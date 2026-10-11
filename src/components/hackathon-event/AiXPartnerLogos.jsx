@@ -45,13 +45,6 @@ const brands = [
         dark: "organizations/official/ztvp.png",
         plate: true,
     },
-    {
-        id: "qwen",
-        name: "千问 Qwen",
-        source: "/images/hackathon/ai-x/official/qwen.webp",
-        light: "qwen-official-dark.png",
-        dark: "qwen-official-dark.png",
-    },
     { id: "huawei", name: "华为 Huawei", light: "huawei.png", dark: "huawei.png", plate: true },
     {
         id: "aliyun",
@@ -90,10 +83,10 @@ export function AiXBrand({ id }) {
 const groups = [
     ["innovation"],
     ["tuozhe"],
-    ["qwen", "huawei"],
+    ["tianmao", "huawei"],
     ["aliyun", "huawei", "qoder", "modelscope"],
     ["eagle", "ztvp"],
-    ["tianmao", "guancha", "deepseekclub"],
+    ["guancha", "deepseekclub"],
 ];
 export default function AiXPartnerLogos() {
     const { t } = useTranslation();

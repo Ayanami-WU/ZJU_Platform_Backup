@@ -152,7 +152,7 @@ export default function AiXOverview({
                 <div className="aix-track-pair">
                     {["campus", "industry"].map((track) => (
                         <article className={`aix-track-card aix-track-${track}`} key={track}>
-                            <AiXBrand id={track === "campus" ? "qwen" : "huawei"} />
+                            <AiXBrand id={track === "campus" ? "tianmao" : "huawei"} />
                             <h3>{t(`aix.landing.tracks.${track}.shortTitle`)}</h3>
                             <p className="aix-track-summary">
                                 {t(`aix.tracks.${track}.description`)}

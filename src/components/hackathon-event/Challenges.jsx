@@ -92,7 +92,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
             <section className="aix-brief" aria-label={t(`aix.tracks.${track}.title`)}>
                 <div className="aix-brief-main">
                     <div className="aix-brief-heading">
-                        <AiXBrand id={track === "campus" ? "qwen" : "huawei"} />
+                        <AiXBrand id={track === "campus" ? "tianmao" : "huawei"} />
                         <span className={`aix-status is-${status}`}>
                             {t(`aix.refined.status.${status}`)}
                         </span>
