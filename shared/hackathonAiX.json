@@ -47,7 +47,43 @@
             "challenges": [],
             "reports": [],
             "challengeReleaseAt": "2026-10-18T13:00:00+08:00",
-            "registrationOpensAt": "2026-10-13T00:00:00+08:00"
+            "registrationOpensAt": "2026-10-13T00:00:00+08:00",
+            "trackStages": {
+                "campus": [
+                    {
+                        "id": "initial",
+                        "opensAt": "2026-10-13T00:00:00+08:00",
+                        "closesAt": "2026-10-18T17:00:00+08:00"
+                    },
+                    {
+                        "id": "semifinal",
+                        "opensAt": "2026-10-19T00:00:00+08:00",
+                        "closesAt": "2026-10-24T00:00:00+08:00"
+                    },
+                    {
+                        "id": "final",
+                        "opensAt": "2026-10-25T09:10:00+08:00",
+                        "closesAt": "2026-10-25T11:30:00+08:00"
+                    }
+                ],
+                "industry": [
+                    {
+                        "id": "initial",
+                        "opensAt": "2026-10-18T13:00:00+08:00",
+                        "closesAt": "2026-10-18T17:00:00+08:00"
+                    },
+                    {
+                        "id": "semifinal",
+                        "opensAt": "2026-10-19T00:00:00+08:00",
+                        "closesAt": "2026-10-24T00:00:00+08:00"
+                    },
+                    {
+                        "id": "final",
+                        "opensAt": "2026-10-25T09:10:00+08:00",
+                        "closesAt": "2026-10-25T11:30:00+08:00"
+                    }
+                ]
+            }
         }
     },
     "rules": [

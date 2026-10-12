@@ -1,22 +1,49 @@
-.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice {
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock-region {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: color-mix(in srgb, var(--hx-panel) 25%, transparent);
+    pointer-events: none;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px 20px;
-    margin-bottom: 20px;
-    padding: 14px 16px;
+    gap: 12px;
+    max-width: 280px;
+    padding: 18px 22px;
     border: 1px solid var(--hx-line);
-    border-radius: 8px;
+    border-radius: 10px;
+    background: var(--hx-panel);
+    text-align: center;
+    pointer-events: auto;
 }
-.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice p {
-    margin: 0;
-    font-size: 15px;
-}
-.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice button {
-    width: auto;
-    min-height: 42px;
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock-content > svg {
+    width: 24px;
+    height: 24px;
+    color: var(--hx-accent-text);
     flex-shrink: 0;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock-content p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.5;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-lock-content button {
+    width: auto;
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 750;
 }
 .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-preview-fields {
     opacity: 0.5;
@@ -32,9 +59,6 @@
     border: 0;
     margin: 0;
     min-width: 0;
-}
-.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice {
-    flex-shrink: 0;
 }
 .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-forum-fields {
     margin-bottom: 20px;

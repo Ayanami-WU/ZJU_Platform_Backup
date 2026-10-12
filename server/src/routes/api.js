@@ -1234,6 +1234,34 @@ router.get(
     hackathonForumController.getForumRoster
 );
 
+const hackathonSubmissionController = require("../controllers/hackathonSubmissionController");
+const { createSubmissionUpload } = require("../middleware/hackathonSubmissionUpload");
+router.post(
+    "/hackathon/submissions/files",
+    authenticateToken,
+    createSubmissionUpload(),
+    hackathonSubmissionController.uploadFile
+);
+router.get(
+    "/hackathon/submissions/files/:id",
+    authenticateToken,
+    hackathonSubmissionController.downloadFile
+);
+router.get("/hackathon/submissions", authenticateToken, hackathonSubmissionController.getMine);
+router.put("/hackathon/submissions", authenticateToken, hackathonSubmissionController.save);
+router.get(
+    "/admin/hackathon/submissions",
+    authenticateToken,
+    isAdmin,
+    hackathonSubmissionController.getRoster
+);
+router.put(
+    "/admin/hackathon/submissions/qualification",
+    authenticateToken,
+    isAdmin,
+    hackathonSubmissionController.setQualification
+);
+
 // Hackathon Registration Routes
 router.get("/hackathon/schedule", hackathonController.getHackathonScheduleConfig);
 router.get("/hackathon/template", hackathonController.getHackathonTemplateConfig);

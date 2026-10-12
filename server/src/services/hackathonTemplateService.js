@@ -165,7 +165,28 @@ const normalizeProgram = (input = {}) => {
         ...(input.challengeReleaseAt
             ? { challengeReleaseAt: text(input.challengeReleaseAt, 40) }
             : {}),
+        ...(input.registrationOpensAt
+            ? { registrationOpensAt: text(input.registrationOpensAt, 40) }
+            : {}),
         registrationClosesAt: text(input.registrationClosesAt, 40),
+        ...(input.trackStages && typeof input.trackStages === "object"
+            ? {
+                  trackStages: Object.fromEntries(
+                      ["campus", "industry"]
+                          .filter((track) => Array.isArray(input.trackStages[track]))
+                          .map((track) => [
+                              track,
+                              input.trackStages[track]
+                                  .slice(0, 3)
+                                  .map((stage) => ({
+                                      id: text(stage.id, 40),
+                                      opensAt: text(stage.opensAt, 40),
+                                      closesAt: text(stage.closesAt, 40),
+                                  })),
+                          ])
+                  ),
+              }
+            : {}),
         stages: (Array.isArray(input.stages) ? input.stages : []).slice(0, 3).map((stage) => ({
             id: text(stage.id, 40),
             opensAt: text(stage.opensAt, 40),
@@ -343,7 +364,17 @@ const validateTemplate = (template) => {
                 field: "event.program.registrationClosesAt",
                 message: "请输入有效的报名截止时间",
             });
-        for (const stage of program.stages) {
+        for (const [track, stages] of Object.entries(program.trackStages || {})) {
+            if (stages.length !== 3 || new Set(stages.map((stage) => stage.id)).size !== 3)
+                errors.push({
+                    field: `event.program.trackStages.${track}`,
+                    message: "请配置完整且不重复的初赛、复赛和决赛",
+                });
+        }
+        for (const stage of [
+            ...program.stages,
+            ...Object.values(program.trackStages || {}).flat(),
+        ]) {
             if (
                 !["initial", "semifinal", "final"].includes(stage.id) ||
                 !Number.isFinite(Date.parse(stage.opensAt)) ||

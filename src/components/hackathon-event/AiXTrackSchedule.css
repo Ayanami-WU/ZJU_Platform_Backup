@@ -1,0 +1,35 @@
+.aix-rule-panel .aix-track-card-heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 18px;
+}
+.aix-rule-panel .aix-track-card-heading h3 {
+    margin: 0;
+}
+.aix-track-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-left: auto;
+}
+.aix-track-badges > span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 3px 9px;
+    color: var(--hx-accent-text);
+    border: 1px solid color-mix(in srgb, var(--hx-accent-text) 30%, transparent);
+    background: color-mix(in srgb, var(--hx-accent-text) 6%, transparent);
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .aix-track-badges {
+        margin-left: 0;
+    }
+}

@@ -10,6 +10,7 @@ import AiXChapters from "./AiXChapters";
 import "./AiXOverview.css";
 import "./AiXPaged.css";
 import AiXForumOverview from "./AiXForumOverview";
+import AiXRegistrationLock from "./AiXRegistrationLock";
 import "./AiXForums.css";
 import "./AiXRegistrationPreview.css";
 const FORUM_IDS = ["forum-technology", "forum-entrepreneurship", "forum-registration"];
@@ -322,23 +323,6 @@ export default function AiXForums({ now, registrationState }) {
                                 </div>
                             )}
 
-                            {!user && (
-                                <div className="aix-registration-login-notice">
-                                    <p>
-                                        {t("aix.register.loginPreview", {
-                                            defaultValue: "请先注册或登录，再填写报名信息。",
-                                        })}
-                                    </p>
-                                    <button
-                                        type="button"
-                                        className="aix-primary"
-                                        onClick={onLogin}
-                                        disabled={authLoading}
-                                    >
-                                        {t("accountProfile.loginOrRegister")}
-                                    </button>
-                                </div>
-                            )}
                             {(authLoading || loading) && <p role="status">{t("aix.loading")}</p>}
                             {user && error === "loadFailed" ? (
                                 <>
@@ -381,6 +365,7 @@ export default function AiXForums({ now, registrationState }) {
                                     <div
                                         role="tabpanel"
                                         id="forum-attendee-fields"
+                                        className="aix-registration-lock-region"
                                         aria-labelledby={`forum-tab-${details.attendeeType}`}
                                     >
                                         <fieldset
@@ -462,6 +447,12 @@ export default function AiXForums({ now, registrationState }) {
                                                 );
                                             })}
                                         </fieldset>
+                                        {!user && (
+                                            <AiXRegistrationLock
+                                                onLogin={onLogin}
+                                                loading={authLoading || loading}
+                                            />
+                                        )}
                                     </div>
                                     {error && <p role="alert">{t(`aix.forumPage.${error}`)}</p>}
                                     {saved && (

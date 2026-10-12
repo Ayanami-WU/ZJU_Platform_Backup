@@ -1,316 +1,384 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
-import { ArrowDown, ArrowUpRight, Clock3, FileText, LockKeyhole } from "lucide-react";
-import {
-    currentStage,
-    safeWebUrl,
-    stageState,
-    eventTimestamp,
-    registrationOpen,
-} from "../../utils/hackathonAiX";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ArrowUpRight, CalendarDays, FileText, MapPin } from "lucide-react";
+import { safeWebUrl, eventTimestamp, registrationOpen } from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
-import RepositorySubmission from "./RepositorySubmission";
-import { AiXBrand } from "./AiXPartnerLogos";
+import api from "../../services/api";
+import AiXStageSubmission from "./AiXStageSubmission";
 import "./AiXChallenges.css";
+import "./AiXRegistrationPreview.css";
+
+const tracks = ["industry", "campus"];
+const stages = ["initial", "semifinal", "final"];
 
 export default function Challenges({ template, now, registrationState = {} }) {
     const { t, i18n } = useTranslation();
+    const label = (key, options) => t(`aix.challengeWorkspace.${key}`, options);
     const location = useLocation();
-    const submissionRef = useRef(null);
-    const [track, setTrack] = useState(() =>
-        new URLSearchParams(location.search).get("track") === "industry" ? "industry" : "campus"
+    const navigate = useNavigate();
+    const { user, loading: authLoading, onLogin } = registrationState;
+    const [snapshot, setSnapshot] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [loadError, setLoadError] = useState(false);
+    const [retry, setRetry] = useState(0);
+    const [mutating, setMutating] = useState(false);
+    const drafts = useRef({});
+    const boundaryRefresh = useRef(null);
+    const owner = user?.id || null;
+    const ownerRef = useRef(owner);
+    ownerRef.current = owner;
+    const eventKey = template.event.key;
+    const data = snapshot?.owner === owner && owner ? snapshot.data : null;
+    const serverTime =
+        typeof data?.serverNow === "number" ? data.serverNow : Date.parse(data?.serverNow);
+    const referenceNow = Number.isFinite(serverTime)
+        ? serverTime + Math.max(0, now - snapshot.receivedAt)
+        : now;
+    const program = template.event.program || {};
+    const params = new URLSearchParams(location.search);
+    const track = tracks.includes(params.get("track")) ? params.get("track") : "industry";
+    const publicStages = program.trackStages?.[track] || program.stages || [];
+    const windows = data?.tracks?.[track]?.stages;
+    const current =
+        stages.find((id) => {
+            const item = windows?.[id] || publicStages.find((value) => value.id === id);
+            return (
+                item &&
+                referenceNow >= eventTimestamp(item.opensAt) &&
+                referenceNow < eventTimestamp(item.closesAt)
+            );
+        }) ||
+        stages
+            .filter((id) => {
+                const item = windows?.[id] || publicStages.find((value) => value.id === id);
+                return item && referenceNow >= eventTimestamp(item.opensAt);
+            })
+            .at(-1) ||
+        "initial";
+    const stage = stages.includes(params.get("stage")) ? params.get("stage") : current;
+    const publicWindow = publicStages.find((item) => item.id === stage);
+    const remoteGate = windows?.[stage];
+    const window = remoteGate || publicWindow;
+    const temporalState =
+        stage === "final"
+            ? "presentation"
+            : !window || referenceNow < eventTimestamp(window.opensAt)
+              ? "upcoming"
+              : referenceNow >= eventTimestamp(window.closesAt)
+                ? "closed"
+                : "open";
+    const gate = remoteGate
+        ? {
+              ...remoteGate,
+              state: temporalState,
+              canSave: remoteGate.canSave && temporalState === "open",
+              canSubmit: remoteGate.canSubmit && temporalState === "open",
+              blockedReason:
+                  remoteGate.blockedReason ||
+                  (temporalState === "closed"
+                      ? "closed"
+                      : temporalState === "upcoming"
+                        ? "not_open"
+                        : null),
+          }
+        : { ...publicWindow, state: temporalState, canSave: false, canSubmit: false };
+    const record = data?.submissions?.find((item) => item.track === track && item.stage === stage);
+    const draftKey = `${owner || "anonymous"}:${track}:${stage}`;
+    const challenges = (program.challenges || []).filter(
+        (item) => item.published && item.track === track && item.stage === stage
     );
+    const signupOpen = registrationOpen(template, now);
+    const formatDate = (value) => {
+        const time = eventTimestamp(value);
+        return Number.isFinite(time)
+            ? new Intl.DateTimeFormat(i18n.resolvedLanguage?.startsWith("en") ? "en-GB" : "zh-CN", {
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                  timeZone: "Asia/Shanghai",
+              }).format(time)
+            : "—";
+    };
+    const read = useCallback(
+        async (signal) => {
+            const response = await api.get("/hackathon/submissions", {
+                params: { event: eventKey },
+                signal,
+            });
+            if (ownerRef.current === owner)
+                setSnapshot({ owner, data: response.data, receivedAt: Date.now() });
+            return response.data;
+        },
+        [eventKey, owner]
+    );
+    useEffect(() => {
+        if (!owner) return;
+        const controller = new AbortController();
+        setLoading(true);
+        setLoadError(false);
+        read(controller.signal)
+            .catch((error) => {
+                if (error.code !== "ERR_CANCELED") setLoadError(true);
+            })
+            .finally(() => {
+                if (!controller.signal.aborted) setLoading(false);
+            });
+        return () => controller.abort();
+    }, [owner, read, retry]);
+    useEffect(() => {
+        drafts.current = {};
+        boundaryRefresh.current = null;
+    }, [owner]);
+    useEffect(() => {
+        if (!owner || !remoteGate || stage === "final" || remoteGate.state === temporalState)
+            return;
+        const key = `${owner}:${track}:${stage}:${remoteGate.state}:${temporalState}`;
+        if (boundaryRefresh.current === key) return;
+        boundaryRefresh.current = key;
+        read().catch(() => setLoadError(true));
+    }, [owner, track, stage, remoteGate, temporalState, read]);
+    const loaded = Boolean(data);
     useEffect(() => {
         if (location.hash !== "#submission") return;
         const frame = requestAnimationFrame(() =>
-            submissionRef.current?.scrollIntoView({ block: "start" })
+            document.getElementById("submission")?.scrollIntoView({ block: "start" })
         );
         return () => cancelAnimationFrame(frame);
-    }, [location.hash]);
-    const [stageId, setStageId] = useState(null);
-    const program = template.event.program || {};
-    const stages = program.stages || [];
-    const stage = stages.find((item) => item.id === stageId) || currentStage(stages, now);
-    const { user, loading, error, registration, onRetry, onLogin, onRegistered } =
-        registrationState;
-    const ended = now >= eventTimestamp(template.event.endAt);
-    const signupOpen = !ended && registrationOpen(template, now);
-    const challenges = (program.challenges || []).filter(
-        (item) =>
-            item.published &&
-            item.track === track &&
-            (track === "campus" || item.stage === stage?.id)
-    );
-    const stageStatus = stage ? stageState(stage, now) : "upcoming";
-    const status = ended
-        ? "closed"
-        : track === "campus"
-          ? now < eventTimestamp(program.registrationOpensAt || template.event.startAt)
-              ? "pending"
-              : "selfDefined"
-          : stageStatus === "ended"
-            ? "stageClosed"
-            : challenges.length
-              ? "published"
-              : "pending";
-    const date = (value) =>
-        new Intl.DateTimeFormat(i18n.resolvedLanguage?.startsWith("en") ? "en-GB" : "zh-CN", {
-            month: "short",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-            timeZone: "Asia/Shanghai",
-        }).format(eventTimestamp(value));
-    const goRegistration = getEventUrl(template.event.key, "intro", { hash: "#registration-form" });
+    }, [location.hash, loaded]);
+    const select = (nextTrack, nextStage) => {
+        const search = new URLSearchParams(location.search);
+        search.set("track", nextTrack);
+        search.set("stage", nextStage);
+        navigate({ pathname: location.pathname, search: `?${search}` }, { replace: true });
+    };
+    const onRecord = (submission) => {
+        if (ownerRef.current !== owner) return;
+        setSnapshot((value) =>
+            value?.owner !== owner
+                ? value
+                : {
+                      ...value,
+                      data: {
+                          ...value.data,
+                          submissions: [
+                              ...value.data.submissions.filter(
+                                  (item) =>
+                                      item.track !== submission.track ||
+                                      item.stage !== submission.stage
+                              ),
+                              submission,
+                          ],
+                      },
+                  }
+        );
+    };
+    const reason = !user
+        ? "login"
+        : loadError
+          ? "loadFailed"
+          : !data
+            ? "loading"
+            : gate.blockedReason || "ready";
     return (
-        <div className="aix-challenges">
-            <header className="aix-challenges-heading">
-                <div>
-                    <p className="aix-challenge-eyebrow">AI + X · 2026</p>
-                    <h1>{t("aix.refined.challengeTitle")}</h1>
-                    <p>{t("aix.refined.challengeIntro")}</p>
-                </div>
-                <a className="aix-secondary" href="#submission">
-                    {t("aix.refined.mySubmission")}
-                    <ArrowDown size={18} />
-                </a>
+        <div className="aix-challenges aix-task-workspace">
+            <header className="aix-task-heading">
+                <h1>{label("title")}</h1>
+                <span>{label("eventLabel")}</span>
             </header>
-            <div className="aix-track-tabs" aria-label={t("aix.tracksKicker")}>
-                {["campus", "industry"].map((value) => (
+            <div className="aix-task-track-tabs" role="tablist" aria-label={label("tracks")}>
+                {tracks.map((id) => (
                     <button
-                        key={value}
+                        key={id}
                         type="button"
-                        aria-pressed={value === track}
-                        onClick={() => setTrack(value)}
+                        role="tab"
+                        disabled={mutating}
+                        id={`task-track-${id}`}
+                        aria-selected={track === id}
+                        aria-controls="aix-task-panel"
+                        onClick={() => select(id, stage)}
                     >
-                        {t(`aix.tracks.${value}.title`)}
+                        {t(`aix.tracks.${id}.title`)}
                     </button>
                 ))}
             </div>
-            <section className="aix-brief" aria-label={t(`aix.tracks.${track}.title`)}>
-                <div className="aix-brief-main">
-                    <div className="aix-brief-heading">
-                        <AiXBrand id={track === "campus" ? "tianmao" : "huawei"} />
-                        <span className={`aix-status is-${status}`}>
-                            {t(`aix.refined.status.${status}`)}
+            <div className="aix-task-stage-tabs" role="tablist" aria-label={label("stages")}>
+                {stages.map((id, index) => (
+                    <button
+                        key={id}
+                        type="button"
+                        role="tab"
+                        disabled={mutating}
+                        id={`task-stage-${id}`}
+                        aria-selected={stage === id}
+                        aria-controls="aix-task-panel"
+                        onClick={() => select(track, id)}
+                    >
+                        <span>0{index + 1}</span>
+                        {t(`aix.stages.${id}.title`)}
+                    </button>
+                ))}
+            </div>
+            <div
+                role="tabpanel"
+                id="aix-task-panel"
+                aria-labelledby={`task-track-${track} task-stage-${stage}`}
+            >
+                <section className="aix-task-window" aria-label={label("window")}>
+                    <div>
+                        <span className={`aix-task-state is-${temporalState}`}>
+                            {label(`states.${temporalState}`)}
                         </span>
-                    </div>
-                    <h2>{t(`aix.tracks.${track}.title`)}</h2>
-                    <p className="aix-brief-lead">{t(`aix.tracks.${track}.description`)}</p>
-                    {track === "industry" && (
-                        <div className="aix-round-tabs" aria-label={t("aix.industryStages")}>
-                            {stages.map((item) => (
-                                <button
-                                    key={item.id}
-                                    type="button"
-                                    aria-pressed={stage?.id === item.id}
-                                    onClick={() => setStageId(item.id)}
-                                >
-                                    {t(`aix.stages.${item.id}.title`)}
-                                    <span>{t(`aix.state.${stageState(item, now)}`)}</span>
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                    {track === "campus" && (
-                        <div className="aix-brief-copy">
-                            <h3>{t("aix.refined.problemTitle")}</h3>
-                            <p>{t("aix.refined.problemDescription")}</p>
-                            <h3>{t("aix.refined.directions")}</h3>
-                            <ul className="aix-direction-list">
-                                {t("aix.refined.directionItems.campus", {
-                                    returnObjects: true,
-                                }).map((item) => (
-                                    <li key={item.title}>
-                                        <strong>{item.title}</strong>
-                                        <span>{item.description}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {track === "industry" && (
-                        <div className="aix-brief-copy">
-                            <h3>{t("aix.refined.directions")}</h3>
-                            <ul className="aix-direction-list">
-                                {t("aix.refined.directionItems.industry", {
-                                    returnObjects: true,
-                                }).map((item) => (
-                                    <li key={item.title}>
-                                        <strong>{item.title}</strong>
-                                        <span>{item.description}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {challenges.map((item) => (
-                        <article key={item.id} className="aix-published-brief">
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                            {safeWebUrl(item.briefUrl) && (
-                                <a
-                                    href={safeWebUrl(item.briefUrl)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <FileText size={17} />
-                                    {t("aix.readBrief")}
-                                    <ArrowUpRight size={16} />
-                                </a>
-                            )}
-                            {safeWebUrl(item.submissionUrl) && stageStatus === "live" && !ended && (
-                                <a
-                                    href={safeWebUrl(item.submissionUrl)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {t("aix.refined.specificSubmission")}
-                                    <ArrowUpRight size={16} />
-                                </a>
-                            )}
-                        </article>
-                    ))}
-                    {track === "industry" && !challenges.length && (
-                        <div className="aix-brief-pending" role="status">
-                            <Clock3 size={24} />
-                            <div>
-                                <h3>
-                                    {t(
-                                        stageStatus === "ended"
-                                            ? "aix.refined.status.stageClosed"
-                                            : "aix.challengePending"
-                                    )}
-                                </h3>
-                                <p>
-                                    {stage && stageStatus === "upcoming"
-                                        ? t("aix.refined.releaseAt", {
-                                              date: date(
-                                                  stage.id === "initial"
-                                                      ? program.challengeReleaseAt || stage.opensAt
-                                                      : stage.opensAt
-                                              ),
-                                          })
-                                        : t(
-                                              stageStatus === "ended"
-                                                  ? "aix.refined.closedBrief"
-                                                  : "aix.refined.awaitPublication"
-                                          )}
-                                </p>
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <aside className="aix-brief-meta">
-                    <section>
-                        <h3>{t("aix.refined.participation")}</h3>
-                        <p>
-                            {t(track === "campus" ? "aix.refined.individual" : "aix.refined.team")}
-                        </p>
-                    </section>
-                    <section>
-                        <h3>{t("aix.refined.schedule")}</h3>
-                        <p>
-                            {t(
-                                track === "campus"
-                                    ? "aix.campusSchedule"
-                                    : `aix.stages.${stage?.id || "initial"}.description`
-                            )}
-                        </p>
-                        {track === "industry" && stage && (
-                            <p className="aix-brief-date">
-                                {date(stage.opensAt)} —<br />
-                                {date(stage.closesAt)}
+                        {window && (
+                            <p>
+                                <CalendarDays size={18} />
+                                {formatDate(window.opensAt)} — {formatDate(window.closesAt)}
+                                <small>{label("timezone")}</small>
                             </p>
                         )}
-                    </section>
-                    <section>
-                        <h3>{t("aix.requirements")}</h3>
-                        <p>
-                            {t(
-                                track === "campus"
-                                    ? "aix.refined.campusMaterials"
-                                    : "aix.refined.industryMaterials"
+                    </div>
+                    {stage !== "final" && (
+                        <div className="aix-task-access" role="status">
+                            <p>{label(`blocked.${reason}`)}</p>
+                            {reason === "not_registered" && signupOpen && (
+                                <Link
+                                    to={getEventUrl(eventKey, "intro", {
+                                        hash: "#registration-form",
+                                    })}
+                                >
+                                    {label("register")}
+                                    <ArrowUpRight size={16} />
+                                </Link>
                             )}
-                        </p>
-                    </section>
-                    <a className="aix-primary" href="#submission">
-                        {t("aix.refined.toSubmission")}
-                        <ArrowDown size={17} />
-                    </a>
-                </aside>
-            </section>
-            <section
-                className="aix-submission-section"
-                id="submission"
-                ref={submissionRef}
-                aria-labelledby="aix-submission-title"
-            >
-                <header>
-                    <h2 id="aix-submission-title">{t("aix.refined.mySubmission")}</h2>
-                    <p>{t("aix.refined.submissionIntro")}</p>
-                </header>
-                <div className="aix-channel-note">
-                    <h3>{t("aix.refined.channelsTitle")}</h3>
-                    <p>
-                        {t(
-                            track === "campus"
-                                ? "aix.refined.campusChannels"
-                                : "aix.refined.industryChannels"
-                        )}
-                    </p>
-                    <p>{t("aix.refined.channelHint")}</p>
-                </div>
-                {loading ? (
-                    <div className="aix-submission-gate" role="status">
-                        {t("aix.loading")}
-                    </div>
-                ) : error ? (
-                    <div className="aix-submission-gate" role="alert">
-                        <h3>{t("aix.refined.loadFailed")}</h3>
-                        <button className="aix-secondary" onClick={onRetry}>
-                            {t("aix.retry")}
-                        </button>
-                    </div>
-                ) : !user ? (
-                    <div className="aix-submission-gate">
-                        <LockKeyhole size={26} />
-                        <h3>{t("aix.refined.loginTitle")}</h3>
-                        <p>{t("aix.refined.loginHint")}</p>
-                        <button className="aix-primary" onClick={onLogin}>
-                            {t("accountProfile.loginOrRegister")}
-                        </button>
-                    </div>
-                ) : !registration ? (
-                    <div className="aix-submission-gate">
-                        <h3>
-                            {t(
-                                !signupOpen
-                                    ? "aix.refined.noRegistrationClosed"
-                                    : "aix.refined.registerFirst"
+                            {loadError && (
+                                <button
+                                    type="button"
+                                    className="aix-secondary"
+                                    onClick={() => setRetry((value) => value + 1)}
+                                >
+                                    {t("aix.retry")}
+                                </button>
                             )}
-                        </h3>
-                        <p>
-                            {t(signupOpen ? "aix.refined.registerHint" : "aix.refined.closedHint")}
-                        </p>
-                        {signupOpen && (
-                            <Link className="aix-primary" to={goRegistration}>
-                                {t("aix.register.title")}
-                                <ArrowUpRight size={17} />
-                            </Link>
-                        )}
-                    </div>
+                        </div>
+                    )}
+                </section>
+                {stage === "final" ? (
+                    <section className="aix-task-final">
+                        <div>
+                            <h2>{label("finalTitle")}</h2>
+                            <p>{label("finalDescription")}</p>
+                        </div>
+                        <div>
+                            <MapPin size={24} />
+                            <p>{label("finalVenue")}</p>
+                        </div>
+                    </section>
                 ) : (
-                    <RepositorySubmission
-                        key={`${user.id}:${registration.id}`}
-                        registration={registration}
-                        endAt={template.event.endAt}
-                        onSaved={onRegistered}
-                    />
+                    <div className="aix-task-columns">
+                        <section className="aix-task-brief" aria-labelledby="aix-task-brief-title">
+                            <header className="aix-task-panel-heading">
+                                <h2 id="aix-task-brief-title">{label("brief")}</h2>
+                                <span className="aix-task-state">
+                                    {label(challenges.length ? "published" : "pending")}
+                                </span>
+                            </header>
+                            {track === "campus" && (
+                                <p className="aix-task-muted">{label("selfDefined")}</p>
+                            )}
+                            {challenges.map((item) => (
+                                <article key={item.id} className="aix-task-challenge">
+                                    <h3>{item.title}</h3>
+                                    <p>{item.description}</p>
+                                    {safeWebUrl(item.briefUrl) && (
+                                        <a
+                                            href={safeWebUrl(item.briefUrl)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <FileText size={17} />
+                                            {t("aix.readBrief")}
+                                            <ArrowUpRight size={16} />
+                                        </a>
+                                    )}
+                                    {safeWebUrl(item.submissionUrl) && temporalState === "open" && (
+                                        <a
+                                            href={safeWebUrl(item.submissionUrl)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {t("aix.refined.specificSubmission")}
+                                            <ArrowUpRight size={16} />
+                                        </a>
+                                    )}
+                                </article>
+                            ))}
+                            {!challenges.length && (
+                                <div className="aix-task-empty">
+                                    <FileText size={24} />
+                                    <p>
+                                        {label(
+                                            track === "campus" ? "campusPending" : "industryPending"
+                                        )}
+                                    </p>
+                                </div>
+                            )}
+                        </section>
+                        {(!user || data) && (
+                            <AiXStageSubmission
+                                key={draftKey}
+                                eventKey={eventKey}
+                                track={track}
+                                stage={stage}
+                                gate={gate}
+                                record={record}
+                                onBusyChange={setMutating}
+                                files={data?.files || []}
+                                legacyRepositories={data?.legacyRepositories}
+                                onFile={(file) => {
+                                    if (ownerRef.current !== owner) return;
+                                    setSnapshot((value) =>
+                                        value?.owner !== owner
+                                            ? value
+                                            : {
+                                                  ...value,
+                                                  data: {
+                                                      ...value.data,
+                                                      files: [
+                                                          ...(value.data.files || []).filter(
+                                                              (item) => item.id !== file.id
+                                                          ),
+                                                          file,
+                                                      ],
+                                                  },
+                                              }
+                                    );
+                                }}
+                                user={user}
+                                loading={authLoading || loading}
+                                onLogin={onLogin}
+                                cachedDraft={drafts.current[draftKey]}
+                                onDraft={(value) => {
+                                    if (ownerRef.current === owner)
+                                        drafts.current[draftKey] = value;
+                                }}
+                                onRecord={onRecord}
+                                onReload={read}
+                                formatDate={formatDate}
+                            />
+                        )}
+                        {user && !data && (
+                            <section className="aix-task-submission">
+                                <h2>{label("mySubmission")}</h2>
+                                <p role="status">
+                                    {label(loadError ? "blocked.loadFailed" : "blocked.loading")}
+                                </p>
+                            </section>
+                        )}
+                    </div>
                 )}
-            </section>
+            </div>
         </div>
     );
 }

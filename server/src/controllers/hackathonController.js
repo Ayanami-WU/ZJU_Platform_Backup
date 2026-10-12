@@ -1,3 +1,4 @@
+const { getTrackStages } = require("../services/hackathonSubmissionService");
 const {
     registrationPayload,
     saveTrackRegistration,
@@ -117,13 +118,11 @@ const registerHackathon = async (req, res, next) => {
         const answers = { ...validation.answers, ...registrationProfile };
         if (template.event.key === AIX_EVENT_KEY) {
             const row = await saveTrackRegistration(db, { userId: req.user.id, template, answers });
-            return res
-                .status(201)
-                .json({
-                    ...registrationPayload(row),
-                    repositories: repositorySubmission(row),
-                    message: "报名成功",
-                });
+            return res.status(201).json({
+                ...registrationPayload(row),
+                repositories: repositorySubmission(row),
+                message: "报名成功",
+            });
         }
         const name = String(answers.name || "").trim();
         const studentId = String(answers.studentId || "")
@@ -282,12 +281,22 @@ const publicTemplate = (template) => {
             program: {
                 ...program,
                 challenges: program.challenges.filter((item) => {
-                    const stage = program.stages.find((value) => value.id === item.stage);
+                    const stages =
+                        template.event.key === AIX_EVENT_KEY
+                            ? getTrackStages(template, item.track)
+                            : program.stages;
+                    const stage = stages.find((value) => value.id === item.stage);
                     const releaseAt =
                         item.track === "industry" && stage?.id === "initial"
                             ? program.challengeReleaseAt || stage.opensAt
                             : stage?.opensAt;
-                    return item.published && stage && Date.parse(releaseAt) <= Date.now();
+                    return (
+                        item.published &&
+                        stage &&
+                        (template.event.key !== AIX_EVENT_KEY ||
+                            Date.parse(stage.opensAt) <= Date.now()) &&
+                        Date.parse(releaseAt) <= Date.now()
+                    );
                 }),
                 reports: program.reports.filter((item) => item.published),
             },

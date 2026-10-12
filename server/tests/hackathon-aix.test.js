@@ -80,6 +80,8 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         const program = schedule.events[1].event.program;
         program.stages[0].opensAt = "2000-01-01T00:00:00Z";
         program.stages[1].opensAt = "2099-01-01T00:00:00Z";
+        program.trackStages.campus[0].opensAt = "2000-01-01T00:00:00Z";
+        program.trackStages.industry[1].opensAt = "2099-01-01T00:00:00Z";
         program.challenges = [
             { id: "open", stage: "initial", track: "campus", title: "Released", published: true },
             {
@@ -125,9 +127,10 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         );
         assert.equal(settingsResponse.body.hackathon_schedule_config, undefined);
         assert.equal(settingsResponse.body.hackathon_template_config, undefined);
-        // Huawei's initial brief is released at the opening, before development.
+        // Each track only releases published briefs at its own initial opening.
         const originalProgram = structuredClone(program);
-        program.stages[0].opensAt = "2026-10-18T11:00:00+08:00";
+        program.trackStages.campus[0].opensAt = "2026-10-13T00:00:00+08:00";
+        program.trackStages.industry[0].opensAt = "2026-10-18T13:00:00+08:00";
         program.challengeReleaseAt = "2026-10-18T09:00:00+08:00";
         program.challenges.push({
             id: "opening",
@@ -142,8 +145,10 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         const originalNow = Date.now;
         try {
             for (const [instant, expected] of [
-                ["2026-10-18T08:59:59+08:00", []],
-                ["2026-10-18T09:00:00+08:00", ["opening"]],
+                ["2026-10-12T23:59:59+08:00", []],
+                ["2026-10-13T00:00:00+08:00", ["open"]],
+                ["2026-10-18T12:59:59+08:00", ["open"]],
+                ["2026-10-18T13:00:00+08:00", ["open", "opening"]],
             ]) {
                 Date.now = () => Date.parse(instant);
                 const published = response();

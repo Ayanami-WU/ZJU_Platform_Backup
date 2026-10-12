@@ -4,11 +4,13 @@ import { Pause, Play, Trophy, Medal, Gift, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AiXPartnerLogos from "./AiXPartnerLogos";
 import "./AiXOverview.css";
+import "./AiXTrackSchedule.css";
 
 export default function AiXOverview({ state }) {
     const { t } = useTranslation();
     const [paused, setPaused] = useState(false);
     const copy = t("aix.pages", { returnObjects: true });
+    const trackBadges = t("aix.trackBadges", { returnObjects: true });
     return (
         <div className="aix-paged-content">
             <section
@@ -93,9 +95,13 @@ export default function AiXOverview({ state }) {
                     <div className="aix-track-rules">
                         {copy.tracks.map((track) => (
                             <article className="aix-rule-panel" key={track.id}>
-                                <header>
+                                <header className="aix-track-card-heading">
                                     <h3>{track.title}</h3>
-                                    <p>{track.mode}</p>
+                                    <div className="aix-track-badges">
+                                        {trackBadges[track.id].map((badge) => (
+                                            <span key={badge}>{badge}</span>
+                                        ))}
+                                    </div>
                                 </header>
                                 <ol className="aix-track-schedule">
                                     {track.schedule.map((step, index) => (

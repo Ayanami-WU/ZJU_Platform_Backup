@@ -3,40 +3,137 @@ import fs from "node:fs";
 const template = JSON.parse(
     fs.readFileSync(new URL("../shared/hackathonAiX.json", import.meta.url), "utf8")
 );
-const registration = {
-    id: 42,
-    eventKey: template.event.key,
-    answers: { name: "UI Test", track: ["campus"] },
-    repositories: {
-        githubUrl: "https://github.com/test/project",
-        modelscopeUrl: "",
-        updatedAt: "2026-10-09T00:00:00Z",
-    },
+const formalMaterials = {
+    projectName: "正式项目",
+    githubUrl: "https://github.com/test/formal-project",
+    modelscopeUrl: "https://formal-project.ms.show/",
+    bpFileId: null,
+    demoFileId: null,
 };
-async function prepare(
-    page,
-    { date = "2026-10-18T13:00:00+08:00", error = false, published = false } = {}
-) {
+const draftMaterials = {
+    ...formalMaterials,
+    projectName: "截止前尚未正式提交的修改",
+    githubUrl: "https://github.com/test/draft-project",
+};
+async function prepare(page, { date = "2026-10-18T14:00:00+08:00", failRead = false } = {}) {
+    const now = Date.parse(date);
     await page.clock.setFixedTime(new Date(date));
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.addInitScript(() => {
         localStorage.setItem("token", "fixture");
         localStorage.setItem("i18nextLng", "zh");
         localStorage.setItem("ui_mode_v3", "dark");
     });
     const event = structuredClone(template);
-    if (published)
-        event.event.program.challenges = [
-            {
-                id: "brief",
-                track: "industry",
-                stage: "initial",
-                published: true,
-                title: "正式赛题测试",
-                description: "只有当前赛道和阶段显示这个题目。",
-                briefUrl: "https://example.test/brief",
-                submissionUrl: "https://example.test/submit",
+    event.event.program.challenges = [
+        {
+            id: "published-initial",
+            track: "industry",
+            stage: "initial",
+            published: true,
+            title: "正式赛题测试",
+            description: "只在当前赛道和阶段显示。",
+            briefUrl: "https://example.test/brief",
+            submissionUrl: "https://example.test/extra-submit",
+        },
+        {
+            id: "unpublished",
+            track: "industry",
+            stage: "initial",
+            published: false,
+            title: "不能显示的未发布题目",
+            submissionUrl: "https://example.test/private-submit",
+        },
+    ];
+    const state = {
+        failRead,
+        reads: 0,
+        data: {
+            eventKey: event.event.key,
+            serverNow: now,
+            tracks: Object.fromEntries(
+                ["campus", "industry"].map((track) => [
+                    track,
+                    {
+                        registered: true,
+                        semifinalQualified: true,
+                        stages: Object.fromEntries(
+                            event.event.program.trackStages[track].map((stage) => {
+                                const status =
+                                    stage.id === "final"
+                                        ? "presentation"
+                                        : now < Date.parse(stage.opensAt)
+                                          ? "upcoming"
+                                          : now >= Date.parse(stage.closesAt)
+                                            ? "closed"
+                                            : "open";
+                                return [
+                                    stage.id,
+                                    {
+                                        ...stage,
+                                        state: status,
+                                        canSave: status === "open",
+                                        canSubmit: status === "open",
+                                        blockedReason:
+                                            status === "open"
+                                                ? null
+                                                : status === "upcoming"
+                                                  ? "not_open"
+                                                  : status,
+                                        requiredFields:
+                                            stage.id === "final"
+                                                ? []
+                                                : [
+                                                      "projectName",
+                                                      "githubUrl",
+                                                      "modelscopeUrl",
+                                                      ...(stage.id === "semifinal"
+                                                          ? [
+                                                                ...(track === "campus"
+                                                                    ? ["bpFileId"]
+                                                                    : []),
+                                                                "demoFileId",
+                                                            ]
+                                                          : []),
+                                                  ],
+                                    },
+                                ];
+                            })
+                        ),
+                    },
+                ])
+            ),
+            submissions: [
+                {
+                    id: 1,
+                    track: "campus",
+                    stage: "initial",
+                    version: 3,
+                    draft: draftMaterials,
+                    draftUpdatedAt: "2026-10-18T16:59:00+08:00",
+                    submitted: formalMaterials,
+                    submittedAt: "2026-10-18T16:00:00+08:00",
+                },
+                {
+                    id: 2,
+                    track: "industry",
+                    stage: "initial",
+                    version: 1,
+                    draft: draftMaterials,
+                    draftUpdatedAt: "2026-10-18T16:59:00+08:00",
+                    submitted: null,
+                    submittedAt: null,
+                },
+            ],
+            files: [],
+            legacyRepositories: {
+                githubUrl: "https://github.com/test/legacy",
+                modelscopeUrl: "",
+                updatedAt: "2026-10-12T00:00:00Z",
             },
-        ];
+        },
+    };
+    // Every API request is mocked: localhost may otherwise proxy production.
     await page.route("**/api/**", async (route) => {
         const url = new URL(route.request().url());
         if (url.pathname === "/api/auth/me")
@@ -44,6 +141,7 @@ async function prepare(
                 json: {
                     id: 42,
                     username: "ui_test",
+                    role: "user",
                     registrationProfile: {
                         name: "UI Test",
                         studentId: "UI42",
@@ -54,64 +152,76 @@ async function prepare(
             });
         if (url.pathname === "/api/hackathon/schedule")
             return route.fulfill({ json: { events: [event], activeEventKey: event.event.key } });
-        if (url.pathname === "/api/hackathon/registration")
-            return error
-                ? route.fulfill({ status: 503, json: { error: "fixture failure" } })
-                : route.fulfill({ json: { registration } });
-        if (url.pathname === "/api/hackathon/registration/repositories")
-            return route.fulfill({ status: 503, json: { error: "fixture save failure" } });
+        if (url.pathname === "/api/hackathon/submissions" && route.request().method() === "GET") {
+            state.reads++;
+            return state.failRead
+                ? route.fulfill({ status: 503, json: { error: "fixture read failure" } })
+                : route.fulfill({ json: state.data });
+        }
         if (route.request().method() !== "GET") return route.abort();
-        return route.continue();
+        return route.fulfill({ json: {} });
     });
+    return state;
 }
-test("published brief has a live action; changing stage removes the other stage brief", async ({
+
+test("published brief and extra entry belong only to the selected track and round", async ({
     page,
 }) => {
-    await prepare(page, { published: true });
-    await page.goto("/hackathon/2/challenges?track=industry");
-    await expect(page.getByText("正式赛题测试", { exact: true })).toBeVisible();
-    await expect(page.getByRole("link", { name: "赛题指定提交入口" })).toBeVisible();
-    await page.getByRole("button", { name: /复赛/ }).click();
+    await prepare(page);
+    await page.goto("/hackathon/2/challenges?track=industry&stage=initial");
+    await expect(page.getByRole("heading", { name: "正式赛题测试", exact: true })).toBeVisible();
+    await expect(page.locator('a[href="https://example.test/brief"]')).toBeVisible();
+    await expect(page.locator('a[href="https://example.test/extra-submit"]')).toBeVisible();
+    await expect(page.getByText("不能显示的未发布题目", { exact: true })).toHaveCount(0);
+    await expect(page.locator('a[href="https://example.test/private-submit"]')).toHaveCount(0);
+    await page.locator("#task-stage-semifinal").click();
     await expect(page.getByText("正式赛题测试", { exact: true })).toHaveCount(0);
-    await expect(page.locator(".aix-status")).toHaveText("赛题待发布");
+    await expect(page.locator('a[href="https://example.test/extra-submit"]')).toHaveCount(0);
+    await page.locator("#task-stage-initial").click();
+    await page.locator("#task-track-campus").click();
+    await expect(page.getByText("正式赛题测试", { exact: true })).toHaveCount(0);
+    await expect(page.locator('a[href="https://example.test/extra-submit"]')).toHaveCount(0);
 });
-test("saved one repository, unsaved edits, failed save preserves input", async ({ page }) => {
-    await prepare(page);
-    await page.goto("/hackathon/2/challenges#submission");
-    await expect(page.locator(".aix-repository-state")).toHaveText("已保存 1 个仓库");
-    await page.locator("#repository-modelscopeUrl").fill("https://modelscope.cn/studios/test/new");
-    await expect(page.locator(".aix-repository-state")).toHaveText("有未保存的修改");
-    await page.locator(".aix-repository-form button[type=submit]").click();
-    await expect(page.locator("#repository-error")).toBeVisible();
-    await expect(page.locator("#repository-modelscopeUrl")).toHaveValue(
-        "https://modelscope.cn/studios/test/new"
-    );
-});
-test("ended event retains saved links with disabled inputs and no save action", async ({
+
+test("failed private submission read offers retry without showing a blank editable form", async ({
     page,
 }) => {
-    await prepare(page, { date: "2026-10-26T12:00:00+08:00" });
-    await page.goto("/hackathon/2/challenges#submission");
-    await expect(page.locator("#repository-githubUrl")).toBeDisabled();
-    await expect(page.locator(".aix-repository-form button[type=submit]")).toHaveCount(0);
-    await expect(page.getByRole("link", { name: "查看已提交仓库" })).toHaveAttribute(
-        "href",
-        registration.repositories.githubUrl
+    const state = await prepare(page, { failRead: true });
+    await page.goto("/hackathon/2/challenges?track=campus&stage=initial");
+    const retry = page.locator(".aix-task-access button");
+    await expect(retry).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("#material-campus-initial-githubUrl")).toHaveCount(0);
+    const failedReads = state.reads;
+    state.failRead = false;
+    await retry.click();
+    await expect(page.locator("#material-campus-initial-githubUrl")).toHaveValue(
+        draftMaterials.githubUrl
     );
+    await expect(retry).toHaveCount(0);
+    expect(state.reads).toBe(failedReads + 1);
 });
-test("registration read failure presents retry instead of an empty submission form", async ({
+
+test("deadline preserves the formal receipt separately from later drafts and legacy links", async ({
     page,
 }) => {
-    await prepare(page, { error: true });
-    await page.goto("/hackathon/2/challenges#submission");
-    await expect(page.getByRole("heading", { name: "报名信息加载失败" })).toBeVisible({
-        timeout: 15000,
-    });
-    await expect(page.locator(".aix-submission-gate button")).toBeVisible();
-    await expect(page.locator("#repository-githubUrl")).toHaveCount(0);
-    await prepare(page);
-    await page.locator(".aix-submission-gate button").click();
-    await expect(page.locator("#repository-githubUrl")).toHaveValue(
-        registration.repositories.githubUrl
+    await prepare(page, { date: "2026-10-18T17:00:00+08:00" });
+    await page.goto("/hackathon/2/challenges?track=campus&stage=initial");
+    await expect(page.locator("#material-campus-initial-githubUrl")).toBeDisabled();
+    await expect(page.locator("#material-campus-initial-githubUrl")).toHaveValue(
+        draftMaterials.githubUrl
     );
+    await expect(page.locator(".aix-task-actions")).toHaveCount(0);
+    const receipt = page.locator(".aix-task-receipt");
+    await expect(receipt).toHaveAttribute("open", "");
+    await expect(receipt).toContainText(formalMaterials.projectName);
+    await expect(receipt.locator(`a[href="${formalMaterials.githubUrl}"]`)).toBeVisible();
+    await expect(receipt.locator(`a[href="${draftMaterials.githubUrl}"]`)).toHaveCount(0);
+    await expect(receipt.locator('a[href="https://github.com/test/legacy"]')).toHaveCount(0);
+    await page.locator("#task-track-industry").click();
+    await expect(page.locator("#material-industry-initial-githubUrl")).toBeDisabled();
+    await expect(page.locator("#material-industry-initial-githubUrl")).toHaveValue(
+        draftMaterials.githubUrl
+    );
+    await expect(page.locator(".aix-task-receipt")).toHaveCount(0);
+    await expect(page.locator(".aix-task-actions")).toHaveCount(0);
 });

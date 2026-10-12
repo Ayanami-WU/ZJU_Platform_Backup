@@ -149,9 +149,9 @@ test("public forum account creation does not request a student ID or grant conte
     await expect(contestFields.locator("input").first()).toBeDisabled();
     await expect(contestFields.locator("textarea").first()).toBeDisabled();
     await expect(page.locator(".hackathon-form-panel button[type=submit]")).toBeDisabled();
-    await expect(
-        page.locator(".hackathon-form-panel .aix-registration-login-notice")
-    ).toContainText("请先注册或登录");
+    await expect(page.locator(".hackathon-form-panel .aix-registration-lock")).toContainText(
+        "请先注册或登录"
+    );
     await page.goto("/hackathon/2/forums#forum-registration");
     const preview = page.locator(".aix-forum-signup form");
     await expect(preview.getByLabel(/姓名/)).toBeDisabled();
@@ -161,7 +161,7 @@ test("public forum account creation does not request a student ID or grant conte
     await preview.getByRole("tab", { name: "校外", exact: true }).click();
     await expect(preview.getByLabel(/单位或学校/)).toBeDisabled();
     await expect(preview.locator("button[type=submit]")).toBeDisabled();
-    await page.locator(".aix-forum-signup .aix-registration-login-notice button").click();
+    await page.locator(".aix-forum-signup .aix-registration-lock button").click();
     const dialog = page.getByRole("dialog");
     await dialog.getByRole("button", { name: "注册", exact: true }).click();
     await expect(dialog.getByLabel(/学号/)).toHaveCount(0);

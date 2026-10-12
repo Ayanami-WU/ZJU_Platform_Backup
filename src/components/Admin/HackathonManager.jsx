@@ -20,7 +20,7 @@ import {
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-import { registrationOpen } from "../../utils/hackathonAiX";
+import { AIX_EVENT_KEY, registrationOpen } from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
 import { formatHackathonAnswer } from "../../data/hackathonTemplate";
 import api from "../../services/api";
@@ -42,6 +42,7 @@ import {
     useAdminTheme,
 } from "./AdminUI";
 import HackathonTemplateEditor from "./HackathonTemplateEditor";
+import HackathonSubmissionManager from "./HackathonSubmissionManager";
 
 const gradeLabels = {
     freshman: "大一",
@@ -275,6 +276,9 @@ const HackathonManager = () => {
     );
     useEffect(() => {
         setEventFilter(selectedEventKey);
+        if (selectedEventKey !== AIX_EVENT_KEY) {
+            setActiveWorkspace((current) => (current === "submissions" ? "overview" : current));
+        }
         const id = selectedCompetition ? String(selectedCompetition.id) : "__none__";
         setWorkCompetitionFilter(id);
         setMediaCompetitionFilter(id);
@@ -927,6 +931,9 @@ const HackathonManager = () => {
                             ["overview", t("admin.hackathon_manager.flow.title")],
                             ["template", t("admin.hackathon_manager.tabs.template")],
                             ["registrations", t("admin.hackathon_manager.tabs.registrations")],
+                            ...(selectedEventKey === AIX_EVENT_KEY
+                                ? [["submissions", t("admin.hackathon_submissions.title")]]
+                                : []),
                             [
                                 "works",
                                 t("admin.hackathon_manager.tabs.works", {
@@ -1086,6 +1093,13 @@ const HackathonManager = () => {
                         initialEventKey={selectedEventKey}
                         focusSection={templateSection}
                         onTemplateChange={handleTemplateChange}
+                    />
+                ) : null}
+
+                {activeWorkspace === "submissions" && selectedEventKey === AIX_EVENT_KEY ? (
+                    <HackathonSubmissionManager
+                        key={selectedEventKey}
+                        eventKey={selectedEventKey}
                     />
                 ) : null}
 

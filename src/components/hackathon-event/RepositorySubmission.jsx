@@ -97,15 +97,17 @@ export default function RepositorySubmission({ registration, endAt, onSaved, com
             </details>
             {compact ? (
                 <div className="aix-repository-next">
-                    <p>
-                        {t(count ? "aix.refined.savedCount" : "aix.refined.noSubmission", {
-                            count,
-                        })}
-                    </p>
+                    <p>{t("aix.challengeWorkspace.registrationReceiptHint")}</p>
                     <Link
                         className="aix-primary"
                         to={getEventUrl(registration.eventKey, "challenges", {
                             hash: "#submission",
+                            search: new URLSearchParams({
+                                track:
+                                    registration.answers?.track?.[0] === "campus"
+                                        ? "campus"
+                                        : "industry",
+                            }).toString(),
                         })}
                     >
                         {t("aix.refined.toSubmission")}
