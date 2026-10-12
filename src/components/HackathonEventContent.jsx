@@ -57,7 +57,7 @@ export default function HackathonEventContent({
             registrationState={registrationState}
             introductionContent={
                 template.event.key === "zhekesong-ai-x-2026"
-                    ? ({ scrollToForm, scrollToSection }) => (
+                    ? () => (
                           <AiXOverview
                               now={now}
                               state={
@@ -68,29 +68,6 @@ export default function HackathonEventContent({
                                         : "upcoming"
                               }
                               switchView={switchView}
-                              onRegister={
-                                  registrationState?.error
-                                      ? registrationState.onRetry
-                                      : scrollToForm
-                              }
-                              onAgenda={() => scrollToSection("hx-program")}
-                              registrationLabel={
-                                  registrationState?.registration
-                                      ? "aix.register.registered"
-                                      : registrationState?.error
-                                        ? "aix.register.retry"
-                                        : registrationState?.loading
-                                          ? "aix.loading"
-                                          : registrationOpen
-                                            ? "aix.register.title"
-                                            : "aix.register.closed"
-                              }
-                              registrationDisabled={
-                                  registrationState?.loading ||
-                                  (!registrationState?.registration &&
-                                      !registrationOpen &&
-                                      !registrationState?.error)
-                              }
                           />
                       )
                     : undefined

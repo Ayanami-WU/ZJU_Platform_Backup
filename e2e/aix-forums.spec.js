@@ -47,7 +47,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
     await expect(page.locator(".hx-nav a")).toHaveCount(4);
     await expect(
         page.getByText(
-            "初赛选手必须参加10月18日技术论坛；决赛选手必须参加10月25日决赛论坛。请分别完成论坛报名并按对应场次到场。"
+            "华为初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。"
         )
     ).toBeVisible();
     const form = page.locator(".aix-forum-signup form");

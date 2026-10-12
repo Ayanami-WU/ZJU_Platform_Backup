@@ -1,6 +1,17 @@
 import { useTranslation } from "react-i18next";
 
 const brands = [
+    ...[
+        { id: "entrepreneurship-alliance", name: "浙江大学创业联盟", viewBox: "550 1225 275 195" },
+        { id: "investment", name: "投资协会", viewBox: "50 1615 255 185" },
+        { id: "lianhua", name: "联华利合协会", viewBox: "360 1625 170 180" },
+        { id: "magic", name: "D调魔法学园", viewBox: "590 1620 240 165" },
+    ].map((brand) => ({
+        ...brand,
+        source: "/images/hackathon/ai-x/official/partner-lineup.png",
+        imageWidth: 859,
+        imageHeight: 1831,
+    })),
     { id: "bonjour", name: "Bonjour!", light: "company-3.png", dark: "company-3-dark.png" },
     // Display approved marks directly from the supplied poster without redrawing them.
     ...[
@@ -89,7 +100,11 @@ export function AiXBrand({ id }) {
         return (
             <span className={`aix-brand-logo aix-brand-${id}`}>
                 <svg viewBox={brand.viewBox} role="img" aria-label={brand.name}>
-                    <image href={brand.source} width="1080" height="1066" />
+                    <image
+                        href={brand.source}
+                        width={brand.imageWidth || 1080}
+                        height={brand.imageHeight || 1066}
+                    />
                 </svg>
             </span>
         );
@@ -113,8 +128,8 @@ export function AiXBrand({ id }) {
 export default function AiXPartnerLogos() {
     const { t } = useTranslation();
     return (
-        <dl className="aix-partner-groups aix-partners-october12">
-            {t("aix.october12.partnerGroups", { returnObjects: true })
+        <dl className="aix-partner-panels">
+            {t("aix.pages.partnerGroups", { returnObjects: true })
                 .filter((group) => group.published)
                 .map((group) => (
                     <div key={group.id} data-partner-group={group.id}>

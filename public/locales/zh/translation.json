@@ -5178,19 +5178,19 @@
         "description": "从你的专业出发，发现一个真实问题，用 AI 把它做成可以演示、实际使用的作品。",
         "date": "2026.10.09–10.25",
         "location": "10.18 段永平教学楼2-112 · 10.25 三墩元空间",
-        "team": "天猫每队2–5人 · 华为组队参赛",
+        "team": "1–5 人组队，可兼报两条赛道",
         "tracksKicker": "两条赛道",
         "tracksTitle": "你的专业，就是创新的起点。",
         "viewChallenges": "查看赛题",
         "tracks": {
             "campus": {
                 "title": "天猫·OPC孵化赛道",
-                "description": "每队2–5人，优先招募成熟、可落地的项目。10月18日携现有产品到场，在导师指导下完善功能、验证效果；复赛提交技术作品、Demo与产业落地方案。",
+                "description": "多学科自由命题，优先招募成熟、可落地项目。 可线上参赛 · 1–5 人组队",
                 "topics": "多学科、多场景自由命题"
             },
             "industry": {
                 "title": "华为·产业进阶赛道",
-                "description": "华为10月18日13:00发布文案与营销命题，现场开发Agent或Skill，17:00截止提交；复赛作品于10月22日24:00截止。",
+                "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 1–5 人组队",
                 "topics": "文案 · 营销"
             }
         },
@@ -5225,7 +5225,7 @@
             "semifinal": {
                 "date": "10.19–10.22",
                 "title": "线上复赛",
-                "description": "10月19–22日线上完善作品、Demo及方案，22日24:00截止，23日评审并公布决赛名单。"
+                "description": "10月19—23日线上复赛，完善作品、Demo及方案。"
             },
             "shortlist": {
                 "date": "10.23",
@@ -5243,7 +5243,7 @@
         "stagesLabel": "比赛阶段",
         "deadline": "材料截止",
         "challengePending": "赛题待发布",
-        "releaseTime": "天猫项目报名10月12日开启；华为10月18日13:00发布赛题。",
+        "releaseTime": "天猫10月13日线上开启；华为10月18日13:00发布赛题。",
         "nextStageNotice": "本阶段要求与提交入口将在正式通知后开放。",
         "submissionPending": "提交入口待开放",
         "submissionClosed": "本阶段提交已结束",
@@ -5261,7 +5261,7 @@
             "semifinal": {
                 "title": "复赛",
                 "date": "10.19—10.24",
-                "description": "10月19–22日线上完善作品、Demo及方案，22日24:00截止，23日评审并公布决赛名单。",
+                "description": "10月19—23日线上复赛，完善作品、Demo及方案。",
                 "materials": "完善项目说明、使用手册与演示材料，按赛题要求提交源码及魔搭社区作品；具体提交规则以正式赛题为准。"
             },
             "final": {
@@ -5290,7 +5290,7 @@
             "registered": "已报名 · 查看",
             "retry": "重试报名状态",
             "closed": "报名已截止",
-            "description": "可兼报两条赛道，每位选手独立填写资料。天猫每队2–5人，华为组队参赛；论坛请单独报名。",
+            "description": "1–5 人组队，可兼报两条赛道",
             "success": "你的报名信息已保存，可在此查看。赛事安排以正式通知为准。",
             "saved": "报名成功",
             "loginHint": "登录后报名，方便随时查看自己的报名信息。",
@@ -5314,7 +5314,7 @@
                 },
                 "experience": {
                     "title": "项目与科研经历",
-                    "hint": "以下均为选填，重点说明你的实际工作和成果，无需写成长篇简历。"
+                    "hint": "项目经历与科研经历为必填。"
                 },
                 "additional": {
                     "title": "补充信息",
@@ -5330,23 +5330,27 @@
             "track": "报名赛道（可多选）",
             "contact": "联系邮箱",
             "team": "队伍名称（选填）",
-            "experience": "项目经历（选填）",
-            "researchExperience": "科研经历（选填）",
+            "experience": "项目经历",
+            "researchExperience": "科研经历",
             "aiTools": "AI 工具偏好（可多选）",
             "aiToolsOther": "其他 AI 工具（选填）",
             "strengths": "擅长领域（可多选）",
             "projectLinks": "作品或成果链接（选填）",
-            "teamSize": "天猫赛道队伍人数"
+            "teamSize": "队伍人数"
         },
         "options": {
+            "2": "2 人",
+            "3": "3 人",
+            "4": "4 人",
+            "5": "5 人",
             "freshman": "大一",
             "sophomore": "大二",
             "junior": "大三",
             "senior": "大四",
             "master": "硕士",
             "phd": "博士",
-            "campus": "天猫·OPC孵化赛道 · 每队2–5人",
-            "industry": "华为·产业进阶赛道 · 组队参赛",
+            "campus": "天猫·OPC孵化赛道",
+            "industry": "华为·产业进阶赛道",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
             "Cursor": "Cursor",
@@ -5367,11 +5371,7 @@
             "product": "产品策划",
             "data": "数据分析",
             "research": "学科研究",
-            "exploring": "还在探索",
-            "2": "2 人",
-            "3": "3 人",
-            "4": "4 人",
-            "5": "5 人"
+            "exploring": "还在探索"
         },
         "brand": "浙客松",
         "backToSite": "返回拓浙 AI 生态",
@@ -5422,7 +5422,7 @@
         "resultsTitle": "成果",
         "resultsIntro": "获奖名单、项目成果、讲话总结与论坛分享，在这里集中查看。",
         "industryStages": "华为·产业进阶赛道 · 比赛阶段",
-        "campusSchedule": "10月12日报名；18日现场初赛；19–22日线上复赛，22日24:00截止；25日决赛。",
+        "campusSchedule": "10月13日线上开启；18日可参加现场技术指导；19—23日线上复赛；25日决赛。",
         "fieldHints": {
             "name": "",
             "studentId": "",
@@ -5452,7 +5452,7 @@
                     "format": "线上开发 · 线下路演",
                     "shortTitle": "天猫·OPC孵化赛道",
                     "shortDescription": "自选学科问题，提前开发。",
-                    "team": "每队2–5人",
+                    "team": "每队1–5人",
                     "deadline": "10.18 17:00 初赛提交",
                     "support": "天猫校园支持 · 项目开发与孵化"
                 },
@@ -5637,13 +5637,13 @@
                 "stageClosed": "本阶段已结束"
             },
             "problemTitle": "携现有产品参赛",
-            "problemDescription": "每队2–5人，优先招募成熟、可落地的项目。10月18日携现有产品到场，在导师指导下完善功能、验证效果；复赛提交技术作品、Demo与产业落地方案。",
+            "problemDescription": "多学科自由命题，优先招募成熟、可落地项目。 可线上参赛 · 1–5 人组队",
             "directions": "可探索的方向",
             "specificSubmission": "赛题指定提交入口",
             "releaseAt": "预计 {{date}} 发布；正式赛题以主办方发布为准。",
             "awaitPublication": "正式赛题尚未发布，请等待主办方更新。",
             "participation": "参赛形式",
-            "individual": "天猫每队2–5人，携现有产品到场。",
+            "individual": "天猫每队1–5人，可线上参赛。",
             "team": "组队参赛；初赛线下开发，复赛线上开发。",
             "schedule": "时间安排",
             "campusMaterials": "准备项目说明与可体验的 AI 应用，下方保存 GitHub 和魔搭社区仓库地址。",
@@ -5698,7 +5698,7 @@
                     },
                     {
                         "title": "成熟产品",
-                        "description": "携现有产品到场完善功能、验证效果"
+                        "description": "可参加10月18日下午现场技术指导"
                     },
                     {
                         "title": "产业孵化",
@@ -5718,7 +5718,7 @@
             }
         },
         "official": {
-            "chapters": ["总览", "赛道", "论坛", "奖励", "合作", "回顾", "报名"],
+            "chapters": ["主页", "赛制", "奖励", "合作", "报名"],
             "chapterNav": "介绍页章节",
             "totalPrize": "奖品与奖金总价值",
             "tracksTitle": "比赛赛道",
@@ -5754,7 +5754,7 @@
             "back": "返回赛事",
             "enter": "查看论坛与独立报名",
             "attendanceTitle": "参赛选手到场要求",
-            "attendance": "初赛选手必须参加10月18日技术论坛；决赛选手必须参加10月25日决赛论坛。请分别完成论坛报名并按对应场次到场。",
+            "attendance": "华为初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。",
             "agenda": "查看议程",
             "invited": "拟邀请",
             "registered": "已报名 · 编号 {{id}}",
@@ -6048,11 +6048,272 @@
                 }
             ],
             "organizers": "指导单位：浙江大学创新创业学院 · 主办单位：拓浙 AI 生态、浙江大学求是强鹰俱乐部",
-            "teamSizeLabel": "天猫赛道队伍人数",
-            "teamSizeHint": "参加天猫赛道时填写，含本人2–5人",
-            "teamSizeError": "请填写天猫赛道队伍人数（2–5人）",
+            "teamSizeLabel": "队伍人数",
+            "teamSizeHint": "含本人，1–5 人",
+            "teamSizeError": "请选择队伍人数（1–5 人）",
             "recapAdditionalTitle": "析境杯 · 跨学科量化投资挑战赛",
             "recapAdditionalText": "析境科技主办，拓浙 AI 生态与校内相关社团协办。2026年7月至10月，围绕自然语言研究假设、因子与策略回测、虚拟组合运行开展持续评价。"
+        },
+        "pages": {
+            "format": "比赛赛制",
+            "rewardsTitle": "赛事奖励",
+            "partnersTitle": "合作阵容",
+            "group": "赛事群",
+            "forumSignup": "论坛报名",
+            "venues": [
+                {
+                    "date": "10.18",
+                    "title": "初赛 · 技术论坛",
+                    "place": "浙江大学紫金港校区",
+                    "address": "段永平教学楼 2-112"
+                },
+                {
+                    "date": "10.25",
+                    "title": "决赛 · 创业论坛",
+                    "place": "三墩元空间",
+                    "address": "宝港生活广场 C 座 6 楼"
+                }
+            ],
+            "tracks": [
+                {
+                    "id": "campus",
+                    "title": "天猫·OPC孵化赛道",
+                    "mode": "可线上参赛 · 1–5 人组队",
+                    "description": "多学科自由命题，优先招募成熟、可落地项目。",
+                    "stages": [
+                        {
+                            "date": "10.13",
+                            "title": "线上开启"
+                        },
+                        {
+                            "date": "10.18",
+                            "title": "现场技术指导",
+                            "note": "13:00–17:00 · 可选参加"
+                        },
+                        {
+                            "date": "10.19—23",
+                            "title": "线上复赛"
+                        },
+                        {
+                            "date": "10.25",
+                            "title": "决赛"
+                        }
+                    ]
+                },
+                {
+                    "id": "industry",
+                    "title": "华为·产业进阶赛道",
+                    "mode": "初赛须线下 · 1–5 人组队",
+                    "description": "企业文案与营销命题，开发 Agent 或 Skill。",
+                    "stages": [
+                        {},
+                        {
+                            "date": "10.18",
+                            "title": "线下开发",
+                            "note": "13:00–17:00"
+                        },
+                        {
+                            "date": "10.19—23",
+                            "title": "线上复赛"
+                        },
+                        {
+                            "date": "10.25",
+                            "title": "决赛"
+                        }
+                    ]
+                }
+            ],
+            "forums": [
+                {
+                    "title": "技术论坛",
+                    "time": "10.18 · 9:00–11:15"
+                },
+                {
+                    "title": "创业论坛",
+                    "time": "10.25 · 13:30–16:30"
+                }
+            ],
+            "rewards": [
+                {
+                    "title": "天猫·OPC孵化赛道",
+                    "value": "¥6,500",
+                    "note": "6 个获奖团队",
+                    "rows": [
+                        {
+                            "label": "冠军 · 1 队",
+                            "lines": ["¥3,000／队"]
+                        },
+                        {
+                            "label": "亚军 · 2 队",
+                            "lines": ["¥1,000／队"]
+                        },
+                        {
+                            "label": "季军 · 3 队",
+                            "lines": ["¥500／队"]
+                        }
+                    ],
+                    "footer": "另有证书奖状、天猫校园周边"
+                },
+                {
+                    "title": "华为·产业进阶赛道",
+                    "value": "¥14,980",
+                    "note": "10 个获奖名额 · 奖品与奖金合计",
+                    "rows": [
+                        {
+                            "label": "一等奖 · 2 名",
+                            "lines": [
+                                "Osmo Pocket 4 相机 × 1",
+                                "MatePad AIR Z 平板 × 1",
+                                "另各获 ¥1,000"
+                            ]
+                        },
+                        {
+                            "label": "二等奖 · 3 名",
+                            "lines": ["FreeBuds Neo 耳机 ＋ ¥600／名"]
+                        },
+                        {
+                            "label": "三等奖 · 5 名",
+                            "lines": ["FreeBuds 7i 耳机 ＋ ¥250／名"]
+                        }
+                    ]
+                },
+                {
+                    "title": "魔搭社区·现场抽奖",
+                    "value": "130 份",
+                    "note": "现场抽奖礼品",
+                    "rows": [
+                        {
+                            "label": "各 10 份",
+                            "lines": ["颈枕 · 马克杯 · 雨伞"]
+                        },
+                        {
+                            "label": "各 20 份",
+                            "lines": ["帆布袋 · 毛绒耳机包", "紫色手机夹"]
+                        },
+                        {
+                            "label": "40 份",
+                            "lines": ["贴纸"]
+                        }
+                    ],
+                    "footer": "魔搭社区赞助"
+                }
+            ],
+            "organizers": [
+                {
+                    "label": "指导单位",
+                    "names": "浙江大学创新创业学院"
+                },
+                {
+                    "label": "主办单位",
+                    "names": "拓浙 AI 生态 · 浙江大学求是强鹰俱乐部"
+                }
+            ],
+            "groups": {
+                "personal": "个人信息",
+                "entry": "参赛信息",
+                "skills": "能力与经历",
+                "links": "作品链接"
+            },
+            "partnerGroups": [
+                {
+                    "id": "companies",
+                    "label": "合作企业",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huawei",
+                            "name": "华为"
+                        },
+                        {
+                            "id": "tianmao",
+                            "name": "天猫校园"
+                        },
+                        {
+                            "id": "aliyun",
+                            "name": "阿里云"
+                        },
+                        {
+                            "id": "guancha",
+                            "name": "观猹"
+                        },
+                        {
+                            "id": "qoder",
+                            "name": "Qoder"
+                        },
+                        {
+                            "id": "novax",
+                            "name": "NovaX"
+                        },
+                        {
+                            "id": "bonjour",
+                            "name": "Bonjour!"
+                        },
+                        {
+                            "id": "unionlink",
+                            "name": "友念智能"
+                        },
+                        {
+                            "id": "deepseekclub",
+                            "name": "深求社区"
+                        },
+                        {
+                            "id": "modelscope",
+                            "name": "魔搭社区"
+                        },
+                        {
+                            "id": "thunisoft",
+                            "name": "华宇"
+                        },
+                        {
+                            "id": "yuandian",
+                            "name": "元典"
+                        }
+                    ]
+                },
+                {
+                    "id": "organizations",
+                    "label": "合作组织及平台",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "ztvp",
+                            "name": "ZTVP"
+                        },
+                        {
+                            "id": "kab",
+                            "name": "KAB创业俱乐部"
+                        },
+                        {
+                            "id": "entrepreneurship-alliance",
+                            "name": "浙江大学创业联盟"
+                        },
+                        {
+                            "id": "zjuai",
+                            "name": "学生人工智能协会"
+                        },
+                        {
+                            "id": "aira",
+                            "name": "AI创研会"
+                        },
+                        {
+                            "id": "cross-innovation",
+                            "name": "跨界创新俱乐部"
+                        },
+                        {
+                            "id": "investment",
+                            "name": "投资协会"
+                        },
+                        {
+                            "id": "lianhua",
+                            "name": "联华利合协会"
+                        },
+                        {
+                            "id": "magic",
+                            "name": "D调魔法学园"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "eventWorkspace": {

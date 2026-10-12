@@ -3,7 +3,7 @@ import fs from "node:fs";
 const template = JSON.parse(
     fs.readFileSync(new URL("../shared/hackathonAiX.json", import.meta.url), "utf8")
 );
-test("four persistent tabs, seven scrollable chapters and pending results change with event state", async ({
+test("four persistent tabs, five paged screens and pending results change with event state", async ({
     page,
 }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -17,15 +17,15 @@ test("four persistent tabs, seven scrollable chapters and pending results change
     );
     await page.goto("/hackathon/2");
     await expect(page.locator(".hx-nav a")).toHaveCount(4);
-    await expect(page.locator(".aix-chapters button")).toHaveCount(7);
+    await expect(page.locator(".aix-chapters button")).toHaveCount(5);
     await expect(page.locator(".hx-nav a").nth(1)).toContainText("即将揭晓");
     await page.locator(".aix-chapters-toggle").click();
-    await page.locator(".aix-chapters button").nth(3).click();
-    await expect(page.locator(".aix-chapters button").nth(3)).toHaveAttribute(
+    await page.locator(".aix-chapters button").nth(2).click();
+    await expect(page.locator(".aix-chapters button").nth(2)).toHaveAttribute(
         "aria-current",
         "location"
     );
-    await expect(page.getByText("6个获奖团队")).toBeVisible();
+    await expect(page.getByText("6 个获奖团队")).toBeVisible();
     await page.locator(".aix-chapters-toggle").click();
     await page.locator(".aix-chapters button").nth(0).click();
     await expect(page.locator(".aix-chapters button").nth(0)).toHaveAttribute(

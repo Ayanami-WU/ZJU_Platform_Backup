@@ -119,8 +119,8 @@ const answers = {
     strengths: ["exploring"],
     aiTools: ["none"],
     aiToolsOther: "",
-    experience: "",
-    researchExperience: "",
+    experience: "课程项目开发",
+    researchExperience: "文献研究",
     projectLinks: "",
 };
 
@@ -138,7 +138,7 @@ test("AI+X registration permits beginners and validates exclusive choices and op
         ["aiTools", ["Codex", "none"]],
         ["strengths", ["development", "exploring"]],
         ["track", ["unknown"]],
-        ["teamSize", "1"],
+        ["teamSize", "0"],
         ["teamSize", "6"],
         ["teamSize", ""],
         ["projectLinks", "javascript:alert(1)"],
@@ -170,4 +170,66 @@ test("AI+X registration permits beginners and validates exclusive choices and op
         validateRegistrationAnswers(customized, { ...answers, aiTools: ["none", "Codex"] }).errors,
         []
     );
+});
+
+test("AI+X requires both experience answers and rejects whitespace", () => {
+    for (const field of ["experience", "researchExperience"]) {
+        for (const value of [undefined, "", "   "])
+            assert.ok(
+                validateRegistrationAnswers(template, { ...answers, [field]: value }).errors.some(
+                    (error) => error.field === field
+                )
+            );
+    }
+});
+
+test("required experience migration is scoped, preserves answers and runs once", async () => {
+    const {
+        migrateHackathonAiXRequiredExperience: migrate,
+    } = require("../src/config/migrations/hackathonAiXRequiredExperience");
+    const db = await open({ filename: ":memory:", driver: sqlite3.Database });
+    try {
+        await db.exec(
+            "CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT); CREATE TABLE hackathon_registrations (id INTEGER PRIMARY KEY, form_data_json TEXT); INSERT INTO hackathon_registrations VALUES(1, '{}');"
+        );
+        const event = clone(template);
+        event.form.fields
+            .filter((f) => ["experience", "researchExperience"].includes(f.id))
+            .forEach((f) => {
+                f.required = false;
+                f.label = "custom " + f.id;
+            });
+        const other = {
+            event: { key: "historical" },
+            form: { fields: [{ id: "experience", required: false }] },
+        };
+        const schedule = { revision: 5, activeEventKey: "historical", events: [other, event] };
+        await db.run(
+            "INSERT INTO settings VALUES('hackathon_schedule_config', ?)",
+            JSON.stringify(schedule)
+        );
+        await migrate(db);
+        const row = await db.get(
+            "SELECT value FROM settings WHERE key='hackathon_schedule_config'"
+        );
+        const updated = JSON.parse(row.value);
+        assert.deepEqual(updated.events[0], other);
+        assert.equal(updated.activeEventKey, "historical");
+        for (const id of ["experience", "researchExperience"]) {
+            const f = updated.events[1].form.fields.find((f) => f.id === id);
+            assert.equal(f.required, true);
+            assert.equal(f.label, "custom " + id);
+        }
+        assert.deepEqual(await db.get("SELECT * FROM hackathon_registrations"), {
+            id: 1,
+            form_data_json: "{}",
+        });
+        await migrate(db);
+        assert.deepEqual(
+            await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'"),
+            row
+        );
+    } finally {
+        await db.close();
+    }
 });

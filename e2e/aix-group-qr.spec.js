@@ -17,10 +17,10 @@ test("official group QR opens, closes with Escape and does not inherit the old Q
     );
     await page.clock.setFixedTime(new Date("2026-10-16T23:59:00+08:00"));
     await page.goto("/hackathon/2");
-    const button = page.getByRole("button", { name: "查看入群二维码" });
+    const button = page.getByRole("button", { name: "赛事群" });
     await button.scrollIntoViewIfNeeded();
     await button.click();
-    const dialog = page.getByRole("dialog", { name: "查看入群二维码" });
+    const dialog = page.getByRole("dialog", { name: "赛事群" });
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("img")).toHaveAttribute(
         "src",
@@ -31,7 +31,8 @@ test("official group QR opens, closes with Escape and does not inherit the old Q
     await expect(button).toBeFocused();
     await page.clock.setFixedTime(new Date("2026-10-17T00:00:00+08:00"));
     await page.reload();
-    await page.locator(".aix-chapters button").nth(6).click();
+    await page.locator(".aix-chapters-toggle").click();
+    await page.locator(".aix-chapters button").nth(4).click();
     await expect(button).toBeVisible();
     await expect(page.getByText("二维码有效至 10 月 16 日")).toHaveCount(0);
 });

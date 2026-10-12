@@ -13,14 +13,14 @@
         "key": "zhekesong-ai-x-2026",
         "brand": "浙客松 · 2026",
         "title": "AI+X破界黑客松",
-        "subtitle": "破界 · 共创 · 涌现",
+        "subtitle": "",
         "description": "天猫·OPC孵化赛道优先招募成熟、可落地的项目，华为·产业进阶赛道围绕企业文案与营销场景开发应用。",
         "startAt": "2026-10-09T00:00",
         "endAt": "2026-10-25T17:00",
         "timezone": "Asia/Shanghai",
         "location": "10月18日：紫金港校区段永平教学楼2-112 · 10月25日：三墩元空间（宝港生活广场C座6楼）",
-        "format": "天猫每队2–5人 · 华为组队参赛",
-        "duration": "10月12日报名 · 18日初赛 · 19–22日复赛 · 25日决赛",
+        "format": "1–5 人组队 · 可兼报两条赛道",
+        "duration": "10月13日天猫线上开启 · 18日华为线下开启 · 19—23日线上复赛 · 25日决赛",
         "prizeValue": "21,480",
         "prizeUnit": "¥",
         "registrationOpen": true,
@@ -36,7 +36,7 @@
                 {
                     "id": "semifinal",
                     "opensAt": "2026-10-19T00:00:00+08:00",
-                    "closesAt": "2026-10-23T00:00:00+08:00"
+                    "closesAt": "2026-10-24T00:00:00+08:00"
                 },
                 {
                     "id": "final",
@@ -47,20 +47,20 @@
             "challenges": [],
             "reports": [],
             "challengeReleaseAt": "2026-10-18T13:00:00+08:00",
-            "registrationOpensAt": "2026-10-12T00:00:00+08:00"
+            "registrationOpensAt": "2026-10-13T00:00:00+08:00"
         }
     },
     "rules": [
         {
             "id": "cross_discipline",
             "title": "跨学科创新与真实应用",
-            "description": "天猫·OPC孵化赛道每队2–5人，携现有产品参加现场初赛；华为·产业进阶赛道组队开发企业命题。初赛选手须参加技术论坛，决赛选手须参加决赛论坛。",
+            "description": "两条赛道均为1–5人组队。天猫可线上参赛，18日13:00—17:00提供可选现场技术指导；华为初赛必须线下开发。",
             "enabled": true
         }
     ],
     "form": {
         "title": "赛事报名",
-        "description": "天猫·OPC孵化赛道每队2–5人，华为组队参赛。可兼报，每位选手独立填写报名资料；论坛请到独立页面报名。",
+        "description": "两条赛道均为1–5人组队。天猫可线上参赛，18日13:00—17:00提供可选现场技术指导；华为初赛必须线下开发。",
         "requiredHint": "所有带 * 的字段均为必填",
         "submitLabel": "提交报名",
         "successMessage": "报名已提交，可在右上角查看报名信息。",
@@ -139,7 +139,7 @@
                 "id": "track",
                 "label": "意向赛道",
                 "type": "multi_select",
-                "placeholder": "可同时选择两条赛道；天猫每队2–5人，华为组队参赛",
+                "placeholder": "可同时选择两条赛道",
                 "required": true,
                 "enabled": true,
                 "width": "full",
@@ -176,13 +176,17 @@
             },
             {
                 "id": "teamSize",
-                "label": "天猫赛道队伍人数",
+                "label": "队伍人数",
                 "type": "select",
-                "placeholder": "参加天猫赛道时填写；每队2–5人",
-                "required": false,
+                "placeholder": "含本人，1–5 人",
+                "required": true,
                 "enabled": true,
                 "width": "half",
                 "options": [
+                    {
+                        "value": "1",
+                        "label": "1 人"
+                    },
                     {
                         "value": "2",
                         "label": "2 人"
@@ -321,8 +325,8 @@
                 "id": "experience",
                 "label": "项目经历",
                 "type": "textarea",
-                "placeholder": "可简述一个项目：解决什么问题、你负责什么、使用的方法或工具、取得的成果。暂无经历可留空。",
-                "required": false,
+                "placeholder": "项目名称、个人贡献、成果",
+                "required": true,
                 "enabled": true,
                 "width": "full",
                 "options": []
@@ -331,8 +335,8 @@
                 "id": "researchExperience",
                 "label": "科研经历",
                 "type": "textarea",
-                "placeholder": "可简述研究方向、你承担的工作、使用的方法与阶段性成果。课程研究也可以填写，暂无经历可留空。",
-                "required": false,
+                "placeholder": "研究方向、承担工作、成果",
+                "required": true,
                 "enabled": true,
                 "width": "full",
                 "options": []

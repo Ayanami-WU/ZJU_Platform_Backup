@@ -2929,6 +2929,10 @@ async function runMigrations(db) {
     await require("./migrations/hackathonFirstFilm").migrateHackathonFirstFilm(db);
     await require("./migrations/hackathonForums").migrateHackathonForums(db);
     await require("./migrations/hackathonAiXOctober12").migrateHackathonAiXOctober12(db);
+    await require("./migrations/hackathonAiXRequiredExperience").migrateHackathonAiXRequiredExperience(
+        db
+    );
+    await require("./migrations/hackathonAiXPaged").migrateHackathonAiXPaged(db);
     await require("./migrations/hackathonGetuiBeauty").migrateHackathonGetuiBeauty(db);
     await require("./migrations/competitionWorkSelection").migrateCompetitionWorkSelection(db);
 }

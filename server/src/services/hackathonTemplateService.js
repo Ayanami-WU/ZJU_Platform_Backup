@@ -695,11 +695,10 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
 
     if (
         template.event.key === "zhekesong-ai-x-2026" &&
-        answers.track?.includes("campus") &&
         template.form.fields.some((f) => f.id === "teamSize" && f.enabled) &&
-        !["2", "3", "4", "5"].includes(answers.teamSize)
+        !["1", "2", "3", "4", "5"].includes(answers.teamSize)
     )
-        errors.push({ field: "teamSize", message: "天猫赛道每队2–5人，请填写队伍人数" });
+        errors.push({ field: "teamSize", message: "每队1–5人，请填写队伍人数" });
     if (JSON.stringify(answers).length > 30000) {
         errors.push({ field: "answers", message: "报名内容过长，请精简后重试" });
     }

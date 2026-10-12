@@ -42,7 +42,7 @@ test("October12 revision preserves old signups, published briefs, editor setting
             { id: "published", published: true },
         ]);
         assert.equal(after.events[1].event.program.stages[0].opensAt, "2026-10-18T13:00:00+08:00");
-        assert.equal(after.events[1].event.program.stages[1].closesAt, "2026-10-23T00:00:00+08:00");
+        assert.equal(after.events[1].event.program.stages[1].closesAt, "2026-10-24T00:00:00+08:00");
         assert.equal(
             after.events[1].form.fields.find((f) => f.id === "track").options[0].label,
             "天猫·OPC孵化赛道"

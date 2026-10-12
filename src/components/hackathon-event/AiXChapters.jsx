@@ -4,10 +4,8 @@ import { useTranslation } from "react-i18next";
 export const AIX_CHAPTER_IDS = [
     "aix-overview",
     "aix-tracks",
-    "aix-forums",
     "aix-rewards",
     "aix-partners-title",
-    "aix-recap",
     "registration-form",
 ];
 export default function AiXChapters({ containerRef, onSelect }) {

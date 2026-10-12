@@ -5069,19 +5069,19 @@
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
         "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
-        "team": "Tmall: 2–5 members · Huawei: team competition",
+        "team": "Teams of 1–5; both tracks may be selected",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
         "tracks": {
             "campus": {
                 "title": "Tmall Campus · OPC Incubation Track",
-                "description": "Teams of 2–5. Bring an existing product onsite on October 18, refine it with mentors, and develop a demo and industrial implementation plan in the semifinal.",
+                "description": "Open topics across disciplines; mature, deployable projects preferred. Online participation · 1–5 people",
                 "topics": "Open topics across disciplines and application scenarios"
             },
             "industry": {
                 "title": "Huawei · Industry Advanced Track",
-                "description": "Huawei sets copywriting and marketing challenges at 13:00 on October 18. Build an Agent or Skill onsite; submit at 17:00. Semifinal work is due October 22, 24:00.",
+                "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · 1–5 people",
                 "topics": "Copywriting · Marketing"
             }
         },
@@ -5116,7 +5116,7 @@
             "semifinal": {
                 "date": "10.19–10.22",
                 "title": "Online semifinal",
-                "description": "Online October 19–22. Due October 22, 24:00; final selection October 23."
+                "description": "Online semifinal: October 19–23. Refine your project, demo and proposal."
             },
             "shortlist": {
                 "date": "10.23",
@@ -5134,7 +5134,7 @@
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Tmall project registration opens October 12; Huawei briefs are released October 18 at 13:00.",
+        "releaseTime": "Tmall launches online on Oct 13; Huawei releases its challenge at 13:00 on Oct 18.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -5152,7 +5152,7 @@
             "semifinal": {
                 "title": "Semifinal",
                 "date": "10.19—10.24",
-                "description": "Online October 19–22. Due October 22, 24:00; final selection October 23.",
+                "description": "Online semifinal: October 19–23. Refine your project, demo and proposal.",
                 "materials": "Refine the project guide and demo, submit source code and a ModelScope project as required by the official challenge."
             },
             "final": {
@@ -5181,7 +5181,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Register individually for either or both tracks. Tmall teams have 2–5 members. Forum registration is separate.",
+            "description": "Teams of 1–5; both tracks may be selected",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5205,7 +5205,7 @@
                 },
                 "experience": {
                     "title": "Project and research experience",
-                    "hint": "All fields below are optional. Focus on your own contribution and outcomes, rather than a full CV."
+                    "hint": "Project and research experience are required."
                 },
                 "additional": {
                     "title": "Additional information",
@@ -5221,23 +5221,27 @@
             "track": "Tracks (multiple allowed)",
             "contact": "Contact email",
             "team": "Team name (optional)",
-            "experience": "Project experience (optional)",
-            "researchExperience": "Research experience (optional)",
+            "experience": "Project experience",
+            "researchExperience": "Research experience",
             "aiTools": "AI tools (multiple allowed)",
             "aiToolsOther": "Other AI tools (optional)",
             "strengths": "Strengths (multiple allowed)",
             "projectLinks": "Portfolio or research links (optional)",
-            "teamSize": "Tmall team size"
+            "teamSize": "Team size"
         },
         "options": {
+            "2": "2 members",
+            "3": "3 members",
+            "4": "4 members",
+            "5": "5 members",
             "freshman": "Year 1",
             "sophomore": "Year 2",
             "junior": "Year 3",
             "senior": "Year 4",
             "master": "Master’s",
             "phd": "PhD",
-            "campus": "Tmall Campus · OPC Incubation Track · 2–5 members",
-            "industry": "Huawei · Industry Advanced Track · Teams",
+            "campus": "Tmall · OPC Incubation",
+            "industry": "Huawei · Industry Track",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
             "Cursor": "Cursor",
@@ -5258,11 +5262,7 @@
             "product": "Product planning",
             "data": "Data analysis",
             "research": "Domain research",
-            "exploring": "Still exploring",
-            "2": "2 members",
-            "3": "3 members",
-            "4": "4 members",
-            "5": "5 members"
+            "exploring": "Still exploring"
         },
         "brand": "ZHEKESONG",
         "backToSite": "Back to TUOZHE AI",
@@ -5313,7 +5313,7 @@
         "resultsTitle": "Results",
         "resultsIntro": "Award winners, projects, speeches and forum highlights in one place.",
         "industryStages": "Huawei Advanced Track · Stages",
-        "campusSchedule": "Registration October 12; onsite preliminary October 18; online semifinal October 19–22; deadline October 22 at 24:00; finals October 25.",
+        "campusSchedule": "Online launch Oct 13; optional on-site mentoring Oct 18; online semifinal Oct 19–23; finals Oct 25.",
         "fieldHints": {
             "name": "",
             "studentId": "",
@@ -5343,7 +5343,7 @@
                     "format": "Build online · Present on campus",
                     "shortTitle": "Tmall Campus · OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
-                    "team": "2–5 members",
+                    "team": "1–5 members",
                     "deadline": "Onsite · October 18, 17:00",
                     "support": "Tmall Campus · Product development and incubation"
                 },
@@ -5531,13 +5531,13 @@
                 "stageClosed": "Stage ended"
             },
             "problemTitle": "Bring a working product",
-            "problemDescription": "Teams of 2–5. Bring an existing product onsite on October 18, refine it with mentors, and develop a demo and industrial implementation plan in the semifinal.",
+            "problemDescription": "Open topics across disciplines; mature, deployable projects preferred. Online participation · 1–5 people",
             "directions": "Areas to explore",
             "specificSubmission": "Challenge submission link",
             "releaseAt": "Expected release: {{date}}. The official published brief is authoritative.",
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
-            "individual": "2–5 members per Tmall team; bring an existing product onsite.",
+            "individual": "Teams of 1–5; online participation is available for Tmall.",
             "team": "Team competition; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Prepare a project description and a usable AI app. Save GitHub and ModelScope repository links below.",
@@ -5592,7 +5592,7 @@
                     },
                     {
                         "title": "Working products",
-                        "description": "Bring an existing product and validate results onsite"
+                        "description": "Optional on-site mentoring on the afternoon of Oct 18"
                     },
                     {
                         "title": "Industry & incubation",
@@ -5612,7 +5612,7 @@
             }
         },
         "official": {
-            "chapters": ["Overview", "Tracks", "Forums", "Prizes", "Partners", "Recap", "Register"],
+            "chapters": ["Overview", "Format", "Rewards", "Partners", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5648,7 +5648,7 @@
             "back": "Back to competition",
             "enter": "Forums & independent registration",
             "attendanceTitle": "Required attendance for contestants",
-            "attendance": "Preliminary-round contestants must attend the October 18 technical forum. Finalists must attend the October 25 final-day forum. Register separately for the required session.",
+            "attendance": "Huawei preliminary contestants must attend the October 18 technical forum; finalists must attend the October 25 final-day forum. Forum signup is separate.",
             "agenda": "View agenda",
             "invited": "Invited · Not confirmed",
             "registered": "Registered · No. {{id}}",
@@ -5942,11 +5942,272 @@
                 }
             ],
             "organizers": "Guidance: ZJU School of Innovation and Entrepreneurship · Organizers: Tuozhe AI Ecosystem, Zhejiang University Qiushi Elite Eagle Club",
-            "teamSizeLabel": "Tmall team size",
-            "teamSizeHint": "2–5 members for the Tmall track",
-            "teamSizeError": "Enter a Tmall team size of 2–5.",
+            "teamSizeLabel": "Team size",
+            "teamSizeHint": "Including yourself, 1–5 people",
+            "teamSizeError": "Choose a team size of 1–5",
             "recapAdditionalTitle": "Xijing Cup · Interdisciplinary Quantitative Investment Challenge",
             "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios."
+        },
+        "pages": {
+            "format": "Competition format",
+            "rewardsTitle": "Prizes & rewards",
+            "partnersTitle": "Partners",
+            "group": "Event group",
+            "forumSignup": "Forum signup",
+            "venues": [
+                {
+                    "date": "10.18",
+                    "title": "Preliminary round · Technical forum",
+                    "place": "Zhejiang University, Zijingang Campus",
+                    "address": "Duan Yongping Teaching Building 2–112"
+                },
+                {
+                    "date": "10.25",
+                    "title": "Finals · Entrepreneurship forum",
+                    "place": "Sandun Entrepreneurship Space",
+                    "address": "Baogang Life Plaza, Block C, Level 6"
+                }
+            ],
+            "tracks": [
+                {
+                    "id": "campus",
+                    "title": "Tmall · OPC Incubation",
+                    "mode": "Online participation · 1–5 people",
+                    "description": "Open topics across disciplines; mature, deployable projects preferred.",
+                    "stages": [
+                        {
+                            "date": "10.13",
+                            "title": "Online launch"
+                        },
+                        {
+                            "date": "10.18",
+                            "title": "On-site mentoring",
+                            "note": "13:00–17:00 · Optional"
+                        },
+                        {
+                            "date": "10.19–23",
+                            "title": "Online semifinal"
+                        },
+                        {
+                            "date": "10.25",
+                            "title": "Finals"
+                        }
+                    ]
+                },
+                {
+                    "id": "industry",
+                    "title": "Huawei · Industry Track",
+                    "mode": "On-site preliminary · 1–5 people",
+                    "description": "Build an Agent or Skill for business writing and marketing.",
+                    "stages": [
+                        {},
+                        {
+                            "date": "10.18",
+                            "title": "On-site build",
+                            "note": "13:00–17:00"
+                        },
+                        {
+                            "date": "10.19–23",
+                            "title": "Online semifinal"
+                        },
+                        {
+                            "date": "10.25",
+                            "title": "Finals"
+                        }
+                    ]
+                }
+            ],
+            "forums": [
+                {
+                    "title": "Technical forum",
+                    "time": "Oct 18 · 09:00–11:15"
+                },
+                {
+                    "title": "Entrepreneurship forum",
+                    "time": "Oct 25 · 13:30–16:30"
+                }
+            ],
+            "rewards": [
+                {
+                    "title": "Tmall · OPC Incubation",
+                    "value": "¥6,500",
+                    "note": "6 winning teams",
+                    "rows": [
+                        {
+                            "label": "Champion · 1 team",
+                            "lines": ["¥3,000 / team"]
+                        },
+                        {
+                            "label": "Runner-up · 2 teams",
+                            "lines": ["¥1,000 / team"]
+                        },
+                        {
+                            "label": "Third place · 3 teams",
+                            "lines": ["¥500 / team"]
+                        }
+                    ],
+                    "footer": "Certificates and Tmall Campus gifts included"
+                },
+                {
+                    "title": "Huawei · Industry Track",
+                    "value": "¥14,980",
+                    "note": "10 winners · Cash and prizes combined",
+                    "rows": [
+                        {
+                            "label": "First prize · 2 winners",
+                            "lines": [
+                                "Osmo Pocket 4 camera × 1",
+                                "MatePad AIR Z tablet × 1",
+                                "Plus ¥1,000 each"
+                            ]
+                        },
+                        {
+                            "label": "Second prize · 3 winners",
+                            "lines": ["FreeBuds Neo + ¥600 each"]
+                        },
+                        {
+                            "label": "Third prize · 5 winners",
+                            "lines": ["FreeBuds 7i + ¥250 each"]
+                        }
+                    ]
+                },
+                {
+                    "title": "ModelScope · On-site draw",
+                    "value": "130 gifts",
+                    "note": "On-site prize draw",
+                    "rows": [
+                        {
+                            "label": "10 each",
+                            "lines": ["Neck pillows · Mugs · Umbrellas"]
+                        },
+                        {
+                            "label": "20 each",
+                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"]
+                        },
+                        {
+                            "label": "40",
+                            "lines": ["Stickers"]
+                        }
+                    ],
+                    "footer": "Sponsored by ModelScope"
+                }
+            ],
+            "organizers": [
+                {
+                    "label": "Guidance",
+                    "names": "ZJU College of Innovation and Entrepreneurship"
+                },
+                {
+                    "label": "Organizers",
+                    "names": "TUOZHE AI Ecosystem · ZJU Qiushi Elite Eagle Club"
+                }
+            ],
+            "groups": {
+                "personal": "Personal details",
+                "entry": "Entry details",
+                "skills": "Skills & experience",
+                "links": "Portfolio links"
+            },
+            "partnerGroups": [
+                {
+                    "id": "companies",
+                    "label": "Partner companies",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huawei",
+                            "name": "华为"
+                        },
+                        {
+                            "id": "tianmao",
+                            "name": "Tmall Campus"
+                        },
+                        {
+                            "id": "aliyun",
+                            "name": "Alibaba Cloud"
+                        },
+                        {
+                            "id": "guancha",
+                            "name": "Guancha"
+                        },
+                        {
+                            "id": "qoder",
+                            "name": "Qoder"
+                        },
+                        {
+                            "id": "novax",
+                            "name": "NovaX"
+                        },
+                        {
+                            "id": "bonjour",
+                            "name": "Bonjour!"
+                        },
+                        {
+                            "id": "unionlink",
+                            "name": "UnionLink-Intell"
+                        },
+                        {
+                            "id": "deepseekclub",
+                            "name": "DeepSeek Club"
+                        },
+                        {
+                            "id": "modelscope",
+                            "name": "ModelScope"
+                        },
+                        {
+                            "id": "thunisoft",
+                            "name": "Thunisoft"
+                        },
+                        {
+                            "id": "yuandian",
+                            "name": "Legal Intelligence"
+                        }
+                    ]
+                },
+                {
+                    "id": "organizations",
+                    "label": "Organizations & platforms",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "ztvp",
+                            "name": "ZTVP"
+                        },
+                        {
+                            "id": "kab",
+                            "name": "KAB Club"
+                        },
+                        {
+                            "id": "entrepreneurship-alliance",
+                            "name": "ZJU Entrepreneur Alliance"
+                        },
+                        {
+                            "id": "zjuai",
+                            "name": "ZJU Student AI Association"
+                        },
+                        {
+                            "id": "aira",
+                            "name": "AIRA"
+                        },
+                        {
+                            "id": "cross-innovation",
+                            "name": "Pioneering Innovation Club"
+                        },
+                        {
+                            "id": "investment",
+                            "name": "Investment Association"
+                        },
+                        {
+                            "id": "lianhua",
+                            "name": "Unilever Club"
+                        },
+                        {
+                            "id": "magic",
+                            "name": "DuMagic"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "eventWorkspace": {

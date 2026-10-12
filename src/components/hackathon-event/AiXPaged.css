@@ -1,0 +1,699 @@
+/* Five full-height screens, scoped to this edition. */
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] {
+    --event-nav-height: 80px;
+    --aix-page-height: calc(
+        100dvh - var(--site-nav-height) - var(--event-nav-height) - var(--event-bottom-inset)
+    );
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-eventbar {
+    margin-bottom: 0;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #hx-event-content {
+    min-height: 0;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] [data-registration-page][data-paged] {
+    position: relative;
+    height: var(--aix-page-height);
+    min-height: 0;
+    padding: 0;
+    scroll-snap-type: y mandatory;
+    scroll-padding: 0;
+}
+.aix-paged-content {
+    display: contents;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form[data-contained-form]) {
+    box-sizing: border-box;
+    height: var(--aix-page-height);
+    min-height: 0;
+    max-height: var(--aix-page-height);
+    padding: 24px 132px 24px 36px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    overflow: hidden;
+}
+.aix-page {
+    position: relative;
+}
+.aix-page-body {
+    max-width: 1280px;
+    height: 100%;
+    min-height: 0;
+    margin: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px 8px 8px;
+    scrollbar-width: thin;
+}
+.aix-page :is(h1, h2, h3, p, dl, dd, ol) {
+    margin: 0;
+}
+.aix-page-heading {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    margin-bottom: 22px;
+}
+.aix-page-heading > span {
+    color: var(--hx-accent-text);
+    font:
+        600 14px ui-monospace,
+        monospace;
+}
+.aix-page-heading h2 {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+.aix-cover {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    gap: 24px 40px;
+}
+.aix-cover-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    color: var(--hx-muted);
+    font-size: 14px;
+}
+.aix-cover-eyebrow > span:first-child {
+    color: var(--hx-accent-text);
+    letter-spacing: 0.12em;
+}
+.aix-cover h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    font-size: clamp(32px, 4vw, 62px);
+    font-weight: 800;
+    line-height: 1.16;
+}
+.aix-cover h1 strong {
+    font-size: clamp(64px, 7vw, 108px);
+    letter-spacing: -0.055em;
+}
+.aix-cover-prize {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 32px;
+}
+.aix-cover-prize > strong {
+    color: var(--hx-accent-text);
+    font:
+        800 clamp(56px, 6.4vw, 96px)/1.1 ui-monospace,
+        monospace;
+    letter-spacing: -0.06em;
+}
+.aix-cover-prize > span {
+    color: var(--hx-muted);
+    font-size: 15px;
+}
+.aix-cover-art {
+    position: relative;
+}
+.aix-cover-art img {
+    width: 100%;
+    max-height: 470px;
+    object-fit: contain;
+    animation: aix-breathe 5s ease-in-out infinite;
+}
+@keyframes aix-breathe {
+    50% {
+        opacity: 0.7;
+        transform: scale(0.97);
+    }
+}
+.aix-cover-art[data-motion-paused="true"] img {
+    animation-play-state: paused;
+}
+.aix-cover-art button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--hx-line);
+    border-radius: 50%;
+    color: var(--hx-muted);
+}
+.aix-cover-venues {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    border-top: 1px solid var(--hx-line);
+    padding-top: 20px;
+}
+.aix-cover-venues > div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    row-gap: 3px;
+}
+.aix-cover-venues time {
+    grid-row: 1/4;
+    color: var(--hx-accent-text);
+    font:
+        700 32px/1.3 ui-monospace,
+        monospace;
+}
+.aix-cover-venues strong {
+    font-size: 17px;
+}
+.aix-cover-venues span {
+    color: var(--hx-muted);
+    font-size: 14px;
+}
+.aix-track-timelines {
+    display: grid;
+    gap: 18px;
+}
+.aix-timeline-panel {
+    border: 1px solid var(--hx-line);
+    background: var(--hx-panel);
+    padding: 20px 24px;
+    border-radius: 8px;
+}
+.aix-timeline-panel header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+.aix-timeline-panel h3 {
+    font-size: 22px;
+    font-weight: 750;
+}
+.aix-timeline-panel header > span {
+    color: var(--hx-accent-text);
+    font-size: 14px;
+}
+.aix-timeline-panel > p {
+    font-size: 14px;
+    color: var(--hx-muted);
+    margin-top: 5px;
+}
+.aix-timeline-panel ol {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+.aix-timeline-panel li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-top: 1px solid var(--hx-line);
+    padding: 12px 12px 0 0;
+}
+.aix-timeline-panel li:not(.aix-stage-empty)::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hx-accent-text);
+}
+.aix-timeline-panel time {
+    font:
+        700 20px ui-monospace,
+        monospace;
+    color: var(--hx-accent-text);
+}
+.aix-timeline-panel li strong {
+    font-size: 15px;
+    font-weight: 650;
+}
+.aix-timeline-panel small {
+    font-size: 12px;
+    color: var(--hx-muted);
+}
+.aix-stage-empty {
+    border-color: transparent !important;
+}
+.aix-forum-strip {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 18px 0 0;
+}
+.aix-forum-strip > div {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 13px;
+}
+.aix-forum-strip span {
+    color: var(--hx-muted);
+}
+.aix-forum-strip a {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--hx-accent-text);
+    white-space: nowrap;
+    font-size: 14px;
+    min-height: 44px;
+}
+.aix-prize-panels {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+.aix-prize-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+    padding: 24px;
+}
+.aix-prize-panel h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+.aix-prize-number {
+    font:
+        800 clamp(32px, 3.6vw, 52px)/1.2 ui-monospace,
+        monospace;
+    color: var(--hx-accent-text);
+    margin: 20px 0 8px;
+    letter-spacing: -0.045em;
+}
+.aix-prize-panel > p,
+.aix-prize-panel footer {
+    font-size: 12px;
+    color: var(--hx-muted);
+}
+.aix-prize-panel dl {
+    margin: 20px 0 0;
+}
+.aix-prize-panel dl > div {
+    border-top: 1px solid var(--hx-line);
+    padding: 16px 0;
+}
+.aix-prize-panel dt {
+    font-size: 15px;
+    font-weight: 750;
+    margin-bottom: 6px;
+}
+.aix-prize-panel dd {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--hx-muted);
+}
+.aix-prize-panel footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-organizer-rows {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 36px;
+    margin-bottom: 20px !important;
+}
+.aix-organizer-rows > div {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+}
+.aix-organizer-rows dt {
+    color: var(--hx-muted);
+    white-space: nowrap;
+}
+.aix-partner-panels {
+    display: grid;
+    gap: 16px;
+}
+.aix-partner-panels > div {
+    padding: 18px 22px;
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+    background: var(--hx-panel);
+}
+.aix-partner-panels dt {
+    font-size: 16px;
+    font-weight: 750;
+    margin-bottom: 14px;
+}
+.aix-partner-panels .aix-partner-members {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.aix-partner-panels .aix-partner-members li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 0;
+}
+.aix-partner-panels .aix-brand-logo {
+    display: flex;
+    width: 100%;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    padding: 0;
+}
+.aix-partner-panels .aix-brand-logo :is(img, svg) {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.aix-partner-panels .aix-partner-name {
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--hx-muted);
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form[data-contained-form]
+    > .mx-auto {
+    display: block;
+    height: 100%;
+    max-width: 1120px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form[data-contained-form]
+    > .mx-auto
+    > div:first-child {
+    display: none;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #registration-form > .pointer-events-none {
+    display: none;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form[data-contained-form]
+    .hackathon-form-panel {
+    height: 100%;
+    padding: 22px 26px;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 14px;
+    padding-bottom: 14px;
+}
+.hackathon-form-heading h2 {
+    font-size: 26px;
+    font-weight: 800;
+}
+.aix-group-control button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    padding: 9px 12px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-form-group-title {
+    grid-column: 1/-1;
+    font-size: 14px;
+    font-weight: 750;
+    color: var(--hx-muted);
+    margin: 0;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-group {
+    gap: 14px 22px;
+    padding-top: 18px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-group + [class] {
+    border-top: 1px solid var(--hx-line);
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-footer > div:first-child {
+    border: 0;
+    background: none;
+    padding: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .hackathon-form-footer
+    > div:first-child
+    > p:first-child {
+    display: none;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions .hx-outline {
+    border: 2px solid var(--hx-accent-text);
+    color: var(--hx-accent-text);
+    background: var(--hx-panel);
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions .hx-primary:not(:disabled) {
+    background: var(--hx-accent);
+    color: #101507;
+    border-color: var(--hx-accent);
+}
+:root[data-theme="day"] .aix-cover-art img {
+    filter: brightness(0.55) saturate(0.85);
+}
+@media (max-width: 1100px) {
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] {
+        --event-nav-height: 108px;
+    }
+    .aix-prize-panel {
+        padding: 18px;
+    }
+    .aix-partner-panels .aix-partner-members {
+        gap: 14px;
+    }
+    .aix-forum-strip {
+        gap: 14px;
+    }
+    .aix-forum-strip > div {
+        display: block;
+    }
+}
+@media (max-width: 767px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form[data-contained-form]) {
+        padding: 16px 16px 58px;
+    }
+    .aix-page-body {
+        padding: 0 0 8px;
+    }
+    .aix-page-heading {
+        margin-bottom: 16px;
+        gap: 12px;
+    }
+    .aix-page-heading h2 {
+        font-size: 28px;
+    }
+    .aix-cover {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 24px;
+        align-content: safe center;
+        position: relative;
+    }
+    .aix-cover-copy {
+        position: relative;
+        z-index: 1;
+    }
+    .aix-cover-eyebrow {
+        font-size: 12px;
+        gap: 16px;
+    }
+    .aix-cover h1 {
+        font-size: 32px;
+        margin-top: 18px;
+    }
+    .aix-cover h1 strong {
+        font-size: 70px;
+    }
+    .aix-cover-prize {
+        margin-top: 26px;
+    }
+    .aix-cover-prize > strong {
+        font-size: 64px;
+    }
+    .aix-cover-art {
+        position: absolute;
+        right: 0;
+        top: 40px;
+        width: 44%;
+        opacity: 0.22;
+    }
+    .aix-cover-art button {
+        display: none;
+    }
+    .aix-cover-venues {
+        gap: 18px;
+        padding-top: 18px;
+    }
+    .aix-cover-venues > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .aix-cover-venues time {
+        font-size: 26px;
+    }
+    .aix-cover-venues strong {
+        font-size: 14px;
+    }
+    .aix-cover-venues span {
+        font-size: 12px;
+    }
+    .aix-timeline-panel {
+        padding: 16px 12px;
+    }
+    .aix-timeline-panel header {
+        display: block;
+    }
+    .aix-timeline-panel h3 {
+        font-size: 19px;
+    }
+    .aix-timeline-panel header > span {
+        font-size: 12px;
+    }
+    .aix-timeline-panel > p {
+        font-size: 12px;
+    }
+    .aix-timeline-panel ol {
+        margin-top: 18px;
+        gap: 4px;
+    }
+    .aix-timeline-panel time {
+        font-size: 13px;
+    }
+    .aix-timeline-panel li strong {
+        font-size: 12px;
+    }
+    .aix-timeline-panel small {
+        font-size: 10px;
+    }
+    .aix-timeline-panel li {
+        padding-right: 0;
+    }
+    .aix-forum-strip {
+        flex-wrap: wrap;
+        gap: 8px 18px;
+    }
+    .aix-forum-strip > div {
+        font-size: 12px;
+    }
+    .aix-forum-strip a {
+        margin-left: 0;
+    }
+    .aix-prize-panels {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .aix-prize-number {
+        font-size: 44px;
+    }
+    .aix-prize-panel {
+        padding: 22px;
+    }
+    .aix-organizer-rows {
+        display: grid;
+        gap: 10px;
+    }
+    .aix-organizer-rows > div {
+        font-size: 12px;
+        gap: 12px;
+    }
+    .aix-partner-panels > div {
+        padding: 16px 12px;
+    }
+    .aix-partner-panels .aix-partner-members {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px 12px;
+    }
+    .aix-partner-panels .aix-brand-logo {
+        height: 36px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-contained-form]
+        .hackathon-form-panel {
+        padding: 16px;
+    }
+    .hackathon-form-heading h2 {
+        font-size: 23px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-group {
+        grid-template-columns: 1fr;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-group > div {
+        grid-column: 1/-1;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions :is(a, button) {
+        font-size: 12px;
+        padding-inline: 8px;
+        height: 40px;
+    }
+    .aix-cover-art img {
+        animation: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .aix-cover-art img {
+        animation: none;
+    }
+    .aix-cover-art button {
+        display: none;
+    }
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-page-heading h2 {
+    font-size: clamp(28px, 3vw, 40px);
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-heading h2 {
+    font-size: 30px;
+    line-height: 1.3;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-group {
+    margin-top: 18px;
+    padding-top: 14px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] [data-field="contact"] {
+    grid-column: 1/-1;
+}
+.aix-partner-panels :is(.aix-brand-huawei, .aix-brand-guancha) {
+    background: #f2f4ed;
+    padding: 6px;
+    border-radius: 4px;
+}
+.aix-partner-panels [data-partner-group="organizations"] .aix-brand-logo {
+    height: 52px;
+}
+@media (max-width: 767px) {
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hackathon-form-heading h2 {
+        font-size: 23px;
+    }
+}

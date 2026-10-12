@@ -94,18 +94,22 @@
     color: var(--hx-text);
 }
 :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions :is(a, button) {
-    border-radius: 0;
+    border-radius: 6px;
     box-shadow: none;
-    background: transparent;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: 800;
 }
 :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions .hx-outline {
-    border-color: transparent;
-    color: var(--hx-muted);
+    border: 2px solid var(--hx-accent-text);
+    background: var(--hx-surface);
+    color: var(--hx-accent-text);
 }
 :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions .hx-primary:not(:disabled) {
-    border-color: var(--hx-muted);
-    background: transparent;
-    color: var(--hx-text);
+    border: 2px solid var(--hx-accent);
+    background: var(--hx-accent);
+    color: #101507;
 }
 :root
     .hx-workspace[data-event="zhekesong-ai-x-2026"]
@@ -538,4 +542,11 @@
     .hackathon-form-panel[data-registration-gate="login"] {
     height: auto;
     min-height: 230px;
+}
+
+@media (max-width: 767px) {
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions :is(a, button) {
+        padding-inline: 10px;
+        font-size: 13px;
+    }
 }

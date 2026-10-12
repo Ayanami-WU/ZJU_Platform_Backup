@@ -1160,7 +1160,7 @@
 }
 @media (max-width: 767px) {
     .aix-pixel-field .aix-motion-toggle {
-        display: none;
+        display: grid;
     }
     .aix-mobile-motion {
         display: grid;

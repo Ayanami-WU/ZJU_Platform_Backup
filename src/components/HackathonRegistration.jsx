@@ -1,4 +1,5 @@
-import AiXChapters from "./hackathon-event/AiXChapters";
+import { useAiXPager } from "../hooks/useAiXPager";
+import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
 import RepositorySubmission from "./hackathon-event/RepositorySubmission";
 import { getFirstEditionPartnerGroups } from "../data/firstEditionPartners";
@@ -47,9 +48,13 @@ import {
 } from "../utils/registrationProfile";
 
 const AIX_REGISTRATION_GROUPS = [
-    { key: "basics", ids: ["name", "studentId", "major", "grade", "contact", "track"] },
-    { key: "skills", ids: ["strengths", "aiTools", "aiToolsOther"] },
-    { key: "experience", ids: ["experience", "researchExperience", "projectLinks"] },
+    { key: "personal", ids: ["name", "studentId", "major", "grade", "contact"] },
+    { key: "entry", ids: ["track", "team", "teamSize"] },
+    {
+        key: "skills",
+        ids: ["strengths", "aiTools", "aiToolsOther", "experience", "researchExperience"],
+    },
+    { key: "links", ids: ["projectLinks"] },
 ];
 
 const hasCjkText = (value) => typeof value === "string" && /[\u3400-\u9fff]/.test(value);
@@ -270,6 +275,7 @@ const HackathonRegistration = ({
     );
     const { groups: ecosystemPartnerGroups } = useEcosystemPartners();
     const pageRef = useRef(null);
+    useAiXPager(pageRef, AIX_CHAPTER_IDS, isAiX, reduceMotion);
     const [activeSection, setActiveSection] = useState(0);
     const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -311,7 +317,6 @@ const HackathonRegistration = ({
         reduceMotion,
         minWidth: 0,
         lockMs: 860,
-        // Wheel-driven section paging is switched off for AI+X (/hackathon/2); remove to restore.
         enabled: !isAiX,
     });
 
@@ -645,7 +650,7 @@ const HackathonRegistration = ({
             const missing =
                 value === undefined ||
                 value === null ||
-                value === "" ||
+                (typeof value === "string" && value.trim() === "") ||
                 value === false ||
                 (Array.isArray(value) && value.length === 0);
             if (field.required && missing) {
@@ -667,8 +672,7 @@ const HackathonRegistration = ({
         if (
             isAiX &&
             activeFormFields.some((f) => f.id === "teamSize") &&
-            formData.track?.includes("campus") &&
-            !["2", "3", "4", "5"].includes(formData.teamSize)
+            !["1", "2", "3", "4", "5"].includes(formData.teamSize)
         )
             errors.teamSize = t("aix.october12.teamSizeError");
         if (
@@ -817,10 +821,7 @@ const HackathonRegistration = ({
             scroller?.querySelector(".hackathon-section-nav"),
         ].filter((element) => element?.getClientRects().length);
         const offset = isAiX
-            ? (workspace?.querySelector(".hx-eventbar")?.getBoundingClientRect().bottom ??
-                  viewportTop) -
-              viewportTop +
-              12
+            ? 0
             : navigation.length
               ? Math.max(...navigation.map((element) => element.getBoundingClientRect().bottom)) -
                 viewportTop +
@@ -877,8 +878,8 @@ const HackathonRegistration = ({
         <div
             ref={pageRef}
             data-registration-page
-            // Switches off scroll snapping for AI+X (/hackathon/2) only; remove to restore.
-            data-scroll-snap={isAiX ? "off" : undefined}
+            data-paged={isAiX || undefined}
+            tabIndex={isAiX ? 0 : undefined}
             className={`${introductionContent ? "aix-registration-page" : ""} hackathon-registration-scroll h-[100svh] min-w-0 max-w-full snap-y snap-proximity overflow-y-auto overflow-x-hidden scroll-smooth overscroll-y-contain ${palette.page}`}
         >
             <SEO
@@ -1474,7 +1475,6 @@ const HackathonRegistration = ({
                                 {formConfig.description}
                             </p>
 
-                            {isAiX && <AiXRegistrationInfo />}
                             {/* AI+X 收敛冗余：这三格与 hero 赛事信息重复，组队规则留在赛道字段提示。 */}
                             {!isAiX && (
                                 <>
@@ -1547,7 +1547,7 @@ const HackathonRegistration = ({
                     </div>
 
                     <MotionDiv
-                        {...(shouldAnimate
+                        {...(shouldAnimate && !isAiX
                             ? {
                                   initial: { opacity: 0, y: 24 },
                                   whileInView: { opacity: 1, y: 0 },
@@ -1560,11 +1560,17 @@ const HackathonRegistration = ({
                         }
                         className={`hackathon-form-panel relative z-10 min-w-0 max-w-full border p-5 backdrop-blur-2xl sm:p-7 lg:p-7 2xl:p-10 ${palette.panelStrong}`}
                     >
-                        {/* AI+X 去重：左侧栏已有同名标题，面板只保留编辑入口（无则整行不渲染）。 */}
-                        {(!isAiX || editProfileButton) && (
+                        {/* AI+X 在同一面板内展示标题、赛事群和报名字段。 */}
+                        {
                             <div
                                 className={`hackathon-form-heading mb-6 flex items-center gap-5 border-b pb-5 ${isDayMode ? "border-cyan-200" : "border-cyan-300/[0.18]"} ${isAiX ? "justify-end" : "justify-between"}`}
                             >
+                                {isAiX && (
+                                    <>
+                                        <h2>{t("aix.register.title")}</h2>
+                                        <AiXRegistrationInfo />
+                                    </>
+                                )}
                                 {!isAiX && (
                                     <div>
                                         <h3 className="text-3xl font-black tracking-tight xl:text-4xl">
@@ -1577,7 +1583,7 @@ const HackathonRegistration = ({
                                         </p>
                                     </div>
                                 )}
-                                {editProfileButton}
+                                {!isAiX && editProfileButton}
                                 {!isAiX && (
                                     <div
                                         className={`flex h-14 w-14 shrink-0 items-center justify-center border ${isDayMode ? "border-cyan-200 bg-cyan-50" : "border-cyan-300/20 bg-cyan-300/10"}`}
@@ -1586,7 +1592,7 @@ const HackathonRegistration = ({
                                     </div>
                                 )}
                             </div>
-                        )}
+                        }
 
                         {showProfileGate ? (
                             registrationLoading ? (
@@ -1689,6 +1695,7 @@ const HackathonRegistration = ({
                                                     </div>
                                                 ))}
                                             </dl>
+                                            {isAiX && editProfileButton}
                                         </div>
                                     )}
                                     <fieldset
@@ -1704,6 +1711,15 @@ const HackathonRegistration = ({
                                                 key={group.key}
                                                 className="hackathon-form-group grid gap-5 md:grid-cols-2 xl:gap-6"
                                             >
+                                                {isAiX && (
+                                                    <h3 className="aix-form-group-title">
+                                                        {t(`aix.pages.groups.${group.key}`, {
+                                                            defaultValue: t(
+                                                                "aix.register.groups.additional.title"
+                                                            ),
+                                                        })}
+                                                    </h3>
+                                                )}
                                                 {group.fields
                                                     .filter(
                                                         (field) =>
@@ -1719,10 +1735,7 @@ const HackathonRegistration = ({
                                                                 formData.aiTools?.includes(
                                                                     "other"
                                                                 ) ||
-                                                                formData.aiToolsOther) &&
-                                                            (!isAiX ||
-                                                                field.id !== "teamSize" ||
-                                                                formData.track?.includes("campus"))
+                                                                formData.aiToolsOther)
                                                     )
                                                     .map((field) => (
                                                         <div
@@ -1732,7 +1745,6 @@ const HackathonRegistration = ({
                                                                 field.width === "half" ||
                                                                 (isAiX &&
                                                                     [
-                                                                        "track",
                                                                         "experience",
                                                                         "researchExperience",
                                                                     ].includes(field.id))
@@ -1744,11 +1756,7 @@ const HackathonRegistration = ({
                                                         >
                                                             <DynamicRegistrationField
                                                                 field={
-                                                                    field.id === "teamSize" &&
-                                                                    isAiX &&
-                                                                    formData.track?.includes(
-                                                                        "campus"
-                                                                    )
+                                                                    field.id === "teamSize" && isAiX
                                                                         ? {
                                                                               ...field,
                                                                               required: true,
@@ -1953,8 +1961,7 @@ const DynamicRegistrationField = ({
                 error={error}
                 palette={palette}
             >
-                {/* 紧凑模式下仍显示赛道提示：组队规则的唯一归宿（按钮标签自带个人赛/最多3人）。 */}
-                {field.placeholder && (!compact || field.id === "track") ? (
+                {field.placeholder && !compact ? (
                     <p className={`mb-3 text-sm ${palette.textMuted}`}>{field.placeholder}</p>
                 ) : null}
                 <div
@@ -2054,6 +2061,7 @@ const DynamicRegistrationField = ({
             >
                 <textarea
                     id={`hackathon-field-${field.id}`}
+                    required={field.required}
                     value={value || ""}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={field.placeholder}
