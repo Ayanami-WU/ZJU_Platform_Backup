@@ -44,3 +44,26 @@ test("three visible tabs, five paged screens and unpublished results remain guar
     await expect(page).toHaveURL(/\/hackathon\/2\/media$/);
     await expect(page.locator(".hx-nav a")).toHaveCount(3);
 });
+
+test("race overview stays usable with an older locale missing track badges", async ({ page }) => {
+    const locale = JSON.parse(
+        fs.readFileSync(new URL("../public/locales/zh/translation.json", import.meta.url), "utf8")
+    );
+    delete locale.aix.trackBadges;
+    const errors = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.addInitScript(() => localStorage.setItem("i18nextLng", "zh"));
+    await page.route("**/locales/*/translation.json", (route) => route.fulfill({ json: locale }));
+    await page.route("**/api/hackathon/schedule", (route) =>
+        route.fulfill({ json: { events: [template], activeEventKey: template.event.key } })
+    );
+    await page.goto("/hackathon/2#aix-tracks");
+    await expect(page.locator(".aix-rule-panel")).toHaveCount(2);
+    for (const [index, track] of locale.aix.pages.tracks.entries()) {
+        await expect(
+            page.locator(".aix-rule-panel").nth(index).locator(".aix-track-badges span")
+        ).toHaveText(track.mode.split(/\s*·\s*/));
+    }
+    await expect(page.getByRole("heading", { name: "出错了", exact: true })).toHaveCount(0);
+    expect(errors).toEqual([]);
+});

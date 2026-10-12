@@ -98,7 +98,12 @@ export default function AiXOverview({ state }) {
                                 <header className="aix-track-card-heading">
                                     <h3>{track.title}</h3>
                                     <div className="aix-track-badges">
-                                        {trackBadges[track.id].map((badge) => (
+                                        {(Array.isArray(trackBadges?.[track.id])
+                                            ? trackBadges[track.id]
+                                            : String(track.mode || "")
+                                                  .split(/\s*·\s*/)
+                                                  .filter(Boolean)
+                                        ).map((badge) => (
                                             <span key={badge}>{badge}</span>
                                         ))}
                                     </div>
