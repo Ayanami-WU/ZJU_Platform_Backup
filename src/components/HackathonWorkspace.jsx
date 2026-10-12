@@ -7,6 +7,7 @@ import api from "../services/api";
 import { registrationOpen, eventTimestamp } from "../utils/hackathonAiX";
 import forumConfig from "../../shared/hackathonForums.json";
 import SEO from "./SEO";
+import LotteryModal from "../features/lottery/LotteryModal";
 import HackathonEventPicker from "./HackathonEventPicker";
 import HackathonEventContent from "./HackathonEventContent";
 import { getEventViews, getEventView, getEventUrl } from "../utils/hackathonRoute";
@@ -28,6 +29,7 @@ export default function HackathonWorkspace({ template, schedule }) {
     const [registrationLoading, setRegistrationLoading] = useState(false);
     const [registrationError, setRegistrationError] = useState(false);
     const [retry, setRetry] = useState(0);
+    const [lotteryOpen, setLotteryOpen] = useState(false);
     const event = template.event;
     const registrationOwner = useRef({ userId: user?.id, eventKey: event.key });
     useLayoutEffect(() => {
@@ -150,14 +152,15 @@ export default function HackathonWorkspace({ template, schedule }) {
                         ))}
                 </nav>
                 <div className="hx-event-actions">
-                    <Link
+                    <button
+                        type="button"
                         className="hx-outline"
-                        to={getEventUrl(event.key, "lottery")}
-                        aria-current={view === "lottery" ? "page" : undefined}
+                        aria-haspopup="dialog"
+                        onClick={() => setLotteryOpen(true)}
                     >
                         <Gift size={17} aria-hidden="true" />
                         {t("lottery.event_entry")}
-                    </Link>
+                    </button>
                     <button
                         className="hx-primary"
                         disabled={
@@ -176,6 +179,13 @@ export default function HackathonWorkspace({ template, schedule }) {
                 </div>
                 <span className="hx-event-status">{t(`aix.state.${state}`)}</span>
             </header>
+            {lotteryOpen && (
+                <LotteryModal
+                    eventKey={event.key}
+                    eventTitle={event.title}
+                    onClose={() => setLotteryOpen(false)}
+                />
+            )}
             <div
                 id="hx-event-content"
                 className={`hx-page ${!["intro", "media"].includes(view) ? "hx-interior" : ""}`}

@@ -44,7 +44,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         return route.continue();
     });
     await page.goto("/hackathon/2/forums?session=technology#forum-registration");
-    await expect(page.locator(".hx-nav a")).toHaveCount(4);
+    await expect(page.locator(".hx-nav a")).toHaveCount(3);
     await expect(
         page.getByText(
             "华为初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。"

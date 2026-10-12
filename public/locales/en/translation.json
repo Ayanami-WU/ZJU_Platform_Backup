@@ -6034,19 +6034,27 @@
                     "note": "6 winning teams",
                     "rows": [
                         {
-                            "label": "Champion · 1 team",
-                            "lines": ["¥3,000 / team"]
+                            "label": "Champion",
+                            "count": "1 team",
+                            "lines": [],
+                            "cash": "¥3,000 / team"
                         },
                         {
-                            "label": "Runner-up · 2 teams",
-                            "lines": ["¥1,000 / team"]
+                            "label": "Runner-up",
+                            "count": "2 teams",
+                            "lines": [],
+                            "cash": "¥1,000 / team"
                         },
                         {
-                            "label": "Third place · 3 teams",
-                            "lines": ["¥500 / team"]
+                            "label": "Third place",
+                            "count": "3 teams",
+                            "lines": [],
+                            "cash": "¥500 / team"
                         }
                     ],
-                    "footer": "Certificates and Tmall Campus gifts included"
+                    "footer": "Certificates and Tmall Campus gifts included",
+                    "kind": "campus",
+                    "totalLabel": "Total cash prizes"
                 },
                 {
                     "title": "Huawei · Industry Track",
@@ -6054,22 +6062,26 @@
                     "note": "10 winners · Cash and prizes combined",
                     "rows": [
                         {
-                            "label": "First prize · 2 winners",
-                            "lines": [
-                                "Osmo Pocket 4 camera × 1",
-                                "MatePad AIR Z tablet × 1",
-                                "Plus ¥1,000 each"
-                            ]
+                            "label": "1st prize",
+                            "count": "2 winners",
+                            "lines": ["Osmo Pocket 4 camera × 1", "MatePad AIR Z tablet × 1"],
+                            "cash": "+ ¥1,000 cash each"
                         },
                         {
-                            "label": "Second prize · 3 winners",
-                            "lines": ["FreeBuds Neo + ¥600 each"]
+                            "label": "2nd prize",
+                            "count": "3 winners",
+                            "lines": ["FreeBuds Neo earbuds"],
+                            "cash": "+ ¥600 cash each"
                         },
                         {
-                            "label": "Third prize · 5 winners",
-                            "lines": ["FreeBuds 7i + ¥250 each"]
+                            "label": "3rd prize",
+                            "count": "5 winners",
+                            "lines": ["FreeBuds 7i earbuds"],
+                            "cash": "+ ¥250 cash each"
                         }
-                    ]
+                    ],
+                    "kind": "industry",
+                    "totalLabel": "Prizes & cash value"
                 },
                 {
                     "title": "ModelScope · On-site draw",
@@ -6078,18 +6090,23 @@
                     "rows": [
                         {
                             "label": "10 each",
-                            "lines": ["Neck pillows · Mugs · Umbrellas"]
+                            "lines": ["Neck pillows · Mugs · Umbrellas"],
+                            "count": ""
                         },
                         {
                             "label": "20 each",
-                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"]
+                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"],
+                            "count": ""
                         },
                         {
                             "label": "40",
-                            "lines": ["Stickers"]
+                            "lines": ["Stickers"],
+                            "count": ""
                         }
                     ],
-                    "footer": "Sponsored by ModelScope"
+                    "footer": "Sponsored by ModelScope",
+                    "kind": "gifts",
+                    "totalLabel": "On-site gifts"
                 }
             ],
             "organizers": [

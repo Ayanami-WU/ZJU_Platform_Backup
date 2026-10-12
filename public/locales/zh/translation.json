@@ -6140,19 +6140,27 @@
                     "note": "6 个获奖团队",
                     "rows": [
                         {
-                            "label": "冠军 · 1 队",
-                            "lines": ["¥3,000／队"]
+                            "label": "冠军",
+                            "count": "1 队",
+                            "lines": [],
+                            "cash": "¥3,000／队"
                         },
                         {
-                            "label": "亚军 · 2 队",
-                            "lines": ["¥1,000／队"]
+                            "label": "亚军",
+                            "count": "2 队",
+                            "lines": [],
+                            "cash": "¥1,000／队"
                         },
                         {
-                            "label": "季军 · 3 队",
-                            "lines": ["¥500／队"]
+                            "label": "季军",
+                            "count": "3 队",
+                            "lines": [],
+                            "cash": "¥500／队"
                         }
                     ],
-                    "footer": "另有证书奖状、天猫校园周边"
+                    "footer": "另有证书奖状、天猫校园周边",
+                    "kind": "campus",
+                    "totalLabel": "奖金合计"
                 },
                 {
                     "title": "华为·产业进阶赛道",
@@ -6160,22 +6168,26 @@
                     "note": "10 个获奖名额 · 奖品与奖金合计",
                     "rows": [
                         {
-                            "label": "一等奖 · 2 名",
-                            "lines": [
-                                "Osmo Pocket 4 相机 × 1",
-                                "MatePad AIR Z 平板 × 1",
-                                "另各获 ¥1,000"
-                            ]
+                            "label": "一等奖",
+                            "count": "2 名",
+                            "lines": ["Osmo Pocket 4 相机 × 1", "MatePad AIR Z 平板 × 1"],
+                            "cash": "+ 现金 ¥1,000／名"
                         },
                         {
-                            "label": "二等奖 · 3 名",
-                            "lines": ["FreeBuds Neo 耳机 ＋ ¥600／名"]
+                            "label": "二等奖",
+                            "count": "3 名",
+                            "lines": ["FreeBuds Neo 耳机"],
+                            "cash": "+ 现金 ¥600／名"
                         },
                         {
-                            "label": "三等奖 · 5 名",
-                            "lines": ["FreeBuds 7i 耳机 ＋ ¥250／名"]
+                            "label": "三等奖",
+                            "count": "5 名",
+                            "lines": ["FreeBuds 7i 耳机"],
+                            "cash": "+ 现金 ¥250／名"
                         }
-                    ]
+                    ],
+                    "kind": "industry",
+                    "totalLabel": "奖品与奖金合计"
                 },
                 {
                     "title": "魔搭社区·现场抽奖",
@@ -6184,18 +6196,23 @@
                     "rows": [
                         {
                             "label": "各 10 份",
-                            "lines": ["颈枕 · 马克杯 · 雨伞"]
+                            "lines": ["颈枕 · 马克杯 · 雨伞"],
+                            "count": ""
                         },
                         {
                             "label": "各 20 份",
-                            "lines": ["帆布袋 · 毛绒耳机包", "紫色手机夹"]
+                            "lines": ["帆布袋 · 毛绒耳机包", "紫色手机夹"],
+                            "count": ""
                         },
                         {
                             "label": "40 份",
-                            "lines": ["贴纸"]
+                            "lines": ["贴纸"],
+                            "count": ""
                         }
                     ],
-                    "footer": "魔搭社区赞助"
+                    "footer": "魔搭社区赞助",
+                    "kind": "gifts",
+                    "totalLabel": "现场礼品"
                 }
             ],
             "organizers": [

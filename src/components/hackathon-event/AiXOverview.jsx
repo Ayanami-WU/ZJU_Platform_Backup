@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, Trophy, Medal, Gift } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AiXForumOverview from "./AiXForumOverview";
 import AiXPartnerLogos from "./AiXPartnerLogos";
@@ -116,23 +116,54 @@ export default function AiXOverview({ state }) {
                     </header>
                     <div className="aix-prize-panels">
                         {copy.rewards.map((reward) => (
-                            <article key={reward.title} className="aix-prize-panel">
-                                <h3>{reward.title}</h3>
-                                <strong className="aix-prize-number">{reward.value}</strong>
+                            <article
+                                key={reward.title}
+                                className="aix-prize-panel"
+                                data-reward={reward.kind}
+                            >
+                                <header className="aix-prize-heading">
+                                    {reward.kind === "gifts" ? (
+                                        <Gift size={24} aria-hidden="true" />
+                                    ) : (
+                                        <Trophy size={24} aria-hidden="true" />
+                                    )}
+                                    <h3>{reward.title}</h3>
+                                </header>
+                                <div className="aix-prize-total">
+                                    <span>{reward.totalLabel}</span>
+                                    <strong className="aix-prize-number">{reward.value}</strong>
+                                </div>
                                 <p>{reward.note}</p>
                                 <dl>
                                     {reward.rows.map((row) => (
                                         <div key={row.label}>
-                                            <dt>{row.label}</dt>
+                                            <dt>
+                                                {reward.kind !== "gifts" && (
+                                                    <Medal
+                                                        size={23}
+                                                        strokeWidth={1.5}
+                                                        aria-hidden="true"
+                                                    />
+                                                )}
+                                                <strong>{row.label}</strong>
+                                                {row.count && <span>{row.count}</span>}
+                                            </dt>
                                             <dd>
                                                 {row.lines.map((line) => (
                                                     <span key={line}>{line}</span>
                                                 ))}
+                                                {row.cash && (
+                                                    <strong className="aix-prize-cash">
+                                                        {row.cash}
+                                                    </strong>
+                                                )}
                                             </dd>
                                         </div>
                                     ))}
                                 </dl>
-                                {reward.footer && <footer>{reward.footer}</footer>}
+                                <footer aria-hidden={!reward.footer || undefined}>
+                                    {reward.footer}
+                                </footer>
                             </article>
                         ))}
                     </div>

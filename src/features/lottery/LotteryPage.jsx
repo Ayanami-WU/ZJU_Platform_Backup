@@ -63,10 +63,16 @@ export function ProofImage({ id, entryId }) {
         <p>{t(failed ? "lottery.errors.unavailable" : "lottery.loading")}</p>
     );
 }
-export default function LotteryPage({ eventKey, eventTitle }) {
+export default function LotteryPage({ eventKey, eventTitle, embedded = false, onLogin }) {
+    const [selectedCampaign, setSelectedCampaign] = useState(null);
+    const [campaignCount, setCampaignCount] = useState(0);
     const { id: legacyId } = useParams();
     const location = useLocation();
-    const id = eventKey ? new URLSearchParams(location.search).get("campaign") : legacyId;
+    const id = embedded
+        ? selectedCampaign
+        : eventKey
+          ? new URLSearchParams(location.search).get("campaign")
+          : legacyId;
     const requestVersion = useRef(0);
     const { t, i18n } = useTranslation();
     const { user } = useAuth();
@@ -96,6 +102,13 @@ export default function LotteryPage({ eventKey, eventTitle }) {
                 noRetry: true,
             });
             if (version !== requestVersion.current) return;
+            if (embedded && Array.isArray(result)) {
+                setCampaignCount(result.length);
+                if (result.length === 1) {
+                    setSelectedCampaign(result[0].id);
+                    return;
+                }
+            }
             setData(result);
             setError("");
             if (result.server_now) setOffset(result.server_now - Date.now());
@@ -103,7 +116,7 @@ export default function LotteryPage({ eventKey, eventTitle }) {
             if (version === requestVersion.current)
                 setError(e.response?.data?.error || "unavailable");
         }
-    }, [id, eventKey, user?.id]);
+    }, [id, eventKey, user?.id, embedded]);
     useEffect(() => {
         setData(null);
         setBusy(false);
@@ -224,17 +237,26 @@ export default function LotteryPage({ eventKey, eventTitle }) {
         <Container
             className={`lottery-shell lottery-public ${eventKey ? "lottery-event" : ""} ${uiMode === "day" ? "lottery-day" : ""}`}
         >
-            <Helmet>
-                <title>
-                    {data?.title ||
-                        (eventKey
-                            ? `${eventTitle} · ${t("lottery.event.title")}`
-                            : t("lottery.title"))}
-                </title>
-            </Helmet>
-            <Link className="lottery-back" to={returnUrl}>
-                {t(returnLabel)}
-            </Link>
+            {!embedded && (
+                <Helmet>
+                    <title>
+                        {data?.title ||
+                            (eventKey
+                                ? `${eventTitle} · ${t("lottery.event.title")}`
+                                : t("lottery.title"))}
+                    </title>
+                </Helmet>
+            )}
+            {!embedded && (
+                <Link className="lottery-back" to={returnUrl}>
+                    {t(returnLabel)}
+                </Link>
+            )}
+            {embedded && id && campaignCount > 1 && (
+                <button className="lottery-back" onClick={() => setSelectedCampaign(null)}>
+                    {t("lottery.event.back_campaigns")}
+                </button>
+            )}
             {error && (
                 <div role="alert" className="lottery-alert">
                     {t(`lottery.errors.${error}`, {
@@ -253,7 +275,19 @@ export default function LotteryPage({ eventKey, eventTitle }) {
                     </header>
                     <div className="lottery-list">
                         {data.map((c) => (
-                            <Link key={c.id} className="lottery-campaign" to={campaignUrl(c)}>
+                            <Link
+                                key={c.id}
+                                className="lottery-campaign"
+                                to={campaignUrl(c)}
+                                onClick={
+                                    embedded
+                                        ? (event) => {
+                                              event.preventDefault();
+                                              setSelectedCampaign(c.id);
+                                          }
+                                        : undefined
+                                }
+                            >
                                 <span className="lottery-tag">
                                     {t(
                                         `lottery.status.${c.status === "open" ? (now < c.opens_at ? "upcoming" : now >= c.closes_at ? "closed" : "open") : c.status}`
@@ -282,7 +316,7 @@ export default function LotteryPage({ eventKey, eventTitle }) {
                             <Gift size={44} />
                             <h2>{t(eventKey ? "lottery.event.empty" : "lottery.empty")}</h2>
                             <p>{t(eventKey ? "lottery.event.empty_hint" : "lottery.empty_hint")}</p>
-                            <Link to={eventIntroUrl}>{t(exploreLabel)}</Link>
+                            {!embedded && <Link to={eventIntroUrl}>{t(exploreLabel)}</Link>}
                         </div>
                     )}
                 </>
@@ -423,11 +457,13 @@ export default function LotteryPage({ eventKey, eventTitle }) {
                                             <p>{t("lottery.login_hint")}</p>
                                             <button
                                                 className="lottery-primary"
-                                                onClick={() =>
-                                                    window.dispatchEvent(
-                                                        new Event("open-auth-modal")
-                                                    )
-                                                }
+                                                onClick={() => {
+                                                    if (onLogin) onLogin();
+                                                    else
+                                                        window.dispatchEvent(
+                                                            new Event("open-auth-modal")
+                                                        );
+                                                }}
                                             >
                                                 {t("lottery.login")}
                                             </button>
@@ -706,10 +742,12 @@ export default function LotteryPage({ eventKey, eventTitle }) {
                                     )}
                                 </>
                             )}
-                            <Link className="lottery-explore" to={eventIntroUrl}>
-                                {t(exploreLabel)}
-                                <ArrowRight size={18} />
-                            </Link>
+                            {!embedded && (
+                                <Link className="lottery-explore" to={eventIntroUrl}>
+                                    {t(exploreLabel)}
+                                    <ArrowRight size={18} />
+                                </Link>
+                            )}
                         </aside>
                     </div>
                 </>

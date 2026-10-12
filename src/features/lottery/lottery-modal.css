@@ -1,0 +1,118 @@
+.lottery-modal-overlay {
+    --hx-surface: #101810;
+    --hx-line: #33402f;
+    --hx-muted: #acb5a8;
+    --hx-text: #f1f4ed;
+    --hx-accent-text: #b5f747;
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: #000a;
+    backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+.lottery-modal-overlay[data-theme="day"] {
+    --hx-surface: #fbfcf7;
+    --hx-line: #d5dfcf;
+    --hx-muted: #55634e;
+    --hx-text: #1a2617;
+    --hx-accent-text: #47691c;
+}
+.lottery-modal {
+    width: min(1040px, 100%);
+    max-height: calc(100dvh - 48px);
+    display: flex;
+    flex-direction: column;
+    background: var(--hx-surface);
+    color: var(--hx-text);
+    border: 1px solid var(--hx-line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 100px #0006;
+}
+.lottery-modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--hx-line);
+    flex-shrink: 0;
+}
+.lottery-modal-bar h2 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+.lottery-modal-bar h2 svg {
+    color: var(--hx-accent-text);
+}
+.lottery-modal-bar button {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+}
+.lottery-modal-bar button:hover {
+    background: color-mix(in srgb, var(--hx-text) 8%, transparent);
+}
+.lottery-modal-content {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    min-height: 0;
+}
+.lottery-modal .lottery-event {
+    padding: 20px 24px 28px;
+}
+.lottery-modal .lottery-heading {
+    padding: 0 0 20px;
+}
+.lottery-modal .lottery-heading h1 {
+    font-size: 25px;
+}
+.lottery-modal .lottery-event-name {
+    display: none;
+}
+.lottery-modal .lottery-promotion {
+    padding: 18px 0;
+    margin-bottom: 20px;
+}
+.lottery-modal .lottery-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
+    gap: 20px;
+}
+.lottery-modal .lottery-panel {
+    padding: 20px;
+    border-radius: 10px;
+}
+.lottery-modal .lottery-steps {
+    gap: 18px;
+}
+.lottery-modal .lottery-campaign {
+    text-align: left;
+}
+@media (max-width: 800px) {
+    .lottery-modal-overlay {
+        padding: 12px;
+    }
+    .lottery-modal {
+        max-height: calc(100dvh - 24px);
+    }
+    .lottery-modal-bar {
+        padding: 8px 16px;
+    }
+    .lottery-modal .lottery-event {
+        padding: 16px;
+    }
+    .lottery-modal .lottery-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .lottery-modal input,
+    .lottery-modal textarea {
+        font-size: 16px;
+    }
+}
