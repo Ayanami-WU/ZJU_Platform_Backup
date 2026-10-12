@@ -753,15 +753,58 @@
     min-width: 0;
 }
 .hx-picker-copy strong {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.5;
-    font-weight: 600;
+    font-weight: 750;
     overflow-wrap: anywhere;
 }
 .hx-picker-copy > span {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
     line-height: 1.5;
     color: var(--hx-muted);
+}
+.hx-picker-state {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+}
+.hx-picker-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 4px 9px;
+    border: 1px solid var(--hx-line);
+    border-radius: 6px;
+    color: var(--hx-muted);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+.hx-picker-status[data-state="live"] {
+    border-color: var(--hx-accent);
+    background: var(--hx-accent);
+    color: #101907;
+}
+.hx-picker-status[data-state="live"]::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.hx-picker-status[data-state="upcoming"] {
+    border-color: var(--hx-accent);
+    color: var(--hx-accent);
+}
+.hx-picker-selected {
+    display: inline-flex;
+    align-items: center;
+    width: 18px;
 }
 .hx-picker-menu svg {
     color: var(--hx-accent);

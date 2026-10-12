@@ -15,3 +15,55 @@
     max-width: 560px;
     margin-inline: auto;
 }
+
+#aix-partners-title.aix-partners-page .aix-organizers-group dt {
+    color: var(--hx-text);
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.5;
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] [data-partner="tianmao"] {
+    gap: 14px;
+}
+#aix-partners-title
+    .aix-partner-panels
+    [data-partner-group="sponsors"]
+    [data-partner="tianmao"]
+    .aix-brand-logo {
+    flex: 0 0 108px;
+    height: 80px;
+    max-width: 108px;
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-partner-wordmark {
+    font-size: 21px;
+    font-weight: 800;
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-brand-tianmao img {
+    transform: scale(1.8);
+}
+@media (max-width: 600px) {
+    #aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-brand-tianmao img {
+        transform: scale(1.6);
+    }
+    #aix-partners-title.aix-partners-page .aix-organizers-group dt {
+        font-size: 20px;
+    }
+    #aix-partners-title
+        .aix-partner-panels
+        [data-partner-group="sponsors"]
+        [data-partner="tianmao"] {
+        gap: 6px;
+    }
+    #aix-partners-title
+        .aix-partner-panels
+        [data-partner-group="sponsors"]
+        [data-partner="tianmao"]
+        .aix-brand-logo {
+        flex-basis: 68px;
+        max-width: 68px;
+        height: 64px;
+    }
+    #aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-partner-wordmark {
+        font-size: 15px;
+    }
+}

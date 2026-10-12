@@ -9,7 +9,14 @@ export default function HackathonEventPicker({ events, value, now, onChange }) {
     const root = useRef(null);
     const trigger = useRef(null);
     const listId = useId();
-    const items = [...events].reverse();
+    const items = [...events].sort((a, b) => {
+        const startA = eventTimestamp(a.event.startAt);
+        const startB = eventTimestamp(b.event.startAt);
+        return (
+            (Number.isFinite(startA) ? startA : Infinity) -
+            (Number.isFinite(startB) ? startB : Infinity)
+        );
+    });
     const selected = events.find((item) => item.event.key === value);
     const close = (restoreFocus = false) => {
         setOpen(false);
@@ -86,37 +93,44 @@ export default function HackathonEventPicker({ events, value, now, onChange }) {
                     }}
                 >
                     <p className="hx-picker-heading">{t("eventWorkspace.switchEvent")}</p>
-                    {items.map(({ event }) => (
-                        <button
-                            type="button"
-                            role="option"
-                            key={event.key}
-                            aria-selected={event.key === value}
-                            tabIndex={event.key === value ? 0 : -1}
-                            onClick={() => {
-                                close(true);
-                                if (event.key !== value) onChange(event.key);
-                            }}
-                        >
-                            <span className="hx-picker-copy">
-                                <strong>{event.title}</strong>
-                                <span>
-                                    {String(event.startAt || "")
-                                        .slice(0, 10)
-                                        .replaceAll("-", ".")}{" "}
-                                    ·{" "}
-                                    {t(
-                                        eventTimestamp(event.endAt) < now
-                                            ? "aix.history"
-                                            : eventTimestamp(event.startAt) <= now
-                                              ? "aix.state.live"
-                                              : "aix.state.upcoming"
-                                    )}
+                    {items.map(({ event }) => {
+                        const status =
+                            eventTimestamp(event.endAt) <= now
+                                ? "ended"
+                                : eventTimestamp(event.startAt) <= now
+                                  ? "live"
+                                  : "upcoming";
+                        return (
+                            <button
+                                type="button"
+                                role="option"
+                                key={event.key}
+                                aria-selected={event.key === value}
+                                tabIndex={event.key === value ? 0 : -1}
+                                onClick={() => {
+                                    close(true);
+                                    if (event.key !== value) onChange(event.key);
+                                }}
+                            >
+                                <span className="hx-picker-copy">
+                                    <strong>{event.title}</strong>
+                                    <span>
+                                        {String(event.startAt || "")
+                                            .slice(0, 10)
+                                            .replaceAll("-", ".")}
+                                    </span>
                                 </span>
-                            </span>
-                            {event.key === value && <Check size={17} aria-hidden="true" />}
-                        </button>
-                    ))}
+                                <span className="hx-picker-state">
+                                    <span className="hx-picker-status" data-state={status}>
+                                        {t(`aix.state.${status}`)}
+                                    </span>
+                                    <span className="hx-picker-selected" aria-hidden="true">
+                                        {event.key === value && <Check size={18} />}
+                                    </span>
+                                </span>
+                            </button>
+                        );
+                    })}
                 </div>
             )}
         </div>
