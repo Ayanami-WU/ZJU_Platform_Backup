@@ -25,6 +25,11 @@ export default function AiXForumOverview() {
                                 <h3>{forum.title}</h3>
                                 <p>{forum.theme}</p>
                             </header>
+                            <div className="aix-forum-place">
+                                <time>{forum.date}</time>
+                                <p>{forum.location}</p>
+                            </div>
+
                             <div className="aix-forum-lineup">
                                 <ul className="aix-forum-guests">
                                     {forum.guests.map((guest) => (
@@ -62,24 +67,25 @@ export default function AiXForumOverview() {
                                     {forum.topics.map((topic) => (
                                         <li key={topic.speaker}>
                                             <span>{topic.title}</span>
-                                            <small>{topic.speaker}</small>
+                                            <small>
+                                                {topic.speaker}
+                                                {topic.host && <span>{topic.host}</span>}
+                                            </small>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                            <footer>
-                                <div className="aix-forum-place">
-                                    <time>{forum.date}</time>
-                                    <p>{forum.location}</p>
-                                </div>
-                                <Link
-                                    className="aix-forum-signup-link"
-                                    to={`/hackathon/2/forums?session=${forum.id}#forum-registration`}
-                                >
-                                    {forum.signup}
-                                    <ArrowUpRight size={18} aria-hidden="true" />
-                                </Link>
-                            </footer>
+                            {forum.id === "entrepreneurship" && (
+                                <footer>
+                                    <Link
+                                        className="aix-forum-signup-link"
+                                        to={`/hackathon/2/forums?session=${forum.id}#forum-registration`}
+                                    >
+                                        {forum.signup}
+                                        <ArrowUpRight size={18} aria-hidden="true" />
+                                    </Link>
+                                </footer>
+                            )}
                         </article>
                     ))}
                 </div>

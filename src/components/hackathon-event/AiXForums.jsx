@@ -203,7 +203,15 @@ export default function AiXForums({ now, registrationState }) {
                                 <ol>
                                     {forum.topics.map((topic) => (
                                         <li key={topic.speaker}>
-                                            <span>{topic.speaker}</span>
+                                            <span>
+                                                {topic.speaker}
+                                                {topic.host && (
+                                                    <>
+                                                        <br />
+                                                        {topic.host}
+                                                    </>
+                                                )}
+                                            </span>
                                             <span>{topic.title}</span>
                                         </li>
                                     ))}

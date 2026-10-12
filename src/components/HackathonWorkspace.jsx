@@ -121,33 +121,33 @@ export default function HackathonWorkspace({ template, schedule }) {
                     }
                 />
                 <nav className="hx-nav" aria-label={t("aix.navigation")}>
-                    {getEventViews(event.key).map((item) => (
-                        <Link
-                            key={item}
-                            to={getEventUrl(event.key, item)}
-                            aria-current={
-                                (view === "register" ? "intro" : view) === item ? "page" : undefined
-                            }
-                        >
-                            {t(`eventWorkspace.tabs.${item}`)}
-                            {event.key === "zhekesong-ai-x-2026" &&
-                                item === "results" &&
-                                template.navigation?.resultsVisible === false && (
-                                    <small>
-                                        {t(
-                                            now < eventTimestamp(event.endAt)
-                                                ? "aix.official.resultsBefore"
-                                                : "aix.official.resultsAfter"
-                                        )}
-                                    </small>
-                                )}
-                            {event.key === "zhekesong-ai-x-2026" &&
-                                item === "challenges" &&
-                                now < eventTimestamp(event.startAt) && (
-                                    <small>{t("aix.official.challengeSoon")}</small>
-                                )}
-                        </Link>
-                    ))}
+                    {getEventViews(event.key)
+                        .filter(
+                            (item) =>
+                                !(
+                                    event.key === "zhekesong-ai-x-2026" &&
+                                    item === "results" &&
+                                    template.navigation?.resultsVisible === false
+                                )
+                        )
+                        .map((item) => (
+                            <Link
+                                key={item}
+                                to={getEventUrl(event.key, item)}
+                                aria-current={
+                                    (view === "register" ? "intro" : view) === item
+                                        ? "page"
+                                        : undefined
+                                }
+                            >
+                                {t(`eventWorkspace.tabs.${item}`)}
+                                {event.key === "zhekesong-ai-x-2026" &&
+                                    item === "challenges" &&
+                                    now < eventTimestamp(event.startAt) && (
+                                        <small>{t("aix.official.challengeSoon")}</small>
+                                    )}
+                            </Link>
+                        ))}
                 </nav>
                 <div className="hx-event-actions">
                     <Link

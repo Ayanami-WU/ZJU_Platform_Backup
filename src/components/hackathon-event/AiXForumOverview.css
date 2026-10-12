@@ -164,12 +164,17 @@
 #aix-forums .aix-forum-topics small {
     font-size: 11px;
     color: var(--hx-muted);
-    flex-shrink: 0;
+    flex: 0 1 32%;
+    text-align: right;
+}
+#aix-forums .aix-forum-topics small span {
+    display: block;
 }
 #aix-forums .aix-forum-panel footer {
     margin-top: auto;
 }
 #aix-forums .aix-forum-place {
+    margin-top: 16px;
     display: flex;
     gap: 16px;
     align-items: center;
@@ -206,7 +211,7 @@
     outline: 2px solid var(--hx-accent-text);
     outline-offset: 3px;
 }
-@media (min-width: 1000px) and (max-height: 950px) {
+@media (min-width: 1000px) and (max-height: 1050px) {
     #aix-forums .aix-forum-panel {
         padding: 16px 20px;
     }
@@ -278,5 +283,6 @@
     #aix-forums .aix-forum-topics small {
         display: block;
         margin-top: 2px;
+        text-align: left;
     }
 }
