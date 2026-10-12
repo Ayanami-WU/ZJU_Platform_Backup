@@ -33,6 +33,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
             puts++;
             if (fail) return route.fulfill({ status: 503, json: { error: "test failure" } });
             const data = req.postDataJSON();
+            expect(data.sessions).toEqual(["entrepreneurship"]);
             rows = data.sessions.map((forumKey, i) => ({ id: i + 1, forumKey, ...data }));
             return route.fulfill({ json: { registrations: rows } });
         }
@@ -44,15 +45,10 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         return route.continue();
     });
     await page.goto("/hackathon/2/forums?session=technology#forum-registration");
-    await expect(page.locator(".hx-nav a")).toHaveCount(4);
-    await expect(
-        page.getByText(
-            "华为初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。"
-        )
-    ).toBeVisible();
+    await expect(page.locator(".hx-nav a")).toHaveCount(3);
+    await expect(page.locator(".hx-nav a")).toHaveText(["赛事", "论坛", /赛题&提交/]);
     const form = page.locator(".aix-forum-signup form");
-    await expect(form.getByLabel("技术论坛", { exact: true })).toBeChecked();
-    await form.getByLabel("决赛暨创业论坛", { exact: true }).check();
+    await expect(form.locator('input[type="checkbox"]')).toHaveCount(0);
     await form.getByLabel("姓名", { exact: true }).fill("论坛测试");
     await form.getByLabel("手机号码或邮箱").fill("forum@example.test");
     await form.getByLabel("学校／单位（选填）").fill("示例单位");
@@ -63,15 +59,15 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
     expect(puts).toBe(1);
     fail = false;
     await form.locator("button[type=submit]").click();
-    await expect(page.locator(".aix-forum-receipt")).toHaveCount(2);
+    await expect(page.locator(".aix-forum-receipt")).toHaveCount(1);
     await expect(form.getByRole("status")).toContainText("已保存");
     await page.reload();
-    await expect(page.locator(".aix-forum-receipt")).toHaveCount(2);
+    await expect(page.locator(".aix-forum-receipt")).toHaveCount(1);
     await expect(
         page.locator(".aix-forum-signup form").getByLabel("姓名", { exact: true })
     ).toHaveValue("论坛测试");
     await page.locator(".aix-forum-receipt").first().getByRole("button").click();
-    await expect(page.locator(".aix-forum-receipt")).toHaveCount(1);
+    await expect(page.locator(".aix-forum-receipt")).toHaveCount(0);
 });
 
 test("public forum account creation does not request a student ID or grant contestant access", async ({
@@ -110,8 +106,22 @@ test("public forum account creation does not request a student ID or grant conte
         if (req.method() !== "GET") return route.abort();
         return route.continue();
     });
-    await page.goto("/hackathon/2/forums");
-    await page.locator(".aix-forum-signup button").click();
+    await page.goto("/hackathon/2#registration-form");
+    const contestFields = page.locator(".hackathon-form-panel .aix-registration-preview-fields");
+    await expect(contestFields).toBeVisible();
+    await expect(contestFields.locator("input").first()).toBeDisabled();
+    await expect(contestFields.locator("textarea").first()).toBeDisabled();
+    await expect(page.locator(".hackathon-form-panel button[type=submit]")).toBeDisabled();
+    await expect(
+        page.locator(".hackathon-form-panel .aix-registration-login-notice")
+    ).toContainText("请先注册或登录");
+    await page.goto("/hackathon/2/forums#forum-registration");
+    const preview = page.locator(".aix-forum-signup form");
+    await expect(preview.getByLabel("姓名", { exact: true })).toBeDisabled();
+    await expect(preview.getByLabel("手机号码或邮箱")).toBeDisabled();
+    await expect(preview.getByLabel("学校／单位（选填）")).toBeDisabled();
+    await expect(preview.locator("button[type=submit]")).toBeDisabled();
+    await page.locator(".aix-forum-signup .aix-registration-login-notice button").click();
     const dialog = page.getByRole("dialog");
     await dialog.getByRole("button", { name: "注册", exact: true }).click();
     await expect(dialog.getByLabel(/学号/)).toHaveCount(0);
@@ -119,6 +129,9 @@ test("public forum account creation does not request a student ID or grant conte
     await dialog.getByLabel("密码", { exact: true }).fill("fixture-password");
     await dialog.getByRole("button", { name: "创建账户", exact: true }).click();
     await expect(page.locator(".aix-forum-signup form")).toBeVisible();
+    await expect(
+        page.locator(".aix-forum-signup form").getByLabel("姓名", { exact: true })
+    ).toBeEnabled();
     expect(payload.registrationContext).toBe("aix-forum");
     expect(payload.registrationProfile).toBeUndefined();
     await expect(page.getByRole("dialog", { name: "完善注册资料" })).toHaveCount(0);

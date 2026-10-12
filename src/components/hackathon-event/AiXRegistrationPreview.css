@@ -1,0 +1,51 @@
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice p {
+    margin: 0;
+    font-size: 15px;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice button {
+    width: auto;
+    min-height: 42px;
+    flex-shrink: 0;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-preview-fields {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-registration-preview-fields
+    :is(input, textarea, select, button) {
+    cursor: not-allowed;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] fieldset.aix-forum-fields {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    min-width: 0;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-registration-login-notice {
+    flex-shrink: 0;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-forum-fields {
+    margin-bottom: 20px;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-forum-signup button[type="submit"]:disabled {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .hackathon-form-panel[data-registration-gate="preview"]
+    .hackathon-form-footer
+    button:disabled {
+    filter: grayscale(1);
+}

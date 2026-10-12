@@ -3,47 +3,82 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./AiXForumOverview.css";
 
+function ForumGuest({ guest }) {
+    return (
+        <div className="aix-forum-speaker">
+            <div className="aix-guest-portrait" data-empty={!guest.photo || undefined}>
+                {guest.photo && (
+                    <img
+                        src={`/images/hackathon/ai-x/guests/${guest.id}.png`}
+                        alt={guest.name}
+                        loading="lazy"
+                        width="240"
+                        height="280"
+                    />
+                )}
+            </div>
+            <div>
+                <strong>{guest.name}</strong>
+                <p>{guest.role}</p>
+            </div>
+        </div>
+    );
+}
+
 export default function AiXForumOverview() {
     const { t } = useTranslation();
     const copy = t("aix.pages.forumOverview", { returnObjects: true });
     return (
-        <section id="aix-forums" aria-label={copy.title}>
-            <div>
-                <div className="aix-forum-panels">
-                    {copy.sessions.map((forum) => (
-                        <article className="aix-forum-panel" data-forum={forum.id} key={forum.id}>
-                            <header className="aix-forum-panel-heading">
-                                <h3>{forum.title}</h3>
-                                <p>{forum.theme}</p>
-                            </header>
-                            <div className="aix-forum-place">
-                                <time>{forum.date}</time>
-                                <p>{forum.location}</p>
+        <>
+            {copy.sessions.map((forum, index) => {
+                const featured = new Set(forum.topics.flatMap((topic) => topic.guestIds));
+                const otherGuests = forum.guests.filter((guest) => !featured.has(guest.id));
+                return (
+                    <section
+                        className="aix-page aix-forum-screen"
+                        id={`forum-${forum.id}`}
+                        data-forum={forum.id}
+                        key={forum.id}
+                    >
+                        <div className="aix-page-body">
+                            <div className="aix-forum-screen-top">
+                                <header className="aix-forum-panel-heading">
+                                    <div className="aix-page-heading">
+                                        <span>{String(index + 1).padStart(2, "0")}</span>
+                                        <h2>{forum.title}</h2>
+                                    </div>
+                                    <p>{forum.theme}</p>
+                                </header>
+                                <div className="aix-forum-place">
+                                    <time>{forum.date}</time>
+                                    <p>{forum.location}</p>
+                                </div>
                             </div>
-
-                            <div className="aix-forum-lineup">
-                                <ul className="aix-forum-guests">
-                                    {forum.guests.map((guest) => (
-                                        <li key={guest.id}>
-                                            <div
-                                                className="aix-guest-portrait"
-                                                data-empty={!guest.photo || undefined}
-                                            >
-                                                {guest.photo && (
-                                                    <img
-                                                        src={`/images/hackathon/ai-x/guests/${guest.id}.png`}
-                                                        alt={guest.name}
-                                                        loading="lazy"
-                                                        width="240"
-                                                        height="280"
-                                                    />
-                                                )}
-                                            </div>
-                                            <strong>{guest.name}</strong>
-                                            <p>{guest.role}</p>
-                                        </li>
-                                    ))}
-                                </ul>
+                            <div className="aix-forum-agenda">
+                                {forum.topics.map((topic) => (
+                                    <article
+                                        className="aix-forum-topic-row"
+                                        data-roundtable={topic.guestIds.length > 1 || undefined}
+                                        key={topic.speaker}
+                                    >
+                                        <div className="aix-forum-speakers">
+                                            {topic.guestIds
+                                                .map((id) =>
+                                                    forum.guests.find((guest) => guest.id === id)
+                                                )
+                                                .filter(Boolean)
+                                                .map((guest) => (
+                                                    <ForumGuest key={guest.id} guest={guest} />
+                                                ))}
+                                        </div>
+                                        <div className="aix-forum-topic-copy">
+                                            <h3>{topic.title}</h3>
+                                            {topic.host && <p>{topic.host}</p>}
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                            <footer className="aix-forum-screen-footer">
                                 {forum.teasers && (
                                     <div className="aix-forum-teasers">
                                         {forum.teasers.map((text) => (
@@ -51,23 +86,14 @@ export default function AiXForumOverview() {
                                         ))}
                                     </div>
                                 )}
-                            </div>
-                            <div className="aix-forum-topics">
-                                <h4>{copy.topicsLabel}</h4>
-                                <ul>
-                                    {forum.topics.map((topic) => (
-                                        <li key={topic.speaker}>
-                                            <span>{topic.title}</span>
-                                            <small>
-                                                {topic.speaker}
-                                                {topic.host && <span>{topic.host}</span>}
-                                            </small>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            {forum.id === "entrepreneurship" && (
-                                <footer>
+                                {otherGuests.length > 0 && (
+                                    <div className="aix-forum-other-guests">
+                                        {otherGuests.map((guest) => (
+                                            <ForumGuest key={guest.id} guest={guest} />
+                                        ))}
+                                    </div>
+                                )}
+                                {forum.id === "entrepreneurship" && (
                                     <Link
                                         className="aix-forum-signup-link"
                                         to={`/hackathon/2/forums?session=${forum.id}#forum-registration`}
@@ -75,12 +101,12 @@ export default function AiXForumOverview() {
                                         {forum.signup}
                                         <ArrowUpRight size={18} aria-hidden="true" />
                                     </Link>
-                                </footer>
-                            )}
-                        </article>
-                    ))}
-                </div>
-            </div>
-        </section>
+                                )}
+                            </footer>
+                        </div>
+                    </section>
+                );
+            })}
+        </>
     );
 }

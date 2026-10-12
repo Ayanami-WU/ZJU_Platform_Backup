@@ -1,21 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import api from "../../services/api";
 import config from "../../../shared/hackathonForums.json";
-import { getEventUrl } from "../../utils/hackathonRoute";
+import { useReducedMotion } from "framer-motion";
+import { useAiXPager } from "../../hooks/useAiXPager";
+import AiXChapters from "./AiXChapters";
+import "./AiXOverview.css";
+import "./AiXPaged.css";
 import AiXForumOverview from "./AiXForumOverview";
 import "./AiXForums.css";
+import "./AiXRegistrationPreview.css";
+const FORUM_IDS = ["forum-technology", "forum-entrepreneurship", "forum-registration"];
+const entrepreneurship = config.sessions.find((s) => s.key === "entrepreneurship");
 export default function AiXForums({ now, registrationState }) {
     const { t } = useTranslation();
-    const { hash, search } = useLocation();
-    const requestedSession = config.sessions.find(
-        (session) => session.key === new URLSearchParams(search).get("session")
-    )?.key;
+    const { hash } = useLocation();
+    const pageRef = useRef(null);
+    const reduceMotion = useReducedMotion();
+    useAiXPager(pageRef, FORUM_IDS, true, reduceMotion);
+    const goTo = (id) => {
+        const root = pageRef.current,
+            target = root?.querySelector(`#${id}`);
+        if (target)
+            root.scrollTo({ top: target.offsetTop, behavior: reduceMotion ? "instant" : "smooth" });
+    };
     const { user, loading: authLoading, onLogin } = registrationState;
-    const [registrations, setRegistrations] = useState([]),
-        [selected, setSelected] = useState([]);
+    const [registrations, setRegistrations] = useState([]);
     const [details, setDetails] = useState({ name: "", contact: "", organization: "" });
     const [loading, setLoading] = useState(false),
         [busy, setBusy] = useState(false),
@@ -30,7 +42,6 @@ export default function AiXForums({ now, registrationState }) {
     useEffect(() => {
         let active = true;
         setRegistrations([]);
-        setSelected(requestedSession ? [requestedSession] : []);
         setSaved(false);
         setBusy(false);
         setError("");
@@ -44,14 +55,10 @@ export default function AiXForums({ now, registrationState }) {
             .then(({ data }) => {
                 if (!active) return;
                 setRegistrations(data.registrations);
-                setSelected([
-                    ...new Set([
-                        ...data.registrations.map((r) => r.forumKey),
-                        ...(requestedSession ? [requestedSession] : []),
-                    ]),
-                ]);
                 if (data.registrations.length) {
-                    const r = data.registrations[0];
+                    const r =
+                        data.registrations.find((r) => r.forumKey === "entrepreneurship") ||
+                        data.registrations[0];
                     setDetails({ name: r.name, contact: r.contact, organization: r.organization });
                 }
             })
@@ -64,23 +71,22 @@ export default function AiXForums({ now, registrationState }) {
         return () => {
             active = false;
         };
-    }, [user?.id, user?.registrationProfile?.name, retry, requestedSession]);
+    }, [user?.id, user?.registrationProfile?.name, retry]);
     useEffect(() => {
-        if (hash !== "#forum-registration") return;
+        if (!FORUM_IDS.includes(hash.slice(1))) return;
         const frame = requestAnimationFrame(() =>
-            formRef.current?.scrollIntoView({ block: "start" })
+            pageRef.current?.querySelector(hash)?.scrollIntoView({ block: "start" })
         );
         return () => cancelAnimationFrame(frame);
     }, [hash]);
     const submit = async (event) => {
         event.preventDefault();
-        const sessions = selected.filter((key) =>
-            config.sessions.some((s) => s.key === key && open(s))
-        );
-        if (!sessions.length) {
-            setError("chooseSession");
+        if (!user || authLoading || loading || busy) return;
+        if (!open(entrepreneurship)) {
+            setError("closed");
             return;
         }
+        const sessions = ["entrepreneurship"];
         const userId = user.id;
         setBusy(true);
         setError("");
@@ -118,7 +124,6 @@ export default function AiXForums({ now, registrationState }) {
             });
             if (owner.current !== userId) return;
             setRegistrations(data.registrations);
-            setSelected(data.registrations.map((r) => r.forumKey));
         } catch {
             if (owner.current === userId) setError("saveFailed");
         } finally {
@@ -165,138 +170,168 @@ export default function AiXForums({ now, registrationState }) {
         }
     };
     return (
-        <div className="aix-forums-page">
-            <header>
-                <Link className="aix-secondary" to={getEventUrl(config.eventKey)}>
-                    <ArrowLeft size={16} />
-                    {t("aix.forumPage.back")}
-                </Link>
-                <p className="aix-eyebrow">AI + X · 2026</p>
-                <h1>{t("aix.forumPage.title")}</h1>
-                <p>{t("aix.forumPage.intro")}</p>
-            </header>
+        <div className="aix-forums-page" ref={pageRef} tabIndex={0}>
+            <AiXChapters
+                containerRef={pageRef}
+                onSelect={goTo}
+                ids={FORUM_IDS}
+                labels={t("aix.forumPage.chapters", { returnObjects: true })}
+            />
             <AiXForumOverview />
-            <section className="aix-forum-signup" ref={formRef} id="forum-registration">
-                <div className="aix-forum-attendance">
-                    <strong>{t("aix.forumPage.attendanceTitle")}</strong>
-                    <p>{t("aix.forumPage.attendance")}</p>
-                </div>
-                {registrations.length > 0 && (
-                    <div className="aix-forum-receipts">
-                        {config.sessions.map((session) => {
-                            const receipt = registrations.find((r) => r.forumKey === session.key);
-                            return (
-                                receipt && (
-                                    <div className="aix-forum-receipt" key={session.key}>
-                                        <CheckCircle2 size={17} />
-                                        <strong>
-                                            {t(`aix.forumPage.sessions.${session.key}.title`)}
-                                        </strong>
-                                        <span>
-                                            {t("aix.forumPage.registered", { id: receipt.id })}
-                                        </span>
-                                        {open(session) && (
-                                            <button
-                                                type="button"
-                                                disabled={busy}
-                                                onClick={() => cancel(session.key)}
-                                            >
-                                                {t("aix.forumPage.cancel")}
-                                            </button>
-                                        )}
-                                    </div>
-                                )
-                            );
-                        })}
-                    </div>
-                )}
-                <h2>{t("aix.forumPage.signupTitle")}</h2>
-                <p>{t("aix.forumPage.signupHint")}</p>
-                {authLoading || loading ? (
-                    <p role="status">{t("aix.loading")}</p>
-                ) : !user ? (
-                    <button className="aix-primary" onClick={onLogin}>
-                        {t("accountProfile.loginOrRegister")}
-                    </button>
-                ) : error === "loadFailed" ? (
-                    <>
-                        <p role="alert">{t("aix.forumPage.loadFailed")}</p>
-                        <button className="aix-secondary" onClick={() => setRetry((v) => v + 1)}>
-                            {t("aix.retry")}
-                        </button>
-                    </>
-                ) : (
-                    <form onSubmit={submit}>
-                        <fieldset disabled={busy}>
-                            <legend>{t("aix.forumPage.chooseSession")}</legend>
-                            {config.sessions.filter(open).map((s) => (
-                                <label className="aix-forum-checkbox" key={s.key}>
-                                    <input
-                                        type="checkbox"
-                                        checked={selected.includes(s.key)}
-                                        onChange={(e) => {
-                                            setSaved(false);
-                                            setSelected((v) =>
-                                                e.target.checked
-                                                    ? [...v, s.key]
-                                                    : v.filter((k) => k !== s.key)
-                                            );
-                                        }}
-                                    />
-                                    {t(`aix.forumPage.sessions.${s.key}.title`)}
-                                </label>
-                            ))}
-                        </fieldset>
-                        <div className="aix-forum-fields">
-                            {["name", "contact", "organization"].map((key) => (
-                                <label key={key}>
-                                    {t(`aix.forumPage.fields.${key}`)}
-                                    <input
-                                        required={key !== "organization"}
-                                        maxLength={
-                                            key === "name" ? 80 : key === "contact" ? 120 : 160
+            <section className="aix-page" ref={formRef} id="forum-registration">
+                <div className="aix-page-body">
+                    <header className="aix-page-heading">
+                        <span>03</span>
+                        <h2>{t("aix.forumPage.signupTitle")}</h2>
+                    </header>
+                    <div className="aix-forum-registration-layout">
+                        <aside className="aix-forum-registration-summary">
+                            <p className="aix-eyebrow">AI + X · 2026</p>
+                            <h3>{t("aix.pages.forumOverview.sessions.1.theme")}</h3>
+                            <time>10.25</time>
+                            <p>{t("aix.pages.forumOverview.sessions.1.location")}</p>
+                        </aside>
+                        <div className="aix-forum-signup">
+                            {registrations.length > 0 && (
+                                <div className="aix-forum-receipts">
+                                    {config.sessions.map((session) => {
+                                        const receipt = registrations.find(
+                                            (r) => r.forumKey === session.key
+                                        );
+                                        return (
+                                            receipt && (
+                                                <div
+                                                    className="aix-forum-receipt"
+                                                    key={session.key}
+                                                >
+                                                    <CheckCircle2 size={17} />
+                                                    <strong>
+                                                        {t(
+                                                            `aix.forumPage.sessions.${session.key}.title`
+                                                        )}
+                                                    </strong>
+                                                    <span>
+                                                        {t("aix.forumPage.registered", {
+                                                            id: receipt.id,
+                                                        })}
+                                                    </span>
+                                                    {open(session) && (
+                                                        <button
+                                                            type="button"
+                                                            disabled={busy}
+                                                            onClick={() => cancel(session.key)}
+                                                        >
+                                                            {t("aix.forumPage.cancel")}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )
+                                        );
+                                    })}
+                                </div>
+                            )}
+                            <p>{t("aix.forumPage.signupHint")}</p>
+                            {!user && (
+                                <div className="aix-registration-login-notice">
+                                    <p>
+                                        {t("aix.register.loginPreview", {
+                                            defaultValue: "请先注册或登录，再填写报名信息。",
+                                        })}
+                                    </p>
+                                    <button
+                                        type="button"
+                                        className="aix-primary"
+                                        onClick={onLogin}
+                                        disabled={authLoading}
+                                    >
+                                        {t("accountProfile.loginOrRegister")}
+                                    </button>
+                                </div>
+                            )}
+                            {(authLoading || loading) && <p role="status">{t("aix.loading")}</p>}
+                            {user && error === "loadFailed" ? (
+                                <>
+                                    <p role="alert">{t("aix.forumPage.loadFailed")}</p>
+                                    <button
+                                        className="aix-secondary"
+                                        onClick={() => setRetry((v) => v + 1)}
+                                    >
+                                        {t("aix.retry")}
+                                    </button>
+                                </>
+                            ) : (
+                                <form onSubmit={submit}>
+                                    <fieldset
+                                        disabled={!user || authLoading || loading || busy}
+                                        className={`aix-forum-fields ${!user ? "aix-registration-preview-fields" : ""}`}
+                                    >
+                                        {["name", "contact", "organization"].map((key) => (
+                                            <label key={key}>
+                                                {t(`aix.forumPage.fields.${key}`)}
+                                                <input
+                                                    required={key !== "organization"}
+                                                    maxLength={
+                                                        key === "name"
+                                                            ? 80
+                                                            : key === "contact"
+                                                              ? 120
+                                                              : 160
+                                                    }
+                                                    autoComplete={
+                                                        key === "name"
+                                                            ? "name"
+                                                            : key === "organization"
+                                                              ? "organization"
+                                                              : "email"
+                                                    }
+                                                    value={details[key]}
+                                                    disabled={
+                                                        !user || authLoading || loading || busy
+                                                    }
+                                                    onChange={(e) => {
+                                                        setSaved(false);
+                                                        setDetails((v) => ({
+                                                            ...v,
+                                                            [key]: e.target.value,
+                                                        }));
+                                                    }}
+                                                />
+                                            </label>
+                                        ))}
+                                    </fieldset>
+                                    {error && <p role="alert">{t(`aix.forumPage.${error}`)}</p>}
+                                    {saved && (
+                                        <p className="aix-forum-success" role="status">
+                                            {t("aix.forumPage.success")}
+                                        </p>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        className="aix-primary"
+                                        disabled={
+                                            !user ||
+                                            authLoading ||
+                                            loading ||
+                                            busy ||
+                                            !open(entrepreneurship)
                                         }
-                                        autoComplete={
-                                            key === "name"
-                                                ? "name"
-                                                : key === "organization"
-                                                  ? "organization"
-                                                  : "email"
-                                        }
-                                        value={details[key]}
-                                        disabled={busy}
-                                        onChange={(e) => {
-                                            setSaved(false);
-                                            setDetails((v) => ({ ...v, [key]: e.target.value }));
-                                        }}
-                                    />
-                                </label>
-                            ))}
+                                    >
+                                        {t(busy ? "aix.forumPage.saving" : "aix.forumPage.submit")}
+                                    </button>
+                                </form>
+                            )}
+                            {user?.role === "admin" && (
+                                <button
+                                    className="aix-secondary aix-forum-export"
+                                    disabled={busy}
+                                    onClick={exportRoster}
+                                >
+                                    {t("aix.forumPage.export")}
+                                </button>
+                            )}
                         </div>
-                        {error && <p role="alert">{t(`aix.forumPage.${error}`)}</p>}
-                        {saved && (
-                            <p className="aix-forum-success" role="status">
-                                {t("aix.forumPage.success")}
-                            </p>
-                        )}
-                        <button
-                            type="submit"
-                            className="aix-primary"
-                            disabled={busy || !config.sessions.some(open)}
-                        >
-                            {t(busy ? "aix.forumPage.saving" : "aix.forumPage.submit")}
-                        </button>
-                    </form>
-                )}
-                {user?.role === "admin" && (
-                    <button
-                        className="aix-secondary aix-forum-export"
-                        disabled={busy}
-                        onClick={exportRoster}
-                    >
-                        {t("aix.forumPage.export")}
-                    </button>
-                )}
+                    </div>
+                </div>
             </section>
         </div>
     );

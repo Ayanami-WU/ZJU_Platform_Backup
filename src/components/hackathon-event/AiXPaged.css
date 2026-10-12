@@ -927,3 +927,60 @@
         font-size: 32px;
     }
 }
+
+.aix-prize-products {
+    display: grid;
+    gap: 14px;
+}
+.aix-prize-products[data-pair] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.aix-prize-products > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+.aix-prize-products[data-pair] > div + div {
+    border-left: 1px solid var(--hx-line);
+    padding-left: 14px;
+}
+.aix-prize-products small {
+    color: var(--hx-muted);
+    font-size: 13px;
+}
+.aix-prize-products .aix-prize-cash {
+    font-size: 16px;
+    white-space: nowrap;
+}
+@media (min-width: 1000px) {
+    .aix-prize-panels {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr) minmax(0, 1fr);
+        gap: 18px;
+    }
+    .aix-prize-panel[data-reward="industry"] dl > div {
+        grid-template-columns: 60px minmax(0, 1fr);
+        gap: 12px;
+    }
+    .aix-prize-panel[data-reward="industry"] dd {
+        padding-left: 12px;
+    }
+}
+
+/* Preserve the form's inner scroller when entering from the forum route. */
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    #registration-form[data-contained-form]
+    > .mx-auto,
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    #registration-form[data-contained-form]
+    .hackathon-form-panel {
+    height: 100%;
+    min-height: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    #registration-form[data-contained-form] {
+    height: var(--aix-page-height);
+}

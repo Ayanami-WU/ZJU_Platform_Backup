@@ -74,9 +74,9 @@ test("AI+X adds an independent forum tab and retains direct pending-page links w
     };
     assert.deepEqual(getEventViews("zhekesong-ai-x-2026"), [
         "intro",
+        "forums",
         "challenges",
         "media",
-        "forums",
         "results",
     ]);
     for (const view of ["media", "results"]) {

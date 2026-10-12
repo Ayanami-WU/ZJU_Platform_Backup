@@ -699,6 +699,15 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         !["1", "2", "3", "4", "5"].includes(answers.teamSize)
     )
         errors.push({ field: "teamSize", message: "每队1–5人，请填写队伍人数" });
+    if (
+        template.event.key === "zhekesong-ai-x-2026" &&
+        template.form.fields.some((f) => f.id === "teamSize" && f.enabled) &&
+        answers.track?.includes("industry") &&
+        !answers.track.includes("campus") &&
+        answers.teamSize !== "1"
+    ) {
+        errors.push({ field: "teamSize", message: "华为赛道为个人参赛" });
+    }
     if (JSON.stringify(answers).length > 30000) {
         errors.push({ field: "answers", message: "报名内容过长，请精简后重试" });
     }

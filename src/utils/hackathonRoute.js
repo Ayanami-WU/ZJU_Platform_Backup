@@ -3,7 +3,7 @@ import eventRoutes from "../../shared/hackathonRoutes.json" with { type: "json" 
 export const EVENT_VIEWS = ["intro", "challenges", "media", "results"];
 export const getEventViews = (eventKey) =>
     eventKey === "zhekesong-ai-x-2026"
-        ? ["intro", "challenges", "media", "forums", "results"]
+        ? ["intro", "forums", "challenges", "media", "results"]
         : EVENT_VIEWS;
 
 const readEventPath = (location = {}) => {

@@ -5069,7 +5069,7 @@
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
         "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
-        "team": "Teams of 1–5; both tracks may be selected",
+        "team": "Tmall teams of 1–5 · Huawei individual entry",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
@@ -5081,7 +5081,7 @@
             },
             "industry": {
                 "title": "Huawei · Industry Advanced Track",
-                "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · 1–5 people",
+                "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · individual entry",
                 "topics": "Copywriting · Marketing"
             }
         },
@@ -5181,7 +5181,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Teams of 1–5; both tracks may be selected",
+            "description": "Tmall teams of 1–5 · Huawei individual entry",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5211,7 +5211,8 @@
                     "title": "Additional information",
                     "hint": "Complete any additional fields required for this event."
                 }
-            }
+            },
+            "loginPreview": "Please register or sign in before completing your registration."
         },
         "fields": {
             "name": "Name",
@@ -5354,7 +5355,7 @@
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei · Industry Advanced Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
-                    "team": "Team competition",
+                    "team": "Individual entry",
                     "deadline": "Onsite · October 18, 17:00",
                     "support": "Challenge support from Huawei China"
                 }
@@ -5538,7 +5539,7 @@
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
             "individual": "Teams of 1–5; online participation is available for Tmall.",
-            "team": "Team competition; onsite preliminary, online semifinal.",
+            "team": "Individual entry; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Prepare a project description and a usable AI app. Save GitHub and ModelScope repository links below.",
             "submissionIntro": "Register first, then save or update your project repositories here.",
@@ -5655,8 +5656,8 @@
             "cancel": "Cancel this session",
             "register": "Register for this forum",
             "closed": "Registration closed or not yet open",
-            "signupTitle": "Independent forum registration",
-            "signupHint": "Competition registration is not required. Choose one or both sessions; your receipt is saved to your account. Details are used for forum communications and onsite organization.",
+            "signupTitle": "Register for entrepreneurship forum",
+            "signupHint": "Enter your contact details to register for the entrepreneurship forum.",
             "chooseSession": "Choose forum sessions",
             "fields": {
                 "name": "Name",
@@ -5711,7 +5712,7 @@
                     ]
                 },
                 "entrepreneurship": {
-                    "title": "Finals & Entrepreneurship Forum",
+                    "title": "Entrepreneurship forum",
                     "theme": "First principles of entrepreneurship in the AI era",
                     "time": "October 25 · 09:00–17:00 · Around 150 attendees",
                     "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
@@ -5784,7 +5785,8 @@
                 }
             },
             "heroLink": "Forums & registration",
-            "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details."
+            "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
+            "chapters": ["Technology", "Entrepreneurship", "Registration"]
         },
         "october12": {
             "partnerGroups": [
@@ -5946,7 +5948,9 @@
             "teamSizeHint": "Including yourself, 1–5 people",
             "teamSizeError": "Choose a team size of 1–5",
             "recapAdditionalTitle": "Xijing Cup · Interdisciplinary Quantitative Investment Challenge",
-            "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios."
+            "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios.",
+            "campusTeamLabel": "Tmall team name",
+            "campusTeamSizeLabel": "Tmall team size"
         },
         "pages": {
             "format": "Competition format",
@@ -6015,7 +6019,7 @@
                 {
                     "id": "industry",
                     "title": "Huawei · Industry Track",
-                    "mode": "On-site preliminary · 1–5 people",
+                    "mode": "On-site qualifier · Individual entry",
                     "description": "Build an Agent or Skill for business writing and marketing.",
                     "stages": [
                         {},
@@ -6095,25 +6099,48 @@
                 {
                     "title": "Huawei · Industry Track",
                     "value": "¥14,980",
-                    "note": "10 winners · Cash and prizes combined",
+                    "note": "Individual entry · 10 winners",
                     "rows": [
                         {
                             "label": "1st prize",
                             "count": "2 winners",
-                            "lines": ["Osmo Pocket 4 camera × 1", "MatePad AIR Z tablet × 1"],
-                            "cash": "+ ¥1,000 cash each"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "Osmo Pocket 4 camera",
+                                    "value": "Value ¥2,999",
+                                    "cash": "Cash ¥1,000"
+                                },
+                                {
+                                    "name": "MatePad Air Z tablet",
+                                    "value": "Value ¥2,779",
+                                    "cash": "Cash ¥1,000"
+                                }
+                            ]
                         },
                         {
                             "label": "2nd prize",
                             "count": "3 winners",
-                            "lines": ["FreeBuds Neo earbuds"],
-                            "cash": "+ ¥600 cash each"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "FreeBuds Neo earbuds",
+                                    "value": "Value ¥669",
+                                    "cash": "Cash ¥600"
+                                }
+                            ]
                         },
                         {
                             "label": "3rd prize",
                             "count": "5 winners",
-                            "lines": ["FreeBuds 7i earbuds"],
-                            "cash": "+ ¥250 cash each"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "FreeBuds 7i earbuds",
+                                    "value": "Value ¥429",
+                                    "cash": "Cash ¥250"
+                                }
+                            ]
                         }
                     ],
                     "kind": "industry",
@@ -6148,11 +6175,29 @@
             "organizers": [
                 {
                     "label": "Guidance",
-                    "names": "ZJU College of Innovation and Entrepreneurship"
+                    "members": [
+                        {
+                            "id": "innovation",
+                            "name": "Zhejiang University Innovation & Entrepreneurship College"
+                        }
+                    ]
                 },
                 {
                     "label": "Organizers",
-                    "names": "TUOZHE AI Ecosystem · ZJU Qiushi Elite Eagle Club"
+                    "members": [
+                        {
+                            "id": "tuozhe",
+                            "name": "TUOZHE AI Ecosystem"
+                        },
+                        {
+                            "id": "qiushi-eagle",
+                            "name": "Zhejiang University Qiushi Eagle Club"
+                        },
+                        {
+                            "id": "elite-eagle",
+                            "name": "Elite Eagle"
+                        }
+                    ]
                 }
             ],
             "groups": {
@@ -6293,11 +6338,13 @@
                         "topics": [
                             {
                                 "title": "Keynote",
-                                "speaker": "Ye Xinjiang"
+                                "speaker": "Ye Xinjiang",
+                                "guestIds": ["ye-xinjiang"]
                             },
                             {
                                 "title": "Technical talk",
-                                "speaker": "Sun Yifei"
+                                "speaker": "Sun Yifei",
+                                "guestIds": ["sun-yifei"]
                             }
                         ],
                         "signup": "Join technical forum"
@@ -6355,26 +6402,37 @@
                         "topics": [
                             {
                                 "title": "Beyond the AI hype: building capabilities that endure across cycles",
-                                "speaker": "Wang Jin"
+                                "speaker": "Wang Jin",
+                                "guestIds": ["wang-jin"]
                             },
                             {
                                 "title": "ZJU Zijin Entrepreneurship Space: AI-enabled entrepreneurship education",
-                                "speaker": "Wang Feifan"
+                                "speaker": "Wang Feifan",
+                                "guestIds": ["wang-feifan"]
                             },
                             {
                                 "title": "Keynote · Topic to be announced",
-                                "speaker": "Zhang Kejun"
+                                "speaker": "Zhang Kejun",
+                                "guestIds": ["zhang-kejun"]
                             },
                             {
                                 "title": "Roundtable: First successes and failures in the AI era",
                                 "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin",
-                                "host": "Moderator: Ying Qi"
+                                "host": "Moderator: Ying Qi",
+                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
                         "signup": "Join entrepreneurship forum"
                     }
                 ]
             }
+        },
+        "workspaceTabs": {
+            "intro": "Event",
+            "forums": "Forums",
+            "challenges": "Challenges & submissions",
+            "media": "Photo live",
+            "results": "Results"
         }
     },
     "eventWorkspace": {

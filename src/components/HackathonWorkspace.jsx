@@ -135,8 +135,9 @@ export default function HackathonWorkspace({ template, schedule }) {
                             (item) =>
                                 !(
                                     event.key === "zhekesong-ai-x-2026" &&
-                                    item === "results" &&
-                                    template.navigation?.resultsVisible === false
+                                    (item === "media" ||
+                                        (item === "results" &&
+                                            template.navigation?.resultsVisible === false))
                                 )
                         )
                         .map((item) => (
@@ -149,7 +150,11 @@ export default function HackathonWorkspace({ template, schedule }) {
                                         : undefined
                                 }
                             >
-                                {t(`eventWorkspace.tabs.${item}`)}
+                                {t(
+                                    event.key === "zhekesong-ai-x-2026"
+                                        ? `aix.workspaceTabs.${item}`
+                                        : `eventWorkspace.tabs.${item}`
+                                )}
                                 {event.key === "zhekesong-ai-x-2026" &&
                                     item === "challenges" &&
                                     now < eventTimestamp(event.startAt) && (
@@ -172,7 +177,12 @@ export default function HackathonWorkspace({ template, schedule }) {
                         className="hx-primary"
                         disabled={
                             view === "forums"
-                                ? !forumConfig.sessions.some((s) => now < Date.parse(s.startsAt))
+                                ? !forumConfig.sessions.some(
+                                      (s) =>
+                                          s.key === "entrepreneurship" &&
+                                          now >= Date.parse(forumConfig.registrationOpensAt) &&
+                                          now < Date.parse(s.startsAt)
+                                  )
                                 : authLoading ||
                                   registrationLoading ||
                                   (!registration && !open && !registrationError)
@@ -200,11 +210,11 @@ export default function HackathonWorkspace({ template, schedule }) {
             )}
             <div
                 id="hx-event-content"
-                className={`hx-page ${!["intro", "media"].includes(view) ? "hx-interior" : ""}`}
+                className={`hx-page ${!["intro", "media", "forums"].includes(view) ? "hx-interior" : ""}`}
                 data-view={view}
                 key={`${event.key}:${view}`}
             >
-                {!["intro", "media"].includes(view) && (
+                {!["intro", "media", "forums"].includes(view) && (
                     <div className="hx-page-scenery" aria-hidden="true">
                         <div className="hx-event-backdrop" />
                         <div className="hx-event-grid" />

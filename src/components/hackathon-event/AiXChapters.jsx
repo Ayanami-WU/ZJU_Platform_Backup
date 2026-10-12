@@ -8,13 +8,18 @@ export const AIX_CHAPTER_IDS = [
     "aix-partners-title",
     "registration-form",
 ];
-export default function AiXChapters({ containerRef, onSelect }) {
+export default function AiXChapters({
+    containerRef,
+    onSelect,
+    ids = AIX_CHAPTER_IDS,
+    labels: customLabels,
+}) {
     const { t } = useTranslation();
     const [active, setActive] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const toggleRef = useRef(null);
     const menuId = useId();
-    const labels = t("aix.official.chapters", { returnObjects: true });
+    const labels = customLabels || t("aix.official.chapters", { returnObjects: true });
     useEffect(() => {
         const root = containerRef.current;
         if (!root) return;
@@ -23,16 +28,16 @@ export default function AiXChapters({ containerRef, onSelect }) {
                 const visible = entries
                     .filter((entry) => entry.isIntersecting)
                     .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-                if (visible.length) setActive(AIX_CHAPTER_IDS.indexOf(visible[0].target.id));
+                if (visible.length) setActive(ids.indexOf(visible[0].target.id));
             },
             { root, rootMargin: "-12% 0px -65% 0px", threshold: 0 }
         );
-        AIX_CHAPTER_IDS.forEach((id) => {
+        ids.forEach((id) => {
             const element = root.querySelector(`#${id}`);
             if (element) observer.observe(element);
         });
         return () => observer.disconnect();
-    }, [containerRef]);
+    }, [containerRef, ids]);
     useEffect(() => {
         if (!expanded) return;
         const closeOnEscape = (event) => {
@@ -66,10 +71,10 @@ export default function AiXChapters({ containerRef, onSelect }) {
             <nav id={menuId} className="aix-chapters" aria-label={t("aix.official.chapterNav")}>
                 {labels.map((label, index) => (
                     <button
-                        key={AIX_CHAPTER_IDS[index]}
+                        key={ids[index]}
                         type="button"
                         aria-current={active === index ? "location" : undefined}
-                        onClick={() => selectChapter(AIX_CHAPTER_IDS[index])}
+                        onClick={() => selectChapter(ids[index])}
                     >
                         <span>{String(index + 1).padStart(2, "0")}</span>
                         {label}

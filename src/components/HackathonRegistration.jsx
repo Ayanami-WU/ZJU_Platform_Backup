@@ -1,6 +1,7 @@
 import { useAiXPager } from "../hooks/useAiXPager";
 import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
+import "./hackathon-event/AiXRegistrationPreview.css";
 import RepositorySubmission from "./hackathon-event/RepositorySubmission";
 import { getFirstEditionPartnerGroups } from "../data/firstEditionPartners";
 import React, { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
@@ -321,6 +322,10 @@ const HackathonRegistration = ({
     });
 
     const [formData, setFormData] = useState(() => buildHackathonInitialAnswers(resolvedTemplate));
+    const industryOnly =
+        isAiX &&
+        (Array.isArray(formData.track) ? formData.track : [formData.track]).includes("industry") &&
+        !(Array.isArray(formData.track) ? formData.track : [formData.track]).includes("campus");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const previousUser = useRef(user?.id);
     useEffect(() => {
@@ -646,6 +651,7 @@ const HackathonRegistration = ({
             experience: "experience",
         };
         activeFormFields.forEach((field) => {
+            if (industryOnly && ["team", "teamSize"].includes(field.id)) return;
             const value = formData[field.id];
             const missing =
                 value === undefined ||
@@ -671,6 +677,7 @@ const HackathonRegistration = ({
         });
         if (
             isAiX &&
+            !industryOnly &&
             activeFormFields.some((f) => f.id === "teamSize") &&
             !["1", "2", "3", "4", "5"].includes(formData.teamSize)
         )
@@ -732,7 +739,7 @@ const HackathonRegistration = ({
                 "/hackathon/register",
                 {
                     eventKey: resolvedTemplate.event.key,
-                    answers: formData,
+                    answers: industryOnly ? { ...formData, team: "", teamSize: "1" } : formData,
                     templateRevision: resolvedTemplate.revision,
                     name: formData.name,
                     studentId: formData.studentId,
@@ -1556,7 +1563,7 @@ const HackathonRegistration = ({
                               }
                             : {})}
                         data-registration-gate={
-                            isAiX && showProfileGate && !user ? "login" : undefined
+                            isAiX && requiresLogin && !user ? "preview" : undefined
                         }
                         className={`hackathon-form-panel relative z-10 min-w-0 max-w-full border p-5 backdrop-blur-2xl sm:p-7 lg:p-7 2xl:p-10 ${palette.panelStrong}`}
                     >
@@ -1594,7 +1601,24 @@ const HackathonRegistration = ({
                             </div>
                         }
 
-                        {showProfileGate ? (
+                        {isAiX && requiresLogin && !user && (
+                            <div className="aix-registration-login-notice">
+                                <p>
+                                    {t("aix.register.loginPreview", {
+                                        defaultValue: "请先注册或登录，再填写报名信息。",
+                                    })}
+                                </p>
+                                <button
+                                    type="button"
+                                    className="hx-primary"
+                                    onClick={onLogin}
+                                    disabled={registrationLoading}
+                                >
+                                    {t("accountProfile.loginOrRegister")}
+                                </button>
+                            </div>
+                        )}
+                        {showProfileGate && (user || !isAiX) ? (
                             registrationLoading ? (
                                 <p role="status">{t("aix.loading")}</p>
                             ) : !user ? (
@@ -1702,9 +1726,10 @@ const HackathonRegistration = ({
                                         disabled={
                                             isSubmitting ||
                                             Boolean(registration) ||
-                                            registrationLoading
+                                            registrationLoading ||
+                                            (requiresLogin && !user)
                                         }
-                                        className="min-w-0 space-y-8"
+                                        className={`min-w-0 space-y-8 ${isAiX && requiresLogin && !user ? "aix-registration-preview-fields" : ""}`}
                                     >
                                         {registrationGroups.map((group) => (
                                             <div
@@ -1723,6 +1748,12 @@ const HackathonRegistration = ({
                                                 {group.fields
                                                     .filter(
                                                         (field) =>
+                                                            !(
+                                                                industryOnly &&
+                                                                ["team", "teamSize"].includes(
+                                                                    field.id
+                                                                )
+                                                            ) &&
                                                             !(
                                                                 useAccountBasics &&
                                                                 registrationProfileFields.some(
@@ -1756,10 +1787,22 @@ const HackathonRegistration = ({
                                                         >
                                                             <DynamicRegistrationField
                                                                 field={
-                                                                    field.id === "teamSize" && isAiX
+                                                                    isAiX &&
+                                                                    ["team", "teamSize"].includes(
+                                                                        field.id
+                                                                    )
                                                                         ? {
                                                                               ...field,
-                                                                              required: true,
+                                                                              label: t(
+                                                                                  field.id ===
+                                                                                      "team"
+                                                                                      ? "aix.october12.campusTeamLabel"
+                                                                                      : "aix.october12.campusTeamSizeLabel"
+                                                                              ),
+                                                                              required:
+                                                                                  field.id ===
+                                                                                      "teamSize" ||
+                                                                                  field.required,
                                                                           }
                                                                         : field
                                                                 }
@@ -1821,7 +1864,8 @@ const HackathonRegistration = ({
                                                 isSubmitting ||
                                                 registrationLoading ||
                                                 Boolean(registration) ||
-                                                !event.registrationOpen
+                                                !event.registrationOpen ||
+                                                (requiresLogin && !user)
                                             }
                                             className={
                                                 "group inline-flex min-h-14 w-full items-center justify-center gap-2 px-7 text-base font-black transition duration-200 focus:outline-none focus:ring-4 focus:ring-cyan-300/30 disabled:cursor-not-allowed disabled:opacity-55 2xl:min-h-16 2xl:text-lg " +

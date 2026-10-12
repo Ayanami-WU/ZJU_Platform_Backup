@@ -5178,7 +5178,7 @@
         "description": "从你的专业出发，发现一个真实问题，用 AI 把它做成可以演示、实际使用的作品。",
         "date": "2026.10.09–10.25",
         "location": "10.18 段永平教学楼2-112 · 10.25 三墩元空间",
-        "team": "1–5 人组队，可兼报两条赛道",
+        "team": "天猫 1–5 人组队 · 华为个人参赛",
         "tracksKicker": "两条赛道",
         "tracksTitle": "你的专业，就是创新的起点。",
         "viewChallenges": "查看赛题",
@@ -5190,7 +5190,7 @@
             },
             "industry": {
                 "title": "华为·产业进阶赛道",
-                "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 1–5 人组队",
+                "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 个人参赛",
                 "topics": "文案 · 营销"
             }
         },
@@ -5290,7 +5290,7 @@
             "registered": "已报名 · 查看",
             "retry": "重试报名状态",
             "closed": "报名已截止",
-            "description": "1–5 人组队，可兼报两条赛道",
+            "description": "天猫 1–5 人组队 · 华为个人参赛",
             "success": "你的报名信息已保存，可在此查看。赛事安排以正式通知为准。",
             "saved": "报名成功",
             "loginHint": "登录后报名，方便随时查看自己的报名信息。",
@@ -5320,7 +5320,8 @@
                     "title": "补充信息",
                     "hint": "请按本届报名要求填写。"
                 }
-            }
+            },
+            "loginPreview": "请先注册或登录，再填写报名信息。"
         },
         "fields": {
             "name": "姓名",
@@ -5463,7 +5464,7 @@
                     "format": "方案设计 · 产品开发 · 阶段展示",
                     "shortTitle": "华为·产业进阶赛道",
                     "shortDescription": "企业真实业务问题，方案设计与产品开发。",
-                    "team": "组队参赛",
+                    "team": "个人参赛",
                     "deadline": "10.18 17:00 初赛提交",
                     "support": "华为中国区命题支持"
                 }
@@ -5644,7 +5645,7 @@
             "awaitPublication": "正式赛题尚未发布，请等待主办方更新。",
             "participation": "参赛形式",
             "individual": "天猫每队1–5人，可线上参赛。",
-            "team": "组队参赛；初赛线下开发，复赛线上开发。",
+            "team": "个人参赛；初赛线下开发，复赛线上开发。",
             "schedule": "时间安排",
             "campusMaterials": "准备项目说明与可体验的 AI 应用，下方保存 GitHub 和魔搭社区仓库地址。",
             "submissionIntro": "完成报名后，在这里保存或更新参赛仓库。",
@@ -5761,8 +5762,8 @@
             "cancel": "取消本场报名",
             "register": "报名本场论坛",
             "closed": "报名已截止或尚未开放",
-            "signupTitle": "论坛独立报名",
-            "signupHint": "无需先报名赛事。可选择一场或两场，报名成功后保留个人回执；信息仅用于论坛通知和现场组织。",
+            "signupTitle": "创业论坛报名",
+            "signupHint": "填写联系信息，报名创业论坛。",
             "chooseSession": "请选择论坛场次",
             "fields": {
                 "name": "姓名",
@@ -5817,7 +5818,7 @@
                     ]
                 },
                 "entrepreneurship": {
-                    "title": "决赛暨创业论坛",
+                    "title": "创业论坛",
                     "theme": "AI时代创业的第一性原理",
                     "time": "10月25日 09:00–17:00 · 约150人",
                     "location": "浙江大学国家级双创示范基地·三墩元空间（宝港生活广场C座6楼）",
@@ -5890,7 +5891,8 @@
                 }
             },
             "heroLink": "论坛介绍与独立报名",
-            "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。"
+            "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
+            "chapters": ["技术论坛", "创业论坛", "论坛报名"]
         },
         "october12": {
             "partnerGroups": [
@@ -6052,7 +6054,9 @@
             "teamSizeHint": "含本人，1–5 人",
             "teamSizeError": "请选择队伍人数（1–5 人）",
             "recapAdditionalTitle": "析境杯 · 跨学科量化投资挑战赛",
-            "recapAdditionalText": "析境科技主办，拓浙 AI 生态与校内相关社团协办。2026年7月至10月，围绕自然语言研究假设、因子与策略回测、虚拟组合运行开展持续评价。"
+            "recapAdditionalText": "析境科技主办，拓浙 AI 生态与校内相关社团协办。2026年7月至10月，围绕自然语言研究假设、因子与策略回测、虚拟组合运行开展持续评价。",
+            "campusTeamLabel": "天猫队伍名称",
+            "campusTeamSizeLabel": "天猫队伍人数"
         },
         "pages": {
             "format": "比赛赛制",
@@ -6121,7 +6125,7 @@
                 {
                     "id": "industry",
                     "title": "华为·产业进阶赛道",
-                    "mode": "初赛须线下 · 1–5 人组队",
+                    "mode": "初赛须线下 · 个人参赛",
                     "description": "企业文案与营销命题，开发 Agent 或 Skill。",
                     "stages": [
                         {},
@@ -6201,25 +6205,48 @@
                 {
                     "title": "华为·产业进阶赛道",
                     "value": "¥14,980",
-                    "note": "10 个获奖名额 · 奖品与奖金合计",
+                    "note": "个人参赛 · 10 个获奖名额",
                     "rows": [
                         {
                             "label": "一等奖",
                             "count": "2 名",
-                            "lines": ["Osmo Pocket 4 相机 × 1", "MatePad AIR Z 平板 × 1"],
-                            "cash": "+ 现金 ¥1,000／名"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "Osmo Pocket 4 相机",
+                                    "value": "价值 ¥2,999",
+                                    "cash": "现金 ¥1,000"
+                                },
+                                {
+                                    "name": "MatePad Air Z 平板",
+                                    "value": "价值 ¥2,779",
+                                    "cash": "现金 ¥1,000"
+                                }
+                            ]
                         },
                         {
                             "label": "二等奖",
                             "count": "3 名",
-                            "lines": ["FreeBuds Neo 耳机"],
-                            "cash": "+ 现金 ¥600／名"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "FreeBuds Neo 耳机",
+                                    "value": "价值 ¥669",
+                                    "cash": "现金 ¥600"
+                                }
+                            ]
                         },
                         {
                             "label": "三等奖",
                             "count": "5 名",
-                            "lines": ["FreeBuds 7i 耳机"],
-                            "cash": "+ 现金 ¥250／名"
+                            "lines": [],
+                            "products": [
+                                {
+                                    "name": "FreeBuds 7i 耳机",
+                                    "value": "价值 ¥429",
+                                    "cash": "现金 ¥250"
+                                }
+                            ]
                         }
                     ],
                     "kind": "industry",
@@ -6254,11 +6281,29 @@
             "organizers": [
                 {
                     "label": "指导单位",
-                    "names": "浙江大学创新创业学院"
+                    "members": [
+                        {
+                            "id": "innovation",
+                            "name": "浙江大学创新创业学院"
+                        }
+                    ]
                 },
                 {
                     "label": "主办单位",
-                    "names": "拓浙 AI 生态 · 浙江大学求是强鹰俱乐部"
+                    "members": [
+                        {
+                            "id": "tuozhe",
+                            "name": "拓浙 AI 生态"
+                        },
+                        {
+                            "id": "qiushi-eagle",
+                            "name": "浙江大学求是强鹰俱乐部"
+                        },
+                        {
+                            "id": "elite-eagle",
+                            "name": "时代强鹰"
+                        }
+                    ]
                 }
             ],
             "groups": {
@@ -6396,11 +6441,13 @@
                         "topics": [
                             {
                                 "title": "主题分享",
-                                "speaker": "叶新江"
+                                "speaker": "叶新江",
+                                "guestIds": ["ye-xinjiang"]
                             },
                             {
                                 "title": "技术报告",
-                                "speaker": "孙逸飞"
+                                "speaker": "孙逸飞",
+                                "guestIds": ["sun-yifei"]
                             }
                         ],
                         "signup": "报名技术论坛"
@@ -6458,26 +6505,37 @@
                         "topics": [
                             {
                                 "title": "AI狂欢下的冷静思考——青年应该培养哪些穿越周期的能力？",
-                                "speaker": "王进"
+                                "speaker": "王进",
+                                "guestIds": ["wang-jin"]
                             },
                             {
                                 "title": "浙大紫金创业元空间——AI+创新创业教育赋能生态",
-                                "speaker": "王非凡"
+                                "speaker": "王非凡",
+                                "guestIds": ["wang-feifan"]
                             },
                             {
                                 "title": "主题分享 · 题目待公布",
-                                "speaker": "张克俊"
+                                "speaker": "张克俊",
+                                "guestIds": ["zhang-kejun"]
                             },
                             {
                                 "title": "圆桌论坛：AI时代的第一次成功与失败？",
                                 "speaker": "张洁、张加林、刘建斌",
-                                "host": "主持人：应奇"
+                                "host": "主持人：应奇",
+                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
                         "signup": "报名创业论坛"
                     }
                 ]
             }
+        },
+        "workspaceTabs": {
+            "intro": "赛事",
+            "forums": "论坛",
+            "challenges": "赛题&提交",
+            "media": "照片直播",
+            "results": "成果"
         }
     },
     "eventWorkspace": {

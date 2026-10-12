@@ -1,3 +1,4 @@
+import AiXOrganizers from "./AiXOrganizers";
 import { useState } from "react";
 import { Pause, Play, Trophy, Medal, Gift } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -166,6 +167,24 @@ export default function AiXOverview({ state }) {
                                                 {row.count && <span>{row.count}</span>}
                                             </dt>
                                             <dd>
+                                                {row.products && (
+                                                    <div
+                                                        className="aix-prize-products"
+                                                        data-pair={
+                                                            row.products.length === 2 || undefined
+                                                        }
+                                                    >
+                                                        {row.products.map((product) => (
+                                                            <div key={product.name}>
+                                                                <span>{product.name}</span>
+                                                                <small>{product.value}</small>
+                                                                <strong className="aix-prize-cash">
+                                                                    {product.cash}
+                                                                </strong>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
                                                 {row.lines.map((line) => (
                                                     <span key={line}>{line}</span>
                                                 ))}
@@ -197,14 +216,7 @@ export default function AiXOverview({ state }) {
                         <span>04</span>
                         <h2 id="aix-partners-heading">{copy.partnersTitle}</h2>
                     </header>
-                    <dl className="aix-organizer-rows">
-                        {copy.organizers.map((row) => (
-                            <div key={row.label}>
-                                <dt>{row.label}</dt>
-                                <dd>{row.names}</dd>
-                            </div>
-                        ))}
-                    </dl>
+                    <AiXOrganizers groups={copy.organizers} />
                     <AiXPartnerLogos />
                 </div>
             </section>

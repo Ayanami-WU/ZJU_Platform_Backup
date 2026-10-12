@@ -3,7 +3,7 @@ import fs from "node:fs";
 const template = JSON.parse(
     fs.readFileSync(new URL("../shared/hackathonAiX.json", import.meta.url), "utf8")
 );
-test("four visible tabs, five paged screens and unpublished results remain guarded", async ({
+test("three visible tabs, five paged screens and unpublished results remain guarded", async ({
     page,
 }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -16,9 +16,9 @@ test("four visible tabs, five paged screens and unpublished results remain guard
         r.fulfill({ json: { events: [template], activeEventKey: template.event.key } })
     );
     await page.goto("/hackathon/2");
-    await expect(page.locator(".hx-nav a")).toHaveCount(4);
+    await expect(page.locator(".hx-nav a")).toHaveCount(3);
     await expect(page.locator(".aix-chapters button")).toHaveCount(5);
-    await expect(page.locator(".hx-nav a").nth(1)).toContainText("即将揭晓");
+    await expect(page.locator(".hx-nav a").nth(2)).toContainText("即将揭晓");
     await page.locator(".aix-chapters-toggle").click();
     await page.locator(".aix-chapters button").nth(2).click();
     await expect(page.locator(".aix-chapters button").nth(2)).toHaveAttribute(
@@ -39,7 +39,8 @@ test("four visible tabs, five paged screens and unpublished results remain guard
     await page.clock.setFixedTime(new Date("2026-10-26T12:00:00+08:00"));
     await page.reload();
     await expect(page.locator(".aix-pending-page h1")).toHaveText("成果待公布");
-    await page.locator(".hx-nav a").nth(2).click();
+    await expect(page.locator(".hx-nav a[href$='/media']")).toHaveCount(0);
+    await page.goto("/hackathon/2/media");
     await expect(page).toHaveURL(/\/hackathon\/2\/media$/);
-    await expect(page.locator(".hx-nav a")).toHaveCount(4);
+    await expect(page.locator(".hx-nav a")).toHaveCount(3);
 });

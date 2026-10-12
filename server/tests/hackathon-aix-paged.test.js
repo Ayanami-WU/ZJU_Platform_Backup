@@ -73,7 +73,7 @@ test("five-page migration does not create or publish missing events", async () =
         }
     }
 });
-test("both tracks allow one-person teams and reject missing or out-of-range size", () => {
+test("Tmall accepts 1-5 team members while Huawei-only entry requires one person", () => {
     const answers = {
         name: "Test",
         studentId: "T",
@@ -86,16 +86,44 @@ test("both tracks allow one-person teams and reject missing or out-of-range size
         researchExperience: "Research",
     };
     for (const track of [["campus"], ["industry"], ["campus", "industry"]]) {
-        for (const teamSize of ["1", "5"])
+        for (const teamSize of track.length === 1 && track[0] === "industry" ? ["1"] : ["1", "5"])
             assert.deepEqual(
                 validateRegistrationAnswers(defaults, { ...answers, track, teamSize }).errors,
                 []
             );
-        for (const teamSize of ["", "0", "6"])
+        for (const teamSize of track.length === 1 && track[0] === "industry"
+            ? ["", "0", "2", "5", "6"]
+            : ["", "0", "6"])
             assert.ok(
                 validateRegistrationAnswers(defaults, { ...answers, track, teamSize }).errors.some(
                     (e) => e.field === "teamSize"
                 )
             );
+    }
+});
+
+test("individual entry update preserves an already migrated event's edited dates and fields", async () => {
+    const db = await open({ filename: ":memory:", driver: sqlite3.Database });
+    try {
+        await db.exec(
+            "CREATE TABLE settings(key TEXT PRIMARY KEY,value TEXT);INSERT INTO settings VALUES('hackathon_ai_x_five_pages_20261013_v1','1')"
+        );
+        const event = structuredClone(defaults);
+        event.event.format = "old format";
+        event.event.program.registrationOpensAt = "2026-10-14T00:00:00+08:00";
+        event.form.fields.find((f) => f.id === "teamSize").label = "Custom team label";
+        await db.run(
+            "INSERT INTO settings VALUES('hackathon_schedule_config',?)",
+            JSON.stringify({ events: [event] })
+        );
+        await migrate(db);
+        const saved = JSON.parse(
+            (await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'")).value
+        ).events[0];
+        assert.equal(saved.event.format, defaults.event.format);
+        assert.deepEqual(saved.event.program, event.event.program);
+        assert.deepEqual(saved.form.fields, event.form.fields);
+    } finally {
+        await db.close();
     }
 });

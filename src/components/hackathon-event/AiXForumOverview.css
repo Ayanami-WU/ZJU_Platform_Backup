@@ -1,266 +1,286 @@
-#aix-forums :is(h2, h3, p) {
+.aix-forum-screen :is(h2, h3, p) {
     margin: 0;
 }
-#aix-forums {
-    margin-top: 28px;
-}
-#aix-forums .aix-forum-panels {
-    display: grid;
-    grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
-    gap: 22px;
-}
-#aix-forums .aix-page-heading {
-    margin-bottom: 14px;
-}
-#aix-forums .aix-forum-panel {
-    min-width: 0;
+.aix-forum-screen-top {
     display: flex;
-    flex-direction: column;
-    padding: 22px 24px;
-    border: 1px solid var(--hx-line);
-    border-radius: 8px;
-    background:
-        radial-gradient(
-            ellipse at 60% 0%,
-            color-mix(in srgb, var(--hx-accent) 8%, transparent),
-            transparent 65%
-        ),
-        var(--hx-panel);
+    justify-content: space-between;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 24px;
 }
-#aix-forums .aix-forum-panel-heading h3 {
-    color: var(--hx-text);
-    font-size: clamp(24px, 2.2vw, 32px);
-    font-weight: 800;
-    line-height: 1.2;
+.aix-forum-screen .aix-page-heading {
+    margin-bottom: 6px;
 }
-#aix-forums .aix-forum-panel-heading p {
-    margin-top: 8px;
+.aix-forum-panel-heading > p {
     color: var(--hx-accent-text);
-    font-size: 15px;
-    font-weight: 650;
+    font-size: 18px;
     line-height: 1.5;
+    font-weight: 600;
 }
-#aix-forums .aix-forum-lineup {
-    flex: 1;
-    padding: 22px 0 16px;
+.aix-forum-place {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    flex-shrink: 0;
 }
-#aix-forums .aix-forum-guests {
+.aix-forum-place time {
+    font:
+        700 32px/1 ui-monospace,
+        monospace;
+    color: var(--hx-accent-text);
+}
+.aix-forum-place p {
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--hx-muted);
+}
+.aix-forum-agenda {
+    border: 1px solid var(--hx-line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--hx-panel);
+}
+.aix-forum-topic-row {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    gap: 16px 12px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: stretch;
 }
-#aix-forums .aix-forum-guests li {
-    grid-column: span 2;
-    min-width: 0;
-    text-align: center;
+.aix-forum-topic-row + .aix-forum-topic-row {
+    border-top: 1px solid var(--hx-line);
 }
-#aix-forums [data-forum="entrepreneurship"] .aix-forum-guests li:nth-child(5) {
-    grid-column: 2 / span 2;
-}
-#aix-forums .aix-guest-portrait {
-    position: relative;
-    height: clamp(80px, 7.6vw, 108px);
-    max-width: 120px;
-    margin: 0 auto 7px;
+.aix-forum-speakers {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    padding: 10px 26px;
+    background: linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--hx-accent) 6%, transparent),
+        transparent
+    );
+}
+.aix-forum-speaker {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+    width: 100%;
+}
+.aix-guest-portrait {
+    position: relative;
+    flex: 0 0 80px;
+    height: 92px;
+    display: flex;
     justify-content: center;
+    align-items: flex-end;
     isolation: isolate;
     overflow: hidden;
-    mask-image: linear-gradient(#000 88%, transparent);
+    mask-image: linear-gradient(#000 90%, transparent);
 }
-#aix-forums .aix-guest-portrait::before {
+.aix-guest-portrait::before {
     content: "";
     position: absolute;
     z-index: -1;
-    height: 85%;
-    width: auto;
+    height: 82%;
     aspect-ratio: 1;
-    border: 1px solid var(--hx-accent-text);
+    border: 1px solid color-mix(in srgb, var(--hx-accent-text) 65%, transparent);
     border-radius: 50%;
     background: radial-gradient(
         circle,
-        color-mix(in srgb, var(--hx-accent) 15%, transparent),
+        color-mix(in srgb, var(--hx-accent) 12%, transparent),
         transparent 72%
     );
-    top: 12%;
+    top: 14%;
 }
-#aix-forums .aix-guest-portrait[data-empty]::before {
+.aix-guest-portrait[data-empty]::before {
     opacity: 0.4;
 }
-#aix-forums .aix-guest-portrait img {
+.aix-guest-portrait img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center bottom;
 }
-#aix-forums .aix-forum-guests strong {
-    display: block;
-    font-size: 17px;
-    line-height: 1.3;
-    font-weight: 750;
+.aix-forum-speaker strong {
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--hx-text);
 }
-#aix-forums .aix-forum-guests p {
-    margin-top: 5px;
+.aix-forum-speaker p {
+    font-size: 13px;
+    line-height: 1.5;
     color: var(--hx-muted);
-    font-size: 11px;
-    line-height: 1.45;
+    margin-top: 5px;
+    max-width: 240px;
+}
+.aix-forum-topic-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 32px;
+    border-left: 1px solid var(--hx-line);
+}
+.aix-forum-topic-copy h3 {
+    font-size: clamp(20px, 1.65vw, 26px);
+    line-height: 1.55;
+    font-weight: 650;
     text-wrap: pretty;
 }
-#aix-forums [data-forum="technology"] .aix-forum-guests {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 390px;
-    width: 100%;
-    align-self: center;
-    gap: 24px;
-}
-#aix-forums [data-forum="technology"] .aix-forum-guests li {
-    grid-column: auto;
-}
-#aix-forums [data-forum="technology"] .aix-guest-portrait {
-    height: clamp(150px, 14vw, 200px);
-    max-width: 200px;
-}
-#aix-forums [data-forum="technology"] .aix-forum-guests strong {
-    font-size: 22px;
-}
-#aix-forums [data-forum="technology"] .aix-forum-guests p {
-    font-size: 13px;
-}
-#aix-forums .aix-forum-teasers {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px 24px;
-    margin-top: 22px;
+.aix-forum-topic-copy p {
     color: var(--hx-muted);
-    font-size: 13px;
-}
-#aix-forums .aix-forum-topics {
-    border-top: 1px solid var(--hx-line);
-    padding-top: 12px;
-    margin-bottom: 18px;
-}
-#aix-forums .aix-forum-topics h4 {
-    margin: 0 0 8px;
-    color: var(--hx-muted);
-    font-size: 12px;
-    font-weight: 600;
-}
-#aix-forums .aix-forum-topics ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-#aix-forums .aix-forum-topics li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    margin-top: 6px;
-    font-size: 13px;
-    line-height: 1.5;
-}
-#aix-forums .aix-forum-topics small {
-    font-size: 11px;
-    color: var(--hx-muted);
-    flex: 0 1 32%;
-    text-align: right;
-}
-#aix-forums .aix-forum-topics small span {
-    display: block;
-}
-#aix-forums .aix-forum-panel footer {
-    margin-top: auto;
-}
-#aix-forums .aix-forum-place {
-    margin-top: 16px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-#aix-forums .aix-forum-place time {
-    font:
-        700 26px/1 ui-monospace,
-        monospace;
-    color: var(--hx-accent-text);
-}
-#aix-forums .aix-forum-place p {
-    white-space: pre-line;
-    font-size: 12px;
-    line-height: 1.5;
-    color: var(--hx-muted);
-}
-#aix-forums .aix-forum-signup-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 40px;
-    margin-top: 14px;
-    padding: 9px 14px;
-    border-radius: 4px;
-    background: var(--hx-accent);
-    color: #101507;
     font-size: 14px;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speakers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding-block: 14px;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speaker {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+}
+.aix-forum-topic-row[data-roundtable] .aix-guest-portrait {
+    flex-basis: auto;
+    width: 74px;
+    height: 80px;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speaker strong {
+    font-size: 17px;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speaker p {
+    font-size: 11px;
+}
+.aix-forum-screen-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 16px;
+}
+.aix-forum-other-guests .aix-guest-portrait {
+    flex-basis: 48px;
+    height: 56px;
+}
+.aix-forum-other-guests .aix-forum-speaker {
+    gap: 12px;
+}
+.aix-forum-other-guests .aix-forum-speaker strong {
+    font-size: 16px;
+}
+.aix-forum-other-guests .aix-forum-speaker p {
+    font-size: 12px;
+    margin-top: 2px;
+}
+.aix-forum-teasers {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    color: var(--hx-muted);
+    font-size: 15px;
+    padding: 12px 0;
+}
+.aix-forum-signup-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    padding: 12px 18px;
+    min-height: 46px;
+    border-radius: 4px;
+    color: #101507;
+    background: var(--hx-accent);
+    font-size: 15px;
     font-weight: 700;
 }
-#aix-forums .aix-forum-signup-link:hover {
-    filter: brightness(1.08);
-}
-#aix-forums .aix-forum-signup-link:focus-visible {
+.aix-forum-signup-link:focus-visible {
     outline: 2px solid var(--hx-accent-text);
     outline-offset: 3px;
 }
-@media (max-width: 999px) {
-    #aix-forums .aix-forum-panels {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 18px;
+.aix-forum-screen[data-forum="technology"] .aix-forum-topic-row {
+    min-height: clamp(190px, 27vh, 285px);
+}
+.aix-forum-screen[data-forum="technology"] .aix-guest-portrait {
+    flex-basis: 150px;
+    height: 175px;
+}
+.aix-forum-screen[data-forum="technology"] .aix-forum-speaker strong {
+    font-size: 25px;
+}
+.aix-forum-screen[data-forum="technology"] .aix-forum-topic-copy h3 {
+    font-size: 30px;
+}
+@media (max-width: 1100px) and (min-width: 768px) {
+    .aix-forum-topic-row {
+        grid-template-columns: 1fr 1.1fr;
     }
-    #aix-forums .aix-forum-panel {
-        padding: 22px;
+    .aix-forum-speakers {
+        padding-inline: 16px;
     }
-    #aix-forums .aix-guest-portrait {
-        height: 120px;
+    .aix-forum-topic-copy {
+        padding-inline: 22px;
     }
-    #aix-forums .aix-forum-lineup {
-        padding-block: 24px;
+    .aix-forum-speaker {
+        gap: 12px;
+    }
+    .aix-forum-screen[data-forum="technology"] .aix-guest-portrait {
+        flex-basis: 110px;
+        height: 140px;
     }
 }
-@media (max-width: 480px) {
-    #aix-forums .aix-forum-panel {
-        padding: 18px 14px;
+@media (max-width: 767px) {
+    .aix-forum-screen-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
     }
-    #aix-forums .aix-forum-panel-heading p {
+    .aix-forum-panel-heading > p {
+        font-size: 15px;
+    }
+    .aix-forum-place p {
+        font-size: 13px;
+    }
+    .aix-forum-topic-row {
+        grid-template-columns: 1fr;
+    }
+    .aix-forum-topic-copy {
+        border-left: 0;
+        padding: 4px 18px 20px;
+    }
+    .aix-forum-topic-copy h3 {
+        font-size: 19px;
+    }
+    .aix-forum-speakers {
+        padding: 16px 18px 12px;
+        background: none;
+    }
+    .aix-forum-speaker strong {
+        font-size: 20px;
+    }
+    .aix-forum-screen[data-forum="technology"] .aix-forum-topic-row {
+        min-height: 0;
+    }
+    .aix-forum-screen[data-forum="technology"] .aix-guest-portrait {
+        flex-basis: 90px;
+        height: 112px;
+    }
+    .aix-forum-screen[data-forum="technology"] .aix-forum-speaker strong {
+        font-size: 22px;
+    }
+    .aix-forum-screen[data-forum="technology"] .aix-forum-topic-copy h3 {
+        font-size: 22px;
+    }
+    .aix-forum-screen-footer {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .aix-forum-teasers {
+        gap: 10px 24px;
         font-size: 14px;
-    }
-    #aix-forums .aix-forum-guests {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 18px 12px;
-    }
-    #aix-forums [data-forum="entrepreneurship"] .aix-forum-guests li:nth-child(5) {
-        grid-column: span 2;
-    }
-    #aix-forums [data-forum="entrepreneurship"] .aix-forum-guests li:last-child {
-        grid-column: 3 / span 2;
-    }
-    #aix-forums .aix-guest-portrait {
-        height: 90px;
-    }
-    #aix-forums .aix-forum-guests strong {
-        font-size: 16px;
-    }
-    #aix-forums .aix-forum-topics li {
-        display: block;
-    }
-    #aix-forums .aix-forum-topics small {
-        display: block;
-        margin-top: 2px;
-        text-align: left;
     }
 }

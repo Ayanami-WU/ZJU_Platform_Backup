@@ -1,0 +1,115 @@
+.aix-organizers {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    margin: 0 0 24px;
+    padding: 4px 0 22px;
+    border-bottom: 1px solid var(--hx-line);
+}
+
+.aix-organizers-group {
+    min-width: 0;
+}
+
+.aix-organizers-group + .aix-organizers-group {
+    border-left: 1px solid var(--hx-line);
+}
+
+.aix-organizers-group dt {
+    margin-bottom: 16px;
+    color: var(--hx-muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.aix-organizers-group dd {
+    margin: 0;
+}
+
+.aix-organizers-group ul {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aix-organizers-group li {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    color: var(--hx-text);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.aix-organizer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 58px;
+}
+
+.aix-organizer-logo img {
+    display: block;
+    width: auto;
+    max-width: min(138px, 100%);
+    height: auto;
+    max-height: 58px;
+    object-fit: contain;
+}
+
+.aix-organizers [data-organizer="elite-eagle"] img {
+    padding: 4px 6px;
+    background: #fff;
+    border-radius: 3px;
+}
+
+[data-theme="day"] .aix-organizers [data-organizer="innovation"] img {
+    filter: brightness(0) saturate(100%);
+}
+
+@media (max-width: 760px) {
+    .aix-organizers {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    .aix-organizers-group + .aix-organizers-group {
+        padding-top: 18px;
+        border-top: 1px solid var(--hx-line);
+        border-left: 0;
+    }
+
+    .aix-organizers-group:first-child li {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .aix-organizers-group:first-child .aix-organizer-logo {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+    }
+
+    .aix-organizers-group li {
+        padding: 0 6px;
+        font-size: 12px;
+    }
+
+    .aix-organizer-logo {
+        height: 46px;
+    }
+
+    .aix-organizer-logo img {
+        max-height: 46px;
+    }
+}
