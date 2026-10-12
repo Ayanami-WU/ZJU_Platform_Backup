@@ -13,14 +13,14 @@ import AiXForumOverview from "./AiXForumOverview";
 import "./AiXForums.css";
 import "./AiXRegistrationPreview.css";
 const FORUM_IDS = ["forum-technology", "forum-entrepreneurship", "forum-registration"];
-const emptyDetails = (name = "") => ({
-    name,
+const emptyDetails = (profile = {}) => ({
+    name: profile.name || "",
     contact: "",
     organization: "",
     attendeeType: "internal",
-    studentId: "",
-    major: "",
-    grade: "",
+    studentId: profile.studentId || "",
+    major: profile.major || "",
+    grade: profile.grade || "",
     question: "",
 });
 const entrepreneurship = config.sessions.find((s) => s.key === "entrepreneurship");
@@ -46,6 +46,34 @@ export default function AiXForums({ now, registrationState }) {
         [retry, setRetry] = useState(0);
     const formRef = useRef(null),
         owner = useRef(user?.id);
+    const previousProfile = useRef({});
+    const profileDefaults = useRef(emptyDetails());
+    profileDefaults.current = emptyDetails(user?.registrationProfile || {});
+    if (profileDefaults.current.grade)
+        profileDefaults.current.grade = t(`aix.options.${profileDefaults.current.grade}`, {
+            defaultValue: profileDefaults.current.grade,
+        });
+    const savedForum = registrations.find((r) => r.forumKey === "entrepreneurship");
+    useEffect(() => {
+        const next = profileDefaults.current;
+        const previous = previousProfile.current;
+        if (!savedForum)
+            setDetails((values) => {
+                const updated = { ...values };
+                for (const key of ["name", "studentId", "major", "grade"]) {
+                    if (!values[key] || values[key] === previous[key]) updated[key] = next[key];
+                }
+                return updated;
+            });
+        previousProfile.current = next;
+    }, [
+        user?.id,
+        user?.registrationProfile?.name,
+        user?.registrationProfile?.studentId,
+        user?.registrationProfile?.major,
+        user?.registrationProfile?.grade,
+        savedForum,
+    ]);
     owner.current = user?.id;
     const open = (session) =>
         now >= Date.parse(config.registrationOpensAt) && now < Date.parse(session.startsAt);
@@ -55,7 +83,8 @@ export default function AiXForums({ now, registrationState }) {
         setSaved(false);
         setBusy(false);
         setError("");
-        setDetails(emptyDetails(user?.registrationProfile?.name || ""));
+        const defaults = profileDefaults.current;
+        setDetails(defaults);
         if (!user) {
             setLoading(false);
             return;
@@ -69,13 +98,12 @@ export default function AiXForums({ now, registrationState }) {
                     const r =
                         data.registrations.find((r) => r.forumKey === "entrepreneurship") ||
                         data.registrations[0];
+                    const fallback =
+                        r.attendeeType === "external" ? emptyDetails() : profileDefaults.current;
                     setDetails({
-                        ...emptyDetails(),
+                        ...fallback,
                         ...Object.fromEntries(
-                            Object.keys(emptyDetails()).map((key) => [
-                                key,
-                                r[key] || (key === "attendeeType" ? "internal" : ""),
-                            ])
+                            Object.keys(emptyDetails()).map((key) => [key, r[key] || fallback[key]])
                         ),
                     });
                 }
@@ -89,7 +117,7 @@ export default function AiXForums({ now, registrationState }) {
         return () => {
             active = false;
         };
-    }, [user?.id, user?.registrationProfile?.name, retry]);
+    }, [user?.id, retry]);
     useEffect(() => {
         if (!FORUM_IDS.includes(hash.slice(1))) return;
         const frame = requestAnimationFrame(() =>

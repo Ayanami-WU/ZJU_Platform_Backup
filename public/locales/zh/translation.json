@@ -5327,7 +5327,25 @@
             "trackTabs_campus": "天猫报名",
             "phone": "手机号",
             "phonePlaceholder": "填写可接收赛事通知的手机号",
-            "invalidPhone": "请填写有效的手机号"
+            "invalidPhone": "请填写有效的手机号",
+            "trackSummary": {
+                "label": "参赛安排",
+                "industryTitle": "华为 · 产业进阶赛道",
+                "campusTitle": "天猫 · OPC孵化赛道",
+                "industryFormat": "个人参赛 · 必须线下",
+                "campusFormat": "1–5 人组队 · 可线上参赛",
+                "development": "现场开发",
+                "opens": "线上开启",
+                "venue": "参赛地点",
+                "guidance": "现场技术指导 · 自愿参加",
+                "campusLocation": "浙江大学紫金港校区",
+                "room": "段永平教学楼 2–112",
+                "brief": "赛制",
+                "industryBrief": "现场发布产业命题，开发 Agent 或 Skill。",
+                "campusBrief": "自主命题，也可提交已有成熟项目。",
+                "semifinal": "线上复赛",
+                "final": "决赛 · 三墩元空间"
+            }
         },
         "fields": {
             "name": "姓名",
@@ -5653,7 +5671,7 @@
             "individual": "天猫每队1–5人，可线上参赛。",
             "team": "个人参赛；初赛线下开发，复赛线上开发。",
             "schedule": "时间安排",
-            "campusMaterials": "准备项目说明与可体验的 AI 应用，下方保存 GitHub 和魔搭社区仓库地址。",
+            "campusMaterials": "技术作品 + BP + Demo",
             "submissionIntro": "完成报名后，在这里保存或更新参赛仓库。",
             "loadFailed": "报名信息加载失败",
             "loginTitle": "登录后查看我的提交",
@@ -5694,8 +5712,8 @@
                 "qoder": "开发工具与技术支持"
             },
             "channelsTitle": "作品提交渠道",
-            "campusChannels": "天猫：初赛提交技术作品；复赛提交技术作品、Demo和产业落地方案。下方可保存GitHub与魔搭仓库，外部提交以正式公布渠道为准。",
-            "industryChannels": "华为：技术作品、Demo及OPC创业方案通过魔搭社区提交；GitHub为补充代码入口。",
+            "campusChannels": "在下方保存 GitHub 与魔搭社区仓库地址。",
+            "industryChannels": "通过魔搭社区提交，GitHub 作为补充代码入口。",
             "channelHint": "本页保存仓库地址供赛事组查看；赛题另有指定入口时，请同步完成该入口的提交。",
             "directionItems": {
                 "campus": [
@@ -5722,7 +5740,8 @@
                         "description": "围绕企业商业营销场景，开发可完成具体办公流程的 Agent 或 Skill。"
                     }
                 ]
-            }
+            },
+            "industryMaterials": "技术作品 + Demo"
         },
         "official": {
             "chapters": ["主页", "赛制", "奖励", "合作", "报名"],
@@ -6121,22 +6140,30 @@
                             "title": "决赛"
                         }
                     ],
-                    "rules": [
+                    "schedule": [
                         {
-                            "label": "参赛任务",
-                            "value": "多学科自由命题，可提交已有成熟项目；推荐场景有小幅优先录取。"
+                            "date": "10.13",
+                            "title": "线上开启",
+                            "note": "自主命题，也可提交已有成熟项目"
                         },
                         {
-                            "label": "提交内容",
-                            "value": "技术作品、Demo、产业落地方案。"
+                            "date": "10.18",
+                            "time": "13:00–17:00",
+                            "title": "现场技术指导 · 自愿参加",
+                            "place": "浙江大学紫金港校区 · 段永平教学楼 2–112",
+                            "note": "初赛作品 17:00 截止提交"
                         },
                         {
-                            "label": "晋级要求",
-                            "value": "技术可行性过关，进入线上复赛。"
+                            "date": "10.19–23",
+                            "time": "23日 24:00 截止",
+                            "title": "线上复赛",
+                            "note": "线上完善参赛项目"
                         },
                         {
-                            "label": "参赛方式",
-                            "value": "线上参赛；10 月 18 日下午可到场接受技术指导。"
+                            "date": "10.25",
+                            "time": "09:10–11:30",
+                            "title": "线下决赛路演",
+                            "place": "三墩元空间 · 宝港生活广场 C 座 6 楼"
                         }
                     ]
                 },
@@ -6161,22 +6188,31 @@
                             "title": "决赛"
                         }
                     ],
-                    "rules": [
+                    "schedule": [
                         {
-                            "label": "参赛任务",
-                            "value": "围绕现场发布的产业命题，从 0 到 1 开发 Agent 或 Skill。"
+                            "date": "10.18",
+                            "time": "09:00–11:15",
+                            "title": "技术论坛",
+                            "place": "浙江大学紫金港校区 · 段永平教学楼 2–112"
                         },
                         {
-                            "label": "提交内容",
-                            "value": "Agent 或 Skill 作品。"
+                            "date": "10.18",
+                            "time": "13:00–17:00",
+                            "title": "现场开发 · 必须到场",
+                            "note": "13:00 发布命题，17:00 截止提交",
+                            "place": "浙江大学紫金港校区 · 段永平教学楼 2–112"
                         },
                         {
-                            "label": "晋级要求",
-                            "value": "初赛完成度达到 60%；复赛选出 10 个决赛项目。"
+                            "date": "10.19–23",
+                            "time": "23日 24:00 截止",
+                            "title": "线上复赛",
+                            "note": "线上完善参赛项目"
                         },
                         {
-                            "label": "参赛方式",
-                            "value": "初赛必须线下，13:00 发布命题、17:00 截止提交。"
+                            "date": "10.25",
+                            "time": "09:10–11:30",
+                            "title": "线下决赛路演",
+                            "place": "三墩元空间 · 宝港生活广场 C 座 6 楼"
                         }
                     ]
                 }

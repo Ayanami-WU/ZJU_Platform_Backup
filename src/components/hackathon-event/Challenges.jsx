@@ -232,7 +232,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                             {t(
                                 track === "campus"
                                     ? "aix.refined.campusMaterials"
-                                    : `aix.stages.${stage?.id || "initial"}.materials`
+                                    : "aix.refined.industryMaterials"
                             )}
                         </p>
                     </section>

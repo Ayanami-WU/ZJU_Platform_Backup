@@ -1013,3 +1013,68 @@
     #registration-form[data-contained-form] {
     height: var(--aix-page-height);
 }
+.aix-rule-panel header p {
+    font-size: 20px;
+    font-weight: 750;
+    margin-top: 12px;
+}
+.aix-track-schedule {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.aix-track-schedule > li {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px 0;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-track-step-time {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.aix-track-step-time time {
+    font-size: 19px;
+    font-weight: 750;
+    color: var(--hx-accent-text);
+}
+.aix-track-step-time span {
+    font-size: 12px;
+    color: var(--hx-muted);
+    line-height: 1.5;
+}
+.aix-track-step-info h4 {
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+.aix-track-step-info p {
+    margin-top: 7px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--hx-muted);
+}
+.aix-track-step-place {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+}
+.aix-track-step-place svg {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+@media (max-width: 767px) {
+    .aix-rule-panel header p {
+        font-size: 18px;
+    }
+    .aix-track-schedule > li {
+        grid-template-columns: 90px minmax(0, 1fr);
+        gap: 12px;
+        padding: 18px 0;
+    }
+    .aix-track-step-info h4 {
+        font-size: 16px;
+    }
+}

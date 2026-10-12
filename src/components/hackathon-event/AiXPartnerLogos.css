@@ -1,0 +1,78 @@
+#aix-partners-title .aix-partner-panels .aix-partner-members {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px 28px;
+    align-items: center;
+}
+#aix-partners-title .aix-partner-panels .aix-partner-members li {
+    flex-direction: row;
+    gap: 10px;
+    min-height: 70px;
+}
+#aix-partners-title .aix-partner-panels .aix-brand-logo {
+    width: 100%;
+    height: 64px;
+    max-width: 154px;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+#aix-partners-title .aix-partner-panels .aix-brand-logo img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+#aix-partners-title .aix-partner-panels [data-partner="tianmao"] .aix-brand-logo {
+    flex: 0 1 64px;
+    min-width: 0;
+}
+.aix-partner-wordmark {
+    flex: 0 0 auto;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--hx-text);
+}
+#aix-partners-title .aix-partner-panels .aix-brand-guancha img {
+    transform: scale(1.8);
+}
+#aix-partners-title .aix-partner-panels .aix-brand-novax img {
+    transform: scale(1.4);
+}
+#aix-partners-title .aix-partner-panels .aix-brand-deepseekclub img {
+    transform: scale(1.2);
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="organizations"] .aix-brand-logo {
+    height: 80px;
+}
+[data-theme="day"] #aix-partners-title .aix-brand-novax img {
+    filter: brightness(0);
+}
+[data-theme="day"]
+    #aix-partners-title
+    :is(.aix-brand-unionlink, .aix-brand-yuandian, .aix-brand-thunisoft) {
+    background: #102319;
+    border-radius: 4px;
+    padding: 7px;
+}
+@media (max-width: 1000px) {
+    #aix-partners-title .aix-partner-panels .aix-partner-members {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (max-width: 600px) {
+    #aix-partners-title .aix-partner-panels .aix-partner-members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 18px;
+    }
+    #aix-partners-title .aix-partner-panels .aix-brand-logo {
+        height: 58px;
+        max-width: 128px;
+    }
+    #aix-partners-title .aix-partner-panels [data-partner="tianmao"] {
+        gap: 7px;
+    }
+    .aix-partner-wordmark {
+        font-size: 13px;
+    }
+}

@@ -20,7 +20,19 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         const req = route.request(),
             url = new URL(req.url());
         if (url.pathname === "/api/auth/me")
-            return route.fulfill({ json: { id: 42, username: "fixture", role: "user" } });
+            return route.fulfill({
+                json: {
+                    id: 42,
+                    username: "fixture",
+                    role: "user",
+                    registrationProfile: {
+                        name: "注册姓名",
+                        studentId: "32600001",
+                        major: "计算机",
+                        grade: "sophomore",
+                    },
+                },
+            });
         if (url.pathname === "/api/hackathon/schedule")
             return route.fulfill({
                 json: { events: [template], activeEventKey: template.event.key },
@@ -56,6 +68,10 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
     await expect(page.locator(".hx-nav a")).toHaveText(["赛事", "论坛", /赛题&提交/]);
     const form = page.locator(".aix-forum-signup form");
     await expect(form.locator('input[type="checkbox"]')).toHaveCount(0);
+    await expect(form.getByLabel(/姓名/)).toHaveValue("注册姓名");
+    await expect(form.getByLabel(/学号/)).toHaveValue("32600001");
+    await expect(form.getByLabel(/专业/)).toHaveValue("计算机");
+    await expect(form.getByLabel(/年级/)).toHaveValue("大二");
     await form.getByLabel(/姓名/).fill("论坛测试");
     await form.getByLabel(/手机号/).fill("13800138000");
     await form.getByLabel(/学号/).fill("32600001");

@@ -5218,7 +5218,25 @@
             "trackTabs_campus": "Tmall registration",
             "phone": "Mobile number",
             "phonePlaceholder": "Mobile number for event updates",
-            "invalidPhone": "Enter a valid mobile number"
+            "invalidPhone": "Enter a valid mobile number",
+            "trackSummary": {
+                "label": "Participation details",
+                "industryTitle": "Huawei · Industry Track",
+                "campusTitle": "Tmall · OPC Incubation",
+                "industryFormat": "Individual entry · In person required",
+                "campusFormat": "Teams of 1–5 · Online participation",
+                "development": "On-site development",
+                "opens": "Opens online",
+                "venue": "Venue",
+                "guidance": "Optional on-site mentoring",
+                "campusLocation": "ZJU Zijingang Campus",
+                "room": "Duan Yongping Teaching Building 2–112",
+                "brief": "Format",
+                "industryBrief": "Build an Agent or Skill for an industry challenge announced on site.",
+                "campusBrief": "Choose your own topic or enter an existing mature project.",
+                "semifinal": "Online semifinal",
+                "final": "Final · Sandun Metaspace"
+            }
         },
         "fields": {
             "name": "Name",
@@ -5547,7 +5565,7 @@
             "individual": "Teams of 1–5; online participation is available for Tmall.",
             "team": "Individual entry; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
-            "campusMaterials": "Prepare a project description and a usable AI app. Save GitHub and ModelScope repository links below.",
+            "campusMaterials": "Technical project + BP + Demo",
             "submissionIntro": "Register first, then save or update your project repositories here.",
             "loadFailed": "Could not load your registration",
             "loginTitle": "Sign in to view your submission",
@@ -5588,8 +5606,8 @@
                 "qoder": "Development tools and technical support"
             },
             "channelsTitle": "Submission channels",
-            "campusChannels": "Tmall: preliminary technical work; semifinal technical work, demo and industrial implementation plan. Save GitHub / ModelScope repositories below; published platform instructions govern external submission.",
-            "industryChannels": "Huawei: technical work, demo and OPC venture plan; submit through ModelScope. GitHub is supplementary.",
+            "campusChannels": "Save your GitHub and ModelScope repository URLs below.",
+            "industryChannels": "Submit through ModelScope; GitHub is a supplementary code repository.",
             "channelHint": "Save repository links here for the event team. If a challenge specifies another submission form, complete that form as well.",
             "directionItems": {
                 "campus": [
@@ -5616,7 +5634,8 @@
                         "description": "Build Agents or Skills that complete concrete business workflows."
                     }
                 ]
-            }
+            },
+            "industryMaterials": "Technical project + Demo"
         },
         "official": {
             "chapters": ["Overview", "Format", "Rewards", "Partners", "Register"],
@@ -6015,22 +6034,30 @@
                             "title": "Finals"
                         }
                     ],
-                    "rules": [
+                    "schedule": [
                         {
-                            "label": "Task",
-                            "value": "Choose a topic across disciplines or enter a mature project. Recommended scenarios receive slight admission priority."
+                            "date": "10.13",
+                            "title": "Opens online",
+                            "note": "Choose your own topic or enter an existing mature project"
                         },
                         {
-                            "label": "Deliverables",
-                            "value": "Technical work, a demo and an industry deployment plan."
+                            "date": "10.18",
+                            "time": "13:00–17:00",
+                            "title": "Optional on-site mentoring",
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
+                            "note": "Initial-round project due at 17:00"
                         },
                         {
-                            "label": "Advancement",
-                            "value": "Demonstrate technical feasibility to enter the online semifinal."
+                            "date": "10.19–23",
+                            "time": "Due Oct 23, 24:00",
+                            "title": "Online semifinal",
+                            "note": "Continue developing your project online"
                         },
                         {
-                            "label": "Participation",
-                            "value": "Compete online, with optional on-site mentoring on October 18 afternoon."
+                            "date": "10.25",
+                            "time": "09:10–11:30",
+                            "title": "In-person final pitches",
+                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza"
                         }
                     ]
                 },
@@ -6055,22 +6082,31 @@
                             "title": "Finals"
                         }
                     ],
-                    "rules": [
+                    "schedule": [
                         {
-                            "label": "Task",
-                            "value": "Build an Agent or Skill from scratch for an industry challenge announced on site."
+                            "date": "10.18",
+                            "time": "09:00–11:15",
+                            "title": "Technology forum",
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
                         },
                         {
-                            "label": "Deliverables",
-                            "value": "An Agent or Skill."
+                            "date": "10.18",
+                            "time": "13:00–17:00",
+                            "title": "On-site development · Attendance required",
+                            "note": "Challenge released at 13:00; submissions close at 17:00",
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
                         },
                         {
-                            "label": "Advancement",
-                            "value": "Reach 60% completion in the preliminary round. The semifinal selects 10 finalists."
+                            "date": "10.19–23",
+                            "time": "Due Oct 23, 24:00",
+                            "title": "Online semifinal",
+                            "note": "Continue developing your project online"
                         },
                         {
-                            "label": "Participation",
-                            "value": "Attend the preliminary round in person. Challenge released at 13:00; submission closes at 17:00."
+                            "date": "10.25",
+                            "time": "09:10–11:30",
+                            "title": "In-person final pitches",
+                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza"
                         }
                     ]
                 }

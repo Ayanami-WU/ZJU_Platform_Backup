@@ -1,6 +1,7 @@
 import { useAiXPager } from "../hooks/useAiXPager";
 import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
+import AiXTrackRegistrationSummary from "./hackathon-event/AiXTrackRegistrationSummary";
 import "./hackathon-event/AiXRegistrationPreview.css";
 import RepositorySubmission from "./hackathon-event/RepositorySubmission";
 import { getFirstEditionPartnerGroups } from "../data/firstEditionPartners";
@@ -349,6 +350,7 @@ const HackathonRegistration = ({
         !(Array.isArray(formData.track) ? formData.track : [formData.track]).includes("campus");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const previousUser = useRef(user?.id);
+    const previousFormContext = useRef({ activeTrack, registration });
     useEffect(() => {
         const accountChanged = previousUser.current !== user?.id;
         if (accountChanged) {
@@ -356,17 +358,24 @@ const HackathonRegistration = ({
             setEditingProfile(false);
         }
         if (isAiX) {
-            setFormData({
+            const contextChanged =
+                accountChanged ||
+                previousFormContext.current.activeTrack !== activeTrack ||
+                previousFormContext.current.registration !== registration;
+            setFormData((current) => ({
                 ...(registration?.answers ||
-                    trackDrafts.current[activeTrack] ||
-                    buildHackathonInitialAnswers(resolvedTemplate)),
+                    (contextChanged
+                        ? trackDrafts.current[activeTrack] ||
+                          buildHackathonInitialAnswers(resolvedTemplate)
+                        : current)),
                 ...(useAccountBasics ? user.registrationProfile : {}),
                 track: [activeTrack],
-            });
+            }));
         } else if (accountChanged || registration) {
             setFormData(registration?.answers || buildHackathonInitialAnswers(resolvedTemplate));
         }
         previousUser.current = user?.id;
+        previousFormContext.current = { activeTrack, registration };
     }, [
         registration,
         user?.id,
@@ -1519,93 +1528,126 @@ const HackathonRegistration = ({
                 <div className="pointer-events-none absolute left-0 top-[7%] max-w-full overflow-hidden font-black uppercase leading-none tracking-normal text-white/[0.04] text-[18vw]">
                     APPLY
                 </div>
-                <div className="mx-auto grid min-w-0 w-full max-w-[1880px] gap-7 xl:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] xl:items-center xl:gap-8 min-[1536px]:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] min-[1536px]:gap-14 2xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] 2xl:gap-20">
-                    <div className="relative z-10 min-w-0">
-                        <div className="max-w-[760px]">
-                            <p
-                                className={`text-sm font-black uppercase tracking-[0.28em] ${palette.accent}`}
-                            >
-                                Register
-                            </p>
-                            <h2 className="mt-4 text-5xl font-black leading-[0.96] tracking-normal sm:text-6xl xl:text-7xl min-[1536px]:text-[5.25rem]">
-                                {formConfig.title}
-                            </h2>
-                            <p
-                                className={`mt-5 max-w-xl text-lg leading-9 xl:text-xl xl:leading-9 ${palette.textSoft}`}
-                            >
-                                {formConfig.description}
-                            </p>
+                <div
+                    className={`mx-auto grid min-w-0 w-full max-w-[1880px] gap-7 xl:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] xl:items-center xl:gap-8 min-[1536px]:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] min-[1536px]:gap-14 2xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] 2xl:gap-20 ${isAiX ? "aix-track-registration-layout" : ""}`}
+                >
+                    {isAiX && (
+                        <nav
+                            className="aix-track-registration-tabs"
+                            role="tablist"
+                            aria-label={t("aix.register.trackTabs", {
+                                defaultValue: "报名赛道",
+                            })}
+                        >
+                            {["industry", "campus"].map((track) => (
+                                <button
+                                    key={track}
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={activeTrack === track}
+                                    disabled={isSubmitting}
+                                    onClick={() => switchTrack(track)}
+                                >
+                                    {t(`aix.register.trackTabs_${track}`, {
+                                        defaultValue:
+                                            track === "industry" ? "华为报名" : "天猫报名",
+                                    })}
+                                </button>
+                            ))}
+                        </nav>
+                    )}
+                    {isAiX ? (
+                        <AiXTrackRegistrationSummary track={activeTrack} />
+                    ) : (
+                        <div className="relative z-10 min-w-0">
+                            <div className="max-w-[760px]">
+                                <p
+                                    className={`text-sm font-black uppercase tracking-[0.28em] ${palette.accent}`}
+                                >
+                                    Register
+                                </p>
+                                <h2 className="mt-4 text-5xl font-black leading-[0.96] tracking-normal sm:text-6xl xl:text-7xl min-[1536px]:text-[5.25rem]">
+                                    {formConfig.title}
+                                </h2>
+                                <p
+                                    className={`mt-5 max-w-xl text-lg leading-9 xl:text-xl xl:leading-9 ${palette.textSoft}`}
+                                >
+                                    {formConfig.description}
+                                </p>
 
-                            {/* AI+X 收敛冗余：这三格与 hero 赛事信息重复，组队规则留在赛道字段提示。 */}
-                            {!isAiX && (
-                                <>
-                                    <div
-                                        className={`mt-7 grid gap-px overflow-hidden border ${palette.line} ${isDayMode ? "bg-slate-200/80" : "bg-cyan-300/16"} min-[1536px]:grid-cols-3`}
-                                    >
-                                        {[
-                                            [
-                                                t("hackathon.event.format_label", "形式"),
-                                                event.format,
-                                            ],
-                                            [
-                                                t("hackathon.event.duration_label", "时长"),
-                                                event.duration,
-                                            ],
-                                            [t("common.location", "地点"), event.location],
-                                        ].map(([label, value]) => (
-                                            <div
-                                                key={label}
-                                                className={`flex items-center justify-between gap-4 px-5 py-4 min-[1536px]:flex-col min-[1536px]:items-start min-[1536px]:justify-start ${
-                                                    isDayMode ? "bg-white/82" : "bg-white/[0.055]"
-                                                }`}
-                                            >
-                                                <span
-                                                    className={`text-sm font-black uppercase tracking-[0.18em] ${palette.accent}`}
+                                {/* AI+X 收敛冗余：这三格与 hero 赛事信息重复，组队规则留在赛道字段提示。 */}
+                                {!isAiX && (
+                                    <>
+                                        <div
+                                            className={`mt-7 grid gap-px overflow-hidden border ${palette.line} ${isDayMode ? "bg-slate-200/80" : "bg-cyan-300/16"} min-[1536px]:grid-cols-3`}
+                                        >
+                                            {[
+                                                [
+                                                    t("hackathon.event.format_label", "形式"),
+                                                    event.format,
+                                                ],
+                                                [
+                                                    t("hackathon.event.duration_label", "时长"),
+                                                    event.duration,
+                                                ],
+                                                [t("common.location", "地点"), event.location],
+                                            ].map(([label, value]) => (
+                                                <div
+                                                    key={label}
+                                                    className={`flex items-center justify-between gap-4 px-5 py-4 min-[1536px]:flex-col min-[1536px]:items-start min-[1536px]:justify-start ${
+                                                        isDayMode
+                                                            ? "bg-white/82"
+                                                            : "bg-white/[0.055]"
+                                                    }`}
                                                 >
-                                                    {label}
-                                                </span>
-                                                <span className="text-lg font-black tracking-tight">
-                                                    {value}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <div className={`mt-5 border p-5 ${palette.panel}`}>
-                                        <div className="flex items-start gap-3">
-                                            <Bot
-                                                className={`mt-1 h-5 w-5 shrink-0 ${palette.accent}`}
-                                            />
-                                            <p
-                                                className={`text-base leading-8 ${palette.textSoft}`}
-                                            >
-                                                {resolvedTemplate.event.program
-                                                    ? t("aix.team")
-                                                    : t(
-                                                          "hackathon.form.tool_hint",
-                                                          "工具选择用于了解参赛者的 AI 开发习惯，不影响报名资格。"
-                                                      )}
-                                            </p>
+                                                    <span
+                                                        className={`text-sm font-black uppercase tracking-[0.18em] ${palette.accent}`}
+                                                    >
+                                                        {label}
+                                                    </span>
+                                                    <span className="text-lg font-black tracking-tight">
+                                                        {value}
+                                                    </span>
+                                                </div>
+                                            ))}
                                         </div>
-                                    </div>
-                                </>
+
+                                        <div className={`mt-5 border p-5 ${palette.panel}`}>
+                                            <div className="flex items-start gap-3">
+                                                <Bot
+                                                    className={`mt-1 h-5 w-5 shrink-0 ${palette.accent}`}
+                                                />
+                                                <p
+                                                    className={`text-base leading-8 ${palette.textSoft}`}
+                                                >
+                                                    {resolvedTemplate.event.program
+                                                        ? t("aix.team")
+                                                        : t(
+                                                              "hackathon.form.tool_hint",
+                                                              "工具选择用于了解参赛者的 AI 开发习惯，不影响报名资格。"
+                                                          )}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                            {!resolvedTemplate.event.program && (
+                                <div className="mt-6 hidden max-w-[680px] lg:block">
+                                    <HackathonAiCoachPanel
+                                        isDayMode={isDayMode}
+                                        palette={palette}
+                                        t={t}
+                                        query={coachQuery}
+                                        setQuery={setCoachQuery}
+                                        result={coachResult}
+                                        isLoading={isCoachLoading}
+                                        onAsk={askHackathonCoach}
+                                    />
+                                </div>
                             )}
                         </div>
-                        {!resolvedTemplate.event.program && (
-                            <div className="mt-6 hidden max-w-[680px] lg:block">
-                                <HackathonAiCoachPanel
-                                    isDayMode={isDayMode}
-                                    palette={palette}
-                                    t={t}
-                                    query={coachQuery}
-                                    setQuery={setCoachQuery}
-                                    result={coachResult}
-                                    isLoading={isCoachLoading}
-                                    onAsk={askHackathonCoach}
-                                />
-                            </div>
-                        )}
-                    </div>
+                    )}
 
                     <MotionDiv
                         {...(shouldAnimate && !isAiX
@@ -1655,31 +1697,6 @@ const HackathonRegistration = ({
                             </div>
                         }
 
-                        {isAiX && (
-                            <div
-                                className="aix-track-registration-tabs"
-                                role="tablist"
-                                aria-label={t("aix.register.trackTabs", {
-                                    defaultValue: "报名赛道",
-                                })}
-                            >
-                                {["industry", "campus"].map((track) => (
-                                    <button
-                                        key={track}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={activeTrack === track}
-                                        disabled={isSubmitting}
-                                        onClick={() => switchTrack(track)}
-                                    >
-                                        {t(`aix.register.trackTabs_${track}`, {
-                                            defaultValue:
-                                                track === "industry" ? "华为报名" : "天猫报名",
-                                        })}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
                         {isAiX && requiresLogin && !user && (
                             <div className="aix-registration-login-notice">
                                 <p>

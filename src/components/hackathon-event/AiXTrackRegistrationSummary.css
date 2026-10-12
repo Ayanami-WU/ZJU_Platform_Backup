@@ -1,0 +1,146 @@
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    #registration-form[data-contained-form]
+    > .mx-auto.aix-track-registration-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.92fr) minmax(0, 1.85fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 18px 26px;
+    max-width: 1280px;
+    align-items: stretch;
+    min-height: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-track-registration-layout
+    > .aix-track-registration-tabs {
+    grid-column: 1 / -1;
+    margin: 0;
+    max-width: 520px;
+    width: 100%;
+}
+.aix-track-registration-summary {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 24px 26px;
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+    background: var(--hx-panel);
+    color: var(--hx-text);
+    scrollbar-width: thin;
+}
+.aix-track-summary-heading > span {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--hx-accent-text);
+    font: 700 16px / 1 monospace;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-summary-heading h2 {
+    margin: 0;
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.5;
+    font-weight: 750;
+    text-wrap: balance;
+}
+.aix-track-summary-format {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0 22px;
+    color: var(--hx-accent-text);
+    font-size: 15px;
+    font-weight: 650;
+}
+.aix-track-summary-facts {
+    display: grid;
+    gap: 20px;
+    margin: 0;
+}
+.aix-track-summary-facts dt {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--hx-muted);
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.aix-track-summary-facts dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.75;
+}
+.aix-track-summary-facts dd p {
+    margin: 0;
+}
+.aix-track-summary-facts strong {
+    font: 700 28px / 1.5 monospace;
+    letter-spacing: -0.03em;
+    margin-right: 12px;
+}
+.aix-track-summary-facts dd > span {
+    white-space: nowrap;
+}
+.aix-track-summary-next {
+    margin-top: auto;
+    padding-top: 22px;
+}
+.aix-track-summary-next p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin: 0;
+    padding-top: 10px;
+    font-size: 13px;
+    color: var(--hx-muted);
+}
+.aix-track-summary-next time {
+    min-width: 76px;
+    color: var(--hx-text);
+}
+@media (max-width: 900px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        #registration-form[data-contained-form]
+        > .mx-auto.aix-track-registration-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto max-content minmax(540px, 1fr);
+        overflow-y: auto;
+        gap: 16px;
+        scrollbar-width: thin;
+        padding-right: 4px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-track-registration-layout
+        > .aix-track-registration-tabs {
+        max-width: none;
+    }
+    .aix-track-registration-summary {
+        padding: 20px;
+        min-height: max-content;
+        overflow: visible;
+    }
+    .aix-track-summary-heading > span {
+        display: none;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-summary-heading h2 {
+        font-size: 22px;
+    }
+    .aix-track-summary-format {
+        margin: 10px 0 18px;
+    }
+    .aix-track-summary-facts {
+        gap: 14px;
+    }
+    .aix-track-summary-facts strong {
+        font-size: 24px;
+    }
+    .aix-track-summary-next {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding-top: 8px;
+    }
+}

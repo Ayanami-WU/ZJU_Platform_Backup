@@ -1,6 +1,6 @@
 import AiXOrganizers from "./AiXOrganizers";
 import { useState } from "react";
-import { Pause, Play, Trophy, Medal, Gift } from "lucide-react";
+import { Pause, Play, Trophy, Medal, Gift, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AiXPartnerLogos from "./AiXPartnerLogos";
 import "./AiXOverview.css";
@@ -97,26 +97,27 @@ export default function AiXOverview({ state }) {
                                     <h3>{track.title}</h3>
                                     <p>{track.mode}</p>
                                 </header>
-                                <dl>
-                                    {track.rules.map((rule) => (
-                                        <div key={rule.label}>
-                                            <dt>{rule.label}</dt>
-                                            <dd>{rule.value}</dd>
-                                        </div>
+                                <ol className="aix-track-schedule">
+                                    {track.schedule.map((step, index) => (
+                                        <li key={index}>
+                                            <div className="aix-track-step-time">
+                                                <time>{step.date}</time>
+                                                {step.time && <span>{step.time}</span>}
+                                            </div>
+                                            <div className="aix-track-step-info">
+                                                <h4>{step.title}</h4>
+                                                {step.note && <p>{step.note}</p>}
+                                                {step.place && (
+                                                    <p className="aix-track-step-place">
+                                                        <MapPin size={15} aria-hidden="true" />
+                                                        {step.place}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </li>
                                     ))}
-                                </dl>
+                                </ol>
                             </article>
-                        ))}
-                    </div>
-                    <div className="aix-format-venues">
-                        {copy.venues.map((venue) => (
-                            <div key={venue.date}>
-                                <time>{venue.date}</time>
-                                <p>
-                                    <strong>{venue.place}</strong>
-                                    <span>{venue.address}</span>
-                                </p>
-                            </div>
                         ))}
                     </div>
                 </div>

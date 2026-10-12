@@ -18,9 +18,13 @@ export default function AiXOrganizers({ groups }) {
                             {group.members.map((member) => (
                                 <li key={member.id} data-organizer={member.id}>
                                     <span className="aix-organizer-logo">
-                                        <img src={logos[member.id]} alt="" loading="lazy" />
+                                        <img
+                                            src={logos[member.id]}
+                                            alt={member.id === "elite-eagle" ? member.name : ""}
+                                            loading="lazy"
+                                        />
                                     </span>
-                                    <span>{member.name}</span>
+                                    {member.id !== "elite-eagle" && <span>{member.name}</span>}
                                 </li>
                             ))}
                         </ul>
