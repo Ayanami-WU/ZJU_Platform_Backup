@@ -1,4 +1,4 @@
-import { CalendarDays, MapPin, UsersRound, Code2 } from "lucide-react";
+import { CalendarDays, MapPin, UsersRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXTrackRegistrationSummary.css";
 
@@ -31,49 +31,68 @@ export default function AiXTrackRegistrationSummary({ track }) {
                 <div>
                     <dt>
                         <CalendarDays size={18} />
-                        {industry ? copy("development", "现场开发") : copy("opens", "线上初赛")}
+                        {industry
+                            ? copy("initialDevelopment", "初赛 · 现场开发")
+                            : copy("opens", "线上初赛")}
                     </dt>
                     <dd>
-                        <strong>{industry ? "10.18" : "10.13–18"}</strong>
+                        <strong>{industry ? "10.18" : "10.13–10.18"}</strong>
                         <span>
-                            {industry ? "13:00–17:00" : copy("initialDeadline", "10.18 17:00 截止")}
+                            {industry ? "13:00–17:00" : copy("initialDeadline", "17:00 截止")}
                         </span>
+                        {industry && (
+                            <div className="aix-track-summary-venue">
+                                <MapPin size={16} aria-hidden="true" />
+                                <div>
+                                    <p>{copy("campusLocation", "浙江大学紫金港校区")}</p>
+                                    <p>{copy("room", "段永平教学楼 2–112")}</p>
+                                </div>
+                            </div>
+                        )}
+                        <p className="aix-track-summary-brief">
+                            {industry
+                                ? copy("industryBrief", "现场发布产业命题，开发 Agent 或 Skill。")
+                                : copy("campusBrief", "自主命题，也可提交已有成熟项目。")}
+                        </p>
                     </dd>
                 </div>
-                <div>
-                    <dt>
-                        <MapPin size={18} />
-                        {industry
-                            ? copy("venue", "参赛地点")
-                            : copy("guidance", "现场技术指导 · 自愿参加")}
-                    </dt>
-                    <dd>
-                        {!industry && <p>10.18 · 13:00–17:00</p>}
-                        <p>{copy("campusLocation", "浙江大学紫金港校区")}</p>
-                        <p>{copy("room", "段永平教学楼 2–112")}</p>
-                    </dd>
-                </div>
-                <div>
-                    <dt>
-                        <Code2 size={18} />
-                        {copy("brief", "赛制")}
-                    </dt>
-                    <dd>
-                        {industry
-                            ? copy("industryBrief", "现场发布产业命题，开发 Agent 或 Skill。")
-                            : copy("campusBrief", "自主命题，也可提交已有成熟项目。")}
-                    </dd>
-                </div>
+                {!industry && (
+                    <div>
+                        <dt>
+                            <CalendarDays size={18} />
+                            {copy("guidance", "现场技术指导 · 自愿参加")}
+                        </dt>
+                        <dd>
+                            <strong>10.18</strong>
+                            <span>13:00–17:00</span>
+                            <div className="aix-track-summary-venue">
+                                <MapPin size={16} aria-hidden="true" />
+                                <div>
+                                    <p>{copy("campusLocation", "浙江大学紫金港校区")}</p>
+                                    <p>{copy("room", "段永平教学楼 2–112")}</p>
+                                </div>
+                            </div>
+                        </dd>
+                    </div>
+                )}
             </dl>
             <div className="aix-track-summary-next">
-                <p>
-                    <time>10.19–23</time>
-                    <span>{copy("semifinal", "线上复赛")}</span>
-                </p>
-                <p>
-                    <time>10.25</time>
-                    <span>{copy("final", "决赛 · 三墩元空间")}</span>
-                </p>
+                <div>
+                    <p>
+                        <time>10.19–10.23</time>
+                        <span>{copy("semifinal", "线上复赛")}</span>
+                    </p>
+                    <p className="aix-track-summary-deadline">
+                        {copy("semifinalDeadline", "24:00 截止")}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <time>10.25</time>
+                        <span>{copy("final", "决赛 · 三墩元空间")}</span>
+                    </p>
+                    <p className="aix-track-summary-deadline">09:10–11:30</p>
+                </div>
             </div>
         </aside>
     );

@@ -82,22 +82,44 @@
 .aix-track-summary-facts dd > span {
     white-space: nowrap;
 }
+.aix-track-summary-venue {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    margin-top: 8px;
+}
+.aix-track-summary-venue > svg {
+    flex-shrink: 0;
+    margin-top: 5px;
+    color: var(--hx-accent-text);
+}
+.aix-track-summary-facts dd .aix-track-summary-brief {
+    margin-top: 8px;
+}
 .aix-track-summary-next {
-    margin-top: auto;
-    padding-top: 22px;
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hx-line);
 }
 .aix-track-summary-next p {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
     gap: 6px 14px;
     margin: 0;
-    padding-top: 10px;
     font-size: 13px;
+    font-weight: 650;
     color: var(--hx-muted);
 }
 .aix-track-summary-next time {
     min-width: 76px;
     color: var(--hx-text);
+}
+.aix-track-summary-next .aix-track-summary-deadline {
+    display: block;
+    margin-top: 4px;
+    padding-left: 118px;
 }
 @media (max-width: 900px) {
     :root
@@ -138,9 +160,7 @@
         font-size: 24px;
     }
     .aix-track-summary-next {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        padding-top: 8px;
+        margin-top: 14px;
+        padding-top: 12px;
     }
 }

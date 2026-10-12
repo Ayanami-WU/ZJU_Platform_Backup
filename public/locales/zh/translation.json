@@ -5392,7 +5392,9 @@
                 "campusBrief": "自主命题，也可提交已有成熟项目。",
                 "semifinal": "线上复赛",
                 "final": "决赛 · 三墩元空间",
-                "initialDeadline": "10.18 17:00 截止"
+                "initialDeadline": "17:00 截止",
+                "initialDevelopment": "初赛 · 现场开发",
+                "semifinalDeadline": "24:00 截止"
             }
         },
         "fields": {

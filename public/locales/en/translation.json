@@ -5283,7 +5283,9 @@
                 "campusBrief": "Choose your own topic or enter an existing mature project.",
                 "semifinal": "Online semifinal",
                 "final": "Final · Sandun Metaspace",
-                "initialDeadline": "Due Oct 18, 17:00"
+                "initialDeadline": "Due 17:00",
+                "initialDevelopment": "Qualifier · On-site development",
+                "semifinalDeadline": "Due 24:00"
             }
         },
         "fields": {
