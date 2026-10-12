@@ -176,13 +176,11 @@ const normalizeProgram = (input = {}) => {
                           .filter((track) => Array.isArray(input.trackStages[track]))
                           .map((track) => [
                               track,
-                              input.trackStages[track]
-                                  .slice(0, 3)
-                                  .map((stage) => ({
-                                      id: text(stage.id, 40),
-                                      opensAt: text(stage.opensAt, 40),
-                                      closesAt: text(stage.closesAt, 40),
-                                  })),
+                              input.trackStages[track].slice(0, 3).map((stage) => ({
+                                  id: text(stage.id, 40),
+                                  opensAt: text(stage.opensAt, 40),
+                                  closesAt: text(stage.closesAt, 40),
+                              })),
                           ])
                   ),
               }
