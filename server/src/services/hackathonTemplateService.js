@@ -652,6 +652,9 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         }
 
         if (template.event.key === "zhekesong-ai-x-2026") {
+            if (field.id === "contact" && value && !/^(?:\+?86[ -]?)?1[3-9]\d{9}$/.test(value)) {
+                errors.push({ field: field.id, message: "请填写有效的手机号" });
+            }
             const exclusiveValue = { aiTools: "none", strengths: "exploring" }[field.id];
             if (
                 field.type === "multi_select" &&

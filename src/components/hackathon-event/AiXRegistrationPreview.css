@@ -49,3 +49,25 @@
     button:disabled {
     filter: grayscale(1);
 }
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-registration-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-registration-tabs button {
+    min-height: 46px;
+    border: 1px solid var(--hx-line);
+    background: transparent;
+    color: var(--hx-muted);
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 6px;
+}
+.hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-track-registration-tabs
+    button[aria-selected="true"] {
+    background: var(--hx-accent, #b8ff46);
+    border-color: var(--hx-accent, #b8ff46);
+    color: #102000;
+}

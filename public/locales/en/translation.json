@@ -5212,7 +5212,13 @@
                     "hint": "Complete any additional fields required for this event."
                 }
             },
-            "loginPreview": "Please register or sign in before completing your registration."
+            "loginPreview": "Please register or sign in before completing your registration.",
+            "trackTabs": "Registration track",
+            "trackTabs_industry": "Huawei registration",
+            "trackTabs_campus": "Tmall registration",
+            "phone": "Mobile number",
+            "phonePlaceholder": "Mobile number for event updates",
+            "invalidPhone": "Enter a valid mobile number"
         },
         "fields": {
             "name": "Name",
@@ -5661,15 +5667,19 @@
             "chooseSession": "Choose forum sessions",
             "fields": {
                 "name": "Name",
-                "contact": "Phone number or email",
-                "organization": "School / organization (optional)"
+                "contact": "Mobile number",
+                "organization": "Organization or school",
+                "studentId": "Student ID",
+                "major": "Major",
+                "grade": "Year of study",
+                "question": "Your question for the speakers"
             },
             "submit": "Submit forum registration",
             "saving": "Saving",
             "success": "Forum registration saved. View your sessions and receipt numbers above.",
             "loadFailed": "Could not load your registrations. Retry before submitting.",
             "saveFailed": "Could not save. Please retry; saved registrations will not be duplicated.",
-            "invalidDetails": "Enter your name and a valid phone number or email.",
+            "invalidDetails": "Complete all required fields and check your mobile number.",
             "export": "Export forum registrations",
             "sessions": {
                 "technology": {
@@ -5786,7 +5796,17 @@
             },
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
-            "chapters": ["Technology", "Entrepreneurship", "Registration"]
+            "chapters": ["Technology", "Entrepreneurship", "Registration"],
+            "timeLabel": "Date & time",
+            "dateTime": "October 25 · 13:30",
+            "locationLabel": "Location",
+            "venue": "Sandun Innovation Space",
+            "address": "6F, Building C, Baogang Life Plaza",
+            "attendeeLabel": "Attendee type",
+            "attendeeTypes": {
+                "internal": "On-campus",
+                "external": "Off-campus"
+            }
         },
         "october12": {
             "partnerGroups": [

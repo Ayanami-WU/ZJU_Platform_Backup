@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { CheckCircle2 } from "lucide-react";
+import { CalendarDays, MapPin, CheckCircle2 } from "lucide-react";
 import api from "../../services/api";
 import config from "../../../shared/hackathonForums.json";
 import { useReducedMotion } from "framer-motion";
@@ -13,6 +13,16 @@ import AiXForumOverview from "./AiXForumOverview";
 import "./AiXForums.css";
 import "./AiXRegistrationPreview.css";
 const FORUM_IDS = ["forum-technology", "forum-entrepreneurship", "forum-registration"];
+const emptyDetails = (name = "") => ({
+    name,
+    contact: "",
+    organization: "",
+    attendeeType: "internal",
+    studentId: "",
+    major: "",
+    grade: "",
+    question: "",
+});
 const entrepreneurship = config.sessions.find((s) => s.key === "entrepreneurship");
 export default function AiXForums({ now, registrationState }) {
     const { t } = useTranslation();
@@ -28,7 +38,7 @@ export default function AiXForums({ now, registrationState }) {
     };
     const { user, loading: authLoading, onLogin } = registrationState;
     const [registrations, setRegistrations] = useState([]);
-    const [details, setDetails] = useState({ name: "", contact: "", organization: "" });
+    const [details, setDetails] = useState(emptyDetails);
     const [loading, setLoading] = useState(false),
         [busy, setBusy] = useState(false),
         [error, setError] = useState(""),
@@ -45,7 +55,7 @@ export default function AiXForums({ now, registrationState }) {
         setSaved(false);
         setBusy(false);
         setError("");
-        setDetails({ name: user?.registrationProfile?.name || "", contact: "", organization: "" });
+        setDetails(emptyDetails(user?.registrationProfile?.name || ""));
         if (!user) {
             setLoading(false);
             return;
@@ -59,7 +69,15 @@ export default function AiXForums({ now, registrationState }) {
                     const r =
                         data.registrations.find((r) => r.forumKey === "entrepreneurship") ||
                         data.registrations[0];
-                    setDetails({ name: r.name, contact: r.contact, organization: r.organization });
+                    setDetails({
+                        ...emptyDetails(),
+                        ...Object.fromEntries(
+                            Object.keys(emptyDetails()).map((key) => [
+                                key,
+                                r[key] || (key === "attendeeType" ? "internal" : ""),
+                            ])
+                        ),
+                    });
                 }
             })
             .catch(() => {
@@ -94,7 +112,13 @@ export default function AiXForums({ now, registrationState }) {
         try {
             const { data } = await api.post(
                 "/hackathon/forums/register",
-                { sessions, ...details },
+                {
+                    sessions,
+                    ...details,
+                    ...(details.attendeeType === "external"
+                        ? { studentId: "", major: "", grade: "", question: "" }
+                        : { organization: "" }),
+                },
                 { noRetry: true }
             );
             if (owner.current !== userId) return;
@@ -144,12 +168,32 @@ export default function AiXForums({ now, registrationState }) {
                     .replace(/"/g, '""') +
                 '"';
             const rows = [
-                ["论坛", "姓名", "联系方式", "学校/单位", "报名时间"],
+                [
+                    "论坛",
+                    "身份",
+                    "姓名",
+                    "手机号",
+                    "学校/单位",
+                    "学号",
+                    "专业",
+                    "年级",
+                    "提问",
+                    "报名时间",
+                ],
                 ...data.registrations.map((r) => [
                     t(`aix.forumPage.sessions.${r.forumKey}.title`),
+                    r.attendeeType === "internal"
+                        ? "校内"
+                        : r.attendeeType === "external"
+                          ? "校外"
+                          : "历史报名",
                     r.name,
                     r.contact,
                     r.organization,
+                    r.studentId,
+                    r.major,
+                    r.grade,
+                    r.question,
                     r.createdAt,
                 ]),
             ];
@@ -188,8 +232,29 @@ export default function AiXForums({ now, registrationState }) {
                         <aside className="aix-forum-registration-summary">
                             <p className="aix-eyebrow">AI + X · 2026</p>
                             <h3>{t("aix.pages.forumOverview.sessions.1.theme")}</h3>
-                            <time>10.25</time>
-                            <p>{t("aix.pages.forumOverview.sessions.1.location")}</p>
+                            <div className="aix-forum-event-info">
+                                <div>
+                                    <span className="aix-forum-info-icon">
+                                        <CalendarDays size={24} aria-hidden="true" />
+                                    </span>
+                                    <div>
+                                        <span>{t("aix.forumPage.timeLabel")}</span>
+                                        <time dateTime={entrepreneurship.startsAt}>
+                                            {t("aix.forumPage.dateTime")}
+                                        </time>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span className="aix-forum-info-icon">
+                                        <MapPin size={24} aria-hidden="true" />
+                                    </span>
+                                    <div>
+                                        <span>{t("aix.forumPage.locationLabel")}</span>
+                                        <strong>{t("aix.forumPage.venue")}</strong>
+                                        <p>{t("aix.forumPage.address")}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </aside>
                         <div className="aix-forum-signup">
                             {registrations.length > 0 && (
@@ -230,7 +295,7 @@ export default function AiXForums({ now, registrationState }) {
                                     })}
                                 </div>
                             )}
-                            <p>{t("aix.forumPage.signupHint")}</p>
+
                             {!user && (
                                 <div className="aix-registration-login-notice">
                                     <p>
@@ -261,44 +326,117 @@ export default function AiXForums({ now, registrationState }) {
                                 </>
                             ) : (
                                 <form onSubmit={submit}>
-                                    <fieldset
-                                        disabled={!user || authLoading || loading || busy}
-                                        className={`aix-forum-fields ${!user ? "aix-registration-preview-fields" : ""}`}
+                                    <div
+                                        className="aix-forum-attendee-tabs"
+                                        role="tablist"
+                                        aria-label={t("aix.forumPage.attendeeLabel")}
                                     >
-                                        {["name", "contact", "organization"].map((key) => (
-                                            <label key={key}>
-                                                {t(`aix.forumPage.fields.${key}`)}
-                                                <input
-                                                    required={key !== "organization"}
-                                                    maxLength={
-                                                        key === "name"
-                                                            ? 80
-                                                            : key === "contact"
-                                                              ? 120
-                                                              : 160
-                                                    }
-                                                    autoComplete={
-                                                        key === "name"
-                                                            ? "name"
-                                                            : key === "organization"
-                                                              ? "organization"
-                                                              : "email"
-                                                    }
-                                                    value={details[key]}
-                                                    disabled={
-                                                        !user || authLoading || loading || busy
-                                                    }
-                                                    onChange={(e) => {
-                                                        setSaved(false);
-                                                        setDetails((v) => ({
-                                                            ...v,
-                                                            [key]: e.target.value,
-                                                        }));
-                                                    }}
-                                                />
-                                            </label>
+                                        {["internal", "external"].map((type) => (
+                                            <button
+                                                key={type}
+                                                id={`forum-tab-${type}`}
+                                                type="button"
+                                                role="tab"
+                                                aria-selected={details.attendeeType === type}
+                                                aria-controls="forum-attendee-fields"
+                                                disabled={busy || loading}
+                                                onClick={() => {
+                                                    setSaved(false);
+                                                    setDetails((v) => ({
+                                                        ...v,
+                                                        attendeeType: type,
+                                                    }));
+                                                }}
+                                            >
+                                                {t(`aix.forumPage.attendeeTypes.${type}`)}
+                                            </button>
                                         ))}
-                                    </fieldset>
+                                    </div>
+                                    <div
+                                        role="tabpanel"
+                                        id="forum-attendee-fields"
+                                        aria-labelledby={`forum-tab-${details.attendeeType}`}
+                                    >
+                                        <fieldset
+                                            disabled={!user || authLoading || loading || busy}
+                                            className={`aix-forum-fields ${!user ? "aix-registration-preview-fields" : ""}`}
+                                        >
+                                            {(details.attendeeType === "internal"
+                                                ? [
+                                                      "name",
+                                                      "studentId",
+                                                      "major",
+                                                      "grade",
+                                                      "contact",
+                                                      "question",
+                                                  ]
+                                                : ["name", "contact", "organization"]
+                                            ).map((key) => {
+                                                const Input =
+                                                    key === "question" ? "textarea" : "input";
+                                                return (
+                                                    <label
+                                                        key={key}
+                                                        className={
+                                                            key === "question" ||
+                                                            key === "organization"
+                                                                ? "aix-forum-field-wide"
+                                                                : ""
+                                                        }
+                                                    >
+                                                        <span>
+                                                            {t(`aix.forumPage.fields.${key}`)}{" "}
+                                                            <span aria-hidden="true">*</span>
+                                                        </span>
+                                                        <Input
+                                                            name={key}
+                                                            required
+                                                            maxLength={
+                                                                key === "question"
+                                                                    ? 2000
+                                                                    : key === "contact"
+                                                                      ? 30
+                                                                      : key === "organization"
+                                                                        ? 160
+                                                                        : 80
+                                                            }
+                                                            type={
+                                                                key === "contact"
+                                                                    ? "tel"
+                                                                    : undefined
+                                                            }
+                                                            rows={
+                                                                key === "question" ? 3 : undefined
+                                                            }
+                                                            autoComplete={
+                                                                key === "name"
+                                                                    ? "name"
+                                                                    : key === "contact"
+                                                                      ? "tel"
+                                                                      : key === "organization"
+                                                                        ? "organization"
+                                                                        : "off"
+                                                            }
+                                                            value={details[key]}
+                                                            disabled={
+                                                                !user ||
+                                                                authLoading ||
+                                                                loading ||
+                                                                busy
+                                                            }
+                                                            onChange={(e) => {
+                                                                setSaved(false);
+                                                                setDetails((v) => ({
+                                                                    ...v,
+                                                                    [key]: e.target.value,
+                                                                }));
+                                                            }}
+                                                        />
+                                                    </label>
+                                                );
+                                            })}
+                                        </fieldset>
+                                    </div>
                                     {error && <p role="alert">{t(`aix.forumPage.${error}`)}</p>}
                                     {saved && (
                                         <p className="aix-forum-success" role="status">

@@ -83,7 +83,10 @@ export default function RepositorySubmission({ registration, endAt, onSaved, com
                 </summary>
                 <dl>
                     {Object.entries(registration.answers || {})
-                        .filter(([, v]) => v && (!Array.isArray(v) || v.length))
+                        .filter(
+                            ([key, v]) =>
+                                key !== "trackRegistrations" && v && (!Array.isArray(v) || v.length)
+                        )
                         .map(([key, value]) => (
                             <div key={key}>
                                 <dt>{t(`aix.fields.${key}`, { defaultValue: key })}</dt>

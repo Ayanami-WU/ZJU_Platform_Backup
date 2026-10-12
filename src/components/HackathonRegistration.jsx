@@ -196,7 +196,7 @@ const HackathonRegistration = ({
         user,
         loading: registrationLoading,
         error: registrationError,
-        registration,
+        registration: eventRegistration,
         onLogin,
         onRegistered,
         onRetry,
@@ -212,6 +212,27 @@ const HackathonRegistration = ({
     const isEnglish = String(language).startsWith("en");
     const resolvedTemplate = useMemo(() => normalizeHackathonTemplate(template), [template]);
     const isAiX = resolvedTemplate.event.key === "zhekesong-ai-x-2026";
+    const [activeTrack, setActiveTrack] = useState("industry");
+    const trackDrafts = useRef({});
+    const registration = useMemo(() => {
+        if (!isAiX || !eventRegistration) return eventRegistration;
+        const entry =
+            eventRegistration.trackRegistrations?.[activeTrack] ||
+            eventRegistration.answers?.trackRegistrations?.[activeTrack];
+        if (entry)
+            return { ...eventRegistration, answers: entry.answers, createdAt: entry.createdAt };
+        if (eventRegistration.trackRegistrations || eventRegistration.answers?.trackRegistrations)
+            return null;
+        const selected = Array.isArray(eventRegistration.answers?.track)
+            ? eventRegistration.answers.track
+            : [eventRegistration.answers?.track];
+        return selected.includes(activeTrack)
+            ? {
+                  ...eventRegistration,
+                  answers: { ...eventRegistration.answers, track: [activeTrack] },
+              }
+            : null;
+    }, [isAiX, eventRegistration, activeTrack]);
     const gateRegistration =
         requiresLogin && resolvedTemplate.event.registrationOpen && !registration;
     const showProfileGate = gateRegistration && (!user || !profileComplete || editingProfile);
@@ -329,13 +350,38 @@ const HackathonRegistration = ({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const previousUser = useRef(user?.id);
     useEffect(() => {
-        if (previousUser.current && previousUser.current !== user?.id)
-            setFormData(buildHackathonInitialAnswers(resolvedTemplate));
-        else if (registration)
-            setFormData(registration.answers || buildHackathonInitialAnswers(resolvedTemplate));
-        if (previousUser.current !== user?.id) setEditingProfile(false);
+        const accountChanged = previousUser.current !== user?.id;
+        if (accountChanged) {
+            trackDrafts.current = {};
+            setEditingProfile(false);
+        }
+        if (isAiX) {
+            setFormData({
+                ...(registration?.answers ||
+                    trackDrafts.current[activeTrack] ||
+                    buildHackathonInitialAnswers(resolvedTemplate)),
+                ...(useAccountBasics ? user.registrationProfile : {}),
+                track: [activeTrack],
+            });
+        } else if (accountChanged || registration) {
+            setFormData(registration?.answers || buildHackathonInitialAnswers(resolvedTemplate));
+        }
         previousUser.current = user?.id;
-    }, [registration, user?.id, resolvedTemplate]);
+    }, [
+        registration,
+        user?.id,
+        resolvedTemplate,
+        isAiX,
+        activeTrack,
+        useAccountBasics,
+        user?.registrationProfile,
+    ]);
+    const switchTrack = (track) => {
+        if (track === activeTrack || isSubmitting) return;
+        trackDrafts.current[activeTrack] = formData;
+        setFormErrors({});
+        setActiveTrack(track);
+    };
     useEffect(() => {
         if (useAccountBasics)
             setFormData((current) => ({ ...current, ...user.registrationProfile }));
@@ -667,6 +713,7 @@ const HackathonRegistration = ({
             }
             if (
                 field.type === "email" &&
+                !(isAiX && field.id === "contact") &&
                 value &&
                 !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value))
             ) {
@@ -675,6 +722,12 @@ const HackathonRegistration = ({
                     : `${field.label}格式不正确`;
             }
         });
+        if (
+            isAiX &&
+            formData.contact &&
+            !/^(?:\+?86[ -]?)?1[3-9]\d{9}$/.test(formData.contact.trim())
+        )
+            errors.contact = t("aix.register.invalidPhone", { defaultValue: "请填写有效的手机号" });
         if (
             isAiX &&
             !industryOnly &&
@@ -753,6 +806,7 @@ const HackathonRegistration = ({
             toast.success(formConfig.successMessage);
             if (requiresLogin)
                 onRegistered?.({
+                    ...data,
                     id: data.id,
                     eventKey: resolvedTemplate.event.key,
                     answers: data.answers || formData,
@@ -1601,6 +1655,31 @@ const HackathonRegistration = ({
                             </div>
                         }
 
+                        {isAiX && (
+                            <div
+                                className="aix-track-registration-tabs"
+                                role="tablist"
+                                aria-label={t("aix.register.trackTabs", {
+                                    defaultValue: "报名赛道",
+                                })}
+                            >
+                                {["industry", "campus"].map((track) => (
+                                    <button
+                                        key={track}
+                                        type="button"
+                                        role="tab"
+                                        aria-selected={activeTrack === track}
+                                        disabled={isSubmitting}
+                                        onClick={() => switchTrack(track)}
+                                    >
+                                        {t(`aix.register.trackTabs_${track}`, {
+                                            defaultValue:
+                                                track === "industry" ? "华为报名" : "天猫报名",
+                                        })}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                         {isAiX && requiresLogin && !user && (
                             <div className="aix-registration-login-notice">
                                 <p>
@@ -1652,7 +1731,12 @@ const HackathonRegistration = ({
                                 key={`${registration.eventKey}:${registration.id}`}
                                 registration={registration}
                                 endAt={resolvedTemplate.event.endAt}
-                                onSaved={onRegistered}
+                                onSaved={(value) =>
+                                    onRegistered?.({
+                                        ...eventRegistration,
+                                        repositories: value.repositories,
+                                    })
+                                }
                             />
                         ) : (
                             <form
@@ -1731,100 +1815,135 @@ const HackathonRegistration = ({
                                         }
                                         className={`min-w-0 space-y-8 ${isAiX && requiresLogin && !user ? "aix-registration-preview-fields" : ""}`}
                                     >
-                                        {registrationGroups.map((group) => (
-                                            <div
-                                                key={group.key}
-                                                className="hackathon-form-group grid gap-5 md:grid-cols-2 xl:gap-6"
-                                            >
-                                                {isAiX && (
-                                                    <h3 className="aix-form-group-title">
-                                                        {t(`aix.pages.groups.${group.key}`, {
-                                                            defaultValue: t(
-                                                                "aix.register.groups.additional.title"
-                                                            ),
-                                                        })}
-                                                    </h3>
-                                                )}
-                                                {group.fields
-                                                    .filter(
-                                                        (field) =>
-                                                            !(
-                                                                industryOnly &&
-                                                                ["team", "teamSize"].includes(
-                                                                    field.id
-                                                                )
-                                                            ) &&
-                                                            !(
-                                                                useAccountBasics &&
-                                                                registrationProfileFields.some(
-                                                                    ({ id }) => id === field.id
-                                                                )
-                                                            ) &&
-                                                            (!isAiX ||
-                                                                field.id !== "aiToolsOther" ||
-                                                                field.required ||
-                                                                formData.aiTools?.includes(
-                                                                    "other"
-                                                                ) ||
-                                                                formData.aiToolsOther)
+                                        {registrationGroups
+                                            .filter(
+                                                (group) =>
+                                                    !(
+                                                        isAiX &&
+                                                        industryOnly &&
+                                                        group.key === "entry"
                                                     )
-                                                    .map((field) => (
-                                                        <div
-                                                            key={field.id}
-                                                            data-field={field.id}
-                                                            className={
-                                                                field.width === "half" ||
-                                                                (isAiX &&
-                                                                    [
-                                                                        "experience",
-                                                                        "researchExperience",
-                                                                    ].includes(field.id))
-                                                                    ? "min-w-0"
-                                                                    : isAiX
-                                                                      ? "min-w-0 col-span-2"
-                                                                      : "min-w-0 md:col-span-2"
-                                                            }
-                                                        >
-                                                            <DynamicRegistrationField
-                                                                field={
-                                                                    isAiX &&
+                                            )
+                                            .map((group) => (
+                                                <div
+                                                    key={group.key}
+                                                    className="hackathon-form-group grid gap-5 md:grid-cols-2 xl:gap-6"
+                                                >
+                                                    {isAiX && (
+                                                        <h3 className="aix-form-group-title">
+                                                            {t(`aix.pages.groups.${group.key}`, {
+                                                                defaultValue: t(
+                                                                    "aix.register.groups.additional.title"
+                                                                ),
+                                                            })}
+                                                        </h3>
+                                                    )}
+                                                    {group.fields
+                                                        .filter(
+                                                            (field) =>
+                                                                !(isAiX && field.id === "track") &&
+                                                                !(
+                                                                    industryOnly &&
                                                                     ["team", "teamSize"].includes(
                                                                         field.id
                                                                     )
-                                                                        ? {
-                                                                              ...field,
-                                                                              label: t(
-                                                                                  field.id ===
-                                                                                      "team"
-                                                                                      ? "aix.october12.campusTeamLabel"
-                                                                                      : "aix.october12.campusTeamSizeLabel"
-                                                                              ),
-                                                                              required:
-                                                                                  field.id ===
-                                                                                      "teamSize" ||
-                                                                                  field.required,
-                                                                          }
-                                                                        : field
-                                                                }
-                                                                value={formData[field.id]}
-                                                                error={formErrors[field.id]}
-                                                                palette={palette}
-                                                                isDayMode={isDayMode}
-                                                                compact={isAiX}
-                                                                onChange={(value) =>
-                                                                    updateAnswer(field.id, value)
-                                                                }
-                                                                onToggle={(option) =>
-                                                                    handleMultiSelectToggle(
-                                                                        field.id,
-                                                                        option
+                                                                ) &&
+                                                                !(
+                                                                    useAccountBasics &&
+                                                                    registrationProfileFields.some(
+                                                                        ({ id }) => id === field.id
                                                                     )
+                                                                ) &&
+                                                                (!isAiX ||
+                                                                    field.id !== "aiToolsOther" ||
+                                                                    field.required ||
+                                                                    formData.aiTools?.includes(
+                                                                        "other"
+                                                                    ) ||
+                                                                    formData.aiToolsOther)
+                                                        )
+                                                        .map((field) => (
+                                                            <div
+                                                                key={field.id}
+                                                                data-field={field.id}
+                                                                className={
+                                                                    field.width === "half" ||
+                                                                    (isAiX &&
+                                                                        [
+                                                                            "experience",
+                                                                            "researchExperience",
+                                                                        ].includes(field.id))
+                                                                        ? "min-w-0"
+                                                                        : isAiX
+                                                                          ? "min-w-0 col-span-2"
+                                                                          : "min-w-0 md:col-span-2"
                                                                 }
-                                                            />
-                                                        </div>
-                                                    ))}
-                                            </div>
-                                        ))}
+                                                            >
+                                                                <DynamicRegistrationField
+                                                                    field={
+                                                                        isAiX &&
+                                                                        [
+                                                                            "team",
+                                                                            "teamSize",
+                                                                        ].includes(field.id)
+                                                                            ? {
+                                                                                  ...field,
+                                                                                  label: t(
+                                                                                      field.id ===
+                                                                                          "team"
+                                                                                          ? "aix.october12.campusTeamLabel"
+                                                                                          : "aix.october12.campusTeamSizeLabel"
+                                                                                  ),
+                                                                                  required:
+                                                                                      field.id ===
+                                                                                          "teamSize" ||
+                                                                                      field.required,
+                                                                              }
+                                                                            : isAiX &&
+                                                                                field.id ===
+                                                                                    "contact"
+                                                                              ? {
+                                                                                    ...field,
+                                                                                    type: "tel",
+                                                                                    label: t(
+                                                                                        "aix.register.phone",
+                                                                                        {
+                                                                                            defaultValue:
+                                                                                                "手机号",
+                                                                                        }
+                                                                                    ),
+                                                                                    placeholder: t(
+                                                                                        "aix.register.phonePlaceholder",
+                                                                                        {
+                                                                                            defaultValue:
+                                                                                                "填写可接收赛事通知的手机号",
+                                                                                        }
+                                                                                    ),
+                                                                                }
+                                                                              : field
+                                                                    }
+                                                                    value={formData[field.id]}
+                                                                    error={formErrors[field.id]}
+                                                                    palette={palette}
+                                                                    isDayMode={isDayMode}
+                                                                    compact={isAiX}
+                                                                    onChange={(value) =>
+                                                                        updateAnswer(
+                                                                            field.id,
+                                                                            value
+                                                                        )
+                                                                    }
+                                                                    onToggle={(option) =>
+                                                                        handleMultiSelectToggle(
+                                                                            field.id,
+                                                                            option
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        ))}
+                                                </div>
+                                            ))}
                                     </fieldset>
                                 </div>
 

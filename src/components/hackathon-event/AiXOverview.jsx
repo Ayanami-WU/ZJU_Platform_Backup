@@ -176,11 +176,17 @@ export default function AiXOverview({ state }) {
                                                     >
                                                         {row.products.map((product) => (
                                                             <div key={product.name}>
-                                                                <span>{product.name}</span>
-                                                                <small>{product.value}</small>
-                                                                <strong className="aix-prize-cash">
-                                                                    {product.cash}
+                                                                <strong className="aix-prize-product-name">
+                                                                    {product.name}
                                                                 </strong>
+                                                                <span className="aix-prize-product-amounts">
+                                                                    <strong className="aix-prize-value">
+                                                                        {product.value}
+                                                                    </strong>
+                                                                    <strong className="aix-prize-cash">
+                                                                        + {product.cash}
+                                                                    </strong>
+                                                                </span>
                                                             </div>
                                                         ))}
                                                     </div>

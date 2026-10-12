@@ -185,3 +185,99 @@ test("hackathon controller stores and returns configurable form answers", async 
         fs.rmSync(tempDir, { recursive: true, force: true });
     }
 });
+
+test("AI-X track submissions preserve separate answers, concurrent entries and legacy joint registrations", async () => {
+    const { open } = require("sqlite");
+    const sqlite3 = require("sqlite3");
+    const {
+        saveTrackRegistration,
+        registrationPayload,
+    } = require("../src/services/hackathonTrackRegistrationService");
+    const template = require("../../shared/hackathonAiX.json");
+    const db = await open({ filename: ":memory:", driver: sqlite3.Database });
+    try {
+        await db.exec(
+            `CREATE TABLE hackathon_registrations(id INTEGER PRIMARY KEY,event_key TEXT,user_id INTEGER,name TEXT,student_id TEXT,major TEXT,grade TEXT,ai_tools TEXT,experience TEXT,form_data_json TEXT,template_revision INTEGER,created_at TEXT,UNIQUE(event_key,user_id),UNIQUE(event_key,student_id));`
+        );
+        const base = {
+            name: "Track test",
+            studentId: "student-one",
+            major: "Design",
+            grade: "junior",
+            aiTools: ["Codex"],
+            experience: "First project",
+            contact: "13800138000",
+        };
+        const industry = { ...base, track: ["industry"], team: "", teamSize: "1" };
+        const campus = {
+            ...base,
+            track: ["campus"],
+            team: "Campus team",
+            teamSize: "4",
+            experience: "Second project",
+            contact: "13900139000",
+        };
+        await Promise.all([
+            saveTrackRegistration(db, { userId: 1, template, answers: industry }),
+            saveTrackRegistration(db, { userId: 1, template, answers: campus }),
+        ]);
+        let row = await db.get("SELECT * FROM hackathon_registrations WHERE user_id=1");
+        const payload = registrationPayload(row);
+        assert.deepEqual(payload.answers.track, ["industry", "campus"]);
+        assert.deepEqual(payload.trackRegistrations.industry.answers, industry);
+        assert.deepEqual(payload.trackRegistrations.campus.answers, campus);
+        assert.equal((await db.get("SELECT COUNT(*) n FROM hackathon_registrations")).n, 1);
+        const before = row.form_data_json;
+        await assert.rejects(
+            saveTrackRegistration(db, {
+                userId: 1,
+                template,
+                answers: { ...campus, experience: "Overwrite attempt" },
+            }),
+            { code: "HACKATHON_ALREADY_REGISTERED" }
+        );
+        await assert.rejects(saveTrackRegistration(db, { userId: 2, template, answers: campus }), {
+            code: "HACKATHON_ALREADY_REGISTERED",
+        });
+        assert.equal(
+            (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=1"))
+                .form_data_json,
+            before
+        );
+        const legacy = {
+            ...base,
+            track: ["industry", "campus"],
+            contact: "legacy@example.test",
+            teamSize: "3",
+        };
+        await db.run(
+            "INSERT INTO hackathon_registrations(event_key,user_id,student_id,form_data_json,created_at) VALUES(?,?,?,?,?)",
+            [template.event.key, 3, "legacy-one", JSON.stringify(legacy), "2026-10-12"]
+        );
+        row = await db.get("SELECT * FROM hackathon_registrations WHERE user_id=3");
+        const old = registrationPayload(row);
+        assert.equal(old.trackRegistrations.industry.legacy, true);
+        assert.equal(old.trackRegistrations.campus.answers.contact, "legacy@example.test");
+        assert.equal(
+            (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=3"))
+                .form_data_json,
+            JSON.stringify(legacy)
+        );
+        const single = { ...legacy, track: ["campus"] };
+        await db.run("UPDATE hackathon_registrations SET form_data_json=? WHERE user_id=3", [
+            JSON.stringify(single),
+        ]);
+        const upgraded = await saveTrackRegistration(db, {
+            userId: 3,
+            template,
+            answers: { ...industry, studentId: "legacy-one" },
+        });
+        assert.deepEqual(registrationPayload(upgraded).trackRegistrations.campus.answers, single);
+        assert.equal(
+            registrationPayload(upgraded).trackRegistrations.industry.answers.teamSize,
+            "1"
+        );
+    } finally {
+        await db.close();
+    }
+});

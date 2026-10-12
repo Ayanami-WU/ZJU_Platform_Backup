@@ -109,22 +109,39 @@ const fallbackRegistrationFields = [
     { id: "experience", label: "项目经验" },
 ];
 
-const registrationAnswers = (registration) => ({
-    githubRepository: registration.github_repository_url || "",
-    modelscopeRepository: registration.modelscope_repository_url || "",
-    repositoriesUpdatedAt: registration.repositories_updated_at || "",
-    name: registration.name,
-    studentId: registration.student_id,
-    major: registration.major,
-    grade: registration.grade,
-    aiTools: safeParseTools(registration.ai_tools),
-    experience: registration.experience,
-    ...(registration.form_data &&
-    typeof registration.form_data === "object" &&
-    !Array.isArray(registration.form_data)
-        ? registration.form_data
-        : {}),
-});
+const registrationAnswers = (registration) => {
+    const entries = registration.form_data?.trackRegistrations;
+    const trackAnswers = {};
+    if (entries) {
+        for (const track of ["industry", "campus"]) {
+            const entry = entries[track];
+            if (!entry?.answers) continue;
+            for (const [id, value] of Object.entries(entry.answers)) {
+                if (id !== "trackRegistrations") trackAnswers[`${track}__${id}`] = value;
+            }
+            trackAnswers[`${track}__submittedAt`] = entry.createdAt;
+        }
+    }
+    const answers = {
+        githubRepository: registration.github_repository_url || "",
+        modelscopeRepository: registration.modelscope_repository_url || "",
+        repositoriesUpdatedAt: registration.repositories_updated_at || "",
+        name: registration.name,
+        studentId: registration.student_id,
+        major: registration.major,
+        grade: registration.grade,
+        aiTools: safeParseTools(registration.ai_tools),
+        experience: registration.experience,
+        ...(registration.form_data &&
+        typeof registration.form_data === "object" &&
+        !Array.isArray(registration.form_data)
+            ? registration.form_data
+            : {}),
+        ...trackAnswers,
+    };
+    delete answers.trackRegistrations;
+    return answers;
+};
 
 const registrationFieldsByEvent = (events) =>
     new Map(
@@ -146,9 +163,24 @@ const fallbackFieldsById = new Map(
         { id: "repositoriesUpdatedAt", label: "仓库提交时间" },
     ].map((field) => [field.id, field])
 );
-const registrationField = (fieldsByEvent, eventKey, fieldId) =>
-    fieldsByEvent.get(eventKey)?.get(fieldId) ||
-    fallbackFieldsById.get(fieldId) || { id: fieldId, label: fieldId };
+const registrationField = (fieldsByEvent, eventKey, fieldId) => {
+    const match = /^(industry|campus)__(.+)$/.exec(fieldId);
+    if (match) {
+        const field =
+            match[2] === "submittedAt"
+                ? { label: "提交时间" }
+                : registrationField(fieldsByEvent, eventKey, match[2]);
+        return {
+            ...field,
+            id: fieldId,
+            label: `${match[1] === "industry" ? "华为" : "天猫"} · ${field.label}`,
+        };
+    }
+    return (
+        fieldsByEvent.get(eventKey)?.get(fieldId) ||
+        fallbackFieldsById.get(fieldId) || { id: fieldId, label: fieldId }
+    );
+};
 
 const registrationExportTable = (registrations, events, eventFilter) => {
     const fieldsByEvent = registrationFieldsByEvent(events);

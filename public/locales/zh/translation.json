@@ -5321,7 +5321,13 @@
                     "hint": "请按本届报名要求填写。"
                 }
             },
-            "loginPreview": "请先注册或登录，再填写报名信息。"
+            "loginPreview": "请先注册或登录，再填写报名信息。",
+            "trackTabs": "报名赛道",
+            "trackTabs_industry": "华为报名",
+            "trackTabs_campus": "天猫报名",
+            "phone": "手机号",
+            "phonePlaceholder": "填写可接收赛事通知的手机号",
+            "invalidPhone": "请填写有效的手机号"
         },
         "fields": {
             "name": "姓名",
@@ -5767,15 +5773,19 @@
             "chooseSession": "请选择论坛场次",
             "fields": {
                 "name": "姓名",
-                "contact": "手机号码或邮箱",
-                "organization": "学校／单位（选填）"
+                "contact": "手机号",
+                "organization": "单位或学校",
+                "studentId": "学号",
+                "major": "专业",
+                "grade": "年级",
+                "question": "想要提问的问题"
             },
             "submit": "提交论坛报名",
             "saving": "正在保存",
             "success": "论坛报名已保存，可在上方查看场次和报名编号。",
             "loadFailed": "报名信息加载失败，请重试后再提交。",
             "saveFailed": "保存失败，请重试；已保存的报名不会重复创建。",
-            "invalidDetails": "请填写姓名和有效的手机号码或邮箱。",
+            "invalidDetails": "请填写全部必填信息，并检查手机号格式。",
             "export": "导出论坛报名名单",
             "sessions": {
                 "technology": {
@@ -5892,7 +5902,17 @@
             },
             "heroLink": "论坛介绍与独立报名",
             "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
-            "chapters": ["技术论坛", "创业论坛", "论坛报名"]
+            "chapters": ["技术论坛", "创业论坛", "论坛报名"],
+            "timeLabel": "活动时间",
+            "dateTime": "10月25日 13:30",
+            "locationLabel": "活动地点",
+            "venue": "三墩元空间",
+            "address": "宝港生活广场 C 座 6 楼",
+            "attendeeLabel": "参会身份",
+            "attendeeTypes": {
+                "internal": "校内",
+                "external": "校外"
+            }
         },
         "october12": {
             "partnerGroups": [

@@ -79,7 +79,7 @@ test("Tmall accepts 1-5 team members while Huawei-only entry requires one person
         studentId: "T",
         major: "Design",
         grade: "junior",
-        contact: "test@example.test",
+        contact: "13800138000",
         strengths: ["design"],
         aiTools: ["Codex"],
         experience: "Project",

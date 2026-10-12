@@ -123,7 +123,7 @@ test("real SQLite registration, private repository persistence, edits, deadline 
             answers: {
                 track: ["campus", "industry"],
                 teamSize: "2",
-                contact: "test@example.test",
+                contact: "13800138000",
                 strengths: ["exploring"],
                 aiTools: ["none"],
                 experience: "开发过活动报名工具，负责接口与测试。",

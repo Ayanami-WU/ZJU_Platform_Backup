@@ -945,13 +945,42 @@
     border-left: 1px solid var(--hx-line);
     padding-left: 14px;
 }
-.aix-prize-products small {
+.aix-prize-product-name {
+    font-weight: 750;
+}
+.aix-prize-product-amounts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 6px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.aix-prize-products .aix-prize-value {
     color: var(--hx-muted);
-    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 .aix-prize-products .aix-prize-cash {
-    font-size: 16px;
+    font-size: inherit;
+    font-weight: 750;
+    line-height: inherit;
     white-space: nowrap;
+}
+@media (max-width: 600px) {
+    .aix-prize-panel[data-reward="industry"] dl > div {
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 10px;
+    }
+    .aix-prize-panel[data-reward="industry"] dd {
+        padding-left: 10px;
+    }
+    .aix-prize-products[data-pair] {
+        gap: 10px;
+    }
+    .aix-prize-products[data-pair] > div + div {
+        padding-left: 10px;
+    }
 }
 @media (min-width: 1000px) {
     .aix-prize-panels {

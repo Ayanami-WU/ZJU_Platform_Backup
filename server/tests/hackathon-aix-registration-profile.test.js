@@ -115,7 +115,7 @@ const answers = {
     grade: "junior",
     track: ["campus", "industry"],
     teamSize: "2",
-    contact: "test@example.test",
+    contact: "13800138000",
     strengths: ["exploring"],
     aiTools: ["none"],
     aiToolsOther: "",
@@ -228,6 +228,57 @@ test("required experience migration is scoped, preserves answers and runs once",
         assert.deepEqual(
             await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'"),
             row
+        );
+    } finally {
+        await db.close();
+    }
+});
+
+test("AI-X phone template migration is scoped and keeps historical signup answers", async () => {
+    const {
+        migrateHackathonAiXTrackRegistration,
+    } = require("../src/config/migrations/hackathonAiXTrackRegistration");
+    const db = await open({ filename: ":memory:", driver: sqlite3.Database });
+    try {
+        await db.exec(
+            'CREATE TABLE settings(key TEXT PRIMARY KEY,value TEXT); CREATE TABLE hackathon_registrations(form_data_json TEXT); INSERT INTO hackathon_registrations VALUES(\'{"contact":"old@example.test","track":["industry","campus"]}\');'
+        );
+        const event = clone(template);
+        Object.assign(
+            event.form.fields.find((f) => f.id === "contact"),
+            { type: "email", label: "联系邮箱" }
+        );
+        const schedule = {
+            events: [{ event: { key: "another-event" }, custom: true }, event],
+            activeEventKey: "another-event",
+        };
+        await db.run("INSERT INTO settings VALUES('hackathon_schedule_config',?)", [
+            JSON.stringify(schedule),
+        ]);
+        const before = await db.all("SELECT * FROM hackathon_registrations");
+        await migrateHackathonAiXTrackRegistration(db);
+        const first = await db.get(
+            "SELECT value FROM settings WHERE key='hackathon_schedule_config'"
+        );
+        const updated = JSON.parse(first.value);
+        assert.equal(updated.events[1].form.fields.find((f) => f.id === "contact").type, "tel");
+        assert.deepEqual(updated.events[0], schedule.events[0]);
+        assert.equal(updated.activeEventKey, "another-event");
+        assert.deepEqual(await db.all("SELECT * FROM hackathon_registrations"), before);
+        await migrateHackathonAiXTrackRegistration(db);
+        assert.deepEqual(
+            await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'"),
+            first
+        );
+        assert(
+            validateRegistrationAnswers(template, {
+                ...answers,
+                contact: "old@example.test",
+            }).errors.some((e) => e.field === "contact")
+        );
+        assert.deepEqual(
+            validateRegistrationAnswers(template, { ...answers, contact: "+8613800138000" }).errors,
+            []
         );
     } finally {
         await db.close();

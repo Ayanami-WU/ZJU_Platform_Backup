@@ -156,9 +156,9 @@
             },
             {
                 "id": "contact",
-                "label": "联系邮箱",
-                "type": "email",
-                "placeholder": "填写可接收赛事通知的邮箱",
+                "label": "手机号",
+                "type": "tel",
+                "placeholder": "填写可接收赛事通知的手机号",
                 "required": true,
                 "enabled": true,
                 "width": "half",

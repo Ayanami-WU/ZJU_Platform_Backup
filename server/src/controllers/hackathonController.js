@@ -1,4 +1,8 @@
 const {
+    registrationPayload,
+    saveTrackRegistration,
+} = require("../services/hackathonTrackRegistrationService");
+const {
     AIX_EVENT_KEY,
     normalizeRepositoryUrl,
     repositorySubmission,
@@ -61,10 +65,11 @@ const registerHackathon = async (req, res, next) => {
                 .json({ error: "请先登录后报名", code: "HACKATHON_LOGIN_REQUIRED" });
         }
         if (
-            await db.get(
+            template.event.key !== AIX_EVENT_KEY &&
+            (await db.get(
                 "SELECT id FROM hackathon_registrations WHERE event_key = ? AND user_id = ?",
                 [template.event.key, req.user.id]
-            )
+            ))
         ) {
             return res
                 .status(409)
@@ -110,6 +115,16 @@ const registerHackathon = async (req, res, next) => {
         }
 
         const answers = { ...validation.answers, ...registrationProfile };
+        if (template.event.key === AIX_EVENT_KEY) {
+            const row = await saveTrackRegistration(db, { userId: req.user.id, template, answers });
+            return res
+                .status(201)
+                .json({
+                    ...registrationPayload(row),
+                    repositories: repositorySubmission(row),
+                    message: "报名成功",
+                });
+        }
         const name = String(answers.name || "").trim();
         const studentId = String(answers.studentId || "")
             .trim()
@@ -153,6 +168,8 @@ const registerHackathon = async (req, res, next) => {
             message: "报名成功",
         });
     } catch (error) {
+        if ([400, 409].includes(error.status))
+            return res.status(error.status).json({ error: error.message, code: error.code });
         if (error.code === "SQLITE_CONSTRAINT" || error.code?.startsWith("SQLITE_CONSTRAINT_")) {
             return res.status(409).json({
                 error: "该账号或学号已报名，请勿重复提交",
@@ -176,10 +193,7 @@ const getMyRegistration = async (req, res, next) => {
         res.json({
             registration: row
                 ? {
-                      id: row.id,
-                      eventKey: row.event_key,
-                      answers: JSON.parse(row.form_data_json || "{}"),
-                      createdAt: row.created_at,
+                      ...registrationPayload(row),
                       repositories: repositorySubmission(row),
                   }
                 : null,

@@ -140,3 +140,120 @@
         padding: 20px 16px;
     }
 }
+/* Event facts and attendee-specific registration share one compact composition. */
+.aix-forum-registration-layout {
+    grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: clamp(24px, 4vw, 56px);
+    margin-top: 24px;
+}
+.aix-forum-registration-summary h3 {
+    font-size: clamp(24px, 2.5vw, 34px);
+    line-height: 1.45;
+    margin: 12px 0 36px;
+    font-weight: 650;
+}
+.aix-forum-event-info {
+    display: grid;
+    gap: 28px;
+}
+.aix-forum-event-info > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.aix-forum-info-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
+    color: var(--hx-accent-text);
+    background: var(--hx-panel);
+}
+.aix-forum-event-info div > span:not(.aix-forum-info-icon) {
+    display: block;
+    color: var(--hx-muted);
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.aix-forum-event-info time,
+.aix-forum-event-info strong {
+    display: block;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 650;
+    color: var(--hx-text);
+}
+.aix-forum-event-info time {
+    color: var(--hx-accent-text);
+}
+.aix-forum-event-info p {
+    margin-top: 4px;
+    font-size: 15px;
+}
+.aix-forum-attendee-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+    margin-bottom: 22px;
+}
+.aix-forum-attendee-tabs button {
+    min-height: 40px;
+    color: var(--hx-muted);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.aix-forum-attendee-tabs button[aria-selected="true"] {
+    background: var(--hx-accent, #b8ff46);
+    color: #102000;
+}
+.aix-forum-fields label:last-child {
+    grid-column: auto;
+}
+.aix-forum-fields label.aix-forum-field-wide {
+    grid-column: 1/-1;
+}
+.aix-forum-fields textarea {
+    width: 100%;
+    min-height: 84px;
+    border: 1px solid var(--hx-line);
+    background: var(--hx-surface);
+    padding: 10px 12px;
+    color: var(--hx-text);
+    font-size: 16px;
+    resize: vertical;
+}
+.aix-forum-fields :is(input, textarea) {
+    border-radius: 6px;
+}
+.aix-forum-fields textarea:focus-visible {
+    outline: 2px solid var(--hx-accent-text);
+    outline-offset: 2px;
+}
+.aix-forum-signup button[type="submit"] {
+    margin-top: 22px;
+}
+@media (max-width: 767px) {
+    .aix-forum-registration-layout {
+        grid-template-columns: 1fr;
+        margin-top: 12px;
+    }
+    .aix-forum-registration-summary h3 {
+        margin-bottom: 22px;
+        font-size: 24px;
+    }
+    .aix-forum-event-info {
+        gap: 18px;
+    }
+    .aix-forum-event-info time,
+    .aix-forum-event-info strong {
+        font-size: 19px;
+    }
+}

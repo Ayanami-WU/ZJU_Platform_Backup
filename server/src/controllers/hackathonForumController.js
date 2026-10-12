@@ -6,6 +6,11 @@ const toRegistration = (row) => ({
     name: row.name,
     contact: row.contact,
     organization: row.organization,
+    attendeeType: row.attendee_type || "",
+    studentId: row.student_id || "",
+    major: row.major || "",
+    grade: row.grade || "",
+    question: row.question || "",
     createdAt: row.created_at,
 });
 const clean = (value, limit) =>
@@ -32,10 +37,26 @@ const registerForums = async (req, res, next) => {
             name: rawName,
             contact: rawContact,
             organization: rawOrganization,
+            attendeeType,
+            studentId: rawStudentId,
+            major: rawMajor,
+            grade: rawGrade,
+            question: rawQuestion,
         } = req.body || {};
         const name = clean(rawName, 80),
             contact = clean(rawContact, 120),
             organization = clean(rawOrganization || "", 160);
+        const internal = attendeeType === "internal";
+        const studentId = internal ? clean(rawStudentId, 80) : "";
+        const major = internal ? clean(rawMajor, 160) : "";
+        const grade = internal ? clean(rawGrade, 80) : "";
+        const question =
+            internal &&
+            typeof rawQuestion === "string" &&
+            rawQuestion.length <= 2000 &&
+            !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(rawQuestion)
+                ? rawQuestion.trim()
+                : "";
         if (
             !Array.isArray(sessions) ||
             !sessions.length ||
@@ -49,12 +70,18 @@ const registerForums = async (req, res, next) => {
         if (
             !name ||
             !contact ||
-            !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) || /^\+?[\d ()-]{7,30}$/.test(contact)) ||
+            !/^(?:\+?86[ -]?)?1[3-9]\d{9}$/.test(contact) ||
+            !["internal", "external"].includes(attendeeType) ||
+            (internal && (!studentId || !major || !grade || !question)) ||
+            (!internal && !organization) ||
             (rawOrganization && !organization)
         )
             return res
                 .status(400)
-                .json({ error: "请填写姓名和有效的手机号码或邮箱", code: "FORUM_INVALID_DETAILS" });
+                .json({
+                    error: "请填写有效手机号及对应身份的必填信息",
+                    code: "FORUM_INVALID_DETAILS",
+                });
         const now = Date.now();
         if (
             now < Date.parse(config.registrationOpensAt) ||
@@ -73,10 +100,15 @@ const registerForums = async (req, res, next) => {
             name,
             contact,
             organization,
+            attendeeType,
+            studentId,
+            major,
+            grade,
+            question,
         ]);
         // One atomic statement: repeat submissions update the same account/session receipt.
         await db.run(
-            `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization) VALUES ${sessions.map(() => "(?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,updated_at=CURRENT_TIMESTAMP`,
+            `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization,attendee_type,student_id,major,grade,question) VALUES ${sessions.map(() => "(?,?,?,?,?,?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,attendee_type=excluded.attendee_type,student_id=excluded.student_id,major=excluded.major,grade=excluded.grade,question=excluded.question,updated_at=CURRENT_TIMESTAMP`,
             values
         );
         return getMyForums(req, res, next);

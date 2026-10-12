@@ -174,7 +174,7 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             track: ["campus", "industry"],
             team: "",
             teamSize: "2",
-            contact: "test@example.test",
+            contact: "13800138000",
             strengths: ["development", "research"],
             aiTools: ["Codex", "DeepSeek"],
             aiToolsOther: "",
@@ -265,20 +265,28 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         const stored = await db.get("SELECT * FROM hackathon_registrations WHERE id = ?", [
             res.body.id,
         ]);
-        assert.deepEqual(res.body.answers, answers);
-        assert.deepEqual(JSON.parse(stored.form_data_json), answers);
+        const storedAnswers = JSON.parse(stored.form_data_json);
+        assert.deepEqual(res.body.answers, storedAnswers);
+        assert.deepEqual(storedAnswers.trackRegistrations.industry.answers, {
+            ...answers,
+            track: ["industry"],
+        });
+        assert.deepEqual(storedAnswers.trackRegistrations.campus.answers, {
+            ...answers,
+            track: ["campus"],
+        });
         assert.deepEqual(JSON.parse(stored.ai_tools), answers.aiTools);
         assert.equal(stored.experience, answers.experience);
         const registrationsResponse = response();
         await controller.getRegistrations({}, registrationsResponse, next);
-        assert.deepEqual(registrationsResponse.body[0].form_data, answers);
+        assert.deepEqual(registrationsResponse.body[0].form_data, storedAnswers);
         res = response();
         await controller.getMyRegistration(
             { user: { id: 1 }, query: { event: eventKey } },
             res,
             next
         );
-        assert.deepEqual(res.body.registration.answers, answers);
+        assert.deepEqual(res.body.registration.answers, storedAnswers);
         res = response();
         await controller.getMyRegistration(
             { user: { id: 2 }, query: { event: eventKey } },
@@ -306,7 +314,7 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
                 (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=1"))
                     .form_data_json
             ),
-            answers
+            storedAnswers
         );
         // The prerequisite also applies to another open edition, not only AI+X.
         schedule.events[0].event.endAt = "2099-01-02T17:00";

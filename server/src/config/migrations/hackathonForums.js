@@ -7,10 +7,27 @@ async function migrateHackathonForums(db) {
         name TEXT NOT NULL,
         contact TEXT NOT NULL,
         organization TEXT NOT NULL DEFAULT '',
+        attendee_type TEXT NOT NULL DEFAULT '',
+        student_id TEXT NOT NULL DEFAULT '',
+        major TEXT NOT NULL DEFAULT '',
+        grade TEXT NOT NULL DEFAULT '',
+        question TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(event_key, user_id, forum_key)
     );
     CREATE INDEX IF NOT EXISTS idx_hackathon_forum_roster ON hackathon_forum_registrations(event_key, forum_key);`);
+    const columns = new Set(
+        (await db.all("PRAGMA table_info(hackathon_forum_registrations)")).map(
+            (column) => column.name
+        )
+    );
+    for (const column of ["attendee_type", "student_id", "major", "grade", "question"]) {
+        if (!columns.has(column)) {
+            await db.exec(
+                `ALTER TABLE hackathon_forum_registrations ADD COLUMN ${column} TEXT NOT NULL DEFAULT ''`
+            );
+        }
+    }
 }
 module.exports = { migrateHackathonForums };
