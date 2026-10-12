@@ -14,7 +14,7 @@ const readEventPath = (location = {}) => {
         return {
             eventKey,
             view,
-            invalid: segments.length > 2 || ![...EVENT_VIEWS, "lottery"].includes(view),
+            invalid: segments.length > 2 || ![...EVENT_VIEWS, "lottery", "forums"].includes(view),
         };
     } catch {
         return { invalid: true };
@@ -49,7 +49,8 @@ export const resolveEventLocation = (location = {}, schedule = {}) => {
                   item.event.key === path.eventKey || item.results.competitionSlug === path.eventKey
           )
         : events.find((item) => item.event.key === schedule.activeEventKey) || events[0];
-    if (!template) return null;
+    if (!template || (path?.view === "forums" && template.event.key !== "zhekesong-ai-x-2026"))
+        return null;
     const requestedView = getEventView(location);
     return {
         template,

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import { registrationOpen, eventTimestamp } from "../utils/hackathonAiX";
+import forumConfig from "../../shared/hackathonForums.json";
 import SEO from "./SEO";
 import HackathonEventPicker from "./HackathonEventPicker";
 import HackathonEventContent from "./HackathonEventContent";
@@ -73,6 +74,12 @@ export default function HackathonWorkspace({ template, schedule }) {
         };
     }, [user?.id, event.key, retry]);
     const showRegistration = () => {
+        if (view === "forums") {
+            document
+                .getElementById("forum-registration")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            return;
+        }
         if (view === "intro" && registrationRef.current) registrationRef.current.scrollToForm();
         else navigate(getEventUrl(event.key, "intro", { hash: "#registration-form" }));
     };
@@ -108,7 +115,9 @@ export default function HackathonWorkspace({ template, schedule }) {
                     events={schedule.events}
                     value={event.key}
                     now={now}
-                    onChange={(key) => navigate(getEventUrl(key, view))}
+                    onChange={(key) =>
+                        navigate(getEventUrl(key, view === "forums" ? "intro" : view))
+                    }
                 />
                 <nav className="hx-nav" aria-label={t("aix.navigation")}>
                     {getEventViews(event.key).map((item) => (
@@ -151,14 +160,16 @@ export default function HackathonWorkspace({ template, schedule }) {
                     <button
                         className="hx-primary"
                         disabled={
-                            authLoading ||
-                            registrationLoading ||
-                            (!registration && !open && !registrationError)
+                            view === "forums"
+                                ? !forumConfig.sessions.some((s) => now < Date.parse(s.startsAt))
+                                : authLoading ||
+                                  registrationLoading ||
+                                  (!registration && !open && !registrationError)
                         }
                         onClick={showRegistration}
                     >
                         {registration ? <Check size={17} /> : null}
-                        {t(label)}
+                        {t(view === "forums" ? "aix.forumPage.signupTitle" : label)}
                         {open && !registration ? <ArrowUpRight size={17} /> : null}
                     </button>
                 </div>

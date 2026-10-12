@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import React, { useId, useState } from "react";
 import ReactDOM from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +25,8 @@ const AuthModal = ({ isOpen, onClose }) => {
     const passwordId = useId();
     const errorId = useId();
 
+    const { pathname } = useLocation();
+    const isForumSignup = /^\/hackathon\/(?:2|zhekesong-ai-x-2026)\/forums\/?$/.test(pathname);
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -51,14 +54,18 @@ const AuthModal = ({ isOpen, onClose }) => {
             return;
         }
 
-        if (!isLogin && !hasRegistrationProfile(registrationProfile)) {
+        if (!isLogin && !isForumSignup && !hasRegistrationProfile(registrationProfile)) {
             setError(t("accountProfile.invalid"));
             return;
         }
         setLoading(true);
         const success = isLogin
             ? await login(username, password, { remember })
-            : await register(username, password, { remember, registrationProfile });
+            : await register(username, password, {
+                  remember,
+                  registrationProfile: isForumSignup ? undefined : registrationProfile,
+                  registrationContext: isForumSignup ? "aix-forum" : undefined,
+              });
 
         setLoading(false);
         if (success) {
@@ -213,7 +220,10 @@ const AuthModal = ({ isOpen, onClose }) => {
                             </div>
                         </div>
 
-                        {!isLogin && (
+                        {!isLogin && isForumSignup && (
+                            <p className="text-sm">{t("aix.forumPage.accountHint")}</p>
+                        )}
+                        {!isLogin && !isForumSignup && (
                             <RegistrationProfileFields
                                 value={registrationProfile}
                                 disabled={loading}

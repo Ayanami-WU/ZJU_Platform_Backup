@@ -15,7 +15,7 @@ const registration = {
 };
 async function prepare(
     page,
-    { date = "2026-10-18T11:00:00+08:00", error = false, published = false } = {}
+    { date = "2026-10-18T13:00:00+08:00", error = false, published = false } = {}
 ) {
     await page.clock.setFixedTime(new Date(date));
     await page.addInitScript(() => {

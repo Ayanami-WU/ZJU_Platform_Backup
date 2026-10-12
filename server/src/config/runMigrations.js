@@ -2927,6 +2927,8 @@ async function runMigrations(db) {
         db
     );
     await require("./migrations/hackathonFirstFilm").migrateHackathonFirstFilm(db);
+    await require("./migrations/hackathonForums").migrateHackathonForums(db);
+    await require("./migrations/hackathonAiXOctober12").migrateHackathonAiXOctober12(db);
     await require("./migrations/hackathonGetuiBeauty").migrateHackathonGetuiBeauty(db);
     await require("./migrations/competitionWorkSelection").migrateCompetitionWorkSelection(db);
 }

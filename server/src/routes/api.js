@@ -1211,6 +1211,29 @@ router.get("/admin/messages", authenticateToken, isAdmin, messageController.getM
 router.delete("/admin/messages/:id", authenticateToken, isAdmin, messageController.deleteMessage);
 router.put("/admin/messages/:id/read", authenticateToken, isAdmin, messageController.markAsRead);
 
+const hackathonForumController = require("../controllers/hackathonForumController");
+router.get(
+    "/hackathon/forums/registration",
+    authenticateToken,
+    hackathonForumController.getMyForums
+);
+router.post(
+    "/hackathon/forums/register",
+    authenticateToken,
+    hackathonForumController.registerForums
+);
+router.delete(
+    "/hackathon/forums/registration/:forumKey",
+    authenticateToken,
+    hackathonForumController.cancelForum
+);
+router.get(
+    "/admin/hackathon/forums/registrations",
+    authenticateToken,
+    isAdmin,
+    hackathonForumController.getForumRoster
+);
+
 // Hackathon Registration Routes
 router.get("/hackathon/schedule", hackathonController.getHackathonScheduleConfig);
 router.get("/hackathon/template", hackathonController.getHackathonTemplateConfig);

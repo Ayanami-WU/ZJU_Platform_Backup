@@ -1705,3 +1705,81 @@
         padding: 6px 12px;
     }
 }
+
+.aix-forum-entry[data-aix-chapter] {
+    min-height: 0;
+    padding-block: 32px;
+}
+.aix-forum-entry > a {
+    align-self: flex-start;
+}
+.aix-partner-organizers {
+    margin-bottom: 24px !important;
+    color: var(--hx-muted);
+    font-size: 13px;
+}
+.aix-partners-october12 > div:first-child,
+.aix-partners-october12 > div:nth-child(3),
+.aix-partners-october12 > div:nth-child(4) {
+    grid-column: 1 / -1;
+}
+.aix-partners-october12 > div:first-child .aix-partner-members {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 20px;
+}
+.aix-partners-october12 > div:nth-child(3) .aix-partner-members {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.aix-recap-additional {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-recap-additional p {
+    color: var(--hx-muted);
+    font-size: 14px;
+    margin-top: 8px;
+}
+@media (max-width: 767px) {
+    .aix-partners-october12 > div:first-child .aix-partner-members,
+    .aix-partners-october12 > div:nth-child(3) .aix-partner-members,
+    .aix-partners-october12 > div:nth-child(4) .aix-partner-members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+}
+
+.aix-forum-hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-top: 8px;
+    color: var(--hx-accent-text) !important;
+    font-size: 14px;
+}
+
+.aix-partner-groups.aix-partners-october12 > div {
+    grid-row: auto;
+    grid-column: 1 / -1;
+}
+
+.aix-forum-registration-notice {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hx-line);
+    font-size: 14px;
+}
+.aix-forum-registration-notice p {
+    font-size: 13px;
+    color: var(--hx-muted);
+    line-height: 1.7;
+    margin-top: 6px;
+}
+.aix-forum-registration-notice a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: var(--hx-accent-text);
+}

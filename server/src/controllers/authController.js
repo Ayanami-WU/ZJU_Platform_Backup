@@ -181,7 +181,10 @@ const register = async (req, res, next) => {
             return res.status(400).json({ error: "Username and password are required" });
         }
 
-        const validation = validateRegistrationProfile(req.body.registrationProfile);
+        const validation =
+            req.body.registrationContext === "aix-forum"
+                ? { profile: null, errors: [] }
+                : validateRegistrationProfile(req.body.registrationProfile);
         if (validation.errors.length) {
             return res.status(400).json({
                 error: "请完善姓名、学号、专业和年级",
@@ -204,7 +207,9 @@ const register = async (req, res, next) => {
 
         const hashedPassword = await bcrypt.hash(password, 12); // Increased salt rounds
 
-        const user = await createRegisteredUser(db, username, hashedPassword, validation.profile);
+        const user = await createRegisteredUser(db, username, hashedPassword, validation.profile, {
+            allowBootstrap: req.body.registrationContext !== "aix-forum",
+        });
         res.setHeader("Cache-Control", "no-store");
         res.json({
             token: signAuthToken(user),

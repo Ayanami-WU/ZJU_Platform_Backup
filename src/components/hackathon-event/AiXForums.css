@@ -1,0 +1,205 @@
+.aix-forums-page {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: calc(var(--event-nav-height) + 28px) 0 100px;
+    color: var(--hx-text);
+}
+.aix-forums-page header > .aix-secondary {
+    margin-bottom: 24px;
+}
+.aix-forums-page h1 {
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.2;
+    margin: 12px 0;
+}
+.aix-forums-page p {
+    line-height: 1.7;
+    color: var(--hx-muted);
+}
+.aix-forum-attendance {
+    margin: 24px 0;
+    padding: 16px 20px;
+    border-left: 2px solid var(--hx-accent-text);
+    background: var(--hx-surface);
+}
+.aix-forum-attendance p {
+    margin: 4px 0 0;
+}
+.aix-forum-sessions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+}
+.aix-forum-sessions article {
+    padding: 20px 0;
+    min-width: 0;
+}
+.aix-forum-sessions h2,
+.aix-forum-signup h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+.aix-forum-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 12px 0;
+    font-size: 14px;
+}
+.aix-forum-detail svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.aix-forum-sessions .aix-forum-required {
+    color: var(--hx-accent-text);
+    font-weight: 600;
+}
+.aix-forum-sessions details {
+    margin: 20px 0;
+}
+.aix-forum-sessions summary {
+    cursor: pointer;
+}
+.aix-forum-sessions ol {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    margin: 16px 0;
+}
+.aix-forum-sessions li {
+    display: grid;
+    grid-template-columns: 105px minmax(0, 1fr);
+    gap: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.aix-forum-sessions time {
+    color: var(--hx-muted);
+}
+.aix-forum-guest-list {
+    display: grid;
+    gap: 14px;
+    margin: 24px 0;
+}
+.aix-forum-guest-list > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.aix-forum-guest-list span,
+.aix-forum-guest-list small {
+    font-size: 13px;
+    color: var(--hx-muted);
+    line-height: 1.5;
+}
+.aix-forum-receipt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: var(--hx-accent-text);
+    font-size: 14px;
+}
+.aix-forum-receipt button {
+    margin-left: auto;
+    text-decoration: underline;
+    color: var(--hx-muted);
+    padding: 10px;
+}
+.aix-forum-signup {
+    border-top: 1px solid var(--hx-line);
+    padding-top: 30px;
+    margin-top: 32px;
+    scroll-margin-top: calc(var(--site-nav-height) + var(--event-nav-height) + 20px);
+}
+.aix-forum-signup form {
+    max-width: 780px;
+}
+.aix-forum-signup fieldset {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    border: 0;
+    padding: 0;
+}
+.aix-forum-signup legend {
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.aix-forum-checkbox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+}
+.aix-forum-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--hx-accent-text);
+}
+.aix-forum-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.aix-forum-fields label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+.aix-forum-fields input {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--hx-line);
+    background: var(--hx-surface);
+    padding: 10px 12px;
+    color: var(--hx-text);
+    font-size: 16px;
+}
+.aix-forum-fields input:focus-visible {
+    outline: 2px solid var(--hx-accent-text);
+    outline-offset: 2px;
+}
+.aix-forum-fields label:last-child {
+    grid-column: 1/-1;
+}
+.aix-forum-signup .aix-forum-success {
+    color: var(--hx-accent-text);
+}
+.aix-forum-export {
+    margin-top: 24px;
+}
+@media (max-width: 767px) {
+    .aix-forums-page {
+        width: calc(100% - 32px);
+        padding-top: calc(var(--event-nav-height) + 20px);
+    }
+    .aix-forum-sessions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .aix-forum-sessions article + article {
+        border-top: 1px solid var(--hx-line);
+        padding-top: 28px;
+    }
+    .aix-forum-fields {
+        grid-template-columns: 1fr;
+    }
+    .aix-forum-sessions h2,
+    .aix-forum-signup h2 {
+        font-size: 23px;
+    }
+    .aix-forum-signup fieldset {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+.aix-forum-signup :is(button, input) {
+    scroll-margin-top: calc(var(--site-nav-height) + var(--event-nav-height) + 20px);
+    scroll-margin-bottom: 120px;
+}

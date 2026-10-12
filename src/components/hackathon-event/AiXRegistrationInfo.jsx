@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import { X, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -48,6 +49,14 @@ export default function AiXRegistrationInfo() {
                     <ArrowUpRight size={18} />
                 </button>
                 <small>{t("aix.landing.qrExpiry")}</small>
+            </div>
+            <div className="aix-forum-registration-notice">
+                <strong>{t("aix.forumPage.attendanceTitle")}</strong>
+                <p>{t("aix.forumPage.attendance")}</p>
+                <Link to="/hackathon/2/forums#forum-registration">
+                    {t("aix.forumPage.heroLink")}
+                    <ArrowUpRight size={16} />
+                </Link>
             </div>
             <dialog
                 ref={dialog}

@@ -44,6 +44,11 @@ const registerHackathon = async (req, res, next) => {
                 code: "HACKATHON_REGISTRATION_CLOSED",
             });
         }
+        const registrationOpensAt = template.event.program?.registrationOpensAt;
+        if (registrationOpensAt && Date.now() < Date.parse(registrationOpensAt))
+            return res
+                .status(403)
+                .json({ error: "报名尚未开放", code: "HACKATHON_REGISTRATION_CLOSED" });
         const registrationClosesAt = template.event.program?.registrationClosesAt;
         if (registrationClosesAt && Date.now() >= Date.parse(registrationClosesAt)) {
             return res

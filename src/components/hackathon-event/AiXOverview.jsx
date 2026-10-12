@@ -6,7 +6,6 @@ import {
     ArrowUpRight,
     CalendarDays,
     Gift,
-    MapPin,
     Pause,
     Play,
     UsersRound,
@@ -46,13 +45,13 @@ export default function AiXOverview({
                     <p className="aix-hero-motto">{t("aix.motto")}</p>
                     <div className="aix-prize-total">
                         <span>{t("aix.official.totalPrize")}</span>
-                        <strong>¥20,000</strong>
+                        <strong>{t("aix.official.prizeValue")}</strong>
                     </div>
                     <p className="aix-hero-intro">{t("aix.landing.heroDescription")}</p>
                     <dl className="aix-event-facts">
                         <div>
                             <dt>{t("aix.landing.eventDates")}</dt>
-                            <dd className="aix-date">2026.10.11–10.25</dd>
+                            <dd className="aix-date">2026.10.09–10.25</dd>
                         </div>
                         <div>
                             <dt>{t("common.location")}</dt>
@@ -93,6 +92,13 @@ export default function AiXOverview({
                             {motionPaused ? <Play size={16} /> : <Pause size={16} />}
                         </button>
                     </div>
+                    <Link
+                        className="aix-forum-hero-link"
+                        to={getEventUrl("zhekesong-ai-x-2026", "forums")}
+                    >
+                        {t("aix.forumPage.heroLink")}
+                        <ArrowUpRight size={17} />
+                    </Link>
                     <Link
                         className="aix-lottery-entry"
                         to={getEventUrl("zhekesong-ai-x-2026", "lottery")}
@@ -186,43 +192,19 @@ export default function AiXOverview({
                 </div>
                 <p className="aix-track-footnote">{t("aix.landing.bothTracks")}</p>
             </section>
-            <section id="aix-forums" data-aix-chapter className="aix-section aix-wrap">
+            <section
+                id="aix-forums"
+                data-aix-chapter
+                className="aix-section aix-wrap aix-forum-entry"
+            >
                 <div className="aix-section-heading">
-                    <h2>{t("aix.forumsTitle")}</h2>
-                    <p>{t("aix.forumsDescription")}</p>
+                    <h2>{t("aix.forumPage.title")}</h2>
+                    <p>{t("aix.forumPage.attendance")}</p>
                 </div>
-                <div className="aix-forum-pair">
-                    {["technology", "entrepreneurship"].map((forum) => (
-                        <article key={forum}>
-                            <div className="aix-forum-date">
-                                <strong>{t(`aix.forums.${forum}.date`)}</strong>
-                            </div>
-                            <h3>{t(`aix.forums.${forum}.title`)}</h3>
-                            <p>{t(`aix.forums.${forum}.description`)}</p>
-                            <span className="aix-forum-location">
-                                <MapPin size={16} />
-                                {t(`aix.landing.forums.${forum}.location`)}
-                            </span>
-                            <div className="aix-speaker-grid">
-                                {t(`aix.landing.forums.${forum}.speakers`, {
-                                    returnObjects: true,
-                                }).map((speaker) => (
-                                    <div key={speaker.name}>
-                                        <img
-                                            src={asset(speaker.image)}
-                                            alt={speaker.name}
-                                            width="300"
-                                            height="180"
-                                            loading="lazy"
-                                        />
-                                        <strong>{speaker.name}</strong>
-                                        <span>{speaker.role}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </article>
-                    ))}
-                </div>
+                <Link className="aix-primary" to={getEventUrl("zhekesong-ai-x-2026", "forums")}>
+                    {t("aix.forumPage.enter")}
+                    <ArrowUpRight size={18} />
+                </Link>
             </section>
             <section id="aix-rewards" data-aix-chapter className="aix-section aix-wrap">
                 <div className="aix-section-heading">
@@ -261,42 +243,8 @@ export default function AiXOverview({
                 <div className="aix-section-heading">
                     <h2>{t("aix.landing.partnersTitle")}</h2>
                 </div>
+                <p className="aix-partner-organizers">{t("aix.october12.organizers")}</p>
                 <AiXPartnerLogos />
-                <div className="aix-clubs">
-                    <h3>{t("aix.official.clubsTitle")}</h3>
-                    <ul>
-                        {[
-                            "zjuai",
-                            "kab",
-                            "aira",
-                            "xlab",
-                            "delta-x",
-                            "cross-innovation",
-                            "embedded-ai",
-                        ].map((name, index) => (
-                            <li key={name}>
-                                <img
-                                    src={asset(name)}
-                                    alt=""
-                                    loading="lazy"
-                                    width="180"
-                                    height="100"
-                                />
-                                <span>
-                                    {t("aix.official.clubNames", { returnObjects: true })[index]}
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <dl className="aix-other-partners">
-                    {t("aix.landing.morePartners", { returnObjects: true }).map((group) => (
-                        <div key={group.label}>
-                            <dt>{group.label}</dt>
-                            <dd>{group.names}</dd>
-                        </div>
-                    ))}
-                </dl>
             </section>
             <section id="aix-recap" data-aix-chapter className="aix-section aix-wrap">
                 <div className="aix-section-heading">
@@ -362,6 +310,10 @@ export default function AiXOverview({
                         </article>
                     ))}
                 </div>
+                <article className="aix-recap-additional">
+                    <h3>{t("aix.october12.recapAdditionalTitle")}</h3>
+                    <p>{t("aix.october12.recapAdditionalText")}</p>
+                </article>
             </section>
         </div>
     );

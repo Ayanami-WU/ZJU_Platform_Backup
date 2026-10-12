@@ -114,6 +114,7 @@ const answers = {
     major: "Design",
     grade: "junior",
     track: ["campus", "industry"],
+    teamSize: "2",
     contact: "test@example.test",
     strengths: ["exploring"],
     aiTools: ["none"],
@@ -130,13 +131,16 @@ test("AI+X registration permits beginners and validates exclusive choices and op
         ["campus"]
     );
     assert.deepEqual(
-        validateRegistrationAnswers(template, { ...answers, team: "Not collected" }).answers.team,
-        undefined
+        validateRegistrationAnswers(template, { ...answers, team: "Team A" }).answers.team,
+        "Team A"
     );
     for (const [field, value] of [
         ["aiTools", ["Codex", "none"]],
         ["strengths", ["development", "exploring"]],
         ["track", ["unknown"]],
+        ["teamSize", "1"],
+        ["teamSize", "6"],
+        ["teamSize", ""],
         ["projectLinks", "javascript:alert(1)"],
         ["projectLinks", "https://user:password@example.test"],
         ["projectLinks", "https://example.test\ninvalid"],

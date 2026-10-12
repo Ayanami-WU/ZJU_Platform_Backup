@@ -1,0 +1,16 @@
+{
+    "eventKey": "zhekesong-ai-x-2026",
+    "registrationOpensAt": "2026-10-12T00:00:00+08:00",
+    "sessions": [
+        {
+            "key": "technology",
+            "startsAt": "2026-10-18T09:00:00+08:00",
+            "endsAt": "2026-10-18T11:15:00+08:00"
+        },
+        {
+            "key": "entrepreneurship",
+            "startsAt": "2026-10-25T09:00:00+08:00",
+            "endsAt": "2026-10-25T17:00:00+08:00"
+        }
+    ]
+}

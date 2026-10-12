@@ -7,7 +7,7 @@ test("four persistent tabs, seven scrollable chapters and pending results change
     page,
 }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.clock.setFixedTime(new Date("2026-10-10T12:00:00+08:00"));
+    await page.clock.setFixedTime(new Date("2026-10-08T12:00:00+08:00"));
     await page.addInitScript(() => {
         localStorage.setItem("i18nextLng", "zh");
         localStorage.setItem("ui_mode_v3", "dark");
@@ -25,7 +25,7 @@ test("four persistent tabs, seven scrollable chapters and pending results change
         "aria-current",
         "location"
     );
-    await expect(page.getByText("18 个获奖名额")).toBeVisible();
+    await expect(page.getByText("6个获奖团队")).toBeVisible();
     await page.locator(".aix-chapters-toggle").click();
     await page.locator(".aix-chapters button").nth(0).click();
     await expect(page.locator(".aix-chapters button").nth(0)).toHaveAttribute(

@@ -19,7 +19,9 @@ export default function RegistrationProfileReminder() {
     const [openFor, setOpenFor] = useState(null);
     const titleId = useId();
     const descriptionId = useId();
-    const needsProfile = Boolean(user) && !hasRegistrationProfile(user.registrationProfile);
+    const isPublicForum = /^\/hackathon\/(?:2|zhekesong-ai-x-2026)\/forums\/?$/.test(pathname);
+    const needsProfile =
+        !isPublicForum && Boolean(user) && !hasRegistrationProfile(user.registrationProfile);
     const isOpen = needsProfile && openFor === user.id;
     const day = uiMode === "day";
     const close = () => setOpenFor(null);

@@ -666,6 +666,13 @@ const HackathonRegistration = ({
         });
         if (
             isAiX &&
+            activeFormFields.some((f) => f.id === "teamSize") &&
+            formData.track?.includes("campus") &&
+            !["2", "3", "4", "5"].includes(formData.teamSize)
+        )
+            errors.teamSize = t("aix.october12.teamSizeError");
+        if (
+            isAiX &&
             formData.projectLinks &&
             activeFormFields.some((field) => field.id === "projectLinks")
         ) {
@@ -1712,7 +1719,10 @@ const HackathonRegistration = ({
                                                                 formData.aiTools?.includes(
                                                                     "other"
                                                                 ) ||
-                                                                formData.aiToolsOther)
+                                                                formData.aiToolsOther) &&
+                                                            (!isAiX ||
+                                                                field.id !== "teamSize" ||
+                                                                formData.track?.includes("campus"))
                                                     )
                                                     .map((field) => (
                                                         <div
@@ -1733,7 +1743,18 @@ const HackathonRegistration = ({
                                                             }
                                                         >
                                                             <DynamicRegistrationField
-                                                                field={field}
+                                                                field={
+                                                                    field.id === "teamSize" &&
+                                                                    isAiX &&
+                                                                    formData.track?.includes(
+                                                                        "campus"
+                                                                    )
+                                                                        ? {
+                                                                              ...field,
+                                                                              required: true,
+                                                                          }
+                                                                        : field
+                                                                }
                                                                 value={formData[field.id]}
                                                                 error={formErrors[field.id]}
                                                                 palette={palette}

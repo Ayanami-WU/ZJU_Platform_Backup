@@ -49,7 +49,7 @@ async function saveRegistrationProfile(db, userId, profile) {
 
 // A dedicated connection keeps account creation atomic without enrolling unrelated
 // requests in the shared connection's transaction. Hash passwords before entering it.
-async function createRegisteredUser(db, username, passwordHash, profile) {
+async function createRegisteredUser(db, username, passwordHash, profile, options = {}) {
     const database = (await db.all("PRAGMA database_list")).find((row) => row.name === "main");
     if (!database?.file) throw new Error("Account registration requires a persistent database");
     const transaction = await open({ filename: database.file, driver: sqlite3.Database });
@@ -58,7 +58,7 @@ async function createRegisteredUser(db, username, passwordHash, profile) {
             "PRAGMA foreign_keys=ON; PRAGMA busy_timeout=10000; BEGIN IMMEDIATE"
         );
         const count = await transaction.get("SELECT COUNT(*) AS count FROM users");
-        const role = count.count === 0 ? "admin" : "user";
+        const role = count.count === 0 && options.allowBootstrap !== false ? "admin" : "user";
         const user = {
             username,
             role,
@@ -80,7 +80,7 @@ async function createRegisteredUser(db, username, passwordHash, profile) {
             ]
         );
         user.id = result.lastID;
-        await saveRegistrationProfile(transaction, user.id, profile);
+        if (profile) await saveRegistrationProfile(transaction, user.id, profile);
         await transaction.exec("COMMIT");
         return user;
     } catch (error) {

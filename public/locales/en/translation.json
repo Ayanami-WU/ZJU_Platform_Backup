@@ -5065,23 +5065,23 @@
         "forumKicker": "AI Interdisciplinary Innovation Forum &",
         "heroTitle": "Break Boundaries",
         "eventFullTitle": "AI Interdisciplinary Innovation Forum & AI+X Hackathon",
-        "motto": "Cross disciplines · Innovate · Solve real problems",
+        "motto": "Break boundaries · Co-create · Emerge",
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
-        "date": "2026.10.11 - 10.25",
-        "location": "Oct 18: Zijingang North Teaching Building · Oct 25: Zijingang School of Management",
-        "team": "Qwen: individual · Huawei: up to 3 people",
+        "date": "2026.10.09–10.25",
+        "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
+        "team": "Tmall: 2–5 members · Huawei: team competition",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
         "tracks": {
             "campus": {
-                "title": "Qwen · Academic Starter Track",
-                "description": "An online solo competition. Turn a concrete problem from your discipline into an AI application people can try.",
-                "topics": "Law · Ocean science · Medicine · Education · Communication"
+                "title": "Tmall Campus · OPC Incubation Track",
+                "description": "Teams of 2–5. Bring an existing product onsite on October 18, refine it with mentors, and develop a demo and industrial implementation plan in the semifinal.",
+                "topics": "Open topics across disciplines and application scenarios"
             },
             "industry": {
                 "title": "Huawei · Industry Advanced Track",
-                "description": "Enterprise challenges in copywriting and marketing. Build an Agent or Skill onsite, then refine it online and validate its business impact.",
+                "description": "Huawei sets copywriting and marketing challenges at 13:00 on October 18. Build an Agent or Skill onsite; submit at 17:00. Semifinal work is due October 22, 24:00.",
                 "topics": "Copywriting · Marketing"
             }
         },
@@ -5090,14 +5090,14 @@
         "forumsDescription": "Technical practice and entrepreneurship in the AI era.",
         "forums": {
             "technology": {
-                "date": "10.18",
-                "title": "Technology forum",
-                "description": "Frontier perspectives, the latest enterprise technology and development practice. Around 200 attendees."
+                "date": "October 18 · 09:00–11:15 · Around 200 attendees",
+                "title": "Technical Forum",
+                "description": "AI technology trends and industrial applications"
             },
             "entrepreneurship": {
-                "date": "10.25",
-                "title": "Entrepreneurship forum",
-                "description": "How young entrepreneurs can develop the fundamentals to navigate economic cycles in the AI era. Around 150 attendees."
+                "date": "October 25 · 09:00–17:00 · Around 150 attendees",
+                "title": "Finals & Entrepreneurship Forum",
+                "description": "First principles of entrepreneurship in the AI era"
             }
         },
         "agendaTitle": "Event schedule",
@@ -5111,30 +5111,30 @@
             "initial": {
                 "date": "10.18",
                 "title": "First round · Tech forum",
-                "description": "Opening at 09:00, tech forum 09:30–11:00; build onsite 11:00–12:30 and 13:30–16:00."
+                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall; 60% completion required for Huawei."
             },
             "semifinal": {
-                "date": "10.19—10.24",
+                "date": "10.19–10.22",
                 "title": "Online semifinal",
-                "description": "Online development and review; ten Huawei projects advance to the final."
+                "description": "Online October 19–22. Due October 22, 24:00; final selection October 23."
             },
             "shortlist": {
-                "date": "10.19—10.24",
+                "date": "10.23",
                 "title": "Semifinal development & review",
                 "description": "Refine online; ten Huawei projects selected for the final."
             },
             "final": {
                 "date": "10.25",
                 "title": "Final · Venture forum",
-                "description": "Opening at 09:00, entrepreneurship forum 09:30–11:30, parallel pitches 13:30–15:30, awards and closing 16:00–17:00."
+                "description": "October 25, 09:10–11:30 parallel pitches. Separate judging; joint awards."
             }
         },
-        "challengeKicker": "Qwen Beginner · Huawei Advanced",
+        "challengeKicker": "Tmall incubation · Huawei industry",
         "challengeDescription": "Start with a problem in your discipline or tackle a real business brief. Each track has its own schedule; published briefs and submission links appear here.",
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Qwen starts October 11; Huawei challenges are revealed at the October 18 opening.",
+        "releaseTime": "Tmall project registration opens October 12; Huawei briefs are released October 18 at 13:00.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -5146,19 +5146,19 @@
             "initial": {
                 "title": "First round",
                 "date": "10.18",
-                "description": "Huawei challenges launch at the October 18 opening.",
+                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall; 60% completion required for Huawei.",
                 "materials": "Submit a working demo and project description to ModelScope, covering the problem, core features and completion."
             },
             "semifinal": {
                 "title": "Semifinal",
                 "date": "10.19—10.24",
-                "description": "Develop solutions and products for real enterprise problems.",
+                "description": "Online October 19–22. Due October 22, 24:00; final selection October 23.",
                 "materials": "Refine the project guide and demo, submit source code and a ModelScope project as required by the official challenge."
             },
             "final": {
                 "title": "Final",
                 "date": "10.25",
-                "description": "October 25 finals: present the solution and its practical impact.",
+                "description": "October 25, 09:10–11:30 parallel pitches. Separate judging; joint awards.",
                 "materials": "Prepare pitch slides, a project poster and a working demo. Pitch order and detailed rules will be announced."
             }
         },
@@ -5181,7 +5181,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Each participant must register an account and apply individually. Fields marked * are required; experience is optional.",
+            "description": "Register individually for either or both tracks. Tmall teams have 2–5 members. Forum registration is separate.",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5226,7 +5226,8 @@
             "aiTools": "AI tools (multiple allowed)",
             "aiToolsOther": "Other AI tools (optional)",
             "strengths": "Strengths (multiple allowed)",
-            "projectLinks": "Portfolio or research links (optional)"
+            "projectLinks": "Portfolio or research links (optional)",
+            "teamSize": "Tmall team size"
         },
         "options": {
             "freshman": "Year 1",
@@ -5235,8 +5236,8 @@
             "senior": "Year 4",
             "master": "Master’s",
             "phd": "PhD",
-            "campus": "Qwen · Academic Starter Track · Solo",
-            "industry": "Huawei · Industry Advanced Track · Up to 3",
+            "campus": "Tmall Campus · OPC Incubation Track · 2–5 members",
+            "industry": "Huawei · Industry Advanced Track · Teams",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
             "Cursor": "Cursor",
@@ -5257,7 +5258,11 @@
             "product": "Product planning",
             "data": "Data analysis",
             "research": "Domain research",
-            "exploring": "Still exploring"
+            "exploring": "Still exploring",
+            "2": "2 members",
+            "3": "3 members",
+            "4": "4 members",
+            "5": "5 members"
         },
         "brand": "ZHEKESONG",
         "backToSite": "Back to TUOZHE AI",
@@ -5308,7 +5313,7 @@
         "resultsTitle": "Results",
         "resultsIntro": "Award winners, projects, speeches and forum highlights in one place.",
         "industryStages": "Huawei Advanced Track · Stages",
-        "campusSchedule": "Online development October 11–17; finals October 25.",
+        "campusSchedule": "Registration October 12; onsite preliminary October 18; online semifinal October 19–22; deadline October 22 at 24:00; finals October 25.",
         "fieldHints": {
             "name": "",
             "studentId": "",
@@ -5320,7 +5325,8 @@
             "aiTools": "",
             "aiToolsOther": "Tool names",
             "strengths": "",
-            "projectLinks": "https://… (one per line)"
+            "projectLinks": "https://… (one per line)",
+            "team": "Team name for onsite organization"
         },
         "landing": {
             "viewAgenda": "View schedule",
@@ -5331,15 +5337,15 @@
             "tracksIntro": "Start with a question from your discipline or a real business need.",
             "tracks": {
                 "campus": {
-                    "partner": "Qwen",
+                    "partner": "Tmall Campus",
                     "type": "Your own challenge",
                     "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
                     "format": "Build online · Present on campus",
-                    "shortTitle": "Qwen · Academic Starter Track",
+                    "shortTitle": "Tmall Campus · OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
-                    "team": "Individual",
-                    "deadline": "Oct 11–17",
-                    "support": "Supported by Qwen · Choose your discipline"
+                    "team": "2–5 members",
+                    "deadline": "Onsite · October 18, 17:00",
+                    "support": "Tmall Campus · Product development and incubation"
                 },
                 "industry": {
                     "partner": "Huawei China",
@@ -5348,8 +5354,8 @@
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei · Industry Advanced Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
-                    "team": "Up to 3 people",
-                    "deadline": "Oct 18–25",
+                    "team": "Team competition",
+                    "deadline": "Onsite · October 18, 17:00",
                     "support": "Challenge support from Huawei China"
                 }
             },
@@ -5357,19 +5363,19 @@
             "fullAgenda": "Full onsite schedule",
             "agenda": [
                 {
-                    "date": "10.11",
-                    "title": "Qwen track opens",
-                    "description": "Define a problem and build online."
+                    "date": "10.12",
+                    "title": "Tmall registration opens",
+                    "description": "Existing, deployable projects welcome"
                 },
                 {
                     "date": "10.18",
-                    "title": "Huawei track · Opening",
-                    "description": "Technology forum and Huawei challenge launch."
+                    "title": "Preliminary round",
+                    "description": "Tech forum; build 13:00–17:00"
                 },
                 {
                     "date": "10.25",
-                    "title": "Finals",
-                    "description": "Entrepreneurship forum and final presentations."
+                    "title": "Finals & forum",
+                    "description": "Morning pitches; afternoon venture forum"
                 }
             ],
             "days": [],
@@ -5377,45 +5383,18 @@
             "forums": {
                 "technology": {
                     "time": "",
-                    "location": "Zijingang North Teaching Building, Zhejiang University",
-                    "speakers": [
-                        {
-                            "name": "Ye Xinjiang",
-                            "role": "CTO, Daily Interactive",
-                            "image": "ye-xinjiang"
-                        },
-                        {
-                            "name": "Sun Yifei",
-                            "role": "Hundred Talents Researcher, Zhejiang University",
-                            "image": "sun-yifei"
-                        },
-                        {
-                            "name": "Wang Feifan",
-                            "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University",
-                            "image": "wang-feifan"
-                        }
-                    ]
+                    "location": "Duan Yongping Teaching Building 2-112, Zijingang Campus, Zhejiang University",
+                    "speakers": []
                 },
                 "entrepreneurship": {
                     "time": "",
-                    "location": "Zijingang School of Management, Zhejiang University",
-                    "speakers": [
-                        {
-                            "name": "Zheng Gang",
-                            "role": "Deputy Head, Innovation, Entrepreneurship and Strategy Department; Director, ZTVP, Zhejiang University",
-                            "image": "zheng-gang"
-                        },
-                        {
-                            "name": "Zhang Jie",
-                            "role": "General Manager, Huadan Angel Fund",
-                            "image": "zhang-jie"
-                        }
-                    ]
+                    "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
+                    "speakers": []
                 }
             },
             "beyondLabel": "BUILD BEYOND THE EVENT",
             "beyondTitle": "From a project to real use",
-            "beyondDescription": "Promising projects may connect with enterprise needs, paid development and procurement, or apply for ecosystem incubation with mentors and development resources through ZTVP and Elite Eagle.",
+            "beyondDescription": "Promising projects can apply for space, ecosystem resources and mentor support from Shidai Qiangying, ZTVP and Tmall Campus. Opportunities are subject to selection.",
             "pastProjects": "Explore the first edition",
             "partnersLabel": "THIS EDITION’S PARTNERS",
             "partnersTitle": "Partners",
@@ -5435,7 +5414,7 @@
                 },
                 {
                     "label": "Technology & ecosystem",
-                    "names": "Alibaba Cloud (technology) · Huawei China (compute) · Qoder (tools and technology) · ModelScope"
+                    "names": "Alibaba Cloud · Qoder · ModelScope · Guancha · DeepSeek Club · Bonjour!"
                 },
                 {
                     "label": "Capital & incubation",
@@ -5455,12 +5434,12 @@
             "closing": "Bring your discipline. Build something new.",
             "lightMode": "Switch to light mode",
             "darkMode": "Switch to dark mode",
-            "heroDescription": "AI Interdisciplinary Innovation Forum & AI+X Hackathon. Solve real problems in learning, research, campus life and industry.",
+            "heroDescription": "Tmall OPC incubation and Huawei industry challenges. Build practical AI products and connect with industry and incubation resources.",
             "application": "Apps",
             "bothTracks": "You can enter both tracks",
             "venues": [
-                "Oct 18 · Zijingang North Teaching Building",
-                "Oct 25 · Zijingang School of Management"
+                "Oct 18 · Duan Yongping Teaching Building 2-112",
+                "Oct 25 · Sandun Entrepreneurship Space"
             ],
             "pauseMotion": "Pause glow animation",
             "resumeMotion": "Play glow animation",
@@ -5468,18 +5447,18 @@
             "openingLabel": "Opening speakers",
             "judges": "",
             "rewardsTitle": "Awards & gifts",
-            "rewardsIntro": "Qwen and Huawei track prizes, plus ModelScope giveaways.",
+            "rewardsIntro": "Tmall team awards and Huawei cash and prizes; ModelScope onsite giveaways.",
             "rewards": [
                 {
-                    "label": "Qwen prizes",
-                    "value": "¥5,000",
-                    "note": "18 awards",
+                    "label": "Tmall OPC incubation awards",
+                    "value": "¥6,500",
+                    "note": "6 winning teams",
                     "items": [
-                        "Top prize: 1 × ¥1,288",
-                        "Category awards: 4 × ¥588",
-                        "Excellence awards: 13 × ¥100"
-                    ],
-                    "detail": "Expected payout: approximately ¥4,940."
+                        "Champion · 1 team · ¥3,000",
+                        "Runner-up · 2 teams · ¥1,000 each",
+                        "Third place · 3 teams · ¥500 each",
+                        "Certificates and Tmall Campus gifts"
+                    ]
                 },
                 {
                     "label": "Huawei prizes & cash value",
@@ -5493,14 +5472,15 @@
                     "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+128GB (¥2,779), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
                 },
                 {
-                    "label": "Giveaways",
-                    "value": "130 gifts",
-                    "note": "Sponsored by ModelScope",
+                    "label": "ModelScope onsite giveaway",
+                    "value": "130",
+                    "note": "Onsite giveaway gifts",
                     "items": [
-                        "Neck pillows, mugs, umbrellas, tote bags",
-                        "Headphone pouches, phone clips, stickers and more"
+                        "Pillows, mugs, umbrellas: 10 each",
+                        "Canvas bags, headset bags, phone clips: 20 each",
+                        "40 stickers"
                     ],
-                    "detail": "Attend a forum for the onsite draw; share the event and collect likes for the online draw."
+                    "detail": "All 130 gifts are for the onsite giveaway."
                 }
             ],
             "contactTitle": "Join the event group",
@@ -5550,15 +5530,15 @@
                 "pending": "Brief coming soon",
                 "stageClosed": "Stage ended"
             },
-            "problemTitle": "Start with a real problem",
-            "problemDescription": "Choose a problem from your studies, research or campus work, and use AI to build a working application people can try.",
+            "problemTitle": "Bring a working product",
+            "problemDescription": "Teams of 2–5. Bring an existing product onsite on October 18, refine it with mentors, and develop a demo and industrial implementation plan in the semifinal.",
             "directions": "Areas to explore",
             "specificSubmission": "Challenge submission link",
             "releaseAt": "Expected release: {{date}}. The official published brief is authoritative.",
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
-            "individual": "Individual participation with a self-defined problem.",
-            "team": "Teams of up to three, or individual participation.",
+            "individual": "2–5 members per Tmall team; bring an existing product onsite.",
+            "team": "Team competition; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Prepare a project description and a usable AI app. Save GitHub and ModelScope repository links below.",
             "submissionIntro": "Register first, then save or update your project repositories here.",
@@ -5584,7 +5564,7 @@
             "partnerNames": {
                 "innovation": "ZJU School of Innovation and Entrepreneurship",
                 "tuozhe": "Tuozhe AI Ecosystem",
-                "qwen": "Qwen",
+                "qwen": "Tmall Campus",
                 "huawei": "Huawei China",
                 "aliyun": "Alibaba Cloud",
                 "qoder": "Qoder",
@@ -5601,30 +5581,22 @@
                 "qoder": "Development tools and technical support"
             },
             "channelsTitle": "Submission channels",
-            "campusChannels": "Qwen: save GitHub and ModelScope repositories below.",
-            "industryChannels": "Huawei: save GitHub and ModelScope repositories below.",
+            "campusChannels": "Tmall: preliminary technical work; semifinal technical work, demo and industrial implementation plan. Save GitHub / ModelScope repositories below; published platform instructions govern external submission.",
+            "industryChannels": "Huawei: technical work, demo and OPC venture plan; submit through ModelScope. GitHub is supplementary.",
             "channelHint": "Save repository links here for the event team. If a challenge specifies another submission form, complete that form as well.",
             "directionItems": {
                 "campus": [
                     {
-                        "title": "Law",
-                        "description": "Find statutes and cases"
+                        "title": "Across disciplines",
+                        "description": "Open topics grounded in professional knowledge"
                     },
                     {
-                        "title": "Ocean science",
-                        "description": "Process observation data"
+                        "title": "Working products",
+                        "description": "Bring an existing product and validate results onsite"
                     },
                     {
-                        "title": "Medicine",
-                        "description": "Extract evidence from papers"
-                    },
-                    {
-                        "title": "Education",
-                        "description": "Identify knowledge gaps"
-                    },
-                    {
-                        "title": "Communications",
-                        "description": "Generate articles and scripts"
+                        "title": "Industry & incubation",
+                        "description": "Present implementation plans and incubation potential"
                     }
                 ],
                 "industry": [
@@ -5642,7 +5614,7 @@
         "official": {
             "chapters": ["Overview", "Tracks", "Forums", "Prizes", "Partners", "Recap", "Register"],
             "chapterNav": "Introduction chapters",
-            "totalPrize": "Total prizes approx.",
+            "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
             "recapTitle": "Past events",
             "recapHint": "From campus development to industry practice.",
@@ -5667,7 +5639,294 @@
             "resultsBefore": "After finals",
             "resultsAfter": "Results awaiting publication",
             "resultsHint": "This edition’s awards and projects will appear after official publication.",
-            "challengeSoon": "Coming soon"
+            "challengeSoon": "Coming soon",
+            "prizeValue": "¥21,480"
+        },
+        "forumPage": {
+            "title": "AI Interdisciplinary Innovation Forums",
+            "intro": "AI technology and industrial applications, and first principles of entrepreneurship. Open to the public; forum and competition registrations are separate.",
+            "back": "Back to competition",
+            "enter": "Forums & independent registration",
+            "attendanceTitle": "Required attendance for contestants",
+            "attendance": "Preliminary-round contestants must attend the October 18 technical forum. Finalists must attend the October 25 final-day forum. Register separately for the required session.",
+            "agenda": "View agenda",
+            "invited": "Invited · Not confirmed",
+            "registered": "Registered · No. {{id}}",
+            "cancel": "Cancel this session",
+            "register": "Register for this forum",
+            "closed": "Registration closed or not yet open",
+            "signupTitle": "Independent forum registration",
+            "signupHint": "Competition registration is not required. Choose one or both sessions; your receipt is saved to your account. Details are used for forum communications and onsite organization.",
+            "chooseSession": "Choose forum sessions",
+            "fields": {
+                "name": "Name",
+                "contact": "Phone number or email",
+                "organization": "School / organization (optional)"
+            },
+            "submit": "Submit forum registration",
+            "saving": "Saving",
+            "success": "Forum registration saved. View your sessions and receipt numbers above.",
+            "loadFailed": "Could not load your registrations. Retry before submitting.",
+            "saveFailed": "Could not save. Please retry; saved registrations will not be duplicated.",
+            "invalidDetails": "Enter your name and a valid phone number or email.",
+            "export": "Export forum registrations",
+            "sessions": {
+                "technology": {
+                    "title": "Technical Forum",
+                    "theme": "AI technology trends and industrial applications",
+                    "time": "October 18 · 09:00–11:15 · Around 200 attendees",
+                    "location": "Duan Yongping Teaching Building 2-112, Zijingang Campus, Zhejiang University",
+                    "required": "Preliminary-round contestants must attend the technical forum.",
+                    "agenda": [
+                        {
+                            "time": "09:00–09:10",
+                            "title": "应奇 · 开场鸣谢"
+                        },
+                        {
+                            "time": "09:10–09:20",
+                            "title": "阮俊华 · 开幕致辞：AI+X的教育意义与创新创业内涵"
+                        },
+                        {
+                            "time": "09:30–10:15",
+                            "title": "叶新江 · 主题分享"
+                        },
+                        {
+                            "time": "10:30–11:15",
+                            "title": "孙逸飞 · 技术报告"
+                        }
+                    ],
+                    "guests": [
+                        {
+                            "name": "阮俊华",
+                            "role": "浙江大学创新创业学院常务副院长、杭州创业发展促进会会长、彩虹人生平台创始人"
+                        },
+                        {
+                            "name": "叶新江",
+                            "role": "每日互动股份有限公司 CTO"
+                        },
+                        {
+                            "name": "孙逸飞",
+                            "role": "浙江大学百人计划研究员"
+                        }
+                    ]
+                },
+                "entrepreneurship": {
+                    "title": "Finals & Entrepreneurship Forum",
+                    "theme": "First principles of entrepreneurship in the AI era",
+                    "time": "October 25 · 09:00–17:00 · Around 150 attendees",
+                    "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
+                    "required": "Finalists must attend the final-day forum. Parallel pitches in the morning; entrepreneurship forum in the afternoon.",
+                    "agenda": [
+                        {
+                            "time": "09:05–09:10",
+                            "title": "张克俊 · 路演开幕致辞"
+                        },
+                        {
+                            "time": "09:10–11:30",
+                            "title": "两赛道决赛路演（10:10–10:30茶歇）"
+                        },
+                        {
+                            "time": "13:10–13:20",
+                            "title": "王晗（拟邀请） · 创业论坛开场致辞"
+                        },
+                        {
+                            "time": "13:30–14:10",
+                            "title": "王进 · AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？"
+                        },
+                        {
+                            "time": "14:10–14:40",
+                            "title": "闪电路演 · 3个项目"
+                        },
+                        {
+                            "time": "15:00–16:00",
+                            "title": "张克俊、张洁、张加林 · AI时代的第一次成功与第一次失败"
+                        },
+                        {
+                            "time": "16:20–16:30",
+                            "title": "项目点评"
+                        },
+                        {
+                            "time": "16:30–16:50",
+                            "title": "颁奖"
+                        },
+                        {
+                            "time": "16:50–17:00",
+                            "title": "阮俊华 · 闭幕致辞"
+                        }
+                    ],
+                    "guests": [
+                        {
+                            "name": "张克俊",
+                            "role": "浙江大学人工智能学院智能设计系系主任、国际设计研究院副院长、人工智能教育教学研究中心常务副主任"
+                        },
+                        {
+                            "name": "张洁",
+                            "role": "华旦天使投资创始人兼CEO"
+                        },
+                        {
+                            "name": "王进",
+                            "role": "曼哈顿资本总裁"
+                        },
+                        {
+                            "name": "张加林",
+                            "role": "时代强鹰·杭州创业发展促进会秘书长"
+                        },
+                        {
+                            "name": "王晗",
+                            "role": "浙江大学创新创业学院副院长",
+                            "pending": true
+                        },
+                        {
+                            "name": "窦明清",
+                            "role": "普华资本投后总监 · 出席嘉宾"
+                        }
+                    ]
+                }
+            },
+            "heroLink": "Forums & registration",
+            "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details."
+        },
+        "october12": {
+            "partnerGroups": [
+                {
+                    "label": "Partner schools",
+                    "members": [
+                        {
+                            "id": "school-0",
+                            "name": "浙江大学创新创业学院"
+                        },
+                        {
+                            "id": "school-1",
+                            "name": "浙江大学管理学院"
+                        },
+                        {
+                            "id": "school-2",
+                            "name": "浙江大学光华法学院"
+                        },
+                        {
+                            "id": "school-3",
+                            "name": "浙江大学历史学院"
+                        },
+                        {
+                            "id": "school-4",
+                            "name": "浙江大学传媒与国际文化学院"
+                        },
+                        {
+                            "id": "school-5",
+                            "name": "浙江大学海洋学院"
+                        },
+                        {
+                            "id": "school-6",
+                            "name": "浙江大学医学院"
+                        },
+                        {
+                            "id": "school-7",
+                            "name": "浙江大学控制科学与工程学院"
+                        },
+                        {
+                            "id": "school-8",
+                            "name": "浙江大学信息与电子学院"
+                        }
+                    ]
+                },
+                {
+                    "label": "Track sponsors",
+                    "members": [
+                        {
+                            "id": "tianmao",
+                            "name": "天猫校园"
+                        },
+                        {
+                            "id": "huawei",
+                            "name": "华为"
+                        }
+                    ]
+                },
+                {
+                    "label": "Supporting companies",
+                    "members": [
+                        {
+                            "id": "aliyun",
+                            "name": "阿里云"
+                        },
+                        {
+                            "id": "qoder",
+                            "name": "Qoder"
+                        },
+                        {
+                            "id": "modelscope",
+                            "name": "魔搭社区"
+                        },
+                        {
+                            "id": "guancha",
+                            "name": "观猹社区"
+                        },
+                        {
+                            "id": "deepseekclub",
+                            "name": "深求社区（deepseek.club）"
+                        },
+                        {
+                            "id": "bonjour",
+                            "name": "Bonjour！"
+                        }
+                    ]
+                },
+                {
+                    "label": "Supporting organizations",
+                    "members": [
+                        {
+                            "id": "eagle",
+                            "name": "时代强鹰"
+                        },
+                        {
+                            "id": "ztvp",
+                            "name": "浙江大学管理学院科技创业中心 ZTVP"
+                        },
+                        {
+                            "id": "qiushi-eagle",
+                            "name": "求是强鹰俱乐部"
+                        },
+                        {
+                            "id": "kab",
+                            "name": "KAB创业俱乐部"
+                        },
+                        {
+                            "id": "entrepreneurship-alliance",
+                            "name": "创业联盟"
+                        },
+                        {
+                            "id": "zjuai",
+                            "name": "人工智能协会"
+                        },
+                        {
+                            "id": "aira",
+                            "name": "AI创研会"
+                        },
+                        {
+                            "id": "cross-innovation",
+                            "name": "MBA跨界创新俱乐部"
+                        },
+                        {
+                            "id": "lianhua",
+                            "name": "联华利合协会"
+                        },
+                        {
+                            "id": "investment",
+                            "name": "投资协会"
+                        },
+                        {
+                            "id": "novax",
+                            "name": "NovaX"
+                        }
+                    ]
+                }
+            ],
+            "organizers": "Guidance: ZJU School of Innovation and Entrepreneurship · Organizer: Tuozhe AI Ecosystem",
+            "teamSizeLabel": "Tmall team size",
+            "teamSizeHint": "2–5 members for the Tmall track",
+            "teamSizeError": "Enter a Tmall team size of 2–5.",
+            "recapAdditionalTitle": "Xijing Cup · Interdisciplinary Quantitative Investment Challenge",
+            "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios."
         }
     },
     "eventWorkspace": {

@@ -11,17 +11,17 @@
     },
     "event": {
         "key": "zhekesong-ai-x-2026",
-        "brand": "AI跨学科创新论坛暨",
+        "brand": "浙客松 · 2026",
         "title": "AI+X破界黑客松",
-        "subtitle": "跨界 · 创新 · 解决真实问题",
-        "description": "千问学科入门赛道围绕 AI+学科自主开发，华为产业进阶赛道围绕 AI+产业解决企业真实问题。",
-        "startAt": "2026-10-11T00:00",
+        "subtitle": "破界 · 共创 · 涌现",
+        "description": "天猫·OPC孵化赛道优先招募成熟、可落地的项目，华为·产业进阶赛道围绕企业文案与营销场景开发应用。",
+        "startAt": "2026-10-09T00:00",
         "endAt": "2026-10-25T17:00",
         "timezone": "Asia/Shanghai",
-        "location": "浙江大学紫金港校区北教（10月18日） · 管理学院（10月25日）",
-        "format": "千问个人赛 · 华为每队最多 3 人",
-        "duration": "千问 10月11–17日 · 华为 10月18–25日",
-        "prizeValue": "约20,000",
+        "location": "10月18日：紫金港校区段永平教学楼2-112 · 10月25日：三墩元空间（宝港生活广场C座6楼）",
+        "format": "天猫每队2–5人 · 华为组队参赛",
+        "duration": "10月12日报名 · 18日初赛 · 19–22日复赛 · 25日决赛",
+        "prizeValue": "21,480",
         "prizeUnit": "¥",
         "registrationOpen": true,
         "highlights": [],
@@ -30,36 +30,37 @@
             "stages": [
                 {
                     "id": "initial",
-                    "opensAt": "2026-10-18T11:00:00+08:00",
-                    "closesAt": "2026-10-18T16:00:00+08:00"
+                    "opensAt": "2026-10-18T13:00:00+08:00",
+                    "closesAt": "2026-10-18T17:00:00+08:00"
                 },
                 {
                     "id": "semifinal",
                     "opensAt": "2026-10-19T00:00:00+08:00",
-                    "closesAt": "2026-10-25T00:00:00+08:00"
+                    "closesAt": "2026-10-23T00:00:00+08:00"
                 },
                 {
                     "id": "final",
-                    "opensAt": "2026-10-25T13:30:00+08:00",
-                    "closesAt": "2026-10-25T15:30:00+08:00"
+                    "opensAt": "2026-10-25T09:10:00+08:00",
+                    "closesAt": "2026-10-25T11:30:00+08:00"
                 }
             ],
             "challenges": [],
             "reports": [],
-            "challengeReleaseAt": "2026-10-18T09:00:00+08:00"
+            "challengeReleaseAt": "2026-10-18T13:00:00+08:00",
+            "registrationOpensAt": "2026-10-12T00:00:00+08:00"
         }
     },
     "rules": [
         {
             "id": "cross_discipline",
             "title": "跨学科创新与真实应用",
-            "description": "千问·学科入门赛道个人参赛，华为·产业进阶赛道每队最多 3 人。可同时报名两个赛道，每位参赛者须注册账号并独立报名。",
+            "description": "天猫·OPC孵化赛道每队2–5人，携现有产品参加现场初赛；华为·产业进阶赛道组队开发企业命题。初赛选手须参加技术论坛，决赛选手须参加决赛论坛。",
             "enabled": true
         }
     ],
     "form": {
         "title": "赛事报名",
-        "description": "可同时报名千问和华为两个赛道。千问·学科入门赛道个人参赛，华为·产业进阶赛道每队最多 3 人；每位参赛者须注册账号并独立填写报名信息。",
+        "description": "天猫·OPC孵化赛道每队2–5人，华为组队参赛。可兼报，每位选手独立填写报名资料；论坛请到独立页面报名。",
         "requiredHint": "所有带 * 的字段均为必填",
         "submitLabel": "提交报名",
         "successMessage": "报名已提交，可在右上角查看报名信息。",
@@ -138,14 +139,14 @@
                 "id": "track",
                 "label": "意向赛道",
                 "type": "multi_select",
-                "placeholder": "可同时选择两个赛道；千问·学科入门赛道个人参赛，华为·产业进阶赛道每队最多 3 人",
+                "placeholder": "可同时选择两条赛道；天猫每队2–5人，华为组队参赛",
                 "required": true,
                 "enabled": true,
                 "width": "full",
                 "options": [
                     {
                         "value": "campus",
-                        "label": "千问·学科入门赛道"
+                        "label": "天猫·OPC孵化赛道"
                     },
                     {
                         "value": "industry",
@@ -167,11 +168,38 @@
                 "id": "team",
                 "label": "队伍名称",
                 "type": "text",
-                "placeholder": "暂未组队可留空",
+                "placeholder": "填写队伍名称，便于现场组织",
                 "required": false,
-                "enabled": false,
-                "width": "full",
+                "enabled": true,
+                "width": "half",
                 "options": []
+            },
+            {
+                "id": "teamSize",
+                "label": "天猫赛道队伍人数",
+                "type": "select",
+                "placeholder": "参加天猫赛道时填写；每队2–5人",
+                "required": false,
+                "enabled": true,
+                "width": "half",
+                "options": [
+                    {
+                        "value": "2",
+                        "label": "2 人"
+                    },
+                    {
+                        "value": "3",
+                        "label": "3 人"
+                    },
+                    {
+                        "value": "4",
+                        "label": "4 人"
+                    },
+                    {
+                        "value": "5",
+                        "label": "5 人"
+                    }
+                ]
             },
             {
                 "id": "strengths",

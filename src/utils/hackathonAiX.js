@@ -14,6 +14,8 @@ export const currentStage = (stages, now = Date.now()) =>
 export const registrationOpen = (template, now = Date.now()) =>
     template.navigation.registrationVisible &&
     template.event.registrationOpen &&
+    (!template.event.program?.registrationOpensAt ||
+        now >= Date.parse(template.event.program.registrationOpensAt)) &&
     (!template.event.program?.registrationClosesAt ||
         now < Date.parse(template.event.program.registrationClosesAt));
 export const safeWebUrl = (value) => {

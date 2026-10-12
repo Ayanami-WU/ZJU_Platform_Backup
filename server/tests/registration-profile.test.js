@@ -78,6 +78,24 @@ test("registration persists private profile atomically; legacy login and own edi
         assert.deepEqual(res.body.user.registrationProfile, profile);
         assert.equal(jwt.decode(res.body.token).registrationProfile, undefined);
         const id = res.body.user.id;
+        const visitor = response();
+        await auth.register(
+            {
+                body: {
+                    username: "forum_visitor",
+                    password: "testpassword",
+                    registrationContext: "aix-forum",
+                    role: "admin",
+                },
+            },
+            visitor,
+            next
+        );
+        assert.equal(visitor.statusCode, 200);
+        assert.equal(visitor.body.user.role, "user");
+        assert.equal(visitor.body.user.registrationProfile, null);
+        assert.equal(await getRegistrationProfile(db, visitor.body.user.id), null);
+
         assert.equal((await db.get("SELECT * FROM users WHERE id=?", [id])).student_id, undefined);
         const privateRow = await getRegistrationProfile(db, id);
         await migrateRegistrationProfiles(db);

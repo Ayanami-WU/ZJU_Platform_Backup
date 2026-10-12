@@ -122,6 +122,7 @@ test("real SQLite registration, private repository persistence, edits, deadline 
             eventKey: AIX_EVENT_KEY,
             answers: {
                 track: ["campus", "industry"],
+                teamSize: "2",
                 contact: "test@example.test",
                 strengths: ["exploring"],
                 aiTools: ["none"],

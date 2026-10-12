@@ -1,6 +1,18 @@
 import { useTranslation } from "react-i18next";
 
 const brands = [
+    ...["kab", "zjuai", "aira", "cross-innovation"].map((id) => ({
+        id,
+        name: id,
+        source: `/images/hackathon/ai-x/official/${id}.webp`,
+        plate: true,
+    })),
+    {
+        id: "novax",
+        name: "NovaX",
+        source: "/images/hackathon/ai-x/official/novax.jpg",
+        plate: true,
+    },
     {
         id: "tianmao",
         name: "天猫校园",
@@ -80,38 +92,19 @@ export function AiXBrand({ id }) {
         </span>
     );
 }
-const groups = [
-    ["innovation"],
-    ["tuozhe"],
-    ["tianmao", "huawei"],
-    ["aliyun", "huawei", "qoder", "modelscope"],
-    ["eagle", "ztvp"],
-    ["guancha", "deepseekclub"],
-];
 export default function AiXPartnerLogos() {
     const { t } = useTranslation();
-    const partners = t("aix.landing.partners", { returnObjects: true });
     return (
-        <dl className="aix-partner-groups">
-            {groups.map((members, index) => (
-                <div key={index}>
-                    <dt>
-                        {partners[index]?.label ||
-                            t("aix.landing.morePartners", { returnObjects: true })[1].label}
-                    </dt>
+        <dl className="aix-partner-groups aix-partners-october12">
+            {t("aix.october12.partnerGroups", { returnObjects: true }).map((group) => (
+                <div key={group.label}>
+                    <dt>{group.label}</dt>
                     <dd>
                         <ul className="aix-partner-members">
-                            {members.map((id) => (
-                                <li key={id}>
-                                    <AiXBrand id={id} />
-                                    <span className="aix-partner-name">
-                                        {t(`aix.refined.partnerNames.${id}`)}
-                                    </span>
-                                    {index === 3 && id !== "modelscope" && (
-                                        <span className="aix-partner-role">
-                                            {t(`aix.refined.supportRoles.${id}`)}
-                                        </span>
-                                    )}
+                            {group.members.map((member) => (
+                                <li key={member.id}>
+                                    <AiXBrand id={member.id} />
+                                    <span className="aix-partner-name">{member.name}</span>
                                 </li>
                             ))}
                         </ul>

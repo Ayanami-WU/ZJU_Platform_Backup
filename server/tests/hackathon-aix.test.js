@@ -172,6 +172,8 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             major: "Test",
             grade: "junior",
             track: ["campus", "industry"],
+            team: "",
+            teamSize: "2",
             contact: "test@example.test",
             strengths: ["development", "research"],
             aiTools: ["Codex", "DeepSeek"],

@@ -41,8 +41,8 @@ test("official release updates only the current edition copy, preserves signup a
             );
         await migrate(db);
         const after = await read();
-        assert.equal(after.events[1].event.startAt, "2026-10-11T00:00");
-        assert.match(after.events[1].event.location, /管理学院/);
+        assert.equal(after.events[1].event.startAt, "2026-10-09T00:00");
+        assert.match(after.events[1].event.location, /三墩元空间/);
         assert.deepEqual(after.events[0], history);
         assert.deepEqual(after.events[1].event.program, current.event.program);
         assert.deepEqual(after.events[1].form, current.form);

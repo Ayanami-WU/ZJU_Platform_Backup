@@ -158,6 +158,7 @@ export const AuthProvider = ({ children }) => {
                     username,
                     password,
                     registrationProfile: options.registrationProfile,
+                    registrationContext: options.registrationContext,
                 },
                 { noRetry: true }
             );

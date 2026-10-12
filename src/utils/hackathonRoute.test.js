@@ -85,3 +85,11 @@ test("retired query routes, former page aliases and unknown editions are not sup
         assert.equal(resolveEventLocation(locationOf(path), schedule), null, path);
     }
 });
+
+test("forums are independent in edition two and keep the four event tabs intact", () => {
+    assert.equal(
+        resolveEventLocation(locationOf("/hackathon/2/forums#forum-registration"), schedule).url,
+        "/hackathon/2/forums#forum-registration"
+    );
+    assert.equal(resolveEventLocation(locationOf("/hackathon/1/forums"), schedule), null);
+});
