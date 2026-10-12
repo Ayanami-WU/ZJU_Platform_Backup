@@ -5,7 +5,6 @@ export const AIX_CHAPTER_IDS = [
     "aix-overview",
     "aix-tracks",
     "aix-rewards",
-    "aix-forums",
     "aix-partners-title",
     "registration-form",
 ];

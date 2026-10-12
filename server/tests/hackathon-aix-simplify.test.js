@@ -63,7 +63,7 @@ test("hide AI+X results once, preserve other editions, signup and briefs, and ex
         await db.close();
     }
 });
-test("AI+X retains four tabs and direct pending-page links without changing first edition", async () => {
+test("AI+X adds an independent forum tab and retains direct pending-page links without changing first edition", async () => {
     const { resolveEventLocation, getEventViews } =
         await import("../../src/utils/hackathonRoute.js");
     const schedule = {
@@ -76,6 +76,7 @@ test("AI+X retains four tabs and direct pending-page links without changing firs
         "intro",
         "challenges",
         "media",
+        "forums",
         "results",
     ]);
     for (const view of ["media", "results"]) {

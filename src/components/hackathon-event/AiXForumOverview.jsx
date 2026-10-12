@@ -7,17 +7,8 @@ export default function AiXForumOverview() {
     const { t } = useTranslation();
     const copy = t("aix.pages.forumOverview", { returnObjects: true });
     return (
-        <section
-            id="aix-forums"
-            className="aix-page"
-            data-aix-chapter
-            aria-labelledby="aix-forums-heading"
-        >
-            <div className="aix-page-body">
-                <header className="aix-page-heading">
-                    <span>04</span>
-                    <h2 id="aix-forums-heading">{copy.title}</h2>
-                </header>
+        <section id="aix-forums" aria-label={copy.title}>
+            <div>
                 <div className="aix-forum-panels">
                     {copy.sessions.map((forum) => (
                         <article className="aix-forum-panel" data-forum={forum.id} key={forum.id}>

@@ -1,3 +1,9 @@
+#aix-forums :is(h2, h3, p) {
+    margin: 0;
+}
+#aix-forums {
+    margin-top: 28px;
+}
 #aix-forums .aix-forum-panels {
     display: grid;
     grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
@@ -210,34 +216,6 @@
 #aix-forums .aix-forum-signup-link:focus-visible {
     outline: 2px solid var(--hx-accent-text);
     outline-offset: 3px;
-}
-@media (min-width: 1000px) and (max-height: 1050px) {
-    #aix-forums .aix-forum-panel {
-        padding: 16px 20px;
-    }
-    #aix-forums .aix-forum-lineup {
-        padding: 14px 0 10px;
-    }
-    #aix-forums .aix-guest-portrait {
-        height: 78px;
-    }
-    #aix-forums .aix-forum-guests {
-        row-gap: 10px;
-    }
-    #aix-forums [data-forum="technology"] .aix-guest-portrait {
-        height: 150px;
-    }
-    #aix-forums .aix-forum-panel-heading h3 {
-        font-size: 28px;
-    }
-    #aix-forums .aix-forum-topics {
-        padding-top: 10px;
-        margin-bottom: 12px;
-    }
-    #aix-forums .aix-forum-topics li {
-        margin-top: 4px;
-        line-height: 1.4;
-    }
 }
 @media (max-width: 999px) {
     #aix-forums .aix-forum-panels {

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, CalendarDays, MapPin, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import api from "../../services/api";
 import config from "../../../shared/hackathonForums.json";
 import { getEventUrl } from "../../utils/hackathonRoute";
+import AiXForumOverview from "./AiXForumOverview";
 import "./AiXForums.css";
 export default function AiXForums({ now, registrationState }) {
     const { t } = useTranslation();
-    const forumOverview = t("aix.pages.forumOverview", { returnObjects: true });
     const { hash, search } = useLocation();
     const requestedSession = config.sessions.find(
         (session) => session.key === new URLSearchParams(search).get("session")
@@ -175,100 +175,41 @@ export default function AiXForums({ now, registrationState }) {
                 <h1>{t("aix.forumPage.title")}</h1>
                 <p>{t("aix.forumPage.intro")}</p>
             </header>
-            <div className="aix-forum-attendance">
-                <strong>{t("aix.forumPage.attendanceTitle")}</strong>
-                <p>{t("aix.forumPage.attendance")}</p>
-            </div>
-            <div className="aix-forum-sessions">
-                {config.sessions.map((session) => {
-                    const receipt = registrations.find((r) => r.forumKey === session.key);
-                    const forum = forumOverview.sessions.find((item) => item.id === session.key);
-                    return (
-                        <article key={session.key}>
-                            <h2>{t(`aix.forumPage.sessions.${session.key}.title`)}</h2>
-                            <p>{forum.theme}</p>
-                            <div className="aix-forum-detail">
-                                <CalendarDays size={17} />
-                                <span>{t(`aix.forumPage.sessions.${session.key}.time`)}</span>
-                            </div>
-                            <div className="aix-forum-detail">
-                                <MapPin size={17} />
-                                <span>{t(`aix.forumPage.sessions.${session.key}.location`)}</span>
-                            </div>
-                            <p className="aix-forum-required">
-                                {t(`aix.forumPage.sessions.${session.key}.required`)}
-                            </p>
-                            <details>
-                                <summary>{forumOverview.topicsLabel}</summary>
-                                <ol>
-                                    {forum.topics.map((topic) => (
-                                        <li key={topic.speaker}>
-                                            <span>
-                                                {topic.speaker}
-                                                {topic.host && (
-                                                    <>
-                                                        <br />
-                                                        {topic.host}
-                                                    </>
-                                                )}
-                                            </span>
-                                            <span>{topic.title}</span>
-                                        </li>
-                                    ))}
-                                </ol>
-                            </details>
-                            <div className="aix-forum-guest-list">
-                                {forum.guests.map((guest) => (
-                                    <div key={guest.id}>
-                                        <strong>{guest.name}</strong>
-                                        <span>{guest.role}</span>
-                                    </div>
-                                ))}
-                                {forum.teasers?.map((text) => (
-                                    <div key={text}>{text}</div>
-                                ))}
-                            </div>
-                            {receipt ? (
-                                <div className="aix-forum-receipt">
-                                    <CheckCircle2 size={17} />
-                                    <span>{t("aix.forumPage.registered", { id: receipt.id })}</span>
-                                    {open(session) && (
-                                        <button
-                                            type="button"
-                                            disabled={busy}
-                                            onClick={() => cancel(session.key)}
-                                        >
-                                            {t("aix.forumPage.cancel")}
-                                        </button>
-                                    )}
-                                </div>
-                            ) : (
-                                <button
-                                    className="aix-primary"
-                                    type="button"
-                                    disabled={!open(session)}
-                                    onClick={() => {
-                                        setSelected((v) =>
-                                            v.includes(session.key) ? v : [...v, session.key]
-                                        );
-                                        formRef.current?.scrollIntoView({
-                                            behavior: "smooth",
-                                            block: "start",
-                                        });
-                                    }}
-                                >
-                                    {t(
-                                        open(session)
-                                            ? "aix.forumPage.register"
-                                            : "aix.forumPage.closed"
-                                    )}
-                                </button>
-                            )}
-                        </article>
-                    );
-                })}
-            </div>
+            <AiXForumOverview />
             <section className="aix-forum-signup" ref={formRef} id="forum-registration">
+                <div className="aix-forum-attendance">
+                    <strong>{t("aix.forumPage.attendanceTitle")}</strong>
+                    <p>{t("aix.forumPage.attendance")}</p>
+                </div>
+                {registrations.length > 0 && (
+                    <div className="aix-forum-receipts">
+                        {config.sessions.map((session) => {
+                            const receipt = registrations.find((r) => r.forumKey === session.key);
+                            return (
+                                receipt && (
+                                    <div className="aix-forum-receipt" key={session.key}>
+                                        <CheckCircle2 size={17} />
+                                        <strong>
+                                            {t(`aix.forumPage.sessions.${session.key}.title`)}
+                                        </strong>
+                                        <span>
+                                            {t("aix.forumPage.registered", { id: receipt.id })}
+                                        </span>
+                                        {open(session) && (
+                                            <button
+                                                type="button"
+                                                disabled={busy}
+                                                onClick={() => cancel(session.key)}
+                                            >
+                                                {t("aix.forumPage.cancel")}
+                                            </button>
+                                        )}
+                                    </div>
+                                )
+                            );
+                        })}
+                    </div>
+                )}
                 <h2>{t("aix.forumPage.signupTitle")}</h2>
                 <p>{t("aix.forumPage.signupHint")}</p>
                 {authLoading || loading ? (

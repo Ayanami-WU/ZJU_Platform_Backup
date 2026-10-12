@@ -5612,7 +5612,7 @@
             }
         },
         "official": {
-            "chapters": ["Overview", "Format", "Rewards", "Forums", "Partners", "Register"],
+            "chapters": ["Overview", "Format", "Rewards", "Partners", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5992,6 +5992,24 @@
                             "date": "10.25",
                             "title": "Finals"
                         }
+                    ],
+                    "rules": [
+                        {
+                            "label": "Task",
+                            "value": "Choose a topic across disciplines or enter a mature project. Recommended scenarios receive slight admission priority."
+                        },
+                        {
+                            "label": "Deliverables",
+                            "value": "Technical work, a demo and an industry deployment plan."
+                        },
+                        {
+                            "label": "Advancement",
+                            "value": "Demonstrate technical feasibility to enter the online semifinal."
+                        },
+                        {
+                            "label": "Participation",
+                            "value": "Compete online, with optional on-site mentoring on October 18 afternoon."
+                        }
                     ]
                 },
                 {
@@ -6013,6 +6031,24 @@
                         {
                             "date": "10.25",
                             "title": "Finals"
+                        }
+                    ],
+                    "rules": [
+                        {
+                            "label": "Task",
+                            "value": "Build an Agent or Skill from scratch for an industry challenge announced on site."
+                        },
+                        {
+                            "label": "Deliverables",
+                            "value": "An Agent or Skill."
+                        },
+                        {
+                            "label": "Advancement",
+                            "value": "Reach 60% completion in the preliminary round. The semifinal selects 10 finalists."
+                        },
+                        {
+                            "label": "Participation",
+                            "value": "Attend the preliminary round in person. Challenge released at 13:00; submission closes at 17:00."
                         }
                     ]
                 }
@@ -6350,7 +6386,8 @@
             "intro": "Overview",
             "challenges": "Challenges",
             "media": "Event photos",
-            "results": "Results"
+            "results": "Results",
+            "forums": "Forums"
         },
         "resultsTitle": "Event results",
         "mediaArchive": "Past event · Event photos",

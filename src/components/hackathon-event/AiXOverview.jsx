@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Pause, Play, Trophy, Medal, Gift } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import AiXForumOverview from "./AiXForumOverview";
 import AiXPartnerLogos from "./AiXPartnerLogos";
 import "./AiXOverview.css";
 
@@ -50,37 +49,13 @@ export default function AiXOverview({ state }) {
                             {paused ? <Play size={16} /> : <Pause size={16} />}
                         </button>
                     </div>
-                    <div className="aix-cover-venues">
-                        {copy.venues.map((venue) => (
-                            <div key={venue.date}>
-                                <time>{venue.date}</time>
-                                <strong>{venue.title}</strong>
-                                <span>{venue.place}</span>
-                                <span>{venue.address}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            <section
-                id="aix-tracks"
-                className="aix-page"
-                data-aix-chapter
-                aria-labelledby="aix-format-title"
-            >
-                <div className="aix-page-body">
-                    <header className="aix-page-heading">
-                        <span>02</span>
-                        <h2 id="aix-format-title">{copy.format}</h2>
-                    </header>
-                    <div className="aix-track-timelines">
+                    <div className="aix-cover-schedule">
                         {copy.tracks.map((track) => (
                             <article className="aix-timeline-panel" key={track.id}>
                                 <header>
                                     <h3>{track.title}</h3>
                                     <span>{track.mode}</span>
                                 </header>
-                                <p>{track.description}</p>
                                 <ol>
                                     {track.stages.map((stage, index) => (
                                         <li
@@ -99,6 +74,48 @@ export default function AiXOverview({ state }) {
                                     ))}
                                 </ol>
                             </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            <section
+                id="aix-tracks"
+                className="aix-page"
+                data-aix-chapter
+                aria-labelledby="aix-format-title"
+            >
+                <div className="aix-page-body">
+                    <header className="aix-page-heading">
+                        <span>02</span>
+                        <h2 id="aix-format-title">{copy.format}</h2>
+                    </header>
+                    <div className="aix-track-rules">
+                        {copy.tracks.map((track) => (
+                            <article className="aix-rule-panel" key={track.id}>
+                                <header>
+                                    <h3>{track.title}</h3>
+                                    <p>{track.mode}</p>
+                                </header>
+                                <dl>
+                                    {track.rules.map((rule) => (
+                                        <div key={rule.label}>
+                                            <dt>{rule.label}</dt>
+                                            <dd>{rule.value}</dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                            </article>
+                        ))}
+                    </div>
+                    <div className="aix-format-venues">
+                        {copy.venues.map((venue) => (
+                            <div key={venue.date}>
+                                <time>{venue.date}</time>
+                                <p>
+                                    <strong>{venue.place}</strong>
+                                    <span>{venue.address}</span>
+                                </p>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -169,7 +186,6 @@ export default function AiXOverview({ state }) {
                     </div>
                 </div>
             </section>
-            <AiXForumOverview />
             <section
                 id="aix-partners-title"
                 className="aix-page"
@@ -178,7 +194,7 @@ export default function AiXOverview({ state }) {
             >
                 <div className="aix-page-body">
                     <header className="aix-page-heading">
-                        <span>05</span>
+                        <span>04</span>
                         <h2 id="aix-partners-heading">{copy.partnersTitle}</h2>
                     </header>
                     <dl className="aix-organizer-rows">

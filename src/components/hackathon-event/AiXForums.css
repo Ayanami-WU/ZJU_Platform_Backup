@@ -1,7 +1,7 @@
 .aix-forums-page {
     width: min(1180px, calc(100% - 48px));
     margin: 0 auto;
-    padding: calc(var(--event-nav-height) + 28px) 0 100px;
+    padding: 32px 0 100px;
     color: var(--hx-text);
 }
 .aix-forums-page header > .aix-secondary {
@@ -10,6 +10,7 @@
 .aix-forums-page h1 {
     font-size: clamp(30px, 4vw, 52px);
     line-height: 1.2;
+    font-weight: 750;
     margin: 12px 0;
 }
 .aix-forums-page p {
@@ -202,4 +203,26 @@
 .aix-forum-signup :is(button, input) {
     scroll-margin-top: calc(var(--site-nav-height) + var(--event-nav-height) + 20px);
     scroll-margin-bottom: 120px;
+}
+
+.aix-forum-receipts {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.aix-forums-page > header {
+    position: relative;
+}
+.aix-forums-page > header > .aix-secondary {
+    margin-bottom: 10px;
+}
+.aix-forum-signup {
+    max-width: 820px;
+    margin-inline: auto;
+}
+@media (max-width: 767px) {
+    .aix-forums-page {
+        width: calc(100% - 32px);
+        padding-top: 24px;
+    }
 }
