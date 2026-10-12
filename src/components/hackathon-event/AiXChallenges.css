@@ -2,9 +2,9 @@
     margin-bottom: 0;
 }
 .aix-task-workspace {
-    width: min(calc(100% - 64px), 1360px);
+    width: min(calc(100% - 64px), 1120px);
     margin: 0 auto;
-    padding: 32px 0 64px;
+    padding: 26px 0 64px;
     color: var(--hx-text);
 }
 .aix-task-workspace :is(h1, h2, h3, p, dl, dd) {
@@ -15,7 +15,7 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 24px;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 .aix-task-heading h1 {
     font-size: clamp(32px, 4vw, 48px);
@@ -27,84 +27,101 @@
     font-size: 16px;
     font-weight: 650;
 }
-.aix-task-track-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+.aix-task-selectors {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    padding-bottom: 22px;
     border-bottom: 1px solid var(--hx-line);
 }
-.aix-task-track-tabs button {
-    color: var(--hx-muted);
-    background: transparent;
-    border: 0;
-    border-bottom: 3px solid transparent;
-    padding: 18px 20px;
-    text-align: left;
-    font-size: 22px;
-    font-weight: 750;
-}
-.aix-task-track-tabs button[aria-selected="true"] {
-    color: var(--hx-accent-text);
-    border-bottom-color: var(--hx-accent-text);
-}
+.aix-task-track-tabs,
 .aix-task-stage-tabs {
     display: flex;
-    gap: 12px;
-    margin: 24px 0;
+    align-items: stretch;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--hx-line);
+    border-radius: 9px;
+    background: var(--hx-panel);
 }
+.aix-task-track-tabs button,
 .aix-task-stage-tabs button {
     display: flex;
     align-items: center;
-    gap: 12px;
-    min-height: 48px;
-    padding: 10px 24px;
-    border: 1px solid var(--hx-line);
-    border-radius: 8px;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 6px;
     background: transparent;
     color: var(--hx-muted);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 750;
+    line-height: 1.4;
+}
+.aix-task-track-tabs button[aria-selected="true"] {
+    background: var(--hx-accent-text);
+    color: var(--hx-surface);
+}
+.aix-task-stage-tabs button[aria-selected="true"] {
+    background: var(--hx-surface);
+    color: var(--hx-text);
+    box-shadow: inset 0 0 0 1px var(--hx-line);
 }
 .aix-task-stage-tabs button > span {
     font-size: 14px;
     font-variant-numeric: tabular-nums;
 }
-.aix-task-stage-tabs button[aria-selected="true"] {
-    color: var(--hx-text);
-    background: var(--hx-panel);
-    border-color: var(--hx-accent-text);
-}
 .aix-task-stage-tabs button[aria-selected="true"] > span {
     color: var(--hx-accent-text);
 }
 .aix-task-window {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--hx-line);
+}
+.aix-task-requirements {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 16px 32px;
-    padding: 18px 0 24px;
 }
-.aix-task-window > div:first-child {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
+.aix-task-requirements > div {
+    min-width: 0;
 }
-.aix-task-window p {
+.aix-task-requirements dt {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 7px;
+    margin-bottom: 5px;
+    color: var(--hx-muted);
+    font-size: 14px;
+    font-weight: 700;
 }
-.aix-task-window small {
+.aix-task-requirements dd {
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+.aix-task-requirements small {
+    display: inline-block;
+    margin-left: 10px;
     color: var(--hx-muted);
     font-size: 13px;
+    font-weight: 600;
+}
+.aix-task-material-summary {
+    grid-column: 1 / -1;
 }
 .aix-task-access {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    gap: 10px 16px;
+    margin-top: 16px;
+    font-size: 15px;
     color: var(--hx-muted);
 }
 .aix-task-access a {
@@ -125,11 +142,10 @@
 }
 .aix-task-columns {
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
     align-items: start;
 }
-.aix-task-brief,
 .aix-task-submission,
 .aix-task-final {
     min-width: 0;
@@ -137,6 +153,10 @@
     border: 1px solid var(--hx-line);
     border-radius: 14px;
     background: var(--hx-panel);
+}
+.aix-task-brief {
+    min-width: 0;
+    padding: 24px 0 0;
 }
 .aix-task-panel-heading {
     display: flex;
@@ -219,11 +239,19 @@
 }
 .aix-task-submission fieldset {
     display: grid;
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
     min-width: 0;
     padding: 0;
     border: 0;
     margin: 0;
+}
+.aix-task-field-wide {
+    grid-column: 1 / -1;
+}
+.aix-task-field-upload {
+    border-top: 1px solid var(--hx-line);
+    padding-top: 18px;
 }
 .aix-task-submission label {
     display: grid;
@@ -256,6 +284,9 @@
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 24px;
+}
+.aix-task-actions {
+    max-width: 480px;
 }
 .aix-task-actions button {
     flex: 1;
@@ -356,38 +387,53 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .aix-task-brief,
     .aix-task-submission,
     .aix-task-final {
         padding: 22px 18px;
     }
-    .aix-task-track-tabs button {
-        padding: 14px 8px;
-        font-size: 17px;
-        line-height: 1.5;
+    .aix-task-selectors {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        justify-content: stretch;
+        gap: 10px;
+        padding-bottom: 18px;
     }
+    .aix-task-track-tabs,
     .aix-task-stage-tabs {
-        gap: 8px;
-        margin: 20px 0 12px;
+        min-width: 0;
+        width: 100%;
     }
+    .aix-task-track-tabs button,
     .aix-task-stage-tabs button {
         flex: 1;
-        justify-content: center;
-        padding: 10px 8px;
-        gap: 6px;
+        padding: 9px 8px;
         font-size: 16px;
+        gap: 6px;
+        white-space: nowrap;
     }
     .aix-task-stage-tabs button > span {
-        font-size: 12px;
+        font-size: 13px;
+    }
+    .aix-task-requirements,
+    .aix-task-submission fieldset {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .aix-task-requirements dd {
+        font-size: 16px;
+    }
+    .aix-task-requirements small {
+        display: block;
+        margin-left: 0;
+    }
+    .aix-task-brief {
+        padding: 20px 0 0;
     }
     .aix-task-workspace h2 {
         font-size: 23px;
     }
     .aix-task-window {
         padding-block: 12px 20px;
-    }
-    .aix-task-window small {
-        display: none;
     }
     .aix-task-receipt dl > div {
         grid-template-columns: 1fr;

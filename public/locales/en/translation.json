@@ -6562,7 +6562,7 @@
             "partners": "Partners"
         },
         "challengeWorkspace": {
-            "title": "Challenges & submissions",
+            "title": "Challenges",
             "eventLabel": "Zhekesong · AI+X Hackathon",
             "tracks": "Choose a track",
             "stages": "Choose a round",
@@ -6642,7 +6642,7 @@
             "legacyTitle": "Previous repository links",
             "legacyHint": "These previously saved links are for reference only and are not a formal submission for this round.",
             "finalTitle": "Final presentations",
-            "finalDescription": "October 25, 09:10–11:30. Tmall and Huawei presentations run in two rooms. Dual-track entrants present at different times; follow the on-site running order.",
+            "finalDescription": "Tmall and Huawei presentations run in two rooms. Dual-track entrants present at different times; follow the on-site running order.",
             "finalVenue": "Zhejiang University National Innovation and Entrepreneurship Demonstration Base · Sandun Innovation Space\n6F, Block C, Baogang Lifestyle Plaza",
             "registrationReceiptHint": "Registration saved. Choose your track and round to save a draft or submit your work for review.",
             "uploadFile": "Choose file",
@@ -6657,7 +6657,27 @@
             "uploadProgress": "Uploading {{progress}}%",
             "downloadFile": "Download {{field}}",
             "loginHint": "Sign in to prepare your submission",
-            "projectNameRequired": "Enter a project name before submitting for review."
+            "projectNameRequired": "Enter a project name before submitting for review.",
+            "roundRequirements": "Round requirements",
+            "timeLabel": "Time",
+            "participationLabel": "Participation",
+            "participation": {
+                "campus": "Online participation available",
+                "industry": "On-site development · Attendance required",
+                "semifinal": "Online development and submission",
+                "final": "On-site presentations"
+            },
+            "summaryFields": {
+                "githubUrl": "GitHub repository URL",
+                "modelscopeUrl": "ModelScope deployment URL",
+                "bpFileId": "BP file",
+                "demoFileId": "Demo video",
+                "projectName": "Project name"
+            },
+            "trackLabels": {
+                "industry": "Huawei track",
+                "campus": "Tmall track"
+            }
         },
         "trackScheduleOnline": "Online",
         "trackBadges": {

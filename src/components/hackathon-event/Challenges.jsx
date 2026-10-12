@@ -5,7 +5,7 @@ import { ArrowUpRight, CalendarDays, FileText, MapPin } from "lucide-react";
 import { safeWebUrl, eventTimestamp, registrationOpen } from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
 import api from "../../services/api";
-import AiXStageSubmission from "./AiXStageSubmission";
+import AiXStageSubmission, { requiredMaterialFields } from "./AiXStageSubmission";
 import "./AiXChallenges.css";
 import "./AiXRegistrationPreview.css";
 
@@ -102,6 +102,31 @@ export default function Challenges({ template, now, registrationState = {} }) {
               }).format(time)
             : "—";
     };
+    const formatWindow = (opensAt, closesAt) => {
+        const start = eventTimestamp(opensAt),
+            end = eventTimestamp(closesAt);
+        if (!Number.isFinite(start) || !Number.isFinite(end)) return "—";
+        const formatter = new Intl.DateTimeFormat("en-GB", {
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "Asia/Shanghai",
+        });
+        const parts = (value) =>
+            Object.fromEntries(
+                formatter.formatToParts(value).map((part) => [part.type, part.value])
+            );
+        const first = parts(start);
+        let last = parts(end);
+        const midnight = last.hour === "00" && last.minute === "00";
+        if (midnight) last = { ...parts(end - 86400000), hour: "24", minute: "00" };
+        const date = (value) => `${value.month}.${value.day}`;
+        const time = (value) => `${value.hour}:${value.minute}`;
+        return `${date(first)} ${time(first)} — ${date(first) === date(last) ? "" : `${date(last)} `}${time(last)}`;
+    };
+    const materialFields = requiredMaterialFields(gate, track, stage);
     const read = useCallback(
         async (signal) => {
             const response = await api.get("/hackathon/submissions", {
@@ -188,57 +213,85 @@ export default function Challenges({ template, now, registrationState = {} }) {
                 <h1>{label("title")}</h1>
                 <span>{label("eventLabel")}</span>
             </header>
-            <div className="aix-task-track-tabs" role="tablist" aria-label={label("tracks")}>
-                {tracks.map((id) => (
-                    <button
-                        key={id}
-                        type="button"
-                        role="tab"
-                        disabled={mutating}
-                        id={`task-track-${id}`}
-                        aria-selected={track === id}
-                        aria-controls="aix-task-panel"
-                        onClick={() => select(id, stage)}
-                    >
-                        {t(`aix.tracks.${id}.title`)}
-                    </button>
-                ))}
-            </div>
-            <div className="aix-task-stage-tabs" role="tablist" aria-label={label("stages")}>
-                {stages.map((id, index) => (
-                    <button
-                        key={id}
-                        type="button"
-                        role="tab"
-                        disabled={mutating}
-                        id={`task-stage-${id}`}
-                        aria-selected={stage === id}
-                        aria-controls="aix-task-panel"
-                        onClick={() => select(track, id)}
-                    >
-                        <span>0{index + 1}</span>
-                        {t(`aix.stages.${id}.title`)}
-                    </button>
-                ))}
+            <div className="aix-task-selectors">
+                <div className="aix-task-track-tabs" role="tablist" aria-label={label("tracks")}>
+                    {tracks.map((id) => (
+                        <button
+                            key={id}
+                            type="button"
+                            role="tab"
+                            disabled={mutating}
+                            id={`task-track-${id}`}
+                            aria-selected={track === id}
+                            aria-controls="aix-task-panel"
+                            onClick={() => select(id, stage)}
+                        >
+                            {label(`trackLabels.${id}`)}
+                        </button>
+                    ))}
+                </div>
+                <div className="aix-task-stage-tabs" role="tablist" aria-label={label("stages")}>
+                    {stages.map((id, index) => (
+                        <button
+                            key={id}
+                            type="button"
+                            role="tab"
+                            disabled={mutating}
+                            id={`task-stage-${id}`}
+                            aria-selected={stage === id}
+                            aria-controls="aix-task-panel"
+                            onClick={() => select(track, id)}
+                        >
+                            <span>0{index + 1}</span>
+                            {t(`aix.stages.${id}.title`)}
+                        </button>
+                    ))}
+                </div>
             </div>
             <div
                 role="tabpanel"
                 id="aix-task-panel"
                 aria-labelledby={`task-track-${track} task-stage-${stage}`}
             >
-                <section className="aix-task-window" aria-label={label("window")}>
-                    <div>
+                <section className="aix-task-window" aria-labelledby="aix-requirements-title">
+                    <header className="aix-task-panel-heading">
+                        <h2 id="aix-requirements-title">{label("roundRequirements")}</h2>
                         <span className={`aix-task-state is-${temporalState}`}>
                             {label(`states.${temporalState}`)}
                         </span>
-                        {window && (
-                            <p>
-                                <CalendarDays size={18} />
-                                {formatDate(window.opensAt)} — {formatDate(window.closesAt)}
+                    </header>
+                    <dl className="aix-task-requirements">
+                        <div>
+                            <dt>
+                                <CalendarDays size={17} aria-hidden="true" />
+                                {label("timeLabel")}
+                            </dt>
+                            <dd>
+                                {window ? formatWindow(window.opensAt, window.closesAt) : "—"}
                                 <small>{label("timezone")}</small>
-                            </p>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>
+                                <MapPin size={17} aria-hidden="true" />
+                                {label("participationLabel")}
+                            </dt>
+                            <dd>{label(`participation.${stage === "initial" ? track : stage}`)}</dd>
+                        </div>
+                        {stage !== "final" && (
+                            <div className="aix-task-material-summary">
+                                <dt>
+                                    <FileText size={17} aria-hidden="true" />
+                                    {label("requirements")}
+                                </dt>
+                                <dd>
+                                    {materialFields
+                                        .map((field) => label(`summaryFields.${field}`))
+                                        .join(" + ")}
+                                </dd>
+                            </div>
                         )}
-                    </div>
+                    </dl>
                     {stage !== "final" && (
                         <div className="aix-task-access" role="status">
                             <p>{label(`blocked.${reason}`)}</p>

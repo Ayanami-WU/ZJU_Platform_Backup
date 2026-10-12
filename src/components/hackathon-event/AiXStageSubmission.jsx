@@ -15,6 +15,18 @@ export const emptyMaterials = () => ({
 const materialKeys = ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"];
 const equalMaterials = (a, b) => materialKeys.every((key) => (a?.[key] || "") === (b?.[key] || ""));
 
+export const requiredMaterialFields = (gate, track, stage) => [
+    ...new Set([
+        "projectName",
+        ...(gate?.requiredFields ||
+            (stage === "initial"
+                ? ["githubUrl", "modelscopeUrl"]
+                : track === "campus"
+                  ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
+                  : ["githubUrl", "modelscopeUrl", "demoFileId"])),
+    ]),
+];
+
 export default function AiXStageSubmission({
     eventKey,
     track,
@@ -52,17 +64,7 @@ export default function AiXStageSubmission({
         onBusyChange?.(Boolean(busy || uploading));
         return () => onBusyChange?.(false);
     }, [busy, uploading, onBusyChange]);
-    const required = [
-        ...new Set([
-            "projectName",
-            ...(gate?.requiredFields ||
-                (stage === "initial"
-                    ? ["githubUrl", "modelscopeUrl"]
-                    : track === "campus"
-                      ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                      : ["githubUrl", "modelscopeUrl", "demoFileId"])),
-        ]),
-    ];
+    const required = requiredMaterialFields(gate, track, stage);
     const fields = required;
     const dirty = !equalMaterials(materials, record?.draft);
     const pendingFormal = record?.submitted && !equalMaterials(materials, record.submitted);
@@ -276,7 +278,10 @@ export default function AiXStageSubmission({
                                 (item) => String(item.id) === String(materials[field])
                             );
                             return (
-                                <div key={field} className="aix-task-field">
+                                <div
+                                    key={field}
+                                    className={`aix-task-field ${field === "projectName" ? "aix-task-field-wide" : ""} ${isFile ? "aix-task-field-upload" : ""}`}
+                                >
                                     <label htmlFor={`material-${track}-${stage}-${field}`}>
                                         <span>
                                             {label(`fields.${field}`)}{" "}

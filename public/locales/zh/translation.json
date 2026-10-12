@@ -6668,7 +6668,7 @@
             "partners": "合作阵容"
         },
         "challengeWorkspace": {
-            "title": "赛题 & 提交",
+            "title": "赛题",
             "eventLabel": "浙客松 · AI+X 破界黑客松",
             "tracks": "选择赛道",
             "stages": "选择比赛阶段",
@@ -6748,7 +6748,7 @@
             "legacyTitle": "历史仓库链接",
             "legacyHint": "此前保存的链接仅供参考，尚未计入本轮正式提交。",
             "finalTitle": "决赛路演",
-            "finalDescription": "10 月 25 日 09:10—11:30，天猫、华为两厅同步路演。兼报选手错开出场，具体顺序以现场安排为准。",
+            "finalDescription": "天猫、华为两厅同步路演。兼报选手错开出场，具体顺序以现场安排为准。",
             "finalVenue": "浙江大学国家级双创示范基地 · 三墩元空间\n宝港生活广场 C 座 6 楼",
             "registrationReceiptHint": "报名已保存。请前往对应赛道与轮次，保存草稿或正式提交作品。",
             "uploadFile": "选择文件",
@@ -6763,7 +6763,27 @@
             "uploadProgress": "上传中 {{progress}}%",
             "downloadFile": "下载{{field}}",
             "loginHint": "登录后填写本轮提交材料",
-            "projectNameRequired": "请填写项目名称后再正式提交。"
+            "projectNameRequired": "请填写项目名称后再正式提交。",
+            "roundRequirements": "本轮要求",
+            "timeLabel": "时间",
+            "participationLabel": "参赛方式",
+            "participation": {
+                "campus": "可线上参赛",
+                "industry": "线下现场开发 · 必须到场",
+                "semifinal": "线上完善与提交",
+                "final": "线下路演"
+            },
+            "summaryFields": {
+                "githubUrl": "GitHub 仓库链接",
+                "modelscopeUrl": "魔搭部署链接",
+                "bpFileId": "BP 文件",
+                "demoFileId": "Demo 视频",
+                "projectName": "项目名称"
+            },
+            "trackLabels": {
+                "industry": "华为赛道",
+                "campus": "天猫赛道"
+            }
         },
         "trackScheduleOnline": "线上",
         "trackBadges": {

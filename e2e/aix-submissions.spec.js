@@ -231,7 +231,7 @@ test("round submissions preserve draft isolation, failures, formal snapshots and
     await expect(page.getByText("尚未获得本赛道复赛资格", { exact: true })).toBeVisible();
     await expect(form.getByLabel(/商业计划书/)).toBeDisabled();
     await page.getByRole("tab", { name: /决赛/ }).click();
-    await expect(page.locator(".aix-task-final")).toContainText("09:10—11:30");
+    await expect(page.locator(".aix-task-requirements")).toContainText("10.25 09:10 — 11:30");
     await expect(page.locator(".aix-task-submission")).toHaveCount(0);
     await page.getByRole("tab", { name: /初赛/ }).click();
     state.data.serverNow = "2026-10-18T18:00:00+08:00";
