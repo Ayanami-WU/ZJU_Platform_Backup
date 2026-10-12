@@ -238,7 +238,6 @@ export default function AiXForums({ now, registrationState }) {
                                         <CalendarDays size={24} aria-hidden="true" />
                                     </span>
                                     <div>
-                                        <span>{t("aix.forumPage.timeLabel")}</span>
                                         <time dateTime={entrepreneurship.startsAt}>
                                             {t("aix.forumPage.dateTime")}
                                         </time>
@@ -249,7 +248,6 @@ export default function AiXForums({ now, registrationState }) {
                                         <MapPin size={24} aria-hidden="true" />
                                     </span>
                                     <div>
-                                        <span>{t("aix.forumPage.locationLabel")}</span>
                                         <strong>{t("aix.forumPage.venue")}</strong>
                                         <p>{t("aix.forumPage.address")}</p>
                                     </div>

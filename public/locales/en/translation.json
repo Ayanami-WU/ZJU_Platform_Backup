@@ -5797,9 +5797,7 @@
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
             "chapters": ["Technology", "Entrepreneurship", "Registration"],
-            "timeLabel": "Date & time",
-            "dateTime": "October 25 · 13:30",
-            "locationLabel": "Location",
+            "dateTime": "October 25 · 13:30–16:30",
             "venue": "Sandun Innovation Space",
             "address": "6F, Building C, Baogang Life Plaza",
             "attendeeLabel": "Attendee type",
@@ -6335,14 +6333,15 @@
                         "id": "technology",
                         "title": "Technical forum",
                         "theme": "AI technology trends & industry applications",
-                        "date": "10.18",
+                        "date": "October 18 · 09:00–11:15",
                         "location": "ZJU Zijingang Campus\nDuan Yongping Teaching Building 2–112",
                         "guests": [
                             {
                                 "id": "ye-xinjiang",
                                 "name": "Ye Xinjiang",
                                 "role": "CTO, Daily Interactive Co., Ltd.",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/ye-xinjiang.jpg"
                             },
                             {
                                 "id": "sun-yifei",
@@ -6373,7 +6372,7 @@
                         "id": "entrepreneurship",
                         "title": "Entrepreneurship forum",
                         "theme": "First principles of entrepreneurship in the AI era",
-                        "date": "10.25",
+                        "date": "October 25 · 13:30–16:30",
                         "location": "Sandun Entrepreneurship Space\nBaogang Life Plaza, Block C, Level 6",
                         "guests": [
                             {

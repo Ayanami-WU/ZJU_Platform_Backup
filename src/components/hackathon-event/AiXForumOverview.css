@@ -18,14 +18,23 @@
     font-weight: 600;
 }
 .aix-forum-place {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+    display: grid;
+    gap: 12px;
     flex-shrink: 0;
 }
+.aix-forum-place > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.aix-forum-place svg {
+    flex-shrink: 0;
+    color: var(--hx-accent-text);
+}
+
 .aix-forum-place time {
     font:
-        700 32px/1 ui-monospace,
+        700 20px/1.3 ui-monospace,
         monospace;
     color: var(--hx-accent-text);
 }
@@ -294,4 +303,18 @@
         grid-template-columns: 1fr;
         gap: 14px;
     }
+}
+
+.aix-forum-screen .aix-guest-portrait[data-photo="original"] {
+    mask-image: none;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    height: auto;
+    align-self: center;
+}
+.aix-guest-portrait[data-photo="original"] img {
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
 }

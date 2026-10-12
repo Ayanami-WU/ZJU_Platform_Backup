@@ -159,7 +159,7 @@
 }
 .aix-forum-event-info > div {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
 }
 .aix-forum-info-icon {

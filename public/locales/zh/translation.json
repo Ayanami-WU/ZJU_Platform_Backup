@@ -5903,9 +5903,7 @@
             "heroLink": "论坛介绍与独立报名",
             "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
             "chapters": ["技术论坛", "创业论坛", "论坛报名"],
-            "timeLabel": "活动时间",
-            "dateTime": "10月25日 13:30",
-            "locationLabel": "活动地点",
+            "dateTime": "10月25日 13:30–16:30",
             "venue": "三墩元空间",
             "address": "宝港生活广场 C 座 6 楼",
             "attendeeLabel": "参会身份",
@@ -6441,14 +6439,15 @@
                         "id": "technology",
                         "title": "技术论坛",
                         "theme": "AI技术趋势与产业应用",
-                        "date": "10.18",
+                        "date": "10月18日 09:00–11:15",
                         "location": "浙江大学紫金港校区\n段永平教学楼 2-112",
                         "guests": [
                             {
                                 "id": "ye-xinjiang",
                                 "name": "叶新江",
                                 "role": "每日互动股份有限公司 CTO",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/ye-xinjiang.jpg"
                             },
                             {
                                 "id": "sun-yifei",
@@ -6476,7 +6475,7 @@
                         "id": "entrepreneurship",
                         "title": "创业论坛",
                         "theme": "AI时代创业的第一性原理",
-                        "date": "10.25",
+                        "date": "10月25日 13:30–16:30",
                         "location": "三墩元空间\n宝港生活广场 C 座 6 楼",
                         "guests": [
                             {

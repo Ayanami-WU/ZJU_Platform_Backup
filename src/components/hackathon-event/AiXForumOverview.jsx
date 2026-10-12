@@ -1,13 +1,18 @@
+import { CalendarDays, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXForumOverview.css";
 
 function ForumGuest({ guest }) {
     return (
         <div className="aix-forum-speaker">
-            <div className="aix-guest-portrait" data-empty={!guest.photo || undefined}>
+            <div
+                className="aix-guest-portrait"
+                data-empty={!guest.photo || undefined}
+                data-photo={guest.photoUrl ? "original" : undefined}
+            >
                 {guest.photo && (
                     <img
-                        src={`/images/hackathon/ai-x/guests/${guest.id}.png`}
+                        src={guest.photoUrl || `/images/hackathon/ai-x/guests/${guest.id}.png`}
                         alt={guest.name}
                         loading="lazy"
                         width="240"
@@ -49,8 +54,14 @@ export default function AiXForumOverview() {
                                     <p>{forum.theme}</p>
                                 </header>
                                 <div className="aix-forum-place">
-                                    <time>{forum.date}</time>
-                                    <p>{forum.location}</p>
+                                    <div>
+                                        <CalendarDays size={22} aria-hidden="true" />
+                                        <time>{forum.date}</time>
+                                    </div>
+                                    <div>
+                                        <MapPin size={22} aria-hidden="true" />
+                                        <p>{forum.location}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="aix-forum-agenda">
