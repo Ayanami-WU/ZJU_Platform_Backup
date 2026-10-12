@@ -5226,7 +5226,7 @@
                 "industryFormat": "Individual entry · In person required",
                 "campusFormat": "Teams of 1–5 · Online participation",
                 "development": "On-site development",
-                "opens": "Opens online",
+                "opens": "Online qualifier",
                 "venue": "Venue",
                 "guidance": "Optional on-site mentoring",
                 "campusLocation": "ZJU Zijingang Campus",
@@ -5235,7 +5235,8 @@
                 "industryBrief": "Build an Agent or Skill for an industry challenge announced on site.",
                 "campusBrief": "Choose your own topic or enter an existing mature project.",
                 "semifinal": "Online semifinal",
-                "final": "Final · Sandun Metaspace"
+                "final": "Final · Sandun Metaspace",
+                "initialDeadline": "Due Oct 18, 17:00"
             }
         },
         "fields": {
@@ -5338,7 +5339,7 @@
         "resultsTitle": "Results",
         "resultsIntro": "Award winners, projects, speeches and forum highlights in one place.",
         "industryStages": "Huawei Advanced Track · Stages",
-        "campusSchedule": "Online launch Oct 13; optional on-site mentoring Oct 18; online semifinal Oct 19–23; finals Oct 25.",
+        "campusSchedule": "Online qualifier: Oct 13–18, closing at 17:00; optional on-site mentoring Oct 18, 13:00–17:00; online semifinal Oct 19–23; final Oct 25.",
         "fieldHints": {
             "name": "",
             "studentId": "",
@@ -6036,16 +6037,16 @@
                     ],
                     "schedule": [
                         {
-                            "date": "10.13",
-                            "title": "Opens online",
-                            "note": "Choose your own topic or enter an existing mature project"
+                            "date": "10.13–18",
+                            "title": "Online qualifier",
+                            "note": "Choose your own topic or enter an existing mature project",
+                            "time": "Due Oct 18, 17:00"
                         },
                         {
                             "date": "10.18",
                             "time": "13:00–17:00",
                             "title": "Optional on-site mentoring",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
-                            "note": "Initial-round project due at 17:00"
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
                         },
                         {
                             "date": "10.19–23",
@@ -6083,12 +6084,6 @@
                         }
                     ],
                     "schedule": [
-                        {
-                            "date": "10.18",
-                            "time": "09:00–11:15",
-                            "title": "Technology forum",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
-                        },
                         {
                             "date": "10.18",
                             "time": "13:00–17:00",

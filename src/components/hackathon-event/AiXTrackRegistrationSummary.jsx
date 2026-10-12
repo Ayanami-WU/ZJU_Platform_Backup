@@ -31,11 +31,13 @@ export default function AiXTrackRegistrationSummary({ track }) {
                 <div>
                     <dt>
                         <CalendarDays size={18} />
-                        {industry ? copy("development", "现场开发") : copy("opens", "线上开启")}
+                        {industry ? copy("development", "现场开发") : copy("opens", "线上初赛")}
                     </dt>
                     <dd>
-                        <strong>{industry ? "10.18" : "10.13"}</strong>
-                        {industry && <span>13:00–17:00</span>}
+                        <strong>{industry ? "10.18" : "10.13–18"}</strong>
+                        <span>
+                            {industry ? "13:00–17:00" : copy("initialDeadline", "10.18 17:00 截止")}
+                        </span>
                     </dd>
                 </div>
                 <div>
