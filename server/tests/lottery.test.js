@@ -563,6 +563,31 @@ test("HTTP permissions, screenshot decoding, proof ownership, and public data mi
         const eventDetail = await (await req(`/${event.id}?event=${eventKey}`, 3)).json();
         assert.equal(eventDetail.entry.like_count, 18);
         assert.equal(eventDetail.entry.status, "pending");
+        assert.equal(eventDetail.entry.id, eventEntry.id);
+        assert.match(eventDetail.entry.ticket, /^[0-9A-F]{16}$/);
+        assert.equal(eventDetail.entry.has_proof, 1);
+        const repeated = await req(`/${event.id}/entries`, 3, {
+            method: "POST",
+            body: eventForm,
+        });
+        assert.equal(repeated.status, 200);
+        assert.deepEqual(await repeated.json(), { id: eventEntry.id, duplicate: true });
+        const reloaded = await (await req(`/${event.id}?event=${eventKey}`, 3)).json();
+        assert.equal(reloaded.entry.ticket, eventDetail.entry.ticket);
+        assert.equal((await req(`/admin/${event.id}/entries`, 3)).status, 403);
+        const roster = await (await req(`/admin/${event.id}/entries`, 1)).json();
+        assert.equal(roster.total, 1);
+        assert.equal(roster.items[0].id, eventEntry.id);
+        assert.equal(roster.items[0].status, "pending");
+        assert.equal(roster.items[0].like_count, 18);
+        assert.equal(roster.items[0].note, "event private note");
+        const saved = await db.get(
+            "SELECT ticket, status, proof IS NOT NULL AS has_proof FROM lottery_entries WHERE id=?",
+            eventEntry.id
+        );
+        assert.equal(saved.ticket, eventDetail.entry.ticket);
+        assert.equal(saved.status, "pending");
+        assert.equal(saved.has_proof, 1);
         const reviewUrl = `/admin/${event.id}/entries/${eventEntry.id}/review`;
         const review = {
             method: "POST",

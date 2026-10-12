@@ -5827,7 +5827,9 @@
                             "id": "school-8",
                             "name": "浙江大学信息与电子学院"
                         }
-                    ]
+                    ],
+                    "id": "colleges",
+                    "published": false
                 },
                 {
                     "label": "Track sponsors",
@@ -5840,7 +5842,9 @@
                             "id": "huawei",
                             "name": "华为"
                         }
-                    ]
+                    ],
+                    "id": "sponsors",
+                    "published": true
                 },
                 {
                     "label": "Supporting companies",
@@ -5869,7 +5873,9 @@
                             "id": "bonjour",
                             "name": "Bonjour！"
                         }
-                    ]
+                    ],
+                    "id": "companies",
+                    "published": true
                 },
                 {
                     "label": "Supporting organizations",
@@ -5918,10 +5924,12 @@
                             "id": "novax",
                             "name": "NovaX"
                         }
-                    ]
+                    ],
+                    "id": "organizations",
+                    "published": false
                 }
             ],
-            "organizers": "Guidance: ZJU School of Innovation and Entrepreneurship · Organizer: Tuozhe AI Ecosystem",
+            "organizers": "Guidance: ZJU School of Innovation and Entrepreneurship · Organizers: Tuozhe AI Ecosystem, Zhejiang University Qiushi Elite Eagle Club",
             "teamSizeLabel": "Tmall team size",
             "teamSizeHint": "2–5 members for the Tmall track",
             "teamSizeError": "Enter a Tmall team size of 2–5.",

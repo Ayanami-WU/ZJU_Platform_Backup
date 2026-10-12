@@ -5933,7 +5933,9 @@
                             "id": "school-8",
                             "name": "浙江大学信息与电子学院"
                         }
-                    ]
+                    ],
+                    "id": "colleges",
+                    "published": false
                 },
                 {
                     "label": "赞助企业",
@@ -5946,7 +5948,9 @@
                             "id": "huawei",
                             "name": "华为"
                         }
-                    ]
+                    ],
+                    "id": "sponsors",
+                    "published": true
                 },
                 {
                     "label": "支持企业",
@@ -5975,7 +5979,9 @@
                             "id": "bonjour",
                             "name": "Bonjour！"
                         }
-                    ]
+                    ],
+                    "id": "companies",
+                    "published": true
                 },
                 {
                     "label": "支持组织",
@@ -6024,10 +6030,12 @@
                             "id": "novax",
                             "name": "NovaX"
                         }
-                    ]
+                    ],
+                    "id": "organizations",
+                    "published": false
                 }
             ],
-            "organizers": "指导单位：浙江大学创新创业学院 · 主办单位：拓浙 AI 生态",
+            "organizers": "指导单位：浙江大学创新创业学院 · 主办单位：拓浙 AI 生态、浙江大学求是强鹰俱乐部",
             "teamSizeLabel": "天猫赛道队伍人数",
             "teamSizeHint": "参加天猫赛道时填写，含本人2–5人",
             "teamSizeError": "请填写天猫赛道队伍人数（2–5人）",

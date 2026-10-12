@@ -1718,16 +1718,7 @@
     color: var(--hx-muted);
     font-size: 13px;
 }
-.aix-partners-october12 > div:first-child,
-.aix-partners-october12 > div:nth-child(3),
-.aix-partners-october12 > div:nth-child(4) {
-    grid-column: 1 / -1;
-}
-.aix-partners-october12 > div:first-child .aix-partner-members {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px 20px;
-}
-.aix-partners-october12 > div:nth-child(3) .aix-partner-members {
+.aix-partners-october12 [data-partner-group="companies"] .aix-partner-members {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .aix-recap-additional {
@@ -1741,9 +1732,7 @@
     margin-top: 8px;
 }
 @media (max-width: 767px) {
-    .aix-partners-october12 > div:first-child .aix-partner-members,
-    .aix-partners-october12 > div:nth-child(3) .aix-partner-members,
-    .aix-partners-october12 > div:nth-child(4) .aix-partner-members {
+    .aix-partners-october12 [data-partner-group] .aix-partner-members {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
     }

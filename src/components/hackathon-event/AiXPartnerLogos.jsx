@@ -96,21 +96,23 @@ export default function AiXPartnerLogos() {
     const { t } = useTranslation();
     return (
         <dl className="aix-partner-groups aix-partners-october12">
-            {t("aix.october12.partnerGroups", { returnObjects: true }).map((group) => (
-                <div key={group.label}>
-                    <dt>{group.label}</dt>
-                    <dd>
-                        <ul className="aix-partner-members">
-                            {group.members.map((member) => (
-                                <li key={member.id}>
-                                    <AiXBrand id={member.id} />
-                                    <span className="aix-partner-name">{member.name}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </dd>
-                </div>
-            ))}
+            {t("aix.october12.partnerGroups", { returnObjects: true })
+                .filter((group) => group.published)
+                .map((group) => (
+                    <div key={group.id} data-partner-group={group.id}>
+                        <dt>{group.label}</dt>
+                        <dd>
+                            <ul className="aix-partner-members">
+                                {group.members.map((member) => (
+                                    <li key={member.id}>
+                                        <AiXBrand id={member.id} />
+                                        <span className="aix-partner-name">{member.name}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </dd>
+                    </div>
+                ))}
         </dl>
     );
 }
