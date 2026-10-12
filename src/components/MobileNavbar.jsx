@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Calendar, Home, Trees, UserCircle } from "lucide-react";
+import { Calendar, Home, Trees, Trophy, UserCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
@@ -83,6 +83,13 @@ const MobileNavbar = () => {
             ariaLabel: t("nav.mobile_events"),
         },
         {
+            key: "hackathon",
+            path: "/hackathon",
+            icon: Trophy,
+            label: t("nav.hackathon"),
+            ariaLabel: t("nav.hackathon"),
+        },
+        {
             key: "articles",
             path: "/articles",
             icon: Trees,
@@ -102,6 +109,11 @@ const MobileNavbar = () => {
         if (key === "me") {
             return location.pathname.startsWith("/user/");
         }
+        if (key === "hackathon") {
+            return (
+                location.pathname === "/hackathon" || location.pathname.startsWith("/hackathon/")
+            );
+        }
         if (key === "articles") {
             return location.pathname.startsWith("/articles");
         }
@@ -117,7 +129,7 @@ const MobileNavbar = () => {
             aria-label={t("nav.mobile_tabbar")}
         >
             <div className="pb-[env(safe-area-inset-bottom)]">
-                <div className="grid h-[72px] grid-cols-4 px-1.5">
+                <div className="grid h-[72px] grid-cols-5 px-1.5">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = isItemActive(item.path, item.key);
@@ -142,7 +154,7 @@ const MobileNavbar = () => {
                         const inner = (
                             <motion.div
                                 whileTap={prefersReducedMotion ? undefined : tapPress}
-                                className="flex min-w-0 flex-col items-center gap-1.5"
+                                className="flex w-full min-w-0 flex-col items-center gap-1.5"
                             >
                                 <div className={iconClassName}>
                                     {isActive && (
@@ -167,7 +179,7 @@ const MobileNavbar = () => {
                                     )}
                                 </div>
                                 <span
-                                    className={`max-w-full truncate px-0.5 text-[12px] leading-none transition-all ${isActive ? "font-semibold opacity-100" : "font-medium opacity-85"}`}
+                                    className={`max-w-full truncate px-0.5 text-[12px] max-[374px]:px-0 max-[374px]:text-[11px] leading-none transition-all ${isActive ? "font-semibold opacity-100" : "font-medium opacity-85"}`}
                                 >
                                     {item.label}
                                 </span>
