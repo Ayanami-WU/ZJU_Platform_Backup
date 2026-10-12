@@ -109,21 +109,6 @@ export default function AiXForumOverview() {
                                     </section>
                                 )}
                             </div>
-                            <footer className="aix-forum-screen-footer">
-                                {forum.id === "technology" && (
-                                    <section className="aix-forum-host">
-                                        <h3>{copy.hostLabel}</h3>
-                                        <ForumGuest guest={copy.host} />
-                                    </section>
-                                )}
-                                {forum.teasers && (
-                                    <div className="aix-forum-teasers">
-                                        {forum.teasers.map((text) => (
-                                            <span key={text}>{text}</span>
-                                        ))}
-                                    </div>
-                                )}
-                            </footer>
                         </div>
                     </section>
                 );
