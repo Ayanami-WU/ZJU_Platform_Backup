@@ -52,7 +52,7 @@
 }
 .aix-forum-topic-row {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: stretch;
 }
 .aix-forum-topic-row + .aix-forum-topic-row {
@@ -207,9 +207,6 @@
     font-size: 30px;
 }
 @media (max-width: 1100px) and (min-width: 768px) {
-    .aix-forum-topic-row {
-        grid-template-columns: 1fr 1.1fr;
-    }
     .aix-forum-speakers {
         padding-inline: 16px;
     }
@@ -385,22 +382,23 @@
     font-weight: 600;
 }
 .aix-forum-topic-row[data-roundtable] {
-    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
 }
 .aix-forum-topic-row[data-roundtable] .aix-forum-speakers {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(var(--aix-roundtable-count, 4), minmax(0, 1fr));
     padding-block: 20px;
-    gap: 16px;
+    gap: 12px;
+    align-items: start;
 }
 .aix-forum-topic-row[data-roundtable] .aix-forum-speaker strong {
     font-size: 20px;
 }
 .aix-forum-guest-label {
-    display: block;
+    display: inline;
     color: var(--hx-accent-text);
     font-size: 15px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-left: 6px;
 }
 .aix-forum-screen .aix-forum-host .aix-forum-speaker strong,
 .aix-forum-other-guests .aix-forum-speaker strong {
@@ -473,5 +471,36 @@
     .aix-forum-screen-footer {
         flex-wrap: wrap;
         gap: 12px;
+    }
+}
+
+.aix-forum-topic-row:not([data-roundtable]) .aix-forum-speaker {
+    gap: 28px;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speaker > div:last-child {
+    width: 100%;
+}
+.aix-forum-topic-row[data-roundtable] .aix-forum-speaker strong {
+    display: block;
+    min-height: 28px;
+    white-space: nowrap;
+}
+.aix-forum-topic-row[data-roundtable] .aix-guest-portrait {
+    width: 74px;
+    height: 80px;
+    margin-bottom: 4px;
+}
+.aix-forum-screen .aix-forum-topic-row[data-roundtable] .aix-guest-portrait[data-photo="original"] {
+    height: 74px;
+    margin-block: 3px 7px;
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .aix-forum-topic-row[data-roundtable] .aix-forum-speakers {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 767px) {
+    .aix-forum-topic-row:not([data-roundtable]) .aix-forum-speaker {
+        gap: 18px;
     }
 }

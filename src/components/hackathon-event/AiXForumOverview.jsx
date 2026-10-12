@@ -22,8 +22,8 @@ function ForumGuest({ guest, label }) {
             </div>
             <div>
                 <strong>
-                    {label && <span className="aix-forum-guest-label">{label}</span>}
                     {guest.name}
+                    {label && <span className="aix-forum-guest-label">{label}</span>}
                 </strong>
                 <p>{guest.role}</p>
             </div>
@@ -74,6 +74,9 @@ export default function AiXForumOverview() {
                                     <article
                                         className="aix-forum-topic-row"
                                         data-roundtable={topic.guestIds.length > 1 || undefined}
+                                        style={{
+                                            "--aix-roundtable-count": topic.guestIds.length + 1,
+                                        }}
                                         key={topic.speaker}
                                     >
                                         <div className="aix-forum-speakers">
