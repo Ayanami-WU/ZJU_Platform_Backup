@@ -1,0 +1,17 @@
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="partners"]
+    #aix-partners-title.aix-partners-page {
+    padding-inline: clamp(16px, 3vw, 48px);
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="partners"]
+    #aix-partners-title.aix-partners-page
+    .aix-page-body {
+    justify-content: flex-start;
+}
+
+#aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-partner-members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 560px;
+    margin-inline: auto;
+}

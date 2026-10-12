@@ -1,8 +1,6 @@
-import AiXOrganizers from "./AiXOrganizers";
 import { useState } from "react";
 import { Pause, Play, Trophy, Medal, Gift, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import AiXPartnerLogos from "./AiXPartnerLogos";
 import "./AiXOverview.css";
 import "./AiXTrackSchedule.css";
 
@@ -248,21 +246,6 @@ export default function AiXOverview({ state }) {
                             </article>
                         ))}
                     </div>
-                </div>
-            </section>
-            <section
-                id="aix-partners-title"
-                className="aix-page"
-                data-aix-chapter
-                aria-labelledby="aix-partners-heading"
-            >
-                <div className="aix-page-body">
-                    <header className="aix-page-heading">
-                        <span>04</span>
-                        <h2 id="aix-partners-heading">{copy.partnersTitle}</h2>
-                    </header>
-                    <AiXOrganizers groups={copy.organizers} />
-                    <AiXPartnerLogos />
                 </div>
             </section>
         </div>

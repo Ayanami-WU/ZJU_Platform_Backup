@@ -1,13 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { List } from "lucide-react";
 import { useTranslation } from "react-i18next";
-export const AIX_CHAPTER_IDS = [
-    "aix-overview",
-    "aix-tracks",
-    "aix-rewards",
-    "aix-partners-title",
-    "registration-form",
-];
+export const AIX_CHAPTER_IDS = ["aix-overview", "aix-tracks", "aix-rewards", "registration-form"];
 export default function AiXChapters({
     containerRef,
     onSelect,

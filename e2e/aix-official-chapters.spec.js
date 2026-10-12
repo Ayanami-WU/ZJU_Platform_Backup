@@ -3,7 +3,7 @@ import fs from "node:fs";
 const template = JSON.parse(
     fs.readFileSync(new URL("../shared/hackathonAiX.json", import.meta.url), "utf8")
 );
-test("three visible tabs, five paged screens and unpublished results remain guarded", async ({
+test("four visible tabs, four paged screens and unpublished results remain guarded", async ({
     page,
 }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -16,8 +16,8 @@ test("three visible tabs, five paged screens and unpublished results remain guar
         r.fulfill({ json: { events: [template], activeEventKey: template.event.key } })
     );
     await page.goto("/hackathon/2");
-    await expect(page.locator(".hx-nav a")).toHaveCount(3);
-    await expect(page.locator(".aix-chapters button")).toHaveCount(5);
+    await expect(page.locator(".hx-nav a")).toHaveCount(4);
+    await expect(page.locator(".aix-chapters button")).toHaveCount(4);
     await expect(page.locator(".hx-nav a").nth(2)).toContainText("即将揭晓");
     await page.locator(".aix-chapters-toggle").click();
     await page.locator(".aix-chapters button").nth(2).click();
@@ -33,6 +33,24 @@ test("three visible tabs, five paged screens and unpublished results remain guar
         "location"
     );
     await expect(page.locator(".hx-nav a[href$='/results']")).toHaveCount(0);
+    await page.locator('.hx-nav a[href$="/partners"]').click();
+    await expect(page).toHaveURL(/\/hackathon\/2\/partners$/);
+    await expect(page.getByRole("heading", { name: "合作阵容", exact: true })).toBeVisible();
+    await expect(page.locator(".aix-organizers-group")).toHaveCount(2);
+    await expect(page.locator(".aix-partner-panels > div")).toHaveCount(3);
+    await expect(page.locator('[data-partner-group="sponsors"] [data-partner]')).toHaveCount(2);
+    await expect(
+        page.locator('[data-partner-group="companies"] [data-partner="tianmao"]')
+    ).toHaveCount(0);
+    await expect(
+        page.locator('[data-partner-group="companies"] [data-partner="huawei"]')
+    ).toHaveCount(0);
+    await expect(page.locator(".aix-chapters")).toHaveCount(0);
+    await page.goto("/hackathon/2#aix-partners-title");
+    await expect(page).toHaveURL(/\/hackathon\/2\/partners$/);
+    await page.locator('.hx-nav a[href="/hackathon/2"]').click();
+    await expect(page.locator("#aix-partners-title")).toHaveCount(0);
+    await expect(page.locator(".aix-chapters button")).toHaveCount(4);
     await page.goto("/hackathon/2/results");
     await expect(page).toHaveURL(/\/hackathon\/2\/results$/);
     await expect(page.locator(".aix-pending-page h1")).toHaveText("赛后公布");
@@ -42,7 +60,7 @@ test("three visible tabs, five paged screens and unpublished results remain guar
     await expect(page.locator(".hx-nav a[href$='/media']")).toHaveCount(0);
     await page.goto("/hackathon/2/media");
     await expect(page).toHaveURL(/\/hackathon\/2\/media$/);
-    await expect(page.locator(".hx-nav a")).toHaveCount(3);
+    await expect(page.locator(".hx-nav a")).toHaveCount(4);
 });
 
 test("race overview stays usable with an older locale missing track badges", async ({ page }) => {

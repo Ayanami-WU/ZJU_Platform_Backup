@@ -5794,7 +5794,7 @@
             "industryMaterials": "技术作品 + Demo"
         },
         "official": {
-            "chapters": ["主页", "赛制", "奖励", "合作", "报名"],
+            "chapters": ["主页", "赛制", "奖励", "报名"],
             "chapterNav": "介绍页章节",
             "totalPrize": "奖品与奖金总价值",
             "tracksTitle": "比赛赛道",
@@ -6420,18 +6420,25 @@
             },
             "partnerGroups": [
                 {
-                    "id": "companies",
-                    "label": "合作企业",
+                    "id": "sponsors",
+                    "label": "联合赞助",
                     "published": true,
                     "members": [
-                        {
-                            "id": "huawei",
-                            "name": "华为"
-                        },
                         {
                             "id": "tianmao",
                             "name": "天猫校园"
                         },
+                        {
+                            "id": "huawei",
+                            "name": "华为"
+                        }
+                    ]
+                },
+                {
+                    "id": "companies",
+                    "label": "合作企业",
+                    "published": true,
+                    "members": [
                         {
                             "id": "aliyun",
                             "name": "阿里云"
@@ -6655,9 +6662,10 @@
         "workspaceTabs": {
             "intro": "赛事",
             "forums": "论坛",
-            "challenges": "赛题&提交",
+            "challenges": "赛题",
             "media": "照片直播",
-            "results": "成果"
+            "results": "成果",
+            "partners": "合作阵容"
         },
         "challengeWorkspace": {
             "title": "赛题 & 提交",

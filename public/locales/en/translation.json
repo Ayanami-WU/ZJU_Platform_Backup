@@ -5688,7 +5688,7 @@
             "industryMaterials": "Technical project + Demo"
         },
         "official": {
-            "chapters": ["Overview", "Format", "Rewards", "Partners", "Register"],
+            "chapters": ["Home", "Format", "Prizes", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -6314,18 +6314,25 @@
             },
             "partnerGroups": [
                 {
-                    "id": "companies",
-                    "label": "Partner companies",
+                    "id": "sponsors",
+                    "label": "Joint sponsors",
                     "published": true,
                     "members": [
-                        {
-                            "id": "huawei",
-                            "name": "华为"
-                        },
                         {
                             "id": "tianmao",
                             "name": "Tmall Campus"
                         },
+                        {
+                            "id": "huawei",
+                            "name": "华为"
+                        }
+                    ]
+                },
+                {
+                    "id": "companies",
+                    "label": "Partner companies",
+                    "published": true,
+                    "members": [
                         {
                             "id": "aliyun",
                             "name": "Alibaba Cloud"
@@ -6549,9 +6556,10 @@
         "workspaceTabs": {
             "intro": "Event",
             "forums": "Forums",
-            "challenges": "Challenges & submissions",
+            "challenges": "Challenges",
             "media": "Photo live",
-            "results": "Results"
+            "results": "Results",
+            "partners": "Partners"
         },
         "challengeWorkspace": {
             "title": "Challenges & submissions",

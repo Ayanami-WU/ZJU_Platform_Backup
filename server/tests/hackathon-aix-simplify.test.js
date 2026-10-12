@@ -76,9 +76,20 @@ test("AI+X adds an independent forum tab and retains direct pending-page links w
         "intro",
         "forums",
         "challenges",
+        "partners",
         "media",
         "results",
     ]);
+    assert.equal(
+        resolveEventLocation({ pathname: "/hackathon/2/partners" }, schedule).view,
+        "partners"
+    );
+    assert.equal(resolveEventLocation({ pathname: "/hackathon/1/partners" }, schedule), null);
+    assert.equal(
+        resolveEventLocation({ pathname: "/hackathon/2", hash: "#aix-partners-title" }, schedule)
+            .url,
+        "/hackathon/2/partners"
+    );
     for (const view of ["media", "results"]) {
         assert.equal(
             resolveEventLocation({ pathname: `/hackathon/2/${view}`, hash: "#old" }, schedule).url,

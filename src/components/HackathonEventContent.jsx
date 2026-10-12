@@ -12,6 +12,7 @@ import Results from "./hackathon-event/Results";
 import LotteryPage from "../features/lottery/LotteryPage";
 import AiXForums from "./hackathon-event/AiXForums";
 import AiXOverview from "./hackathon-event/AiXOverview";
+import AiXPartners from "./hackathon-event/AiXPartners";
 import { eventTimestamp } from "../utils/hackathonAiX";
 import Program from "./hackathon-event/Program";
 
@@ -29,6 +30,7 @@ export default function HackathonEventContent({
     const navigate = useNavigate();
     const switchView = (next, track) =>
         navigate(getEventUrl(template.event.key, next, { search: track ? `?track=${track}` : "" }));
+    if (view === "partners") return <AiXPartners />;
     if (view === "forums") return <AiXForums now={now} registrationState={registrationState} />;
     if (view === "lottery")
         return <LotteryPage eventKey={template.event.key} eventTitle={template.event.title} />;

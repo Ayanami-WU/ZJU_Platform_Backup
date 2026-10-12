@@ -3,7 +3,7 @@ import eventRoutes from "../../shared/hackathonRoutes.json" with { type: "json" 
 export const EVENT_VIEWS = ["intro", "challenges", "media", "results"];
 export const getEventViews = (eventKey) =>
     eventKey === "zhekesong-ai-x-2026"
-        ? ["intro", "forums", "challenges", "media", "results"]
+        ? ["intro", "forums", "challenges", "partners", "media", "results"]
         : EVENT_VIEWS;
 
 const readEventPath = (location = {}) => {
@@ -17,7 +17,9 @@ const readEventPath = (location = {}) => {
         return {
             eventKey,
             view,
-            invalid: segments.length > 2 || ![...EVENT_VIEWS, "lottery", "forums"].includes(view),
+            invalid:
+                segments.length > 2 ||
+                ![...EVENT_VIEWS, "lottery", "forums", "partners"].includes(view),
         };
     } catch {
         return { invalid: true };
@@ -52,12 +54,24 @@ export const resolveEventLocation = (location = {}, schedule = {}) => {
                   item.event.key === path.eventKey || item.results.competitionSlug === path.eventKey
           )
         : events.find((item) => item.event.key === schedule.activeEventKey) || events[0];
-    if (!template || (path?.view === "forums" && template.event.key !== "zhekesong-ai-x-2026"))
+    if (
+        !template ||
+        (["forums", "partners"].includes(path?.view) &&
+            template.event.key !== "zhekesong-ai-x-2026")
+    )
         return null;
-    const requestedView = getEventView(location);
+    const legacyPartnersLink =
+        template.event.key === "zhekesong-ai-x-2026" &&
+        getEventView(location) === "intro" &&
+        location.hash === "#aix-partners-title";
+    const requestedView = legacyPartnersLink ? "partners" : getEventView(location);
     return {
         template,
         view: requestedView,
-        url: getEventUrl(template.event.key, requestedView, location),
+        url: getEventUrl(
+            template.event.key,
+            requestedView,
+            legacyPartnersLink ? { ...location, hash: "" } : location
+        ),
     };
 };

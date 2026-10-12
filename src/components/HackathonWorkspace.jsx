@@ -128,7 +128,9 @@ export default function HackathonWorkspace({ template, schedule }) {
                     value={event.key}
                     now={now}
                     onChange={(key) =>
-                        navigate(getEventUrl(key, view === "forums" ? "intro" : view))
+                        navigate(
+                            getEventUrl(key, ["forums", "partners"].includes(view) ? "intro" : view)
+                        )
                     }
                 />
                 <nav className="hx-nav" aria-label={t("aix.navigation")}>
@@ -212,11 +214,11 @@ export default function HackathonWorkspace({ template, schedule }) {
             )}
             <div
                 id="hx-event-content"
-                className={`hx-page ${!["intro", "media", "forums"].includes(view) ? "hx-interior" : ""}`}
+                className={`hx-page ${!["intro", "media", "forums", "partners"].includes(view) ? "hx-interior" : ""}`}
                 data-view={view}
                 key={`${event.key}:${view}`}
             >
-                {!["intro", "media", "forums"].includes(view) && (
+                {!["intro", "media", "forums", "partners"].includes(view) && (
                     <div className="hx-page-scenery" aria-hidden="true">
                         <div className="hx-event-backdrop" />
                         <div className="hx-event-grid" />

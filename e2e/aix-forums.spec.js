@@ -64,8 +64,8 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         return route.continue();
     });
     await page.goto("/hackathon/2/forums?session=technology#forum-registration");
-    await expect(page.locator(".hx-nav a")).toHaveCount(3);
-    await expect(page.locator(".hx-nav a")).toHaveText(["赛事", "论坛", /赛题&提交/]);
+    await expect(page.locator(".hx-nav a")).toHaveCount(4);
+    await expect(page.locator(".hx-nav a")).toHaveText(["赛事", "论坛", "赛题", "合作阵容"]);
     const form = page.locator(".aix-forum-signup form");
     await expect(form.locator('input[type="checkbox"]')).toHaveCount(0);
     await expect(form.getByLabel(/姓名/)).toHaveValue("注册姓名");
