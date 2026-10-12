@@ -134,9 +134,18 @@
 .aix-track-summary-location-unit {
     white-space: nowrap;
 }
-.aix-track-summary-stage-details .aix-track-summary-stage-note {
-    margin-top: 5px;
-    color: var(--hx-muted);
+.aix-track-summary-attendance {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border: 1px solid color-mix(in srgb, var(--hx-accent-text) 45%, transparent);
+    border-radius: 4px;
+    color: var(--hx-accent-text);
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.6;
+    white-space: nowrap;
+    vertical-align: baseline;
 }
 @media (max-width: 900px) {
     :root

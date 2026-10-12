@@ -98,12 +98,18 @@
 .aix-track-location-unit {
     white-space: nowrap;
 }
-.aix-track-stage-note {
-    margin: 6px 0 0;
-    font-size: 15px;
+.aix-track-attendance {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border: 1px solid color-mix(in srgb, var(--hx-accent-text) 45%, transparent);
+    border-radius: 4px;
+    color: var(--hx-accent-text);
+    font-size: 13px;
+    font-weight: 750;
     line-height: 1.6;
-    font-weight: 600;
-    color: var(--hx-muted);
+    white-space: nowrap;
+    vertical-align: baseline;
 }
 @media (max-width: 767px) {
     .aix-track-badges {

@@ -6098,7 +6098,8 @@
                             "title": "Optional on-site mentoring",
                             "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
                             "label": "Mentoring",
-                            "note": "Optional attendance"
+                            "note": "Optional attendance",
+                            "attendance": "Optional"
                         },
                         {
                             "date": "10.19–10.23",
@@ -6144,7 +6145,8 @@
                             "title": "On-site development · Attendance required",
                             "note": "On-site challenge and development · Attendance required",
                             "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
-                            "label": "Qualifier"
+                            "label": "Qualifier",
+                            "attendance": "Required"
                         },
                         {
                             "date": "10.19–10.23",

@@ -59,11 +59,13 @@ export default function AiXTrackRegistrationSummary({ track }) {
                                                 part
                                             )
                                         )}
+                                    {step.attendance && (
+                                        <span className="aix-track-summary-attendance">
+                                            {step.attendance}
+                                        </span>
+                                    )}
                                 </span>
                             </p>
-                            {step.note && (
-                                <p className="aix-track-summary-stage-note">{step.note}</p>
-                            )}
                         </div>
                     </li>
                 ))}

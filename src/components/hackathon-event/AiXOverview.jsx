@@ -142,13 +142,13 @@ export default function AiXOverview({ state }) {
                                                                     part
                                                                 )
                                                             )}
+                                                        {step.attendance && (
+                                                            <span className="aix-track-attendance">
+                                                                {step.attendance}
+                                                            </span>
+                                                        )}
                                                     </span>
                                                 </p>
-                                                {step.note && (
-                                                    <p className="aix-track-stage-note">
-                                                        {step.note}
-                                                    </p>
-                                                )}
                                             </div>
                                         </li>
                                     ))}
