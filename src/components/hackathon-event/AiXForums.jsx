@@ -8,7 +8,11 @@ import { getEventUrl } from "../../utils/hackathonRoute";
 import "./AiXForums.css";
 export default function AiXForums({ now, registrationState }) {
     const { t } = useTranslation();
-    const { hash } = useLocation();
+    const forumOverview = t("aix.pages.forumOverview", { returnObjects: true });
+    const { hash, search } = useLocation();
+    const requestedSession = config.sessions.find(
+        (session) => session.key === new URLSearchParams(search).get("session")
+    )?.key;
     const { user, loading: authLoading, onLogin } = registrationState;
     const [registrations, setRegistrations] = useState([]),
         [selected, setSelected] = useState([]);
@@ -26,7 +30,7 @@ export default function AiXForums({ now, registrationState }) {
     useEffect(() => {
         let active = true;
         setRegistrations([]);
-        setSelected([]);
+        setSelected(requestedSession ? [requestedSession] : []);
         setSaved(false);
         setBusy(false);
         setError("");
@@ -40,7 +44,12 @@ export default function AiXForums({ now, registrationState }) {
             .then(({ data }) => {
                 if (!active) return;
                 setRegistrations(data.registrations);
-                setSelected(data.registrations.map((r) => r.forumKey));
+                setSelected([
+                    ...new Set([
+                        ...data.registrations.map((r) => r.forumKey),
+                        ...(requestedSession ? [requestedSession] : []),
+                    ]),
+                ]);
                 if (data.registrations.length) {
                     const r = data.registrations[0];
                     setDetails({ name: r.name, contact: r.contact, organization: r.organization });
@@ -55,7 +64,7 @@ export default function AiXForums({ now, registrationState }) {
         return () => {
             active = false;
         };
-    }, [user?.id, user?.registrationProfile?.name, retry]);
+    }, [user?.id, user?.registrationProfile?.name, retry, requestedSession]);
     useEffect(() => {
         if (hash !== "#forum-registration") return;
         const frame = requestAnimationFrame(() =>
@@ -173,10 +182,11 @@ export default function AiXForums({ now, registrationState }) {
             <div className="aix-forum-sessions">
                 {config.sessions.map((session) => {
                     const receipt = registrations.find((r) => r.forumKey === session.key);
+                    const forum = forumOverview.sessions.find((item) => item.id === session.key);
                     return (
                         <article key={session.key}>
                             <h2>{t(`aix.forumPage.sessions.${session.key}.title`)}</h2>
-                            <p>{t(`aix.forumPage.sessions.${session.key}.theme`)}</p>
+                            <p>{forum.theme}</p>
                             <div className="aix-forum-detail">
                                 <CalendarDays size={17} />
                                 <span>{t(`aix.forumPage.sessions.${session.key}.time`)}</span>
@@ -189,27 +199,25 @@ export default function AiXForums({ now, registrationState }) {
                                 {t(`aix.forumPage.sessions.${session.key}.required`)}
                             </p>
                             <details>
-                                <summary>{t("aix.forumPage.agenda")}</summary>
+                                <summary>{forumOverview.topicsLabel}</summary>
                                 <ol>
-                                    {t(`aix.forumPage.sessions.${session.key}.agenda`, {
-                                        returnObjects: true,
-                                    }).map((row) => (
-                                        <li key={row.time}>
-                                            <time>{row.time}</time>
-                                            <span>{row.title}</span>
+                                    {forum.topics.map((topic) => (
+                                        <li key={topic.speaker}>
+                                            <span>{topic.speaker}</span>
+                                            <span>{topic.title}</span>
                                         </li>
                                     ))}
                                 </ol>
                             </details>
                             <div className="aix-forum-guest-list">
-                                {t(`aix.forumPage.sessions.${session.key}.guests`, {
-                                    returnObjects: true,
-                                }).map((g) => (
-                                    <div key={g.name}>
-                                        <strong>{g.name}</strong>
-                                        <span>{g.role}</span>
-                                        {g.pending && <small>{t("aix.forumPage.invited")}</small>}
+                                {forum.guests.map((guest) => (
+                                    <div key={guest.id}>
+                                        <strong>{guest.name}</strong>
+                                        <span>{guest.role}</span>
                                     </div>
+                                ))}
+                                {forum.teasers?.map((text) => (
+                                    <div key={text}>{text}</div>
                                 ))}
                             </div>
                             {receipt ? (

@@ -3,7 +3,7 @@ import fs from "node:fs";
 const template = JSON.parse(
     fs.readFileSync(new URL("../shared/hackathonAiX.json", import.meta.url), "utf8")
 );
-test("four persistent tabs, five paged screens and pending results change with event state", async ({
+test("four persistent tabs, six paged screens and pending results change with event state", async ({
     page,
 }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -17,7 +17,7 @@ test("four persistent tabs, five paged screens and pending results change with e
     );
     await page.goto("/hackathon/2");
     await expect(page.locator(".hx-nav a")).toHaveCount(4);
-    await expect(page.locator(".aix-chapters button")).toHaveCount(5);
+    await expect(page.locator(".aix-chapters button")).toHaveCount(6);
     await expect(page.locator(".hx-nav a").nth(1)).toContainText("即将揭晓");
     await page.locator(".aix-chapters-toggle").click();
     await page.locator(".aix-chapters button").nth(2).click();

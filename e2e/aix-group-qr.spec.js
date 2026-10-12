@@ -32,7 +32,7 @@ test("official group QR opens, closes with Escape and does not inherit the old Q
     await page.clock.setFixedTime(new Date("2026-10-17T00:00:00+08:00"));
     await page.reload();
     await page.locator(".aix-chapters-toggle").click();
-    await page.locator(".aix-chapters button").nth(4).click();
+    await page.locator(".aix-chapters button").nth(5).click();
     await expect(button).toBeVisible();
     await expect(page.getByText("二维码有效至 10 月 16 日")).toHaveCount(0);
 });

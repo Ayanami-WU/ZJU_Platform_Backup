@@ -1,4 +1,4 @@
-/* Five full-height screens, scoped to this edition. */
+/* Full-height screens, scoped to this edition. */
 :root .hx-workspace[data-event="zhekesong-ai-x-2026"] {
     --event-nav-height: 80px;
     --aix-page-height: calc(
@@ -69,10 +69,12 @@
 }
 .aix-cover {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
+    max-width: 1160px;
+    grid-template-columns: 1.25fr 1fr;
     grid-template-rows: 1fr auto;
     align-items: center;
     gap: 24px 40px;
+    padding-block: 16px;
 }
 .aix-cover-eyebrow {
     display: flex;
@@ -88,26 +90,30 @@
 .aix-cover h1 {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 24px;
-    font-size: clamp(32px, 4vw, 62px);
+    gap: 12px;
+    margin-top: 20px;
     font-weight: 800;
-    line-height: 1.16;
+    line-height: 1.22;
+    letter-spacing: -0.035em;
+}
+.aix-cover h1 > span {
+    font-size: clamp(28px, 2.6vw, 40px);
 }
 .aix-cover h1 strong {
-    font-size: clamp(64px, 7vw, 108px);
-    letter-spacing: -0.055em;
+    font-size: clamp(34px, 3.5vw, 54px);
+    white-space: nowrap;
+    letter-spacing: -0.04em;
 }
 .aix-cover-prize {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-top: 32px;
+    margin-top: 30px;
 }
 .aix-cover-prize > strong {
     color: var(--hx-accent-text);
     font:
-        800 clamp(56px, 6.4vw, 96px)/1.1 ui-monospace,
+        800 clamp(60px, 6vw, 88px)/1.1 ui-monospace,
         monospace;
     letter-spacing: -0.06em;
 }
@@ -120,7 +126,7 @@
 }
 .aix-cover-art img {
     width: 100%;
-    max-height: 470px;
+    max-height: 410px;
     object-fit: contain;
     animation: aix-breathe 5s ease-in-out infinite;
 }
@@ -149,9 +155,11 @@
     grid-column: 1/-1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    border-top: 1px solid var(--hx-line);
-    padding-top: 20px;
+    gap: 24px;
+    border: 1px solid var(--hx-line);
+    background: var(--hx-panel);
+    border-radius: 8px;
+    padding: 20px 24px;
 }
 .aix-cover-venues > div {
     display: grid;
@@ -529,11 +537,14 @@
         gap: 16px;
     }
     .aix-cover h1 {
-        font-size: 32px;
+        gap: 10px;
         margin-top: 18px;
     }
+    .aix-cover h1 > span {
+        font-size: 28px;
+    }
     .aix-cover h1 strong {
-        font-size: 70px;
+        font-size: clamp(27px, 6.5vw, 42px);
     }
     .aix-cover-prize {
         margin-top: 26px;
@@ -552,8 +563,8 @@
         display: none;
     }
     .aix-cover-venues {
-        gap: 18px;
-        padding-top: 18px;
+        gap: 16px;
+        padding: 16px;
     }
     .aix-cover-venues > div {
         display: flex;

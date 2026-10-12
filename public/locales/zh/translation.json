@@ -5718,7 +5718,7 @@
             }
         },
         "official": {
-            "chapters": ["主页", "赛制", "奖励", "合作", "报名"],
+            "chapters": ["主页", "赛制", "奖励", "论坛", "合作", "报名"],
             "chapterNav": "介绍页章节",
             "totalPrize": "奖品与奖金总价值",
             "tracksTitle": "比赛赛道",
@@ -6313,7 +6313,117 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "coverTitle": ["浙客松：", "AI+X破界黑客松"],
+            "forumOverview": {
+                "title": "论坛",
+                "topicsLabel": "分享主题",
+                "sessions": [
+                    {
+                        "id": "technology",
+                        "title": "技术论坛",
+                        "theme": "AI技术趋势与产业应用",
+                        "date": "10.18",
+                        "location": "浙江大学紫金港校区\n段永平教学楼 2-112",
+                        "guests": [
+                            {
+                                "id": "ye-xinjiang",
+                                "name": "叶新江",
+                                "role": "每日互动 CTO",
+                                "photo": false
+                            },
+                            {
+                                "id": "sun-yifei",
+                                "name": "孙逸飞",
+                                "role": "浙江大学百人计划研究员",
+                                "photo": true
+                            }
+                        ],
+                        "teasers": ["华为专家 · 待揭晓", "阿里专家 · 待揭晓"],
+                        "topics": [
+                            {
+                                "title": "主题分享",
+                                "speaker": "叶新江"
+                            },
+                            {
+                                "title": "技术报告",
+                                "speaker": "孙逸飞"
+                            }
+                        ],
+                        "signup": "报名技术论坛"
+                    },
+                    {
+                        "id": "entrepreneurship",
+                        "title": "创业论坛",
+                        "theme": "AI时代创业的第一性原理",
+                        "date": "10.25",
+                        "location": "三墩元空间\n宝港生活广场 C 座 6 楼",
+                        "guests": [
+                            {
+                                "id": "zhang-kejun",
+                                "name": "张克俊",
+                                "role": "浙江大学人工智能学院",
+                                "photo": true
+                            },
+                            {
+                                "id": "zhang-jie",
+                                "name": "张洁",
+                                "role": "华旦天使投资创始人",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-jin",
+                                "name": "王进",
+                                "role": "曼哈顿资本总裁",
+                                "photo": true
+                            },
+                            {
+                                "id": "liu-jianbin",
+                                "name": "刘建斌",
+                                "role": "藕舫天使创始人",
+                                "photo": false
+                            },
+                            {
+                                "id": "dou-mingqing",
+                                "name": "窦明清",
+                                "role": "普华资本投后总监",
+                                "photo": true
+                            },
+                            {
+                                "id": "zhang-jialin",
+                                "name": "张加林",
+                                "role": "时代强鹰·杭州创业发展促进会秘书长",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-feifan",
+                                "name": "王非凡",
+                                "role": "浙江大学学生创业发展中心副主任",
+                                "photo": true
+                            }
+                        ],
+                        "topics": [
+                            {
+                                "title": "AI狂欢下的冷静思考——青年应该培养哪些穿越周期的能力？",
+                                "speaker": "王进"
+                            },
+                            {
+                                "title": "浙大紫金创业元空间——AI+创新创业教育赋能生态",
+                                "speaker": "王非凡"
+                            },
+                            {
+                                "title": "主题分享",
+                                "speaker": "刘建斌"
+                            },
+                            {
+                                "title": "圆桌交流",
+                                "speaker": "张洁、张加林"
+                            }
+                        ],
+                        "signup": "报名创业论坛"
+                    }
+                ]
+            }
         }
     },
     "eventWorkspace": {

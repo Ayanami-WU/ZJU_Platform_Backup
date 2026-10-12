@@ -43,7 +43,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         if (req.method() !== "GET") return route.abort();
         return route.continue();
     });
-    await page.goto("/hackathon/2/forums");
+    await page.goto("/hackathon/2/forums?session=technology#forum-registration");
     await expect(page.locator(".hx-nav a")).toHaveCount(4);
     await expect(
         page.getByText(
@@ -51,7 +51,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
         )
     ).toBeVisible();
     const form = page.locator(".aix-forum-signup form");
-    await form.getByLabel("技术论坛", { exact: true }).check();
+    await expect(form.getByLabel("技术论坛", { exact: true })).toBeChecked();
     await form.getByLabel("决赛暨创业论坛", { exact: true }).check();
     await form.getByLabel("姓名", { exact: true }).fill("论坛测试");
     await form.getByLabel("手机号码或邮箱").fill("forum@example.test");

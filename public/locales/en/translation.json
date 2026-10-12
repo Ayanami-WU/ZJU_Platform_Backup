@@ -5612,7 +5612,7 @@
             }
         },
         "official": {
-            "chapters": ["Overview", "Format", "Rewards", "Partners", "Register"],
+            "chapters": ["Overview", "Format", "Rewards", "Forums", "Partners", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -6207,7 +6207,120 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "coverTitle": ["ZHEKESONG:", "AI+X Hackathon"],
+            "forumOverview": {
+                "title": "Forums",
+                "topicsLabel": "Topics",
+                "sessions": [
+                    {
+                        "id": "technology",
+                        "title": "Technical forum",
+                        "theme": "AI technology trends & industry applications",
+                        "date": "10.18",
+                        "location": "ZJU Zijingang Campus\nDuan Yongping Teaching Building 2–112",
+                        "guests": [
+                            {
+                                "id": "ye-xinjiang",
+                                "name": "Ye Xinjiang",
+                                "role": "CTO, Daily Interactive",
+                                "photo": false
+                            },
+                            {
+                                "id": "sun-yifei",
+                                "name": "Sun Yifei",
+                                "role": "Research Fellow, Zhejiang University",
+                                "photo": true
+                            }
+                        ],
+                        "teasers": [
+                            "Huawei expert · To be announced",
+                            "Alibaba expert · To be announced"
+                        ],
+                        "topics": [
+                            {
+                                "title": "Keynote",
+                                "speaker": "Ye Xinjiang"
+                            },
+                            {
+                                "title": "Technical talk",
+                                "speaker": "Sun Yifei"
+                            }
+                        ],
+                        "signup": "Join technical forum"
+                    },
+                    {
+                        "id": "entrepreneurship",
+                        "title": "Entrepreneurship forum",
+                        "theme": "First principles of entrepreneurship in the AI era",
+                        "date": "10.25",
+                        "location": "Sandun Entrepreneurship Space\nBaogang Life Plaza, Block C, Level 6",
+                        "guests": [
+                            {
+                                "id": "zhang-kejun",
+                                "name": "Zhang Kejun",
+                                "role": "School of AI, Zhejiang University",
+                                "photo": true
+                            },
+                            {
+                                "id": "zhang-jie",
+                                "name": "Zhang Jie",
+                                "role": "Founder, Huadan Angel Investment",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-jin",
+                                "name": "Wang Jin",
+                                "role": "President, Manhattan Capital",
+                                "photo": true
+                            },
+                            {
+                                "id": "liu-jianbin",
+                                "name": "Liu Jianbin",
+                                "role": "Founder, Oufang Angel",
+                                "photo": false
+                            },
+                            {
+                                "id": "dou-mingqing",
+                                "name": "Dou Mingqing",
+                                "role": "Post-investment Director, Puhua Capital",
+                                "photo": true
+                            },
+                            {
+                                "id": "zhang-jialin",
+                                "name": "Zhang Jialin",
+                                "role": "Secretary-General, Hangzhou Entrepreneurship Development Promotion Association",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-feifan",
+                                "name": "Wang Feifan",
+                                "role": "Deputy Director, ZJU Student Entrepreneurship Development Center",
+                                "photo": true
+                            }
+                        ],
+                        "topics": [
+                            {
+                                "title": "Beyond the AI hype: building capabilities that endure across cycles",
+                                "speaker": "Wang Jin"
+                            },
+                            {
+                                "title": "ZJU Zijin Entrepreneurship Space: AI-enabled entrepreneurship education",
+                                "speaker": "Wang Feifan"
+                            },
+                            {
+                                "title": "Keynote",
+                                "speaker": "Liu Jianbin"
+                            },
+                            {
+                                "title": "Roundtable",
+                                "speaker": "Zhang Jie, Zhang Jialin"
+                            }
+                        ],
+                        "signup": "Join entrepreneurship forum"
+                    }
+                ]
+            }
         }
     },
     "eventWorkspace": {

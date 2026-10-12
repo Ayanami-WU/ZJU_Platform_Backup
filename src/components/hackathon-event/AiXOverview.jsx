@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ArrowUpRight, Pause, Play } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import AiXForumOverview from "./AiXForumOverview";
 import AiXPartnerLogos from "./AiXPartnerLogos";
 import "./AiXOverview.css";
 
@@ -20,12 +20,12 @@ export default function AiXOverview({ state }) {
                 <div className="aix-page-body aix-cover">
                     <div className="aix-cover-copy">
                         <div className="aix-cover-eyebrow">
-                            <span>{t("aix.brand")} · 2026</span>
+                            <span>2026</span>
                             <span>{t(`aix.state.${state}`)}</span>
                         </div>
                         <h1 id="aix-main-title">
-                            <strong>AI+X</strong>
-                            <span>{t("aix.heroTitle")}</span>
+                            <span>{copy.coverTitle[0]}</span>
+                            <strong>{copy.coverTitle[1]}</strong>
                         </h1>
                         <div className="aix-cover-prize">
                             <strong>¥21,480</strong>
@@ -101,20 +101,6 @@ export default function AiXOverview({ state }) {
                             </article>
                         ))}
                     </div>
-                    <div className="aix-forum-strip">
-                        <div>
-                            <strong>{copy.forums[0].title}</strong>
-                            <span>{copy.forums[0].time}</span>
-                        </div>
-                        <div>
-                            <strong>{copy.forums[1].title}</strong>
-                            <span>{copy.forums[1].time}</span>
-                        </div>
-                        <Link to="/hackathon/2/forums">
-                            {copy.forumSignup}
-                            <ArrowUpRight size={18} />
-                        </Link>
-                    </div>
                 </div>
             </section>
             <section
@@ -152,6 +138,7 @@ export default function AiXOverview({ state }) {
                     </div>
                 </div>
             </section>
+            <AiXForumOverview />
             <section
                 id="aix-partners-title"
                 className="aix-page"
@@ -160,7 +147,7 @@ export default function AiXOverview({ state }) {
             >
                 <div className="aix-page-body">
                     <header className="aix-page-heading">
-                        <span>04</span>
+                        <span>05</span>
                         <h2 id="aix-partners-heading">{copy.partnersTitle}</h2>
                     </header>
                     <dl className="aix-organizer-rows">
