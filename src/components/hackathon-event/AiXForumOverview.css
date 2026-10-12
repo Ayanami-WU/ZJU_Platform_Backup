@@ -183,23 +183,8 @@
     font-size: 15px;
     padding: 12px 0;
 }
-.aix-forum-signup-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 36px;
-    padding: 12px 18px;
-    min-height: 46px;
-    border-radius: 4px;
-    color: #101507;
-    background: var(--hx-accent);
-    font-size: 15px;
-    font-weight: 700;
-}
-.aix-forum-signup-link:focus-visible {
-    outline: 2px solid var(--hx-accent-text);
-    outline-offset: 3px;
-}
+
+
 .aix-forum-screen[data-forum="technology"] .aix-forum-topic-row {
     min-height: clamp(190px, 27vh, 285px);
 }
@@ -305,16 +290,11 @@
 .aix-forum-invited .aix-forum-speaker {
     align-items: center;
 }
-.aix-forum-screen-footer > .aix-forum-signup-link {
-    flex-shrink: 0;
-    align-self: flex-end;
-}
+.aix-forum-screen-footer > 
 @media (max-width: 767px) {
     .aix-forum-other-guests {
         grid-template-columns: 1fr;
         gap: 14px;
     }
-    .aix-forum-screen-footer > .aix-forum-signup-link {
-        align-self: stretch;
-    }
+    .aix-forum-screen-footer > 
 }

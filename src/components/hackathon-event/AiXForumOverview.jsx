@@ -1,5 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./AiXForumOverview.css";
 
@@ -96,15 +94,6 @@ export default function AiXForumOverview() {
                                             ))}
                                         </div>
                                     </section>
-                                )}
-                                {forum.id === "entrepreneurship" && (
-                                    <Link
-                                        className="aix-forum-signup-link"
-                                        to={`/hackathon/2/forums?session=${forum.id}#forum-registration`}
-                                    >
-                                        {forum.signup}
-                                        <ArrowUpRight size={18} aria-hidden="true" />
-                                    </Link>
                                 )}
                             </footer>
                         </div>
