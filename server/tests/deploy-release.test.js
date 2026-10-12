@@ -8,13 +8,15 @@ const { execFileSync, spawnSync } = require("node:child_process");
 const script = path.resolve(__dirname, "../../deploy/deploy-release.sh");
 const quote = (s) => "'" + s.replaceAll("'", "'\\''") + "'";
 
-for (const { failHealth, browser } of [
+for (const { failHealth, browser, fault = "none" } of [
     { failHealth: false, browser: "ready" },
     { failHealth: true, browser: "ready" },
     { failHealth: false, browser: "needs-deps" },
     { failHealth: false, browser: "unavailable" },
+    { failHealth: false, browser: "ready", fault: "recreated-directory" },
+    { failHealth: false, browser: "ready", fault: "first-move" },
 ]) {
-    test(`release switch: browser ${browser}, health ${failHealth ? "failed" : "healthy"}`, () => {
+    test(`release switch: browser ${browser}, health ${failHealth ? "failed" : "healthy"}, fault ${fault}`, () => {
         const dir = fs.mkdtempSync(path.join(os.tmpdir(), "zju-deploy-test-"));
         const write = (file, text) => {
             fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -28,15 +30,18 @@ for (const { failHealth, browser } of [
             fs.mkdirSync(incoming);
             fs.mkdirSync(bin);
             write(path.join(app, "server/index.js"), "// old server");
+            write(path.join(app, "server/package.json"), '{"name":"server"}');
             write(path.join(app, "dist/index.html"), "old frontend");
             write(path.join(app, "shared/value"), "old shared");
             write(path.join(app, "server/.env"), "DATABASE_FILE=/existing/database.sqlite\n");
             write(path.join(app, "server/uploads/keep"), "upload");
+            write(path.join(app, "server/data/private-file"), "private attachment");
             write(path.join(app, "server/database.sqlite"), "existing database");
             write(path.join(app, ".deployed-release"), "commit=old\n");
             const sha = "a".repeat(40);
             write(path.join(payload, "release-manifest.txt"), `commit=${sha}\n`);
             write(path.join(payload, "server/index.js"), "// new server");
+            write(path.join(payload, "server/package.json"), '{"name":"server"}');
             write(path.join(payload, "dist/index.html"), "new frontend");
             write(path.join(payload, "shared/hackathonTemplateDefaults.json"), "{}");
             for (const match of fs
@@ -49,6 +54,29 @@ for (const { failHealth, browser } of [
                 `${archive}.sha256`,
                 `${createHash("sha256").update(fs.readFileSync(archive)).digest("hex")}  ${path.basename(archive)}\n`
             );
+            const trace = path.join(dir, "operations.jsonl");
+            const mover = path.join(dir, "move-fixture.cjs");
+            // Real filesystem renames with GNU mv -T semantics, including on macOS.
+            write(
+                mover,
+                `
+const fs = require('node:fs');
+const path = require('node:path');
+const args = process.argv.slice(2);
+if (args.shift() !== '-T' || args.shift() !== '--' || args.length !== 2) process.exit(9);
+const [source, destination] = args;
+fs.appendFileSync(${JSON.stringify(trace)}, JSON.stringify({operation:'mv',source,destination})+'\\n');
+const oldServer = source === ${JSON.stringify(path.join(app, "server"))} && destination.endsWith('/previous/server');
+if (oldServer && ${JSON.stringify(fault)} === 'first-move') process.exit(1);
+try {
+ fs.renameSync(source,destination);
+ if (oldServer && ${JSON.stringify(fault)} === 'recreated-directory') {
+  fs.mkdirSync(path.join(source,'uploads'),{recursive:true});
+  fs.writeFileSync(path.join(source,'uploads/unexpected'),'simulated concurrent writer');
+ }
+} catch (error) { console.error(error.code); process.exit(1); }
+`
+            );
             const shims = {
                 npm: "exit 0",
                 npx: `echo "$*" >> ${quote(path.join(dir, "browser-install.log"))}
@@ -56,7 +84,9 @@ case "$*" in *--with-deps*) touch ${quote(path.join(dir, "deps-installed"))};; e
 exit 0`,
                 caddy: "exit 0",
                 systemctl: "exit 0",
-                pm2: "exit 0",
+                pm2: `printf '{"operation":"pm2","action":"%s"}\\n' "$1" >> ${quote(trace)}
+exit 0`,
+                mv: `exec ${quote(process.execPath)} ${quote(mover)} "$@"`,
                 sleep: "exit 0",
                 flock: "exit 0",
                 curl: failHealth ? "exit 22" : 'echo \'{"status":"ok"}\'',
@@ -80,7 +110,7 @@ fi\ncase "$1" in */backup-release-database.js) exit 0;; esac\nexec ${quote(proce
                     ZJU_QWEN_BASE_URL: "http://fixture.invalid",
                 },
             });
-            const failed = failHealth || browser === "unavailable";
+            const failed = failHealth || browser === "unavailable" || fault !== "none";
             assert.equal(result.status, failed ? 1 : 0, result.stdout + result.stderr);
             const installs = fs.readFileSync(path.join(dir, "browser-install.log"), "utf8");
             assert.match(installs, /^playwright install chromium$/m);
@@ -94,6 +124,55 @@ fi\ncase "$1" in */backup-release-database.js) exit 0;; esac\nexec ${quote(proce
                 "existing database"
             );
             assert.equal(fs.readFileSync(path.join(app, "server/uploads/keep"), "utf8"), "upload");
+            assert.equal(
+                fs.readFileSync(path.join(app, "server/data/private-file"), "utf8"),
+                "private attachment"
+            );
+            assert.equal(
+                fs.readFileSync(path.join(app, "server/index.js"), "utf8"),
+                failed ? "// old server" : "// new server"
+            );
+            assert.equal(fs.existsSync(path.join(app, "server/server")), false);
+            if (browser !== "unavailable") {
+                const operations = fs
+                    .readFileSync(trace, "utf8")
+                    .trim()
+                    .split("\n")
+                    .map((line) => JSON.parse(line));
+                const firstMove = operations.findIndex((item) => item.operation === "mv");
+                assert.ok(firstMove > 0);
+                assert.deepEqual(operations[0], { operation: "pm2", action: "stop" });
+                const pm2 = operations
+                    .filter((item) => item.operation === "pm2")
+                    .map((item) => item.action);
+                assert.deepEqual(
+                    pm2,
+                    failHealth
+                        ? ["stop", "restart", "logs", "stop", "restart"]
+                        : fault !== "none"
+                          ? ["stop", "stop", "restart"]
+                          : ["stop", "restart"]
+                );
+                if (failed && fault !== "first-move") {
+                    const failedMove = operations.findIndex(
+                        (item) =>
+                            item.operation === "mv" && item.destination.endsWith("/failed-server")
+                    );
+                    const lastStop = operations
+                        .map((item) => item.operation === "pm2" && item.action === "stop")
+                        .lastIndexOf(true);
+                    assert.ok(lastStop >= 0 && failedMove > lastStop);
+                }
+                if (fault === "recreated-directory") {
+                    assert.equal(
+                        fs.readFileSync(
+                            path.join(app, `.deployments/${sha}/failed-server/uploads/unexpected`),
+                            "utf8"
+                        ),
+                        "simulated concurrent writer"
+                    );
+                }
+            }
             assert.match(
                 fs.readFileSync(path.join(app, "server/.env"), "utf8"),
                 /DATABASE_FILE=\/existing\/database.sqlite/

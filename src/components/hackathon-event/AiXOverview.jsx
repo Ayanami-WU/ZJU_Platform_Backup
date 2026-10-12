@@ -108,20 +108,47 @@ export default function AiXOverview({ state }) {
                                         ))}
                                     </div>
                                 </header>
-                                <ol className="aix-track-schedule">
+                                <ol className="aix-track-stage-list">
                                     {track.schedule.map((step, index) => (
                                         <li key={index}>
-                                            <div className="aix-track-step-time">
-                                                <time>{step.date}</time>
-                                                {step.time && <span>{step.time}</span>}
+                                            <div className="aix-track-stage-label">
+                                                <span>{String(index + 1).padStart(2, "0")}</span>
+                                                <h4>{step.label || step.title}</h4>
                                             </div>
-                                            <div className="aix-track-step-info">
-                                                <h4>{step.title}</h4>
-                                                {step.note && <p>{step.note}</p>}
-                                                {step.place && (
-                                                    <p className="aix-track-step-place">
-                                                        <MapPin size={15} aria-hidden="true" />
-                                                        {step.place}
+                                            <div className="aix-track-stage-details">
+                                                <div className="aix-track-stage-date">
+                                                    <time>{step.date}</time>
+                                                    {step.time && <span>{step.time}</span>}
+                                                </div>
+                                                <p className="aix-track-stage-place">
+                                                    <MapPin size={16} aria-hidden="true" />
+                                                    <span>
+                                                        {(
+                                                            step.place ||
+                                                            t("aix.trackScheduleOnline", {
+                                                                defaultValue: "线上",
+                                                            })
+                                                        )
+                                                            .split(
+                                                                /(\d+[–-]\d+|[A-Z]\s*座\s*\d+\s*楼)/g
+                                                            )
+                                                            .map((part, partIndex) =>
+                                                                partIndex % 2 ? (
+                                                                    <span
+                                                                        className="aix-track-location-unit"
+                                                                        key={partIndex}
+                                                                    >
+                                                                        {part}
+                                                                    </span>
+                                                                ) : (
+                                                                    part
+                                                                )
+                                                            )}
+                                                    </span>
+                                                </p>
+                                                {step.note && (
+                                                    <p className="aix-track-stage-note">
+                                                        {step.note}
                                                     </p>
                                                 )}
                                             </div>

@@ -96,27 +96,42 @@ echo "Caddy configuration validated"
 node "$payload/server/scripts/backup-release-database.js" "$app_root/server" "$release_id"
 
 switched=0
+restart_needed=0
 rollback() {
   code=$?
   trap - EXIT
-  if [ "$code" -ne 0 ] && [ "$switched" -eq 1 ] && [ -d "$previous/server" ]; then
-    echo "Deployment failed; restoring previous release"
-    for runtime_path in .env uploads logs data backups; do
-      if [ -e "$app_root/server/$runtime_path" ] || [ -L "$app_root/server/$runtime_path" ]; then
-        mv "$app_root/server/$runtime_path" "$previous/server/$runtime_path"
-      fi
-    done
-    for file in "$app_root/server"/database.sqlite*; do
-      if [ -e "$file" ] || [ -L "$file" ]; then mv "$file" "$previous/server/"; fi
-    done
-    for part in server dist shared; do
-      if [ -e "$previous/$part" ]; then
-        if [ -e "$app_root/$part" ]; then mv "$app_root/$part" "$slot/failed-$part"; fi
-        mv "$previous/$part" "$app_root/$part"
-      fi
-    done
-    if [ -f "$previous/release-manifest.txt" ]; then cp "$previous/release-manifest.txt" "$app_root/.deployed-release"; fi
-    if [ -f "$previous/runtime.env" ]; then cp -p "$previous/runtime.env" "$app_root/server/.env"; fi
+  if [ "$code" -ne 0 ] && [ "$restart_needed" -eq 1 ]; then
+    # Stop a partially started release before moving its writable directories.
+    pm2 stop zju-server || true
+    if [ "$switched" -eq 1 ] && [ -d "$previous/server" ]; then
+      echo "Deployment failed; restoring previous release"
+      # A partial switch can leave the original runtime data in previous already.
+      # Preserve that data; unexpected directories remain with the failed release.
+      restore_failed=0
+      for runtime_path in .env uploads logs data backups; do
+        if { [ -e "$app_root/server/$runtime_path" ] || [ -L "$app_root/server/$runtime_path" ]; } &&
+           ! { [ -e "$previous/server/$runtime_path" ] || [ -L "$previous/server/$runtime_path" ]; }; then
+          mv -T -- "$app_root/server/$runtime_path" "$previous/server/$runtime_path" || restore_failed=1
+        fi
+      done
+      for file in "$app_root/server"/database.sqlite*; do
+        if { [ -e "$file" ] || [ -L "$file" ]; } && [ ! -e "$previous/server/$(basename "$file")" ]; then
+          mv -T -- "$file" "$previous/server/$(basename "$file")" || restore_failed=1
+        fi
+      done
+      for part in server dist shared; do
+        if [ -e "$previous/$part" ]; then
+          if [ -e "$app_root/$part" ]; then
+            mv -T -- "$app_root/$part" "$slot/failed-$part" || restore_failed=1
+          fi
+          mv -T -- "$previous/$part" "$app_root/$part" || restore_failed=1
+        fi
+      done
+      if [ -f "$previous/release-manifest.txt" ]; then cp "$previous/release-manifest.txt" "$app_root/.deployed-release" || restore_failed=1; fi
+      if [ -f "$previous/runtime.env" ]; then cp -p "$previous/runtime.env" "$app_root/server/.env" || restore_failed=1; fi
+      if [ "$restore_failed" -ne 0 ]; then echo "ERROR: previous release restore encountered a filesystem failure"; fi
+    fi
+    # This also covers failure before the first directory was moved.
     pm2 restart zju-server --update-env || true
   fi
   exit "$code"
@@ -124,27 +139,35 @@ rollback() {
 trap rollback EXIT
 if [ -f "$app_root/.deployed-release" ]; then cp "$app_root/.deployed-release" "$previous/release-manifest.txt"; fi
 if [ -f "$app_root/server/.env" ]; then cp -p "$app_root/server/.env" "$previous/runtime.env"; fi
+# Arm recovery before stopping: even a stop/first-move failure must restart the app.
+restart_needed=1
+pm2 stop zju-server
 switched=1
 
-mv "$app_root/server" "$previous/server"
-mv "$app_root/dist" "$previous/dist"
+mv -T -- "$app_root/server" "$previous/server"
+mv -T -- "$app_root/dist" "$previous/dist"
 if [ -e "$app_root/shared" ] || [ -L "$app_root/shared" ]; then
-  mv "$app_root/shared" "$previous/shared"
+  mv -T -- "$app_root/shared" "$previous/shared"
 fi
-mv "$payload/server" "$app_root/server"
-mv "$payload/dist" "$app_root/dist"
-mv "$payload/shared" "$app_root/shared"
+mv -T -- "$payload/server" "$app_root/server"
+mv -T -- "$payload/dist" "$app_root/dist"
+mv -T -- "$payload/shared" "$app_root/shared"
 
 for runtime_path in .env uploads logs data backups; do
   if [ -e "$previous/server/$runtime_path" ] || [ -L "$previous/server/$runtime_path" ]; then
-    mv "$previous/server/$runtime_path" "$app_root/server/$runtime_path"
+    mv -T -- "$previous/server/$runtime_path" "$app_root/server/$runtime_path"
   fi
 done
 for database_file in "$previous/server"/database.sqlite*; do
   if [ -e "$database_file" ] || [ -L "$database_file" ]; then
-    mv "$database_file" "$app_root/server/"
+    mv -T -- "$database_file" "$app_root/server/$(basename "$database_file")"
     fi
 done
+
+# Verify the installed entry point, not only the staged artifact.
+test -f "$app_root/server/index.js"
+test -f "$app_root/server/package.json"
+test ! -d "$app_root/server/server"
 
 if [ -z "${ZJU_QWEN_BASE_URL:-}" ]; then
   echo "ERROR: private Qwen endpoint secret is missing"

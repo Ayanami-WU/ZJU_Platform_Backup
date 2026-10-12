@@ -31,12 +31,6 @@
     color: var(--hx-text);
     scrollbar-width: thin;
 }
-.aix-track-summary-heading > span {
-    display: block;
-    margin-bottom: 14px;
-    color: var(--hx-accent-text);
-    font: 700 16px / 1 monospace;
-}
 :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-summary-heading h2 {
     margin: 0;
     font-size: clamp(22px, 2vw, 28px);
@@ -103,23 +97,21 @@
     padding-top: 16px;
     border-top: 1px solid var(--hx-line);
 }
-.aix-track-summary-next p {
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
-    gap: 6px 14px;
-    margin: 0;
-    font-size: 13px;
-    font-weight: 650;
-    color: var(--hx-muted);
+.aix-track-summary-step-number {
+    color: var(--hx-accent-text);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+.aix-track-summary-next dd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
 }
 .aix-track-summary-next time {
-    min-width: 76px;
-    color: var(--hx-text);
-}
-.aix-track-summary-next .aix-track-summary-deadline {
-    display: block;
-    margin-top: 4px;
-    padding-left: 118px;
+    color: var(--hx-accent-text);
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
 }
 @media (max-width: 900px) {
     :root
@@ -143,9 +135,6 @@
         padding: 20px;
         min-height: max-content;
         overflow: visible;
-    }
-    .aix-track-summary-heading > span {
-        display: none;
     }
     :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-summary-heading h2 {
         font-size: 22px;

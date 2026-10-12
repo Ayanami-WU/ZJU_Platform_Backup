@@ -6089,25 +6089,30 @@
                             "date": "10.13–10.18",
                             "title": "Online qualifier",
                             "note": "Choose your own topic or enter an existing mature project",
-                            "time": "Due 17:00"
+                            "time": "Due 17:00",
+                            "label": "Qualifier"
                         },
                         {
                             "date": "10.18",
                             "time": "13:00–17:00",
                             "title": "Optional on-site mentoring",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
+                            "label": "Mentoring",
+                            "note": "Optional attendance"
                         },
                         {
                             "date": "10.19–10.23",
                             "time": "Due 24:00",
                             "title": "Online semifinal",
-                            "note": "Continue developing your project online"
+                            "note": "Continue developing your project online",
+                            "label": "Semifinal"
                         },
                         {
                             "date": "10.25",
                             "time": "09:10–11:30",
                             "title": "In-person final pitches",
-                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza"
+                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza",
+                            "label": "Pitch"
                         }
                     ]
                 },
@@ -6137,20 +6142,23 @@
                             "date": "10.18",
                             "time": "13:00–17:00",
                             "title": "On-site development · Attendance required",
-                            "note": "Challenge released at 13:00; submissions close at 17:00",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112"
+                            "note": "On-site challenge and development · Attendance required",
+                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
+                            "label": "Qualifier"
                         },
                         {
                             "date": "10.19–10.23",
                             "time": "Due 24:00",
                             "title": "Online semifinal",
-                            "note": "Continue developing your project online"
+                            "note": "Continue developing your project online",
+                            "label": "Semifinal"
                         },
                         {
                             "date": "10.25",
                             "time": "09:10–11:30",
                             "title": "In-person final pitches",
-                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza"
+                            "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza",
+                            "label": "Pitch"
                         }
                     ]
                 }
@@ -6643,6 +6651,7 @@
             "loginHint": "Sign in to prepare your submission",
             "projectNameRequired": "Enter a project name before submitting for review."
         },
+        "trackScheduleOnline": "Online",
         "trackBadges": {
             "campus": ["Online", "Teams of 1–5"],
             "industry": ["In person", "Solo"]

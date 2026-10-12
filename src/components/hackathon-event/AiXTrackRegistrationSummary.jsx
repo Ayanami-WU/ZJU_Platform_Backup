@@ -1,4 +1,4 @@
-import { CalendarDays, MapPin, UsersRound } from "lucide-react";
+import { MapPin, UsersRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXTrackRegistrationSummary.css";
 
@@ -14,7 +14,6 @@ export default function AiXTrackRegistrationSummary({ track }) {
             data-track={track}
         >
             <div className="aix-track-summary-heading">
-                <span>{industry ? "01" : "02"}</span>
                 <h2>
                     {industry
                         ? copy("industryTitle", "华为 · 产业进阶赛道")
@@ -30,7 +29,7 @@ export default function AiXTrackRegistrationSummary({ track }) {
             <dl className="aix-track-summary-facts">
                 <div>
                     <dt>
-                        <CalendarDays size={18} />
+                        <span className="aix-track-summary-step-number">01</span>
                         {industry
                             ? copy("initialDevelopment", "初赛 · 现场开发")
                             : copy("opens", "线上初赛")}
@@ -59,7 +58,7 @@ export default function AiXTrackRegistrationSummary({ track }) {
                 {!industry && (
                     <div>
                         <dt>
-                            <CalendarDays size={18} />
+                            <span className="aix-track-summary-step-number">02</span>
                             {copy("guidance", "现场技术指导 · 自愿参加")}
                         </dt>
                         <dd>
@@ -76,24 +75,32 @@ export default function AiXTrackRegistrationSummary({ track }) {
                     </div>
                 )}
             </dl>
-            <div className="aix-track-summary-next">
+            <dl className="aix-track-summary-facts aix-track-summary-next">
                 <div>
-                    <p>
+                    <dt>
+                        <span className="aix-track-summary-step-number">
+                            {industry ? "02" : "03"}
+                        </span>
+                        {copy("semifinal", "线上复赛")}
+                    </dt>
+                    <dd>
                         <time>10.19–10.23</time>
-                        <span>{copy("semifinal", "线上复赛")}</span>
-                    </p>
-                    <p className="aix-track-summary-deadline">
-                        {copy("semifinalDeadline", "24:00 截止")}
-                    </p>
+                        <span>{copy("semifinalDeadline", "24:00 截止")}</span>
+                    </dd>
                 </div>
                 <div>
-                    <p>
+                    <dt>
+                        <span className="aix-track-summary-step-number">
+                            {industry ? "03" : "04"}
+                        </span>
+                        {copy("final", "决赛 · 三墩元空间")}
+                    </dt>
+                    <dd>
                         <time>10.25</time>
-                        <span>{copy("final", "决赛 · 三墩元空间")}</span>
-                    </p>
-                    <p className="aix-track-summary-deadline">09:10–11:30</p>
+                        <span>09:10–11:30</span>
+                    </dd>
                 </div>
-            </div>
+            </dl>
         </aside>
     );
 }
