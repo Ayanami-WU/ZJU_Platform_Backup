@@ -184,7 +184,6 @@
     padding: 12px 0;
 }
 
-
 .aix-forum-screen[data-forum="technology"] .aix-forum-topic-row {
     min-height: clamp(190px, 27vh, 285px);
 }
@@ -290,11 +289,9 @@
 .aix-forum-invited .aix-forum-speaker {
     align-items: center;
 }
-.aix-forum-screen-footer > 
 @media (max-width: 767px) {
     .aix-forum-other-guests {
         grid-template-columns: 1fr;
         gap: 14px;
     }
-    .aix-forum-screen-footer > 
 }
