@@ -6539,6 +6539,20 @@
             "entry_pending": "Your submission is awaiting administrator review. You can enter the draw once approved.",
             "entry_approved": "Your entry is approved. Check back at the scheduled draw time for the result.",
             "entry_rejected": "Read the review feedback. You can correct your like count or screenshot and resubmit before entries close."
+        },
+        "compact": {
+            "instruction": "Share the official post to WeChat Moments, collect {{count}} likes, then upload a screenshot.",
+            "instruction_no_min": "Share the official post to WeChat Moments and upload a screenshot showing your post and likes.",
+            "open_post": "View official post",
+            "submit": "Submit screenshot",
+            "receipt": "Submission status",
+            "upload": "Upload screenshot",
+            "file_hint": "JPG, PNG or WebP, up to 5 MB",
+            "login": "Log in to submit",
+            "agree": "I have read the rules",
+            "resubmit": "Resubmit",
+            "closes_at": "Submit by",
+            "draws_at": "Draw time"
         }
     },
     "firstEdition": {

@@ -6642,6 +6642,20 @@
             "entry_pending": "材料已提交，正在等待管理员审核。审核通过后才能参与抽奖。",
             "entry_approved": "审核已通过，你已获得本期抽奖资格，请按时查看开奖结果。",
             "entry_rejected": "请查看审核意见。报名截止前可修改点赞数或截图，重新提交审核。"
+        },
+        "compact": {
+            "instruction": "转发官方推文至朋友圈，集赞满 {{count}} 个后上传截图。",
+            "instruction_no_min": "转发官方推文至朋友圈，上传转发与点赞截图。",
+            "open_post": "查看官方推文",
+            "submit": "提交截图",
+            "receipt": "提交状态",
+            "upload": "点击上传截图",
+            "file_hint": "JPG、PNG 或 WebP，最多 5 MB",
+            "login": "登录后提交",
+            "agree": "我已阅读参与规则",
+            "resubmit": "重新提交",
+            "closes_at": "提交截止",
+            "draws_at": "开奖时间"
         }
     },
     "firstEdition": {

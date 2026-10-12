@@ -6,7 +6,7 @@ import { useSettings } from "../../context/SettingsContext";
 import LotteryPage from "./LotteryPage";
 import "./lottery-modal.css";
 
-export default function LotteryModal({ eventKey, eventTitle, onClose }) {
+export default function LotteryModal({ eventKey, eventTitle, onClose, onLogin }) {
     const { t } = useTranslation();
     const { uiMode } = useSettings();
     const panel = useRef(null);
@@ -75,10 +75,7 @@ export default function LotteryModal({ eventKey, eventTitle, onClose }) {
                         eventKey={eventKey}
                         eventTitle={eventTitle}
                         embedded
-                        onLogin={() => {
-                            onClose();
-                            window.dispatchEvent(new Event("open-auth-modal"));
-                        }}
+                        onLogin={onLogin}
                     />
                 </div>
             </section>

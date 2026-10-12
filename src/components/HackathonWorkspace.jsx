@@ -30,6 +30,13 @@ export default function HackathonWorkspace({ template, schedule }) {
     const [registrationError, setRegistrationError] = useState(false);
     const [retry, setRetry] = useState(0);
     const [lotteryOpen, setLotteryOpen] = useState(false);
+    const resumeLottery = useRef(false);
+    useEffect(() => {
+        if (user && resumeLottery.current) {
+            resumeLottery.current = false;
+            setLotteryOpen(true);
+        }
+    }, [user]);
     const event = template.event;
     const registrationOwner = useRef({ userId: user?.id, eventKey: event.key });
     useLayoutEffect(() => {
@@ -184,6 +191,11 @@ export default function HackathonWorkspace({ template, schedule }) {
                     eventKey={event.key}
                     eventTitle={event.title}
                     onClose={() => setLotteryOpen(false)}
+                    onLogin={() => {
+                        resumeLottery.current = true;
+                        setLotteryOpen(false);
+                        window.dispatchEvent(new Event("open-auth-modal"));
+                    }}
                 />
             )}
             <div
