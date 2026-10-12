@@ -5515,7 +5515,7 @@
                 },
                 {
                     "label": "主办单位",
-                    "names": "拓浙 AI 生态"
+                    "names": "拓浙 AI 生态 · 浙江大学求是强鹰俱乐部"
                 },
                 {
                     "label": "赛道赞助",
@@ -5523,7 +5523,7 @@
                 },
                 {
                     "label": "算力与生态支持",
-                    "names": "阿里云 · Qoder · 魔搭社区 · 观猹社区 · 深求社区（deepseek.club） · Bonjour！"
+                    "names": "阿里云 · Qoder · 魔搭社区 · 观猹社区 · 深求社区（deepseek.club） · Bonjour！ · 友念智能 · 元典 · 华宇"
                 },
                 {
                     "label": "资本与孵化机构",
@@ -5978,6 +5978,18 @@
                         {
                             "id": "bonjour",
                             "name": "Bonjour！"
+                        },
+                        {
+                            "id": "unionlink",
+                            "name": "友念智能"
+                        },
+                        {
+                            "id": "yuandian",
+                            "name": "元典"
+                        },
+                        {
+                            "id": "thunisoft",
+                            "name": "华宇"
                         }
                     ],
                     "id": "companies",

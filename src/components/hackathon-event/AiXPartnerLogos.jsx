@@ -1,6 +1,16 @@
 import { useTranslation } from "react-i18next";
 
 const brands = [
+    { id: "bonjour", name: "Bonjour!", light: "company-3.png", dark: "company-3-dark.png" },
+    // Display approved marks directly from the supplied poster without redrawing them.
+    ...[
+        { id: "unionlink", name: "友念智能 UnionLink-Intell", viewBox: "734 714 304 114" },
+        { id: "yuandian", name: "元典 Legal Intelligence", viewBox: "164 936 390 97" },
+        { id: "thunisoft", name: "华宇 THUNISOFT", viewBox: "637 927 351 124" },
+    ].map((brand) => ({
+        ...brand,
+        source: "/images/hackathon/ai-x/official/company-lineup-oct12.jpg",
+    })),
     ...["kab", "zjuai", "aira", "cross-innovation"].map((id) => ({
         id,
         name: id,
@@ -75,6 +85,14 @@ const brands = [
 export function AiXBrand({ id }) {
     const brand = brands.find((item) => item.id === id);
     if (!brand) return null;
+    if (brand.viewBox)
+        return (
+            <span className={`aix-brand-logo aix-brand-${id}`}>
+                <svg viewBox={brand.viewBox} role="img" aria-label={brand.name}>
+                    <image href={brand.source} width="1080" height="1066" />
+                </svg>
+            </span>
+        );
     return (
         <span className={`aix-brand-logo aix-brand-${id} ${brand.plate ? "aix-brand-plate" : ""}`}>
             <img

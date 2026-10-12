@@ -5406,7 +5406,7 @@
                 },
                 {
                     "label": "Organizer",
-                    "names": "Tuozhe AI Ecosystem"
+                    "names": "Tuozhe AI Ecosystem · Zhejiang University Qiushi Elite Eagle Club"
                 },
                 {
                     "label": "Track sponsors",
@@ -5414,7 +5414,7 @@
                 },
                 {
                     "label": "Technology & ecosystem",
-                    "names": "Alibaba Cloud · Qoder · ModelScope · Guancha · DeepSeek Club · Bonjour!"
+                    "names": "Alibaba Cloud · Qoder · ModelScope · Guancha · DeepSeek Club · Bonjour! · UnionLink-Intell · Legal Intelligence · THUNISOFT"
                 },
                 {
                     "label": "Capital & incubation",
@@ -5872,6 +5872,18 @@
                         {
                             "id": "bonjour",
                             "name": "Bonjour！"
+                        },
+                        {
+                            "id": "unionlink",
+                            "name": "UnionLink-Intell"
+                        },
+                        {
+                            "id": "yuandian",
+                            "name": "Legal Intelligence"
+                        },
+                        {
+                            "id": "thunisoft",
+                            "name": "THUNISOFT"
                         }
                     ],
                     "id": "companies",
