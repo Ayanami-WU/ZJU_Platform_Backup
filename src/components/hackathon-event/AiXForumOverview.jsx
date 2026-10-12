@@ -2,9 +2,9 @@ import { CalendarDays, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXForumOverview.css";
 
-function ForumGuest({ guest }) {
+function ForumGuest({ guest, label }) {
     return (
-        <div className="aix-forum-speaker">
+        <div className="aix-forum-speaker" data-guest={guest.id}>
             <div
                 className="aix-guest-portrait"
                 data-empty={!guest.photo || undefined}
@@ -21,7 +21,10 @@ function ForumGuest({ guest }) {
                 )}
             </div>
             <div>
-                <strong>{guest.name}</strong>
+                <strong>
+                    {label && <span className="aix-forum-guest-label">{label}</span>}
+                    {guest.name}
+                </strong>
                 <p>{guest.role}</p>
             </div>
         </div>
@@ -49,9 +52,11 @@ export default function AiXForumOverview() {
                                 <header className="aix-forum-panel-heading">
                                     <div className="aix-page-heading">
                                         <span>{String(index + 1).padStart(2, "0")}</span>
-                                        <h2>{forum.title}</h2>
+                                        <h2>
+                                            {forum.title}：
+                                            <span className="aix-forum-theme">{forum.theme}</span>
+                                        </h2>
                                     </div>
-                                    <p>{forum.theme}</p>
                                 </header>
                                 <div className="aix-forum-place">
                                     <div>
@@ -72,6 +77,12 @@ export default function AiXForumOverview() {
                                         key={topic.speaker}
                                     >
                                         <div className="aix-forum-speakers">
+                                            {topic.guestIds.length > 1 && (
+                                                <ForumGuest
+                                                    guest={copy.host}
+                                                    label={copy.hostLabel}
+                                                />
+                                            )}
                                             {topic.guestIds
                                                 .map((id) =>
                                                     forum.guests.find((guest) => guest.id === id)
@@ -87,15 +98,6 @@ export default function AiXForumOverview() {
                                         </div>
                                     </article>
                                 ))}
-                            </div>
-                            <footer className="aix-forum-screen-footer">
-                                {forum.teasers && (
-                                    <div className="aix-forum-teasers">
-                                        {forum.teasers.map((text) => (
-                                            <span key={text}>{text}</span>
-                                        ))}
-                                    </div>
-                                )}
                                 {otherGuests.length > 0 && (
                                     <section className="aix-forum-invited">
                                         <h3>{copy.invitedLabel}</h3>
@@ -105,6 +107,21 @@ export default function AiXForumOverview() {
                                             ))}
                                         </div>
                                     </section>
+                                )}
+                            </div>
+                            <footer className="aix-forum-screen-footer">
+                                {forum.id === "technology" && (
+                                    <section className="aix-forum-host">
+                                        <h3>{copy.hostLabel}</h3>
+                                        <ForumGuest guest={copy.host} />
+                                    </section>
+                                )}
+                                {forum.teasers && (
+                                    <div className="aix-forum-teasers">
+                                        {forum.teasers.map((text) => (
+                                            <span key={text}>{text}</span>
+                                        ))}
+                                    </div>
                                 )}
                             </footer>
                         </div>

@@ -52,7 +52,7 @@ export default function LotteryModal({ eventKey, eventTitle, onClose, onLogin })
         }
     };
     return createPortal(
-        <div className="lottery-modal-overlay" data-theme={uiMode}>
+        <div className="lottery-modal-overlay" data-theme={uiMode} data-event={eventKey}>
             <section
                 ref={panel}
                 className="lottery-modal"

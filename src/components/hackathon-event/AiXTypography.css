@@ -1,0 +1,380 @@
+/* Shared type roles for the current edition; forum content owns its own scale. */
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] {
+    --aix-type-body: 16px;
+    --aix-type-meta: 15px;
+    --aix-type-control: 18px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters {
+    width: 150px;
+    gap: 8px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters button {
+    gap: 12px;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: var(--aix-type-control);
+    font-weight: 700;
+    line-height: 1.45;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters button > span,
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters-toggle > span {
+    flex: 0 0 auto;
+    color: var(--hx-accent-text);
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    opacity: 1;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-page-heading {
+    align-items: baseline;
+    gap: 16px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-page-heading > span,
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-page-heading h2 {
+    font-family: inherit;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 750;
+    line-height: 1.3;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    :is(
+        .aix-cover-eyebrow,
+        .aix-cover-prize > span,
+        .aix-cover-schedule .aix-timeline-panel header > span,
+        .aix-cover-schedule .aix-timeline-panel li strong,
+        .aix-timeline-panel li strong,
+        .aix-track-step-info p,
+        .aix-rule-panel :is(dt, dd),
+        .aix-format-venues p,
+        .aix-prize-total > span,
+        .aix-prize-panel > p,
+        .aix-prize-panel dd,
+        .aix-prize-product-name,
+        .aix-prize-panel footer,
+        .aix-organizers-group dt,
+        .aix-organizers-group li,
+        .aix-partner-wordmark,
+        .aix-track-summary-format,
+        .aix-track-summary-facts dd,
+        .aix-track-summary-next p
+    ) {
+    font-size: var(--aix-type-body);
+    font-weight: 600;
+    line-height: 1.65;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    :is(
+        .aix-track-step-time span,
+        .aix-timeline-panel small,
+        .aix-cover-schedule .aix-timeline-panel small,
+        .aix-prize-panel dt span,
+        .aix-prize-value,
+        .aix-partner-name,
+        .aix-track-summary-facts dt
+    ) {
+    font-size: var(--aix-type-meta);
+    font-weight: 650;
+    line-height: 1.6;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    :is(
+        .aix-timeline-panel time,
+        .aix-cover-schedule .aix-timeline-panel time,
+        .aix-track-step-time time,
+        .aix-track-step-time span,
+        .aix-track-summary-facts strong,
+        .aix-track-summary-facts dd > span,
+        .aix-track-summary-next time,
+        .aix-prize-value,
+        .aix-prize-panel dt span,
+        .aix-prize-panel[data-reward="gifts"] dt strong
+    ) {
+    color: var(--hx-accent-text);
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    :is(
+        .aix-timeline-panel time,
+        .aix-cover-schedule .aix-timeline-panel time,
+        .aix-track-step-time time
+    ) {
+    font-size: 20px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+    :is(
+        .aix-track-step-info h4,
+        .aix-prize-panel dt strong,
+        .aix-prize-cash,
+        .aix-partner-panels h3,
+        .aix-cover-schedule .aix-timeline-panel h3
+    ) {
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-heading h3 {
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.45;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-heading {
+    align-items: center;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(
+        .aix-prize-heading,
+        .aix-track-step-place,
+        .aix-track-summary-format,
+        .aix-track-summary-facts dt,
+        .aix-repository-success,
+        .aix-repository-form h3
+    )
+    > svg {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-step-place > svg {
+    margin-top: 3px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form
+    :is(
+        label,
+        input,
+        textarea,
+        select,
+        .aix-registration-login-notice p,
+        .hackathon-form-fields dl,
+        .aix-form-group-title,
+        .hackathon-form-group button
+    ) {
+    font-size: var(--aix-type-body);
+    font-weight: 600;
+    line-height: 1.6;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form
+    :is(
+        .hackathon-form-footer p,
+        .aix-registration-receipt-details,
+        .aix-repository-success p,
+        .aix-repository-next p,
+        .aix-repository-next small,
+        .aix-group-control button
+    ) {
+    font-size: var(--aix-type-meta);
+    font-weight: 600;
+    line-height: 1.65;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #registration-form
+    :is(
+        .aix-track-registration-tabs button,
+        .hackathon-form-footer button,
+        .aix-registration-login-notice button
+    ) {
+    font-size: var(--aix-type-control);
+    font-weight: 700;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-challenges
+    :is(
+        p,
+        label,
+        input,
+        textarea,
+        .aix-direction-list li,
+        .aix-direction-list span,
+        .aix-brief-meta p,
+        .aix-channel-note p,
+        .aix-repository-form label,
+        .aix-registration-receipt-details,
+        .aix-repository-success p
+    ) {
+    font-size: var(--aix-type-body);
+    font-weight: 600;
+    line-height: 1.7;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-challenges
+    :is(
+        .aix-status,
+        .aix-round-tabs button span,
+        .aix-repository-form label small,
+        .aix-repository-help,
+        .aix-repository-next small
+    ) {
+    font-size: var(--aix-type-meta);
+    font-weight: 600;
+    line-height: 1.6;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-challenges
+    :is(.aix-track-tabs button, .aix-round-tabs button, .aix-channel-note h3, .aix-brief h3) {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-challenges
+    :is(.aix-brief-date, .aix-round-tabs button span) {
+    color: var(--hx-accent-text);
+    font-variant-numeric: tabular-nums;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-challenges
+    :is(.aix-primary, .aix-secondary) {
+    font-size: 16px;
+    font-weight: 700;
+}
+@media (min-width: 768px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form[data-contained-form]) {
+        padding-right: 172px;
+    }
+}
+@media (max-width: 767px) {
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters {
+        width: 172px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters button {
+        min-height: 48px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapters-toggle {
+        min-height: 48px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-challenges .aix-track-tabs button {
+        font-size: 16px;
+        overflow-wrap: anywhere;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-track-schedule
+        > li {
+        grid-template-columns: 120px minmax(0, 1fr);
+    }
+}
+/* The portal is outside the edition shell, so it carries its own event scope. */
+.lottery-modal-overlay[data-event="zhekesong-ai-x-2026"]
+    .lottery-compact
+    :is(p, li, label, input, button, .lottery-login-placeholder, .lottery-compact-intro) {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+.lottery-modal-overlay[data-event="zhekesong-ai-x-2026"]
+    .lottery-compact
+    :is(small, .lottery-check, .lottery-compact-footer, .lottery-compact-rules p) {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+.lottery-modal-overlay[data-event="zhekesong-ai-x-2026"]
+    :is(.lottery-compact h2, .lottery-compact-prizes > summary) {
+    font-size: 20px;
+    font-weight: 750;
+}
+.lottery-modal-overlay[data-event="zhekesong-ai-x-2026"]
+    :is(.lottery-compact-prizes small, .lottery-compact-footer dd, .lottery-ticket code) {
+    color: var(--hx-accent-text);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.lottery-modal-overlay[data-event="zhekesong-ai-x-2026"] :is(a, button, summary) > svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-track-schedule > li {
+    grid-template-columns: 120px minmax(0, 1fr);
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #forum-registration .aix-page-heading {
+    align-items: baseline;
+    gap: 16px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #forum-registration .aix-page-heading > span,
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #forum-registration .aix-page-heading h2 {
+    font-family: inherit;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 750;
+    line-height: 1.3;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    :is(p, label, input, textarea, .aix-forum-receipt) {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    .aix-forum-event-info
+    div
+    > span:not(.aix-forum-info-icon) {
+    font-size: 16px;
+    font-weight: 600;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    :is(button, .aix-forum-attendee-tabs button) {
+    font-size: 18px;
+    font-weight: 700;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    .aix-forum-registration-summary
+    h3 {
+    font-weight: 750;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    .aix-forum-event-info
+    :is(time, strong) {
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    .aix-forum-event-info
+    time {
+    color: var(--hx-accent-text);
+    font-variant-numeric: tabular-nums;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #forum-registration
+    .aix-forum-info-icon
+    > svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    stroke-width: 2;
+}

@@ -6433,7 +6433,8 @@
                                 "id": "liu-jianbin",
                                 "name": "Liu Jianbin",
                                 "role": "Founder, Oufang Angel",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6479,7 +6480,6 @@
                             {
                                 "title": "Roundtable: First successes and failures in the AI era",
                                 "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin",
-                                "host": "Moderator: Ying Qi",
                                 "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
@@ -6487,7 +6487,15 @@
                         "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
                     }
                 ],
-                "invitedLabel": "Special guests"
+                "invitedLabel": "Special guests",
+                "hostLabel": "Host",
+                "host": {
+                    "id": "ying-qi",
+                    "name": "Ying Qi",
+                    "role": "Founder of Qiying Technology & Tuozhe AI Ecosystem",
+                    "photo": true,
+                    "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
+                }
             }
         },
         "workspaceTabs": {

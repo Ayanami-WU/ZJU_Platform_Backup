@@ -6536,7 +6536,8 @@
                                 "id": "liu-jianbin",
                                 "name": "刘建斌",
                                 "role": "藕舫天使创始人",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6582,7 +6583,6 @@
                             {
                                 "title": "圆桌论坛：AI时代的第一次成功与失败？",
                                 "speaker": "张洁、张加林、刘建斌",
-                                "host": "主持人：应奇",
                                 "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
@@ -6590,7 +6590,15 @@
                         "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
                     }
                 ],
-                "invitedLabel": "特邀嘉宾"
+                "invitedLabel": "特邀嘉宾",
+                "hostLabel": "主持人",
+                "host": {
+                    "id": "ying-qi",
+                    "name": "应奇",
+                    "role": "奇膺科技 & 拓浙AI生态创始人",
+                    "photo": true,
+                    "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
+                }
             }
         },
         "workspaceTabs": {

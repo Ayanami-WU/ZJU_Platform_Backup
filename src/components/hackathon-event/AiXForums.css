@@ -257,3 +257,17 @@
         font-size: 19px;
     }
 }
+@media (min-width: 768px) and (max-width: 1023px) {
+    .aix-forum-registration-layout {
+        grid-template-columns: 1fr;
+        max-width: 680px;
+        gap: 24px;
+    }
+    .aix-forum-registration-summary {
+        padding: 0;
+    }
+    .aix-forum-event-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
