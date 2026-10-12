@@ -126,6 +126,8 @@ test("real SQLite registration, private repository persistence, edits, deadline 
                 contact: "test@example.test",
                 strengths: ["exploring"],
                 aiTools: ["none"],
+                experience: "开发过活动报名工具，负责接口与测试。",
+                researchExperience: "参与课题文献整理。",
             },
         };
         const unauth = await invoke(controller.registerHackathon, { body });
