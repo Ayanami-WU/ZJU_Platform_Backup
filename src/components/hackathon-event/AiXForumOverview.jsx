@@ -31,8 +31,9 @@ export default function AiXForumOverview() {
     return (
         <>
             {copy.sessions.map((forum, index) => {
-                const featured = new Set(forum.topics.flatMap((topic) => topic.guestIds));
-                const otherGuests = forum.guests.filter((guest) => !featured.has(guest.id));
+                const otherGuests = forum.guests.filter((guest) =>
+                    forum.invitedGuestIds?.includes(guest.id)
+                );
                 return (
                     <section
                         className="aix-page aix-forum-screen"
@@ -87,11 +88,14 @@ export default function AiXForumOverview() {
                                     </div>
                                 )}
                                 {otherGuests.length > 0 && (
-                                    <div className="aix-forum-other-guests">
-                                        {otherGuests.map((guest) => (
-                                            <ForumGuest key={guest.id} guest={guest} />
-                                        ))}
-                                    </div>
+                                    <section className="aix-forum-invited">
+                                        <h3>{copy.invitedLabel}</h3>
+                                        <div className="aix-forum-other-guests">
+                                            {otherGuests.map((guest) => (
+                                                <ForumGuest key={guest.id} guest={guest} />
+                                            ))}
+                                        </div>
+                                    </section>
                                 )}
                                 {forum.id === "entrepreneurship" && (
                                     <Link

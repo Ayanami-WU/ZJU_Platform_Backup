@@ -6321,13 +6321,13 @@
                             {
                                 "id": "ye-xinjiang",
                                 "name": "Ye Xinjiang",
-                                "role": "CTO, Daily Interactive",
+                                "role": "CTO, Daily Interactive Co., Ltd.",
                                 "photo": false
                             },
                             {
                                 "id": "sun-yifei",
                                 "name": "Sun Yifei",
-                                "role": "Research Fellow, Zhejiang University",
+                                "role": "Hundred Talents Program Researcher, Zhejiang University",
                                 "photo": true
                             }
                         ],
@@ -6359,13 +6359,13 @@
                             {
                                 "id": "zhang-kejun",
                                 "name": "Zhang Kejun",
-                                "role": "School of AI, Zhejiang University",
+                                "role": "Head of Intelligent Design, School of Artificial Intelligence, Zhejiang University; Deputy Director, International Design Institute; Executive Deputy Director, AI Education and Teaching Research Center",
                                 "photo": true
                             },
                             {
                                 "id": "zhang-jie",
                                 "name": "Zhang Jie",
-                                "role": "Founder, Huadan Angel Investment",
+                                "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)",
                                 "photo": true
                             },
                             {
@@ -6389,14 +6389,20 @@
                             {
                                 "id": "zhang-jialin",
                                 "name": "Zhang Jialin",
-                                "role": "Secretary-General, Hangzhou Entrepreneurship Development Promotion Association",
+                                "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
                                 "photo": true
                             },
                             {
                                 "id": "wang-feifan",
                                 "name": "Wang Feifan",
-                                "role": "Deputy Director, ZJU Student Entrepreneurship Development Center",
+                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University; National Jury Pool Expert, China International College Students’ Innovation Competition",
                                 "photo": true
+                            },
+                            {
+                                "id": "xu-songbo",
+                                "name": "Xu Songbo",
+                                "photo": true,
+                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
                             }
                         ],
                         "topics": [
@@ -6422,9 +6428,11 @@
                                 "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
-                        "signup": "Join entrepreneurship forum"
+                        "signup": "Join entrepreneurship forum",
+                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
                     }
-                ]
+                ],
+                "invitedLabel": "Special guests"
             }
         },
         "workspaceTabs": {

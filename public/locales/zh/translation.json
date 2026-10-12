@@ -6427,7 +6427,7 @@
                             {
                                 "id": "ye-xinjiang",
                                 "name": "叶新江",
-                                "role": "每日互动 CTO",
+                                "role": "每日互动股份有限公司 CTO",
                                 "photo": false
                             },
                             {
@@ -6462,13 +6462,13 @@
                             {
                                 "id": "zhang-kejun",
                                 "name": "张克俊",
-                                "role": "浙江大学人工智能学院",
+                                "role": "浙江大学人工智能学院智能设计系系主任、国际设计研究院副院长、人工智能教育教学研究中心常务副主任",
                                 "photo": true
                             },
                             {
                                 "id": "zhang-jie",
                                 "name": "张洁",
-                                "role": "华旦天使投资创始人",
+                                "role": "华旦天使投资创始人兼 CEO、每日互动（个推）联合创始人",
                                 "photo": true
                             },
                             {
@@ -6498,8 +6498,14 @@
                             {
                                 "id": "wang-feifan",
                                 "name": "王非凡",
-                                "role": "浙江大学学生创业发展中心副主任",
+                                "role": "浙江大学学生创业发展中心副主任、中国国际大学生创新大赛国赛评委库专家",
                                 "photo": true
+                            },
+                            {
+                                "id": "xu-songbo",
+                                "name": "徐松波",
+                                "photo": true,
+                                "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任"
                             }
                         ],
                         "topics": [
@@ -6525,9 +6531,11 @@
                                 "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
                             }
                         ],
-                        "signup": "报名创业论坛"
+                        "signup": "报名创业论坛",
+                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
                     }
-                ]
+                ],
+                "invitedLabel": "特邀嘉宾"
             }
         },
         "workspaceTabs": {

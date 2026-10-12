@@ -284,3 +284,37 @@
         font-size: 14px;
     }
 }
+.aix-forum-speaker p {
+    max-width: none;
+}
+.aix-forum-invited {
+    flex: 1;
+    min-width: 0;
+}
+.aix-forum-invited > h3 {
+    margin-bottom: 10px;
+    color: var(--hx-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+.aix-forum-other-guests {
+    display: grid;
+    grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+    gap: 24px;
+}
+.aix-forum-invited .aix-forum-speaker {
+    align-items: center;
+}
+.aix-forum-screen-footer > .aix-forum-signup-link {
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+@media (max-width: 767px) {
+    .aix-forum-other-guests {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .aix-forum-screen-footer > .aix-forum-signup-link {
+        align-self: stretch;
+    }
+}
