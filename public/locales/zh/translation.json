@@ -6835,6 +6835,10 @@
         "trackBadges": {
             "campus": ["线上", "1—5人组队"],
             "industry": ["线下", "1—5人组队"]
+        },
+        "trackPurpose": {
+            "campus": "OPC孵化",
+            "industry": "产业落地"
         }
     },
     "eventWorkspace": {

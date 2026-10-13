@@ -1,0 +1,16 @@
+.aix-track-purpose {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-inline-start: 10px;
+    padding: 3px 9px;
+    border: 1px solid color-mix(in srgb, var(--hx-accent-text) 30%, transparent);
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--hx-accent-text) 6%, transparent);
+    color: var(--hx-accent-text);
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.5;
+    letter-spacing: normal;
+    white-space: nowrap;
+}

@@ -1,3 +1,4 @@
+import AiXTrackPurpose from "./AiXTrackPurpose";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -227,6 +228,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                             onClick={() => select(id, stage)}
                         >
                             {label(`trackLabels.${id}`)}
+                            <AiXTrackPurpose track={id} />
                         </button>
                     ))}
                 </div>

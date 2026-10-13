@@ -1,3 +1,4 @@
+import AiXTrackPurpose from "./hackathon-event/AiXTrackPurpose";
 import { useAiXPager } from "../hooks/useAiXPager";
 import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
@@ -1604,6 +1605,7 @@ const HackathonRegistration = ({
                                                 ? "产业命题赛道报名"
                                                 : "学科创意赛道报名",
                                     })}
+                                    <AiXTrackPurpose track={track} />
                                 </button>
                             ))}
                         </nav>

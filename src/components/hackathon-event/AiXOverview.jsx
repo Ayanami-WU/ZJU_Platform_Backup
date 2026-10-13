@@ -1,3 +1,4 @@
+import AiXTrackPurpose from "./AiXTrackPurpose";
 import { useState } from "react";
 import { Pause, Play, Trophy, Medal, Gift, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -54,7 +55,10 @@ export default function AiXOverview({ state }) {
                         {copy.tracks.map((track) => (
                             <article className="aix-timeline-panel" key={track.id}>
                                 <header>
-                                    <h3>{track.title}</h3>
+                                    <h3>
+                                        {track.title}
+                                        <AiXTrackPurpose track={track.id} />
+                                    </h3>
                                     <span>{track.mode}</span>
                                 </header>
                                 <ol>
@@ -94,7 +98,10 @@ export default function AiXOverview({ state }) {
                         {copy.tracks.map((track) => (
                             <article className="aix-rule-panel" key={track.id}>
                                 <header className="aix-track-card-heading">
-                                    <h3>{track.title}</h3>
+                                    <h3>
+                                        {track.title}
+                                        <AiXTrackPurpose track={track.id} />
+                                    </h3>
                                     <div className="aix-track-badges">
                                         {(Array.isArray(trackBadges?.[track.id])
                                             ? trackBadges[track.id]
@@ -182,7 +189,10 @@ export default function AiXOverview({ state }) {
                                     ) : (
                                         <Trophy size={24} aria-hidden="true" />
                                     )}
-                                    <h3>{reward.title}</h3>
+                                    <h3>
+                                        {reward.title}
+                                        <AiXTrackPurpose track={reward.kind} />
+                                    </h3>
                                 </header>
                                 <div className="aix-prize-total">
                                     <span>{reward.totalLabel}</span>

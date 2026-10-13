@@ -6732,6 +6732,10 @@
         "trackBadges": {
             "campus": ["Online", "Teams of 1–5"],
             "industry": ["In person", "Teams of 1–5"]
+        },
+        "trackPurpose": {
+            "campus": "OPC Incubation",
+            "industry": "Industry Implementation"
         }
     },
     "eventWorkspace": {
