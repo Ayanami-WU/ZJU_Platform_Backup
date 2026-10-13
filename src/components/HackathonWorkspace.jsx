@@ -92,6 +92,13 @@ export default function HackathonWorkspace({ template, schedule }) {
                 ?.scrollIntoView({ behavior: "smooth", block: "start" });
             return;
         }
+        // The form now lives on its own page; here we only bring it into view.
+        if (view === "register") {
+            document
+                .getElementById("registration-form")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            return;
+        }
         if (view === "intro" && registrationRef.current) registrationRef.current.scrollToForm();
         else navigate(getEventUrl(event.key, "intro", { hash: "#registration-form" }));
     };

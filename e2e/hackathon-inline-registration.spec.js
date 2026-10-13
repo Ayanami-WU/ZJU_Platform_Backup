@@ -94,7 +94,7 @@ test("anonymous registration shows disabled fields and enables them after login"
     await page.goto("/hackathon/2#registration-form");
     await expect(page.locator("#hackathon-field-contact")).toBeDisabled();
     await expect(formSubmit(page)).toBeDisabled();
-    await page.locator(".aix-registration-login-notice button").click();
+    await page.locator(".aix-registration-lock-content button").click();
     const auth = page.getByRole("dialog");
     await auth.getByLabel("用户名", { exact: true }).fill("inline-ui-test");
     await auth.getByLabel("密码", { exact: true }).fill("test-only-password");
@@ -197,7 +197,7 @@ test("account profile fills both tracks without replacing saved receipts or anot
             grade: "master",
         },
     });
-    await page.locator(".aix-registration-login-notice button").click();
+    await page.locator(".aix-registration-lock-content button").click();
     const auth = page.getByRole("dialog");
     await auth.getByLabel("用户名", { exact: true }).fill("second-user");
     await auth.getByLabel("密码", { exact: true }).fill("test-only-password");

@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { getEventUrl } from "../utils/hackathonRoute";
+import { getEventUrl, getRegistrationTrack } from "../utils/hackathonRoute";
 import HackathonRegistration from "./HackathonRegistration";
 import HackathonOutcomeShowcase from "./HackathonOutcomeShowcase";
 import FirstEditionChallenge from "./hackathon-event/FirstEditionChallenge";
@@ -28,8 +28,19 @@ export default function HackathonEventContent({
 }) {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const location = useLocation();
     const switchView = (next, track) =>
         navigate(getEventUrl(template.event.key, next, { search: track ? `?track=${track}` : "" }));
+    // The full registration form lives on its own page; the intro page keeps the entry buttons.
+    if (view === "register")
+        return (
+            <HackathonRegistration
+                standalone
+                initialTrack={getRegistrationTrack(location)}
+                template={{ ...template, event: { ...template.event, registrationOpen } }}
+                registrationState={registrationState}
+            />
+        );
     if (view === "partners") return <AiXPartners />;
     if (view === "forums") return <AiXForums now={now} registrationState={registrationState} />;
     if (view === "lottery")

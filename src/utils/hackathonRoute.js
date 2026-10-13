@@ -19,7 +19,7 @@ const readEventPath = (location = {}) => {
             view,
             invalid:
                 segments.length > 2 ||
-                ![...EVENT_VIEWS, "lottery", "forums", "partners"].includes(view),
+                ![...EVENT_VIEWS, "lottery", "forums", "partners", "register"].includes(view),
         };
     } catch {
         return { invalid: true };
@@ -38,6 +38,19 @@ export const getEventUrl = (eventKey, view = "intro", { search = "", hash = "" }
     const params = new URLSearchParams(search);
     return `${pathname}${params.size ? `?${params}` : ""}${hash}`;
 };
+
+// Standalone registration pages keep one target per track so each entry button has its own URL.
+export const REGISTRATION_TRACKS = ["industry", "campus"];
+
+export const getRegistrationTrack = (location = {}) => {
+    const track = new URLSearchParams(location.search || "").get("track");
+    return REGISTRATION_TRACKS.includes(track) ? track : REGISTRATION_TRACKS[0];
+};
+
+export const getRegistrationUrl = (eventKey, track = REGISTRATION_TRACKS[0]) =>
+    getEventUrl(eventKey, "register", {
+        search: `track=${REGISTRATION_TRACKS.includes(track) ? track : REGISTRATION_TRACKS[0]}`,
+    });
 
 export const resolveEventLocation = (location = {}, schedule = {}) => {
     const path = readEventPath(location);

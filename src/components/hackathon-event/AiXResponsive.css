@@ -142,37 +142,93 @@
         :is(time, strong) {
         font-size: 18px;
     }
+    /* One compact horizontal timeline: both tracks share the same four date columns,
+       so a stage always sits under the date it belongs to. */
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-cover-schedule {
+        padding: 0 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-timeline-panel {
+        padding: 13px 0;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-timeline-panel
+        h3 {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-cover-schedule
         .aix-timeline-panel
         ol {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 22px 16px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0 6px;
+        margin-top: 14px;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-cover-schedule
-        .aix-stage-empty {
-        display: none;
+        .aix-timeline-panel
+        li {
+        gap: 2px;
+        padding: 11px 6px 0 0;
     }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-timeline-panel
+        time {
+        font-size: 13px;
+        letter-spacing: -0.02em;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-timeline-panel
+        li
+        strong {
+        font-size: 13px;
+        font-weight: 750;
+        line-height: 1.35;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-timeline-panel
+        small {
+        font-size: 11px;
+        line-height: 1.35;
+    }
+    /* Keep the blank slot so the two tracks stay aligned by date. */
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        .aix-stage-empty {
+        display: block;
+    }
+    /* Registration details are ordered by competition stage on phones too. */
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-track-schedule
         > li {
         display: block;
-        padding-block: 18px;
+        padding-block: 14px;
     }
     :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-track-step-time {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: baseline;
         gap: 6px 14px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
     :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-panel dl {
         grid-template-rows: none;
-        margin-top: 18px;
+        margin-top: 14px;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
@@ -180,17 +236,47 @@
         dl
         > div {
         min-height: 0;
-        padding-block: 18px;
+        padding-block: 14px;
     }
     :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-total {
-        margin-top: 16px;
+        margin-top: 12px;
     }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-panel
+        dl
+        > div {
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 12px;
+    }
+    /* Award rows share one left (name + winners) / right (reward) structure:
+       the medal sits beside the award name, winners drop to the next line. */
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-panel dt {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3px 6px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-panel
+        dt
+        svg {
+        width: 19px;
+        height: 19px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"] .aix-prize-panel dd {
+        padding-left: 12px;
+    }
+    /* Every award row keeps the same left (name + winners) / right (reward) structure. */
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-prize-panel[data-reward="industry"]
         dl
         > div {
-        display: block;
+        display: grid;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
@@ -199,25 +285,79 @@
         flex-direction: row;
         align-items: center;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 14px;
+        gap: 3px 6px;
+        margin-bottom: 0;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-prize-panel[data-reward="industry"]
         dt
         svg {
-        margin: 0;
+        margin-bottom: 0;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-prize-panel[data-reward="industry"]
         dd {
-        border-left: 0;
-        padding-left: 0;
+        border-left: 1px solid color-mix(in srgb, var(--hx-accent) 35%, var(--hx-line));
+        padding-left: 12px;
+    }
+    /* Gifts: count on the left stays white, gift names on the right turn accent green. */
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-panel[data-reward="gifts"]
+        dl
+        > div {
+        grid-template-columns: 88px minmax(0, 1fr);
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-panel[data-reward="gifts"]
+        dt
+        strong {
+        color: var(--hx-text);
+        font-weight: 800;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-panel[data-reward="gifts"]
+        dd
+        > span {
+        color: var(--hx-accent-text);
+        font-weight: 700;
     }
 }
 @media (max-width: 767px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-product-name {
+        text-wrap: balance;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-cover-schedule
+        small {
+        text-wrap: pretty;
+    }
+}
+/* Phones: the two paired prizes stack so neither value nor cash gets clipped. */
+@media (max-width: 767px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-products[data-pair] {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
+        .aix-prize-products[data-pair]
+        > div
+        + div {
+        border-left: 0;
+        padding-left: 0;
+        border-top: 1px solid var(--hx-line);
+        padding-top: 10px;
+    }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view="intro"]
         .aix-prize-product-name {

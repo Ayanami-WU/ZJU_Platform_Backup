@@ -90,8 +90,7 @@
         .aix-track-summary-facts dd > span,
         .aix-track-summary-next time,
         .aix-prize-value,
-        .aix-prize-panel dt span,
-        .aix-prize-panel[data-reward="gifts"] dt strong
+        .aix-prize-panel dt span
     ) {
     color: var(--hx-accent-text);
     font-weight: 750;
