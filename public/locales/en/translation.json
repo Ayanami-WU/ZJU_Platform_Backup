@@ -4157,8 +4157,8 @@
             "description": "Review each registered account and track separately. Only formal submissions are used for judging; drafts do not count as submitted entries.",
             "track": "Track",
             "stage": "Round",
-            "industry": "Huawei track",
-            "campus": "Tmall track",
+            "industry": "Industry Challenge Track",
+            "campus": "Academic Creativity Track",
             "initial": "Initial round",
             "semifinal": "Semifinal",
             "refresh": "Refresh",
@@ -5116,18 +5116,18 @@
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
         "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
-        "team": "Tmall and Huawei: teams of 1–5",
+        "team": "Academic Creativity Track and Industry Challenge Track: teams of 1–5",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
         "tracks": {
             "campus": {
-                "title": "Tmall Campus · OPC Incubation Track",
+                "title": "Academic Creativity Track",
                 "description": "Open topics across disciplines; mature, deployable projects preferred. Online participation · 1–5 people",
                 "topics": "Open topics across disciplines and application scenarios"
             },
             "industry": {
-                "title": "Huawei · Industry Advanced Track",
+                "title": "Industry Challenge Track",
                 "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · teams of 1–5",
                 "topics": "Copywriting · Marketing"
             }
@@ -5158,7 +5158,7 @@
             "initial": {
                 "date": "10.18",
                 "title": "First round · Tech forum",
-                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall; 60% completion required for Huawei."
+                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Academic Creativity Track; 60% completion required for Industry Challenge Track."
             },
             "semifinal": {
                 "date": "10.19–10.22",
@@ -5168,7 +5168,7 @@
             "shortlist": {
                 "date": "10.23",
                 "title": "Semifinal development & review",
-                "description": "Refine online; ten Huawei projects selected for the final."
+                "description": "Refine online; ten Industry Challenge Track projects selected for the final."
             },
             "final": {
                 "date": "10.25",
@@ -5176,12 +5176,12 @@
                 "description": "October 25, 09:10–11:30 parallel pitches. Separate judging; joint awards."
             }
         },
-        "challengeKicker": "Tmall incubation · Huawei industry",
+        "challengeKicker": "Academic creativity · Industry challenges",
         "challengeDescription": "Start with a problem in your discipline or tackle a real business brief. Each track has its own schedule; published briefs and submission links appear here.",
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Tmall challenges are released on Oct 14; Huawei releases its challenge at 13:00 on Oct 18.",
+        "releaseTime": "Academic Creativity Track challenges are released on Oct 14; Industry Challenge Track releases its challenge at 13:00 on Oct 18.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -5193,7 +5193,7 @@
             "initial": {
                 "title": "First round",
                 "date": "10.18",
-                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall; 60% completion required for Huawei.",
+                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Academic Creativity Track; 60% completion required for Industry Challenge Track.",
                 "materials": "Submit a working demo and project description to ModelScope, covering the problem, core features and completion."
             },
             "semifinal": {
@@ -5228,7 +5228,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Tmall and Huawei: teams of 1–5",
+            "description": "Academic Creativity Track and Industry Challenge Track: teams of 1–5",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5261,11 +5261,11 @@
             },
             "loginPreview": "Please register or sign in before completing your registration.",
             "trackTabs": "Registration track",
-            "trackTabs_industry": "Huawei registration",
-            "trackTabs_campus": "Tmall registration",
+            "trackTabs_industry": "Industry Challenge Track registration",
+            "trackTabs_campus": "Academic Creativity Track registration",
             "sectionTitle": "Register",
-            "cta_industry": "Register for the Huawei track",
-            "cta_campus": "Register for the Tmall track",
+            "cta_industry": "Register for the Industry Challenge Track",
+            "cta_campus": "Register for the Academic Creativity Track",
             "entryHint": "Each track is registered separately; the form and profile editing live on their own pages.",
             "entryRegistered": "Submitted tracks can be opened to review or edit the details.",
             "phone": "Mobile number",
@@ -5273,8 +5273,8 @@
             "invalidPhone": "Enter a valid mobile number",
             "trackSummary": {
                 "label": "Participation details",
-                "industryTitle": "Huawei · Industry Track",
-                "campusTitle": "Tmall · OPC Incubation",
+                "industryTitle": "Industry Challenge Track",
+                "campusTitle": "Academic Creativity Track",
                 "industryFormat": "Teams of 1–5 · In person required",
                 "campusFormat": "Teams of 1–5 · Online participation",
                 "development": "On-site development",
@@ -5330,8 +5330,8 @@
             "senior": "Year 4",
             "master": "Master’s",
             "phd": "PhD",
-            "campus": "Tmall · OPC Incubation",
-            "industry": "Huawei · Industry Track",
+            "campus": "Academic Creativity Track",
+            "industry": "Industry Challenge Track",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
             "Cursor": "Cursor",
@@ -5404,7 +5404,7 @@
         "crossDiscipline": "Interdisciplinary innovation and real applications",
         "resultsTitle": "Results",
         "resultsIntro": "Award winners, projects, speeches and forum highlights in one place.",
-        "industryStages": "Huawei Advanced Track · Stages",
+        "industryStages": "Industry Challenge Track · Stages",
         "campusSchedule": "Online qualifier: Oct 13–18, closing at 17:00; optional on-site mentoring Oct 18, 13:00–17:00; online semifinal Oct 19–23; final Oct 25.",
         "fieldHints": {
             "name": "",
@@ -5433,7 +5433,7 @@
                     "type": "Your own challenge",
                     "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
                     "format": "Build online · Present on campus",
-                    "shortTitle": "Tmall Campus · OPC Incubation Track",
+                    "shortTitle": "Academic Creativity Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
                     "team": "1–5 members",
                     "deadline": "Onsite · October 18, 17:00",
@@ -5444,7 +5444,7 @@
                     "type": "Industry challenge",
                     "topics": ["Copywriting", "Marketing"],
                     "format": "Solution design · Product development · Presentations",
-                    "shortTitle": "Huawei · Industry Advanced Track",
+                    "shortTitle": "Industry Challenge Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
                     "team": "Teams of 1–5",
                     "deadline": "Onsite · October 18, 17:00",
@@ -5456,7 +5456,7 @@
             "agenda": [
                 {
                     "date": "10.12",
-                    "title": "Tmall registration opens",
+                    "title": "Academic Creativity Track registration opens",
                     "description": "Existing, deployable projects welcome"
                 },
                 {
@@ -5526,7 +5526,7 @@
             "closing": "Bring your discipline. Build something new.",
             "lightMode": "Switch to light mode",
             "darkMode": "Switch to dark mode",
-            "heroDescription": "Tmall OPC incubation and Huawei industry challenges. Build practical AI products and connect with industry and incubation resources.",
+            "heroDescription": "Academic creativity and industry challenges. Build practical AI products and connect with industry and incubation resources.",
             "application": "Apps",
             "bothTracks": "You can enter both tracks",
             "venues": [
@@ -5539,10 +5539,10 @@
             "openingLabel": "Opening speakers",
             "judges": "",
             "rewardsTitle": "Awards & gifts",
-            "rewardsIntro": "Tmall team awards and Huawei cash and prizes; ModelScope onsite giveaways.",
+            "rewardsIntro": "Academic Creativity Track team awards and Industry Challenge Track cash and prizes; ModelScope onsite giveaways.",
             "rewards": [
                 {
-                    "label": "Tmall OPC incubation awards",
+                    "label": "Academic Creativity Track awards",
                     "value": "¥6,500",
                     "note": "6 winning teams",
                     "items": [
@@ -5553,7 +5553,7 @@
                     ]
                 },
                 {
-                    "label": "Huawei prizes & cash value",
+                    "label": "Industry Challenge Track prizes & cash value",
                     "value": "¥14,980",
                     "note": "10 awards",
                     "items": [
@@ -5568,7 +5568,7 @@
                     "value": "¥1,614",
                     "note": "3 passes · 3 months each",
                     "items": [
-                        "OPC Incubation champion: 1 winner",
+                        "Academic Creativity Track champion: 1 winner",
                         "Industry Advancement first prize: 2 winners"
                     ]
                 },
@@ -5640,7 +5640,7 @@
             "releaseAt": "Expected release: {{date}}. The official published brief is authoritative.",
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
-            "individual": "Teams of 1–5; online participation is available for Tmall.",
+            "individual": "Teams of 1–5; online participation is available for Academic Creativity Track.",
             "team": "Teams of 1–5; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Technical project + BP + Demo",
@@ -5752,7 +5752,7 @@
             "back": "Back to competition",
             "enter": "Forums & independent registration",
             "attendanceTitle": "Required attendance for contestants",
-            "attendance": "Huawei preliminary contestants must attend the October 18 technical forum; finalists must attend the October 25 final-day forum. Forum signup is separate.",
+            "attendance": "Industry Challenge Track preliminary contestants must attend the October 18 technical forum; finalists must attend the October 25 final-day forum. Forum signup is separate.",
             "agenda": "View agenda",
             "invited": "Invited · Not confirmed",
             "registered": "Registered · No. {{id}}",
@@ -6064,8 +6064,8 @@
             "teamSizeError": "Choose a team size of 1–5",
             "recapAdditionalTitle": "Xijing Cup · Interdisciplinary Quantitative Investment Challenge",
             "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios.",
-            "campusTeamLabel": "Tmall team name",
-            "campusTeamSizeLabel": "Tmall team size"
+            "campusTeamLabel": "Academic Creativity Track team name",
+            "campusTeamSizeLabel": "Academic Creativity Track team size"
         },
         "pages": {
             "format": "Competition format",
@@ -6090,7 +6090,7 @@
             "tracks": [
                 {
                     "id": "campus",
-                    "title": "Tmall · OPC Incubation",
+                    "title": "Academic Creativity Track",
                     "mode": "Online participation · 1–5 people",
                     "description": "Open topics across disciplines; mature, deployable projects preferred.",
                     "stages": [
@@ -6147,7 +6147,7 @@
                 },
                 {
                     "id": "industry",
-                    "title": "Huawei · Industry Track",
+                    "title": "Industry Challenge Track",
                     "mode": "On-site qualifier · Teams of 1–5",
                     "description": "Build an Agent or Skill for business writing and marketing.",
                     "stages": [
@@ -6205,7 +6205,7 @@
             ],
             "rewards": [
                 {
-                    "title": "Tmall · OPC Incubation",
+                    "title": "Academic Creativity Track",
                     "value": "¥6,500",
                     "note": "6 winning teams",
                     "rows": [
@@ -6233,7 +6233,7 @@
                     "totalLabel": "Total cash prizes"
                 },
                 {
-                    "title": "Huawei · Industry Track",
+                    "title": "Industry Challenge Track",
                     "value": "¥14,980",
                     "note": "Teams of 1–5 · 10 winners",
                     "rows": [
@@ -6290,7 +6290,7 @@
                         {
                             "label": "Champion",
                             "count": "1 winner",
-                            "lines": ["OPC Incubation Track"]
+                            "lines": ["Academic Creativity Track"]
                         },
                         {
                             "label": "First prize",
@@ -6651,7 +6651,7 @@
                 "initial": "Receive the challenge on site, build your solution and submit your technical work.",
                 "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
             },
-            "selfDefined": "Tmall challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
+            "selfDefined": "Academic Creativity Track challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
             "campusPending": "Recommended challenges are not published yet. You can prepare your own project.",
             "industryPending": "This round’s challenge is not published yet. Please wait for the official brief.",
             "requirements": "Required materials",
@@ -6696,7 +6696,7 @@
             "legacyTitle": "Previous repository links",
             "legacyHint": "These previously saved links are for reference only and are not a formal submission for this round.",
             "finalTitle": "Final presentations",
-            "finalDescription": "Tmall and Huawei presentations run in two rooms. Dual-track entrants present at different times; follow the on-site running order.",
+            "finalDescription": "Academic Creativity Track and Industry Challenge Track presentations run in two rooms. Dual-track entrants present at different times; follow the on-site running order.",
             "finalVenue": "Zhejiang University National Innovation and Entrepreneurship Demonstration Base · Sandun Innovation Space\n6F, Block C, Baogang Lifestyle Plaza",
             "registrationReceiptHint": "Registration saved. Choose your track and round to save a draft or submit your work for review.",
             "uploadFile": "Choose file",
@@ -6729,14 +6729,18 @@
                 "projectName": "Project name"
             },
             "trackLabels": {
-                "industry": "Huawei track",
-                "campus": "Tmall track"
+                "industry": "Industry Challenge Track",
+                "campus": "Academic Creativity Track"
             }
         },
         "trackScheduleOnline": "Online",
         "trackBadges": {
             "campus": ["Online", "Teams of 1–5"],
             "industry": ["In person", "Teams of 1–5"]
+        },
+        "trackPurpose": {
+            "campus": "OPC Incubation",
+            "industry": "Industry Implementation"
         }
     },
     "eventWorkspace": {
