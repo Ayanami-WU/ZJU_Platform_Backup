@@ -21,11 +21,15 @@ export default function AiXRegistrationInfo() {
                         <X size={22} />
                     </button>
                 </form>
+                <div className="aix-qr-instructions">
+                    <h2>{t("aix.landing.memberQrTitle")}</h2>
+                    <p>{t("aix.landing.memberQrHint")}</p>
+                </div>
                 <img
-                    src="/images/hackathon/ai-x/official/wechat-group.webp"
+                    src="/images/hackathon/ai-x/official/wechat-member.png"
                     alt={t("aix.landing.qrAlt")}
-                    width="900"
-                    height="900"
+                    width="896"
+                    height="922"
                 />
             </dialog>
         </div>

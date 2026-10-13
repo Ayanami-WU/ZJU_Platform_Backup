@@ -859,6 +859,21 @@
     background: #191919;
     color: #fff;
 }
+.aix-qr-instructions {
+    padding: 24px 56px 20px 24px;
+}
+.aix-qr-instructions h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+.aix-qr-instructions p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.7;
+}
 .aix-qr-dialog img {
     display: block;
     width: 100%;

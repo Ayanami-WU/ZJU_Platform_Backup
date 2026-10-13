@@ -5571,11 +5571,13 @@
                 }
             ],
             "contactTitle": "Join the event group",
-            "contactHint": "Challenge releases, pitch shortlists and onsite updates are shared in the group.",
-            "groupQr": "View WeChat group QR",
+            "contactHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
+            "groupQr": "Join via WeChat",
             "qrExpiry": "Check the latest event notice for the current group QR.",
             "qrExpired": "The group QR has expired. Please contact the organizer.",
-            "qrAlt": "WeChat group QR for the AI+X Hackathon",
+            "qrAlt": "Event member’s WeChat QR code for an invitation to the event group",
+            "memberQrTitle": "Add a member to join the group",
+            "memberQrHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
             "closeQr": "Close QR",
             "contactName": "Ying Qi · Founder, Tuozhe AI Ecosystem & Qiying Technology",
             "contactLabel": "Event & partnership contact"
