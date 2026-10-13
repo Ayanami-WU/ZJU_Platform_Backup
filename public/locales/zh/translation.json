@@ -6058,8 +6058,8 @@
                             "name": "华为"
                         },
                         {
-                            "id": "getui",
-                            "name": "每日互动"
+                            "id": "zhipu",
+                            "name": "智谱"
                         }
                     ],
                     "id": "sponsors",
@@ -6068,6 +6068,10 @@
                 {
                     "label": "支持企业",
                     "members": [
+                        {
+                            "id": "getui",
+                            "name": "每日互动"
+                        },
                         {
                             "id": "aliyun",
                             "name": "阿里云"
@@ -6502,8 +6506,8 @@
                             "name": "华为"
                         },
                         {
-                            "id": "getui",
-                            "name": "每日互动"
+                            "id": "zhipu",
+                            "name": "智谱"
                         }
                     ]
                 },
@@ -6512,6 +6516,10 @@
                     "label": "合作企业",
                     "published": true,
                     "members": [
+                        {
+                            "id": "getui",
+                            "name": "每日互动"
+                        },
                         {
                             "id": "aliyun",
                             "name": "阿里云"
@@ -6551,10 +6559,6 @@
                         {
                             "id": "yuandian",
                             "name": "元典"
-                        },
-                        {
-                            "id": "zhipu",
-                            "name": "智谱"
                         }
                     ]
                 },

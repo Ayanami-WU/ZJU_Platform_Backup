@@ -49,12 +49,16 @@
     overflow-wrap: anywhere;
 }
 #aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-partner-members {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 #aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-brand-logo {
     background: #fff;
     border-radius: 4px;
     padding: 6px;
+}
+#aix-partners-title .aix-partner-panels .aix-brand-manhattan {
+    max-width: 440px;
+    flex-basis: 440px;
 }
 #aix-partners-title .aix-partner-panels .aix-brand-guancha img {
     transform: scale(1.85);

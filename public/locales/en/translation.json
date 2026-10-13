@@ -5955,8 +5955,8 @@
                             "name": "华为"
                         },
                         {
-                            "id": "getui",
-                            "name": "Getui"
+                            "id": "zhipu",
+                            "name": "Zhipu"
                         }
                     ],
                     "id": "sponsors",
@@ -5965,6 +5965,10 @@
                 {
                     "label": "Supporting companies",
                     "members": [
+                        {
+                            "id": "getui",
+                            "name": "Getui"
+                        },
                         {
                             "id": "aliyun",
                             "name": "阿里云"
@@ -6399,8 +6403,8 @@
                             "name": "华为"
                         },
                         {
-                            "id": "getui",
-                            "name": "Getui"
+                            "id": "zhipu",
+                            "name": "Zhipu"
                         }
                     ]
                 },
@@ -6409,6 +6413,10 @@
                     "label": "Partner companies",
                     "published": true,
                     "members": [
+                        {
+                            "id": "getui",
+                            "name": "Getui"
+                        },
                         {
                             "id": "aliyun",
                             "name": "Alibaba Cloud"
@@ -6448,10 +6456,6 @@
                         {
                             "id": "yuandian",
                             "name": "Legal Intelligence"
-                        },
-                        {
-                            "id": "zhipu",
-                            "name": "Zhipu"
                         }
                     ]
                 },
