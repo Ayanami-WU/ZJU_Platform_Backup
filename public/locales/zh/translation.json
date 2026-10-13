@@ -5290,7 +5290,7 @@
         "stagesLabel": "比赛阶段",
         "deadline": "材料截止",
         "challengePending": "赛题待发布",
-        "releaseTime": "天猫10月13日线上开启；华为10月18日13:00发布赛题。",
+        "releaseTime": "天猫10月14日公布赛题；华为10月18日13:00发布赛题。",
         "nextStageNotice": "本阶段要求与提交入口将在正式通知后开放。",
         "submissionPending": "提交入口待开放",
         "submissionClosed": "本阶段提交已结束",
@@ -6615,7 +6615,7 @@
                                 "name": "刘建斌",
                                 "role": "藕舫天使创始人",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6723,7 +6723,7 @@
                 "initial": "初赛线下领取命题，现场完成开发并提交技术作品。",
                 "semifinal": "复赛完善技术作品，提交 GitHub、魔搭链接并上传 Demo 演示文件。"
             },
-            "selfDefined": "天猫赛道可自主命题，也可选择已发布的推荐赛题。",
+            "selfDefined": "天猫赛题于10月14日公布，可自主命题，也可选择已发布的推荐赛题。",
             "campusPending": "推荐赛题尚未发布，可先准备自主命题作品。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",

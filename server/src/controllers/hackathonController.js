@@ -323,7 +323,9 @@ const publicTemplate = (template) => {
                     const releaseAt =
                         item.track === "industry" && stage?.id === "initial"
                             ? program.challengeReleaseAt || stage.opensAt
-                            : stage?.opensAt;
+                            : item.track === "campus" && stage?.id === "initial"
+                              ? program.campusChallengeReleaseAt || stage.opensAt
+                              : stage?.opensAt;
                     return (
                         item.published &&
                         stage &&

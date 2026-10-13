@@ -162,6 +162,9 @@ const normalizeProgram = (input = {}) => {
         }
     };
     return {
+        ...(input.campusChallengeReleaseAt
+            ? { campusChallengeReleaseAt: text(input.campusChallengeReleaseAt, 40) }
+            : {}),
         ...(input.challengeReleaseAt
             ? { challengeReleaseAt: text(input.challengeReleaseAt, 40) }
             : {}),

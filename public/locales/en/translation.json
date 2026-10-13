@@ -5181,7 +5181,7 @@
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Tmall launches online on Oct 13; Huawei releases its challenge at 13:00 on Oct 18.",
+        "releaseTime": "Tmall challenges are released on Oct 14; Huawei releases its challenge at 13:00 on Oct 18.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -6509,7 +6509,7 @@
                                 "name": "Liu Jianbin",
                                 "role": "Founder, Oufang Angel",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6617,7 +6617,7 @@
                 "initial": "Receive the challenge on site, build your solution and submit your technical work.",
                 "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
             },
-            "selfDefined": "Choose your own topic or a published recommended challenge for the Tmall track.",
+            "selfDefined": "Tmall challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
             "campusPending": "Recommended challenges are not published yet. You can prepare your own project.",
             "industryPending": "This round’s challenge is not published yet. Please wait for the official brief.",
             "requirements": "Required materials",
