@@ -55,10 +55,7 @@ export default function AiXOverview({ state }) {
                         {copy.tracks.map((track) => (
                             <article className="aix-timeline-panel" key={track.id}>
                                 <header>
-                                    <h3>
-                                        {track.title}
-                                        <AiXTrackPurpose track={track.id} />
-                                    </h3>
+                                    <h3>{track.title}</h3>
                                     <span>{track.mode}</span>
                                 </header>
                                 <ol>
@@ -189,10 +186,7 @@ export default function AiXOverview({ state }) {
                                     ) : (
                                         <Trophy size={24} aria-hidden="true" />
                                     )}
-                                    <h3>
-                                        {reward.title}
-                                        <AiXTrackPurpose track={reward.kind} />
-                                    </h3>
+                                    <h3>{reward.title}</h3>
                                 </header>
                                 <div className="aix-prize-total">
                                     <span>{reward.totalLabel}</span>
