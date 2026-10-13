@@ -5559,6 +5559,15 @@
                     "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+128GB (¥2,779), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
                 },
                 {
+                    "label": "Coding Plan Pro · Quarterly Plan",
+                    "value": "¥1,614",
+                    "note": "3 passes · 3 months each",
+                    "items": [
+                        "OPC Incubation champion: 1 winner",
+                        "Industry Advancement first prize: 2 winners"
+                    ]
+                },
+                {
                     "label": "ModelScope onsite giveaway",
                     "value": "130",
                     "note": "Onsite giveaway gifts",
@@ -5730,7 +5739,7 @@
             "resultsAfter": "Results awaiting publication",
             "resultsHint": "This edition’s awards and projects will appear after official publication.",
             "challengeSoon": "Coming soon",
-            "prizeValue": "¥21,480"
+            "prizeValue": "¥27,500"
         },
         "forumPage": {
             "title": "AI Interdisciplinary Innovation Forums",
@@ -6267,6 +6276,30 @@
                     ],
                     "kind": "industry",
                     "totalLabel": "Prizes & cash value"
+                },
+                {
+                    "title": "Coding Plan Pro · Quarterly Plan",
+                    "value": "¥1,614",
+                    "note": "3 passes · 3 months each",
+                    "rows": [
+                        {
+                            "label": "Champion",
+                            "count": "1 winner",
+                            "lines": [
+                                "OPC Incubation Track"
+                            ]
+                        },
+                        {
+                            "label": "First prize",
+                            "count": "2 winners",
+                            "lines": [
+                                "Industry Advancement Track"
+                            ]
+                        }
+                    ],
+                    "footer": "Awarded in addition to track prizes",
+                    "kind": "coding",
+                    "totalLabel": "Value per pass"
                 },
                 {
                     "title": "ModelScope · On-site draw",

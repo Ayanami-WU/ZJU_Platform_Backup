@@ -5640,7 +5640,7 @@
             "openingLabel": "致辞嘉宾",
             "judges": "",
             "rewardsTitle": "奖励与礼品",
-            "rewardsIntro": "天猫团队奖金、华为奖品与奖金，另有魔搭社区现场抽奖。",
+            "rewardsIntro": "天猫团队奖金、华为奖品与奖金，另加 Coding Plan Pro 套餐季卡及魔搭社区现场抽奖。",
             "rewards": [
                 {
                     "label": "天猫OPC孵化赛道奖励",
@@ -5663,6 +5663,15 @@
                         "三等奖 5 名 · FreeBuds 7i + 每名 ¥250"
                     ],
                     "detail": "一等奖：Osmo Pocket 4（价值 ¥2,999）或 MatePad Air Z 8G+128G 悦享款（价值 ¥2,779），加现金 ¥1,000；二等奖 FreeBuds Neo（¥669）加 ¥600／人；三等奖 FreeBuds 7i（¥429）加 ¥250／人。"
+                },
+                {
+                    "label": "Coding Plan Pro 套餐季卡",
+                    "value": "¥1,614",
+                    "note": "共 3 份 · 每份有效期 3 个月",
+                    "items": [
+                        "OPC孵化赛道冠军：1名",
+                        "产业进阶赛道一等奖：2名"
+                    ]
                 },
                 {
                     "label": "魔搭社区现场抽奖",
@@ -5836,7 +5845,7 @@
             "resultsAfter": "成果待公布",
             "resultsHint": "本届获奖名单与作品将在正式发布后展示。",
             "challengeSoon": "即将揭晓",
-            "prizeValue": "¥21,480"
+            "prizeValue": "¥27,500"
         },
         "forumPage": {
             "title": "AI跨学科创新论坛",
@@ -6373,6 +6382,30 @@
                     ],
                     "kind": "industry",
                     "totalLabel": "奖品与奖金合计"
+                },
+                {
+                    "title": "Coding Plan Pro 套餐季卡",
+                    "value": "¥1,614",
+                    "note": "共 3 份 · 每份有效期 3 个月",
+                    "rows": [
+                        {
+                            "label": "冠军",
+                            "count": "1 名",
+                            "lines": [
+                                "OPC 孵化赛道"
+                            ]
+                        },
+                        {
+                            "label": "一等奖",
+                            "count": "2 名",
+                            "lines": [
+                                "产业进阶赛道"
+                            ]
+                        }
+                    ],
+                    "footer": "在原赛道奖励基础上加赠",
+                    "kind": "coding",
+                    "totalLabel": "每份价值"
                 },
                 {
                     "title": "魔搭社区·现场抽奖",
