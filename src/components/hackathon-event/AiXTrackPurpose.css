@@ -14,3 +14,9 @@
     letter-spacing: normal;
     white-space: nowrap;
 }
+
+button[aria-selected="true"] .aix-track-purpose {
+    color: inherit;
+    border-color: currentColor;
+    background: transparent;
+}
