@@ -31,10 +31,7 @@ test("official group QR opens, closes with Escape and does not inherit the old Q
     await expect(button).toBeFocused();
     await page.clock.setFixedTime(new Date("2026-10-17T00:00:00+08:00"));
     await page.reload();
-    await page.locator(".aix-chapters-toggle").click();
-    // Four chapters (01 主页 / 02 赛制 / 03 奖励 / 04 报名); the group-QR button lives
-    // on the 报名 chapter. Upstream's nth(4) addressed a fifth chapter that never existed.
-    await page.locator(".aix-chapters button").nth(3).click();
+    await button.scrollIntoViewIfNeeded();
     await expect(button).toBeVisible();
     await expect(page.getByText("二维码有效至 10 月 16 日")).toHaveCount(0);
 });

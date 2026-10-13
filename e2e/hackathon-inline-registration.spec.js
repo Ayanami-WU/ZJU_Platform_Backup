@@ -283,13 +283,11 @@ test("anonymous campus captain radios have no default and are disabled at mobile
     await prepare(page, { signedIn: false });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/hackathon/2#registration-form");
-    // Phones replace the inline form with the compact chapter; the form itself now
-    // lives on its own registration page, reached from the per-track entry buttons.
-    await expect(page.locator(".aix-register-chapter")).toBeVisible();
-    await expect(page.locator("#hackathon-field-isCaptain")).toHaveCount(0);
-    await page.locator('.aix-register-entry-button[data-track="campus"]').click();
-    await expect(page).toHaveURL(/\/hackathon\/2\/register\?track=campus$/);
-    await expect(page.locator(".aix-register-chapter")).toHaveCount(0);
+    await expect(page.locator(".aix-chapters-toggle")).not.toBeVisible();
+    await expect(page.locator(".aix-track-registration-summary")).not.toBeVisible();
+    await tab(page, "天猫OPC孵化赛道").click();
+    await expect(page).toHaveURL(/\/hackathon\/2#registration-form$/);
+    await expect(page.locator("#hackathon-field-contact")).toBeDisabled();
     for (const label of ["是", "否"]) {
         await expect(page.getByRole("radio", { name: label, exact: true })).toBeDisabled();
         await expect(page.getByRole("radio", { name: label, exact: true })).not.toBeChecked();
@@ -344,14 +342,9 @@ test("both track registrations can be edited with independent drafts and failed 
     await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
     await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
     await page.setViewportSize({ width: 390, height: 844 });
-    // Phones replace the inline form with the compact chapter; each track opens its
-    // own registration page, where the same captain choice stays editable.
-    await expect(page.locator(".aix-register-chapter")).toBeVisible();
+    await tab(page, "天猫OPC孵化赛道").click();
+    await expect(page.locator(".aix-track-registration-summary")).not.toBeVisible();
     await page.screenshot({ path: "output/playwright/aix-team-captain-mobile.png" });
-    await page.locator('.aix-register-entry-button[data-track="campus"]').click();
-    // Wait for the standalone registration page before touching its controls; sampling
-    // the edit button with a bare count() races the mount and silently skips the click.
-    await expect(page.locator("[data-standalone]").first()).toBeVisible();
     const editButton = page.getByRole("button", { name: "修改报名信息", exact: true });
     await expect(editButton.first()).toBeVisible();
     await editButton.first().click();

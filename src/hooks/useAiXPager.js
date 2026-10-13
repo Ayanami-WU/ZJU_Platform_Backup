@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useAiXMobileLayout, AIX_PHONE_LAYOUT } from "./useAiXMobileLayout";
+import { useMediaQuery } from "./useMediaQuery";
 
 // The responsive app shell can replace its route subtree at the mobile breakpoint.
 // Carry scroll positions across that immediate resize remount, never across routes.
@@ -6,9 +8,11 @@ let resizeRemount = null;
 
 // Keep overflow inside the current screen until its edge, then turn one page.
 export function useAiXPager(containerRef, ids, enabled, reduceMotion) {
+    useAiXMobileLayout(containerRef, enabled);
+    const phone = useMediaQuery(AIX_PHONE_LAYOUT);
     useEffect(() => {
         const root = containerRef.current;
-        if (!enabled || !root) return;
+        if (!enabled || !root || phone) return;
         let locked = false,
             timer,
             navigationTimer,
@@ -242,5 +246,5 @@ export function useAiXPager(containerRef, ids, enabled, reduceMotion) {
             root.removeEventListener("touchstart", start);
             root.removeEventListener("touchmove", move);
         };
-    }, [containerRef, ids, enabled, reduceMotion]);
+    }, [containerRef, ids, enabled, reduceMotion, phone]);
 }

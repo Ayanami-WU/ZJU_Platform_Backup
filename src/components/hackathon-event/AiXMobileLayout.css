@@ -1,0 +1,1150 @@
+/* Scoped phone composition: clear sections, readable type, and continuous scrolling. */
+
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    :is(.aix-page-heading > span, .aix-page-heading h2) {
+    font-size: 24px;
+    line-height: 1.3;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-screen-top {
+    gap: 8px;
+    margin-bottom: 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-place {
+    gap: 5px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-place
+    :is(time, p) {
+    font-size: 14px;
+    line-height: 1.4;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-topic-row {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    min-height: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-speakers {
+    padding: 10px;
+    gap: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-speaker {
+    gap: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    :is(.aix-forum-speaker strong, .aix-forum-topic-copy h3) {
+    font-size: 16px;
+    line-height: 1.4;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    :is(.aix-forum-speaker p, .aix-forum-topic-copy p, .aix-forum-guest-label) {
+    font-size: 12px;
+    line-height: 1.4;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-guest-portrait {
+    flex-basis: 40px;
+    width: 40px;
+    height: 48px;
+    margin: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-topic-copy {
+    padding: 10px;
+    border-left: 1px solid var(--hx-line);
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-topic-row[data-roundtable] {
+    grid-template-columns: 1fr;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-topic-row[data-roundtable]
+    .aix-forum-speakers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    .aix-forum-topic-row[data-roundtable]
+    .aix-forum-speaker {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    .aix-forum-screen[data-aix-fit]
+    :is(.aix-forum-other-guests, .aix-forum-invited) {
+    padding: 10px;
+    margin-top: 8px;
+    gap: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers {
+    gap: 8px;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers-group {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    align-items: center;
+    padding: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers-group
+    dt {
+    font-size: 13px;
+    margin: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers-group
+    ul {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+    gap: 6px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers-group
+    li {
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    padding: 4px;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizers-group:first-child
+    li {
+    flex-direction: row;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizer-logo {
+    flex-basis: 30px;
+    width: 100%;
+    height: 30px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-organizer-logo
+    img {
+    max-height: 30px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    [data-organizer="elite-eagle"]
+    .aix-organizer-logo {
+    flex-basis: 30px;
+    max-width: 100%;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-panels {
+    gap: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-panels
+    > div {
+    padding: 8px 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-panels
+    dt {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-members {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px 14px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-members
+    li {
+    height: 38px;
+    min-height: 38px;
+    gap: 4px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-panels
+    .aix-brand-logo {
+    height: 34px;
+    max-width: 100%;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    .aix-partner-wordmark {
+    font-size: 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    [data-partner="tianmao"]
+    .aix-brand-logo {
+    flex-basis: 30px;
+    max-width: 30px;
+    height: 30px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-partners-title[data-aix-fit]
+    [data-partner-group="capital"]
+    .aix-partner-members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #aix-rewards[data-aix-fit] .aix-prize-panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #aix-rewards[data-aix-fit] .aix-prize-panel {
+    padding: 8px;
+    min-height: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-heading {
+    min-height: 0;
+    gap: 6px;
+    align-items: flex-start;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-heading
+    svg {
+    width: 16px;
+    height: 18px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    h3 {
+    font-size: 15px;
+    line-height: 1.35;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #aix-rewards[data-aix-fit] .aix-prize-total {
+    margin-top: 6px;
+    gap: 2px;
+}
+:root .hx-workspace[data-event="zhekesong-ai-x-2026"] #aix-rewards[data-aix-fit] .aix-prize-number {
+    font-size: 20px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    :is(.aix-prize-total > span, .aix-prize-panel > p, .aix-prize-panel footer) {
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dl {
+    grid-template-rows: none;
+    flex: 0 0 auto;
+    margin-top: 6px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dl
+    > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 3px;
+    padding: 5px 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dt {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    margin: 0;
+    font-size: 13px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dt
+    svg {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dt
+    span {
+    font-size: 12px;
+    line-height: 1.3;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dt
+    strong {
+    font-size: 13px;
+    line-height: 1.3;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel[data-reward="gifts"]
+    dl
+    > div {
+    grid-template-columns: 50px minmax(0, 1fr);
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    dd {
+    padding: 0;
+    border: 0;
+    gap: 3px;
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    :is(.aix-prize-product-name, .aix-prize-product-value, .aix-prize-value, .aix-prize-cash) {
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-products {
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    footer {
+    margin-top: 5px;
+    padding-top: 5px;
+    min-height: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    #aix-rewards[data-aix-fit]
+    .aix-prize-panel
+    footer:empty {
+    display: none;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-page-heading {
+    margin-bottom: 12px;
+    gap: 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover {
+    align-content: start;
+    gap: 16px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover
+    h1 {
+    margin-top: 12px;
+    gap: 6px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover
+    h1
+    > span {
+    font-size: 26px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover
+    h1
+    strong {
+    font-size: 30px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover-prize {
+    margin-top: 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover-prize
+    > strong {
+    font-size: 54px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover-schedule {
+    gap: 10px;
+    padding: 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel {
+    padding: 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    header {
+    margin-bottom: 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-cover-schedule
+    .aix-timeline-panel
+    ol {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    h3 {
+    font-size: 17px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    :is(time, li strong, small) {
+    font-size: 13px;
+    line-height: 1.4;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    header
+    > span {
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    li {
+    padding-top: 8px;
+    gap: 3px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-timeline-panel
+    small {
+    font-size: 12px;
+    line-height: 1.35;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-rules {
+    gap: 10px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-rule-panel {
+    padding: 10px 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-card-heading {
+    gap: 6px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-card-heading
+    h3 {
+    font-size: 18px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    :is(.aix-track-badges, .aix-track-purpose) {
+    gap: 6px;
+    font-size: 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-badges
+    > span {
+    min-height: 24px;
+    padding: 1px 6px;
+    font-size: 12px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-list {
+    margin-top: 8px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-list
+    > li {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 8px;
+    padding: 7px 0;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-label {
+    gap: 5px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-label
+    :is(span, h4) {
+    font-size: 15px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-date
+    :is(time, span) {
+    font-size: 14px;
+    line-height: 1.4;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-place {
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 1.35;
+    gap: 4px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-stage-place
+    svg {
+    width: 12px;
+    height: 12px;
+    margin-top: 2px;
+}
+:root
+    .hx-workspace[data-event="zhekesong-ai-x-2026"]
+    :is(.aix-page, #registration-form)[data-aix-fit]
+    .aix-track-attendance {
+    padding: 0 4px;
+    font-size: 11px;
+}
+
+@media (min-width: 768px) and (max-width: 1100px) and (max-height: 600px) {
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] {
+        --event-nav-height: 56px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-eventbar {
+        grid-template-columns: minmax(120px, 1fr) auto auto;
+        grid-template-rows: 44px;
+        padding: 6px 12px;
+        gap: 8px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-nav {
+        grid-area: 1 / 2;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-nav a {
+        padding-inline: 8px;
+        font-size: 12px;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .hx-event-actions {
+        grid-area: 1 / 3;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit]
+        .aix-partner-panels {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form)[data-aix-fit] {
+        padding-bottom: 20px;
+    }
+}
+
+/* Phone edition: a continuous poster-style article, with readable type and clear chapters. */
+@media (max-width: 767px), (max-width: 1100px) and (max-height: 600px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is([data-registration-page][data-paged], .aix-forums-page) {
+        scroll-snap-type: none;
+        scroll-behavior: auto;
+    }
+    :root .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-chapter-controls {
+        display: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form)[data-aix-fit="flow"],
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-registration-page][data-standalone]
+        #registration-form[data-contained-form][data-aix-fit="flow"] {
+        display: block;
+        container-type: inline-size;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        padding: 24px 16px 32px;
+        overflow: visible;
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
+        scroll-margin-top: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form)[data-aix-fit="flow"]
+        + :is(.aix-page, #registration-form) {
+        border-top: 1px solid var(--hx-line);
+        padding-top: 28px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form)[data-aix-fit="flow"]
+        > :is(.aix-page-body, .aix-track-registration-layout),
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-registration-page][data-standalone]
+        #registration-form[data-contained-form][data-aix-fit="flow"]
+        > .aix-track-registration-layout {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        min-height: 0;
+        margin: 0;
+        transform: none;
+        overflow: visible;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        :is(.aix-page, #registration-form)[data-aix-fit="flow"]
+        .aix-page-heading {
+        margin-bottom: 20px;
+        align-items: baseline;
+        gap: 10px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-aix-fit="flow"]
+        .aix-page-heading
+        :is(h2, span) {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-aix-fit="flow"]
+        :is(.aix-track-purpose, .aix-track-badges > span) {
+        font-size: 13px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-aix-fit="flow"]
+        .aix-track-stage-list
+        > li {
+        padding-block: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-aix-fit="flow"]
+        .aix-track-stage-place {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        [data-aix-fit="flow"]
+        .aix-track-attendance {
+        font-size: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panels {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panel {
+        padding: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panel
+        h3 {
+        font-size: 18px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-number {
+        font-size: 30px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panel
+        dl
+        > div {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 8px;
+        padding-block: 12px;
+        align-items: start;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panel
+        :is(
+            p,
+            dd,
+            footer,
+            .aix-prize-total > span,
+            .aix-prize-product-name,
+            .aix-prize-product-value,
+            .aix-prize-value,
+            .aix-prize-cash
+        ) {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-rewards[data-aix-fit="flow"]
+        .aix-prize-panel
+        dt {
+        flex-wrap: wrap;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-topic-row {
+        grid-template-columns: 1fr;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-speakers {
+        padding: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-speaker {
+        gap: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-guest-portrait {
+        width: 52px;
+        height: 62px;
+        flex-basis: 52px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        :is(.aix-forum-speaker strong, .aix-forum-topic-copy h3) {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        :is(
+            .aix-forum-speaker p,
+            .aix-forum-place p,
+            .aix-forum-place time,
+            .aix-forum-topic-copy p
+        ) {
+        font-size: 14px;
+        line-height: 1.5;
+        max-width: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-topic-copy {
+        padding: 0 14px 14px 78px;
+        border-left: 0;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-topic-row[data-roundtable]
+        .aix-forum-speakers {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-topic-row[data-roundtable]
+        .aix-forum-topic-copy {
+        order: -1;
+        padding: 14px;
+        border-top: 0;
+        border-bottom: 1px solid var(--hx-line);
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-forum-invited-row {
+        padding: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit="flow"]
+        .aix-partner-members
+        li {
+        height: 48px;
+        min-height: 48px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit="flow"]
+        .aix-partner-panels
+        .aix-brand-logo {
+        height: 44px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit="flow"]
+        :is(.aix-partner-panels dt, .aix-organizers-group dt) {
+        font-size: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit="flow"]
+        .aix-organizers-group {
+        grid-template-columns: 68px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 767px), (max-width: 1100px) and (max-height: 600px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-overview[data-aix-fit="flow"]
+        h1
+        > span::before,
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #aix-partners-title[data-aix-fit="flow"]
+        .aix-page-heading
+        h2::before {
+        content: "01 ";
+        color: var(--hx-accent-text);
+        font-weight: 700;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-signup {
+        padding: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields
+        label {
+        gap: 6px;
+        font-size: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-field-wide {
+        grid-column: 1 / -1;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields[data-attendee-type="internal"]
+        [data-field="contact"] {
+        grid-column: 1 / -1;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields
+        :is(input, textarea) {
+        min-width: 0;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-fields
+        textarea {
+        min-height: 96px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-attendee-tabs {
+        margin-bottom: 16px;
+    }
+}
+
+.aix-track-tab-mobile {
+    display: none;
+}
+@media (max-width: 767px), (max-width: 1100px) and (max-height: 600px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .aix-track-registration-summary {
+        display: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .aix-track-registration-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        margin-bottom: 0;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .aix-track-registration-tabs
+        button {
+        min-height: 48px;
+        padding: 8px 6px;
+        font-size: 14px;
+        line-height: 1.4;
+        text-wrap: balance;
+    }
+    .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-tab-mobile {
+        display: inline;
+    }
+    .hx-workspace[data-event="zhekesong-ai-x-2026"] .aix-track-tab-desktop {
+        display: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding-top: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        + .hackathon-form-group {
+        margin-top: 20px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        > [data-field] {
+        grid-column: 1 / -1;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        > :is(
+            [data-field="name"],
+            [data-field="studentId"],
+            [data-field="major"],
+            [data-field="grade"],
+            [data-field="isCaptain"],
+            [data-field="teamSize"]
+        ) {
+        grid-column: auto;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        label {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 6px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        :is(input:not([type="radio"]):not([type="checkbox"]), select) {
+        min-height: 44px;
+        padding: 10px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        :is(button, label:has(input[type="radio"])) {
+        min-height: 44px;
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #registration-form[data-aix-fit="flow"]
+        .hackathon-form-group
+        textarea {
+        min-height: 96px;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px), (max-width: 1100px) and (max-height: 600px) {
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view]
+        #registration-form[data-contained-form][data-aix-fit="flow"] {
+        height: auto;
+        max-height: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view]
+        #registration-form[data-contained-form][data-aix-fit="flow"]
+        > .mx-auto.aix-track-registration-layout {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        grid-template-rows: auto;
+        gap: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"][data-view]
+        #registration-form[data-contained-form][data-aix-fit="flow"]
+        :is(.hackathon-form-panel, form, .hackathon-form-fields) {
+        height: auto;
+        max-height: none;
+        min-height: 0;
+        overflow: visible;
+    }
+}

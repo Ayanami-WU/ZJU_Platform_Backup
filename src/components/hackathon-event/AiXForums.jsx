@@ -369,6 +369,7 @@ export default function AiXForums({ now, registrationState }) {
                                         aria-labelledby={`forum-tab-${details.attendeeType}`}
                                     >
                                         <fieldset
+                                            data-attendee-type={details.attendeeType}
                                             disabled={!user || authLoading || loading || busy}
                                             className={`aix-forum-fields ${!user ? "aix-registration-preview-fields" : ""}`}
                                         >
@@ -388,6 +389,7 @@ export default function AiXForums({ now, registrationState }) {
                                                 return (
                                                     <label
                                                         key={key}
+                                                        data-field={key}
                                                         className={
                                                             key === "question" ||
                                                             key === "organization"
