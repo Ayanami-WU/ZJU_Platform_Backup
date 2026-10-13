@@ -1601,8 +1601,8 @@ const HackathonRegistration = ({
                                     {t(`aix.register.trackTabs_${track}`, {
                                         defaultValue:
                                             track === "industry"
-                                                ? "华为·产业进阶赛道报名"
-                                                : "天猫·OPC孵化赛道报名",
+                                                ? "华为产业命题赛道报名"
+                                                : "天猫学科创意赛道报名",
                                     })}
                                 </button>
                             ))}

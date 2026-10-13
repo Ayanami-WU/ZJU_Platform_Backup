@@ -174,7 +174,7 @@ const registrationField = (fieldsByEvent, eventKey, fieldId) => {
         return {
             ...field,
             id: fieldId,
-            label: `${match[1] === "industry" ? "华为·产业进阶赛道" : "天猫·OPC孵化赛道"} · ${field.label}`,
+            label: `${match[1] === "industry" ? "华为产业命题赛道" : "天猫学科创意赛道"} · ${field.label}`,
         };
     }
     return (
