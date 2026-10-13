@@ -123,6 +123,8 @@ test("real SQLite registration, private repository persistence, edits, deadline 
             answers: {
                 track: ["campus", "industry"],
                 teamSize: "2",
+                team: "Test team",
+                isCaptain: "no",
                 contact: "13800138000",
                 strengths: ["exploring"],
                 aiTools: ["none"],
@@ -137,8 +139,10 @@ test("real SQLite registration, private repository persistence, edits, deadline 
         const registered = await invoke(controller.registerHackathon, { body, user: { id: 1 } });
         assert.equal(registered.statusCode, 201, JSON.stringify(registered.body));
         assert.equal(registered.body.answers.name, profile.name);
-        const duplicate = await invoke(controller.registerHackathon, { body, user: { id: 1 } });
-        assert.equal(duplicate.statusCode, 409);
+        const repeated = await invoke(controller.registerHackathon, { body, user: { id: 1 } });
+        assert.equal(repeated.statusCode, 201);
+        assert.equal(repeated.body.id, registered.body.id);
+        assert.deepEqual(repeated.body.answers, registered.body.answers);
         const read = (id) =>
             invoke(controller.getMyRegistration, { user: { id }, query: { event: AIX_EVENT_KEY } });
         assert.equal((await read(2)).body.registration, null);

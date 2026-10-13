@@ -5395,7 +5395,11 @@
                 "initialDeadline": "17:00 截止",
                 "initialDevelopment": "初赛 · 现场开发",
                 "semifinalDeadline": "24:00 截止"
-            }
+            },
+            "captainRequired": "请选择是否队长",
+            "notProvided": "未填写",
+            "edit": "修改报名信息",
+            "resubmit": "重新提交报名"
         },
         "fields": {
             "name": "姓名",
@@ -5411,7 +5415,8 @@
             "aiToolsOther": "其他 AI 工具（选填）",
             "strengths": "擅长领域（可多选）",
             "projectLinks": "作品或成果链接（选填）",
-            "teamSize": "队伍人数"
+            "teamSize": "队伍人数",
+            "isCaptain": "是否队长"
         },
         "options": {
             "2": "2 人",
@@ -5446,7 +5451,9 @@
             "product": "产品策划",
             "data": "数据分析",
             "research": "学科研究",
-            "exploring": "还在探索"
+            "exploring": "还在探索",
+            "yes": "是",
+            "no": "否"
         },
         "brand": "浙客松",
         "backToSite": "返回拓浙 AI 生态",

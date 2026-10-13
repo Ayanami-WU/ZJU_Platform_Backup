@@ -115,6 +115,8 @@ const answers = {
     grade: "junior",
     track: ["campus", "industry"],
     teamSize: "2",
+    team: "Example team",
+    isCaptain: "yes",
     contact: "13800138000",
     strengths: ["exploring"],
     aiTools: ["none"],

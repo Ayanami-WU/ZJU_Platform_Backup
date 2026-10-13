@@ -5286,7 +5286,11 @@
                 "initialDeadline": "Due 17:00",
                 "initialDevelopment": "Qualifier · On-site development",
                 "semifinalDeadline": "Due 24:00"
-            }
+            },
+            "captainRequired": "Select whether you are the team captain",
+            "notProvided": "Not provided",
+            "edit": "Edit registration",
+            "resubmit": "Update registration"
         },
         "fields": {
             "name": "Name",
@@ -5302,7 +5306,8 @@
             "aiToolsOther": "Other AI tools (optional)",
             "strengths": "Strengths (multiple allowed)",
             "projectLinks": "Portfolio or research links (optional)",
-            "teamSize": "Team size"
+            "teamSize": "Team size",
+            "isCaptain": "Are you the team captain?"
         },
         "options": {
             "2": "2 members",
@@ -5337,7 +5342,9 @@
             "product": "Product planning",
             "data": "Data analysis",
             "research": "Domain research",
-            "exploring": "Still exploring"
+            "exploring": "Still exploring",
+            "yes": "Yes",
+            "no": "No"
         },
         "brand": "ZHEKESONG",
         "backToSite": "Back to TUOZHE AI",

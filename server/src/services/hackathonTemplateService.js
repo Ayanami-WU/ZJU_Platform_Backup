@@ -640,8 +640,19 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
     const answersInput = rawAnswers && typeof rawAnswers === "object" ? rawAnswers : {};
     const answers = {};
     const errors = [];
+    const isAiX = template.event.key === "zhekesong-ai-x-2026";
+    const selectedTracks = Array.isArray(answersInput.track)
+        ? answersInput.track
+        : [answersInput.track];
+    const industryOnly =
+        isAiX && selectedTracks.includes("industry") && !selectedTracks.includes("campus");
 
     for (const field of template.form.fields.filter((item) => item.enabled)) {
+        // Team identity belongs only to Tmall, including requests sent by older clients.
+        if (industryOnly && ["team", "isCaptain"].includes(field.id)) {
+            if (field.id === "team") answers.team = "";
+            continue;
+        }
         const rawValue = answersInput[field.id];
         let value;
         if (field.type === "multi_select") {
@@ -723,6 +734,16 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         }
 
         answers[field.id] = value;
+    }
+
+    if (isAiX && answers.track?.includes("campus")) {
+        if (!answers.team && !errors.some((error) => error.field === "team"))
+            errors.push({ field: "team", message: "请填写队伍名称" });
+        if (
+            !["yes", "no"].includes(answers.isCaptain) &&
+            !errors.some((error) => error.field === "isCaptain")
+        )
+            errors.push({ field: "isCaptain", message: "请选择是否为队长" });
     }
 
     if (

@@ -7,7 +7,13 @@ import api from "../../services/api";
 import { eventTimestamp } from "../../utils/hackathonAiX";
 import "./RepositorySubmission.css";
 
-export default function RepositorySubmission({ registration, endAt, onSaved, compact = false }) {
+export default function RepositorySubmission({
+    registration,
+    endAt,
+    onSaved,
+    onEdit,
+    compact = false,
+}) {
     const { t } = useTranslation();
     const [urls, setUrls] = useState(() => ({
         githubUrl: registration.repositories?.githubUrl || "",
@@ -65,9 +71,21 @@ export default function RepositorySubmission({ registration, endAt, onSaved, com
     const answer = (key, value) =>
         Array.isArray(value)
             ? value.map((item) => t(`aix.options.${item}`, { defaultValue: item })).join(" · ")
-            : key === "grade"
-              ? t(`aix.options.${value}`, { defaultValue: value })
-              : String(value || "");
+            : key === "isCaptain"
+              ? ["yes", "no"].includes(value)
+                  ? t(`aix.options.${value}`)
+                  : t("aix.register.notProvided")
+              : key === "grade"
+                ? t(`aix.options.${value}`, { defaultValue: value })
+                : String(value || "");
+    const receiptAnswers = { ...registration.answers };
+    const tracks = Array.isArray(receiptAnswers.track)
+        ? receiptAnswers.track
+        : [receiptAnswers.track];
+    if (registration.eventKey === "zhekesong-ai-x-2026") {
+        if (tracks.includes("campus")) receiptAnswers.isCaptain ||= "missing";
+        else delete receiptAnswers.isCaptain;
+    }
     return (
         <div className="aix-repository-receipt">
             <div className="aix-repository-success" role="status">
@@ -82,7 +100,7 @@ export default function RepositorySubmission({ registration, endAt, onSaved, com
                     {registration.answers?.name} · {t("aix.repositories.viewRegistration")}
                 </summary>
                 <dl>
-                    {Object.entries(registration.answers || {})
+                    {Object.entries(receiptAnswers)
                         .filter(
                             ([key, v]) =>
                                 key !== "trackRegistrations" && v && (!Array.isArray(v) || v.length)
@@ -95,6 +113,11 @@ export default function RepositorySubmission({ registration, endAt, onSaved, com
                         ))}
                 </dl>
             </details>
+            {onEdit && (
+                <button type="button" className="hx-primary min-h-[44px]" onClick={onEdit}>
+                    {t("aix.register.edit")}
+                </button>
+            )}
             {compact ? (
                 <div className="aix-repository-next">
                     <p>{t("aix.challengeWorkspace.registrationReceiptHint")}</p>

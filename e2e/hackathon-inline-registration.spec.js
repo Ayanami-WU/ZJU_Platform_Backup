@@ -10,11 +10,15 @@ const sampleUser = {
     registrationProfile: profile,
 };
 test.use({ viewport: { width: 1440, height: 1000 }, reducedMotion: "reduce" });
-async function prepare(page, { signedIn = true, failure = null } = {}) {
+async function prepare(page, { signedIn = true, failure = null, legacy = null } = {}) {
     const template = structuredClone(source);
-    let saved = null;
+    let saved = legacy;
     let currentUser = structuredClone(sampleUser);
     const posts = [];
+    let failNext = false;
+    posts.failNext = () => {
+        failNext = true;
+    };
     posts.setUser = (user) => {
         currentUser = user;
         saved = null;
@@ -47,7 +51,8 @@ async function prepare(page, { signedIn = true, failure = null } = {}) {
         else if (url.pathname.endsWith("/hackathon/register")) {
             const body = route.request().postDataJSON();
             posts.push(body);
-            if (failure === "network" && posts.length === 1) {
+            if (failNext || (failure === "network" && posts.length === 1)) {
+                failNext = false;
                 status = 503;
                 json = { error: "测试：请重试" };
             } else {
@@ -94,7 +99,7 @@ test("anonymous registration shows disabled fields and enables them after login"
     await page.goto("/hackathon/2#registration-form");
     await expect(page.locator("#hackathon-field-contact")).toBeDisabled();
     await expect(formSubmit(page)).toBeDisabled();
-    await page.locator(".aix-registration-login-notice button").click();
+    await page.locator(".aix-registration-lock button").click();
     const auth = page.getByRole("dialog");
     await auth.getByLabel("用户名", { exact: true }).fill("inline-ui-test");
     await auth.getByLabel("密码", { exact: true }).fill("test-only-password");
@@ -114,6 +119,8 @@ test("track drafts and receipts stay independent through failure, two submission
     await fillForm(page, "13900139000", "天猫项目");
     await page.locator("#hackathon-field-team").fill("天猫四人队");
     await page.locator("#hackathon-field-teamSize").selectOption("4");
+    await expect(page.getByRole("radio", { name: "是", exact: true })).not.toBeChecked();
+    await page.getByRole("radio", { name: "是", exact: true }).check();
     await tab(page, "华为报名").click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("13800138000");
     await formSubmit(page).click();
@@ -123,15 +130,18 @@ test("track drafts and receipts stay independent through failure, two submission
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
     expect(posts[1].answers.track).toEqual(["industry"]);
     expect(posts[1].answers.teamSize).toBe("1");
+    expect(posts[1].answers.isCaptain).toBeUndefined();
     for (const key of ["name", "studentId", "major", "grade"])
         expect(posts[1].answers[key]).toBe(profile[key]);
     await tab(page, "天猫报名").click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("13900139000");
     await expect(page.locator("#hackathon-field-teamSize")).toHaveValue("4");
+    await expect(page.getByRole("radio", { name: "是", exact: true })).toBeChecked();
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
     expect(posts[2].answers.track).toEqual(["campus"]);
     expect(posts[2].answers.teamSize).toBe("4");
+    expect(posts[2].answers.isCaptain).toBe("yes");
     for (const key of ["name", "studentId", "major", "grade"])
         expect(posts[2].answers[key]).toBe(profile[key]);
     await page.reload();
@@ -197,7 +207,7 @@ test("account profile fills both tracks without replacing saved receipts or anot
             grade: "master",
         },
     });
-    await page.locator(".aix-registration-login-notice button").click();
+    await page.locator(".aix-registration-lock button").click();
     const auth = page.getByRole("dialog");
     await auth.getByLabel("用户名", { exact: true }).fill("second-user");
     await auth.getByLabel("密码", { exact: true }).fill("test-only-password");
@@ -208,4 +218,120 @@ test("account profile fills both tracks without replacing saved receipts or anot
     await tab(page, "华为报名").click();
     await expect(page.locator(".aix-repository-receipt")).toHaveCount(0);
     await expect(page.locator("#hackathon-field-experience")).toHaveValue("");
+});
+
+test("campus requires a team name and explicit captain choice; anonymous controls remain disabled", async ({
+    page,
+}) => {
+    const posts = await prepare(page);
+    await page.goto("/hackathon/2#registration-form");
+    await tab(page, "天猫报名").click();
+    await fillForm(page, "13800138000", "天猫项目");
+    await page.locator("#hackathon-field-teamSize").selectOption("1");
+    await formSubmit(page).click();
+    expect(posts).toHaveLength(0);
+    await expect(page.locator("#hackathon-error-team")).toBeVisible();
+    await expect(page.locator("#hackathon-error-isCaptain")).toBeVisible();
+    await page.locator("#hackathon-field-team").fill("个人项目队");
+    await page.getByRole("radio", { name: "否", exact: true }).check();
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+    expect(posts[0].answers.isCaptain).toBe("no");
+    await page.reload();
+    await tab(page, "天猫报名").click();
+    await page.locator(".aix-registration-receipt-details summary").click();
+    await expect(page.locator(".aix-registration-receipt-details")).toContainText("是否队长");
+    await expect(
+        page.locator(".aix-registration-receipt-details dd").filter({ hasText: /^否$/ })
+    ).toBeVisible();
+});
+test("legacy campus receipt can be updated after explicitly completing captain information", async ({
+    page,
+}) => {
+    await prepare(page, {
+        legacy: {
+            id: 25,
+            eventKey: source.event.key,
+            answers: { ...profile, track: ["campus"], team: "历史队伍", teamSize: "2" },
+        },
+    });
+    await page.goto("/hackathon/2#registration-form");
+    await tab(page, "天猫报名").click();
+    await page.locator(".aix-registration-receipt-details summary").click();
+    await expect(page.locator(".aix-registration-receipt-details")).toContainText("未填写");
+    await expect(page.getByRole("radio")).toHaveCount(0);
+    await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
+    await expect(page.locator("#hackathon-field-team")).toHaveValue("历史队伍");
+    for (const label of ["是", "否"])
+        await expect(page.getByRole("radio", { name: label, exact: true })).not.toBeChecked();
+    await fillForm(page, "13800138000", "更新历史项目");
+    await formSubmit(page).click();
+    await expect(page.locator("#hackathon-error-isCaptain")).toBeVisible();
+    await page.getByRole("radio", { name: "否", exact: true }).check();
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+});
+test("anonymous campus captain radios have no default and are disabled at mobile size", async ({
+    page,
+}) => {
+    await prepare(page, { signedIn: false });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/hackathon/2#registration-form");
+    await tab(page, "天猫报名").click();
+    for (const label of ["是", "否"]) {
+        await expect(page.getByRole("radio", { name: label, exact: true })).toBeDisabled();
+        await expect(page.getByRole("radio", { name: label, exact: true })).not.toBeChecked();
+    }
+});
+
+test("both track registrations can be edited with independent drafts and failed updates preserved", async ({
+    page,
+}) => {
+    const posts = await prepare(page);
+    await page.goto("/hackathon/2#registration-form");
+    await fillForm(page, "13800138000", "原华为项目");
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+    await tab(page, "天猫报名").click();
+    await fillForm(page, "13900139000", "原天猫项目");
+    await page.locator("#hackathon-field-team").fill("原队名");
+    await page.locator("#hackathon-field-teamSize").selectOption("2");
+    await page.getByRole("radio", { name: "是", exact: true }).check();
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+    await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
+    await expect(page.getByRole("radio", { name: "是", exact: true })).toBeChecked();
+    await page.locator("#hackathon-field-team").fill("更新队名");
+    await page.getByRole("radio", { name: "否", exact: true }).check();
+    await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "output/playwright/aix-team-captain-desktop.png" });
+    await tab(page, "华为报名").click();
+    await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
+    await expect(page.locator("#hackathon-field-team")).toHaveCount(0);
+    await expect(page.getByRole("radio")).toHaveCount(0);
+    await page.locator("#hackathon-field-experience").fill("更新华为项目");
+    await tab(page, "天猫报名").click();
+    await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
+    await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
+    posts.failNext();
+    await formSubmit(page).click();
+    await expect(page.getByText("测试：请重试", { exact: true })).toBeVisible();
+    await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+    await tab(page, "华为报名").click();
+    await expect(page.locator("#hackathon-field-experience")).toHaveValue("更新华为项目");
+    await formSubmit(page).click();
+    await expect(page.locator(".aix-repository-receipt")).toBeVisible();
+    expect(posts.at(-1).answers.isCaptain).toBeUndefined();
+    await page.reload();
+    await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
+    await expect(page.locator("#hackathon-field-experience")).toHaveValue("更新华为项目");
+    await tab(page, "天猫报名").click();
+    await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
+    await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
+    await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "output/playwright/aix-team-captain-mobile.png" });
 });

@@ -47,6 +47,10 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
             code: "HACKATHON_REGISTRATION_INVALID",
         });
     }
+    if (selected.length === 1 && selected[0] === "industry") {
+        answers = { ...answers, team: "", teamSize: "1" };
+        delete answers.isCaptain;
+    }
     const createdAt = new Date().toISOString();
     for (let attempt = 0; attempt < 4; attempt++) {
         const row = await db.get(
@@ -55,8 +59,6 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
         );
         const previous = row ? decode(row) : {};
         const entries = row ? trackRegistrations(previous, row.created_at) : {};
-        if (selected.some((key) => entries[key]))
-            throw conflict("HACKATHON_ALREADY_REGISTERED", "你已报名该赛道");
         const studentId = String(answers.studentId).trim().toLowerCase();
         const sameStudent = await db.get(
             "SELECT id FROM hackathon_registrations WHERE event_key=? AND student_id=?",
@@ -64,18 +66,42 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
         );
         if (sameStudent && sameStudent.id !== row?.id)
             throw conflict("HACKATHON_ALREADY_REGISTERED", "该学号已报名，请使用原账号");
-        for (const key of selected)
-            entries[key] = { answers: { ...answers, track: [key] }, createdAt };
+        for (const key of selected) {
+            const trackAnswers = { ...answers, track: [key] };
+            if (key === "industry") {
+                trackAnswers.team = "";
+                trackAnswers.teamSize = "1";
+                delete trackAnswers.isCaptain;
+            }
+            entries[key] = {
+                answers: trackAnswers,
+                createdAt: entries[key]?.createdAt || createdAt,
+            };
+        }
         // Top-level track remains the eligibility union used by existing submission permissions.
         const merged = {
-            ...(row ? previous : answers),
+            ...previous,
+            ...answers,
             track: TRACKS.filter((key) => entries[key]),
             trackRegistrations: entries,
         };
+        if (selected.length === 1 && selected[0] === "industry") delete merged.isCaptain;
         if (row) {
             const update = await db.run(
-                "UPDATE hackathon_registrations SET form_data_json=? WHERE id=? AND user_id=? AND form_data_json=?",
-                [JSON.stringify(merged), row.id, userId, row.form_data_json]
+                "UPDATE hackathon_registrations SET form_data_json=?,name=?,student_id=?,major=?,grade=?,ai_tools=?,experience=?,template_revision=? WHERE id=? AND user_id=? AND form_data_json=?",
+                [
+                    JSON.stringify(merged),
+                    answers.name,
+                    studentId,
+                    answers.major,
+                    answers.grade,
+                    JSON.stringify(answers.aiTools || []),
+                    answers.experience || "",
+                    template.revision,
+                    row.id,
+                    userId,
+                    row.form_data_json,
+                ]
             );
             if (!update.changes) continue;
             return { ...row, form_data_json: JSON.stringify(merged) };

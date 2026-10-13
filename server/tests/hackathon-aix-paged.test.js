@@ -84,6 +84,8 @@ test("Tmall accepts 1-5 team members while Huawei-only entry requires one person
         aiTools: ["Codex"],
         experience: "Project",
         researchExperience: "Research",
+        team: "Test team",
+        isCaptain: "no",
     };
     for (const track of [["campus"], ["industry"], ["campus", "industry"]]) {
         for (const teamSize of track.length === 1 && track[0] === "industry" ? ["1"] : ["1", "5"])

@@ -52,7 +52,7 @@ import {
 
 const AIX_REGISTRATION_GROUPS = [
     { key: "personal", ids: ["name", "studentId", "major", "grade", "contact"] },
-    { key: "entry", ids: ["track", "team", "teamSize"] },
+    { key: "entry", ids: ["track", "team", "isCaptain", "teamSize"] },
     {
         key: "skills",
         ids: ["strengths", "aiTools", "aiToolsOther", "experience", "researchExperience"],
@@ -119,6 +119,7 @@ const getLocalizedRegistrationField = (field, t, isEnglish, hasProgram) => {
         return {
             ...field,
             label: t(`aix.fields.${field.id}`, { defaultValue: field.label }),
+            type: field.id === "isCaptain" ? "radio" : field.type,
             placeholder:
                 field.type === "select"
                     ? t("aix.register.choose")
@@ -216,6 +217,8 @@ const HackathonRegistration = ({
     const isAiX = resolvedTemplate.event.key === "zhekesong-ai-x-2026";
     const [activeTrack, setActiveTrack] = useState("industry");
     const trackDrafts = useRef({});
+    const [editingTracks, setEditingTracks] = useState({});
+    const editingRegistration = isAiX && Boolean(editingTracks[activeTrack]);
     const registration = useMemo(() => {
         if (!isAiX || !eventRegistration) return eventRegistration;
         const entry =
@@ -357,6 +360,7 @@ const HackathonRegistration = ({
         if (accountChanged) {
             trackDrafts.current = {};
             setEditingProfile(false);
+            setEditingTracks({});
         }
         if (isAiX) {
             const contextChanged =
@@ -364,11 +368,13 @@ const HackathonRegistration = ({
                 previousFormContext.current.activeTrack !== activeTrack ||
                 previousFormContext.current.registration !== registration;
             setFormData((current) => ({
-                ...(registration?.answers ||
-                    (contextChanged
-                        ? trackDrafts.current[activeTrack] ||
-                          buildHackathonInitialAnswers(resolvedTemplate)
-                        : current)),
+                ...(contextChanged
+                    ? (previousFormContext.current.activeTrack === activeTrack &&
+                      previousFormContext.current.registration !== registration
+                          ? registration?.answers
+                          : trackDrafts.current[activeTrack] || registration?.answers) ||
+                      buildHackathonInitialAnswers(resolvedTemplate)
+                    : current),
                 ...(useAccountBasics ? user.registrationProfile : {}),
                 track: [activeTrack],
             }));
@@ -707,7 +713,7 @@ const HackathonRegistration = ({
             experience: "experience",
         };
         activeFormFields.forEach((field) => {
-            if (industryOnly && ["team", "teamSize"].includes(field.id)) return;
+            if (industryOnly && ["team", "teamSize", "isCaptain"].includes(field.id)) return;
             const value = formData[field.id];
             const missing =
                 value === undefined ||
@@ -745,6 +751,8 @@ const HackathonRegistration = ({
             !["1", "2", "3", "4", "5"].includes(formData.teamSize)
         )
             errors.teamSize = t("aix.october12.teamSizeError");
+        if (isAiX && !industryOnly && !["yes", "no"].includes(formData.isCaptain))
+            errors.isCaptain = t("aix.register.captainRequired");
         if (
             isAiX &&
             formData.projectLinks &&
@@ -772,7 +780,13 @@ const HackathonRegistration = ({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isSubmitting || registration || registrationLoading || !event.registrationOpen) return;
+        if (
+            isSubmitting ||
+            (registration && !editingRegistration) ||
+            registrationLoading ||
+            !event.registrationOpen
+        )
+            return;
         if (registrationError) {
             onRetry?.();
             return;
@@ -802,7 +816,9 @@ const HackathonRegistration = ({
                 "/hackathon/register",
                 {
                     eventKey: resolvedTemplate.event.key,
-                    answers: industryOnly ? { ...formData, team: "", teamSize: "1" } : formData,
+                    answers: industryOnly
+                        ? { ...formData, team: "", teamSize: "1", isCaptain: undefined }
+                        : formData,
                     templateRevision: resolvedTemplate.revision,
                     name: formData.name,
                     studentId: formData.studentId,
@@ -814,6 +830,10 @@ const HackathonRegistration = ({
                 { noRetry: true }
             );
             toast.success(formConfig.successMessage);
+            if (isAiX) {
+                delete trackDrafts.current[activeTrack];
+                setEditingTracks((current) => ({ ...current, [activeTrack]: false }));
+            }
             if (requiresLogin)
                 onRegistered?.({
                     ...data,
@@ -1726,9 +1746,24 @@ const HackathonRegistration = ({
                                     }
                                 />
                             )
-                        ) : isAiX && registration ? (
+                        ) : isAiX && registration && !editingRegistration ? (
                             <RepositorySubmission
                                 compact
+                                onEdit={
+                                    event.registrationOpen
+                                        ? () => {
+                                              setFormData({
+                                                  ...registration.answers,
+                                                  track: [activeTrack],
+                                              });
+                                              setFormErrors({});
+                                              setEditingTracks((current) => ({
+                                                  ...current,
+                                                  [activeTrack]: true,
+                                              }));
+                                          }
+                                        : undefined
+                                }
                                 key={`${registration.eventKey}:${registration.id}`}
                                 registration={registration}
                                 endAt={resolvedTemplate.event.endAt}
@@ -1818,7 +1853,7 @@ const HackathonRegistration = ({
                                         <fieldset
                                             disabled={
                                                 isSubmitting ||
-                                                Boolean(registration) ||
+                                                Boolean(registration && !editingRegistration) ||
                                                 registrationLoading ||
                                                 (requiresLogin && !user)
                                             }
@@ -1862,6 +1897,7 @@ const HackathonRegistration = ({
                                                                         [
                                                                             "team",
                                                                             "teamSize",
+                                                                            "isCaptain",
                                                                         ].includes(field.id)
                                                                     ) &&
                                                                     !(
@@ -2009,7 +2045,7 @@ const HackathonRegistration = ({
                                             disabled={
                                                 isSubmitting ||
                                                 registrationLoading ||
-                                                Boolean(registration) ||
+                                                Boolean(registration && !editingRegistration) ||
                                                 !event.registrationOpen ||
                                                 (requiresLogin && !user)
                                             }
@@ -2026,7 +2062,7 @@ const HackathonRegistration = ({
                                             ) : (
                                                 <>
                                                     {registration
-                                                        ? t("aix.register.saved")
+                                                        ? t("aix.register.resubmit")
                                                         : registrationLoading
                                                           ? t("aix.loading")
                                                           : registrationError
@@ -2182,6 +2218,45 @@ const DynamicRegistrationField = ({
                             </button>
                         );
                     })}
+                </div>
+            </Field>
+        );
+    }
+
+    if (field.type === "radio") {
+        return (
+            <Field
+                id={`hackathon-field-${field.id}`}
+                label={field.label}
+                required={field.required}
+                error={error}
+                palette={palette}
+            >
+                <div
+                    id={`hackathon-field-${field.id}`}
+                    role="radiogroup"
+                    aria-label={field.label}
+                    aria-required={field.required}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? `hackathon-error-${field.id}` : undefined}
+                    className="flex flex-wrap gap-3"
+                >
+                    {field.options.map((option) => (
+                        <label
+                            key={option.value}
+                            className={`inline-flex min-h-12 cursor-pointer items-center gap-3 border px-5 py-3 text-base font-semibold ${palette.field}`}
+                        >
+                            <input
+                                type="radio"
+                                name={field.id}
+                                value={option.value}
+                                checked={value === option.value}
+                                onChange={() => onChange(option.value)}
+                                className="h-4 w-4 accent-lime-400"
+                            />
+                            {option.label}
+                        </label>
+                    ))}
                 </div>
             </Field>
         );
