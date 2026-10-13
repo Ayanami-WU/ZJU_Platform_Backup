@@ -641,18 +641,8 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
     const answers = {};
     const errors = [];
     const isAiX = template.event.key === "zhekesong-ai-x-2026";
-    const selectedTracks = Array.isArray(answersInput.track)
-        ? answersInput.track
-        : [answersInput.track];
-    const industryOnly =
-        isAiX && selectedTracks.includes("industry") && !selectedTracks.includes("campus");
 
     for (const field of template.form.fields.filter((item) => item.enabled)) {
-        // Team identity belongs only to Tmall, including requests sent by older clients.
-        if (industryOnly && ["team", "isCaptain"].includes(field.id)) {
-            if (field.id === "team") answers.team = "";
-            continue;
-        }
         const rawValue = answersInput[field.id];
         let value;
         if (field.type === "multi_select") {
@@ -736,7 +726,7 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         answers[field.id] = value;
     }
 
-    if (isAiX && answers.track?.includes("campus")) {
+    if (isAiX) {
         if (!answers.team && !errors.some((error) => error.field === "team"))
             errors.push({ field: "team", message: "请填写队伍名称" });
         if (
@@ -752,15 +742,6 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         !["1", "2", "3", "4", "5"].includes(answers.teamSize)
     )
         errors.push({ field: "teamSize", message: "每队1–5人，请填写队伍人数" });
-    if (
-        template.event.key === "zhekesong-ai-x-2026" &&
-        template.form.fields.some((f) => f.id === "teamSize" && f.enabled) &&
-        answers.track?.includes("industry") &&
-        !answers.track.includes("campus") &&
-        answers.teamSize !== "1"
-    ) {
-        errors.push({ field: "teamSize", message: "华为赛道为个人参赛" });
-    }
     if (JSON.stringify(answers).length > 30000) {
         errors.push({ field: "answers", message: "报名内容过长，请精简后重试" });
     }

@@ -20,6 +20,12 @@ const trackRegistrations = (answers, createdAt) => {
     );
 };
 const decode = (row) => JSON.parse(row.form_data_json || "{}");
+const activeTrackRegistrations = (answers, createdAt) =>
+    Object.fromEntries(
+        Object.entries(trackRegistrations(answers, createdAt)).filter(
+            ([, entry]) => entry.active !== false && !entry.cancelledAt
+        )
+    );
 const registrationPayload = (row) => {
     if (!row) return null;
     const answers = decode(row);
@@ -29,7 +35,10 @@ const registrationPayload = (row) => {
         answers,
         createdAt: row.created_at,
         ...(row.event_key === AIX_EVENT_KEY
-            ? { trackRegistrations: trackRegistrations(answers, row.created_at) }
+            ? {
+                  trackRegistrations: trackRegistrations(answers, row.created_at),
+                  activeTracks: Object.keys(activeTrackRegistrations(answers, row.created_at)),
+              }
             : {}),
     };
 };
@@ -46,10 +55,6 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
             status: 400,
             code: "HACKATHON_REGISTRATION_INVALID",
         });
-    }
-    if (selected.length === 1 && selected[0] === "industry") {
-        answers = { ...answers, team: "", teamSize: "1" };
-        delete answers.isCaptain;
     }
     const createdAt = new Date().toISOString();
     for (let attempt = 0; attempt < 4; attempt++) {
@@ -68,24 +73,20 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
             throw conflict("HACKATHON_ALREADY_REGISTERED", "该学号已报名，请使用原账号");
         for (const key of selected) {
             const trackAnswers = { ...answers, track: [key] };
-            if (key === "industry") {
-                trackAnswers.team = "";
-                trackAnswers.teamSize = "1";
-                delete trackAnswers.isCaptain;
-            }
             entries[key] = {
                 answers: trackAnswers,
                 createdAt: entries[key]?.createdAt || createdAt,
+                active: true,
+                cancelledAt: null,
             };
         }
         // Top-level track remains the eligibility union used by existing submission permissions.
         const merged = {
             ...previous,
             ...answers,
-            track: TRACKS.filter((key) => entries[key]),
+            track: TRACKS.filter((key) => entries[key] && entries[key].active !== false && !entries[key].cancelledAt),
             trackRegistrations: entries,
         };
-        if (selected.length === 1 && selected[0] === "industry") delete merged.isCaptain;
         if (row) {
             const update = await db.run(
                 "UPDATE hackathon_registrations SET form_data_json=?,name=?,student_id=?,major=?,grade=?,ai_tools=?,experience=?,template_revision=? WHERE id=? AND user_id=? AND form_data_json=?",
@@ -137,4 +138,38 @@ async function saveTrackRegistration(db, { userId, template, answers }) {
     }
     throw conflict("HACKATHON_REGISTRATION_CONFLICT", "报名状态已更新，请刷新后重试");
 }
-module.exports = { trackRegistrations, registrationPayload, saveTrackRegistration };
+async function withdrawTrackRegistration(db, { userId, track }) {
+    if (!TRACKS.includes(track))
+        throw Object.assign(new Error("请选择有效的报名赛道"), {
+            status: 400,
+            code: "HACKATHON_REGISTRATION_INVALID",
+        });
+    for (let attempt = 0; attempt < 4; attempt++) {
+        const row = await db.get(
+            "SELECT * FROM hackathon_registrations WHERE event_key=? AND user_id=?",
+            [AIX_EVENT_KEY, userId]
+        );
+        const previous = row ? decode(row) : {};
+        const entries = row ? trackRegistrations(previous, row.created_at) : {};
+        if (!entries[track])
+            throw Object.assign(new Error("尚未报名该赛道"), {
+                status: 404,
+                code: "HACKATHON_REGISTRATION_REQUIRED",
+            });
+        if (entries[track].active === false || entries[track].cancelledAt) return row;
+        entries[track] = { ...entries[track], active: false, cancelledAt: new Date().toISOString() };
+        const merged = {
+            ...previous,
+            trackRegistrations: entries,
+            track: TRACKS.filter((key) => entries[key] && entries[key].active !== false && !entries[key].cancelledAt),
+        };
+        const result = await db.run(
+            "UPDATE hackathon_registrations SET form_data_json=? WHERE id=? AND user_id=? AND form_data_json=?",
+            [JSON.stringify(merged), row.id, userId, row.form_data_json]
+        );
+        if (result.changes) return { ...row, form_data_json: JSON.stringify(merged) };
+    }
+    throw conflict("HACKATHON_REGISTRATION_CONFLICT", "报名状态已更新，请刷新后重试");
+}
+
+module.exports = { trackRegistrations, activeTrackRegistrations, registrationPayload, saveTrackRegistration, withdrawTrackRegistration };

@@ -2937,6 +2937,7 @@ async function runMigrations(db) {
         db
     );
     await require("./migrations/hackathonAiXTeamIdentity").migrateHackathonAiXTeamIdentity(db);
+    await require("./migrations/hackathonAiXTeamTracks").migrateHackathonAiXTeamTracks(db);
     await require("./migrations/hackathonSubmissions").migrateHackathonSubmissions(db);
     await require("./migrations/hackathonGetuiBeauty").migrateHackathonGetuiBeauty(db);
     await require("./migrations/competitionWorkSelection").migrateCompetitionWorkSelection(db);

@@ -1268,6 +1268,7 @@ router.get("/hackathon/template", hackathonController.getHackathonTemplateConfig
 router.post("/hackathon/assistant", optionalAuth, hackathonController.handleHackathonAssistant);
 router.get("/hackathon/registration", authenticateToken, hackathonController.getMyRegistration);
 router.post("/hackathon/register", optionalAuth, hackathonController.registerHackathon);
+router.post("/hackathon/registration/withdraw", authenticateToken, hackathonController.withdrawRegistration);
 router.put(
     "/hackathon/registration/repositories",
     authenticateToken,

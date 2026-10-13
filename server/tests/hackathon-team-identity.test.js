@@ -27,36 +27,25 @@ const valid = {
     researchExperience: "文献研究",
 };
 
-test("Tmall requires a team name and an explicit yes/no captain answer; Huawei ignores identity", () => {
-    for (const isCaptain of ["yes", "no"]) {
-        const result = validateRegistrationAnswers(defaults, { ...valid, isCaptain });
-        assert.deepEqual(result.errors, []);
-        assert.equal(result.answers.isCaptain, isCaptain);
-    }
-    for (const [field, values] of [
-        ["team", [undefined, "", "   "]],
-        ["isCaptain", [undefined, "", false, true, "false", "true", "captain"]],
-    ]) {
-        for (const value of values)
-            assert.ok(
-                validateRegistrationAnswers(defaults, { ...valid, [field]: value }).errors.some(
-                    (error) => error.field === field
-                ),
-                `${field}: ${value}`
-            );
-    }
-    for (const identity of [{}, { team: "Campus team", isCaptain: "invalid" }]) {
-        const result = validateRegistrationAnswers(defaults, {
-            ...valid,
-            team: undefined,
-            isCaptain: undefined,
-            ...identity,
-            track: ["industry"],
-            teamSize: "1",
-        });
-        assert.deepEqual(result.errors, []);
-        assert.equal(result.answers.team, "");
-        assert.equal(result.answers.isCaptain, undefined);
+test("both tracks require team names and explicit yes/no captain answers", () => {
+    for (const track of [["campus"], ["industry"]]) {
+        for (const isCaptain of ["yes", "no"]) {
+            const result = validateRegistrationAnswers(defaults, { ...valid, track, isCaptain });
+            assert.deepEqual(result.errors, []);
+            assert.equal(result.answers.isCaptain, isCaptain);
+        }
+        for (const [field, values] of [
+            ["team", [undefined, "", "   "]],
+            ["isCaptain", [undefined, "", false, true, "false", "true", "captain"]],
+        ]) {
+            for (const value of values)
+                assert.ok(
+                    validateRegistrationAnswers(defaults, { ...valid, track, [field]: value }).errors.some(
+                        (error) => error.field === field
+                    ),
+                    `${field}: ${value}`
+                );
+        }
     }
 });
 

@@ -73,7 +73,7 @@ test("five-page migration does not create or publish missing events", async () =
         }
     }
 });
-test("Tmall accepts 1-5 team members while Huawei-only entry requires one person", () => {
+test("both tracks accept 1-5 team members", () => {
     const answers = {
         name: "Test",
         studentId: "T",
@@ -88,14 +88,12 @@ test("Tmall accepts 1-5 team members while Huawei-only entry requires one person
         isCaptain: "no",
     };
     for (const track of [["campus"], ["industry"], ["campus", "industry"]]) {
-        for (const teamSize of track.length === 1 && track[0] === "industry" ? ["1"] : ["1", "5"])
+        for (const teamSize of ["1", "5"])
             assert.deepEqual(
                 validateRegistrationAnswers(defaults, { ...answers, track, teamSize }).errors,
                 []
             );
-        for (const teamSize of track.length === 1 && track[0] === "industry"
-            ? ["", "0", "2", "5", "6"]
-            : ["", "0", "6"])
+        for (const teamSize of ["", "0", "6"])
             assert.ok(
                 validateRegistrationAnswers(defaults, { ...answers, track, teamSize }).errors.some(
                     (e) => e.field === "teamSize"

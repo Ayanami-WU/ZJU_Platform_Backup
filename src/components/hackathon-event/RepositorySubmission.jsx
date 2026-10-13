@@ -79,12 +79,8 @@ export default function RepositorySubmission({
                 ? t(`aix.options.${value}`, { defaultValue: value })
                 : String(value || "");
     const receiptAnswers = { ...registration.answers };
-    const tracks = Array.isArray(receiptAnswers.track)
-        ? receiptAnswers.track
-        : [receiptAnswers.track];
     if (registration.eventKey === "zhekesong-ai-x-2026") {
-        if (tracks.includes("campus")) receiptAnswers.isCaptain ||= "missing";
-        else delete receiptAnswers.isCaptain;
+        receiptAnswers.isCaptain ||= "missing";
     }
     return (
         <div className="aix-repository-receipt">
