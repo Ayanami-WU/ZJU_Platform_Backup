@@ -60,6 +60,20 @@
     max-width: 440px;
     flex-basis: 440px;
 }
+#aix-partners-title .aix-partner-panels .aix-brand-getui {
+    position: relative;
+    overflow: hidden;
+}
+#aix-partners-title .aix-partner-panels .aix-brand-getui img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 172.87%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    transform: translateY(-50%);
+}
 #aix-partners-title .aix-partner-panels .aix-brand-guancha img {
     transform: scale(1.85);
 }
