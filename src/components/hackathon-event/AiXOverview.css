@@ -881,7 +881,7 @@
 }
 .aix-qr-instructions .aix-qr-remark {
     margin-top: 8px;
-    color: var(--hx-accent-text);
+    color: var(--hx-accent);
     font-weight: 750;
 }
 .aix-registration-page #registration-form > .pointer-events-none {
