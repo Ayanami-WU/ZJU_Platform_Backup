@@ -45,7 +45,7 @@ test("October12 revision preserves old signups, published briefs, editor setting
         assert.equal(after.events[1].event.program.stages[1].closesAt, "2026-10-24T00:00:00+08:00");
         assert.equal(
             after.events[1].form.fields.find((f) => f.id === "track").options[0].label,
-            "天猫学科创意赛道"
+            "天猫·OPC孵化赛道"
         );
         assert.equal(
             after.events[1].form.fields.find((f) => f.id === "contact").label,

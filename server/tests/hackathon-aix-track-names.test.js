@@ -36,8 +36,8 @@ test("track rename keeps IDs, registration snapshots, schedules and published br
         assert.deepEqual(
             after.events[1].form.fields.find((field) => field.id === "track").options,
             [
-                { value: "campus", label: "天猫学科创意赛道" },
-                { value: "industry", label: "华为产业命题赛道" },
+                { value: "campus", label: "天猫·OPC孵化赛道" },
+                { value: "industry", label: "华为·产业进阶赛道" },
             ]
         );
         assert.deepEqual(await db.all("SELECT * FROM hackathon_registrations"), registrations);
