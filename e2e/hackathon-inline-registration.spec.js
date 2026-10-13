@@ -281,7 +281,13 @@ test("anonymous campus captain radios have no default and are disabled at mobile
     await prepare(page, { signedIn: false });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/hackathon/2#registration-form");
-    await tab(page, "天猫报名").click();
+    // Phones replace the inline form with the compact chapter; the form itself now
+    // lives on its own registration page, reached from the per-track entry buttons.
+    await expect(page.locator(".aix-register-chapter")).toBeVisible();
+    await expect(page.locator("#hackathon-field-isCaptain")).toHaveCount(0);
+    await page.locator('.aix-register-entry-button[data-track="campus"]').click();
+    await expect(page).toHaveURL(/\/hackathon\/2\/register\?track=campus$/);
+    await expect(page.locator(".aix-register-chapter")).toHaveCount(0);
     for (const label of ["是", "否"]) {
         await expect(page.getByRole("radio", { name: label, exact: true })).toBeDisabled();
         await expect(page.getByRole("radio", { name: label, exact: true })).not.toBeChecked();
@@ -336,6 +342,18 @@ test("both track registrations can be edited with independent drafts and failed 
     await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
     await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
+    // Phones replace the inline form with the compact chapter; each track opens its
+    // own registration page, where the same captain choice stays editable.
+    await expect(page.locator(".aix-register-chapter")).toBeVisible();
     await page.screenshot({ path: "output/playwright/aix-team-captain-mobile.png" });
+    await page.locator('.aix-register-entry-button[data-track="campus"]').click();
+    const editButton = page.getByRole("button", { name: "修改报名信息", exact: true });
+    if (await editButton.count()) await editButton.first().click();
+    // The form re-renders once its draft effect lands; assert visibility first so the
+    // scroll below never races the re-render.
+    await expect(page.locator("#hackathon-field-isCaptain")).toBeVisible();
+    await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
+    await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "output/playwright/aix-team-captain-mobile-form.png" });
 });
+
