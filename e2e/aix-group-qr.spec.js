@@ -24,7 +24,7 @@ test("official group QR opens, closes with Escape and does not inherit the old Q
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("img")).toHaveAttribute(
         "src",
-        "/images/hackathon/ai-x/official/wechat-member.png"
+        "/images/hackathon/ai-x/official/wechat-assistant.jpg"
     );
     await page.keyboard.press("Escape");
     await expect(dialog).not.toBeVisible();

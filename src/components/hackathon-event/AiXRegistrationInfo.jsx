@@ -24,12 +24,13 @@ export default function AiXRegistrationInfo() {
                 <div className="aix-qr-instructions">
                     <h2>{t("aix.landing.memberQrTitle")}</h2>
                     <p>{t("aix.landing.memberQrHint")}</p>
+                    <p className="aix-qr-remark">{t("aix.landing.memberQrRemark")}</p>
                 </div>
                 <img
-                    src="/images/hackathon/ai-x/official/wechat-member.png"
+                    src="/images/hackathon/ai-x/official/wechat-assistant.jpg"
                     alt={t("aix.landing.qrAlt")}
-                    width="896"
-                    height="922"
+                    width="888"
+                    height="1131"
                 />
             </dialog>
         </div>
