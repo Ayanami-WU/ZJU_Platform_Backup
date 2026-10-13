@@ -10,6 +10,7 @@ const brands = [
         dark: "/images/partner-logos/getui-dark.svg",
     },
     { id: "huadan", name: "华旦天使", source: `${assetRoot}huadan.jpg` },
+    { id: "manhattan", name: "曼哈顿资本", source: `${assetRoot}manhattan.jpg` },
     { id: "puhua", name: "普华资本", source: `${assetRoot}puhua.png` },
     { id: "oufang", name: "藕舫天使", source: `${assetRoot}oufang.jpg` },
     {
