@@ -5530,7 +5530,13 @@
                 "campus": {
                     "partner": "天猫校园",
                     "type": "自主命题",
-                    "topics": ["法学", "海洋", "医学", "教育", "宣传"],
+                    "topics": [
+                        "法学",
+                        "海洋",
+                        "医学",
+                        "教育",
+                        "宣传"
+                    ],
                     "format": "线上开发 · 线下路演",
                     "shortTitle": "天猫·OPC孵化赛道",
                     "shortDescription": "自选学科问题，提前开发。",
@@ -5541,7 +5547,10 @@
                 "industry": {
                     "partner": "华为中国区",
                     "type": "企业命题",
-                    "topics": ["文案", "营销"],
+                    "topics": [
+                        "文案",
+                        "营销"
+                    ],
                     "format": "方案设计 · 产品开发 · 阶段展示",
                     "shortTitle": "华为·产业进阶赛道",
                     "shortDescription": "企业真实业务问题，方案设计与产品开发。",
@@ -5628,7 +5637,10 @@
             "heroDescription": "天猫OPC孵化与华为产业进阶双赛道。用AI解决真实问题，对接产业与孵化资源。",
             "application": "应用",
             "bothTracks": "支持同时报名两条赛道",
-            "venues": ["10.18 · 段永平教学楼2-112", "10.25 · 三墩元空间（宝港生活广场C座6楼）"],
+            "venues": [
+                "10.18 · 段永平教学楼2-112",
+                "10.25 · 三墩元空间（宝港生活广场C座6楼）"
+            ],
             "pauseMotion": "暂停荧光动效",
             "resumeMotion": "播放荧光动效",
             "openingGuests": [],
@@ -5801,7 +5813,12 @@
             "industryMaterials": "技术作品 + Demo"
         },
         "official": {
-            "chapters": ["主页", "赛制", "奖励", "报名"],
+            "chapters": [
+                "主页",
+                "赛制",
+                "奖励",
+                "报名"
+            ],
             "chapterNav": "介绍页章节",
             "totalPrize": "奖品与奖金总价值",
             "tracksTitle": "比赛赛道",
@@ -5978,7 +5995,11 @@
             },
             "heroLink": "论坛介绍与独立报名",
             "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
-            "chapters": ["技术论坛", "创业论坛", "论坛报名"],
+            "chapters": [
+                "技术论坛",
+                "创业论坛",
+                "论坛报名"
+            ],
             "dateTime": "10月25日 13:30–16:30",
             "venue": "三墩元空间",
             "address": "宝港生活广场 C 座 6 楼",
@@ -6374,17 +6395,24 @@
                     "rows": [
                         {
                             "label": "各 10 份",
-                            "lines": ["颈枕 · 马克杯 · 雨伞"],
+                            "lines": [
+                                "颈枕 · 马克杯 · 雨伞"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "各 20 份",
-                            "lines": ["帆布袋 · 毛绒耳机包", "紫色手机夹"],
+                            "lines": [
+                                "帆布袋 · 毛绒耳机包",
+                                "紫色手机夹"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "40 份",
-                            "lines": ["贴纸"],
+                            "lines": [
+                                "贴纸"
+                            ],
                             "count": ""
                         }
                     ],
@@ -6487,6 +6515,10 @@
                         {
                             "id": "yuandian",
                             "name": "元典"
+                        },
+                        {
+                            "id": "zhipu",
+                            "name": "智谱"
                         }
                     ]
                 },
@@ -6534,7 +6566,10 @@
                     ]
                 }
             ],
-            "coverTitle": ["浙客松：", "AI+X破界黑客松"],
+            "coverTitle": [
+                "浙客松：",
+                "AI+X破界黑客松"
+            ],
             "forumOverview": {
                 "title": "论坛",
                 "topicsLabel": "分享主题",
@@ -6564,12 +6599,16 @@
                             {
                                 "title": "主题分享",
                                 "speaker": "叶新江",
-                                "guestIds": ["ye-xinjiang"]
+                                "guestIds": [
+                                    "ye-xinjiang"
+                                ]
                             },
                             {
                                 "title": "技术报告",
                                 "speaker": "孙逸飞",
-                                "guestIds": ["sun-yifei"]
+                                "guestIds": [
+                                    "sun-yifei"
+                                ]
                             }
                         ],
                         "signup": "报名技术论坛"
@@ -6635,26 +6674,39 @@
                             {
                                 "title": "AI狂欢下的冷静思考——青年应该培养哪些穿越周期的能力？",
                                 "speaker": "王进",
-                                "guestIds": ["wang-jin"]
+                                "guestIds": [
+                                    "wang-jin"
+                                ]
                             },
                             {
                                 "title": "浙大紫金创业元空间——AI+创新创业教育赋能生态",
                                 "speaker": "王非凡",
-                                "guestIds": ["wang-feifan"]
+                                "guestIds": [
+                                    "wang-feifan"
+                                ]
                             },
                             {
                                 "title": "主题分享 · 题目待公布",
                                 "speaker": "张克俊",
-                                "guestIds": ["zhang-kejun"]
+                                "guestIds": [
+                                    "zhang-kejun"
+                                ]
                             },
                             {
                                 "title": "圆桌论坛：AI时代的第一次成功与失败？",
                                 "speaker": "张洁、张加林、刘建斌",
-                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
+                                "guestIds": [
+                                    "zhang-jie",
+                                    "zhang-jialin",
+                                    "liu-jianbin"
+                                ]
                             }
                         ],
                         "signup": "报名创业论坛",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
+                        "invitedGuestIds": [
+                            "dou-mingqing",
+                            "xu-songbo"
+                        ]
                     }
                 ],
                 "invitedLabel": "特邀嘉宾",
@@ -6796,8 +6848,14 @@
         },
         "trackScheduleOnline": "线上",
         "trackBadges": {
-            "campus": ["线上", "1—5人组队"],
-            "industry": ["线下", "Solo参赛"]
+            "campus": [
+                "线上",
+                "1—5人组队"
+            ],
+            "industry": [
+                "线下",
+                "Solo参赛"
+            ]
         }
     },
     "eventWorkspace": {
@@ -7100,15 +7158,22 @@
         "partners": [
             {
                 "role": "主办",
-                "names": ["拓浙 AI 生态"]
+                "names": [
+                    "拓浙 AI 生态"
+                ]
             },
             {
                 "role": "承办",
-                "names": ["每日互动"]
+                "names": [
+                    "每日互动"
+                ]
             },
             {
                 "role": "赞助",
-                "names": ["摇滚动物园", "个知"]
+                "names": [
+                    "摇滚动物园",
+                    "个知"
+                ]
             },
             {
                 "role": "联合主办",
@@ -7193,7 +7258,11 @@
             "compress": "内容压缩",
             "feedback": "对话优化"
         },
-        "beautyTasks": ["识别肌肤", "匹配产品", "完成应用"],
+        "beautyTasks": [
+            "识别肌肤",
+            "匹配产品",
+            "完成应用"
+        ],
         "trackDetails": "查看赛道安排",
         "industrySchedule": "初赛 10.18 · 复赛 10.19—10.24 · 决赛 10.25"
     },
@@ -7214,8 +7283,14 @@
         "watchFilm": "播放赛事影像",
         "upcoming": "赛事尚未开始，作品与现场记录将在赛后呈现。",
         "pending": "本场成果正在整理，已发布内容将在这里呈现。",
-        "beautyTitleLines": ["每日互动", "美妆联谊赛"],
-        "aixTitleLines": ["AI+X", "破界黑客松"],
+        "beautyTitleLines": [
+            "每日互动",
+            "美妆联谊赛"
+        ],
+        "aixTitleLines": [
+            "AI+X",
+            "破界黑客松"
+        ],
         "allEntries": "全部作品（{{count}}）"
     },
     "accountProfile": {

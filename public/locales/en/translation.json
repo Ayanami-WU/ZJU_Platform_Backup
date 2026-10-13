@@ -5421,7 +5421,13 @@
                 "campus": {
                     "partner": "Tmall Campus",
                     "type": "Your own challenge",
-                    "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
+                    "topics": [
+                        "Law",
+                        "Ocean science",
+                        "Medicine",
+                        "Education",
+                        "Communications"
+                    ],
                     "format": "Build online · Present on campus",
                     "shortTitle": "Tmall Campus · OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
@@ -5432,7 +5438,10 @@
                 "industry": {
                     "partner": "Huawei China",
                     "type": "Industry challenge",
-                    "topics": ["Copywriting", "Marketing"],
+                    "topics": [
+                        "Copywriting",
+                        "Marketing"
+                    ],
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei · Industry Advanced Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
@@ -5695,7 +5704,12 @@
             "industryMaterials": "Technical project + Demo"
         },
         "official": {
-            "chapters": ["Home", "Format", "Prizes", "Register"],
+            "chapters": [
+                "Home",
+                "Format",
+                "Prizes",
+                "Register"
+            ],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5872,7 +5886,11 @@
             },
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
-            "chapters": ["Technology", "Entrepreneurship", "Registration"],
+            "chapters": [
+                "Technology",
+                "Entrepreneurship",
+                "Registration"
+            ],
             "dateTime": "October 25 · 13:30–16:30",
             "venue": "Sandun Innovation Space",
             "address": "6F, Building C, Baogang Life Plaza",
@@ -6268,17 +6286,24 @@
                     "rows": [
                         {
                             "label": "10 each",
-                            "lines": ["Neck pillows · Mugs · Umbrellas"],
+                            "lines": [
+                                "Neck pillows · Mugs · Umbrellas"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "20 each",
-                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"],
+                            "lines": [
+                                "Tote bags · Plush earphone pouches",
+                                "Purple phone clips"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "40",
-                            "lines": ["Stickers"],
+                            "lines": [
+                                "Stickers"
+                            ],
                             "count": ""
                         }
                     ],
@@ -6381,6 +6406,10 @@
                         {
                             "id": "yuandian",
                             "name": "Legal Intelligence"
+                        },
+                        {
+                            "id": "zhipu",
+                            "name": "Zhipu"
                         }
                     ]
                 },
@@ -6428,7 +6457,10 @@
                     ]
                 }
             ],
-            "coverTitle": ["ZHEKESONG:", "AI+X Hackathon"],
+            "coverTitle": [
+                "ZHEKESONG:",
+                "AI+X Hackathon"
+            ],
             "forumOverview": {
                 "title": "Forums",
                 "topicsLabel": "Topics",
@@ -6458,12 +6490,16 @@
                             {
                                 "title": "Keynote",
                                 "speaker": "Ye Xinjiang",
-                                "guestIds": ["ye-xinjiang"]
+                                "guestIds": [
+                                    "ye-xinjiang"
+                                ]
                             },
                             {
                                 "title": "Technical talk",
                                 "speaker": "Sun Yifei",
-                                "guestIds": ["sun-yifei"]
+                                "guestIds": [
+                                    "sun-yifei"
+                                ]
                             }
                         ],
                         "signup": "Join technical forum"
@@ -6529,26 +6565,39 @@
                             {
                                 "title": "Beyond the AI hype: building capabilities that endure across cycles",
                                 "speaker": "Wang Jin",
-                                "guestIds": ["wang-jin"]
+                                "guestIds": [
+                                    "wang-jin"
+                                ]
                             },
                             {
                                 "title": "ZJU Zijin Entrepreneurship Space: AI-enabled entrepreneurship education",
                                 "speaker": "Wang Feifan",
-                                "guestIds": ["wang-feifan"]
+                                "guestIds": [
+                                    "wang-feifan"
+                                ]
                             },
                             {
                                 "title": "Keynote · Topic to be announced",
                                 "speaker": "Zhang Kejun",
-                                "guestIds": ["zhang-kejun"]
+                                "guestIds": [
+                                    "zhang-kejun"
+                                ]
                             },
                             {
                                 "title": "Roundtable: First successes and failures in the AI era",
                                 "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin",
-                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
+                                "guestIds": [
+                                    "zhang-jie",
+                                    "zhang-jialin",
+                                    "liu-jianbin"
+                                ]
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
+                        "invitedGuestIds": [
+                            "dou-mingqing",
+                            "xu-songbo"
+                        ]
                     }
                 ],
                 "invitedLabel": "Special guests",
@@ -6690,8 +6739,14 @@
         },
         "trackScheduleOnline": "Online",
         "trackBadges": {
-            "campus": ["Online", "Teams of 1–5"],
-            "industry": ["In person", "Solo"]
+            "campus": [
+                "Online",
+                "Teams of 1–5"
+            ],
+            "industry": [
+                "In person",
+                "Solo"
+            ]
         }
     },
     "eventWorkspace": {
@@ -6994,15 +7049,22 @@
         "partners": [
             {
                 "role": "Organizer",
-                "names": ["TUOZHE AI ECOSYSTEM"]
+                "names": [
+                    "TUOZHE AI ECOSYSTEM"
+                ]
             },
             {
                 "role": "Host",
-                "names": ["Getui"]
+                "names": [
+                    "Getui"
+                ]
             },
             {
                 "role": "Sponsors",
-                "names": ["ROCKINGZOO", "个知"]
+                "names": [
+                    "ROCKINGZOO",
+                    "个知"
+                ]
             },
             {
                 "role": "Co-organizers",
@@ -7087,7 +7149,11 @@
             "compress": "Condense",
             "feedback": "Refine"
         },
-        "beautyTasks": ["Analyze", "Recommend", "Build"],
+        "beautyTasks": [
+            "Analyze",
+            "Recommend",
+            "Build"
+        ],
         "trackDetails": "Explore the tracks",
         "industrySchedule": "Initial · Oct 18 / Semifinal · Oct 19–24 / Final · Oct 25"
     },
@@ -7108,8 +7174,14 @@
         "watchFilm": "Play event film",
         "upcoming": "The event has not started. Works and event coverage will appear here after the competition.",
         "pending": "Event outcomes are being compiled. Published content will appear here.",
-        "beautyTitleLines": ["Getui", "Beauty Hackathon"],
-        "aixTitleLines": ["AI+X", "Hackathon"],
+        "beautyTitleLines": [
+            "Getui",
+            "Beauty Hackathon"
+        ],
+        "aixTitleLines": [
+            "AI+X",
+            "Hackathon"
+        ],
         "allEntries": "All works ({{count}})"
     },
     "accountProfile": {
