@@ -5953,6 +5953,10 @@
                         {
                             "id": "huawei",
                             "name": "华为"
+                        },
+                        {
+                            "id": "getui",
+                            "name": "Getui"
                         }
                     ],
                     "id": "sponsors",
@@ -6000,6 +6004,29 @@
                     ],
                     "id": "companies",
                     "published": true
+                },
+                {
+                    "id": "capital",
+                    "label": "Capital partners",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huadan",
+                            "name": "Huadan Angel Investment"
+                        },
+                        {
+                            "id": "manhattan",
+                            "name": "Manhattan Capital"
+                        },
+                        {
+                            "id": "puhua",
+                            "name": "Puhua Capital"
+                        },
+                        {
+                            "id": "oufang",
+                            "name": "Oufang Angel"
+                        }
+                    ]
                 },
                 {
                     "label": "Supporting organizations",
@@ -6370,6 +6397,10 @@
                         {
                             "id": "huawei",
                             "name": "华为"
+                        },
+                        {
+                            "id": "getui",
+                            "name": "Getui"
                         }
                     ]
                 },
@@ -6421,6 +6452,29 @@
                         {
                             "id": "zhipu",
                             "name": "Zhipu"
+                        }
+                    ]
+                },
+                {
+                    "id": "capital",
+                    "label": "Capital partners",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huadan",
+                            "name": "Huadan Angel Investment"
+                        },
+                        {
+                            "id": "manhattan",
+                            "name": "Manhattan Capital"
+                        },
+                        {
+                            "id": "puhua",
+                            "name": "Puhua Capital"
+                        },
+                        {
+                            "id": "oufang",
+                            "name": "Oufang Angel"
                         }
                     ]
                 },

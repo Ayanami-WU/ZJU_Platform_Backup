@@ -4,6 +4,15 @@ import "./AiXPartnerLogos.css";
 const assetRoot = "/images/hackathon/ai-x/partners/";
 const brands = [
     {
+        id: "getui",
+        name: "每日互动",
+        light: "/images/partner-logos/getui.svg",
+        dark: "/images/partner-logos/getui-dark.svg",
+    },
+    { id: "huadan", name: "华旦天使", source: `${assetRoot}huadan.jpg` },
+    { id: "puhua", name: "普华资本", source: `${assetRoot}puhua.png` },
+    { id: "oufang", name: "藕舫天使", source: `${assetRoot}oufang.jpg` },
+    {
         id: "zhipu",
         name: "智谱 Zhipu",
         // Official brand assets: https://www.zhipuai.cn/zh
@@ -74,7 +83,7 @@ const brands = [
 ];
 export function AiXBrand({ id, name }) {
     const brand = brands.find((item) => item.id === id);
-    if (!brand) return null;
+    if (!brand) return <span className="aix-partner-name">{name}</span>;
     return (
         <span
             className={`aix-brand-logo aix-brand-${id}`}

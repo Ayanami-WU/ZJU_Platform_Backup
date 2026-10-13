@@ -6056,6 +6056,10 @@
                         {
                             "id": "huawei",
                             "name": "华为"
+                        },
+                        {
+                            "id": "getui",
+                            "name": "每日互动"
                         }
                     ],
                     "id": "sponsors",
@@ -6103,6 +6107,29 @@
                     ],
                     "id": "companies",
                     "published": true
+                },
+                {
+                    "id": "capital",
+                    "label": "合作资本",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huadan",
+                            "name": "华旦天使"
+                        },
+                        {
+                            "id": "manhattan",
+                            "name": "曼哈顿资本"
+                        },
+                        {
+                            "id": "puhua",
+                            "name": "普华资本"
+                        },
+                        {
+                            "id": "oufang",
+                            "name": "藕舫天使"
+                        }
+                    ]
                 },
                 {
                     "label": "支持组织",
@@ -6473,6 +6500,10 @@
                         {
                             "id": "huawei",
                             "name": "华为"
+                        },
+                        {
+                            "id": "getui",
+                            "name": "每日互动"
                         }
                     ]
                 },
@@ -6524,6 +6555,29 @@
                         {
                             "id": "zhipu",
                             "name": "智谱"
+                        }
+                    ]
+                },
+                {
+                    "id": "capital",
+                    "label": "合作资本",
+                    "published": true,
+                    "members": [
+                        {
+                            "id": "huadan",
+                            "name": "华旦天使"
+                        },
+                        {
+                            "id": "manhattan",
+                            "name": "曼哈顿资本"
+                        },
+                        {
+                            "id": "puhua",
+                            "name": "普华资本"
+                        },
+                        {
+                            "id": "oufang",
+                            "name": "藕舫天使"
                         }
                     ]
                 },
