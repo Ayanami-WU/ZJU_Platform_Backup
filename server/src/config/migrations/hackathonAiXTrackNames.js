@@ -1,5 +1,5 @@
 const defaults = require("../../../../shared/hackathonAiX.json");
-const MARKER = "hackathon_ai_x_track_names_confirmed_screenshot_v4";
+const MARKER = "hackathon_ai_x_track_names_opc_industry_implementation_v5";
 
 async function migrateHackathonAiXTrackNames(db) {
     await db.exec("BEGIN IMMEDIATE");

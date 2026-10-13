@@ -4276,8 +4276,8 @@
             "description": "按报名账号及赛道分别查看材料。正式提交用于评审；草稿仅供查看，不代表已参赛提交。",
             "track": "赛道",
             "stage": "轮次",
-            "industry": "华为产业命题赛道",
-            "campus": "天猫学科创意赛道",
+            "industry": "华为产业落地赛道",
+            "campus": "天猫OPC孵化赛道",
             "initial": "初赛",
             "semifinal": "复赛",
             "refresh": "刷新",
@@ -5225,18 +5225,18 @@
         "description": "从你的专业出发，发现一个真实问题，用 AI 把它做成可以演示、实际使用的作品。",
         "date": "2026.10.09–10.25",
         "location": "10.18 段永平教学楼2-112 · 10.25 三墩元空间",
-        "team": "天猫学科创意赛道、华为产业命题赛道均为 1–5 人组队",
+        "team": "天猫OPC孵化赛道、华为产业落地赛道均为 1–5 人组队",
         "tracksKicker": "两条赛道",
         "tracksTitle": "你的专业，就是创新的起点。",
         "viewChallenges": "查看赛题",
         "tracks": {
             "campus": {
-                "title": "天猫学科创意赛道",
+                "title": "天猫OPC孵化赛道",
                 "description": "多学科自由命题，优先招募成熟、可落地项目。 可线上参赛 · 1–5 人组队",
                 "topics": "多学科、多场景自由命题"
             },
             "industry": {
-                "title": "华为产业命题赛道",
+                "title": "华为产业落地赛道",
                 "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 1–5 人组队",
                 "topics": "文案 · 营销"
             }
@@ -5267,7 +5267,7 @@
             "initial": {
                 "date": "10.18",
                 "title": "初赛 · 技术论坛",
-                "description": "10月18日13:00–17:00现场开发。天猫学科创意赛道技术可行性过关进入复赛；华为产业命题赛道完成度达到60%晋级，当晚22:00公布名单。"
+                "description": "10月18日13:00–17:00现场开发。天猫OPC孵化赛道技术可行性过关进入复赛；华为产业落地赛道完成度达到60%晋级，当晚22:00公布名单。"
             },
             "semifinal": {
                 "date": "10.19–10.22",
@@ -5277,7 +5277,7 @@
             "shortlist": {
                 "date": "10.23",
                 "title": "复赛开发与评审",
-                "description": "华为产业命题赛道复赛在线完善作品，评审选出 10 个决赛项目。"
+                "description": "华为产业落地赛道复赛在线完善作品，评审选出 10 个决赛项目。"
             },
             "final": {
                 "date": "10.25",
@@ -5290,7 +5290,7 @@
         "stagesLabel": "比赛阶段",
         "deadline": "材料截止",
         "challengePending": "赛题待发布",
-        "releaseTime": "天猫学科创意赛道10月14日公布赛题；华为产业命题赛道10月18日13:00发布赛题。",
+        "releaseTime": "天猫OPC孵化赛道10月14日公布赛题；华为产业落地赛道10月18日13:00发布赛题。",
         "nextStageNotice": "本阶段要求与提交入口将在正式通知后开放。",
         "submissionPending": "提交入口待开放",
         "submissionClosed": "本阶段提交已结束",
@@ -5302,7 +5302,7 @@
             "initial": {
                 "title": "初赛",
                 "date": "10.18",
-                "description": "10月18日13:00–17:00现场开发。天猫学科创意赛道技术可行性过关进入复赛；华为产业命题赛道完成度达到60%晋级，当晚22:00公布名单。",
+                "description": "10月18日13:00–17:00现场开发。天猫OPC孵化赛道技术可行性过关进入复赛；华为产业落地赛道完成度达到60%晋级，当晚22:00公布名单。",
                 "materials": "提交可运行的 Demo 与项目说明，展示解决的问题、核心功能与完成情况；作品提交至魔搭社区。"
             },
             "semifinal": {
@@ -5337,7 +5337,7 @@
             "registered": "已报名 · 查看",
             "retry": "重试报名状态",
             "closed": "报名已截止",
-            "description": "天猫学科创意赛道、华为产业命题赛道均为 1–5 人组队",
+            "description": "天猫OPC孵化赛道、华为产业落地赛道均为 1–5 人组队",
             "success": "你的报名信息已保存，可在此查看。赛事安排以正式通知为准。",
             "saved": "报名成功",
             "loginHint": "登录后报名，方便随时查看自己的报名信息。",
@@ -5370,15 +5370,15 @@
             },
             "loginPreview": "请先注册或登录，再填写报名信息。",
             "trackTabs": "报名赛道",
-            "trackTabs_industry": "华为产业命题赛道报名",
-            "trackTabs_campus": "天猫学科创意赛道报名",
+            "trackTabs_industry": "华为产业落地赛道报名",
+            "trackTabs_campus": "天猫OPC孵化赛道报名",
             "phone": "手机号",
             "phonePlaceholder": "填写可接收赛事通知的手机号",
             "invalidPhone": "请填写有效的手机号",
             "trackSummary": {
                 "label": "参赛安排",
-                "industryTitle": "华为产业命题赛道",
-                "campusTitle": "天猫学科创意赛道",
+                "industryTitle": "华为产业落地赛道",
+                "campusTitle": "天猫OPC孵化赛道",
                 "industryFormat": "1–5 人组队 · 必须线下",
                 "campusFormat": "1–5 人组队 · 可线上参赛",
                 "development": "现场开发",
@@ -5434,8 +5434,8 @@
             "senior": "大四",
             "master": "硕士",
             "phd": "博士",
-            "campus": "天猫学科创意赛道",
-            "industry": "华为产业命题赛道",
+            "campus": "天猫OPC孵化赛道",
+            "industry": "华为产业落地赛道",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
             "Cursor": "Cursor",
@@ -5508,7 +5508,7 @@
         "crossDiscipline": "跨学科创新与真实应用",
         "resultsTitle": "成果",
         "resultsIntro": "获奖名单、项目成果、讲话总结与论坛分享，在这里集中查看。",
-        "industryStages": "华为产业命题赛道 · 比赛阶段",
+        "industryStages": "华为产业落地赛道 · 比赛阶段",
         "campusSchedule": "10月13日至18日17:00线上初赛；18日13:00–17:00可参加线下指导；19—23日线上复赛；25日决赛。",
         "fieldHints": {
             "name": "",
@@ -5537,7 +5537,7 @@
                     "type": "自主命题",
                     "topics": ["法学", "海洋", "医学", "教育", "宣传"],
                     "format": "线上开发 · 线下路演",
-                    "shortTitle": "天猫学科创意赛道",
+                    "shortTitle": "天猫OPC孵化赛道",
                     "shortDescription": "自选学科问题，提前开发。",
                     "team": "每队1–5人",
                     "deadline": "10.18 17:00 初赛提交",
@@ -5548,7 +5548,7 @@
                     "type": "企业命题",
                     "topics": ["文案", "营销"],
                     "format": "方案设计 · 产品开发 · 阶段展示",
-                    "shortTitle": "华为产业命题赛道",
+                    "shortTitle": "华为产业落地赛道",
                     "shortDescription": "企业真实业务问题，方案设计与产品开发。",
                     "team": "1–5 人组队",
                     "deadline": "10.18 17:00 初赛提交",
@@ -5560,7 +5560,7 @@
             "agenda": [
                 {
                     "date": "10.12",
-                    "title": "天猫学科创意赛道项目报名开启",
+                    "title": "天猫OPC孵化赛道项目报名开启",
                     "description": "招募成熟、可落地的项目"
                 },
                 {
@@ -5640,10 +5640,10 @@
             "openingLabel": "致辞嘉宾",
             "judges": "",
             "rewardsTitle": "奖励与礼品",
-            "rewardsIntro": "天猫学科创意赛道团队奖金、华为产业命题赛道奖品与奖金，另加 Coding Plan Pro 套餐季卡及魔搭社区现场抽奖。",
+            "rewardsIntro": "天猫OPC孵化赛道团队奖金、华为产业落地赛道奖品与奖金，另加 Coding Plan Pro 套餐季卡及魔搭社区现场抽奖。",
             "rewards": [
                 {
-                    "label": "天猫学科创意赛道奖励",
+                    "label": "天猫OPC孵化赛道奖励",
                     "value": "¥6,500",
                     "note": "6个获奖团队",
                     "items": [
@@ -5654,7 +5654,7 @@
                     ]
                 },
                 {
-                    "label": "华为产业命题赛道奖品与奖金总价值",
+                    "label": "华为产业落地赛道奖品与奖金总价值",
                     "value": "¥14,980",
                     "note": "10 个获奖名额",
                     "items": [
@@ -5668,7 +5668,7 @@
                     "label": "Coding Plan Pro 套餐季卡",
                     "value": "¥1,614",
                     "note": "共 3 份 · 每份有效期 3 个月",
-                    "items": ["天猫学科创意赛道冠军：1名", "华为产业命题赛道一等奖：2名"]
+                    "items": ["天猫OPC孵化赛道冠军：1名", "华为产业落地赛道一等奖：2名"]
                 },
                 {
                     "label": "魔搭社区现场抽奖",
@@ -5738,7 +5738,7 @@
             "releaseAt": "预计 {{date}} 发布；正式赛题以主办方发布为准。",
             "awaitPublication": "正式赛题尚未发布，请等待主办方更新。",
             "participation": "参赛形式",
-            "individual": "天猫学科创意赛道每队1–5人，可线上参赛。",
+            "individual": "天猫OPC孵化赛道每队1–5人，可线上参赛。",
             "team": "1–5 人组队；初赛线下开发，复赛线上开发。",
             "schedule": "时间安排",
             "campusMaterials": "技术作品 + BP + Demo",
@@ -5850,7 +5850,7 @@
             "back": "返回赛事",
             "enter": "查看论坛与独立报名",
             "attendanceTitle": "参赛选手到场要求",
-            "attendance": "华为产业命题赛道初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。",
+            "attendance": "华为产业落地赛道初赛选手须参加10月18日技术论坛；决赛选手须参加10月25日决赛论坛。论坛需单独报名。",
             "agenda": "查看议程",
             "invited": "拟邀请",
             "registered": "已报名 · 编号 {{id}}",
@@ -6162,8 +6162,8 @@
             "teamSizeError": "请选择队伍人数（1–5 人）",
             "recapAdditionalTitle": "析境杯 · 跨学科量化投资挑战赛",
             "recapAdditionalText": "析境科技主办，拓浙 AI 生态与校内相关社团协办。2026年7月至10月，围绕自然语言研究假设、因子与策略回测、虚拟组合运行开展持续评价。",
-            "campusTeamLabel": "天猫学科创意赛道队伍名称",
-            "campusTeamSizeLabel": "天猫学科创意赛道队伍人数"
+            "campusTeamLabel": "天猫OPC孵化赛道队伍名称",
+            "campusTeamSizeLabel": "天猫OPC孵化赛道队伍人数"
         },
         "pages": {
             "format": "比赛赛制",
@@ -6188,7 +6188,7 @@
             "tracks": [
                 {
                     "id": "campus",
-                    "title": "天猫学科创意赛道",
+                    "title": "天猫OPC孵化赛道",
                     "mode": "可线上参赛 · 1–5 人组队",
                     "description": "多学科自由命题，优先招募成熟、可落地项目。",
                     "stages": [
@@ -6245,7 +6245,7 @@
                 },
                 {
                     "id": "industry",
-                    "title": "华为产业命题赛道",
+                    "title": "华为产业落地赛道",
                     "mode": "初赛须线下 · 1–5 人组队",
                     "description": "企业文案与营销命题，开发 Agent 或 Skill。",
                     "stages": [
@@ -6303,7 +6303,7 @@
             ],
             "rewards": [
                 {
-                    "title": "天猫学科创意赛道",
+                    "title": "天猫OPC孵化赛道",
                     "value": "¥6,500",
                     "note": "6 个获奖团队",
                     "rows": [
@@ -6331,7 +6331,7 @@
                     "totalLabel": "奖金合计"
                 },
                 {
-                    "title": "华为产业命题赛道",
+                    "title": "华为产业落地赛道",
                     "value": "¥14,980",
                     "note": "1–5 人组队 · 10 个获奖名额",
                     "rows": [
@@ -6388,12 +6388,12 @@
                         {
                             "label": "冠军",
                             "count": "1 名",
-                            "lines": ["天猫学科创意赛道"]
+                            "lines": ["天猫OPC孵化赛道"]
                         },
                         {
                             "label": "一等奖",
                             "count": "2 名",
-                            "lines": ["华为产业命题赛道"]
+                            "lines": ["华为产业落地赛道"]
                         }
                     ],
                     "footer": "在原赛道奖励基础上加赠",
@@ -6749,7 +6749,7 @@
                 "initial": "初赛线下领取命题，现场完成开发并提交技术作品。",
                 "semifinal": "复赛完善技术作品，提交 GitHub、魔搭链接并上传 Demo 演示文件。"
             },
-            "selfDefined": "天猫学科创意赛道赛题于10月14日公布，可自主命题，也可选择已发布的推荐赛题。",
+            "selfDefined": "天猫OPC孵化赛道赛题于10月14日公布，可自主命题，也可选择已发布的推荐赛题。",
             "campusPending": "推荐赛题尚未发布，可先准备自主命题作品。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",
@@ -6794,7 +6794,7 @@
             "legacyTitle": "历史仓库链接",
             "legacyHint": "此前保存的链接仅供参考，尚未计入本轮正式提交。",
             "finalTitle": "决赛路演",
-            "finalDescription": "天猫学科创意赛道、华为产业命题赛道两厅同步路演。兼报选手错开出场，具体顺序以现场安排为准。",
+            "finalDescription": "天猫OPC孵化赛道、华为产业落地赛道两厅同步路演。兼报选手错开出场，具体顺序以现场安排为准。",
             "finalVenue": "浙江大学国家级双创示范基地 · 三墩元空间\n宝港生活广场 C 座 6 楼",
             "registrationReceiptHint": "报名已保存。请前往对应赛道与轮次，保存草稿或正式提交作品。",
             "uploadFile": "选择文件",
@@ -6827,8 +6827,8 @@
                 "projectName": "项目名称"
             },
             "trackLabels": {
-                "industry": "华为产业命题赛道",
-                "campus": "天猫学科创意赛道"
+                "industry": "华为产业落地赛道",
+                "campus": "天猫OPC孵化赛道"
             }
         },
         "trackScheduleOnline": "线上",
@@ -6837,8 +6837,8 @@
             "industry": ["线下", "1—5人组队"]
         },
         "trackPurpose": {
-            "campus": "OPC孵化",
-            "industry": "产业落地"
+            "campus": "自由命题",
+            "industry": "企业命题"
         }
     },
     "eventWorkspace": {
