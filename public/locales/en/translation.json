@@ -5299,7 +5299,7 @@
             "grade": "Year",
             "track": "Registration track",
             "contact": "Mobile number",
-            "team": "Team name (optional)",
+            "team": "Team name",
             "experience": "Project experience",
             "researchExperience": "Research experience",
             "aiTools": "AI tools (multiple allowed)",

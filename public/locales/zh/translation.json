@@ -5408,7 +5408,7 @@
             "grade": "年级",
             "track": "报名赛道",
             "contact": "手机号",
-            "team": "队伍名称（选填）",
+            "team": "队伍名称",
             "experience": "项目经历",
             "researchExperience": "科研经历",
             "aiTools": "AI 工具偏好（可多选）",

@@ -120,6 +120,7 @@ const getLocalizedRegistrationField = (field, t, isEnglish, hasProgram) => {
             ...field,
             label: t(`aix.fields.${field.id}`, { defaultValue: field.label }),
             type: field.id === "isCaptain" ? "radio" : field.type,
+            required: ["team", "isCaptain"].includes(field.id) || field.required,
             placeholder:
                 field.type === "select"
                     ? t("aix.register.choose")
