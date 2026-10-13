@@ -40,6 +40,22 @@
     font-weight: 700;
     color: var(--hx-text);
 }
+#aix-partners-title .aix-partner-panels .aix-partner-members li .aix-partner-name {
+    color: var(--hx-text);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-partner-members {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+#aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-brand-logo {
+    background: #fff;
+    border-radius: 4px;
+    padding: 6px;
+}
 #aix-partners-title .aix-partner-panels .aix-brand-guancha img {
     transform: scale(1.85);
 }
@@ -84,6 +100,9 @@
     }
 }
 @media (max-width: 600px) {
+    #aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-partner-members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     #aix-partners-title .aix-partner-panels .aix-partner-members {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px 18px;

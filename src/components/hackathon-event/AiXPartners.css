@@ -11,8 +11,8 @@
 }
 
 #aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-partner-members {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 560px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 840px;
     margin-inline: auto;
 }
 
@@ -42,6 +42,9 @@
     transform: scale(1.8);
 }
 @media (max-width: 600px) {
+    #aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-partner-members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     #aix-partners-title .aix-partner-panels [data-partner-group="sponsors"] .aix-brand-tianmao img {
         transform: scale(1.6);
     }

@@ -37,7 +37,7 @@ export default function HackathonProgramEditor({ program, onChange, inputClass, 
     return (
         <AdminPanel
             title="赛程、赛题与分享"
-            description="时间统一使用北京时间。已勾选发布的产业命题赛道初赛命题按独立发布时间公开，其他赛题按阶段开始时间公开；分享勾选发布并保存后立即公开。"
+            description="时间统一使用北京时间。已勾选发布的华为产业落地赛道初赛命题按独立发布时间公开，其他赛题按阶段开始时间公开；分享勾选发布并保存后立即公开。"
         >
             <label className="block text-sm mb-5">
                 报名截止时间
@@ -51,7 +51,7 @@ export default function HackathonProgramEditor({ program, onChange, inputClass, 
                 />
             </label>
             <label className="block text-sm mb-5">
-                产业命题赛道初赛命题发布时间（选填，默认采用阶段开始时间）
+                华为产业落地赛道初赛命题发布时间（选填，默认采用阶段开始时间）
                 <input
                     type="datetime-local"
                     className={`${inputClass} mt-2`}

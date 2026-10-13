@@ -1,4 +1,3 @@
-import AiXTrackPurpose from "./AiXTrackPurpose";
 import { MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXTrackRegistrationSummary.css";
@@ -21,10 +20,7 @@ export default function AiXTrackRegistrationSummary({ track }) {
             data-track={track}
         >
             <header className="aix-track-summary-heading">
-                <h2>
-                    {selected.title}
-                    <AiXTrackPurpose track={track} />
-                </h2>
+                <h2>{selected.title}</h2>
                 <div className="aix-track-summary-tags">
                     {trackBadges.map((badge) => (
                         <span key={badge}>{badge}</span>

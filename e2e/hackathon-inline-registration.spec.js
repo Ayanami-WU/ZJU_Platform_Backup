@@ -121,13 +121,13 @@ test("track drafts and receipts stay independent through failure, two submission
     const posts = await prepare(page, { failure: "network" });
     await page.goto("/hackathon/2#registration-form");
     await fillForm(page, "13800138000", "华为项目");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("");
     await fillForm(page, "13900139000", "天猫项目");
     await page.locator("#hackathon-field-team").fill("天猫四人队");
     await page.locator("#hackathon-field-teamSize").selectOption("4");
     await expect(page.getByRole("radio", { name: "是", exact: true })).toBeChecked();
-    await tab(page, "产业命题赛道").click();
+    await tab(page, "华为产业落地赛道").click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("13800138000");
     await formSubmit(page).click();
     await expect(page.getByText("测试：请重试", { exact: true })).toBeVisible();
@@ -139,7 +139,7 @@ test("track drafts and receipts stay independent through failure, two submission
     expect(posts[1].answers.isCaptain).toBe("yes");
     for (const key of ["name", "studentId", "major", "grade"])
         expect(posts[1].answers[key]).toBe(profile[key]);
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("13900139000");
     await expect(page.locator("#hackathon-field-teamSize")).toHaveValue("4");
     await expect(page.getByRole("radio", { name: "是", exact: true })).toBeChecked();
@@ -153,7 +153,7 @@ test("track drafts and receipts stay independent through failure, two submission
     await page.reload();
     await page.locator(".aix-registration-receipt-details summary").click();
     await expect(page.locator(".aix-registration-receipt-details")).toContainText("华为项目");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator(".aix-registration-receipt-details")).toContainText("天猫项目");
     await expect(page.locator(".aix-registration-receipt-details")).toContainText("13900139000");
 });
@@ -165,7 +165,7 @@ test("duplicate response restores the matching track receipt without resubmittin
     await fillForm(page, "13800138000", "华为项目");
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator("#hackathon-field-contact")).toBeEnabled();
     expect(posts).toHaveLength(1);
 });
@@ -189,16 +189,16 @@ test("account profile fills both tracks without replacing saved receipts or anot
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
     expect(posts[0].answers.name).toBe("更新后的姓名");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator('dl[aria-label="注册资料"]')).toContainText("更新后的姓名");
     await page.getByRole("button", { name: "修改资料", exact: true }).click();
     await profileForm.getByLabel("姓名", { exact: false }).fill("又一次更新");
     await profileForm.getByRole("button", { name: "保存并继续", exact: true }).click();
-    await tab(page, "产业命题赛道").click();
+    await tab(page, "华为产业落地赛道").click();
     await expect(page.locator(".aix-registration-receipt-details summary")).toContainText(
         "更新后的姓名"
     );
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await page.locator("#hackathon-field-contact").fill("13900139000");
     await page.getByRole("button", { name: "退出登录", exact: true }).click();
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("");
@@ -221,7 +221,7 @@ test("account profile fills both tracks without replacing saved receipts or anot
     await expect(page.locator('dl[aria-label="注册资料"]')).toContainText("第二账号");
     await expect(page.locator('dl[aria-label="注册资料"]')).toContainText("SECOND-002");
     await expect(page.locator("#hackathon-field-contact")).toHaveValue("");
-    await tab(page, "产业命题赛道").click();
+    await tab(page, "华为产业落地赛道").click();
     await expect(page.locator(".aix-repository-receipt")).toHaveCount(0);
     await expect(page.locator("#hackathon-field-experience")).toHaveValue("");
 });
@@ -231,7 +231,7 @@ test("campus requires a team name and explicit captain choice; anonymous control
 }) => {
     const posts = await prepare(page);
     await page.goto("/hackathon/2#registration-form");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await fillForm(page, "13800138000", "天猫项目", false);
     await page.locator("#hackathon-field-teamSize").selectOption("1");
     await formSubmit(page).click();
@@ -244,7 +244,7 @@ test("campus requires a team name and explicit captain choice; anonymous control
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
     expect(posts[0].answers.isCaptain).toBe("no");
     await page.reload();
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await page.locator(".aix-registration-receipt-details summary").click();
     await expect(page.locator(".aix-registration-receipt-details")).toContainText("是否队长");
     await expect(
@@ -262,7 +262,7 @@ test("legacy campus receipt can be updated after explicitly completing captain i
         },
     });
     await page.goto("/hackathon/2#registration-form");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await page.locator(".aix-registration-receipt-details summary").click();
     await expect(page.locator(".aix-registration-receipt-details")).toContainText("未填写");
     await expect(page.getByRole("radio")).toHaveCount(0);
@@ -304,7 +304,7 @@ test("both track registrations can be edited with independent drafts and failed 
     await fillForm(page, "13800138000", "原华为项目");
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await fillForm(page, "13900139000", "原天猫项目");
     await page.locator("#hackathon-field-team").fill("原队名");
     await page.locator("#hackathon-field-teamSize").selectOption("2");
@@ -317,12 +317,12 @@ test("both track registrations can be edited with independent drafts and failed 
     await page.getByRole("radio", { name: "否", exact: true }).check();
     await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
     await page.screenshot({ path: "output/playwright/aix-team-captain-desktop.png" });
-    await tab(page, "产业命题赛道").click();
+    await tab(page, "华为产业落地赛道").click();
     await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
     await expect(page.locator("#hackathon-field-team")).toHaveValue("测试队伍");
     await expect(page.getByRole("radio", { name: "是", exact: true })).toBeChecked();
     await page.locator("#hackathon-field-experience").fill("更新华为项目");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
     await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();
     posts.failNext();
@@ -331,7 +331,7 @@ test("both track registrations can be edited with independent drafts and failed 
     await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
-    await tab(page, "产业命题赛道").click();
+    await tab(page, "华为产业落地赛道").click();
     await expect(page.locator("#hackathon-field-experience")).toHaveValue("更新华为项目");
     await formSubmit(page).click();
     await expect(page.locator(".aix-repository-receipt")).toBeVisible();
@@ -339,7 +339,7 @@ test("both track registrations can be edited with independent drafts and failed 
     await page.reload();
     await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
     await expect(page.locator("#hackathon-field-experience")).toHaveValue("更新华为项目");
-    await tab(page, "学科创意赛道").click();
+    await tab(page, "天猫OPC孵化赛道").click();
     await page.getByRole("button", { name: "修改报名信息", exact: true }).click();
     await expect(page.locator("#hackathon-field-team")).toHaveValue("更新队名");
     await expect(page.getByRole("radio", { name: "否", exact: true })).toBeChecked();

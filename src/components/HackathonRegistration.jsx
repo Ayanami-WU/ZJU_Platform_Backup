@@ -1,4 +1,3 @@
-import AiXTrackPurpose from "./hackathon-event/AiXTrackPurpose";
 import { useAiXPager } from "../hooks/useAiXPager";
 import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
@@ -1048,9 +1047,10 @@ const HackathonRegistration = ({
                 >
                     {t(`aix.register.trackTabs_${track}`, {
                         defaultValue:
-                            track === "industry" ? "产业命题赛道报名" : "学科创意赛道报名",
+                            track === "industry"
+                                ? "华为产业落地赛道报名"
+                                : "天猫OPC孵化赛道报名",
                     })}
-                    <AiXTrackPurpose track={track} />
                 </button>
             ))}
         </nav>
@@ -1684,8 +1684,8 @@ const HackathonRegistration = ({
                                             {t(`aix.register.cta_${track}`, {
                                                 defaultValue:
                                                     track === "industry"
-                                                        ? "立即报名产业命题赛道"
-                                                        : "立即报名学科创意赛道",
+                                                        ? "立即报名华为产业落地赛道"
+                                                        : "立即报名天猫OPC孵化赛道",
                                             })}
                                         </span>
                                         <ArrowUpRight size={19} aria-hidden="true" />
