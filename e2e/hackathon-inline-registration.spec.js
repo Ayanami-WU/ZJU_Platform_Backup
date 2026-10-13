@@ -362,5 +362,3 @@ test("both track registrations can be edited with independent drafts and failed 
     await page.locator("#hackathon-field-isCaptain").scrollIntoViewIfNeeded();
     await page.screenshot({ path: "output/playwright/aix-team-captain-mobile-form.png" });
 });
-
-

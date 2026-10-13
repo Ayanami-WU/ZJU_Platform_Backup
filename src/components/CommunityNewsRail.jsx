@@ -220,7 +220,10 @@ const CommunityNewsRail = ({ railCompact = false }) => {
             if (resource.type === "group") return updateParams({ group: resource.id });
             return updateParams({ postTab: currentTab, news: resource.id });
         },
-        [currentTab, selectedNews?.id, updateParams]
+        // React Compiler infers `selectedNews` (it reads selectedNews?.id inside);
+        // listing the narrower selectedNews?.id made the manual memoization
+        // unmatched and the compiler skipped optimizing this component.
+        [currentTab, selectedNews, updateParams]
     );
 
     const handleCreateNews = async (form, meta = {}) => {
