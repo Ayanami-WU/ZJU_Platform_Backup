@@ -6285,16 +6285,12 @@
                         {
                             "label": "Champion",
                             "count": "1 winner",
-                            "lines": [
-                                "OPC Incubation Track"
-                            ]
+                            "lines": ["OPC Incubation Track"]
                         },
                         {
                             "label": "First prize",
                             "count": "2 winners",
-                            "lines": [
-                                "Industry Advancement Track"
-                            ]
+                            "lines": ["Industry Advancement Track"]
                         }
                     ],
                     "footer": "Awarded in addition to track prizes",
