@@ -3,6 +3,13 @@ import "./AiXPartnerLogos.css";
 
 const assetRoot = "/images/hackathon/ai-x/partners/";
 const brands = [
+    {
+        id: "zhipu",
+        name: "智谱 Zhipu",
+        // Official brand assets: https://www.zhipuai.cn/zh
+        light: `${assetRoot}zhipu.svg`,
+        dark: `${assetRoot}zhipu-white.svg`,
+    },
     ...[
         ["entrepreneurship-alliance", "浙江大学创业联盟", "alliances"],
         ["investment", "投资协会", "investment"],

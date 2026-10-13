@@ -28,7 +28,7 @@ export default function AiXOverview({ state }) {
                             <strong>{copy.coverTitle[1]}</strong>
                         </h1>
                         <div className="aix-cover-prize">
-                            <strong>¥21,480</strong>
+                            <strong>¥27,500</strong>
                             <span>{t("aix.official.totalPrize")}</span>
                         </div>
                     </div>

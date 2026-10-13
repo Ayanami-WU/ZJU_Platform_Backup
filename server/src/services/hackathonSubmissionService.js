@@ -3,7 +3,7 @@ const { open } = require("sqlite");
 const path = require("path");
 const defaults = require("../../../shared/hackathonAiX.json");
 const { getHackathonTemplate } = require("./hackathonTemplateService");
-const { trackRegistrations } = require("./hackathonTrackRegistrationService");
+const { activeTrackRegistrations } = require("./hackathonTrackRegistrationService");
 const {
     AIX_EVENT_KEY,
     repositorySubmission,
@@ -33,7 +33,7 @@ const getTrackStages = (template, track) => {
     }));
 };
 const entriesFor = (row) =>
-    row ? trackRegistrations(JSON.parse(row.form_data_json || "{}"), row.created_at) : {};
+    row ? activeTrackRegistrations(JSON.parse(row.form_data_json || "{}"), row.created_at) : {};
 const stageInfo = (template, track, stage, registered, qualified, now) => {
     const window = getTrackStages(template, track).find((item) => item.id === stage);
     const opensAt = window?.opensAt || null;
@@ -478,7 +478,7 @@ function createHackathonSubmissionService({
                                 studentId: answers.studentId || row.student_id || "",
                                 contact: answers.contact || "",
                                 teamName: answers.team || "",
-                                teamSize: track === "industry" ? 1 : Number(answers.teamSize) || 1,
+                                teamSize: Number(answers.teamSize) || 1,
                                 semifinalQualified: qualification?.qualified === 1,
                                 qualificationUpdatedAt: qualification?.updated_at || null,
                                 submissions: Object.fromEntries(

@@ -192,6 +192,7 @@ test("AI-X track submissions preserve separate answers, concurrent entries and l
     const {
         saveTrackRegistration,
         registrationPayload,
+        withdrawTrackRegistration,
     } = require("../src/services/hackathonTrackRegistrationService");
     const template = require("../../shared/hackathonAiX.json");
     const db = await open({ filename: ":memory:", driver: sqlite3.Database });
@@ -208,11 +209,12 @@ test("AI-X track submissions preserve separate answers, concurrent entries and l
             experience: "First project",
             contact: "13800138000",
         };
-        const industry = { ...base, track: ["industry"], team: "", teamSize: "1" };
+        const industry = { ...base, track: ["industry"], team: "Huawei team", teamSize: "3", isCaptain: "yes" };
         const campus = {
             ...base,
             track: ["campus"],
             team: "Campus team",
+            isCaptain: "no",
             teamSize: "4",
             experience: "Second project",
             contact: "13900139000",
@@ -226,16 +228,32 @@ test("AI-X track submissions preserve separate answers, concurrent entries and l
         assert.deepEqual(payload.answers.track, ["industry", "campus"]);
         assert.deepEqual(payload.trackRegistrations.industry.answers, industry);
         assert.deepEqual(payload.trackRegistrations.campus.answers, campus);
+        assert.equal(payload.trackRegistrations.campus.answers.isCaptain, "no");
+        assert.equal(payload.trackRegistrations.industry.answers.isCaptain, "yes");
         assert.equal((await db.get("SELECT COUNT(*) n FROM hackathon_registrations")).n, 1);
-        const before = row.form_data_json;
-        await assert.rejects(
+        await Promise.all([
             saveTrackRegistration(db, {
                 userId: 1,
                 template,
-                answers: { ...campus, experience: "Overwrite attempt" },
+                answers: { ...campus, experience: "Updated campus" },
             }),
-            { code: "HACKATHON_ALREADY_REGISTERED" }
+            saveTrackRegistration(db, {
+                userId: 1,
+                template,
+                answers: { ...industry, experience: "Updated industry" },
+            }),
+        ]);
+        row = await db.get("SELECT * FROM hackathon_registrations WHERE user_id=1");
+        const updated = registrationPayload(row);
+        assert.equal(updated.id, payload.id);
+        assert.equal(updated.createdAt, payload.createdAt);
+        assert.equal(
+            updated.trackRegistrations.campus.createdAt,
+            payload.trackRegistrations.campus.createdAt
         );
+        assert.equal(updated.trackRegistrations.campus.answers.experience, "Updated campus");
+        assert.equal(updated.trackRegistrations.industry.answers.experience, "Updated industry");
+        const before = row.form_data_json;
         await assert.rejects(saveTrackRegistration(db, { userId: 2, template, answers: campus }), {
             code: "HACKATHON_ALREADY_REGISTERED",
         });
@@ -257,12 +275,26 @@ test("AI-X track submissions preserve separate answers, concurrent entries and l
         row = await db.get("SELECT * FROM hackathon_registrations WHERE user_id=3");
         const old = registrationPayload(row);
         assert.equal(old.trackRegistrations.industry.legacy, true);
+        assert.equal(old.trackRegistrations.campus.answers.isCaptain, undefined);
         assert.equal(old.trackRegistrations.campus.answers.contact, "legacy@example.test");
         assert.equal(
             (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=3"))
                 .form_data_json,
             JSON.stringify(legacy)
         );
+        const editedLegacy = await saveTrackRegistration(db, {
+            userId: 3,
+            template,
+            answers: { ...campus, studentId: "legacy-one", isCaptain: "yes" },
+        });
+        const editedLegacyPayload = registrationPayload(editedLegacy);
+        assert.deepEqual(
+            editedLegacyPayload.trackRegistrations.industry,
+            old.trackRegistrations.industry
+        );
+        assert.equal(editedLegacyPayload.trackRegistrations.campus.answers.isCaptain, "yes");
+        assert.equal(editedLegacyPayload.createdAt, old.createdAt);
+        assert.equal(editedLegacyPayload.id, old.id);
         const single = { ...legacy, track: ["campus"] };
         await db.run("UPDATE hackathon_registrations SET form_data_json=? WHERE user_id=3", [
             JSON.stringify(single),
@@ -275,8 +307,36 @@ test("AI-X track submissions preserve separate answers, concurrent entries and l
         assert.deepEqual(registrationPayload(upgraded).trackRegistrations.campus.answers, single);
         assert.equal(
             registrationPayload(upgraded).trackRegistrations.industry.answers.teamSize,
-            "1"
+            "3"
         );
+        const joint = await saveTrackRegistration(db, {
+            userId: 4,
+            template,
+            answers: { ...campus, studentId: "joint-four", track: ["industry", "campus"] },
+        });
+        const jointTracks = registrationPayload(joint).trackRegistrations;
+        assert.equal(jointTracks.campus.answers.isCaptain, "no");
+        assert.equal(jointTracks.campus.answers.team, "Campus team");
+        assert.equal(jointTracks.campus.answers.teamSize, "4");
+        assert.equal(jointTracks.industry.answers.isCaptain, "no");
+        assert.equal(jointTracks.industry.answers.team, "Campus team");
+        assert.equal(jointTracks.industry.answers.teamSize, "4");
+        const withdrawn = registrationPayload(await withdrawTrackRegistration(db, { userId: 4, track: "industry" }));
+        assert.deepEqual(withdrawn.activeTracks, ["campus"]);
+        assert.equal(withdrawn.trackRegistrations.industry.active, false);
+        assert.ok(withdrawn.trackRegistrations.industry.cancelledAt);
+        assert.deepEqual(withdrawn.trackRegistrations.industry.answers, jointTracks.industry.answers);
+        assert.deepEqual(withdrawn.trackRegistrations.campus, jointTracks.campus);
+        assert.deepEqual(registrationPayload(await withdrawTrackRegistration(db, { userId: 4, track: "industry" })), withdrawn);
+        await assert.rejects(withdrawTrackRegistration(db, { userId: 5, track: "industry" }), { status: 404 });
+        const restored = registrationPayload(await saveTrackRegistration(db, {
+            userId: 4, template, answers: { ...industry, studentId: "joint-four" },
+        }));
+        assert.equal(restored.id, withdrawn.id);
+        assert.equal(restored.createdAt, withdrawn.createdAt);
+        assert.deepEqual(restored.activeTracks, ["industry", "campus"]);
+        assert.equal(restored.trackRegistrations.industry.cancelledAt, null);
+        assert.deepEqual(restored.trackRegistrations.campus, jointTracks.campus);
     } finally {
         await db.close();
     }

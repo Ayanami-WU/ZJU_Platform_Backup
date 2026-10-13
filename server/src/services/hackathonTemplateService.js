@@ -162,6 +162,9 @@ const normalizeProgram = (input = {}) => {
         }
     };
     return {
+        ...(input.campusChallengeReleaseAt
+            ? { campusChallengeReleaseAt: text(input.campusChallengeReleaseAt, 40) }
+            : {}),
         ...(input.challengeReleaseAt
             ? { challengeReleaseAt: text(input.challengeReleaseAt, 40) }
             : {}),
@@ -640,6 +643,7 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
     const answersInput = rawAnswers && typeof rawAnswers === "object" ? rawAnswers : {};
     const answers = {};
     const errors = [];
+    const isAiX = template.event.key === "zhekesong-ai-x-2026";
 
     for (const field of template.form.fields.filter((item) => item.enabled)) {
         const rawValue = answersInput[field.id];
@@ -725,21 +729,22 @@ const validateRegistrationAnswers = (templateInput, rawAnswers) => {
         answers[field.id] = value;
     }
 
+    if (isAiX) {
+        if (!answers.team && !errors.some((error) => error.field === "team"))
+            errors.push({ field: "team", message: "请填写队伍名称" });
+        if (
+            !["yes", "no"].includes(answers.isCaptain) &&
+            !errors.some((error) => error.field === "isCaptain")
+        )
+            errors.push({ field: "isCaptain", message: "请选择是否为队长" });
+    }
+
     if (
         template.event.key === "zhekesong-ai-x-2026" &&
         template.form.fields.some((f) => f.id === "teamSize" && f.enabled) &&
         !["1", "2", "3", "4", "5"].includes(answers.teamSize)
     )
         errors.push({ field: "teamSize", message: "每队1–5人，请填写队伍人数" });
-    if (
-        template.event.key === "zhekesong-ai-x-2026" &&
-        template.form.fields.some((f) => f.id === "teamSize" && f.enabled) &&
-        answers.track?.includes("industry") &&
-        !answers.track.includes("campus") &&
-        answers.teamSize !== "1"
-    ) {
-        errors.push({ field: "teamSize", message: "华为赛道为个人参赛" });
-    }
     if (JSON.stringify(answers).length > 30000) {
         errors.push({ field: "answers", message: "报名内容过长，请精简后重试" });
     }

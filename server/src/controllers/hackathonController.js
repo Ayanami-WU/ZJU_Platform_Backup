@@ -2,6 +2,8 @@ const { getTrackStages } = require("../services/hackathonSubmissionService");
 const {
     registrationPayload,
     saveTrackRegistration,
+    withdrawTrackRegistration,
+    activeTrackRegistrations,
 } = require("../services/hackathonTrackRegistrationService");
 const {
     AIX_EVENT_KEY,
@@ -216,7 +218,7 @@ const saveMyRepositories = async (req, res, next) => {
             "SELECT * FROM hackathon_registrations WHERE event_key = ? AND user_id = ?",
             [eventKey, req.user.id]
         );
-        if (!row)
+        if (!row || !Object.keys(activeTrackRegistrations(JSON.parse(row.form_data_json || "{}"), row.created_at)).length)
             return res
                 .status(403)
                 .json({ code: "HACKATHON_REGISTRATION_REQUIRED", error: "请先完成本届赛事报名" });
@@ -271,6 +273,38 @@ const saveMyRepositories = async (req, res, next) => {
     }
 };
 
+const withdrawRegistration = async (req, res, next) => {
+    try {
+        if (!req.user?.id)
+            return res.status(401).json({ code: "HACKATHON_LOGIN_REQUIRED", error: "请先登录" });
+        const eventKey = sanitizeText(req.body?.eventKey, 80);
+        if (eventKey !== AIX_EVENT_KEY)
+            return res.status(400).json({ code: "HACKATHON_REGISTRATION_INVALID", error: "该赛事不支持撤销报名" });
+        const db = await getDb();
+        const template = await getHackathonTemplate(db, eventKey);
+        if (template.event.key !== eventKey) return res.status(404).json({ error: "赛事不存在" });
+        const rawEnd = template.event.endAt || "";
+        const endAt = Date.parse(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(rawEnd) ? `${rawEnd}:00+08:00` : rawEnd);
+        const { registrationOpensAt, registrationClosesAt } = template.event.program || {};
+        const now = Date.now();
+        if (
+            (Number.isFinite(endAt) && now >= endAt) ||
+            (registrationOpensAt && now < Date.parse(registrationOpensAt)) ||
+            (registrationClosesAt && now >= Date.parse(registrationClosesAt)) ||
+            !template.navigation.registrationVisible ||
+            !template.event.registrationOpen
+        )
+            return res.status(403).json({ code: "HACKATHON_REGISTRATION_CLOSED", error: "当前不可修改或撤销报名" });
+        const row = await withdrawTrackRegistration(db, { userId: req.user.id, track: req.body?.track });
+        res.setHeader("Cache-Control", "no-store");
+        res.json({ registration: { ...registrationPayload(row), repositories: repositorySubmission(row) }, message: "已撤销该赛道报名" });
+    } catch (error) {
+        if (error.status && error.code)
+            return res.status(error.status).json({ code: error.code, error: error.message });
+        next(error);
+    }
+};
+
 const publicTemplate = (template) => {
     if (!template.event.program) return template;
     const program = template.event.program;
@@ -289,7 +323,9 @@ const publicTemplate = (template) => {
                     const releaseAt =
                         item.track === "industry" && stage?.id === "initial"
                             ? program.challengeReleaseAt || stage.opensAt
-                            : stage?.opensAt;
+                            : item.track === "campus" && stage?.id === "initial"
+                              ? program.campusChallengeReleaseAt || stage.opensAt
+                              : stage?.opensAt;
                     return (
                         item.published &&
                         stage &&
@@ -351,7 +387,10 @@ const getRegistrations = async (req, res, next) => {
     try {
         const db = await getDb();
         const rows = await db.all("SELECT * FROM hackathon_registrations ORDER BY created_at DESC");
-        const registrations = rows.map((row) => {
+        const registrations = rows.filter((row) =>
+            row.event_key !== AIX_EVENT_KEY ||
+            Object.keys(activeTrackRegistrations(JSON.parse(row.form_data_json || "{}"), row.created_at)).length
+        ).map((row) => {
             let formData = null;
             try {
                 formData = row.form_data_json ? JSON.parse(row.form_data_json) : null;
@@ -372,6 +411,16 @@ const getRegistrations = async (req, res, next) => {
                     grade: row.grade,
                     aiTools,
                     experience: row.experience,
+                };
+            }
+            if (row.event_key === AIX_EVENT_KEY) {
+                const active = activeTrackRegistrations(formData, row.created_at);
+                const keys = Object.keys(active);
+                formData = {
+                    ...formData,
+                    ...(keys.length === 1 ? active[keys[0]].answers : {}),
+                    track: keys,
+                    ...(formData.trackRegistrations ? { trackRegistrations: active } : {}),
                 };
             }
             return { ...row, form_data: formData };
@@ -447,6 +496,7 @@ const handleHackathonAssistant = async (req, res) => {
 };
 
 module.exports = {
+    withdrawRegistration,
     getMyRegistration,
     saveMyRepositories,
     getHackathonScheduleConfig,

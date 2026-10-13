@@ -177,7 +177,8 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             major: "Test",
             grade: "junior",
             track: ["campus", "industry"],
-            team: "",
+            team: "Test team",
+            isCaptain: "yes",
             teamSize: "2",
             contact: "13800138000",
             strengths: ["development", "research"],
@@ -305,7 +306,9 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             res,
             next
         );
-        assert.equal(res.statusCode, 409);
+        assert.equal(res.statusCode, 201);
+        assert.equal(res.body.id, stored.id);
+        assert.equal(res.body.createdAt, stored.created_at);
         res = response();
         await controller.registerHackathon(
             { user: { id: 2 }, body: { eventKey, answers } },
@@ -321,6 +324,110 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             ),
             storedAnswers
         );
+        await require("../src/config/migrations/hackathonSubmissions").migrateHackathonSubmissions(
+            db
+        );
+        await db.run(
+            "INSERT INTO hackathon_submissions(event_key,user_id,registration_id,track,stage,draft_json,draft_updated_at,submitted_json,submitted_at) VALUES(?,1,?,'campus','initial','{}','2026-10-13',?,'2026-10-13')",
+            [eventKey, stored.id, JSON.stringify({ projectName: "Already submitted" })]
+        );
+        await db.run(
+            "INSERT INTO hackathon_submission_qualifications(event_key,user_id,registration_id,track,qualified,updated_at) VALUES(?,1,?,'campus',1,'2026-10-13')",
+            [eventKey, stored.id]
+        );
+        const formalBefore = await db.get("SELECT * FROM hackathon_submissions");
+        const qualificationBefore = await db.get(
+            "SELECT * FROM hackathon_submission_qualifications"
+        );
+        const campusEdit = {
+            ...answers,
+            track: ["campus"],
+            team: "Renamed team",
+            isCaptain: "no",
+            contact: "13900139000",
+        };
+        res = response();
+        await controller.registerHackathon(
+            { user: { id: 1 }, body: { eventKey, answers: campusEdit } },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 201);
+        assert.equal(res.body.id, stored.id);
+        assert.equal(res.body.createdAt, stored.created_at);
+        assert.deepEqual(
+            res.body.trackRegistrations.industry,
+            storedAnswers.trackRegistrations.industry
+        );
+        assert.equal(res.body.trackRegistrations.campus.answers.team, "Renamed team");
+        assert.equal(res.body.trackRegistrations.campus.answers.isCaptain, "no");
+        assert.equal(res.body.trackRegistrations.campus.answers.name, "Changed later");
+        const campusAfter = res.body.trackRegistrations.campus;
+        res = response();
+        await controller.registerHackathon(
+            {
+                user: { id: 1 },
+                body: { eventKey, answers: { ...campusEdit, isCaptain: undefined } },
+            },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 400);
+        assert.ok(res.body.details.some((detail) => detail.field === "isCaptain"));
+        res = response();
+        await controller.registerHackathon(
+            {
+                user: { id: 1 },
+                body: {
+                    eventKey,
+                    answers: {
+                        ...answers,
+                        track: ["industry"],
+                        teamSize: "1",
+                        contact: "13700137000",
+                    },
+                },
+            },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 201);
+        assert.deepEqual(res.body.trackRegistrations.campus, campusAfter);
+        assert.equal(res.body.trackRegistrations.industry.answers.contact, "13700137000");
+        assert.equal(res.body.trackRegistrations.industry.answers.isCaptain, "yes");
+        assert.equal(res.body.answers.isCaptain, "yes");
+        assert.equal(
+            (await db.get("SELECT COUNT(*) count FROM hackathon_registrations WHERE user_id=1"))
+                .count,
+            1
+        );
+        assert.deepEqual(await db.get("SELECT * FROM hackathon_submissions"), formalBefore);
+        assert.deepEqual(
+            await db.get("SELECT * FROM hackathon_submission_qualifications"),
+            qualificationBefore
+        );
+        res = response();
+        await controller.withdrawRegistration({ user: { id: 1 }, body: { eventKey, track: "campus" } }, res, next);
+        assert.equal(res.statusCode, 200);
+        assert.deepEqual(res.body.registration.activeTracks, ["industry"]);
+        assert.equal(res.body.registration.trackRegistrations.campus.active, false);
+        assert.equal(res.body.registration.trackRegistrations.campus.answers.team, "Renamed team");
+        const { createHackathonSubmissionService } = require("../src/services/hackathonSubmissionService");
+        const submissionService = createHackathonSubmissionService({ filename: process.env.DATABASE_FILE });
+        const cancelledState = await submissionService.getMine(1, eventKey);
+        assert.equal(cancelledState.tracks.campus.registered, false);
+        assert.equal(cancelledState.tracks.industry.registered, true);
+        assert.equal(cancelledState.tracks.campus.stages.initial.canSave, false);
+        assert.equal(cancelledState.submissions.length, 1);
+        assert.equal((await submissionService.getRoster(eventKey)).rows.some((entry) => entry.track === "campus"), false);
+        res = response();
+        await controller.registerHackathon({ user: { id: 1 }, body: { eventKey, answers: campusEdit } }, res, next);
+        assert.equal(res.statusCode, 201);
+        assert.equal(res.body.id, stored.id);
+        assert.equal(res.body.trackRegistrations.campus.active, true);
+        assert.equal(res.body.trackRegistrations.campus.cancelledAt, null);
+        assert.deepEqual(await db.get("SELECT * FROM hackathon_submissions"), formalBefore);
+        assert.deepEqual(await db.get("SELECT * FROM hackathon_submission_qualifications"), qualificationBefore);
         // The prerequisite also applies to another open edition, not only AI+X.
         schedule.events[0].event.endAt = "2099-01-02T17:00";
         schedule.events[0].event.registrationOpen = true;
@@ -341,10 +448,13 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         ]);
         res = response();
         await controller.registerHackathon(
-            { user: { id: 2 }, body: { eventKey, answers: { ...answers, studentId: "TEST-002" } } },
+            { user: { id: 1 }, body: { eventKey, answers: campusEdit } },
             res,
             next
         );
+        assert.equal(res.statusCode, 403);
+        res = response();
+        await controller.withdrawRegistration({ user: { id: 1 }, body: { eventKey, track: "campus" } }, res, next);
         assert.equal(res.statusCode, 403);
     } finally {
         await pool.close();

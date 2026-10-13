@@ -5116,7 +5116,7 @@
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
         "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
-        "team": "Tmall teams of 1–5 · Huawei individual entry",
+        "team": "Tmall and Huawei: teams of 1–5",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
@@ -5128,7 +5128,7 @@
             },
             "industry": {
                 "title": "Huawei · Industry Advanced Track",
-                "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · individual entry",
+                "description": "Build an Agent or Skill for business writing and marketing. On-site preliminary · teams of 1–5",
                 "topics": "Copywriting · Marketing"
             }
         },
@@ -5181,7 +5181,7 @@
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Tmall launches online on Oct 13; Huawei releases its challenge at 13:00 on Oct 18.",
+        "releaseTime": "Tmall challenges are released on Oct 14; Huawei releases its challenge at 13:00 on Oct 18.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -5228,7 +5228,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Tmall teams of 1–5 · Huawei individual entry",
+            "description": "Tmall and Huawei: teams of 1–5",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5275,7 +5275,7 @@
                 "label": "Participation details",
                 "industryTitle": "Huawei · Industry Track",
                 "campusTitle": "Tmall · OPC Incubation",
-                "industryFormat": "Individual entry · In person required",
+                "industryFormat": "Teams of 1–5 · In person required",
                 "campusFormat": "Teams of 1–5 · Online participation",
                 "development": "On-site development",
                 "opens": "Online qualifier",
@@ -5291,7 +5291,16 @@
                 "initialDeadline": "Due 17:00",
                 "initialDevelopment": "Qualifier · On-site development",
                 "semifinalDeadline": "Due 24:00"
-            }
+            },
+            "captainRequired": "Select whether you are the team captain",
+            "notProvided": "Not provided",
+            "edit": "Edit registration",
+            "resubmit": "Update registration",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing…",
+            "withdrawConfirm": "Withdraw from this track? Your other track is unaffected. You can register again while registration is open.",
+            "withdrawn": "Registration withdrawn for this track",
+            "withdrawFailed": "Withdrawal failed. Please retry."
         },
         "fields": {
             "name": "Name",
@@ -5300,14 +5309,15 @@
             "grade": "Year",
             "track": "Registration track",
             "contact": "Mobile number",
-            "team": "Team name (optional)",
+            "team": "Team name",
             "experience": "Project experience",
             "researchExperience": "Research experience",
             "aiTools": "AI tools (multiple allowed)",
             "aiToolsOther": "Other AI tools (optional)",
             "strengths": "Strengths (multiple allowed)",
             "projectLinks": "Portfolio or research links (optional)",
-            "teamSize": "Team size"
+            "teamSize": "Team size",
+            "isCaptain": "Are you the team captain?"
         },
         "options": {
             "2": "2 members",
@@ -5342,7 +5352,9 @@
             "product": "Product planning",
             "data": "Data analysis",
             "research": "Domain research",
-            "exploring": "Still exploring"
+            "exploring": "Still exploring",
+            "yes": "Yes",
+            "no": "No"
         },
         "brand": "ZHEKESONG",
         "backToSite": "Back to TUOZHE AI",
@@ -5434,7 +5446,7 @@
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei · Industry Advanced Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
-                    "team": "Individual entry",
+                    "team": "Teams of 1–5",
                     "deadline": "Onsite · October 18, 17:00",
                     "support": "Challenge support from Huawei China"
                 }
@@ -5552,6 +5564,15 @@
                     "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+128GB (¥2,779), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
                 },
                 {
+                    "label": "Coding Plan Pro · Quarterly Plan",
+                    "value": "¥1,614",
+                    "note": "3 passes · 3 months each",
+                    "items": [
+                        "OPC Incubation champion: 1 winner",
+                        "Industry Advancement first prize: 2 winners"
+                    ]
+                },
+                {
                     "label": "ModelScope onsite giveaway",
                     "value": "130",
                     "note": "Onsite giveaway gifts",
@@ -5564,11 +5585,13 @@
                 }
             ],
             "contactTitle": "Join the event group",
-            "contactHint": "Challenge releases, pitch shortlists and onsite updates are shared in the group.",
-            "groupQr": "View WeChat group QR",
+            "contactHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
+            "groupQr": "Join via WeChat",
             "qrExpiry": "Check the latest event notice for the current group QR.",
             "qrExpired": "The group QR has expired. Please contact the organizer.",
-            "qrAlt": "WeChat group QR for the AI+X Hackathon",
+            "qrAlt": "Event member’s WeChat QR code for an invitation to the event group",
+            "memberQrTitle": "Add a member to join the group",
+            "memberQrHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
             "closeQr": "Close QR",
             "contactName": "Ying Qi · Founder, Tuozhe AI Ecosystem & Qiying Technology",
             "contactLabel": "Event & partnership contact"
@@ -5618,7 +5641,7 @@
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
             "individual": "Teams of 1–5; online participation is available for Tmall.",
-            "team": "Individual entry; onsite preliminary, online semifinal.",
+            "team": "Teams of 1–5; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Technical project + BP + Demo",
             "submissionIntro": "Register first, then save or update your project repositories here.",
@@ -5721,7 +5744,7 @@
             "resultsAfter": "Results awaiting publication",
             "resultsHint": "This edition’s awards and projects will appear after official publication.",
             "challengeSoon": "Coming soon",
-            "prizeValue": "¥21,480"
+            "prizeValue": "¥27,500"
         },
         "forumPage": {
             "title": "AI Interdisciplinary Innovation Forums",
@@ -6125,7 +6148,7 @@
                 {
                     "id": "industry",
                     "title": "Huawei · Industry Track",
-                    "mode": "On-site qualifier · Individual entry",
+                    "mode": "On-site qualifier · Teams of 1–5",
                     "description": "Build an Agent or Skill for business writing and marketing.",
                     "stages": [
                         {},
@@ -6212,7 +6235,7 @@
                 {
                     "title": "Huawei · Industry Track",
                     "value": "¥14,980",
-                    "note": "Individual entry · 10 winners",
+                    "note": "Teams of 1–5 · 10 winners",
                     "rows": [
                         {
                             "label": "1st prize",
@@ -6258,6 +6281,26 @@
                     ],
                     "kind": "industry",
                     "totalLabel": "Prizes & cash value"
+                },
+                {
+                    "title": "Coding Plan Pro · Quarterly Plan",
+                    "value": "¥1,614",
+                    "note": "3 passes · 3 months each",
+                    "rows": [
+                        {
+                            "label": "Champion",
+                            "count": "1 winner",
+                            "lines": ["OPC Incubation Track"]
+                        },
+                        {
+                            "label": "First prize",
+                            "count": "2 winners",
+                            "lines": ["Industry Advancement Track"]
+                        }
+                    ],
+                    "footer": "Awarded in addition to track prizes",
+                    "kind": "coding",
+                    "totalLabel": "Value per pass"
                 },
                 {
                     "title": "ModelScope · On-site draw",
@@ -6379,6 +6422,10 @@
                         {
                             "id": "yuandian",
                             "name": "Legal Intelligence"
+                        },
+                        {
+                            "id": "zhipu",
+                            "name": "Zhipu"
                         }
                     ]
                 },
@@ -6496,7 +6543,7 @@
                                 "name": "Liu Jianbin",
                                 "role": "Founder, Oufang Angel",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6604,7 +6651,7 @@
                 "initial": "Receive the challenge on site, build your solution and submit your technical work.",
                 "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
             },
-            "selfDefined": "Choose your own topic or a published recommended challenge for the Tmall track.",
+            "selfDefined": "Tmall challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
             "campusPending": "Recommended challenges are not published yet. You can prepare your own project.",
             "industryPending": "This round’s challenge is not published yet. Please wait for the official brief.",
             "requirements": "Required materials",
@@ -6689,7 +6736,7 @@
         "trackScheduleOnline": "Online",
         "trackBadges": {
             "campus": ["Online", "Teams of 1–5"],
-            "industry": ["In person", "Solo"]
+            "industry": ["In person", "Teams of 1–5"]
         }
     },
     "eventWorkspace": {

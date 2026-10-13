@@ -5225,7 +5225,7 @@
         "description": "从你的专业出发，发现一个真实问题，用 AI 把它做成可以演示、实际使用的作品。",
         "date": "2026.10.09–10.25",
         "location": "10.18 段永平教学楼2-112 · 10.25 三墩元空间",
-        "team": "天猫 1–5 人组队 · 华为个人参赛",
+        "team": "天猫、华为均为 1–5 人组队",
         "tracksKicker": "两条赛道",
         "tracksTitle": "你的专业，就是创新的起点。",
         "viewChallenges": "查看赛题",
@@ -5237,7 +5237,7 @@
             },
             "industry": {
                 "title": "华为·产业进阶赛道",
-                "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 个人参赛",
+                "description": "企业文案与营销命题，开发 Agent 或 Skill。 初赛须线下 · 1–5 人组队",
                 "topics": "文案 · 营销"
             }
         },
@@ -5290,7 +5290,7 @@
         "stagesLabel": "比赛阶段",
         "deadline": "材料截止",
         "challengePending": "赛题待发布",
-        "releaseTime": "天猫10月13日线上开启；华为10月18日13:00发布赛题。",
+        "releaseTime": "天猫10月14日公布赛题；华为10月18日13:00发布赛题。",
         "nextStageNotice": "本阶段要求与提交入口将在正式通知后开放。",
         "submissionPending": "提交入口待开放",
         "submissionClosed": "本阶段提交已结束",
@@ -5337,7 +5337,7 @@
             "registered": "已报名 · 查看",
             "retry": "重试报名状态",
             "closed": "报名已截止",
-            "description": "天猫 1–5 人组队 · 华为个人参赛",
+            "description": "天猫、华为均为 1–5 人组队",
             "success": "你的报名信息已保存，可在此查看。赛事安排以正式通知为准。",
             "saved": "报名成功",
             "loginHint": "登录后报名，方便随时查看自己的报名信息。",
@@ -5384,7 +5384,7 @@
                 "label": "参赛安排",
                 "industryTitle": "华为 · 产业进阶赛道",
                 "campusTitle": "天猫 · OPC孵化赛道",
-                "industryFormat": "个人参赛 · 必须线下",
+                "industryFormat": "1–5 人组队 · 必须线下",
                 "campusFormat": "1–5 人组队 · 可线上参赛",
                 "development": "现场开发",
                 "opens": "线上初赛",
@@ -5400,7 +5400,16 @@
                 "initialDeadline": "17:00 截止",
                 "initialDevelopment": "初赛 · 现场开发",
                 "semifinalDeadline": "24:00 截止"
-            }
+            },
+            "captainRequired": "请选择是否队长",
+            "notProvided": "未填写",
+            "edit": "修改报名信息",
+            "resubmit": "重新提交报名",
+            "withdraw": "撤销报名",
+            "withdrawing": "撤销中…",
+            "withdrawConfirm": "确认撤销当前赛道报名？另一赛道不受影响，报名开放期间可重新报名。",
+            "withdrawn": "当前赛道报名已撤销",
+            "withdrawFailed": "撤销失败，请重试"
         },
         "fields": {
             "name": "姓名",
@@ -5409,14 +5418,15 @@
             "grade": "年级",
             "track": "报名赛道",
             "contact": "手机号",
-            "team": "队伍名称（选填）",
+            "team": "队伍名称",
             "experience": "项目经历",
             "researchExperience": "科研经历",
             "aiTools": "AI 工具偏好（可多选）",
             "aiToolsOther": "其他 AI 工具（选填）",
             "strengths": "擅长领域（可多选）",
             "projectLinks": "作品或成果链接（选填）",
-            "teamSize": "队伍人数"
+            "teamSize": "队伍人数",
+            "isCaptain": "是否队长"
         },
         "options": {
             "2": "2 人",
@@ -5451,7 +5461,9 @@
             "product": "产品策划",
             "data": "数据分析",
             "research": "学科研究",
-            "exploring": "还在探索"
+            "exploring": "还在探索",
+            "yes": "是",
+            "no": "否"
         },
         "brand": "浙客松",
         "backToSite": "返回拓浙 AI 生态",
@@ -5543,7 +5555,7 @@
                     "format": "方案设计 · 产品开发 · 阶段展示",
                     "shortTitle": "华为·产业进阶赛道",
                     "shortDescription": "企业真实业务问题，方案设计与产品开发。",
-                    "team": "个人参赛",
+                    "team": "1–5 人组队",
                     "deadline": "10.18 17:00 初赛提交",
                     "support": "华为中国区命题支持"
                 }
@@ -5633,7 +5645,7 @@
             "openingLabel": "致辞嘉宾",
             "judges": "",
             "rewardsTitle": "奖励与礼品",
-            "rewardsIntro": "天猫团队奖金、华为奖品与奖金，另有魔搭社区现场抽奖。",
+            "rewardsIntro": "天猫团队奖金、华为奖品与奖金，另加 Coding Plan Pro 套餐季卡及魔搭社区现场抽奖。",
             "rewards": [
                 {
                     "label": "天猫OPC孵化赛道奖励",
@@ -5658,6 +5670,12 @@
                     "detail": "一等奖：Osmo Pocket 4（价值 ¥2,999）或 MatePad Air Z 8G+128G 悦享款（价值 ¥2,779），加现金 ¥1,000；二等奖 FreeBuds Neo（¥669）加 ¥600／人；三等奖 FreeBuds 7i（¥429）加 ¥250／人。"
                 },
                 {
+                    "label": "Coding Plan Pro 套餐季卡",
+                    "value": "¥1,614",
+                    "note": "共 3 份 · 每份有效期 3 个月",
+                    "items": ["OPC孵化赛道冠军：1名", "产业进阶赛道一等奖：2名"]
+                },
+                {
                     "label": "魔搭社区现场抽奖",
                     "value": "130",
                     "note": "现场抽奖礼品",
@@ -5670,11 +5688,13 @@
                 }
             ],
             "contactTitle": "加入赛事群，获取最新安排",
-            "contactHint": "赛题发布、路演名单与现场通知将在群内同步。",
-            "groupQr": "查看入群二维码",
+            "contactHint": "赛事群已超过 200 人，请先扫码添加赛事成员微信，由成员邀请入群。",
+            "groupQr": "添加微信入群",
             "qrExpiry": "赛事群二维码以最新通知为准。",
             "qrExpired": "入群二维码已过期，请联系赛事负责人。",
-            "qrAlt": "浙客松 AI+X 破界黑客松微信群二维码",
+            "qrAlt": "赛事成员微信二维码，添加后由成员邀请进入赛事群",
+            "memberQrTitle": "添加微信，邀请入群",
+            "memberQrHint": "赛事群已超过 200 人，请先扫码添加赛事成员微信，由成员邀请入群。",
             "closeQr": "关闭二维码",
             "contactName": "应奇 · 拓浙 AI 生态 & 奇膺科技创始人",
             "contactLabel": "赛事与合作联系"
@@ -5724,7 +5744,7 @@
             "awaitPublication": "正式赛题尚未发布，请等待主办方更新。",
             "participation": "参赛形式",
             "individual": "天猫每队1–5人，可线上参赛。",
-            "team": "个人参赛；初赛线下开发，复赛线上开发。",
+            "team": "1–5 人组队；初赛线下开发，复赛线上开发。",
             "schedule": "时间安排",
             "campusMaterials": "技术作品 + BP + Demo",
             "submissionIntro": "完成报名后，在这里保存或更新参赛仓库。",
@@ -5827,7 +5847,7 @@
             "resultsAfter": "成果待公布",
             "resultsHint": "本届获奖名单与作品将在正式发布后展示。",
             "challengeSoon": "即将揭晓",
-            "prizeValue": "¥21,480"
+            "prizeValue": "¥27,500"
         },
         "forumPage": {
             "title": "AI跨学科创新论坛",
@@ -6231,7 +6251,7 @@
                 {
                     "id": "industry",
                     "title": "华为·产业进阶赛道",
-                    "mode": "初赛须线下 · 个人参赛",
+                    "mode": "初赛须线下 · 1–5 人组队",
                     "description": "企业文案与营销命题，开发 Agent 或 Skill。",
                     "stages": [
                         {},
@@ -6318,7 +6338,7 @@
                 {
                     "title": "华为·产业进阶赛道",
                     "value": "¥14,980",
-                    "note": "个人参赛 · 10 个获奖名额",
+                    "note": "1–5 人组队 · 10 个获奖名额",
                     "rows": [
                         {
                             "label": "一等奖",
@@ -6364,6 +6384,26 @@
                     ],
                     "kind": "industry",
                     "totalLabel": "奖品与奖金合计"
+                },
+                {
+                    "title": "Coding Plan Pro 套餐季卡",
+                    "value": "¥1,614",
+                    "note": "共 3 份 · 每份有效期 3 个月",
+                    "rows": [
+                        {
+                            "label": "冠军",
+                            "count": "1 名",
+                            "lines": ["OPC 孵化赛道"]
+                        },
+                        {
+                            "label": "一等奖",
+                            "count": "2 名",
+                            "lines": ["产业进阶赛道"]
+                        }
+                    ],
+                    "footer": "在原赛道奖励基础上加赠",
+                    "kind": "coding",
+                    "totalLabel": "每份价值"
                 },
                 {
                     "title": "魔搭社区·现场抽奖",
@@ -6485,6 +6525,10 @@
                         {
                             "id": "yuandian",
                             "name": "元典"
+                        },
+                        {
+                            "id": "zhipu",
+                            "name": "智谱"
                         }
                     ]
                 },
@@ -6602,7 +6646,7 @@
                                 "name": "刘建斌",
                                 "role": "藕舫天使创始人",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin.webp"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
                                 "id": "dou-mingqing",
@@ -6710,7 +6754,7 @@
                 "initial": "初赛线下领取命题，现场完成开发并提交技术作品。",
                 "semifinal": "复赛完善技术作品，提交 GitHub、魔搭链接并上传 Demo 演示文件。"
             },
-            "selfDefined": "天猫赛道可自主命题，也可选择已发布的推荐赛题。",
+            "selfDefined": "天猫赛题于10月14日公布，可自主命题，也可选择已发布的推荐赛题。",
             "campusPending": "推荐赛题尚未发布，可先准备自主命题作品。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",
@@ -6795,7 +6839,7 @@
         "trackScheduleOnline": "线上",
         "trackBadges": {
             "campus": ["线上", "1—5人组队"],
-            "industry": ["线下", "Solo参赛"]
+            "industry": ["线下", "1—5人组队"]
         }
     },
     "eventWorkspace": {
