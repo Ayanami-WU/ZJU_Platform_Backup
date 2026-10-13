@@ -79,6 +79,7 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
         ]);
         const program = schedule.events[1].event.program;
         program.stages[0].opensAt = "2000-01-01T00:00:00Z";
+        program.campusChallengeReleaseAt = "2000-01-01T00:00:00Z";
         program.stages[1].opensAt = "2099-01-01T00:00:00Z";
         program.trackStages.campus[0].opensAt = "2000-01-01T00:00:00Z";
         program.trackStages.industry[1].opensAt = "2099-01-01T00:00:00Z";
