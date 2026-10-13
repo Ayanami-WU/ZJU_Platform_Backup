@@ -1707,6 +1707,10 @@ const HackathonRegistration = ({
                                                   "两条赛道分别报名，报名表与资料修改在各自的报名页中完成。",
                                           })}
                             </p>
+                            {/* 手机端同样保留赛事群二维码入口（原先在报表面板头部）。 */}
+                            <div className="aix-register-entry-tools">
+                                <AiXRegistrationInfo />
+                            </div>
                         </div>
                     </div>
                 ) : (

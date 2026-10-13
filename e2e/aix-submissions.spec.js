@@ -197,10 +197,10 @@ test("round submissions preserve draft isolation, failures, formal snapshots and
     await form.getByLabel(/项目名称/).fill("天猫初赛草稿");
     await form.getByLabel(/GitHub 仓库链接/).fill("https://github.com/team/campus");
     await form.getByLabel(/魔搭部署链接/).fill("https://modelscope.cn/studios/team/campus");
-    await page.getByRole("tab", { name: /华为/ }).click();
+    await page.getByRole("tab", { name: /产业命题赛道/ }).click();
     await expect(form.getByLabel(/项目名称/)).toHaveValue("");
     await form.getByLabel(/项目名称/).fill("华为独立草稿");
-    await page.getByRole("tab", { name: /天猫/ }).click();
+    await page.getByRole("tab", { name: /学科创意赛道/ }).click();
     await expect(form.getByLabel(/项目名称/)).toHaveValue("天猫初赛草稿");
     state.fail = true;
     await form.getByRole("button", { name: "保存草稿", exact: true }).click();
@@ -262,7 +262,7 @@ test("anonymous mobile preview keeps tabs enabled, fields locked and final free 
     await expect(page.getByLabel(/GitHub 仓库链接/)).toBeDisabled();
     await page.getByRole("tab", { name: /复赛/ }).click();
     await expect(page.getByLabel(/商业计划书/)).toBeDisabled();
-    await page.getByRole("tab", { name: /华为/ }).click();
+    await page.getByRole("tab", { name: /产业命题赛道/ }).click();
     await expect(page.getByLabel(/商业计划书/)).toHaveCount(0);
     await page.screenshot({ path: "output/playwright/aix-task-mobile.png", fullPage: true });
     expect(

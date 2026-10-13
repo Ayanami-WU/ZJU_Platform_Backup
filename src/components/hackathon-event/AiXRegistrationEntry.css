@@ -147,6 +147,13 @@
     font-weight: 650;
     line-height: 1.6;
 }
+/* The compact chapter drops the form panel, so keep its 赛事群 / group-QR entry. */
+.aix-register-entry-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
 @media (max-width: 620px) {
     .aix-register-entry-buttons {
         grid-template-columns: 1fr;
