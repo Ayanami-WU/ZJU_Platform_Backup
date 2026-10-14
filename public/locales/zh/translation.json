@@ -6813,8 +6813,8 @@
                 "initial": "初赛线下领取命题，现场完成开发并提交技术作品。",
                 "semifinal": "复赛完善技术作品，提交 GitHub、魔搭链接并上传 Demo 演示文件。"
             },
-            "selfDefined": "天猫OPC孵化赛道赛题于10月14日公布，可自主命题，也可选择已发布的推荐赛题。",
-            "campusPending": "推荐赛题尚未发布，可先准备自主命题作品。",
+            "selfDefined": "可自主命题，也可选择已公布的推荐赛题。",
+            "campusPending": "本赛道支持自由命题，提交你的技术作品。推荐赛题公布后会在这里展示。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",
             "accessibleLinks": "GitHub 与魔搭链接须使用 HTTPS，并确保评委可直接访问。",

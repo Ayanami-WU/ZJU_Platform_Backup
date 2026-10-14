@@ -5,7 +5,7 @@ import { ArrowUpRight, CalendarDays, FileText, MapPin } from "lucide-react";
 import { safeWebUrl, eventTimestamp, registrationOpen } from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
 import api from "../../services/api";
-import AiXStageSubmission, { requiredMaterialFields } from "./AiXStageSubmission";
+import AiXStageSubmission from "./AiXStageSubmission";
 import "./AiXChallenges.css";
 import "./AiXRegistrationPreview.css";
 
@@ -126,7 +126,6 @@ export default function Challenges({ template, now, registrationState = {} }) {
         const time = (value) => `${value.hour}:${value.minute}`;
         return `${date(first)} ${time(first)} — ${date(first) === date(last) ? "" : `${date(last)} `}${time(last)}`;
     };
-    const materialFields = requiredMaterialFields(gate, track, stage);
     const read = useCallback(
         async (signal) => {
             const response = await api.get("/hackathon/submissions", {
@@ -207,11 +206,22 @@ export default function Challenges({ template, now, registrationState = {} }) {
           : !data
             ? "loading"
             : gate.blockedReason || "ready";
+    const accessNotice =
+        user && ["not_registered", "not_qualified"].includes(reason) ? (
+            <div className="aix-task-access" role="status">
+                <p>{label(`blocked.${reason}`)}</p>
+                {reason === "not_registered" && signupOpen && (
+                    <Link to={getEventUrl(eventKey, "intro", { hash: "#registration-form" })}>
+                        {label("register")}
+                        <ArrowUpRight size={16} />
+                    </Link>
+                )}
+            </div>
+        ) : null;
     return (
         <div className="aix-challenges aix-task-workspace">
             <header className="aix-task-heading">
                 <h1>{label("title")}</h1>
-                <span>{label("eventLabel")}</span>
             </header>
             <div className="aix-task-selectors">
                 <div className="aix-task-track-tabs" role="tablist" aria-label={label("tracks")}>
@@ -253,13 +263,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                 id="aix-task-panel"
                 aria-labelledby={`task-track-${track} task-stage-${stage}`}
             >
-                <section className="aix-task-window" aria-labelledby="aix-requirements-title">
-                    <header className="aix-task-panel-heading">
-                        <h2 id="aix-requirements-title">{label("roundRequirements")}</h2>
-                        <span className={`aix-task-state is-${temporalState}`}>
-                            {label(`states.${temporalState}`)}
-                        </span>
-                    </header>
+                <section className="aix-task-window" aria-label={label("roundRequirements")}>
                     <dl className="aix-task-requirements">
                         <div>
                             <dt>
@@ -268,7 +272,9 @@ export default function Challenges({ template, now, registrationState = {} }) {
                             </dt>
                             <dd>
                                 {window ? formatWindow(window.opensAt, window.closesAt) : "—"}
-                                <small>{label("timezone")}</small>
+                                {i18n.resolvedLanguage?.startsWith("en") && (
+                                    <small>{label("timezone")}</small>
+                                )}
                             </dd>
                         </div>
                         <div>
@@ -278,44 +284,10 @@ export default function Challenges({ template, now, registrationState = {} }) {
                             </dt>
                             <dd>{label(`participation.${stage === "initial" ? track : stage}`)}</dd>
                         </div>
-                        {stage !== "final" && (
-                            <div className="aix-task-material-summary">
-                                <dt>
-                                    <FileText size={17} aria-hidden="true" />
-                                    {label("requirements")}
-                                </dt>
-                                <dd>
-                                    {materialFields
-                                        .map((field) => label(`summaryFields.${field}`))
-                                        .join(" + ")}
-                                </dd>
-                            </div>
-                        )}
                     </dl>
-                    {stage !== "final" && (
-                        <div className="aix-task-access" role="status">
-                            <p>{label(`blocked.${reason}`)}</p>
-                            {reason === "not_registered" && signupOpen && (
-                                <Link
-                                    to={getEventUrl(eventKey, "intro", {
-                                        hash: "#registration-form",
-                                    })}
-                                >
-                                    {label("register")}
-                                    <ArrowUpRight size={16} />
-                                </Link>
-                            )}
-                            {loadError && (
-                                <button
-                                    type="button"
-                                    className="aix-secondary"
-                                    onClick={() => setRetry((value) => value + 1)}
-                                >
-                                    {t("aix.retry")}
-                                </button>
-                            )}
-                        </div>
-                    )}
+                    <span className={`aix-task-state is-${temporalState}`}>
+                        {label(`states.${temporalState}`)}
+                    </span>
                 </section>
                 {stage === "final" ? (
                     <section className="aix-task-final">
@@ -332,12 +304,14 @@ export default function Challenges({ template, now, registrationState = {} }) {
                     <div className="aix-task-columns">
                         <section className="aix-task-brief" aria-labelledby="aix-task-brief-title">
                             <header className="aix-task-panel-heading">
-                                <h2 id="aix-task-brief-title">{label("brief")}</h2>
-                                <span className="aix-task-state">
-                                    {label(challenges.length ? "published" : "pending")}
-                                </span>
+                                <h2 id="aix-task-brief-title">
+                                    <span className="aix-task-number" aria-hidden="true">
+                                        01
+                                    </span>
+                                    {label("brief")}
+                                </h2>
                             </header>
-                            {track === "campus" && (
+                            {track === "campus" && challenges.length > 0 && (
                                 <p className="aix-task-muted">{label("selfDefined")}</p>
                             )}
                             {challenges.map((item) => (
@@ -410,6 +384,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                 }}
                                 user={user}
                                 loading={authLoading || loading}
+                                accessNotice={accessNotice}
                                 onLogin={onLogin}
                                 cachedDraft={drafts.current[draftKey]}
                                 onDraft={(value) => {
@@ -423,10 +398,24 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         )}
                         {user && !data && (
                             <section className="aix-task-submission">
-                                <h2>{label("mySubmission")}</h2>
+                                <h2>
+                                    <span className="aix-task-number" aria-hidden="true">
+                                        02
+                                    </span>
+                                    {label("mySubmission")}
+                                </h2>
                                 <p role="status">
                                     {label(loadError ? "blocked.loadFailed" : "blocked.loading")}
                                 </p>
+                                {loadError && (
+                                    <button
+                                        type="button"
+                                        className="aix-secondary"
+                                        onClick={() => setRetry((value) => value + 1)}
+                                    >
+                                        {t("aix.retry")}
+                                    </button>
+                                )}
                             </section>
                         )}
                     </div>

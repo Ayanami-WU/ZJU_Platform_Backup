@@ -6710,8 +6710,8 @@
                 "initial": "Receive the challenge on site, build your solution and submit your technical work.",
                 "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
             },
-            "selfDefined": "Tmall OPC Incubation Track challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
-            "campusPending": "Recommended challenges are not published yet. You can prepare your own project.",
+            "selfDefined": "Choose your own topic or a published recommended challenge.",
+            "campusPending": "This track accepts self-defined projects. Submit your technical work; recommended challenges will appear here when published.",
             "industryPending": "This round’s challenge is not published yet. Please wait for the official brief.",
             "requirements": "Required materials",
             "accessibleLinks": "Use HTTPS GitHub and ModelScope links that judges can access directly.",
