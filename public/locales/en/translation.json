@@ -6727,7 +6727,7 @@
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
-            "mySubmission": "My submission",
+            "mySubmission": "Submit your work",
             "ownership": "This submission belongs to you, in this track and round only.",
             "unsaved": "Unsaved changes",
             "submitted": "Formally submitted",
@@ -6799,11 +6799,8 @@
                 "final": "Sandun Startup Space · Baogang Lifestyle Plaza, Building C, 6F"
             },
             "recommendations": {
-                "title": "Open topics & recommended scenarios",
-                "intro": "Build a testable, practical product or service around a real user need. The recommended areas and examples are not limits: other original topics with practical value and commercialization potential are equally welcome.",
-                "productForm": "AI apps, agents, software or hardware prototypes, tools, and services are welcome. Working demos, pilot results, and user feedback are encouraged.",
-                "thinkingTitle": "Frame your topic",
-                "thinking": "Specific scenario → Target users → User problem → Product solution & validation",
+                "title": "Recommended scenarios",
+                "thinkingTitle": "From problem to product",
                 "labels": {
                     "audience": "Users & context",
                     "pain": "Problem",
@@ -6849,7 +6846,41 @@
                         "pain": "Turning specialist material into accurate, readable visual content is difficult; organizing assets and repeated revisions take time.",
                         "example": "Reusable AI workflows for asset organization, content planning, writing, visual production, fact-checking, and export. Cite sources and distinguish real images from generated illustrations."
                     }
-                ]
+                ],
+                "topicType": "Open topics",
+                "goal": "Build a testable, practical product or service around a real user need.",
+                "scope": "These scenarios are suggestions. Other topics with practical value and commercialization potential are welcome.",
+                "formatsTitle": "Any project form",
+                "formats": [
+                    "AI app",
+                    "Agent",
+                    "Software prototype",
+                    "Hardware prototype",
+                    "Tool",
+                    "Service"
+                ],
+                "evidenceTitle": "Validation",
+                "evidence": ["Working demo", "Pilot validation", "User feedback"],
+                "thinkingSteps": [
+                    {
+                        "title": "Context",
+                        "question": "In which task or workflow does the problem occur?"
+                    },
+                    {
+                        "title": "Users",
+                        "question": "Who faces the problem and will use the product?"
+                    },
+                    {
+                        "title": "Problem",
+                        "question": "Where is the current approach slow or inadequate?"
+                    },
+                    {
+                        "title": "Solution",
+                        "question": "How will you solve it and validate the result?"
+                    }
+                ],
+                "goalTitle": "Project goal",
+                "evidenceHint": "Encouraged"
             }
         },
         "trackScheduleOnline": "Online",

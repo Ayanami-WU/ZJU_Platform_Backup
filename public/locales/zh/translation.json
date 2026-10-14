@@ -6830,7 +6830,7 @@
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
-            "mySubmission": "我的提交",
+            "mySubmission": "提交作品",
             "ownership": "仅保存本人在当前赛道、当前轮次的提交。",
             "unsaved": "有未保存修改",
             "submitted": "已正式提交",
@@ -6902,11 +6902,8 @@
                 "final": "三墩元空间 · 宝港生活广场 C 座 6 楼"
             },
             "recommendations": {
-                "title": "自由命题与推荐场景",
-                "intro": "围绕真实需求，打造可验证、可落地的产品或服务。以下为重点推荐场景，具体方向不限于示例；其他有实际价值与转化潜力的自由命题项目同样欢迎。",
-                "productForm": "作品可为 AI 应用、Agent、软硬件原型、工具或服务；鼓励提供运行演示、试点验证或用户反馈。",
-                "thinkingTitle": "选题思路",
-                "thinking": "具体场景 → 目标用户 → 用户痛点 → 产品方案与效果验证",
+                "title": "推荐场景",
+                "thinkingTitle": "从问题到产品",
                 "labels": {
                     "audience": "场景与用户",
                     "pain": "痛点",
@@ -6952,7 +6949,34 @@
                         "pain": "专业资料难转成准确、易读的图文，素材整理与多轮修改耗时。",
                         "example": "构建可复用的 AI 图文工作流，串联素材整理、内容策划、文案与视觉制作、事实核对及成品导出；注明来源，区分真实影像与生成示意。"
                     }
-                ]
+                ],
+                "topicType": "自由命题",
+                "goal": "围绕真实需求，做出可验证、可落地的产品或服务。",
+                "scope": "推荐场景供参考，也可自选有实际价值与转化潜力的方向。",
+                "formatsTitle": "作品形式不限",
+                "formats": ["AI 应用", "Agent", "软件原型", "硬件原型", "工具", "服务"],
+                "evidenceTitle": "效果验证",
+                "evidence": ["运行演示", "试点验证", "用户反馈"],
+                "thinkingSteps": [
+                    {
+                        "title": "场景",
+                        "question": "问题发生在哪个任务或流程？"
+                    },
+                    {
+                        "title": "用户",
+                        "question": "谁遇到问题，谁会使用？"
+                    },
+                    {
+                        "title": "痛点",
+                        "question": "现有做法哪里耗时或不足？"
+                    },
+                    {
+                        "title": "方案",
+                        "question": "如何解决，并验证效果？"
+                    }
+                ],
+                "goalTitle": "作品目标",
+                "evidenceHint": "鼓励提供"
             }
         },
         "trackScheduleOnline": "线上",

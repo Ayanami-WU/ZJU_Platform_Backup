@@ -308,9 +308,6 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         <section className="aix-task-brief" aria-labelledby="aix-task-brief-title">
                             <header className="aix-task-panel-heading">
                                 <h2 id="aix-task-brief-title">
-                                    <span className="aix-task-number" aria-hidden="true">
-                                        01
-                                    </span>
                                     {label(hasRecommendations ? "recommendations.title" : "brief")}
                                 </h2>
                             </header>
@@ -402,12 +399,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         )}
                         {user && !data && (
                             <section className="aix-task-submission">
-                                <h2>
-                                    <span className="aix-task-number" aria-hidden="true">
-                                        02
-                                    </span>
-                                    {label("mySubmission")}
-                                </h2>
+                                <h2>{label("mySubmission")}</h2>
                                 <p role="status">
                                     {label(loadError ? "blocked.loadFailed" : "blocked.loading")}
                                 </p>

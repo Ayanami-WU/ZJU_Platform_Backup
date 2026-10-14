@@ -252,12 +252,7 @@ export default function AiXStageSubmission({
             aria-labelledby="aix-submission-title"
         >
             <header className="aix-task-panel-heading">
-                <h2 id="aix-submission-title">
-                    <span className="aix-task-number" aria-hidden="true">
-                        02
-                    </span>
-                    {label("mySubmission")}
-                </h2>
+                <h2 id="aix-submission-title">{label("mySubmission")}</h2>
                 {user && (
                     <span
                         className={`aix-task-state ${record?.submitted ? "is-submitted" : ""}`}

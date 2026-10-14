@@ -387,7 +387,6 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .aix-task-submission,
     .aix-task-final {
         padding: 22px 18px;
     }
@@ -598,8 +597,8 @@
     flex-shrink: 0;
 }
 .aix-task-columns {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: 40px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
+    gap: 32px;
 }
 .aix-task-final {
     grid-template-columns: 1fr;
@@ -614,58 +613,163 @@
     font-size: 24px;
     line-height: 1.4;
 }
-.aix-task-number {
-    color: var(--hx-accent-text);
-    font-size: inherit;
-    font-weight: 650;
+/* Scenes are independent reading cards; the submission form is a separate task. */
+.aix-recommended-scenes {
+    container-type: inline-size;
 }
-.aix-scenes-intro {
-    line-height: 1.8;
-}
-.aix-task-workspace .aix-scenes-format {
-    margin-top: 10px;
-    color: var(--hx-muted);
+.aix-scenes-overview {
+    padding: 20px;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
     font-size: 14px;
+    line-height: 1.8;
+    font-weight: 400;
 }
-.aix-scenes-thinking {
-    padding: 18px 0;
-    margin-top: 16px;
-    border-block: 1px solid var(--hx-line);
-}
-.aix-task-workspace .aix-scenes-thinking h3 {
-    font-size: 15px;
+.aix-task-workspace .aix-scenes-topic h3 {
+    font-size: 18px;
+    color: var(--hx-accent-text);
     margin-bottom: 6px;
 }
-.aix-scenes-thinking p {
-    color: var(--hx-muted);
+.aix-scenes-topic p {
     font-size: 14px;
+    font-weight: 400;
+}
+.aix-task-workspace .aix-scenes-scope {
+    margin-top: 6px;
+    color: var(--hx-muted);
+    font-size: 13px;
+}
+.aix-task-workspace .aix-scenes-facts {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+.aix-scenes-facts > div {
+    display: grid;
+    grid-template-columns: 6.5em minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+}
+.aix-scenes-facts dt {
+    color: var(--hx-muted);
+    font-size: 13px;
+    padding-block: 3px;
+}
+.aix-scenes-facts dt small {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.aix-scenes-facts ul,
+.aix-scenes-steps {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.aix-scenes-formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.aix-scenes-formats li {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 4px 8px;
+    background: var(--hx-surface);
+    border: 1px solid var(--hx-line);
+    border-radius: 5px;
+}
+.aix-scenes-facts .aix-scenes-evidence {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    font-size: 13px;
+    padding-block: 3px;
+}
+.aix-scenes-evidence li:not(:last-child)::after {
+    content: "·";
+    color: var(--hx-muted);
+    margin-left: 10px;
+}
+.aix-scenes-thinking {
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-task-workspace .aix-scenes-thinking h3 {
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: var(--hx-muted);
+}
+.aix-scenes-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 20px;
+}
+.aix-scenes-steps li {
+    min-width: 0;
+    position: relative;
+}
+.aix-scenes-steps strong {
+    font-size: 14px;
+    color: var(--hx-text);
+}
+.aix-task-workspace .aix-scenes-steps p {
+    margin-top: 4px;
+    color: var(--hx-muted);
+    font-size: 13px;
+    line-height: 1.65;
+    font-weight: 400;
+}
+.aix-scenes-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 16px;
 }
 .aix-recommended-scene {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--hx-line);
+    min-width: 0;
+    padding: 20px;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
 }
-.aix-recommended-scene h3 {
+.aix-scene-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+.aix-scene-number {
     color: var(--hx-accent-text);
-    margin-bottom: 12px;
+    font-size: 28px;
+    font-weight: 650;
+    line-height: 1;
+}
+.aix-task-workspace .aix-scene-heading h3 {
+    font-size: 20px;
+    color: var(--hx-text);
 }
 .aix-recommended-scene dl {
     display: grid;
-    gap: 10px;
-    font-size: 15px;
-    line-height: 1.8;
-}
-.aix-recommended-scene dl > div {
-    display: grid;
-    grid-template-columns: 5em minmax(0, 1fr);
-    gap: 12px;
+    gap: 14px;
+    font-size: 14px;
+    line-height: 1.75;
+    font-weight: 400;
 }
 .aix-recommended-scene dt {
+    font-size: 12px;
+    font-weight: 650;
     color: var(--hx-muted);
+    margin-bottom: 4px;
 }
 .aix-scene-resource {
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.8;
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hx-line);
+    font-size: 13px;
+    line-height: 1.75;
 }
 .aix-scene-resource summary {
     color: var(--hx-accent-text);
@@ -675,10 +779,40 @@
 .aix-scene-resource p {
     margin-top: 8px;
     color: var(--hx-muted);
+    font-weight: 400;
+}
+@container (min-width: 620px) {
+    .aix-scenes-steps {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .aix-scenes-steps li:not(:last-child)::after {
+        content: "→";
+        color: var(--hx-muted);
+        position: absolute;
+        top: 0;
+        right: -12px;
+    }
+    .aix-scenes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .aix-recommended-scene:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+    .aix-recommended-scene:last-child:nth-child(odd) dl {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
 }
 .aix-task-submission {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+.aix-task-submission > form {
     padding: 24px;
+    border: 1px solid var(--hx-line);
     border-radius: 12px;
+    background: var(--hx-panel);
 }
 .aix-task-panel-heading {
     margin-bottom: 18px;
@@ -832,7 +966,7 @@
     .aix-task-requirements dd {
         font-size: 14px;
     }
-    .aix-task-submission {
+    .aix-task-submission > form {
         padding: 18px 16px;
     }
     .aix-task-workspace h2 {
@@ -843,5 +977,13 @@
     }
     .aix-task-submission fieldset {
         gap: 14px;
+    }
+}
+@media (max-width: 360px) {
+    .aix-task-actions button {
+        padding-inline: 12px;
+    }
+    .aix-task-actions button svg {
+        display: none;
     }
 }
