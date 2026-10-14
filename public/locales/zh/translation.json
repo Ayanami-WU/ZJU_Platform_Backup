@@ -5943,7 +5943,7 @@
                         },
                         {
                             "time": "13:30–14:10",
-                            "title": "王进 · AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？"
+                            "title": "刘建斌 · AI狂妄下的冷静思考"
                         },
                         {
                             "time": "14:10–14:40",
@@ -5951,7 +5951,7 @@
                         },
                         {
                             "time": "15:00–16:00",
-                            "title": "张克俊、张洁、张加林 · AI时代的第一次成功与第一次失败"
+                            "title": "张洁、张加林、刘建斌、谭炜川 · AI时代的第一次成功与失败？"
                         },
                         {
                             "time": "16:20–16:30",
@@ -5991,6 +5991,14 @@
                         {
                             "name": "窦明清",
                             "role": "普华资本投后总监 · 出席嘉宾"
+                        },
+                        {
+                            "name": "刘建斌",
+                            "role": "藕舫天使创始人"
+                        },
+                        {
+                            "name": "谭炜川",
+                            "role": "奇绩创坛高校负责人"
                         }
                     ]
                 }
@@ -6730,11 +6738,22 @@
                                 "name": "徐松波",
                                 "photo": true,
                                 "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任"
+                            },
+                            {
+                                "id": "tan-weichuan",
+                                "name": "谭炜川",
+                                "role": "奇绩创坛高校负责人",
+                                "photo": false
                             }
                         ],
                         "topics": [
                             {
-                                "title": "AI狂欢下的冷静思考——青年应该培养哪些穿越周期的能力？",
+                                "title": "AI狂妄下的冷静思考",
+                                "speaker": "刘建斌",
+                                "guestIds": ["liu-jianbin"]
+                            },
+                            {
+                                "title": "",
                                 "speaker": "王进",
                                 "guestIds": ["wang-jin"]
                             },
@@ -6750,8 +6769,13 @@
                             },
                             {
                                 "title": "圆桌论坛：AI时代的第一次成功与失败？",
-                                "speaker": "张洁、张加林、刘建斌",
-                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
+                                "speaker": "张洁、张加林、刘建斌、谭炜川",
+                                "guestIds": [
+                                    "zhang-jie",
+                                    "zhang-jialin",
+                                    "liu-jianbin",
+                                    "tan-weichuan"
+                                ]
                             }
                         ],
                         "signup": "报名创业论坛",

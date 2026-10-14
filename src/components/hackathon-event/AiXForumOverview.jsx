@@ -19,6 +19,11 @@ function ForumGuest({ guest, label }) {
                         height="280"
                     />
                 )}
+                {!guest.photo && (
+                    <span className="aix-guest-initial" aria-hidden="true">
+                        {guest.name.slice(0, 1)}
+                    </span>
+                )}
             </div>
             <div>
                 <strong>
@@ -74,6 +79,7 @@ export default function AiXForumOverview() {
                                     <article
                                         className="aix-forum-topic-row"
                                         data-roundtable={topic.guestIds.length > 1 || undefined}
+                                        data-without-topic={!topic.title || undefined}
                                         style={{
                                             "--aix-roundtable-count": topic.guestIds.length + 1,
                                         }}
@@ -95,10 +101,12 @@ export default function AiXForumOverview() {
                                                     <ForumGuest key={guest.id} guest={guest} />
                                                 ))}
                                         </div>
-                                        <div className="aix-forum-topic-copy">
-                                            <h3>{topic.title}</h3>
-                                            {topic.host && <p>{topic.host}</p>}
-                                        </div>
+                                        {topic.title && (
+                                            <div className="aix-forum-topic-copy">
+                                                <h3>{topic.title}</h3>
+                                                {topic.host && <p>{topic.host}</p>}
+                                            </div>
+                                        )}
                                     </article>
                                 ))}
                                 {otherGuests.length > 0 && (

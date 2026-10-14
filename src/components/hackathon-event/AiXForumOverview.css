@@ -102,7 +102,22 @@
     top: 14%;
 }
 .aix-guest-portrait[data-empty]::before {
-    opacity: 0.4;
+    display: none;
+}
+.aix-guest-initial {
+    display: grid;
+    place-items: center;
+    align-self: center;
+    width: 64px;
+    aspect-ratio: 1;
+    border: 1px solid var(--hx-line);
+    border-radius: 50%;
+    color: var(--hx-muted);
+    font-size: 26px;
+    font-weight: 650;
+}
+.aix-forum-topic-row[data-without-topic] {
+    grid-template-columns: 1fr;
 }
 .aix-guest-portrait img {
     width: 100%;

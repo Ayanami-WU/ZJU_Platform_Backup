@@ -5840,7 +5840,7 @@
                         },
                         {
                             "time": "13:30–14:10",
-                            "title": "王进 · AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？"
+                            "title": "Liu Jianbin · Calm reflection amid AI hubris"
                         },
                         {
                             "time": "14:10–14:40",
@@ -5848,7 +5848,7 @@
                         },
                         {
                             "time": "15:00–16:00",
-                            "title": "张克俊、张洁、张加林 · AI时代的第一次成功与第一次失败"
+                            "title": "Zhang Jie, Zhang Jialin, Liu Jianbin, Tan Weichuan · First successes and failures in the AI era"
                         },
                         {
                             "time": "16:20–16:30",
@@ -5888,6 +5888,14 @@
                         {
                             "name": "窦明清",
                             "role": "普华资本投后总监 · 出席嘉宾"
+                        },
+                        {
+                            "name": "Liu Jianbin",
+                            "role": "Founder, Oufang Angel"
+                        },
+                        {
+                            "name": "Tan Weichuan",
+                            "role": "University Relations Lead, MiraclePlus"
                         }
                     ]
                 }
@@ -6627,11 +6635,22 @@
                                 "name": "Xu Songbo",
                                 "photo": true,
                                 "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
+                            },
+                            {
+                                "id": "tan-weichuan",
+                                "name": "Tan Weichuan",
+                                "role": "University Relations Lead, MiraclePlus",
+                                "photo": false
                             }
                         ],
                         "topics": [
                             {
-                                "title": "Beyond the AI hype: building capabilities that endure across cycles",
+                                "title": "Calm reflection amid AI hubris",
+                                "speaker": "Liu Jianbin",
+                                "guestIds": ["liu-jianbin"]
+                            },
+                            {
+                                "title": "",
                                 "speaker": "Wang Jin",
                                 "guestIds": ["wang-jin"]
                             },
@@ -6647,8 +6666,13 @@
                             },
                             {
                                 "title": "Roundtable: First successes and failures in the AI era",
-                                "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin",
-                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
+                                "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin, Tan Weichuan",
+                                "guestIds": [
+                                    "zhang-jie",
+                                    "zhang-jialin",
+                                    "liu-jianbin",
+                                    "tan-weichuan"
+                                ]
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
