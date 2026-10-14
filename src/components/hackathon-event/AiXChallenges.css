@@ -524,6 +524,10 @@
     line-height: 1.65;
 }
 .aix-task-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 620px) minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
     margin-bottom: 18px;
 }
 .aix-task-heading h1 {
@@ -531,16 +535,18 @@
     line-height: 1.35;
 }
 .aix-task-selectors {
+    justify-content: center;
     padding-bottom: 18px;
     gap: 12px 24px;
 }
 .aix-task-track-tabs {
-    flex: 1 1 460px;
+    width: 100%;
     max-width: 620px;
 }
 .aix-task-track-tabs button {
     flex: 1;
-    font-size: 16px;
+    font-size: 17px;
+    min-height: 48px;
     padding: 10px 14px;
     white-space: normal;
     text-wrap: balance;
@@ -568,8 +574,20 @@
     gap: 12px 32px;
 }
 .aix-task-requirements dt {
-    font-size: 13px;
-    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    color: var(--hx-accent-text);
+    margin: 0;
+    flex-shrink: 0;
+}
+.aix-task-requirements > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+.aix-task-requirements dt svg {
+    width: 20px;
+    height: 20px;
 }
 .aix-task-requirements dd {
     font-size: 15px;
@@ -582,6 +600,9 @@
 .aix-task-columns {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 40px;
+}
+.aix-task-final {
+    grid-template-columns: 1fr;
 }
 .aix-task-brief {
     padding: 0;
@@ -693,6 +714,9 @@
     }
 }
 @media (max-width: 1023px) {
+    .aix-task-heading {
+        grid-template-columns: 1fr;
+    }
     .aix-task-workspace {
         width: calc(100% - 40px);
     }
@@ -701,8 +725,7 @@
         gap: 28px;
     }
     .aix-task-track-tabs {
-        flex-basis: 100%;
-        max-width: none;
+        justify-self: center;
     }
     .aix-task-stage-tabs {
         width: 100%;

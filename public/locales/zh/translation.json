@@ -6893,6 +6893,13 @@
             "trackLabels": {
                 "industry": "华为产业落地赛道",
                 "campus": "天猫OPC孵化赛道"
+            },
+            "locationLabel": "地点",
+            "locations": {
+                "campus": "线上",
+                "industry": "浙江大学紫金港校区 · 段永平教学楼 2‑112 · 必须到场",
+                "semifinal": "线上",
+                "final": "三墩元空间 · 宝港生活广场 C 座 6 楼"
             }
         },
         "trackScheduleOnline": "线上",

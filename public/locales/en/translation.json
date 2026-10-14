@@ -6790,6 +6790,13 @@
             "trackLabels": {
                 "industry": "Huawei Industry Implementation Track",
                 "campus": "Tmall OPC Incubation Track"
+            },
+            "locationLabel": "Location",
+            "locations": {
+                "campus": "Online",
+                "industry": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2‑112 · Attendance required",
+                "semifinal": "Online",
+                "final": "Sandun Startup Space · Baogang Lifestyle Plaza, Building C, 6F"
             }
         },
         "trackScheduleOnline": "Online",

@@ -222,8 +222,6 @@ export default function Challenges({ template, now, registrationState = {} }) {
         <div className="aix-challenges aix-task-workspace">
             <header className="aix-task-heading">
                 <h1>{label("title")}</h1>
-            </header>
-            <div className="aix-task-selectors">
                 <div className="aix-task-track-tabs" role="tablist" aria-label={label("tracks")}>
                     {tracks.map((id) => (
                         <button
@@ -240,6 +238,8 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         </button>
                     ))}
                 </div>
+            </header>
+            <div className="aix-task-selectors">
                 <div className="aix-task-stage-tabs" role="tablist" aria-label={label("stages")}>
                     {stages.map((id, index) => (
                         <button
@@ -268,7 +268,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         <div>
                             <dt>
                                 <CalendarDays size={17} aria-hidden="true" />
-                                {label("timeLabel")}
+                                <span className="sr-only">{label("timeLabel")}</span>
                             </dt>
                             <dd>
                                 {window ? formatWindow(window.opensAt, window.closesAt) : "—"}
@@ -280,9 +280,9 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         <div>
                             <dt>
                                 <MapPin size={17} aria-hidden="true" />
-                                {label("participationLabel")}
+                                <span className="sr-only">{label("locationLabel")}</span>
                             </dt>
-                            <dd>{label(`participation.${stage === "initial" ? track : stage}`)}</dd>
+                            <dd>{label(`locations.${stage === "initial" ? track : stage}`)}</dd>
                         </div>
                     </dl>
                     <span className={`aix-task-state is-${temporalState}`}>
@@ -294,10 +294,6 @@ export default function Challenges({ template, now, registrationState = {} }) {
                         <div>
                             <h2>{label("finalTitle")}</h2>
                             <p>{label("finalDescription")}</p>
-                        </div>
-                        <div>
-                            <MapPin size={24} />
-                            <p>{label("finalVenue")}</p>
                         </div>
                     </section>
                 ) : (
