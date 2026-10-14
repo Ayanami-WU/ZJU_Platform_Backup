@@ -6797,6 +6797,59 @@
                 "industry": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2‑112 · Attendance required",
                 "semifinal": "Online",
                 "final": "Sandun Startup Space · Baogang Lifestyle Plaza, Building C, 6F"
+            },
+            "recommendations": {
+                "title": "Open topics & recommended scenarios",
+                "intro": "Build a testable, practical product or service around a real user need. The recommended areas and examples are not limits: other original topics with practical value and commercialization potential are equally welcome.",
+                "productForm": "AI apps, agents, software or hardware prototypes, tools, and services are welcome. Working demos, pilot results, and user feedback are encouraged.",
+                "thinkingTitle": "Frame your topic",
+                "thinking": "Specific scenario → Target users → User problem → Product solution & validation",
+                "labels": {
+                    "audience": "Users & context",
+                    "pain": "Problem",
+                    "example": "Examples"
+                },
+                "scenes": [
+                    {
+                        "id": "law",
+                        "title": "Law",
+                        "audience": "Overseas business compliance, contracts, campus legal services, and legal education for founders, legal teams, students, and the public.",
+                        "pain": "Rules and documents are scattered; technical language is difficult to understand, and research and initial review take time.",
+                        "example": "Tools for overseas regulation research and change summaries with verifiable sources, compliance checklists, or contract information organization.",
+                        "resource": {
+                            "title": "Law resources · Thunisoft Yuandian legal MCP",
+                            "description": "TUOZHE AI Ecosystem × Thunisoft Yuandian provides participant accounts with 3,500 credits per month plus an additional 3,000 credits valid for three months, for legal research in this event."
+                        }
+                    },
+                    {
+                        "id": "business",
+                        "title": "Business",
+                        "audience": "Market research, customer communication, sales follow-up, and e-commerce operations for founders, sales teams, and business operators.",
+                        "pain": "Customer information, business data, and communication records are scattered; needs analysis, proposal preparation, and follow-up take time.",
+                        "example": "Tools for market research, customer needs analysis, sales opportunity tracking, or business data analysis. Validate efficiency and usefulness in a real workflow."
+                    },
+                    {
+                        "id": "medicine",
+                        "title": "Medicine",
+                        "audience": "Medical learning and teaching, human and animal health, serving clinicians, researchers, students, patients, and animal health professionals.",
+                        "pain": "Health data and specialist knowledge are difficult to integrate; research and health services face challenges in understanding, efficiency, and access.",
+                        "example": "Applications for precision medicine analysis, medical humanities, drug discovery, or animal health management. Use reliable, cited data and professional review; do not replace medical or veterinary advice."
+                    },
+                    {
+                        "id": "education",
+                        "title": "Education",
+                        "audience": "Lesson preparation, practice, and personalized learning support for teachers and learners.",
+                        "pain": "Different learner backgrounds make exercise design, differentiated explanations, and feedback organization time-consuming.",
+                        "example": "Generate exercises, learning paths, or feedback from teacher-provided materials, with teacher review and adjustment before use."
+                    },
+                    {
+                        "id": "communication",
+                        "title": "Communication",
+                        "audience": "Exhibitions, cultural heritage, campus events, and creative product promotion for organizers, content teams, and audiences.",
+                        "pain": "Turning specialist material into accurate, readable visual content is difficult; organizing assets and repeated revisions take time.",
+                        "example": "Reusable AI workflows for asset organization, content planning, writing, visual production, fact-checking, and export. Cite sources and distinguish real images from generated illustrations."
+                    }
+                ]
             }
         },
         "trackScheduleOnline": "Online",

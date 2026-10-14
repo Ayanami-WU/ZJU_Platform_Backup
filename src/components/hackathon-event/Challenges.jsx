@@ -2,10 +2,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowUpRight, CalendarDays, FileText, MapPin } from "lucide-react";
-import { safeWebUrl, eventTimestamp, registrationOpen } from "../../utils/hackathonAiX";
+import {
+    AIX_EVENT_KEY,
+    safeWebUrl,
+    eventTimestamp,
+    registrationOpen,
+} from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
 import api from "../../services/api";
 import AiXStageSubmission from "./AiXStageSubmission";
+import AiXRecommendedScenes from "./AiXRecommendedScenes";
 import "./AiXChallenges.css";
 import "./AiXRegistrationPreview.css";
 
@@ -88,6 +94,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
     const challenges = (program.challenges || []).filter(
         (item) => item.published && item.track === track && item.stage === stage
     );
+    const hasRecommendations = eventKey === AIX_EVENT_KEY && track === "campus";
     const signupOpen = registrationOpen(template, now);
     const formatDate = (value) => {
         const time = eventTimestamp(value);
@@ -304,10 +311,11 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                     <span className="aix-task-number" aria-hidden="true">
                                         01
                                     </span>
-                                    {label("brief")}
+                                    {label(hasRecommendations ? "recommendations.title" : "brief")}
                                 </h2>
                             </header>
-                            {track === "campus" && challenges.length > 0 && (
+                            {hasRecommendations && <AiXRecommendedScenes />}
+                            {track === "campus" && !hasRecommendations && challenges.length > 0 && (
                                 <p className="aix-task-muted">{label("selfDefined")}</p>
                             )}
                             {challenges.map((item) => (
@@ -337,7 +345,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                     )}
                                 </article>
                             ))}
-                            {!challenges.length && (
+                            {!challenges.length && !hasRecommendations && (
                                 <div className="aix-task-empty">
                                     <FileText size={24} />
                                     <p>

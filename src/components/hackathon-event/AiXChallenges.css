@@ -619,6 +619,63 @@
     font-size: inherit;
     font-weight: 650;
 }
+.aix-scenes-intro {
+    line-height: 1.8;
+}
+.aix-task-workspace .aix-scenes-format {
+    margin-top: 10px;
+    color: var(--hx-muted);
+    font-size: 14px;
+}
+.aix-scenes-thinking {
+    padding: 18px 0;
+    margin-top: 16px;
+    border-block: 1px solid var(--hx-line);
+}
+.aix-task-workspace .aix-scenes-thinking h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+.aix-scenes-thinking p {
+    color: var(--hx-muted);
+    font-size: 14px;
+}
+.aix-recommended-scene {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--hx-line);
+}
+.aix-recommended-scene h3 {
+    color: var(--hx-accent-text);
+    margin-bottom: 12px;
+}
+.aix-recommended-scene dl {
+    display: grid;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.8;
+}
+.aix-recommended-scene dl > div {
+    display: grid;
+    grid-template-columns: 5em minmax(0, 1fr);
+    gap: 12px;
+}
+.aix-recommended-scene dt {
+    color: var(--hx-muted);
+}
+.aix-scene-resource {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+.aix-scene-resource summary {
+    color: var(--hx-accent-text);
+    cursor: pointer;
+    padding-block: 5px;
+}
+.aix-scene-resource p {
+    margin-top: 8px;
+    color: var(--hx-muted);
+}
 .aix-task-submission {
     padding: 24px;
     border-radius: 12px;
