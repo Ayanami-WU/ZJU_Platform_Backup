@@ -1,6 +1,7 @@
 import AiXTrackPurpose from "./AiXTrackPurpose";
+import AiXRewards from "./AiXRewards";
 import { useState } from "react";
-import { Pause, Play, Trophy, Medal, Gift, MapPin } from "lucide-react";
+import { Pause, Play, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXOverview.css";
 import "./AiXTrackSchedule.css";
@@ -169,87 +170,15 @@ export default function AiXOverview({ state }) {
                 aria-labelledby="aix-reward-title"
             >
                 <div className="aix-page-body">
-                    <header className="aix-page-heading">
+                    <header className="aix-page-heading aix-rewards-heading">
                         <span>03</span>
                         <h2 id="aix-reward-title">{copy.rewardsTitle}</h2>
+                        <p className="aix-rewards-pool">
+                            <small>{t("aix.official.totalPrize")}</small>
+                            <strong>¥27,500</strong>
+                        </p>
                     </header>
-                    <div className="aix-prize-panels">
-                        {copy.rewards.map((reward) => (
-                            <article
-                                key={reward.title}
-                                className="aix-prize-panel"
-                                data-reward={reward.kind}
-                            >
-                                <header className="aix-prize-heading">
-                                    {["gifts", "tokens"].includes(reward.kind) ? (
-                                        <Gift size={24} aria-hidden="true" />
-                                    ) : (
-                                        <Trophy size={24} aria-hidden="true" />
-                                    )}
-                                    <h3>{reward.title}</h3>
-                                </header>
-                                <div className="aix-prize-total">
-                                    <span>{reward.totalLabel}</span>
-                                    <strong className="aix-prize-number">{reward.value}</strong>
-                                </div>
-                                <p>{reward.note}</p>
-                                <dl>
-                                    {reward.rows.map((row) => (
-                                        <div key={row.label}>
-                                            <dt>
-                                                {!["gifts", "tokens"].includes(reward.kind) && (
-                                                    <Medal
-                                                        size={23}
-                                                        strokeWidth={1.5}
-                                                        aria-hidden="true"
-                                                    />
-                                                )}
-                                                <strong>{row.label}</strong>
-                                                {row.count && <span>{row.count}</span>}
-                                            </dt>
-                                            <dd>
-                                                {row.products && (
-                                                    <div
-                                                        className="aix-prize-products"
-                                                        data-pair={
-                                                            row.products.length === 2 || undefined
-                                                        }
-                                                    >
-                                                        {row.products.map((product) => (
-                                                            <div key={product.name}>
-                                                                <strong className="aix-prize-product-name">
-                                                                    {product.name}
-                                                                </strong>
-                                                                <span className="aix-prize-product-amounts">
-                                                                    <strong className="aix-prize-value">
-                                                                        {product.value}
-                                                                    </strong>
-                                                                    <strong className="aix-prize-cash">
-                                                                        + {product.cash}
-                                                                    </strong>
-                                                                </span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                                {row.lines.map((line) => (
-                                                    <span key={line}>{line}</span>
-                                                ))}
-                                                {row.cash && (
-                                                    <strong className="aix-prize-cash">
-                                                        {row.cash}
-                                                    </strong>
-                                                )}
-                                            </dd>
-                                        </div>
-                                    ))}
-                                </dl>
-                                <footer aria-hidden={!reward.footer || undefined}>
-                                    {reward.footer}
-                                </footer>
-                            </article>
-                        ))}
-                    </div>
+                    <AiXRewards rewards={copy.rewards} />
                 </div>
             </section>
         </div>
