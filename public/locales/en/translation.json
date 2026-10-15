@@ -6713,7 +6713,19 @@
                                 "id": "xu-songbo",
                                 "name": "Xu Songbo",
                                 "photo": true,
-                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
+                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee (Huawei track jury)"
+                            },
+                            {
+                                "id": "he-lu",
+                                "name": "He Lu",
+                                "role": "MKT Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
+                                "photo": false
+                            },
+                            {
+                                "id": "yan-guangjun",
+                                "name": "Yan Guangjun",
+                                "role": "Retail Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
+                                "photo": false
                             },
                             {
                                 "id": "zhang-jie",
