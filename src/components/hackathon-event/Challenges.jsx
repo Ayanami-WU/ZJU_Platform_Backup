@@ -45,9 +45,10 @@ export default function Challenges({ template, now, registrationState = {} }) {
     const params = new URLSearchParams(location.search);
     const track = tracks.includes(params.get("track")) ? params.get("track") : "industry";
     const publicStages = program.trackStages?.[track] || program.stages || [];
+    const availableStages = publicStages.map((item) => item.id).filter((id) => stages.includes(id));
     const windows = data?.tracks?.[track]?.stages;
     const current =
-        stages.find((id) => {
+        availableStages.find((id) => {
             const item = windows?.[id] || publicStages.find((value) => value.id === id);
             return (
                 item &&
@@ -55,14 +56,14 @@ export default function Challenges({ template, now, registrationState = {} }) {
                 referenceNow < eventTimestamp(item.closesAt)
             );
         }) ||
-        stages
+        availableStages
             .filter((id) => {
                 const item = windows?.[id] || publicStages.find((value) => value.id === id);
                 return item && referenceNow >= eventTimestamp(item.opensAt);
             })
             .at(-1) ||
         "initial";
-    const stage = stages.includes(params.get("stage")) ? params.get("stage") : current;
+    const stage = availableStages.includes(params.get("stage")) ? params.get("stage") : current;
     const publicWindow = publicStages.find((item) => item.id === stage);
     const remoteGate = windows?.[stage];
     const window = remoteGate || publicWindow;
@@ -182,7 +183,11 @@ export default function Challenges({ template, now, registrationState = {} }) {
     const select = (nextTrack, nextStage) => {
         const search = new URLSearchParams(location.search);
         search.set("track", nextTrack);
-        search.set("stage", nextStage);
+        const nextStages = program.trackStages?.[nextTrack] || program.stages || [];
+        search.set(
+            "stage",
+            nextStages.some((item) => item.id === nextStage) ? nextStage : "initial"
+        );
         navigate({ pathname: location.pathname, search: `?${search}` }, { replace: true });
     };
     const onRecord = (submission) => {
@@ -248,7 +253,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
             </header>
             <div className="aix-task-selectors">
                 <div className="aix-task-stage-tabs" role="tablist" aria-label={label("stages")}>
-                    {stages.map((id, index) => (
+                    {availableStages.map((id, index) => (
                         <button
                             key={id}
                             type="button"

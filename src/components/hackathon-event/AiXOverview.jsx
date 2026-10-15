@@ -181,7 +181,7 @@ export default function AiXOverview({ state }) {
                                 data-reward={reward.kind}
                             >
                                 <header className="aix-prize-heading">
-                                    {reward.kind === "gifts" ? (
+                                    {["gifts", "tokens"].includes(reward.kind) ? (
                                         <Gift size={24} aria-hidden="true" />
                                     ) : (
                                         <Trophy size={24} aria-hidden="true" />
@@ -197,7 +197,7 @@ export default function AiXOverview({ state }) {
                                     {reward.rows.map((row) => (
                                         <div key={row.label}>
                                             <dt>
-                                                {reward.kind !== "gifts" && (
+                                                {!["gifts", "tokens"].includes(reward.kind) && (
                                                     <Medal
                                                         size={23}
                                                         strokeWidth={1.5}

@@ -5,7 +5,14 @@ const os = require("node:os");
 const path = require("node:path");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
-const defaults = require("../../shared/hackathonAiX.json");
+const defaults = structuredClone(require("../../shared/hackathonAiX.json"));
+// Preserve the earlier-round fixture to verify historical snapshots and qualifications.
+defaults.event.program.trackStages.campus = defaults.event.program.trackStages.industry.map(
+    (stage) => ({
+        ...stage,
+        ...(stage.id === "initial" ? { opensAt: "2026-10-13T00:00:00+08:00" } : {}),
+    })
+);
 const { migrateHackathonSubmissions } = require("../src/config/migrations/hackathonSubmissions");
 const {
     createHackathonSubmissionService,
@@ -110,10 +117,16 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             "INSERT INTO hackathon_registrations(id,event_key,user_id,name,student_id,form_data_json,created_at) VALUES(2,?,2,?,?,?,?)",
             [eventKey, "User Two", "002", JSON.stringify({ track: ["industry"] }), "2026-10-12"]
         );
+        await db.run(
+            "INSERT OR IGNORE INTO settings(key,value) VALUES('hackathon_ai_x_track_stage_submissions_v1','1')"
+        );
         await migrateHackathonSubmissions(db);
         const firstConfig = (
             await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'")
         ).value;
+        await db.run(
+            "INSERT OR IGNORE INTO settings(key,value) VALUES('hackathon_ai_x_track_stage_submissions_v1','1')"
+        );
         await migrateHackathonSubmissions(db);
         assert.equal(
             (await db.get("SELECT value FROM settings WHERE key='hackathon_schedule_config'"))
@@ -427,6 +440,9 @@ test("private multipart upload and authenticated download controller use isolate
             JSON.stringify({ track: ["campus"] }),
             "2026-10-13",
         ]);
+        await db.run(
+            "INSERT OR IGNORE INTO settings(key,value) VALUES('hackathon_ai_x_track_stage_submissions_v1','1')"
+        );
         await migrateHackathonSubmissions(db);
         const service = createHackathonSubmissionService({
             filename,

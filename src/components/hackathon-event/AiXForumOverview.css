@@ -519,3 +519,12 @@
         gap: 18px;
     }
 }
+
+.aix-forum-topic-time {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--hx-accent-text);
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}

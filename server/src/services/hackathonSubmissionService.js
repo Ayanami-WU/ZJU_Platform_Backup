@@ -69,13 +69,14 @@ const stageInfo = (template, track, stage, registered, qualified, now) => {
         canSubmit: !blockedReason,
         blockedReason,
         requiredFields:
-            stage === "final"
+            window?.requiredFields ||
+            (stage === "final"
                 ? []
                 : stage === "initial"
                   ? ["projectName", "githubUrl", "modelscopeUrl"]
                   : track === "campus"
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                    : ["projectName", "githubUrl", "modelscopeUrl", "demoFileId"],
+                    : ["projectName", "githubUrl", "modelscopeUrl", "demoFileId"]),
     };
 };
 const normalizeMaterials = (input, required = []) => {
@@ -298,7 +299,10 @@ function createHackathonSubmissionService({
                     );
                     if (
                         !file ||
-                        body.stage !== "semifinal" ||
+                        !(
+                            body.stage === "semifinal" ||
+                            (body.track === "campus" && body.stage === "initial")
+                        ) ||
                         (kind === "bp" && body.track !== "campus")
                     )
                         fail(400, "HACKATHON_SUBMISSION_INVALID", "附件不属于当前赛道与轮次", {
@@ -357,7 +361,10 @@ function createHackathonSubmissionService({
             checkEvent(body.eventKey);
             checkTrack(body.track);
             if (
-                body.stage !== "semifinal" ||
+                !(
+                    body.stage === "semifinal" ||
+                    (body.track === "campus" && body.stage === "initial")
+                ) ||
                 !["bp", "demo"].includes(body.kind) ||
                 (body.kind === "bp" && body.track !== "campus")
             )
@@ -365,8 +372,9 @@ function createHackathonSubmissionService({
             return useDb(true, async (db) => {
                 const row = await registrationFor(db, userId);
                 const template = await templateFor(db);
-                const info = (await eligibility(db, row, template, now()))[body.track].stages
-                    .semifinal;
+                const info = (await eligibility(db, row, template, now()))[body.track].stages[
+                    body.stage
+                ];
                 if (!info.canSave)
                     fail(403, "HACKATHON_SUBMISSION_BLOCKED", "当前无法上传本轮材料", {
                         reason: info.blockedReason,

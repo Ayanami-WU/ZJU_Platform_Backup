@@ -19,7 +19,7 @@ export const requiredMaterialFields = (gate, track, stage) => [
     ...new Set([
         "projectName",
         ...(gate?.requiredFields ||
-            (stage === "initial"
+            (stage === "initial" && track !== "campus"
                 ? ["githubUrl", "modelscopeUrl"]
                 : track === "campus"
                   ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]

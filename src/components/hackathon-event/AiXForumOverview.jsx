@@ -79,7 +79,9 @@ export default function AiXForumOverview() {
                                     <article
                                         className="aix-forum-topic-row"
                                         data-roundtable={topic.guestIds.length > 1 || undefined}
-                                        data-without-topic={!topic.title || undefined}
+                                        data-without-topic={
+                                            (!topic.title && !topic.time) || undefined
+                                        }
                                         style={{
                                             "--aix-roundtable-count": topic.guestIds.length + 1,
                                         }}
@@ -101,9 +103,14 @@ export default function AiXForumOverview() {
                                                     <ForumGuest key={guest.id} guest={guest} />
                                                 ))}
                                         </div>
-                                        {topic.title && (
+                                        {(topic.title || topic.time) && (
                                             <div className="aix-forum-topic-copy">
-                                                <h3>{topic.title}</h3>
+                                                {topic.time && (
+                                                    <time className="aix-forum-topic-time">
+                                                        {topic.time}
+                                                    </time>
+                                                )}
+                                                {topic.title && <h3>{topic.title}</h3>}
                                                 {topic.host && <p>{topic.host}</p>}
                                             </div>
                                         )}
@@ -114,6 +121,16 @@ export default function AiXForumOverview() {
                                         <h3>{copy.invitedLabel}</h3>
                                         <div className="aix-forum-other-guests">
                                             {otherGuests.map((guest) => (
+                                                <ForumGuest key={guest.id} guest={guest} />
+                                            ))}
+                                        </div>
+                                    </section>
+                                )}
+                                {forum.judges?.length > 0 && (
+                                    <section className="aix-forum-invited">
+                                        <h3>{forum.judgesLabel}</h3>
+                                        <div className="aix-forum-other-guests">
+                                            {forum.judges.map((guest) => (
                                                 <ForumGuest key={guest.id} guest={guest} />
                                             ))}
                                         </div>
