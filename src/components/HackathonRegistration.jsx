@@ -1,4 +1,5 @@
 import { useAiXPager } from "../hooks/useAiXPager";
+import { useAiXMobileLayout } from "../hooks/useAiXMobileLayout";
 import AiXChapters, { AIX_CHAPTER_IDS } from "./hackathon-event/AiXChapters";
 import AiXRegistrationInfo from "./hackathon-event/AiXRegistrationInfo";
 import AiXRegistrationLock from "./hackathon-event/AiXRegistrationLock";
@@ -10,11 +11,10 @@ import { getFirstEditionPartnerGroups } from "../data/firstEditionPartners";
 import React, { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
     AlertCircle,
     ArrowRight,
-    ArrowUpRight,
     Bot,
     Calendar,
     ChevronDown,
@@ -41,10 +41,9 @@ import {
 import { getPartnerDisplayName, getPartnerLogoSrc } from "../data/partnerLogos";
 import { useSettings } from "../context/SettingsContext";
 import { useEcosystemPartners } from "../hooks/useEcosystemPartners";
-import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useSectionPager } from "../hooks/useSectionPager";
 import { useReducedMotion } from "../utils/animations";
-import { REGISTRATION_TRACKS, getRegistrationUrl } from "../utils/hackathonRoute";
+import { REGISTRATION_TRACKS } from "../utils/hackathonRoute";
 import api from "../services/api";
 import SEO from "./SEO";
 import RegistrationProfileForm from "./RegistrationProfileForm";
@@ -204,7 +203,6 @@ const HackathonRegistration = ({
 }) => {
     const { i18n, t } = useTranslation();
     const location = useLocation();
-    const navigate = useNavigate();
     const {
         user,
         loading: registrationLoading,
@@ -228,10 +226,6 @@ const HackathonRegistration = ({
     const [activeTrack, setActiveTrack] = useState(() =>
         initialTrack && REGISTRATION_TRACKS.includes(initialTrack) ? initialTrack : "industry"
     );
-    // The intro page keeps a compact chapter with the entry buttons; the form lives on its own page.
-    // Phones only: the desktop chapter keeps its inline form, so the desktop layout is unchanged.
-    const isPhoneViewport = useMediaQuery("(max-width: 767px)");
-    const compactRegistrationChapter = isAiX && !standalone && isPhoneViewport;
     const trackDrafts = useRef({});
     const [editingTracks, setEditingTracks] = useState({});
     const [isWithdrawing, setIsWithdrawing] = useState(false);
@@ -327,6 +321,7 @@ const HackathonRegistration = ({
     );
     const { groups: ecosystemPartnerGroups } = useEcosystemPartners();
     const pageRef = useRef(null);
+    useAiXMobileLayout(pageRef, isAiX && standalone);
     useAiXPager(pageRef, AIX_CHAPTER_IDS, isAiX && !standalone, reduceMotion);
     const [activeSection, setActiveSection] = useState(0);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -1009,24 +1004,6 @@ const HackathonRegistration = ({
             </button>
         ) : null;
 
-    // Which tracks already hold an active registration, so the entry buttons can say so.
-    // Withdrawn tracks (active === false / cancelledAt) must not count as registered.
-    const registeredTracks = useMemo(() => {
-        if (!isAiX || !eventRegistration) return new Set();
-        const nested =
-            eventRegistration.trackRegistrations || eventRegistration.answers?.trackRegistrations;
-        if (nested)
-            return new Set(
-                Object.entries(nested)
-                    .filter(([, entry]) => entry && entry.active !== false && !entry.cancelledAt)
-                    .map(([key]) => key)
-            );
-        const selected = Array.isArray(eventRegistration.answers?.track)
-            ? eventRegistration.answers.track
-            : [eventRegistration.answers?.track];
-        return new Set(selected.filter(Boolean));
-    }, [isAiX, eventRegistration]);
-
     const trackTabs = isAiX ? (
         <nav
             className="aix-track-registration-tabs"
@@ -1042,10 +1019,16 @@ const HackathonRegistration = ({
                     disabled={isSubmitting || isWithdrawing}
                     onClick={() => switchTrack(track)}
                 >
-                    {t(`aix.register.trackTabs_${track}`, {
-                        defaultValue:
-                            track === "industry" ? "华为产业落地赛道报名" : "天猫OPC孵化赛道报名",
-                    })}
+                    <span className="aix-track-tab-desktop">
+                        {t(`aix.register.trackTabs_${track}`)}
+                    </span>
+                    <span className="aix-track-tab-mobile">
+                        {
+                            t("aix.pages.tracks", { returnObjects: true }).find(
+                                (item) => item.id === track
+                            )?.title
+                        }
+                    </span>
                 </button>
             ))}
         </nav>
@@ -1638,86 +1621,22 @@ const HackathonRegistration = ({
                 id="registration-form"
                 data-contained-form={isAiX || undefined}
                 data-standalone={standalone || undefined}
-                data-compact-chapter={compactRegistrationChapter || undefined}
                 className="relative flex min-h-[100svh] min-w-0 max-w-full snap-start snap-always items-start overflow-hidden px-4 pb-28 pt-20 sm:px-6 sm:pb-28 sm:pt-24 lg:px-10 lg:pb-12 lg:pt-[96px] xl:items-center min-[1536px]:px-14 2xl:px-16"
             >
                 <div className="pointer-events-none absolute left-0 top-[7%] max-w-full overflow-hidden font-black uppercase leading-none tracking-normal text-white/[0.04] text-[18vw]">
                     APPLY
                 </div>
-                {compactRegistrationChapter ? (
-                    <div className="aix-page-body aix-register-chapter">
-                        <header className="aix-page-heading">
-                            <span>04</span>
-                            <h2 id="aix-register-title">
-                                {t("aix.register.sectionTitle", { defaultValue: "报名" })}
-                            </h2>
-                        </header>
-                        {trackTabs}
-                        <AiXTrackRegistrationSummary track={activeTrack} />
-                        <div className="aix-register-entry">
-                            <div className="aix-register-entry-buttons">
-                                {REGISTRATION_TRACKS.map((track) => (
-                                    <button
-                                        key={track}
-                                        type="button"
-                                        className="aix-register-entry-button"
-                                        data-track={track}
-                                        data-active={activeTrack === track || undefined}
-                                        data-registered={registeredTracks.has(track) || undefined}
-                                        onClick={() =>
-                                            navigate(
-                                                getRegistrationUrl(
-                                                    resolvedTemplate.event.key,
-                                                    track
-                                                )
-                                            )
-                                        }
-                                    >
-                                        {registeredTracks.has(track) && (
-                                            <span className="aix-register-entry-flag">
-                                                {t("aix.register.registered")}
-                                            </span>
-                                        )}
-                                        <span className="aix-register-entry-label">
-                                            {t(`aix.register.cta_${track}`, {
-                                                defaultValue:
-                                                    track === "industry"
-                                                        ? "立即报名华为产业落地赛道"
-                                                        : "立即报名天猫OPC孵化赛道",
-                                            })}
-                                        </span>
-                                        <ArrowUpRight size={19} aria-hidden="true" />
-                                    </button>
-                                ))}
-                            </div>
-                            <p className="aix-register-entry-status">
-                                {requiresLogin && !user
-                                    ? t("aix.register.loginHint")
-                                    : !event.registrationOpen
-                                      ? t("aix.register.closed")
-                                      : registeredTracks.size
-                                        ? t("aix.register.entryRegistered", {
-                                              defaultValue:
-                                                  "已提交的赛道可进入报名页查看或修改资料。",
-                                          })
-                                        : t("aix.register.entryHint", {
-                                              defaultValue:
-                                                  "两条赛道分别报名，报名表与资料修改在各自的报名页中完成。",
-                                          })}
-                            </p>
-                            {/* 手机端同样保留赛事群二维码入口（原先在报表面板头部）。 */}
-                            <div className="aix-register-entry-tools">
-                                <AiXRegistrationInfo />
-                            </div>
-                        </div>
-                    </div>
-                ) : (
+                {
                     <div
                         className={`mx-auto grid min-w-0 w-full max-w-[1880px] gap-7 xl:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] xl:items-center xl:gap-8 min-[1536px]:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] min-[1536px]:gap-14 2xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] 2xl:gap-20 ${isAiX ? "aix-track-registration-layout" : ""}`}
                     >
                         {isAiX && (
                             <header className="aix-page-heading aix-register-page-heading">
-                                <span>04</span>
+                                <span>
+                                    {String(
+                                        AIX_CHAPTER_IDS.indexOf("registration-form") + 1
+                                    ).padStart(2, "0")}
+                                </span>
                                 <h2>{t("aix.register.sectionTitle", { defaultValue: "报名" })}</h2>
                             </header>
                         )}
@@ -2308,7 +2227,7 @@ const HackathonRegistration = ({
                             </div>
                         )}
                     </div>
-                )}
+                }
             </section>
         </div>
     );

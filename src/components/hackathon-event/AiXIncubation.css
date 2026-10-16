@@ -1,0 +1,88 @@
+.aix-page .aix-incubation-intro {
+    margin: -6px 0 24px;
+    color: var(--hx-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+.aix-incubation-providers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 20px;
+}
+.aix-incubation-provider {
+    min-width: 0;
+    background: var(--hx-panel);
+    color: var(--hx-text);
+    border: 1px solid var(--hx-line);
+    border-radius: 8px;
+    padding: 24px;
+}
+.aix-incubation-provider > header {
+    min-height: 100px;
+    padding-bottom: 20px;
+}
+.aix-incubation-provider h3 {
+    color: var(--hx-text);
+    font-size: 24px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+.aix-incubation-provider header p {
+    margin-top: 10px;
+    color: var(--hx-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+.aix-incubation-provider dl > div {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 16px;
+    padding-block: 16px;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-incubation-provider dt {
+    color: var(--hx-accent-text);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+.aix-incubation-provider dd {
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+@media (max-width: 1100px) {
+    .aix-incubation-providers {
+        grid-template-columns: 1fr;
+    }
+    .aix-incubation-provider > header {
+        min-height: 0;
+    }
+}
+@media (max-width: 600px) {
+    .aix-page .aix-incubation-intro {
+        margin: -4px 0 20px;
+        font-size: 14px;
+    }
+    .aix-incubation-provider {
+        padding: 16px;
+    }
+    .aix-incubation-provider h3 {
+        font-size: 21px;
+    }
+    .aix-incubation-provider header p {
+        font-size: 14px;
+    }
+    .aix-incubation-provider dl > div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding-block: 14px;
+    }
+    .aix-incubation-provider :is(dt, dd) {
+        font-size: 15px;
+    }
+}

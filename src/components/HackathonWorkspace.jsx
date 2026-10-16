@@ -18,6 +18,7 @@ import "./hackathon-event/AiXTheme.css";
 import "./hackathon-event/AiXPaged.css";
 import "./hackathon-event/AiXTypography.css";
 import "./hackathon-event/AiXResponsive.css";
+import "./hackathon-event/AiXMobileLayout.css";
 // Event identity, navigation and signup belong to one shell. Edition bodies own their content.
 export default function HackathonWorkspace({ template, schedule }) {
     const { t } = useTranslation();

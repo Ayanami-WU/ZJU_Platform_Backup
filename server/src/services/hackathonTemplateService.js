@@ -172,6 +172,16 @@ const normalizeProgram = (input = {}) => {
             ? { registrationOpensAt: text(input.registrationOpensAt, 40) }
             : {}),
         registrationClosesAt: text(input.registrationClosesAt, 40),
+        ...(input.campusReview
+            ? {
+                  campusReview: Object.fromEntries(
+                      ["startsAt", "endsAt", "finalistsPublishedAt"].map((key) => [
+                          key,
+                          text(input.campusReview[key], 40),
+                      ])
+                  ),
+              }
+            : {}),
         ...(input.trackStages && typeof input.trackStages === "object"
             ? {
                   trackStages: Object.fromEntries(
@@ -183,6 +193,23 @@ const normalizeProgram = (input = {}) => {
                                   id: text(stage.id, 40),
                                   opensAt: text(stage.opensAt, 40),
                                   closesAt: text(stage.closesAt, 40),
+                                  ...(Array.isArray(stage.requiredFields)
+                                      ? {
+                                            requiredFields: [
+                                                ...new Set(
+                                                    stage.requiredFields.filter((field) =>
+                                                        [
+                                                            "projectName",
+                                                            "githubUrl",
+                                                            "modelscopeUrl",
+                                                            "bpFileId",
+                                                            "demoFileId",
+                                                        ].includes(field)
+                                                    )
+                                                ),
+                                            ],
+                                        }
+                                      : {}),
                               })),
                           ])
                   ),
@@ -366,10 +393,15 @@ const validateTemplate = (template) => {
                 message: "请输入有效的报名截止时间",
             });
         for (const [track, stages] of Object.entries(program.trackStages || {})) {
-            if (stages.length !== 3 || new Set(stages.map((stage) => stage.id)).size !== 3)
+            if (
+                ![2, 3].includes(stages.length) ||
+                new Set(stages.map((stage) => stage.id)).size !== stages.length ||
+                !stages.some((stage) => stage.id === "initial") ||
+                !stages.some((stage) => stage.id === "final")
+            )
                 errors.push({
                     field: `event.program.trackStages.${track}`,
-                    message: "请配置完整且不重复的初赛、复赛和决赛",
+                    message: "请配置不重复的初赛、决赛及适用的复赛",
                 });
         }
         for (const stage of [

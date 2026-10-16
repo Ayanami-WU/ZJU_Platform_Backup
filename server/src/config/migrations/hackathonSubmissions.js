@@ -26,7 +26,7 @@ async function migrateHackathonSubmissions(db) {
                 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                 registration_id INTEGER NOT NULL REFERENCES hackathon_registrations(id) ON DELETE CASCADE,
                 track TEXT NOT NULL CHECK(track IN ('campus','industry')),
-                stage TEXT NOT NULL CHECK(stage = 'semifinal'),
+                stage TEXT NOT NULL CHECK(stage IN ('initial','semifinal')),
                 kind TEXT NOT NULL CHECK(kind IN ('bp','demo')),
                 storage_name TEXT NOT NULL UNIQUE,
                 original_name TEXT NOT NULL,

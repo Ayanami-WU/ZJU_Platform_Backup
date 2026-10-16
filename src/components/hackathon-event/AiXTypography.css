@@ -192,7 +192,7 @@
     .hx-workspace[data-event="zhekesong-ai-x-2026"]
     .aix-challenges
     :is(
-        p,
+        p:not(:where(.aix-task-workspace p)),
         label,
         input,
         textarea,

@@ -19,7 +19,7 @@ export const requiredMaterialFields = (gate, track, stage) => [
     ...new Set([
         "projectName",
         ...(gate?.requiredFields ||
-            (stage === "initial"
+            (stage === "initial" && track !== "campus"
                 ? ["githubUrl", "modelscopeUrl"]
                 : track === "campus"
                   ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
@@ -40,6 +40,7 @@ export default function AiXStageSubmission({
     user,
     loading,
     onLogin,
+    accessNotice,
     cachedDraft,
     onDraft,
     onRecord,
@@ -252,14 +253,16 @@ export default function AiXStageSubmission({
         >
             <header className="aix-task-panel-heading">
                 <h2 id="aix-submission-title">{label("mySubmission")}</h2>
-                <span
-                    className={`aix-task-state ${record?.submitted ? "is-submitted" : ""}`}
-                    role="status"
-                >
-                    {label(state)}
-                </span>
+                {user && (
+                    <span
+                        className={`aix-task-state ${record?.submitted ? "is-submitted" : ""}`}
+                        role="status"
+                    >
+                        {label(state)}
+                    </span>
+                )}
             </header>
-            <p className="aix-task-muted">{label("ownership")}</p>
+            {accessNotice}
             <form
                 noValidate
                 onSubmit={(event) => {

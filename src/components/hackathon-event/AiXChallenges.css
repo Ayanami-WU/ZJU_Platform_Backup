@@ -387,7 +387,6 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .aix-task-submission,
     .aix-task-final {
         padding: 22px 18px;
     }
@@ -514,4 +513,477 @@
 }
 .aix-task-final p {
     white-space: pre-line;
+}
+
+/* Read the brief, then submit: the same hierarchy as the event and forum pages. */
+.aix-task-workspace {
+    width: min(calc(100% - 96px), 1280px);
+    padding: 28px 0 56px;
+    font-size: 16px;
+    line-height: 1.65;
+}
+.aix-task-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 620px) minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.aix-task-heading h1 {
+    font-size: 32px;
+    line-height: 1.35;
+}
+.aix-task-selectors {
+    justify-content: center;
+    padding-bottom: 18px;
+    gap: 12px 24px;
+}
+.aix-task-track-tabs {
+    width: 100%;
+    max-width: 620px;
+}
+.aix-task-track-tabs button {
+    flex: 1;
+    font-size: 17px;
+    min-height: 48px;
+    padding: 10px 14px;
+    white-space: normal;
+    text-wrap: balance;
+}
+.aix-task-stage-tabs {
+    flex: 0 0 auto;
+}
+.aix-task-stage-tabs button {
+    font-size: 15px;
+    padding-inline: 14px;
+}
+.aix-task-window {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding: 16px 0;
+    margin-bottom: 28px;
+}
+.aix-task-requirements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 32px;
+}
+.aix-task-requirements dt {
+    display: flex;
+    align-items: center;
+    color: var(--hx-accent-text);
+    margin: 0;
+    flex-shrink: 0;
+}
+.aix-task-requirements > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+.aix-task-requirements dt svg {
+    width: 20px;
+    height: 20px;
+}
+.aix-task-requirements dd {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 650;
+}
+.aix-task-window > .aix-task-state {
+    flex-shrink: 0;
+}
+.aix-task-columns {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
+    gap: 32px;
+}
+.aix-task-final {
+    grid-template-columns: 1fr;
+}
+.aix-task-brief {
+    padding: 0;
+}
+.aix-task-workspace h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 24px;
+    line-height: 1.4;
+}
+/* Scenes are independent reading cards; the submission form is a separate task. */
+.aix-recommended-scenes {
+    container-type: inline-size;
+}
+.aix-scenes-overview {
+    padding: 20px;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+.aix-task-workspace .aix-scenes-topic h3 {
+    font-size: 18px;
+    color: var(--hx-accent-text);
+    margin-bottom: 6px;
+}
+.aix-scenes-topic p {
+    font-size: 14px;
+    font-weight: 400;
+}
+.aix-task-workspace .aix-scenes-scope {
+    margin-top: 6px;
+    color: var(--hx-muted);
+    font-size: 13px;
+}
+.aix-task-workspace .aix-scenes-facts {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+.aix-scenes-facts > div {
+    display: grid;
+    grid-template-columns: 6.5em minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+}
+.aix-scenes-facts dt {
+    color: var(--hx-muted);
+    font-size: 13px;
+    padding-block: 3px;
+}
+.aix-scenes-facts dt small {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.aix-scenes-facts ul,
+.aix-scenes-steps {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.aix-scenes-formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.aix-scenes-formats li {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 4px 8px;
+    background: var(--hx-surface);
+    border: 1px solid var(--hx-line);
+    border-radius: 5px;
+}
+.aix-scenes-facts .aix-scenes-evidence {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    font-size: 13px;
+    padding-block: 3px;
+}
+.aix-scenes-evidence li:not(:last-child)::after {
+    content: "·";
+    color: var(--hx-muted);
+    margin-left: 10px;
+}
+.aix-scenes-thinking {
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid var(--hx-line);
+}
+.aix-task-workspace .aix-scenes-thinking h3 {
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: var(--hx-muted);
+}
+.aix-scenes-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 20px;
+}
+.aix-scenes-steps li {
+    min-width: 0;
+    position: relative;
+}
+.aix-scenes-steps strong {
+    font-size: 14px;
+    color: var(--hx-text);
+}
+.aix-task-workspace .aix-scenes-steps p {
+    margin-top: 4px;
+    color: var(--hx-muted);
+    font-size: 13px;
+    line-height: 1.65;
+    font-weight: 400;
+}
+.aix-scenes-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+.aix-recommended-scene {
+    min-width: 0;
+    padding: 20px;
+    background: var(--hx-panel);
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
+}
+.aix-scene-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+.aix-scene-number {
+    color: var(--hx-accent-text);
+    font-size: 28px;
+    font-weight: 650;
+    line-height: 1;
+}
+.aix-task-workspace .aix-scene-heading h3 {
+    font-size: 20px;
+    color: var(--hx-text);
+}
+.aix-recommended-scene dl {
+    display: grid;
+    gap: 14px;
+    font-size: 14px;
+    line-height: 1.75;
+    font-weight: 400;
+}
+.aix-recommended-scene dt {
+    font-size: 12px;
+    font-weight: 650;
+    color: var(--hx-muted);
+    margin-bottom: 4px;
+}
+.aix-scene-resource {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hx-line);
+    font-size: 13px;
+    line-height: 1.75;
+}
+.aix-scene-resource summary {
+    color: var(--hx-accent-text);
+    cursor: pointer;
+    padding-block: 5px;
+}
+.aix-scene-resource p {
+    margin-top: 8px;
+    color: var(--hx-muted);
+    font-weight: 400;
+}
+@container (min-width: 620px) {
+    .aix-scenes-steps {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .aix-scenes-steps li:not(:last-child)::after {
+        content: "→";
+        color: var(--hx-muted);
+        position: absolute;
+        top: 0;
+        right: -12px;
+    }
+    .aix-scenes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .aix-recommended-scene:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+    .aix-recommended-scene:last-child:nth-child(odd) dl {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+.aix-task-submission {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+.aix-task-submission > form {
+    padding: 24px;
+    border: 1px solid var(--hx-line);
+    border-radius: 12px;
+    background: var(--hx-panel);
+}
+.aix-task-panel-heading {
+    margin-bottom: 18px;
+}
+.aix-task-submission .aix-task-panel-heading {
+    gap: 8px;
+}
+.aix-task-submission .aix-task-state {
+    font-size: 13px;
+}
+.aix-task-challenge:first-of-type {
+    margin-top: 18px;
+    padding-top: 0;
+    border-top: 0;
+}
+.aix-task-challenge h3 {
+    font-size: 20px;
+    line-height: 1.5;
+}
+.aix-task-challenge p {
+    line-height: 1.85;
+    margin-top: 12px;
+}
+.aix-task-empty {
+    padding: 18px 0;
+    color: var(--hx-muted);
+    font-size: 16px;
+    line-height: 1.8;
+}
+.aix-task-empty svg {
+    width: 20px;
+    height: 20px;
+    color: var(--hx-accent-text);
+}
+.aix-task-access {
+    margin: 0 0 16px;
+    gap: 6px 12px;
+    font-size: 14px;
+}
+.aix-task-submission form {
+    margin-top: 0;
+}
+.aix-task-submission fieldset {
+    gap: 16px;
+}
+.aix-task-field:not(.aix-task-field-upload) {
+    grid-column: 1 / -1;
+}
+.aix-task-submission label {
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 650;
+}
+.aix-task-submission input {
+    min-height: 46px;
+    font-size: 16px;
+    padding: 10px 12px;
+}
+.aix-task-submission .aix-task-help,
+.aix-task-timestamp {
+    font-size: 13px;
+    line-height: 1.6;
+}
+.aix-task-field-upload {
+    padding-top: 14px;
+}
+.aix-task-field-upload small {
+    font-size: 12px;
+    line-height: 1.5;
+}
+.aix-task-actions {
+    max-width: none;
+    margin-top: 20px;
+    gap: 10px;
+}
+.aix-task-actions button {
+    min-height: 46px;
+    font-size: 15px;
+}
+.aix-task-actions .aix-secondary {
+    flex: 0.85;
+}
+.aix-task-actions .aix-primary {
+    flex: 1.15;
+}
+@media (min-width: 1024px) {
+    .aix-task-columns > .aix-task-submission {
+        position: sticky;
+        top: calc(var(--site-nav-height) + var(--event-nav-height) + 20px);
+    }
+}
+@media (max-width: 1023px) {
+    .aix-task-heading {
+        grid-template-columns: 1fr;
+    }
+    .aix-task-workspace {
+        width: calc(100% - 40px);
+    }
+    .aix-task-columns {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .aix-task-track-tabs {
+        justify-self: center;
+    }
+    .aix-task-stage-tabs {
+        width: 100%;
+    }
+    .aix-task-stage-tabs button {
+        flex: 1;
+    }
+}
+@media (max-width: 767px) {
+    .aix-task-workspace {
+        width: calc(100% - 32px);
+        padding: 24px 0 40px;
+    }
+    .aix-task-heading h1 {
+        font-size: 28px;
+    }
+    .aix-task-selectors {
+        gap: 10px;
+        padding-bottom: 14px;
+    }
+    .aix-task-track-tabs button {
+        min-width: 0;
+        padding: 8px 6px;
+        font-size: 14px;
+        white-space: normal;
+    }
+    .aix-task-stage-tabs button {
+        font-size: 14px;
+        min-height: 44px;
+    }
+    .aix-task-window {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        padding-block: 14px;
+        margin-bottom: 24px;
+    }
+    .aix-task-requirements {
+        display: contents;
+    }
+    .aix-task-requirements > div:first-child {
+        grid-column: 1 / -1;
+    }
+    .aix-task-window > .aix-task-state {
+        align-self: end;
+    }
+    .aix-task-requirements dd {
+        font-size: 14px;
+    }
+    .aix-task-submission > form {
+        padding: 18px 16px;
+    }
+    .aix-task-workspace h2 {
+        font-size: 22px;
+    }
+    .aix-task-panel-heading {
+        margin-bottom: 14px;
+    }
+    .aix-task-submission fieldset {
+        gap: 14px;
+    }
+}
+@media (max-width: 360px) {
+    .aix-task-actions button {
+        padding-inline: 12px;
+    }
+    .aix-task-actions button svg {
+        display: none;
+    }
 }

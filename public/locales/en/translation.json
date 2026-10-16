@@ -5137,7 +5137,7 @@
         "forumsDescription": "Technical practice and entrepreneurship in the AI era.",
         "forums": {
             "technology": {
-                "date": "October 18 · 09:00–11:15 · Around 200 attendees",
+                "date": "October 18 · 09:00–12:00 · Around 200 attendees",
                 "title": "Technical Forum",
                 "description": "AI technology trends and industrial applications"
             },
@@ -5149,33 +5149,23 @@
         },
         "agendaTitle": "Event schedule",
         "planned": "Provisional · Subject to official notices",
-        "agenda": {
-            "launch": {
-                "date": "10.09",
-                "title": "Event announcement",
-                "description": "Event information and participation guidance published."
+        "agenda": [
+            {
+                "date": "10.13",
+                "title": "Tmall initial begins",
+                "description": "Initial round begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct; review 21–22 Oct; finalists announced 22 Oct at 23:00; final 25 Oct."
             },
-            "initial": {
+            {
                 "date": "10.18",
-                "title": "First round · Tech forum",
-                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall OPC Incubation Track; 60% completion required for Huawei Industry Implementation Track."
+                "title": "Technology forum & Huawei initial",
+                "description": "09:00–12:00 · 13:00–17:00"
             },
-            "semifinal": {
-                "date": "10.19–10.22",
-                "title": "Online semifinal",
-                "description": "Online semifinal: October 19–23. Refine your project, demo and proposal."
-            },
-            "shortlist": {
-                "date": "10.23",
-                "title": "Semifinal development & review",
-                "description": "Refine online; ten Huawei Industry Implementation Track projects selected for the final."
-            },
-            "final": {
+            {
                 "date": "10.25",
-                "title": "Final · Venture forum",
-                "description": "October 25, 09:10–11:30 parallel pitches. Separate judging; joint awards."
+                "title": "Final & entrepreneurship forum",
+                "description": "09:00–11:30 · 13:30–17:00"
             }
-        },
+        ],
         "challengeKicker": "Academic creativity · Industry challenges",
         "challengeDescription": "Start with a problem in your discipline or tackle a real business brief. Each track has its own schedule; published briefs and submission links appear here.",
         "stagesLabel": "Competition stages",
@@ -5193,13 +5183,13 @@
             "initial": {
                 "title": "First round",
                 "date": "10.18",
-                "description": "October 18, 13:00–17:00 onsite build. Technical feasibility for Tmall OPC Incubation Track; 60% completion required for Huawei Industry Implementation Track.",
+                "description": "Tmall begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct. Huawei develops and submits onsite 18 Oct, 13:00–17:00.",
                 "materials": "Submit a working demo and project description to ModelScope, covering the problem, core features and completion."
             },
             "semifinal": {
                 "title": "Semifinal",
-                "date": "10.19—10.24",
-                "description": "Online semifinal: October 19–23. Refine your project, demo and proposal.",
+                "date": "10.19–10.23",
+                "description": "Huawei semifinal: 19–23 Oct, closing at 24:00 on 23 Oct. Tmall review: 21–22 Oct; finalists at 23:00 on 22 Oct.",
                 "materials": "Refine the project guide and demo, submit source code and a ModelScope project as required by the official challenge."
             },
             "final": {
@@ -5280,7 +5270,7 @@
                 "development": "On-site development",
                 "opens": "Online qualifier",
                 "venue": "Venue",
-                "guidance": "Optional on-site mentoring",
+                "guidance": "Online submission, 18–20 Oct",
                 "campusLocation": "ZJU Zijingang Campus",
                 "room": "Duan Yongping Teaching Building 2–112",
                 "brief": "Format",
@@ -5405,7 +5395,7 @@
         "resultsTitle": "Results",
         "resultsIntro": "Award winners, projects, speeches and forum highlights in one place.",
         "industryStages": "Huawei Industry Implementation Track · Stages",
-        "campusSchedule": "Online qualifier: Oct 13–18, closing at 17:00; optional on-site mentoring Oct 18, 13:00–17:00; online semifinal Oct 19–23; final Oct 25.",
+        "campusSchedule": "Initial round begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct; review 21–22 Oct; finalists announced 22 Oct at 23:00; final 25 Oct.",
         "fieldHints": {
             "name": "",
             "studentId": "",
@@ -5436,7 +5426,7 @@
                     "shortTitle": "Tmall OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
                     "team": "1–5 members",
-                    "deadline": "Onsite · October 18, 17:00",
+                    "deadline": "Initial submission closes 20 Oct, 23:00",
                     "support": "Tmall Campus · Product development and incubation"
                 },
                 "industry": {
@@ -5486,7 +5476,7 @@
             },
             "beyondLabel": "BUILD BEYOND THE EVENT",
             "beyondTitle": "From a project to real use",
-            "beyondDescription": "Promising projects can apply for space, ecosystem resources and mentor support from Shidai Qiangying, ZTVP and Tmall Campus. Opportunities are subject to selection.",
+            "beyondDescription": "Selected projects can access on-campus incubation through ZJU Zijin Startup Space, or workspace and business services through Elite Eagle’s 1897 OPC Community and Sandun Space. ZTVP and Tmall Campus provide additional incubation resources. Support is subject to referral and review.",
             "pastProjects": "Explore the first edition",
             "partnersLabel": "THIS EDITION’S PARTNERS",
             "partnersTitle": "Partners",
@@ -5585,13 +5575,14 @@
                 }
             ],
             "contactTitle": "Join the event group",
-            "contactHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
-            "groupQr": "Join via WeChat",
+            "contactHint": "Add the Tuozhe AI Ecosystem Assistant on WeChat for an invitation to the event group. Include your name, year of study, and major in the friend request.",
+            "groupQr": "Add the assistant to join",
             "qrExpiry": "Check the latest event notice for the current group QR.",
             "qrExpired": "The group QR has expired. Please contact the organizer.",
-            "qrAlt": "Event member’s WeChat QR code for an invitation to the event group",
-            "memberQrTitle": "Add a member to join the group",
-            "memberQrHint": "The event group has over 200 members. Scan this code to add an event member on WeChat, who will invite you into the group.",
+            "qrAlt": "WeChat QR code for the Tuozhe AI Ecosystem Assistant, who will invite you to the event group",
+            "memberQrTitle": "Add the Tuozhe AI Ecosystem Assistant",
+            "memberQrHint": "Scan the code to add the assistant on WeChat. The assistant will invite you to the event group.",
+            "memberQrRemark": "Friend request note: name + year of study + major",
             "closeQr": "Close QR",
             "contactName": "Ying Qi · Founder, Tuozhe AI Ecosystem & Qiying Technology",
             "contactLabel": "Event & partnership contact"
@@ -5695,7 +5686,7 @@
                     },
                     {
                         "title": "Working products",
-                        "description": "Optional on-site mentoring on the afternoon of Oct 18"
+                        "description": "Submit technical work, BP and Demo online, 18–20 Oct"
                     },
                     {
                         "title": "Industry & incubation",
@@ -5716,7 +5707,7 @@
             "industryMaterials": "Technical project + Demo"
         },
         "official": {
-            "chapters": ["Home", "Format", "Prizes", "Register"],
+            "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5782,111 +5773,110 @@
                 "technology": {
                     "title": "Technical Forum",
                     "theme": "AI technology trends and industrial applications",
-                    "time": "October 18 · 09:00–11:15 · Around 200 attendees",
+                    "time": "18 Oct · 09:00–12:00",
                     "location": "Duan Yongping Teaching Building 2-112, Zijingang Campus, Zhejiang University",
                     "required": "Preliminary-round contestants must attend the technical forum.",
                     "agenda": [
                         {
-                            "time": "09:00–09:10",
-                            "title": "应奇 · 开场鸣谢"
-                        },
-                        {
-                            "time": "09:10–09:20",
-                            "title": "阮俊华 · 开幕致辞：AI+X的教育意义与创新创业内涵"
-                        },
-                        {
                             "time": "09:30–10:15",
-                            "title": "叶新江 · 主题分享"
+                            "title": "Ye Xinjiang · Keynote"
                         },
                         {
-                            "time": "10:30–11:15",
-                            "title": "孙逸飞 · 技术报告"
+                            "time": "10:15–11:00",
+                            "title": "Tan Weichuan · From hackathon to startup"
+                        },
+                        {
+                            "time": "11:15–12:00",
+                            "title": "Sun Yifei · Embodied intelligence technical talk"
                         }
                     ],
                     "guests": [
                         {
-                            "name": "阮俊华",
-                            "role": "浙江大学创新创业学院常务副院长、杭州创业发展促进会会长、彩虹人生平台创始人"
+                            "name": "Ye Xinjiang",
+                            "role": "CTO, Daily Interactive Co., Ltd."
                         },
                         {
-                            "name": "叶新江",
-                            "role": "每日互动股份有限公司 CTO"
+                            "name": "Tan Weichuan",
+                            "role": "University Relations Lead, MiraclePlus"
                         },
                         {
-                            "name": "孙逸飞",
-                            "role": "浙江大学百人计划研究员"
+                            "name": "Sun Yifei",
+                            "role": "Hundred Talents Program Researcher, Zhejiang University"
                         }
                     ]
                 },
                 "entrepreneurship": {
                     "title": "Entrepreneurship forum",
                     "theme": "First principles of entrepreneurship in the AI era",
-                    "time": "October 25 · 09:00–17:00 · Around 150 attendees",
+                    "time": "25 Oct · 13:30–17:00",
                     "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
                     "required": "Finalists must attend the final-day forum. Parallel pitches in the morning; entrepreneurship forum in the afternoon.",
                     "agenda": [
                         {
-                            "time": "09:05–09:10",
-                            "title": "张克俊 · 路演开幕致辞"
+                            "time": "13:40–14:10",
+                            "title": "Liu Jianbin · Calm reflection amid the AI frenzy"
                         },
                         {
-                            "time": "09:10–11:30",
-                            "title": "两赛道决赛路演（10:10–10:30茶歇）"
+                            "time": "14:10–14:45",
+                            "title": "Liu Xiang · From the unknown to possibility: how XbotPark empowers founders"
                         },
                         {
-                            "time": "13:10–13:20",
-                            "title": "王晗（拟邀请） · 创业论坛开场致辞"
+                            "time": "14:45–14:55",
+                            "title": "Wang Feifan · ZJU Zijin Entrepreneurship Metaspace: an AI-powered entrepreneurship education ecosystem"
                         },
                         {
-                            "time": "13:30–14:10",
-                            "title": "王进 · AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？"
+                            "time": "14:55–15:05",
+                            "title": "Chen Junkai"
                         },
                         {
-                            "time": "14:10–14:40",
-                            "title": "闪电路演 · 3个项目"
+                            "time": "15:05–15:15",
+                            "title": "Han Bing · Redefining outstanding talent in the AI era"
                         },
                         {
-                            "time": "15:00–16:00",
-                            "title": "张克俊、张洁、张加林 · AI时代的第一次成功与第一次失败"
-                        },
-                        {
-                            "time": "16:20–16:30",
-                            "title": "项目点评"
-                        },
-                        {
-                            "time": "16:30–16:50",
-                            "title": "颁奖"
-                        },
-                        {
-                            "time": "16:50–17:00",
-                            "title": "阮俊华 · 闭幕致辞"
+                            "time": "15:35–16:30",
+                            "title": "Zhang Jie、Zhang Jialin、Wang Jin、Liu Jianbin · Roundtable: first successes and failures in the AI era"
                         }
                     ],
                     "guests": [
                         {
-                            "name": "张克俊",
-                            "role": "浙江大学人工智能学院智能设计系系主任、国际设计研究院副院长、人工智能教育教学研究中心常务副主任"
+                            "name": "Zhang Jie",
+                            "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)"
                         },
                         {
-                            "name": "张洁",
-                            "role": "华旦天使投资创始人兼CEO"
+                            "name": "Wang Jin",
+                            "role": "President, Manhattan Capital"
                         },
                         {
-                            "name": "王进",
-                            "role": "曼哈顿资本总裁"
+                            "name": "Liu Jianbin",
+                            "role": "Founder, Oufang Angel"
                         },
                         {
-                            "name": "张加林",
-                            "role": "时代强鹰·杭州创业发展促进会秘书长"
+                            "name": "Dou Mingqing",
+                            "role": "Post-investment Director, Puhua Capital"
                         },
                         {
-                            "name": "王晗",
-                            "role": "浙江大学创新创业学院副院长",
-                            "pending": true
+                            "name": "Liu Xiang",
+                            "role": "Investment Director, XbotPark Ningbo; core member of Prof. Li Zexiang’s team"
                         },
                         {
-                            "name": "窦明清",
-                            "role": "普华资本投后总监 · 出席嘉宾"
+                            "name": "Zhang Jialin",
+                            "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association"
+                        },
+                        {
+                            "name": "Wang Feifan",
+                            "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University; National Jury Pool Expert, China International College Students’ Innovation Competition"
+                        },
+                        {
+                            "name": "Han Bing",
+                            "role": "Head of Talent, MolarData"
+                        },
+                        {
+                            "name": "Chen Junkai",
+                            "role": "Xijing Technology"
+                        },
+                        {
+                            "name": "Xu Songbo",
+                            "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
                         }
                     ]
                 }
@@ -5894,7 +5884,7 @@
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
             "chapters": ["Technology", "Entrepreneurship", "Registration"],
-            "dateTime": "October 25 · 13:30–16:30",
+            "dateTime": "October 25 · 13:30–17:00",
             "venue": "Sandun Innovation Space",
             "address": "6F, Building C, Baogang Life Plaza",
             "attendeeLabel": "Attendee type",
@@ -6127,45 +6117,37 @@
                     "stages": [
                         {
                             "date": "10.13",
-                            "title": "Online launch"
+                            "title": "Initial round begins"
                         },
                         {
-                            "date": "10.18",
-                            "title": "On-site mentoring",
-                            "note": "13:00–17:00 · Optional"
+                            "date": "10.18–20",
+                            "title": "Online submissions",
+                            "note": "Closes 20 Oct, 23:00"
                         },
                         {
-                            "date": "10.19–23",
-                            "title": "Online semifinal"
+                            "date": "10.21–22",
+                            "title": "Review",
+                            "note": "Finalists: 22 Oct, 23:00"
                         },
                         {
                             "date": "10.25",
-                            "title": "Finals"
+                            "title": "Final"
                         }
                     ],
                     "schedule": [
                         {
-                            "date": "10.13–10.18",
-                            "title": "Online qualifier",
-                            "note": "Choose your own topic or enter an existing mature project",
-                            "time": "Due 17:00",
-                            "label": "Qualifier"
+                            "date": "10.13–10.20",
+                            "label": "Initial",
+                            "title": "Initial round",
+                            "time": "Submit 18–20 Oct · closes 20 Oct, 23:00",
+                            "place": "Online"
                         },
                         {
-                            "date": "10.18",
-                            "time": "13:00–17:00",
-                            "title": "Optional on-site mentoring",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
-                            "label": "Mentoring",
-                            "note": "Optional attendance",
-                            "attendance": "Optional"
-                        },
-                        {
-                            "date": "10.19–10.23",
-                            "time": "Due 24:00",
-                            "title": "Online semifinal",
-                            "note": "Continue developing your project online",
-                            "label": "Semifinal"
+                            "date": "10.21–10.22",
+                            "label": "Review",
+                            "title": "Review",
+                            "time": "Finalists: 22 Oct, 23:00",
+                            "place": "Online"
                         },
                         {
                             "date": "10.25",
@@ -6227,11 +6209,11 @@
             "forums": [
                 {
                     "title": "Technical forum",
-                    "time": "Oct 18 · 09:00–11:15"
+                    "time": "Oct 18 · 09:00–12:00"
                 },
                 {
                     "title": "Entrepreneurship forum",
-                    "time": "Oct 25 · 13:30–16:30"
+                    "time": "Oct 25 · 13:30–17:00"
                 }
             ],
             "rewards": [
@@ -6329,9 +6311,23 @@
                             "lines": ["Industry Advancement Track"]
                         }
                     ],
-                    "footer": "Awarded in addition to track prizes",
+                    "footer": "Sponsored by Zhipu · Added on top of track prizes",
                     "kind": "coding",
                     "totalLabel": "Value per pass"
+                },
+                {
+                    "title": "MiraclePlus · Token credits",
+                    "value": "$400",
+                    "note": "For every contestant",
+                    "kind": "tokens",
+                    "totalLabel": "Credits per contestant",
+                    "rows": [
+                        {
+                            "label": "Models",
+                            "lines": ["Fable · Astra · and more"]
+                        }
+                    ],
+                    "footer": "Provided separately from cash and physical prizes"
                 },
                 {
                     "title": "ModelScope · On-site draw",
@@ -6540,7 +6536,7 @@
                         "id": "technology",
                         "title": "Technical forum",
                         "theme": "AI technology trends & industry applications",
-                        "date": "October 18 · 09:00–11:15",
+                        "date": "18 Oct · 09:00–12:00",
                         "location": "ZJU Zijingang Campus\nDuan Yongping Teaching Building 2–112",
                         "guests": [
                             {
@@ -6549,6 +6545,12 @@
                                 "role": "CTO, Daily Interactive Co., Ltd.",
                                 "photo": true,
                                 "photoUrl": "/images/hackathon/ai-x/guests/ye-xinjiang.jpg"
+                            },
+                            {
+                                "id": "tan-weichuan",
+                                "name": "Tan Weichuan",
+                                "role": "University Relations Lead, MiraclePlus",
+                                "photo": false
                             },
                             {
                                 "id": "sun-yifei",
@@ -6561,12 +6563,20 @@
                             {
                                 "title": "Keynote",
                                 "speaker": "Ye Xinjiang",
-                                "guestIds": ["ye-xinjiang"]
+                                "guestIds": ["ye-xinjiang"],
+                                "time": "09:30–10:15"
                             },
                             {
-                                "title": "Technical talk",
+                                "title": "From hackathon to startup",
+                                "speaker": "Tan Weichuan",
+                                "guestIds": ["tan-weichuan"],
+                                "time": "10:15–11:00"
+                            },
+                            {
+                                "title": "Embodied intelligence technical talk",
                                 "speaker": "Sun Yifei",
-                                "guestIds": ["sun-yifei"]
+                                "guestIds": ["sun-yifei"],
+                                "time": "11:15–12:00"
                             }
                         ],
                         "signup": "Join technical forum"
@@ -6575,15 +6585,9 @@
                         "id": "entrepreneurship",
                         "title": "Entrepreneurship forum",
                         "theme": "First principles of entrepreneurship in the AI era",
-                        "date": "October 25 · 13:30–16:30",
+                        "date": "25 Oct · 13:30–17:00",
                         "location": "Sandun Entrepreneurship Space\nBaogang Life Plaza, Block C, Level 6",
                         "guests": [
-                            {
-                                "id": "zhang-kejun",
-                                "name": "Zhang Kejun",
-                                "role": "Head of Intelligent Design, School of Artificial Intelligence, Zhejiang University; Deputy Director, International Design Institute; Executive Deputy Director, AI Education and Teaching Research Center",
-                                "photo": true
-                            },
                             {
                                 "id": "zhang-jie",
                                 "name": "Zhang Jie",
@@ -6610,6 +6614,12 @@
                                 "photo": true
                             },
                             {
+                                "id": "liu-xiang",
+                                "name": "Liu Xiang",
+                                "role": "Investment Director, XbotPark Ningbo; core member of Prof. Li Zexiang’s team",
+                                "photo": false
+                            },
+                            {
                                 "id": "zhang-jialin",
                                 "name": "Zhang Jialin",
                                 "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
@@ -6622,6 +6632,18 @@
                                 "photo": true
                             },
                             {
+                                "id": "han-bing",
+                                "name": "Han Bing",
+                                "role": "Head of Talent, MolarData",
+                                "photo": false
+                            },
+                            {
+                                "id": "chen-junkai",
+                                "name": "Chen Junkai",
+                                "role": "Xijing Technology",
+                                "photo": false
+                            },
+                            {
                                 "id": "xu-songbo",
                                 "name": "Xu Songbo",
                                 "photo": true,
@@ -6630,28 +6652,118 @@
                         ],
                         "topics": [
                             {
-                                "title": "Beyond the AI hype: building capabilities that endure across cycles",
-                                "speaker": "Wang Jin",
-                                "guestIds": ["wang-jin"]
+                                "title": "Calm reflection amid the AI frenzy",
+                                "speaker": "Liu Jianbin",
+                                "guestIds": ["liu-jianbin"],
+                                "time": "13:40–14:10"
                             },
                             {
-                                "title": "ZJU Zijin Entrepreneurship Space: AI-enabled entrepreneurship education",
+                                "title": "From the unknown to possibility: how XbotPark empowers founders",
+                                "speaker": "Liu Xiang",
+                                "guestIds": ["liu-xiang"],
+                                "time": "14:10–14:45"
+                            },
+                            {
+                                "title": "ZJU Zijin Entrepreneurship Metaspace: an AI-powered entrepreneurship education ecosystem",
                                 "speaker": "Wang Feifan",
-                                "guestIds": ["wang-feifan"]
+                                "guestIds": ["wang-feifan"],
+                                "time": "14:45–14:55"
                             },
                             {
-                                "title": "Keynote · Topic to be announced",
-                                "speaker": "Zhang Kejun",
-                                "guestIds": ["zhang-kejun"]
+                                "title": "",
+                                "speaker": "Chen Junkai",
+                                "guestIds": ["chen-junkai"],
+                                "time": "14:55–15:05"
                             },
                             {
-                                "title": "Roundtable: First successes and failures in the AI era",
-                                "speaker": "Zhang Jie, Zhang Jialin, Liu Jianbin",
-                                "guestIds": ["zhang-jie", "zhang-jialin", "liu-jianbin"]
+                                "title": "Redefining outstanding talent in the AI era",
+                                "speaker": "Han Bing",
+                                "guestIds": ["han-bing"],
+                                "time": "15:05–15:15"
+                            },
+                            {
+                                "title": "Roundtable: first successes and failures in the AI era",
+                                "speaker": "Zhang Jie、Zhang Jialin、Wang Jin、Liu Jianbin",
+                                "guestIds": [
+                                    "zhang-jie",
+                                    "zhang-jialin",
+                                    "wang-jin",
+                                    "liu-jianbin"
+                                ],
+                                "time": "15:35–16:30"
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"]
+                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"],
+                        "judgesLabel": "25 Oct morning · Final jury",
+                        "judges": [
+                            {
+                                "id": "wang-han",
+                                "name": "Wang Han",
+                                "role": "Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University",
+                                "photo": false
+                            },
+                            {
+                                "id": "cheng-shaoxiong",
+                                "name": "Cheng Shaoxiong",
+                                "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus",
+                                "photo": false
+                            },
+                            {
+                                "id": "xu-songbo",
+                                "name": "Xu Songbo",
+                                "photo": true,
+                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee (Huawei track jury)"
+                            },
+                            {
+                                "id": "he-lu",
+                                "name": "He Lu",
+                                "role": "MKT Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
+                                "photo": false
+                            },
+                            {
+                                "id": "yan-guangjun",
+                                "name": "Yan Guangjun",
+                                "role": "Retail Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
+                                "photo": false
+                            },
+                            {
+                                "id": "zhang-jie",
+                                "name": "Zhang Jie",
+                                "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-jin",
+                                "name": "Wang Jin",
+                                "role": "President, Manhattan Capital",
+                                "photo": true
+                            },
+                            {
+                                "id": "yan-xia",
+                                "name": "Yan Xia",
+                                "role": "General Manager of Shelf E-commerce, Pechoin",
+                                "photo": false
+                            },
+                            {
+                                "id": "shen-lei",
+                                "name": "Shen Lei",
+                                "role": "Head of Strategy, Tmall Campus",
+                                "photo": false
+                            },
+                            {
+                                "id": "zhang-jialin",
+                                "name": "Zhang Jialin",
+                                "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
+                                "photo": true
+                            },
+                            {
+                                "id": "wang-feifan",
+                                "name": "Wang Feifan",
+                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University; National Jury Pool Expert, China International College Students’ Innovation Competition",
+                                "photo": true
+                            }
+                        ]
                     }
                 ],
                 "invitedLabel": "Special guests",
@@ -6702,15 +6814,15 @@
             "published": "Challenge published",
             "pending": "Awaiting publication",
             "campus": {
-                "initial": "Submit your GitHub repository and ModelScope deployment for the initial round.",
-                "semifinal": "Refine your technical work and upload your business plan and demo files."
+                "initial": "Submit your technical work (GitHub and ModelScope deployment), BP file and Demo video.",
+                "semifinal": "There is no semifinal submission. Initial entries are reviewed to select finalists."
             },
             "industry": {
                 "initial": "Receive the challenge on site, build your solution and submit your technical work.",
                 "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
             },
-            "selfDefined": "Tmall OPC Incubation Track challenges are released on Oct 14. Choose your own topic or a published recommended challenge.",
-            "campusPending": "Recommended challenges are not published yet. You can prepare your own project.",
+            "selfDefined": "Choose your own topic or a published recommended challenge.",
+            "campusPending": "This track accepts self-defined projects. Submit your technical work; recommended challenges will appear here when published.",
             "industryPending": "This round’s challenge is not published yet. Please wait for the official brief.",
             "requirements": "Required materials",
             "accessibleLinks": "Use HTTPS GitHub and ModelScope links that judges can access directly.",
@@ -6726,7 +6838,7 @@
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
-            "mySubmission": "My submission",
+            "mySubmission": "Submit your work",
             "ownership": "This submission belongs to you, in this track and round only.",
             "unsaved": "Unsaved changes",
             "submitted": "Formally submitted",
@@ -6789,6 +6901,97 @@
             "trackLabels": {
                 "industry": "Huawei Industry Implementation Track",
                 "campus": "Tmall OPC Incubation Track"
+            },
+            "locationLabel": "Location",
+            "locations": {
+                "campus": "Online",
+                "industry": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2‑112 · Attendance required",
+                "semifinal": "Online",
+                "final": "Sandun Startup Space · Baogang Lifestyle Plaza, Building C, 6F"
+            },
+            "recommendations": {
+                "title": "Recommended scenarios",
+                "thinkingTitle": "From problem to product",
+                "labels": {
+                    "audience": "Users & context",
+                    "pain": "Problem",
+                    "example": "Examples"
+                },
+                "scenes": [
+                    {
+                        "id": "law",
+                        "title": "Law",
+                        "audience": "Overseas business compliance, contracts, campus legal services, and legal education for founders, legal teams, students, and the public.",
+                        "pain": "Rules and documents are scattered; technical language is difficult to understand, and research and initial review take time.",
+                        "example": "Tools for overseas regulation research and change summaries with verifiable sources, compliance checklists, or contract information organization.",
+                        "resource": {
+                            "title": "Law resources · Thunisoft Yuandian legal MCP",
+                            "description": "TUOZHE AI Ecosystem × Thunisoft Yuandian provides participant accounts with 3,500 credits per month plus an additional 3,000 credits valid for three months, for legal research in this event."
+                        }
+                    },
+                    {
+                        "id": "business",
+                        "title": "Business",
+                        "audience": "Market research, customer communication, sales follow-up, and e-commerce operations for founders, sales teams, and business operators.",
+                        "pain": "Customer information, business data, and communication records are scattered; needs analysis, proposal preparation, and follow-up take time.",
+                        "example": "Tools for market research, customer needs analysis, sales opportunity tracking, or business data analysis. Validate efficiency and usefulness in a real workflow."
+                    },
+                    {
+                        "id": "medicine",
+                        "title": "Medicine",
+                        "audience": "Medical learning and teaching, human and animal health, serving clinicians, researchers, students, patients, and animal health professionals.",
+                        "pain": "Health data and specialist knowledge are difficult to integrate; research and health services face challenges in understanding, efficiency, and access.",
+                        "example": "Applications for precision medicine analysis, medical humanities, drug discovery, or animal health management. Use reliable, cited data and professional review; do not replace medical or veterinary advice."
+                    },
+                    {
+                        "id": "education",
+                        "title": "Education",
+                        "audience": "Lesson preparation, practice, and personalized learning support for teachers and learners.",
+                        "pain": "Different learner backgrounds make exercise design, differentiated explanations, and feedback organization time-consuming.",
+                        "example": "Generate exercises, learning paths, or feedback from teacher-provided materials, with teacher review and adjustment before use."
+                    },
+                    {
+                        "id": "communication",
+                        "title": "Communication",
+                        "audience": "Exhibitions, cultural heritage, campus events, and creative product promotion for organizers, content teams, and audiences.",
+                        "pain": "Turning specialist material into accurate, readable visual content is difficult; organizing assets and repeated revisions take time.",
+                        "example": "Reusable AI workflows for asset organization, content planning, writing, visual production, fact-checking, and export. Cite sources and distinguish real images from generated illustrations."
+                    }
+                ],
+                "topicType": "Open topics",
+                "goal": "Build a testable, practical product or service around a real user need.",
+                "scope": "These scenarios are suggestions. Other topics with practical value and commercialization potential are welcome.",
+                "formatsTitle": "Any project form",
+                "formats": [
+                    "AI app",
+                    "Agent",
+                    "Software prototype",
+                    "Hardware prototype",
+                    "Tool",
+                    "Service"
+                ],
+                "evidenceTitle": "Validation",
+                "evidence": ["Working demo", "Pilot validation", "User feedback"],
+                "thinkingSteps": [
+                    {
+                        "title": "Context",
+                        "question": "In which task or workflow does the problem occur?"
+                    },
+                    {
+                        "title": "Users",
+                        "question": "Who faces the problem and will use the product?"
+                    },
+                    {
+                        "title": "Problem",
+                        "question": "Where is the current approach slow or inadequate?"
+                    },
+                    {
+                        "title": "Solution",
+                        "question": "How will you solve it and validate the result?"
+                    }
+                ],
+                "goalTitle": "Project goal",
+                "evidenceHint": "Encouraged"
             }
         },
         "trackScheduleOnline": "Online",
@@ -6799,6 +7002,78 @@
         "trackPurpose": {
             "campus": "Open Topic",
             "industry": "Enterprise Challenge"
+        },
+        "incubation": {
+            "title": "Incubation support",
+            "intro": "Selected projects can apply for these incubation resources. Support is subject to referral and review.",
+            "providers": [
+                {
+                    "id": "zijin",
+                    "name": "ZJU Zijin Startup Space",
+                    "location": "On-campus startup space at Zhejiang University",
+                    "benefits": [
+                        {
+                            "title": "Workspace",
+                            "detail": "Referrals for free premises and workstations at ZJU Zijin Startup Space."
+                        },
+                        {
+                            "title": "Park placement",
+                            "detail": "Connections to ZJU-linked industrial parks, local establishment policies and funding support."
+                        },
+                        {
+                            "title": "Investor introductions",
+                            "detail": "Matching with ZJU-linked and leading domestic early-stage investors."
+                        },
+                        {
+                            "title": "Industry support",
+                            "detail": "Connections to Huawei Kunpeng, Ascend seed programs and related funding, compute and ecosystem opportunities worth hundreds of thousands of yuan."
+                        },
+                        {
+                            "title": "Innovation grants",
+                            "detail": "Priority referrals to innovation training programs offering grants of up to ¥50,000–100,000."
+                        },
+                        {
+                            "title": "Scholarships",
+                            "detail": "Priority referrals for innovation and entrepreneurship scholarships of up to ¥20,000."
+                        }
+                    ]
+                },
+                {
+                    "id": "elite-eagle",
+                    "name": "Elite Eagle",
+                    "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Space",
+                    "benefits": [
+                        {
+                            "title": "Workspace",
+                            "detail": "3–6 months of incubation space, with free meeting areas, gigabit broadband and basic office equipment."
+                        },
+                        {
+                            "title": "Business services",
+                            "detail": "Company registration assistance, tax, accounting and legal consultations, and recruitment connections."
+                        },
+                        {
+                            "title": "Compute support",
+                            "detail": "Huawei seed program."
+                        },
+                        {
+                            "title": "Founder mentoring",
+                            "detail": "One-to-one mentor consultations, peer advisory groups, and innovation salons and training."
+                        },
+                        {
+                            "title": "Investor connections",
+                            "detail": "Early-stage fund introductions, fundraising pitches, business plan refinement and competition referrals."
+                        },
+                        {
+                            "title": "Policy applications",
+                            "detail": "Guidance and policy briefings for Xihu talent programs, high-tech enterprise status and technology-based SME programs."
+                        },
+                        {
+                            "title": "Industry and research",
+                            "detail": "Connections to listed companies, specialized and innovative enterprises, alumni industries and the wider innovation ecosystem."
+                        }
+                    ]
+                }
+            ]
         }
     },
     "eventWorkspace": {
