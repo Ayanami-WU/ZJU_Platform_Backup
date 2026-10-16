@@ -78,12 +78,6 @@ export default function AiXRecommendedScenes() {
                                 <dd>{scene.example}</dd>
                             </div>
                         </dl>
-                        {scene.resource && (
-                            <details className="aix-scene-resource">
-                                <summary>{scene.resource.title}</summary>
-                                <p>{scene.resource.description}</p>
-                            </details>
-                        )}
                     </article>
                 ))}
             </div>

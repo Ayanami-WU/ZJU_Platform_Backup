@@ -764,23 +764,6 @@
     color: var(--hx-muted);
     margin-bottom: 4px;
 }
-.aix-scene-resource {
-    margin-top: 16px;
-    padding-top: 10px;
-    border-top: 1px solid var(--hx-line);
-    font-size: 13px;
-    line-height: 1.75;
-}
-.aix-scene-resource summary {
-    color: var(--hx-accent-text);
-    cursor: pointer;
-    padding-block: 5px;
-}
-.aix-scene-resource p {
-    margin-top: 8px;
-    color: var(--hx-muted);
-    font-weight: 400;
-}
 @container (min-width: 620px) {
     .aix-scenes-steps {
         grid-template-columns: repeat(4, minmax(0, 1fr));
