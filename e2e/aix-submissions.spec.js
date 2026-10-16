@@ -229,7 +229,7 @@ test("round submissions preserve draft isolation, failures, formal snapshots and
     await page.screenshot({ path: "output/playwright/aix-task-desktop.png", fullPage: true });
     await page.getByRole("tab", { name: /复赛/ }).click();
     await expect(page.getByText("尚未获得本赛道复赛资格", { exact: true })).toBeVisible();
-    await expect(form.getByLabel(/商业计划书/)).toBeDisabled();
+    await expect(form.getByLabel(/商业一页纸/)).toBeDisabled();
     await page.getByRole("tab", { name: /决赛/ }).click();
     await expect(page.locator(".aix-task-requirements")).toContainText("10.25 09:10 — 11:30");
     await expect(page.locator(".aix-task-submission")).toHaveCount(0);
@@ -261,9 +261,9 @@ test("anonymous mobile preview keeps tabs enabled, fields locked and final free 
     await expect(page.locator(".aix-task-submission .aix-registration-lock")).toBeVisible();
     await expect(page.getByLabel(/GitHub 仓库链接/)).toBeDisabled();
     await page.getByRole("tab", { name: /复赛/ }).click();
-    await expect(page.getByLabel(/商业计划书/)).toBeDisabled();
+    await expect(page.getByLabel(/商业一页纸/)).toBeDisabled();
     await page.getByRole("tab", { name: /华为产业落地/ }).click();
-    await expect(page.getByLabel(/商业计划书/)).toHaveCount(0);
+    await expect(page.getByLabel(/商业一页纸/)).toHaveCount(0);
     await page.screenshot({ path: "output/playwright/aix-task-mobile.png", fullPage: true });
     expect(
         await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)
@@ -328,13 +328,11 @@ test("qualified semifinal accepts private file uploads, preserves previous files
     expect(state.data.submissions[0].submitted.bpFileId).toBe(1);
     expect(state.data.submissions[0].submitted.demoFileId).toBe(2);
     const download = page.waitForEvent("download");
-    await form.getByRole("button", { name: "下载商业计划书（BP）", exact: true }).click();
+    await form.getByRole("button", { name: "下载商业一页纸", exact: true }).click();
     expect((await download).suggestedFilename()).toBe("business-plan.pdf");
     await page.setViewportSize({ width: 1440, height: 1100 });
     await page.reload();
-    await expect(
-        form.getByRole("button", { name: "下载商业计划书（BP）", exact: true })
-    ).toBeVisible();
+    await expect(form.getByRole("button", { name: "下载商业一页纸", exact: true })).toBeVisible();
     await page.screenshot({ path: "output/playwright/aix-task-files-desktop.png", fullPage: true });
 });
 

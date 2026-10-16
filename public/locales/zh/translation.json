@@ -6821,7 +6821,7 @@
                 "projectName": "项目名称",
                 "githubUrl": "GitHub 仓库链接",
                 "modelscopeUrl": "魔搭部署链接",
-                "bpFileId": "商业计划书（BP）",
+                "bpFileId": "商业一页纸",
                 "demoFileId": "Demo 演示文件"
             },
             "placeholders": {

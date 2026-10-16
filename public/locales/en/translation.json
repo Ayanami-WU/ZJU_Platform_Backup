@@ -6718,7 +6718,7 @@
                 "projectName": "Project name",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
-                "bpFileId": "Business plan (BP)",
+                "bpFileId": "Business one-pager",
                 "demoFileId": "Demo file"
             },
             "placeholders": {
