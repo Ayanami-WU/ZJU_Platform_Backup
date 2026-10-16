@@ -5778,8 +5778,20 @@
                     "required": "Preliminary-round contestants must attend the technical forum.",
                     "agenda": [
                         {
+                            "time": "09:00–09:10",
+                            "title": "Opening · Ying Qi, Founder, Tuozhe AI Ecosystem"
+                        },
+                        {
+                            "time": "09:10–09:20",
+                            "title": "Opening remarks: the educational significance of AI+X and its implications for innovation and entrepreneurship · Ruan Junhua, Executive Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University; President, Hangzhou Entrepreneurship Development Association; Founder, Rainbow Life Platform"
+                        },
+                        {
+                            "time": "09:20–09:30",
+                            "title": "Group photo"
+                        },
+                        {
                             "time": "09:30–10:10",
-                            "title": "Ye Xinjiang · Keynote"
+                            "title": "Ye Xinjiang · Development trends of 仝 and enterprise responses"
                         },
                         {
                             "time": "10:10–10:50",
@@ -6577,7 +6589,7 @@
                         ],
                         "topics": [
                             {
-                                "title": "Keynote",
+                                "title": "Development trends of 仝 and enterprise responses",
                                 "speaker": "Ye Xinjiang",
                                 "guestIds": ["ye-xinjiang"],
                                 "time": "09:30–10:10"
