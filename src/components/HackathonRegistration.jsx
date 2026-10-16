@@ -1632,7 +1632,11 @@ const HackathonRegistration = ({
                     >
                         {isAiX && (
                             <header className="aix-page-heading aix-register-page-heading">
-                                <span>04</span>
+                                <span>
+                                    {String(
+                                        AIX_CHAPTER_IDS.indexOf("registration-form") + 1
+                                    ).padStart(2, "0")}
+                                </span>
                                 <h2>{t("aix.register.sectionTitle", { defaultValue: "报名" })}</h2>
                             </header>
                         )}

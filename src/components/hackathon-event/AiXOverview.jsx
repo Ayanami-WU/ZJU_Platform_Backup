@@ -1,5 +1,6 @@
 import AiXTrackPurpose from "./AiXTrackPurpose";
 import AiXRewards from "./AiXRewards";
+import AiXIncubation from "./AiXIncubation";
 import { useState } from "react";
 import { Pause, Play, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -181,6 +182,7 @@ export default function AiXOverview({ state }) {
                     <AiXRewards rewards={copy.rewards} />
                 </div>
             </section>
+            <AiXIncubation />
         </div>
     );
 }

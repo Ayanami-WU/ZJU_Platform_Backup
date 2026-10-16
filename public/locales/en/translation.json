@@ -5476,7 +5476,7 @@
             },
             "beyondLabel": "BUILD BEYOND THE EVENT",
             "beyondTitle": "From a project to real use",
-            "beyondDescription": "Promising projects can apply for space, ecosystem resources and mentor support from Shidai Qiangying, ZTVP and Tmall Campus. Opportunities are subject to selection.",
+            "beyondDescription": "Selected projects can access on-campus incubation through ZJU Zijin Startup Space, or workspace and business services through Elite Eagle’s 1897 OPC Community and Sandun Space. ZTVP and Tmall Campus provide additional incubation resources. Support is subject to referral and review.",
             "pastProjects": "Explore the first edition",
             "partnersLabel": "THIS EDITION’S PARTNERS",
             "partnersTitle": "Partners",
@@ -5707,7 +5707,7 @@
             "industryMaterials": "Technical project + Demo"
         },
         "official": {
-            "chapters": ["Home", "Format", "Prizes", "Register"],
+            "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5787,7 +5787,7 @@
                         },
                         {
                             "time": "11:15–12:00",
-                            "title": "Sun Yifei · Technical talk"
+                            "title": "Sun Yifei · Embodied intelligence technical talk"
                         }
                     ],
                     "guests": [
@@ -6573,7 +6573,7 @@
                                 "time": "10:15–11:00"
                             },
                             {
-                                "title": "Technical talk",
+                                "title": "Embodied intelligence technical talk",
                                 "speaker": "Sun Yifei",
                                 "guestIds": ["sun-yifei"],
                                 "time": "11:15–12:00"
@@ -7002,6 +7002,78 @@
         "trackPurpose": {
             "campus": "Open Topic",
             "industry": "Enterprise Challenge"
+        },
+        "incubation": {
+            "title": "Incubation support",
+            "intro": "Selected projects can apply for these incubation resources. Support is subject to referral and review.",
+            "providers": [
+                {
+                    "id": "zijin",
+                    "name": "ZJU Zijin Startup Space",
+                    "location": "On-campus startup space at Zhejiang University",
+                    "benefits": [
+                        {
+                            "title": "Workspace",
+                            "detail": "Referrals for free premises and workstations at ZJU Zijin Startup Space."
+                        },
+                        {
+                            "title": "Park placement",
+                            "detail": "Connections to ZJU-linked industrial parks, local establishment policies and funding support."
+                        },
+                        {
+                            "title": "Investor introductions",
+                            "detail": "Matching with ZJU-linked and leading domestic early-stage investors."
+                        },
+                        {
+                            "title": "Industry support",
+                            "detail": "Connections to Huawei Kunpeng, Ascend seed programs and related funding, compute and ecosystem opportunities worth hundreds of thousands of yuan."
+                        },
+                        {
+                            "title": "Innovation grants",
+                            "detail": "Priority referrals to innovation training programs offering grants of up to ¥50,000–100,000."
+                        },
+                        {
+                            "title": "Scholarships",
+                            "detail": "Priority referrals for innovation and entrepreneurship scholarships of up to ¥20,000."
+                        }
+                    ]
+                },
+                {
+                    "id": "elite-eagle",
+                    "name": "Elite Eagle",
+                    "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Space",
+                    "benefits": [
+                        {
+                            "title": "Workspace",
+                            "detail": "3–6 months of incubation space, with free meeting areas, gigabit broadband and basic office equipment."
+                        },
+                        {
+                            "title": "Business services",
+                            "detail": "Company registration assistance, tax, accounting and legal consultations, and recruitment connections."
+                        },
+                        {
+                            "title": "Compute support",
+                            "detail": "Huawei seed program."
+                        },
+                        {
+                            "title": "Founder mentoring",
+                            "detail": "One-to-one mentor consultations, peer advisory groups, and innovation salons and training."
+                        },
+                        {
+                            "title": "Investor connections",
+                            "detail": "Early-stage fund introductions, fundraising pitches, business plan refinement and competition referrals."
+                        },
+                        {
+                            "title": "Policy applications",
+                            "detail": "Guidance and policy briefings for Xihu talent programs, high-tech enterprise status and technology-based SME programs."
+                        },
+                        {
+                            "title": "Industry and research",
+                            "detail": "Connections to listed companies, specialized and innovative enterprises, alumni industries and the wider innovation ecosystem."
+                        }
+                    ]
+                }
+            ]
         }
     },
     "eventWorkspace": {
