@@ -5137,12 +5137,12 @@
         "forumsDescription": "Technical practice and entrepreneurship in the AI era.",
         "forums": {
             "technology": {
-                "date": "October 18 · 09:00–12:00 · Around 200 attendees",
+                "date": "October 18 · 09:00–11:30 · Around 200 attendees",
                 "title": "Technical Forum",
                 "description": "AI technology trends and industrial applications"
             },
             "entrepreneurship": {
-                "date": "October 25 · 09:00–17:00 · Around 150 attendees",
+                "date": "October 25 · 09:00–16:00 · Around 150 attendees",
                 "title": "Finals & Entrepreneurship Forum",
                 "description": "First principles of entrepreneurship in the AI era"
             }
@@ -5158,12 +5158,12 @@
             {
                 "date": "10.18",
                 "title": "Technology forum & Huawei initial",
-                "description": "09:00–12:00 · 13:00–17:00"
+                "description": "09:00–11:30 · 13:00–17:00"
             },
             {
                 "date": "10.25",
                 "title": "Final & entrepreneurship forum",
-                "description": "09:00–11:30 · 13:30–17:00"
+                "description": "09:00–11:30 · 13:30–16:00"
             }
         ],
         "challengeKicker": "Academic creativity · Industry challenges",
@@ -5195,7 +5195,7 @@
             "final": {
                 "title": "Final",
                 "date": "10.25",
-                "description": "October 25, 09:10–11:30 parallel pitches. Separate judging; joint awards.",
+                "description": "October 25, 09:15–11:30 parallel pitches. Separate judging; joint awards.",
                 "materials": "Prepare pitch slides, a project poster and a working demo. Pitch order and detailed rules will be announced."
             }
         },
@@ -5773,20 +5773,20 @@
                 "technology": {
                     "title": "Technical Forum",
                     "theme": "AI technology trends and industrial applications",
-                    "time": "18 Oct · 09:00–12:00",
+                    "time": "18 Oct · 09:00–11:30",
                     "location": "Duan Yongping Teaching Building 2-112, Zijingang Campus, Zhejiang University",
                     "required": "Preliminary-round contestants must attend the technical forum.",
                     "agenda": [
                         {
-                            "time": "09:30–10:15",
+                            "time": "09:30–10:10",
                             "title": "Ye Xinjiang · Keynote"
                         },
                         {
-                            "time": "10:15–11:00",
+                            "time": "10:10–10:50",
                             "title": "Tan Weichuan · From hackathon to startup"
                         },
                         {
-                            "time": "11:15–12:00",
+                            "time": "10:50–11:30",
                             "title": "Sun Yifei · Embodied intelligence technical talk"
                         }
                     ],
@@ -5808,36 +5808,56 @@
                 "entrepreneurship": {
                     "title": "Entrepreneurship forum",
                     "theme": "First principles of entrepreneurship in the AI era",
-                    "time": "25 Oct · 13:30–17:00",
+                    "time": "25 Oct · 13:30–16:00",
                     "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
                     "required": "Finalists must attend the final-day forum. Parallel pitches in the morning; entrepreneurship forum in the afternoon.",
                     "agenda": [
                         {
-                            "time": "13:40–14:10",
-                            "title": "Liu Jianbin · Calm reflection amid the AI frenzy"
+                            "time": "13:30–13:35",
+                            "title": "Opening · Yang Xing"
                         },
                         {
-                            "time": "14:10–14:45",
-                            "title": "Liu Xiang · From the unknown to possibility: how XbotPark empowers founders"
+                            "time": "13:35–13:40",
+                            "title": "Leadership remarks · Wang Han, Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University"
                         },
                         {
-                            "time": "14:45–14:55",
-                            "title": "Wang Feifan · ZJU Zijin Entrepreneurship Metaspace: an AI-powered entrepreneurship education ecosystem"
+                            "time": "13:40–13:45",
+                            "title": "Competition update · Ying Qi, Founder, Tuozhe AI Ecosystem"
                         },
                         {
-                            "time": "14:55–15:05",
-                            "title": "Chen Junkai"
+                            "time": "13:45–14:00",
+                            "title": "Platform introduction: ZJU Zijin Entrepreneurship Metaspace — an AI-powered entrepreneurship education ecosystem · Wang Feifan"
                         },
                         {
-                            "time": "15:05–15:15",
-                            "title": "Han Bing · Redefining outstanding talent in the AI era"
+                            "time": "14:00–14:20",
+                            "title": "Founder perspective: redefining outstanding talent in the AI era · Han Bing"
                         },
                         {
-                            "time": "15:35–16:30",
-                            "title": "Zhang Jie、Zhang Jialin、Wang Jin、Liu Jianbin · Roundtable: first successes and failures in the AI era"
+                            "time": "14:20–14:35",
+                            "title": "Platform introduction: Elite Eagle · Zhang Jialin"
+                        },
+                        {
+                            "time": "14:35–14:55",
+                            "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles? · Liu Jianbin"
+                        },
+                        {
+                            "time": "14:55–15:10",
+                            "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1 · Liu Xiang"
+                        },
+                        {
+                            "time": "15:10–15:50",
+                            "title": "Roundtable and discussion: first successes and failures in the AI era · Hosted by Ying Qi; Cheng Shaoxiong, Wang Jin, Zhang Jie and Zhang Jialin"
+                        },
+                        {
+                            "time": "15:50–16:00",
+                            "title": "Awards ceremony"
                         }
                     ],
                     "guests": [
+                        {
+                            "name": "Cheng Shaoxiong",
+                            "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus"
+                        },
                         {
                             "name": "Zhang Jie",
                             "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)"
@@ -5871,10 +5891,6 @@
                             "role": "Head of Talent, MolarData"
                         },
                         {
-                            "name": "Chen Junkai",
-                            "role": "Xijing Technology"
-                        },
-                        {
                             "name": "Xu Songbo",
                             "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
                         }
@@ -5884,7 +5900,7 @@
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
             "chapters": ["Technology", "Entrepreneurship", "Registration"],
-            "dateTime": "October 25 · 13:30–17:00",
+            "dateTime": "October 25 · 13:30–16:00",
             "venue": "Sandun Innovation Space",
             "address": "6F, Building C, Baogang Life Plaza",
             "attendeeLabel": "Attendee type",
@@ -6151,7 +6167,7 @@
                         },
                         {
                             "date": "10.25",
-                            "time": "09:10–11:30",
+                            "time": "09:15–11:30",
                             "title": "In-person final pitches",
                             "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza",
                             "label": "Pitch"
@@ -6198,7 +6214,7 @@
                         },
                         {
                             "date": "10.25",
-                            "time": "09:10–11:30",
+                            "time": "09:15–11:30",
                             "title": "In-person final pitches",
                             "place": "Sandun Metaspace · 6F, Building C, Baogang Life Plaza",
                             "label": "Pitch"
@@ -6209,11 +6225,11 @@
             "forums": [
                 {
                     "title": "Technical forum",
-                    "time": "Oct 18 · 09:00–12:00"
+                    "time": "Oct 18 · 09:00–11:30"
                 },
                 {
                     "title": "Entrepreneurship forum",
-                    "time": "Oct 25 · 13:30–17:00"
+                    "time": "Oct 25 · 13:30–16:00"
                 }
             ],
             "rewards": [
@@ -6536,7 +6552,7 @@
                         "id": "technology",
                         "title": "Technical forum",
                         "theme": "AI technology trends & industry applications",
-                        "date": "18 Oct · 09:00–12:00",
+                        "date": "18 Oct · 09:00–11:30 · Host: Ying Qi",
                         "location": "ZJU Zijingang Campus\nDuan Yongping Teaching Building 2–112",
                         "guests": [
                             {
@@ -6564,19 +6580,19 @@
                                 "title": "Keynote",
                                 "speaker": "Ye Xinjiang",
                                 "guestIds": ["ye-xinjiang"],
-                                "time": "09:30–10:15"
+                                "time": "09:30–10:10"
                             },
                             {
                                 "title": "From hackathon to startup",
                                 "speaker": "Tan Weichuan",
                                 "guestIds": ["tan-weichuan"],
-                                "time": "10:15–11:00"
+                                "time": "10:10–10:50"
                             },
                             {
                                 "title": "Embodied intelligence technical talk",
                                 "speaker": "Sun Yifei",
                                 "guestIds": ["sun-yifei"],
-                                "time": "11:15–12:00"
+                                "time": "10:50–11:30"
                             }
                         ],
                         "signup": "Join technical forum"
@@ -6585,9 +6601,15 @@
                         "id": "entrepreneurship",
                         "title": "Entrepreneurship forum",
                         "theme": "First principles of entrepreneurship in the AI era",
-                        "date": "25 Oct · 13:30–17:00",
+                        "date": "25 Oct · 13:30–16:00 · Host: Yang Xing",
                         "location": "Sandun Entrepreneurship Space\nBaogang Life Plaza, Block C, Level 6",
                         "guests": [
+                            {
+                                "id": "cheng-shaoxiong",
+                                "name": "Cheng Shaoxiong",
+                                "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus",
+                                "photo": false
+                            },
                             {
                                 "id": "zhang-jie",
                                 "name": "Zhang Jie",
@@ -6638,12 +6660,6 @@
                                 "photo": false
                             },
                             {
-                                "id": "chen-junkai",
-                                "name": "Chen Junkai",
-                                "role": "Xijing Technology",
-                                "photo": false
-                            },
-                            {
                                 "id": "xu-songbo",
                                 "name": "Xu Songbo",
                                 "photo": true,
@@ -6652,45 +6668,45 @@
                         ],
                         "topics": [
                             {
-                                "title": "Calm reflection amid the AI frenzy",
-                                "speaker": "Liu Jianbin",
-                                "guestIds": ["liu-jianbin"],
-                                "time": "13:40–14:10"
-                            },
-                            {
-                                "title": "From the unknown to possibility: how XbotPark empowers founders",
-                                "speaker": "Liu Xiang",
-                                "guestIds": ["liu-xiang"],
-                                "time": "14:10–14:45"
-                            },
-                            {
-                                "title": "ZJU Zijin Entrepreneurship Metaspace: an AI-powered entrepreneurship education ecosystem",
+                                "title": "Platform introduction: ZJU Zijin Entrepreneurship Metaspace — an AI-powered entrepreneurship education ecosystem",
                                 "speaker": "Wang Feifan",
                                 "guestIds": ["wang-feifan"],
-                                "time": "14:45–14:55"
+                                "time": "13:45–14:00"
                             },
                             {
-                                "title": "",
-                                "speaker": "Chen Junkai",
-                                "guestIds": ["chen-junkai"],
-                                "time": "14:55–15:05"
-                            },
-                            {
-                                "title": "Redefining outstanding talent in the AI era",
+                                "title": "Founder perspective: redefining outstanding talent in the AI era",
                                 "speaker": "Han Bing",
                                 "guestIds": ["han-bing"],
-                                "time": "15:05–15:15"
+                                "time": "14:00–14:20"
                             },
                             {
-                                "title": "Roundtable: first successes and failures in the AI era",
-                                "speaker": "Zhang Jie、Zhang Jialin、Wang Jin、Liu Jianbin",
+                                "title": "Platform introduction: Elite Eagle",
+                                "speaker": "Zhang Jialin",
+                                "guestIds": ["zhang-jialin"],
+                                "time": "14:20–14:35"
+                            },
+                            {
+                                "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles?",
+                                "speaker": "Liu Jianbin",
+                                "guestIds": ["liu-jianbin"],
+                                "time": "14:35–14:55"
+                            },
+                            {
+                                "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1",
+                                "speaker": "Liu Xiang",
+                                "guestIds": ["liu-xiang"],
+                                "time": "14:55–15:10"
+                            },
+                            {
+                                "title": "Roundtable and discussion: first successes and failures in the AI era",
+                                "speaker": "Cheng Shaoxiong、Wang Jin、Zhang Jie、Zhang Jialin",
                                 "guestIds": [
-                                    "zhang-jie",
-                                    "zhang-jialin",
+                                    "cheng-shaoxiong",
                                     "wang-jin",
-                                    "liu-jianbin"
+                                    "zhang-jie",
+                                    "zhang-jialin"
                                 ],
-                                "time": "15:35–16:30"
+                                "time": "15:10–15:50"
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
