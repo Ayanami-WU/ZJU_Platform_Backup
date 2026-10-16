@@ -5799,7 +5799,7 @@
                         },
                         {
                             "time": "10:50–11:30",
-                            "title": "Sun Yifei · Embodied intelligence technical talk"
+                            "title": "Sun Yifei · Keynote: developments in embodied intelligence technology"
                         }
                     ],
                     "guests": [
@@ -6601,7 +6601,7 @@
                                 "time": "10:10–10:50"
                             },
                             {
-                                "title": "Embodied intelligence technical talk",
+                                "title": "Keynote: developments in embodied intelligence technology",
                                 "speaker": "Sun Yifei",
                                 "guestIds": ["sun-yifei"],
                                 "time": "10:50–11:30"
