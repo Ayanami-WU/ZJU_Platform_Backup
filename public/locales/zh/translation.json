@@ -5783,7 +5783,7 @@
             "tmallChannelQrAlt": "天猫校园大学生 OPC 创业大赛报名表二维码",
             "requiredMark": "必填",
             "huaweiChannelTitle": "华为产业落地赛道提交入口",
-            "huaweiChannelDescription": "华为初赛提交 GitHub、魔搭链接和作品说明书；复赛在此基础上补交 Demo 运行录制视频。",
+            "huaweiChannelDescription": "华为初赛提交 GitHub、魔搭链接和作品说明书（产品特色、功能讲解＋优秀运行结果）；复赛在此基础上补交 Demo 运行录制视频。",
             "campusChannels": "在下方保存 GitHub 与魔搭社区仓库地址。",
             "industryChannels": "通过魔搭社区提交，GitHub 作为补充代码入口。",
             "channelHint": "本页保存仓库地址供赛事组查看；赛题另有指定入口时，请同步完成该入口的提交。",
@@ -7016,7 +7016,7 @@
                 "semifinal": "本赛道不再设置复赛提交，初赛后直接评审并确定决赛项目。"
             },
             "industry": {
-                "initial": "初赛提交 GitHub 链接、魔搭链接和作品说明书（功能讲解＋优秀运行结果）。",
+                "initial": "初赛提交 GitHub 链接、魔搭链接和作品说明书（产品特色、功能讲解＋优秀运行结果）。",
                 "semifinal": "复赛提交 GitHub、魔搭链接、更新后的作品说明书和 Demo 运行录制视频。"
             },
             "selfDefined": "可自主命题，也可选择已公布的推荐赛题。",
@@ -7034,7 +7034,7 @@
             },
             "placeholders": {
                 "projectName": "填写项目名称",
-                "productHighlights": "上传包含功能讲解和优秀运行结果的作品说明书",
+                "productHighlights": "上传包含产品特色、功能讲解和优秀运行结果的作品说明书",
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
@@ -7075,9 +7075,9 @@
             "registrationReceiptHint": "报名已保存。请前往对应赛道与轮次，保存草稿或正式提交作品。",
             "uploadFile": "选择文件",
             "replaceFile": "替换文件",
-            "bpFileHint": "PDF / PPT / PPTX，最大 30 MB；须包含功能讲解和优秀运行结果",
+            "bpFileHint": "PDF / PPT / PPTX，最大 30 MB；须包含产品特色、功能讲解和优秀运行结果",
             "demoFileHint": "MP4 / WebM / MOV，最大 200 MB",
-            "bpFileError": "请上传 30 MB 以内、包含功能讲解和优秀运行结果的作品说明书。",
+            "bpFileError": "请上传 30 MB 以内、包含产品特色、功能讲解和优秀运行结果的作品说明书。",
             "demoFileError": "请上传 200 MB 以内的 MP4、WebM 或 MOV 文件。",
             "uploadFailed": "上传失败，原文件和输入已保留，请重试。",
             "downloadFailed": "下载失败，请重试。",
