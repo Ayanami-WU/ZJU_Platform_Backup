@@ -56,6 +56,9 @@
     border-radius: 4px;
     padding: 6px;
 }
+#aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-brand-xbotpark {
+    background: #102319;
+}
 #aix-partners-title .aix-partner-panels .aix-brand-manhattan {
     max-width: 440px;
     flex-basis: 440px;
@@ -107,7 +110,12 @@
 }
 [data-theme="day"]
     #aix-partners-title
-    :is(.aix-brand-unionlink, .aix-brand-yuandian, .aix-brand-thunisoft) {
+    :is(
+        .aix-brand-unionlink,
+        .aix-brand-yuandian,
+        .aix-brand-thunisoft,
+        .aix-brand-future-entrepreneur
+    ) {
     background: #102319;
     border-radius: 4px;
     padding: 7px;

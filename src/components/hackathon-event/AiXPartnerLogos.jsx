@@ -16,6 +16,13 @@ const brands = [
     { id: "delta-x", name: "迭代未来 Delta X", source: `${assetRoot}delta-x.webp` },
     { id: "opendev", name: "OpenDev", source: `${assetRoot}opendev.png` },
     { id: "mua-pizza", name: "慕玛披萨", source: `${assetRoot}mua-pizza.png` },
+    { id: "xbotpark", name: "XbotPark机器人基地（宁波）", source: `${assetRoot}xbotpark.png` },
+    { id: "miracleplus", name: "奇绩创坛", source: `${assetRoot}miracleplus.png` },
+    {
+        id: "future-entrepreneur",
+        name: "未来企业家俱乐部",
+        source: `${assetRoot}future-entrepreneur.png`,
+    },
     {
         id: "zhipu",
         name: "智谱 Zhipu",
