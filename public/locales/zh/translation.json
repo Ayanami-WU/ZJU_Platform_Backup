@@ -4312,6 +4312,7 @@
             "saving": "保存中…",
             "githubUrl": "GitHub 仓库",
             "modelscopeUrl": "魔搭部署",
+            "productHighlights": "产品特色说明",
             "bpFileId": "BP 文件",
             "demoFileId": "Demo 文件",
             "downloading": "下载中…",
@@ -5778,6 +5779,10 @@
                 "qoder": "开发工具与技术支持"
             },
             "channelsTitle": "作品提交渠道",
+            "tmallChannelQrAlt": "天猫校园大学生 OPC 创业大赛报名表二维码",
+            "requiredMark": "必填",
+            "huaweiChannelTitle": "华为产业落地赛道提交入口",
+            "huaweiChannelDescription": "华为初赛为现场开发，完成后在本页正式提交；复赛开放后再补充 Demo 演示文件。",
             "campusChannels": "在下方保存 GitHub 与魔搭社区仓库地址。",
             "industryChannels": "通过魔搭社区提交，GitHub 作为补充代码入口。",
             "channelHint": "本页保存仓库地址供赛事组查看；赛题另有指定入口时，请同步完成该入口的提交。",
@@ -7019,6 +7024,7 @@
             "accessibleLinks": "GitHub 与魔搭链接须使用 HTTPS，并确保评委可直接访问。",
             "fields": {
                 "projectName": "项目名称",
+                "productHighlights": "产品特色说明",
                 "githubUrl": "GitHub 仓库链接",
                 "modelscopeUrl": "魔搭部署链接",
                 "bpFileId": "商业一页纸",
@@ -7026,6 +7032,7 @@
             },
             "placeholders": {
                 "projectName": "填写项目名称",
+                "productHighlights": "说明产品解决的问题、核心功能与落地价值",
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
@@ -7073,6 +7080,7 @@
             "downloadFile": "下载{{field}}",
             "loginHint": "登录后填写本轮提交材料",
             "projectNameRequired": "请填写项目名称后再正式提交。",
+            "productHighlightsRequired": "请填写产品特色说明后再正式提交。",
             "roundRequirements": "本轮要求",
             "timeLabel": "时间",
             "participationLabel": "参赛方式",
@@ -7083,6 +7091,7 @@
                 "final": "线下路演"
             },
             "summaryFields": {
+                "productHighlights": "产品特色说明",
                 "githubUrl": "GitHub 仓库链接",
                 "modelscopeUrl": "魔搭部署链接",
                 "bpFileId": "BP 文件",

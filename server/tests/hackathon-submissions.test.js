@@ -21,6 +21,7 @@ const {
 const eventKey = defaults.event.key;
 const materials = {
     projectName: "Project",
+    productHighlights: "A product that solves a real problem.",
     githubUrl: "https://github.com/example/project",
     modelscopeUrl: "https://example-project.ms.show",
     bpFileId: null,
@@ -141,6 +142,7 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
         for (const track of ["campus", "industry"]) {
             assert.deepEqual(mine.tracks[track].stages.initial.requiredFields, [
                 "projectName",
+                ...(track === "industry" ? ["productHighlights"] : []),
                 "githubUrl",
                 "modelscopeUrl",
             ]);
@@ -148,7 +150,13 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                 mine.tracks[track].stages.semifinal.requiredFields,
                 track === "campus"
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                    : ["projectName", "githubUrl", "modelscopeUrl", "demoFileId"]
+                    : [
+                          "projectName",
+                          "productHighlights",
+                          "githubUrl",
+                          "modelscopeUrl",
+                          "demoFileId",
+                      ]
             );
         }
         await rejects(() => save(), "HACKATHON_SUBMISSION_BLOCKED", "not_open");

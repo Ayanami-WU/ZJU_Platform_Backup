@@ -4193,6 +4193,7 @@
             "saving": "Saving…",
             "githubUrl": "GitHub repository",
             "modelscopeUrl": "ModelScope deployment",
+            "productHighlights": "Product highlights",
             "bpFileId": "Business plan file",
             "demoFileId": "Demo file",
             "downloading": "Downloading…",
@@ -5675,6 +5676,10 @@
                 "qoder": "Development tools and technical support"
             },
             "channelsTitle": "Submission channels",
+            "tmallChannelQrAlt": "QR code for the Tmall Campus University OPC entrepreneurship competition form",
+            "requiredMark": "required",
+            "huaweiChannelTitle": "Huawei Industry Implementation submission channel",
+            "huaweiChannelDescription": "The Huawei initial round is developed on site and submitted here. Add the Demo file when the semifinal window opens.",
             "campusChannels": "Save your GitHub and ModelScope repository URLs below.",
             "industryChannels": "Submit through ModelScope; GitHub is a supplementary code repository.",
             "channelHint": "Save repository links here for the event team. If a challenge specifies another submission form, complete that form as well.",
@@ -6916,6 +6921,7 @@
             "accessibleLinks": "Use HTTPS GitHub and ModelScope links that judges can access directly.",
             "fields": {
                 "projectName": "Project name",
+                "productHighlights": "Product highlights",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
                 "bpFileId": "Business one-pager",
@@ -6923,6 +6929,7 @@
             },
             "placeholders": {
                 "projectName": "Enter your project name",
+                "productHighlights": "Explain the problem, core features, and practical value",
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
@@ -6970,6 +6977,7 @@
             "downloadFile": "Download {{field}}",
             "loginHint": "Sign in to prepare your submission",
             "projectNameRequired": "Enter a project name before submitting for review.",
+            "productHighlightsRequired": "Add product highlights before submitting.",
             "roundRequirements": "Round requirements",
             "timeLabel": "Time",
             "participationLabel": "Participation",
@@ -6980,6 +6988,7 @@
                 "final": "On-site presentations"
             },
             "summaryFields": {
+                "productHighlights": "Product highlights",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
                 "bpFileId": "BP file",

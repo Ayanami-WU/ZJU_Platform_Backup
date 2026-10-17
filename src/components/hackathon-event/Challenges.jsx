@@ -12,6 +12,7 @@ import { getEventUrl } from "../../utils/hackathonRoute";
 import api from "../../services/api";
 import AiXStageSubmission from "./AiXStageSubmission";
 import AiXRecommendedScenes from "./AiXRecommendedScenes";
+import AiXSubmissionChannel from "./AiXSubmissionChannel";
 import "./AiXChallenges.css";
 import "./AiXRegistrationPreview.css";
 
@@ -316,6 +317,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                     {label(hasRecommendations ? "recommendations.title" : "brief")}
                                 </h2>
                             </header>
+                            <AiXSubmissionChannel track={track} stage={stage} />
                             {hasRecommendations && <AiXRecommendedScenes />}
                             {track === "campus" && !hasRecommendations && challenges.length > 0 && (
                                 <p className="aix-task-muted">{label("selfDefined")}</p>

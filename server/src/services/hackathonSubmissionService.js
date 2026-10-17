@@ -73,17 +73,35 @@ const stageInfo = (template, track, stage, registered, qualified, now) => {
             (stage === "final"
                 ? []
                 : stage === "initial"
-                  ? ["projectName", "githubUrl", "modelscopeUrl"]
+                  ? [
+                        "projectName",
+                        ...(track === "industry" ? ["productHighlights"] : []),
+                        "githubUrl",
+                        "modelscopeUrl",
+                    ]
                   : track === "campus"
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                    : ["projectName", "githubUrl", "modelscopeUrl", "demoFileId"]),
+                    : [
+                          "projectName",
+                          "productHighlights",
+                          "githubUrl",
+                          "modelscopeUrl",
+                          "demoFileId",
+                      ]),
     };
 };
 const normalizeMaterials = (input, required = []) => {
     if (!input || typeof input !== "object" || Array.isArray(input))
         fail(400, "HACKATHON_SUBMISSION_INVALID", "请填写提交材料", { field: "materials" });
     const data = {};
-    for (const field of ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]) {
+    for (const field of [
+        "projectName",
+        "productHighlights",
+        "githubUrl",
+        "modelscopeUrl",
+        "bpFileId",
+        "demoFileId",
+    ]) {
         if (field === "bpFileId" || field === "demoFileId") {
             const id = input[field];
             data[field] = id === null || id === undefined || id === "" ? null : id;
@@ -94,12 +112,16 @@ const normalizeMaterials = (input, required = []) => {
             continue;
         }
         const raw = input[field] ?? "";
-        if (typeof raw !== "string" || raw.length > (field === "projectName" ? 160 : 2000))
+        if (
+            typeof raw !== "string" ||
+            raw.length >
+                (field === "projectName" ? 160 : field === "productHighlights" ? 1000 : 2000)
+        )
             fail(400, "HACKATHON_SUBMISSION_INVALID", "材料格式或长度无效", { field });
         data[field] = raw.trim();
         if (required.includes(field) && !data[field])
             fail(400, "HACKATHON_SUBMISSION_INVALID", "请补全必填材料", { field });
-        if (field !== "projectName" && data[field]) {
+        if (!["projectName", "productHighlights"].includes(field) && data[field]) {
             try {
                 const url = new URL(data[field]);
                 if (

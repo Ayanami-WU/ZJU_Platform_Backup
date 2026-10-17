@@ -7,12 +7,20 @@ import AiXRegistrationLock from "./AiXRegistrationLock";
 
 export const emptyMaterials = () => ({
     projectName: "",
+    productHighlights: "",
     githubUrl: "",
     modelscopeUrl: "",
     bpFileId: "",
     demoFileId: "",
 });
-const materialKeys = ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"];
+const materialKeys = [
+    "projectName",
+    "productHighlights",
+    "githubUrl",
+    "modelscopeUrl",
+    "bpFileId",
+    "demoFileId",
+];
 const equalMaterials = (a, b) => materialKeys.every((key) => (a?.[key] || "") === (b?.[key] || ""));
 
 export const requiredMaterialFields = (gate, track, stage) => [
@@ -20,10 +28,17 @@ export const requiredMaterialFields = (gate, track, stage) => [
         "projectName",
         ...(gate?.requiredFields ||
             (stage === "initial" && track !== "campus"
-                ? ["githubUrl", "modelscopeUrl"]
+                ? ["productHighlights", "githubUrl", "modelscopeUrl"]
                 : track === "campus"
                   ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                  : ["githubUrl", "modelscopeUrl", "demoFileId"])),
+                  : ["productHighlights", "githubUrl", "modelscopeUrl", "demoFileId"])),
+    ]),
+];
+
+export const displayMaterialFields = (gate, track, stage) => [
+    ...new Set([
+        ...requiredMaterialFields(gate, track, stage),
+        ...(track === "industry" && stage !== "final" ? ["productHighlights"] : []),
     ]),
 ];
 
@@ -66,7 +81,7 @@ export default function AiXStageSubmission({
         return () => onBusyChange?.(false);
     }, [busy, uploading, onBusyChange]);
     const required = requiredMaterialFields(gate, track, stage);
-    const fields = required;
+    const fields = displayMaterialFields(gate, track, stage);
     const dirty = !equalMaterials(materials, record?.draft);
     const pendingFormal = record?.submitted && !equalMaterials(materials, record.submitted);
     const disabled = !user || loading || Boolean(busy) || Boolean(uploading) || !gate?.canSave;
@@ -100,6 +115,15 @@ export default function AiXStageSubmission({
         if (invalid) {
             setInvalidField(invalid);
             setError(label("invalidUrl", { field: label(`fields.${invalid}`) }));
+            return;
+        }
+        if (
+            action === "submit" &&
+            required.includes("productHighlights") &&
+            !materials.productHighlights?.trim()
+        ) {
+            setInvalidField("productHighlights");
+            setError(label("productHighlightsRequired"));
             return;
         }
         const missingFile =
@@ -320,6 +344,33 @@ export default function AiXStageSubmission({
                                                     )}
                                                 </small>
                                             </>
+                                        ) : field === "productHighlights" ? (
+                                            <textarea
+                                                id={`material-${track}-${stage}-${field}`}
+                                                name={field}
+                                                required={required.includes(field)}
+                                                maxLength={1000}
+                                                rows={4}
+                                                value={materials[field] || ""}
+                                                placeholder={label(`placeholders.${field}`)}
+                                                aria-invalid={invalidField === field || undefined}
+                                                aria-describedby={
+                                                    invalidField === field
+                                                        ? "aix-material-error"
+                                                        : undefined
+                                                }
+                                                onChange={(event) => {
+                                                    const next = {
+                                                        ...materials,
+                                                        [field]: event.target.value,
+                                                    };
+                                                    setMaterials(next);
+                                                    onDraft(next);
+                                                    setNotice("");
+                                                    setError("");
+                                                    setInvalidField("");
+                                                }}
+                                            />
                                         ) : (
                                             <input
                                                 id={`material-${track}-${stage}-${field}`}
