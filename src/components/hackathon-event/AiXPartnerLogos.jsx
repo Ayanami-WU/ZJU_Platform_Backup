@@ -14,6 +14,8 @@ const brands = [
     { id: "puhua", name: "普华资本", source: `${assetRoot}puhua.png` },
     { id: "oufang", name: "藕舫天使", source: `${assetRoot}oufang.jpg` },
     { id: "delta-x", name: "迭代未来 Delta X", source: `${assetRoot}delta-x.webp` },
+    { id: "opendev", name: "OpenDev", source: `${assetRoot}opendev.png` },
+    { id: "mua-pizza", name: "慕玛披萨", source: `${assetRoot}mua-pizza.png` },
     {
         id: "zhipu",
         name: "智谱 Zhipu",
