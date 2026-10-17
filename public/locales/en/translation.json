@@ -6924,7 +6924,7 @@
                 "productHighlights": "Product highlights",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
-                "bpFileId": "Business one-pager",
+                "bpFileId": "BP file",
                 "demoFileId": "Demo file"
             },
             "placeholders": {
