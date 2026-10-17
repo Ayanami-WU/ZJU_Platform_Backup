@@ -59,6 +59,9 @@
 #aix-partners-title .aix-partner-panels [data-partner-group="capital"] .aix-brand-xbotpark {
     background: #102319;
 }
+#aix-partners-title .aix-partner-panels .aix-brand-lianxingxia {
+    background: #fff;
+}
 #aix-partners-title .aix-partner-panels .aix-brand-manhattan {
     max-width: 440px;
     flex-basis: 440px;

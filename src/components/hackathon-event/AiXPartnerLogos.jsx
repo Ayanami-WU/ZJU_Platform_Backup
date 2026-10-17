@@ -18,6 +18,7 @@ const brands = [
     { id: "mua-pizza", name: "慕玛披萨", source: `${assetRoot}mua-pizza.png` },
     { id: "xbotpark", name: "XbotPark机器人基地（宁波）", source: `${assetRoot}xbotpark.png` },
     { id: "miracleplus", name: "奇绩创坛", source: `${assetRoot}miracleplus.png` },
+    { id: "lianxingxia", name: "链星匣", source: `${assetRoot}lianxingxia.png` },
     {
         id: "future-entrepreneur",
         name: "未来企业家俱乐部",
