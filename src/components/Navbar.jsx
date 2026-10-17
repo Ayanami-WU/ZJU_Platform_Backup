@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { useSettings } from "../context/SettingsContext";
 import { useAuth } from "../context/AuthContext";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -402,7 +401,6 @@ const Navbar = ({ miniProgramMode = false, showAppDownload = true }) => {
                     </Suspense>
                 )}
 
-                <LanguageSwitcher variant="nav" />
 
                 {user ? (
                     <div className="flex items-center gap-3">
@@ -711,11 +709,6 @@ const Navbar = ({ miniProgramMode = false, showAppDownload = true }) => {
                                         </span>
                                     </button>
 
-                                    <div
-                                        className={`col-span-2 flex min-h-[52px] items-center justify-center rounded-lg border px-2 ${isDayMode ? "border-slate-200/80 bg-white" : "border-white/10 bg-white/[0.04]"}`}
-                                    >
-                                        <LanguageSwitcher />
-                                    </div>
                                 </div>
 
                                 <div className="mt-2 grid grid-cols-1 gap-2">
