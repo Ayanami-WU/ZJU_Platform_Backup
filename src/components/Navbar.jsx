@@ -401,7 +401,6 @@ const Navbar = ({ miniProgramMode = false, showAppDownload = true }) => {
                     </Suspense>
                 )}
 
-
                 {user ? (
                     <div className="flex items-center gap-3">
                         <Link
@@ -708,7 +707,6 @@ const Navbar = ({ miniProgramMode = false, showAppDownload = true }) => {
                                             {themeToggleLabel}
                                         </span>
                                     </button>
-
                                 </div>
 
                                 <div className="mt-2 grid grid-cols-1 gap-2">
