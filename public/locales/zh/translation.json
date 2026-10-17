@@ -6096,6 +6096,10 @@
                     "label": "支持企业",
                     "members": [
                         {
+                            "id": "opendev",
+                            "name": "OpenDev"
+                        },
+                        {
                             "id": "getui",
                             "name": "每日互动"
                         },
@@ -6134,6 +6138,10 @@
                         {
                             "id": "thunisoft",
                             "name": "华宇"
+                        },
+                        {
+                            "id": "mua-pizza",
+                            "name": "慕玛披萨"
                         }
                     ],
                     "id": "companies",
@@ -6159,6 +6167,14 @@
                         {
                             "id": "oufang",
                             "name": "藕舫天使"
+                        },
+                        {
+                            "id": "xbotpark",
+                            "name": "XbotPark机器人基地（宁波）"
+                        },
+                        {
+                            "id": "miracleplus",
+                            "name": "奇绩创坛"
                         }
                     ]
                 },
@@ -6199,7 +6215,7 @@
                         },
                         {
                             "id": "lianhua",
-                            "name": "联华利合协会"
+                            "name": "联合利华俱乐部"
                         },
                         {
                             "id": "investment",
@@ -6208,6 +6224,18 @@
                         {
                             "id": "novax",
                             "name": "NovaX"
+                        },
+                        {
+                            "id": "future-entrepreneur",
+                            "name": "未来企业家俱乐部"
+                        },
+                        {
+                            "id": "delta-x",
+                            "name": "迭代未来"
+                        },
+                        {
+                            "id": "lianxingxia",
+                            "name": "链星匣"
                         }
                     ],
                     "id": "organizations",
@@ -6550,6 +6578,10 @@
                     "published": true,
                     "members": [
                         {
+                            "id": "opendev",
+                            "name": "OpenDev"
+                        },
+                        {
                             "id": "getui",
                             "name": "每日互动"
                         },
@@ -6592,6 +6624,10 @@
                         {
                             "id": "yuandian",
                             "name": "元典"
+                        },
+                        {
+                            "id": "mua-pizza",
+                            "name": "慕玛披萨"
                         }
                     ]
                 },
@@ -6615,6 +6651,14 @@
                         {
                             "id": "oufang",
                             "name": "藕舫天使"
+                        },
+                        {
+                            "id": "xbotpark",
+                            "name": "XbotPark机器人基地（宁波）"
+                        },
+                        {
+                            "id": "miracleplus",
+                            "name": "奇绩创坛"
                         }
                     ]
                 },
@@ -6653,11 +6697,23 @@
                         },
                         {
                             "id": "lianhua",
-                            "name": "联华利合协会"
+                            "name": "联合利华俱乐部"
                         },
                         {
                             "id": "magic",
                             "name": "D调魔法学园"
+                        },
+                        {
+                            "id": "future-entrepreneur",
+                            "name": "未来企业家俱乐部"
+                        },
+                        {
+                            "id": "delta-x",
+                            "name": "迭代未来"
+                        },
+                        {
+                            "id": "lianxingxia",
+                            "name": "链星匣"
                         }
                     ]
                 }

@@ -5993,6 +5993,10 @@
                     "label": "Supporting companies",
                     "members": [
                         {
+                            "id": "opendev",
+                            "name": "OpenDev"
+                        },
+                        {
                             "id": "getui",
                             "name": "Getui"
                         },
@@ -6031,6 +6035,10 @@
                         {
                             "id": "thunisoft",
                             "name": "THUNISOFT"
+                        },
+                        {
+                            "id": "mua-pizza",
+                            "name": "Mua Pizza"
                         }
                     ],
                     "id": "companies",
@@ -6056,6 +6064,14 @@
                         {
                             "id": "oufang",
                             "name": "Oufang Angel"
+                        },
+                        {
+                            "id": "xbotpark",
+                            "name": "XbotPark Ningbo"
+                        },
+                        {
+                            "id": "miracleplus",
+                            "name": "MiraclePlus"
                         }
                     ]
                 },
@@ -6105,6 +6121,18 @@
                         {
                             "id": "novax",
                             "name": "NovaX"
+                        },
+                        {
+                            "id": "future-entrepreneur",
+                            "name": "ZJU Future Entrepreneur Club"
+                        },
+                        {
+                            "id": "delta-x",
+                            "name": "Delta X"
+                        },
+                        {
+                            "id": "lianxingxia",
+                            "name": "链星匣"
                         }
                     ],
                     "id": "organizations",
@@ -6447,6 +6475,10 @@
                     "published": true,
                     "members": [
                         {
+                            "id": "opendev",
+                            "name": "OpenDev"
+                        },
+                        {
                             "id": "getui",
                             "name": "Getui"
                         },
@@ -6489,6 +6521,10 @@
                         {
                             "id": "yuandian",
                             "name": "Legal Intelligence"
+                        },
+                        {
+                            "id": "mua-pizza",
+                            "name": "Mua Pizza"
                         }
                     ]
                 },
@@ -6512,6 +6548,14 @@
                         {
                             "id": "oufang",
                             "name": "Oufang Angel"
+                        },
+                        {
+                            "id": "xbotpark",
+                            "name": "XbotPark Ningbo"
+                        },
+                        {
+                            "id": "miracleplus",
+                            "name": "MiraclePlus"
                         }
                     ]
                 },
@@ -6555,6 +6599,18 @@
                         {
                             "id": "magic",
                             "name": "DuMagic"
+                        },
+                        {
+                            "id": "future-entrepreneur",
+                            "name": "ZJU Future Entrepreneur Club"
+                        },
+                        {
+                            "id": "delta-x",
+                            "name": "Delta X"
+                        },
+                        {
+                            "id": "lianxingxia",
+                            "name": "链星匣"
                         }
                     ]
                 }

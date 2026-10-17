@@ -13,6 +13,7 @@ const brands = [
     { id: "manhattan", name: "曼哈顿资本", source: `${assetRoot}manhattan.jpg` },
     { id: "puhua", name: "普华资本", source: `${assetRoot}puhua.png` },
     { id: "oufang", name: "藕舫天使", source: `${assetRoot}oufang.jpg` },
+    { id: "delta-x", name: "迭代未来 Delta X", source: `${assetRoot}delta-x.webp` },
     {
         id: "zhipu",
         name: "智谱 Zhipu",
