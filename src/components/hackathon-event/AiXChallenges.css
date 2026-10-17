@@ -181,6 +181,10 @@
     grid-template-columns: 1fr;
     background: color-mix(in srgb, var(--hx-accent) 8%, var(--hx-panel));
 }
+.aix-submission-channel.is-tmall {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
 .aix-submission-channel-heading {
     display: flex;
     align-items: flex-start;

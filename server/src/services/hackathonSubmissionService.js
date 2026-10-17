@@ -75,17 +75,17 @@ const stageInfo = (template, track, stage, registered, qualified, now) => {
                 : stage === "initial"
                   ? [
                         "projectName",
-                        ...(track === "industry" ? ["productHighlights"] : []),
                         "githubUrl",
                         "modelscopeUrl",
+                        ...(track === "industry" ? ["bpFileId"] : []),
                     ]
                   : track === "campus"
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
                     : [
                           "projectName",
-                          "productHighlights",
                           "githubUrl",
                           "modelscopeUrl",
+                          ...(track === "industry" ? ["bpFileId"] : []),
                           "demoFileId",
                       ]),
     };
@@ -319,14 +319,13 @@ function createHackathonSubmissionService({
                         "SELECT id FROM hackathon_submission_files WHERE id=? AND event_key=? AND user_id=? AND track=? AND stage=? AND kind=?",
                         [materials[field], body.eventKey, userId, body.track, body.stage, kind]
                     );
-                    if (
-                        !file ||
-                        !(
-                            body.stage === "semifinal" ||
-                            (body.track === "campus" && body.stage === "initial")
-                        ) ||
-                        (kind === "bp" && body.track !== "campus")
-                    )
+                    const allowed =
+                        kind === "bp"
+                            ? ["initial", "semifinal"].includes(body.stage)
+                            : body.track === "industry"
+                              ? body.stage === "semifinal"
+                              : body.track === "campus" && ["initial", "semifinal"].includes(body.stage);
+                    if (!file || !allowed)
                         fail(400, "HACKATHON_SUBMISSION_INVALID", "附件不属于当前赛道与轮次", {
                             field,
                         });
@@ -382,14 +381,13 @@ function createHackathonSubmissionService({
         addFile: (userId, body, file) => {
             checkEvent(body.eventKey);
             checkTrack(body.track);
-            if (
-                !(
-                    body.stage === "semifinal" ||
-                    (body.track === "campus" && body.stage === "initial")
-                ) ||
-                !["bp", "demo"].includes(body.kind) ||
-                (body.kind === "bp" && body.track !== "campus")
-            )
+            const allowed =
+                body.kind === "bp"
+                    ? ["initial", "semifinal"].includes(body.stage)
+                    : body.kind === "demo" &&
+                      ((body.track === "industry" && body.stage === "semifinal") ||
+                          (body.track === "campus" && ["initial", "semifinal"].includes(body.stage)));
+            if (!allowed)
                 fail(400, "HACKATHON_SUBMISSION_INVALID", "附件类型或提交阶段无效");
             return useDb(true, async (db) => {
                 const row = await registrationFor(db, userId);

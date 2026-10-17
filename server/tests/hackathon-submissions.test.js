@@ -11,6 +11,9 @@ defaults.event.program.trackStages.campus = defaults.event.program.trackStages.i
     (stage) => ({
         ...stage,
         ...(stage.id === "initial" ? { opensAt: "2026-10-13T00:00:00+08:00" } : {}),
+        ...(stage.id === "initial"
+            ? { requiredFields: ["projectName", "githubUrl", "modelscopeUrl"] }
+            : {}),
     })
 );
 const { migrateHackathonSubmissions } = require("../src/config/migrations/hackathonSubmissions");
@@ -142,9 +145,9 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
         for (const track of ["campus", "industry"]) {
             assert.deepEqual(mine.tracks[track].stages.initial.requiredFields, [
                 "projectName",
-                ...(track === "industry" ? ["productHighlights"] : []),
                 "githubUrl",
                 "modelscopeUrl",
+                ...(track === "industry" ? ["bpFileId"] : []),
             ]);
             assert.deepEqual(
                 mine.tracks[track].stages.semifinal.requiredFields,
@@ -152,9 +155,9 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
                     : [
                           "projectName",
-                          "productHighlights",
                           "githubUrl",
                           "modelscopeUrl",
+                          "bpFileId",
                           "demoFileId",
                       ]
             );
@@ -209,8 +212,26 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             "not_open"
         );
         clock = Date.parse("2026-10-18T13:00:00+08:00");
-        assert.equal((await save({ track: "industry" })).submission.version, 1);
-        await save({ track: "industry" }, 2);
+        const industryInitialBp = (
+            await service.addFile(
+                1,
+                { eventKey, track: "industry", stage: "initial", kind: "bp" },
+                { storageName: "industry-bp", name: "Handbook.pdf", size: 42, mimeType: "application/pdf" }
+            )
+        ).file;
+        const industryInitialMaterials = { ...materials, bpFileId: industryInitialBp.id };
+        assert.equal(
+            (await save({ track: "industry", materials: industryInitialMaterials })).submission.version,
+            1
+        );
+        await save(
+            {
+                track: "industry",
+                action: "save",
+                materials: { ...materials, bpFileId: null },
+            },
+            2
+        );
         clock = Date.parse("2026-10-18T17:00:00+08:00");
         await rejects(() => save({ expectedVersion: 4 }), "HACKATHON_SUBMISSION_BLOCKED", "closed");
         await rejects(
@@ -272,12 +293,19 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             track: "industry",
             qualified: true,
         });
+        const industrySemifinalBp = (
+            await service.addFile(
+                1,
+                { eventKey, track: "industry", stage: "semifinal", kind: "bp" },
+                { storageName: "industry-bp-semifinal", name: "Handbook.pdf", size: 42, mimeType: "application/pdf" }
+            )
+        ).file;
         await assert.rejects(
             () =>
                 save({
                     track: "industry",
                     stage: "semifinal",
-                    materials: { ...materials, demoFileId: uploadedDemo.id },
+                    materials: { ...materials, bpFileId: industrySemifinalBp.id, demoFileId: uploadedDemo.id },
                 }),
             (e) => e.field === "demoFileId"
         );
@@ -291,7 +319,11 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
         await save({
             track: "industry",
             stage: "semifinal",
-            materials: { ...materials, demoFileId: industryDemo.id },
+            materials: {
+                ...materials,
+                bpFileId: industrySemifinalBp.id,
+                demoFileId: industryDemo.id,
+            },
         });
         await service.setQualification(4, {
             eventKey,

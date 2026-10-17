@@ -30,6 +30,14 @@ const optionalText = (value, maxLength, fallback = "") => {
     return value.trim().slice(0, maxLength);
 };
 
+const safeAssetUrl = (value) => {
+    if (typeof value !== "string") return "";
+    const normalized = value.trim();
+    return /^\/(?!\/)[A-Za-z0-9._~!$&'()*+,;=:@%/?#-]+$/.test(normalized)
+        ? normalized.slice(0, 1600)
+        : "";
+};
+
 const booleanValue = (value, fallback = false) => {
     if (typeof value === "boolean") return value;
     if (value === "true") return true;
@@ -228,7 +236,7 @@ const normalizeProgram = (input = {}) => {
                 track: text(item.track, 40),
                 title: text(item.title, 200),
                 description: text(item.description, 5000),
-                briefUrl: safeUrl(item.briefUrl),
+                briefUrl: safeUrl(item.briefUrl) || safeAssetUrl(item.briefUrl),
                 submissionUrl: safeUrl(item.submissionUrl),
                 published: item.published === true,
             })),

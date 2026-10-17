@@ -13,7 +13,7 @@ import {
     useAdminTheme,
 } from "./AdminUI";
 
-const materialKeys = ["productHighlights", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"];
+const materialKeys = ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"];
 
 export default function HackathonSubmissionManager({ eventKey }) {
     const { t, i18n } = useTranslation();
@@ -162,10 +162,10 @@ export default function HackathonSubmissionManager({ eventKey }) {
                         {materialKeys
                             .filter(
                                 (key) =>
-                                    (key === "productHighlights" && track === "industry") ||
                                     ["githubUrl", "modelscopeUrl"].includes(key) ||
                                     (stage === "semifinal" &&
-                                        (key !== "bpFileId" || track === "campus"))
+                                        (key !== "bpFileId" || track === "campus")) ||
+                                    (key === "bpFileId" && track === "industry")
                             )
                             .map((key) => {
                                 const isFile = key.endsWith("FileId");
@@ -182,9 +182,7 @@ export default function HackathonSubmissionManager({ eventKey }) {
                                     >
                                         <dt className={mutedTextClass}>{text(key)}</dt>
                                         <dd>
-                                            {key === "productHighlights" ? (
-                                                snapshot[key] || text("missing")
-                                            ) : isFile ? (
+                                            {isFile ? (
                                                 file ? (
                                                     <button
                                                         type="button"

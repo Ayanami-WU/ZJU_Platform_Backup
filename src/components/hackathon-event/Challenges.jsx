@@ -304,9 +304,14 @@ export default function Challenges({ template, now, registrationState = {} }) {
                 </section>
                 {stage === "final" ? (
                     <section className="aix-task-final">
+                        {track === "campus" && <AiXSubmissionChannel track={track} stage={stage} />}
                         <div>
                             <h2>{label("finalTitle")}</h2>
-                            <p>{label("finalDescription")}</p>
+                            <p>
+                                {label(`finalDescription.${track}`, {
+                                    defaultValue: label("finalDescription.default"),
+                                })}
+                            </p>
                         </div>
                     </section>
                 ) : (
@@ -331,9 +336,10 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                             href={safeWebUrl(item.briefUrl)}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            download={item.briefUrl.startsWith("/") ? true : undefined}
                                         >
                                             <FileText size={17} />
-                                            {t("aix.readBrief")}
+                                            {t("aix.downloadBrief", "查看并下载赛题手册")}
                                             <ArrowUpRight size={16} />
                                         </a>
                                     )}
@@ -360,7 +366,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                 </div>
                             )}
                         </section>
-                        {(!user || data) && (
+                        {track === "industry" && (!user || data) && (
                             <AiXStageSubmission
                                 key={draftKey}
                                 eventKey={eventKey}

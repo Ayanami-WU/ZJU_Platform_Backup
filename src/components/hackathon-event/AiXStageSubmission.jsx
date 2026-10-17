@@ -28,17 +28,17 @@ export const requiredMaterialFields = (gate, track, stage) => [
         "projectName",
         ...(gate?.requiredFields ||
             (stage === "initial" && track !== "campus"
-                ? ["productHighlights", "githubUrl", "modelscopeUrl"]
+                ? ["githubUrl", "modelscopeUrl", "bpFileId"]
                 : track === "campus"
                   ? ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                  : ["productHighlights", "githubUrl", "modelscopeUrl", "demoFileId"])),
+                  : ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"])),
     ]),
 ];
 
 export const displayMaterialFields = (gate, track, stage) => [
     ...new Set([
         ...requiredMaterialFields(gate, track, stage),
-        ...(track === "industry" && stage !== "final" ? ["productHighlights"] : []),
+        ...(track === "industry" && stage !== "final" ? ["bpFileId"] : []),
     ]),
 ];
 

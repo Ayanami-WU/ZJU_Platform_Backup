@@ -44,7 +44,18 @@
                     "closesAt": "2026-10-25T11:30:00+08:00"
                 }
             ],
-            "challenges": [],
+            "challenges": [
+                {
+                    "id": "huawei-initial-challenge-handbook-v4",
+                    "stage": "initial",
+                    "track": "industry",
+                    "title": "AI+华为PC营销软文智能体",
+                    "description": "华为产业落地赛道初赛赛题手册，包含赛制、业务痛点、功能要求、接入指引及评审标准。到达赛题发布时间后开放查看与下载。",
+                    "briefUrl": "/images/hackathon/ai-x/official/huawei-challenge-handbook-v4.pdf",
+                    "submissionUrl": "",
+                    "published": true
+                }
+            ],
             "reports": [],
             "challengeReleaseAt": "2026-10-18T13:00:00+08:00",
             "campusChallengeReleaseAt": "2026-10-14T00:00:00+08:00",
@@ -73,12 +84,25 @@
                     {
                         "id": "initial",
                         "opensAt": "2026-10-18T13:00:00+08:00",
-                        "closesAt": "2026-10-18T17:00:00+08:00"
+                        "closesAt": "2026-10-18T17:00:00+08:00",
+                        "requiredFields": [
+                            "projectName",
+                            "githubUrl",
+                            "modelscopeUrl",
+                            "bpFileId"
+                        ]
                     },
                     {
                         "id": "semifinal",
                         "opensAt": "2026-10-19T00:00:00+08:00",
-                        "closesAt": "2026-10-24T00:00:00+08:00"
+                        "closesAt": "2026-10-24T00:00:00+08:00",
+                        "requiredFields": [
+                            "projectName",
+                            "githubUrl",
+                            "modelscopeUrl",
+                            "bpFileId",
+                            "demoFileId"
+                        ]
                     },
                     {
                         "id": "final",

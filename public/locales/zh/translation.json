@@ -4312,8 +4312,8 @@
             "saving": "保存中…",
             "githubUrl": "GitHub 仓库",
             "modelscopeUrl": "魔搭部署",
-            "productHighlights": "产品特色说明",
-            "bpFileId": "BP 文件",
+            "productHighlights": "作品说明书",
+            "bpFileId": "作品说明书",
             "demoFileId": "Demo 文件",
             "downloading": "下载中…",
             "download_failed": "下载失败，请重试",
@@ -5287,6 +5287,7 @@
         "submissionClosed": "本阶段提交已结束",
         "submitWork": "提交作品",
         "readBrief": "查看完整赛题",
+        "downloadBrief": "查看并下载赛题手册",
         "requirements": "需要准备什么",
         "allProjects": "查看赛事成果",
         "stages": {
@@ -5782,7 +5783,7 @@
             "tmallChannelQrAlt": "天猫校园大学生 OPC 创业大赛报名表二维码",
             "requiredMark": "必填",
             "huaweiChannelTitle": "华为产业落地赛道提交入口",
-            "huaweiChannelDescription": "华为初赛为现场开发，完成后在本页正式提交；复赛开放后再补充 Demo 演示文件。",
+            "huaweiChannelDescription": "华为初赛提交 GitHub、魔搭链接和作品说明书；复赛在此基础上补交 Demo 运行录制视频。",
             "campusChannels": "在下方保存 GitHub 与魔搭社区仓库地址。",
             "industryChannels": "通过魔搭社区提交，GitHub 作为补充代码入口。",
             "channelHint": "本页保存仓库地址供赛事组查看；赛题另有指定入口时，请同步完成该入口的提交。",
@@ -5812,7 +5813,7 @@
                     }
                 ]
             },
-            "industryMaterials": "技术作品 + Demo"
+            "industryMaterials": "GitHub + 魔搭链接 + 作品说明书；复赛补交 Demo 视频"
         },
         "official": {
             "chapters": ["主页", "赛制", "奖励", "孵化支持", "报名"],
@@ -7010,12 +7011,12 @@
             "published": "赛题已发布",
             "pending": "赛题待发布",
             "campus": {
-                "initial": "初赛提交技术作品（GitHub仓库、魔搭部署）、BP文件和Demo视频。",
+                "initial": "天猫校园不在本站提交，请扫描二维码进入官方提交渠道。",
                 "semifinal": "本赛道不再设置复赛提交，初赛后直接评审并确定决赛项目。"
             },
             "industry": {
-                "initial": "初赛线下领取命题，现场完成开发并提交技术作品。",
-                "semifinal": "复赛完善技术作品，提交 GitHub、魔搭链接并上传 Demo 演示文件。"
+                "initial": "初赛提交 GitHub 链接、魔搭链接和作品说明书（功能讲解＋优秀运行结果）。",
+                "semifinal": "复赛提交 GitHub、魔搭链接、更新后的作品说明书和 Demo 运行录制视频。"
             },
             "selfDefined": "可自主命题，也可选择已公布的推荐赛题。",
             "campusPending": "本赛道支持自由命题，提交你的技术作品。推荐赛题公布后会在这里展示。",
@@ -7024,15 +7025,15 @@
             "accessibleLinks": "GitHub 与魔搭链接须使用 HTTPS，并确保评委可直接访问。",
             "fields": {
                 "projectName": "项目名称",
-                "productHighlights": "产品特色说明",
+                "productHighlights": "作品说明书",
                 "githubUrl": "GitHub 仓库链接",
                 "modelscopeUrl": "魔搭部署链接",
-                "bpFileId": "BP",
+                "bpFileId": "作品说明书",
                 "demoFileId": "Demo 演示文件"
             },
             "placeholders": {
                 "projectName": "填写项目名称",
-                "productHighlights": "说明产品解决的问题、核心功能与落地价值",
+                "productHighlights": "上传包含功能讲解和优秀运行结果的作品说明书",
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
@@ -7064,14 +7065,18 @@
             "legacyTitle": "历史仓库链接",
             "legacyHint": "此前保存的链接仅供参考，尚未计入本轮正式提交。",
             "finalTitle": "决赛路演",
-            "finalDescription": "天猫OPC孵化赛道、华为产业落地赛道两厅同步路演。兼报选手错开出场，具体顺序以现场安排为准。",
+            "finalDescription": {
+                "default": "决赛提交现场展示材料（PPT），并参加现场路演。",
+                "campus": "天猫校园不在本站提交，请扫描二维码进入官方报名表。",
+                "industry": "华为决赛提交现场展示材料（PPT），并参加现场路演。"
+            },
             "finalVenue": "浙江大学国家级双创示范基地 · 三墩元空间\n宝港生活广场 C 座 6 楼",
             "registrationReceiptHint": "报名已保存。请前往对应赛道与轮次，保存草稿或正式提交作品。",
             "uploadFile": "选择文件",
             "replaceFile": "替换文件",
-            "bpFileHint": "PDF / PPT / PPTX，最大 30 MB",
+            "bpFileHint": "PDF / PPT / PPTX，最大 30 MB；须包含功能讲解和优秀运行结果",
             "demoFileHint": "MP4 / WebM / MOV，最大 200 MB",
-            "bpFileError": "请上传 30 MB 以内的 PDF、PPT 或 PPTX 文件。",
+            "bpFileError": "请上传 30 MB 以内、包含功能讲解和优秀运行结果的作品说明书。",
             "demoFileError": "请上传 200 MB 以内的 MP4、WebM 或 MOV 文件。",
             "uploadFailed": "上传失败，原文件和输入已保留，请重试。",
             "downloadFailed": "下载失败，请重试。",
@@ -7080,7 +7085,7 @@
             "downloadFile": "下载{{field}}",
             "loginHint": "登录后填写本轮提交材料",
             "projectNameRequired": "请填写项目名称后再正式提交。",
-            "productHighlightsRequired": "请填写产品特色说明后再正式提交。",
+            "productHighlightsRequired": "请上传作品说明书后再正式提交。",
             "roundRequirements": "本轮要求",
             "timeLabel": "时间",
             "participationLabel": "参赛方式",
@@ -7091,10 +7096,10 @@
                 "final": "线下路演"
             },
             "summaryFields": {
-                "productHighlights": "产品特色说明",
+                "productHighlights": "作品说明书",
                 "githubUrl": "GitHub 仓库链接",
                 "modelscopeUrl": "魔搭部署链接",
-                "bpFileId": "BP 文件",
+                "bpFileId": "作品说明书",
                 "demoFileId": "Demo 视频",
                 "projectName": "项目名称"
             },

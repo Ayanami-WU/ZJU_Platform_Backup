@@ -6,14 +6,27 @@ export default function AiXSubmissionChannel({ track, stage }) {
     const label = (key, options) => t(`aix.challengeWorkspace.${key}`, options);
     const channelLabel = (key, options) => t(`aix.refined.${key}`, options);
 
-    if (stage === "final") return null;
-
     const isTmall = track === "campus";
-    const fields = isTmall
-        ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-        : stage === "semifinal"
-          ? ["projectName", "productHighlights", "githubUrl", "modelscopeUrl", "demoFileId"]
-          : ["projectName", "productHighlights", "githubUrl", "modelscopeUrl"];
+    if (stage === "final" && !isTmall) return null;
+    if (isTmall) {
+        return (
+            <section className="aix-submission-channel is-tmall" aria-label={channelLabel("tmallChannelQrAlt")}>
+                <figure className="aix-submission-channel-qr">
+                    <img
+                        src="/images/hackathon/ai-x/official/tmall-submission-qr.jpg"
+                        alt={channelLabel("tmallChannelQrAlt")}
+                        width="954"
+                        height="752"
+                    />
+                </figure>
+            </section>
+        );
+    }
+
+    const fields =
+        stage === "semifinal"
+            ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
+            : ["projectName", "githubUrl", "modelscopeUrl", "bpFileId"];
 
     return (
         <section className={`aix-submission-channel ${isTmall ? "is-tmall" : "is-huawei"}`}>
@@ -41,16 +54,6 @@ export default function AiXSubmissionChannel({ track, stage }) {
                     ))}
                 </ul>
             </div>
-            {isTmall && (
-                <figure className="aix-submission-channel-qr">
-                    <img
-                        src="/images/hackathon/ai-x/official/tmall-submission-qr.jpg"
-                        alt={channelLabel("tmallChannelQrAlt")}
-                        width="954"
-                        height="752"
-                    />
-                </figure>
-            )}
         </section>
     );
 }

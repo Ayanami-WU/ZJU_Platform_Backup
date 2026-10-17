@@ -4193,8 +4193,8 @@
             "saving": "Saving…",
             "githubUrl": "GitHub repository",
             "modelscopeUrl": "ModelScope deployment",
-            "productHighlights": "Product highlights",
-            "bpFileId": "Business plan file",
+            "productHighlights": "Product handbook",
+            "bpFileId": "Product handbook",
             "demoFileId": "Demo file",
             "downloading": "Downloading…",
             "download_failed": "Download failed. Please retry.",
@@ -5178,6 +5178,7 @@
         "submissionClosed": "Submissions closed for this stage",
         "submitWork": "Submit work",
         "readBrief": "Read full brief",
+        "downloadBrief": "View and download the challenge handbook",
         "requirements": "What to prepare",
         "allProjects": "View event results",
         "stages": {
@@ -5679,7 +5680,7 @@
             "tmallChannelQrAlt": "QR code for the Tmall Campus University OPC entrepreneurship competition form",
             "requiredMark": "required",
             "huaweiChannelTitle": "Huawei Industry Implementation submission channel",
-            "huaweiChannelDescription": "The Huawei initial round is developed on site and submitted here. Add the Demo file when the semifinal window opens.",
+            "huaweiChannelDescription": "Huawei initial submissions require GitHub, ModelScope, and a product handbook. Add the recorded Demo video in the semifinal.",
             "campusChannels": "Save your GitHub and ModelScope repository URLs below.",
             "industryChannels": "Submit through ModelScope; GitHub is a supplementary code repository.",
             "channelHint": "Save repository links here for the event team. If a challenge specifies another submission form, complete that form as well.",
@@ -5709,7 +5710,7 @@
                     }
                 ]
             },
-            "industryMaterials": "Technical project + Demo"
+            "industryMaterials": "GitHub + ModelScope + product handbook; add Demo video in semifinal"
         },
         "official": {
             "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
@@ -6907,12 +6908,12 @@
             "published": "Challenge published",
             "pending": "Awaiting publication",
             "campus": {
-                "initial": "Submit your technical work (GitHub and ModelScope deployment), BP file and Demo video.",
+                "initial": "Submit through the official channel via the QR code; this site does not collect Tmall entries.",
                 "semifinal": "There is no semifinal submission. Initial entries are reviewed to select finalists."
             },
             "industry": {
-                "initial": "Receive the challenge on site, build your solution and submit your technical work.",
-                "semifinal": "Refine your technical work, provide GitHub and ModelScope links, and upload your demo file."
+                "initial": "Submit GitHub, ModelScope and a product handbook covering the feature walkthrough and excellent results.",
+                "semifinal": "Submit GitHub, ModelScope, the updated product handbook and a recorded Demo video."
             },
             "selfDefined": "Choose your own topic or a published recommended challenge.",
             "campusPending": "This track accepts self-defined projects. Submit your technical work; recommended challenges will appear here when published.",
@@ -6921,15 +6922,15 @@
             "accessibleLinks": "Use HTTPS GitHub and ModelScope links that judges can access directly.",
             "fields": {
                 "projectName": "Project name",
-                "productHighlights": "Product highlights",
+                "productHighlights": "Product handbook",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
-                "bpFileId": "BP file",
+                "bpFileId": "Product handbook",
                 "demoFileId": "Demo file"
             },
             "placeholders": {
                 "projectName": "Enter your project name",
-                "productHighlights": "Explain the problem, core features, and practical value",
+                "productHighlights": "Upload a handbook covering the feature walkthrough and excellent results",
                 "githubUrl": "https://github.com/owner/repository",
                 "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
@@ -6961,14 +6962,18 @@
             "legacyTitle": "Previous repository links",
             "legacyHint": "These previously saved links are for reference only and are not a formal submission for this round.",
             "finalTitle": "Final presentations",
-            "finalDescription": "Tmall OPC Incubation Track and Huawei Industry Implementation Track presentations run in two rooms. Dual-track entrants present at different times; follow the on-site running order.",
+            "finalDescription": {
+                "default": "Submit the on-site presentation material (PPT) and present in person.",
+                "campus": "Tmall Campus submissions are handled through the QR code, not this site.",
+                "industry": "Huawei finalists submit the on-site presentation material (PPT) and present in person."
+            },
             "finalVenue": "Zhejiang University National Innovation and Entrepreneurship Demonstration Base · Sandun Innovation Space\n6F, Block C, Baogang Lifestyle Plaza",
             "registrationReceiptHint": "Registration saved. Choose your track and round to save a draft or submit your work for review.",
             "uploadFile": "Choose file",
             "replaceFile": "Replace file",
-            "bpFileHint": "PDF / PPT / PPTX, up to 30 MB",
+            "bpFileHint": "PDF / PPT / PPTX, up to 30 MB; include the feature walkthrough and excellent results",
             "demoFileHint": "MP4 / WebM / MOV, up to 200 MB",
-            "bpFileError": "Upload a PDF, PPT or PPTX file no larger than 30 MB.",
+            "bpFileError": "Upload a product handbook no larger than 30 MB with the feature walkthrough and excellent results.",
             "demoFileError": "Upload an MP4, WebM or MOV file no larger than 200 MB.",
             "uploadFailed": "Upload failed. Your previous file and inputs are preserved; please retry.",
             "downloadFailed": "Download failed. Please retry.",
@@ -6977,7 +6982,7 @@
             "downloadFile": "Download {{field}}",
             "loginHint": "Sign in to prepare your submission",
             "projectNameRequired": "Enter a project name before submitting for review.",
-            "productHighlightsRequired": "Add product highlights before submitting.",
+            "productHighlightsRequired": "Upload the product handbook before submitting.",
             "roundRequirements": "Round requirements",
             "timeLabel": "Time",
             "participationLabel": "Participation",
@@ -6988,10 +6993,10 @@
                 "final": "On-site presentations"
             },
             "summaryFields": {
-                "productHighlights": "Product highlights",
+                "productHighlights": "Product handbook",
                 "githubUrl": "GitHub repository URL",
                 "modelscopeUrl": "ModelScope deployment URL",
-                "bpFileId": "BP file",
+                "bpFileId": "Product handbook",
                 "demoFileId": "Demo video",
                 "projectName": "Project name"
             },
