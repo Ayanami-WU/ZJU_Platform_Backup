@@ -336,7 +336,9 @@ export default function Challenges({ template, now, registrationState = {} }) {
                                             href={safeWebUrl(item.briefUrl)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            download={item.briefUrl.startsWith("/") ? true : undefined}
+                                            download={
+                                                item.briefUrl.startsWith("/") ? true : undefined
+                                            }
                                         >
                                             <FileText size={17} />
                                             {t("aix.downloadBrief", "查看并下载赛题手册")}

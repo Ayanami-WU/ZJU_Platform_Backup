@@ -153,13 +153,7 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                 mine.tracks[track].stages.semifinal.requiredFields,
                 track === "campus"
                     ? ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
-                    : [
-                          "projectName",
-                          "githubUrl",
-                          "modelscopeUrl",
-                          "bpFileId",
-                          "demoFileId",
-                      ]
+                    : ["projectName", "githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"]
             );
         }
         await rejects(() => save(), "HACKATHON_SUBMISSION_BLOCKED", "not_open");
@@ -216,12 +210,18 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             await service.addFile(
                 1,
                 { eventKey, track: "industry", stage: "initial", kind: "bp" },
-                { storageName: "industry-bp", name: "Handbook.pdf", size: 42, mimeType: "application/pdf" }
+                {
+                    storageName: "industry-bp",
+                    name: "Handbook.pdf",
+                    size: 42,
+                    mimeType: "application/pdf",
+                }
             )
         ).file;
         const industryInitialMaterials = { ...materials, bpFileId: industryInitialBp.id };
         assert.equal(
-            (await save({ track: "industry", materials: industryInitialMaterials })).submission.version,
+            (await save({ track: "industry", materials: industryInitialMaterials })).submission
+                .version,
             1
         );
         await save(
@@ -297,7 +297,12 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             await service.addFile(
                 1,
                 { eventKey, track: "industry", stage: "semifinal", kind: "bp" },
-                { storageName: "industry-bp-semifinal", name: "Handbook.pdf", size: 42, mimeType: "application/pdf" }
+                {
+                    storageName: "industry-bp-semifinal",
+                    name: "Handbook.pdf",
+                    size: 42,
+                    mimeType: "application/pdf",
+                }
             )
         ).file;
         await assert.rejects(
@@ -305,7 +310,11 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                 save({
                     track: "industry",
                     stage: "semifinal",
-                    materials: { ...materials, bpFileId: industrySemifinalBp.id, demoFileId: uploadedDemo.id },
+                    materials: {
+                        ...materials,
+                        bpFileId: industrySemifinalBp.id,
+                        demoFileId: uploadedDemo.id,
+                    },
                 }),
             (e) => e.field === "demoFileId"
         );

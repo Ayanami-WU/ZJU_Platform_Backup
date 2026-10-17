@@ -5877,7 +5877,6 @@
             "loadFailed": "报名信息加载失败，请重试后再提交。",
             "saveFailed": "保存失败，请重试；已保存的报名不会重复创建。",
             "invalidDetails": "请填写全部必填信息，并检查手机号格式。",
-            "export": "导出论坛报名名单",
             "sessions": {
                 "technology": {
                     "title": "技术论坛",
@@ -6747,7 +6746,8 @@
                                 "id": "tan-weichuan",
                                 "name": "谭炜川",
                                 "role": "奇绩创坛高校负责人",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/tan-weichuan.jpg"
                             },
                             {
                                 "id": "sun-yifei",
@@ -6838,7 +6838,8 @@
                                 "id": "han-bing",
                                 "name": "韩冰",
                                 "role": "整数智能（MolarData）Head of Talent",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/han-bing.jpg"
                             },
                             {
                                 "id": "xu-songbo",

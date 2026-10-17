@@ -10,7 +10,10 @@ export default function AiXSubmissionChannel({ track, stage }) {
     if (stage === "final" && !isTmall) return null;
     if (isTmall) {
         return (
-            <section className="aix-submission-channel is-tmall" aria-label={channelLabel("tmallChannelQrAlt")}>
+            <section
+                className="aix-submission-channel is-tmall"
+                aria-label={channelLabel("tmallChannelQrAlt")}
+            >
                 <figure className="aix-submission-channel-qr">
                     <img
                         src="/images/hackathon/ai-x/official/tmall-submission-qr.jpg"

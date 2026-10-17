@@ -18,12 +18,19 @@ async function migrateHackathonAiXChallengeHandbook(db) {
                 const program = (event.event.program ||= {});
                 const defaultIndustryStages = defaults.event.program.trackStages.industry;
                 program.trackStages ||= {};
-                program.trackStages.industry = (program.trackStages.industry || []).map((stage) => ({
-                    ...stage,
-                    ...(defaultIndustryStages.find((item) => item.id === stage.id)?.requiredFields
-                        ? { requiredFields: defaultIndustryStages.find((item) => item.id === stage.id).requiredFields }
-                        : {}),
-                }));
+                program.trackStages.industry = (program.trackStages.industry || []).map(
+                    (stage) => ({
+                        ...stage,
+                        ...(defaultIndustryStages.find((item) => item.id === stage.id)
+                            ?.requiredFields
+                            ? {
+                                  requiredFields: defaultIndustryStages.find(
+                                      (item) => item.id === stage.id
+                                  ).requiredFields,
+                              }
+                            : {}),
+                    })
+                );
                 const challenges = Array.isArray(program.challenges) ? program.challenges : [];
                 const index = challenges.findIndex((item) => item.id === handbook.id);
                 if (index >= 0) challenges[index] = handbook;

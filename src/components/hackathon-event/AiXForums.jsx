@@ -183,65 +183,6 @@ export default function AiXForums({ now, registrationState }) {
             if (owner.current === userId) setBusy(false);
         }
     };
-    const exportRoster = async () => {
-        const userId = user.id;
-        setBusy(true);
-        setError("");
-        try {
-            const { data } = await api.get("/admin/hackathon/forums/registrations");
-            if (owner.current !== userId) return;
-            const cell = (v) =>
-                '"' +
-                String(v ?? "")
-                    .replace(/^[=+@-]/, "'$&")
-                    .replace(/"/g, '""') +
-                '"';
-            const rows = [
-                [
-                    "论坛",
-                    "身份",
-                    "姓名",
-                    "手机号",
-                    "学校/单位",
-                    "学号",
-                    "专业",
-                    "年级",
-                    "提问",
-                    "报名时间",
-                ],
-                ...data.registrations.map((r) => [
-                    t(`aix.forumPage.sessions.${r.forumKey}.title`),
-                    r.attendeeType === "internal"
-                        ? "校内"
-                        : r.attendeeType === "external"
-                          ? "校外"
-                          : "历史报名",
-                    r.name,
-                    r.contact,
-                    r.organization,
-                    r.studentId,
-                    r.major,
-                    r.grade,
-                    r.question,
-                    r.createdAt,
-                ]),
-            ];
-            const url = URL.createObjectURL(
-                new Blob(["\ufeff" + rows.map((r) => r.map(cell).join(",")).join("\r\n")], {
-                    type: "text/csv;charset=utf-8",
-                })
-            );
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "AI-X-forum-registrations.csv";
-            a.click();
-            setTimeout(() => URL.revokeObjectURL(url), 1000);
-        } catch {
-            if (owner.current === userId) setError("saveFailed");
-        } finally {
-            if (owner.current === userId) setBusy(false);
-        }
-    };
     return (
         <div className="aix-forums-page" ref={pageRef} tabIndex={0}>
             <AiXChapters
@@ -476,15 +417,6 @@ export default function AiXForums({ now, registrationState }) {
                                         {t(busy ? "aix.forumPage.saving" : "aix.forumPage.submit")}
                                     </button>
                                 </form>
-                            )}
-                            {user?.role === "admin" && (
-                                <button
-                                    className="aix-secondary aix-forum-export"
-                                    disabled={busy}
-                                    onClick={exportRoster}
-                                >
-                                    {t("aix.forumPage.export")}
-                                </button>
                             )}
                         </div>
                     </div>

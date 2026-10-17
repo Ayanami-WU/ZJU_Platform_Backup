@@ -6644,7 +6644,8 @@
                                 "id": "tan-weichuan",
                                 "name": "Tan Weichuan",
                                 "role": "University Relations Lead, MiraclePlus",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/tan-weichuan.jpg"
                             },
                             {
                                 "id": "sun-yifei",
@@ -6735,7 +6736,8 @@
                                 "id": "han-bing",
                                 "name": "Han Bing",
                                 "role": "Head of Talent, MolarData",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/han-bing.jpg"
                             },
                             {
                                 "id": "xu-songbo",

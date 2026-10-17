@@ -324,7 +324,8 @@ function createHackathonSubmissionService({
                             ? ["initial", "semifinal"].includes(body.stage)
                             : body.track === "industry"
                               ? body.stage === "semifinal"
-                              : body.track === "campus" && ["initial", "semifinal"].includes(body.stage);
+                              : body.track === "campus" &&
+                                ["initial", "semifinal"].includes(body.stage);
                     if (!file || !allowed)
                         fail(400, "HACKATHON_SUBMISSION_INVALID", "附件不属于当前赛道与轮次", {
                             field,
@@ -386,9 +387,9 @@ function createHackathonSubmissionService({
                     ? ["initial", "semifinal"].includes(body.stage)
                     : body.kind === "demo" &&
                       ((body.track === "industry" && body.stage === "semifinal") ||
-                          (body.track === "campus" && ["initial", "semifinal"].includes(body.stage)));
-            if (!allowed)
-                fail(400, "HACKATHON_SUBMISSION_INVALID", "附件类型或提交阶段无效");
+                          (body.track === "campus" &&
+                              ["initial", "semifinal"].includes(body.stage)));
+            if (!allowed) fail(400, "HACKATHON_SUBMISSION_INVALID", "附件类型或提交阶段无效");
             return useDb(true, async (db) => {
                 const row = await registrationFor(db, userId);
                 const template = await templateFor(db);

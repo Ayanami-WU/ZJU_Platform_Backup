@@ -48,9 +48,6 @@
 .aix-forum-signup .aix-forum-success {
     color: var(--hx-accent-text);
 }
-.aix-forum-export {
-    margin-top: 24px;
-}
 @media (max-width: 767px) {
     .aix-forum-fields {
         grid-template-columns: 1fr;
