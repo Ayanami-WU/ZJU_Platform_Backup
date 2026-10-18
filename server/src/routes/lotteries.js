@@ -8,7 +8,7 @@ const rateLimit = require("express-rate-limit");
 const service = createLotteryService();
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 2 },
+    limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 3 },
 });
 const router = express.Router();
 router.use((_req, res, next) => {
@@ -158,6 +158,7 @@ router.post(
                 note: req.body.note || "",
                 proof,
                 like_count: req.body.like_count,
+                phone: req.body.phone,
             })
         );
     })

@@ -132,7 +132,7 @@ function createLotteryService({
         return { ...rest, prizes: JSON.parse(prizes_json) };
     };
     const entryColumns =
-        "id,lottery_id,user_id,ticket,status,note,like_count,review_note,submitted_at,reviewed_at,eligible,(proof IS NOT NULL) AS has_proof";
+        "id,lottery_id,user_id,ticket,status,note,like_count,phone,review_note,submitted_at,reviewed_at,eligible,(proof IS NOT NULL) AS has_proof";
     const requireOpen = (c) => {
         if (c.status !== "open" || now() < c.opens_at || now() >= c.closes_at)
             fail("registration_closed", 409);
@@ -290,7 +290,7 @@ function createLotteryService({
                 return { id };
             });
         },
-        async enter(id, userId, { note = "", proof = null, like_count } = {}) {
+        async enter(id, userId, { note = "", proof = null, like_count, phone = "" } = {}) {
             return transaction(async (db) => {
                 const c = await campaign(db, id);
                 requireOpen(c);
@@ -305,22 +305,26 @@ function createLotteryService({
                 const likeCount =
                     like_count === undefined && !c.event_key ? null : likes(like_count);
                 if (c.event_key && likeCount < c.min_likes) fail("insufficient_likes");
+                const contactPhone = typeof phone === "string" ? phone.trim() : "";
+                if ((c.event_key || phone !== "") && !/^1[3-9]\d{9}$/.test(contactPhone))
+                    fail("invalid_phone");
                 const text = clean(note, 1000);
                 const status = c.review_required || c.event_key ? "pending" : "approved";
                 let entryId = old?.id;
                 if (old)
                     await db.run(
-                        "UPDATE lottery_entries SET note=?,proof=COALESCE(?,proof),like_count=?,status=?,review_note='',eligible=0,reviewed_by=NULL,reviewed_at=NULL,submitted_at=? WHERE id=?",
+                        "UPDATE lottery_entries SET note=?,proof=COALESCE(?,proof),like_count=?,phone=?,status=?,review_note='',eligible=0,reviewed_by=NULL,reviewed_at=NULL,submitted_at=? WHERE id=?",
                         text,
                         proof,
                         likeCount,
+                        contactPhone,
                         status,
                         now(),
                         old.id
                     );
                 else {
                     const result = await db.run(
-                        "INSERT INTO lottery_entries(lottery_id,user_id,ticket,status,note,proof,like_count,submitted_at) VALUES (?,?,?,?,?,?,?,?)",
+                        "INSERT INTO lottery_entries(lottery_id,user_id,ticket,status,note,proof,like_count,phone,submitted_at) VALUES (?,?,?,?,?,?,?,?,?)",
                         id,
                         userId,
                         randomUUID().replaceAll("-", "").slice(0, 16).toUpperCase(),
@@ -328,6 +332,7 @@ function createLotteryService({
                         text,
                         proof,
                         likeCount,
+                        contactPhone,
                         now()
                     );
                     entryId = result.lastID;
@@ -341,7 +346,7 @@ function createLotteryService({
                 await campaign(db, id);
                 return {
                     items: await db.all(
-                        `SELECT e.id,e.ticket,e.status,e.note,e.like_count,e.review_note,e.submitted_at,e.reviewed_at,(e.proof IS NOT NULL) AS has_proof,u.username,w.prize_name,w.claim_text,w.claimed_at,w.fulfilled_at FROM lottery_entries e JOIN users u ON u.id=e.user_id LEFT JOIN lottery_winners w ON w.entry_id=e.id WHERE e.lottery_id=? ORDER BY e.id DESC LIMIT 50 OFFSET ?`,
+                        `SELECT e.id,e.ticket,e.status,e.note,e.like_count,e.phone,e.review_note,e.submitted_at,e.reviewed_at,(e.proof IS NOT NULL) AS has_proof,u.username,w.prize_name,w.claim_text,w.claimed_at,w.fulfilled_at FROM lottery_entries e JOIN users u ON u.id=e.user_id LEFT JOIN lottery_winners w ON w.entry_id=e.id WHERE e.lottery_id=? ORDER BY e.id DESC LIMIT 50 OFFSET ?`,
                         id,
                         (page - 1) * 50
                     ),

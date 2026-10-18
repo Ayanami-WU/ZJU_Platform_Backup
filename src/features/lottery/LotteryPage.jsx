@@ -93,6 +93,7 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
     const [preview, setPreview] = useState("");
     const [proofError, setProofError] = useState("");
     const [likes, setLikes] = useState("");
+    const [phone, setPhone] = useState("");
     const [claim, setClaim] = useState("");
     const [agreed, setAgreed] = useState(false);
     const load = useCallback(async () => {
@@ -127,6 +128,7 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
         setProof(null);
         setProofError("");
         setLikes("");
+        setPhone("");
         setClaim("");
         setError("");
         setAgreed(false);
@@ -137,6 +139,9 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
             clearInterval(interval);
         };
     }, [load]);
+    useEffect(() => {
+        setPhone(data?.entry?.phone || "");
+    }, [data?.entry?.phone]);
     useEffect(() => {
         if (!proof) {
             setPreview("");
@@ -320,6 +325,11 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
                                             {data.entry.review_note && (
                                                 <p>{data.entry.review_note}</p>
                                             )}
+                                            {data.entry.phone && (
+                                                <p>
+                                                    {t("lottery.phone")}：{data.entry.phone}
+                                                </p>
+                                            )}
                                             {data.entry.has_proof && embedded && (
                                                 <ProofImage
                                                     key={data.entry.submitted_at}
@@ -347,6 +357,7 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
                                             className="lottery-primary"
                                             onClick={() => {
                                                 setLikes(String(data.entry.like_count ?? ""));
+                                                setPhone(data.entry.phone || "");
                                                 setEditingEntry(true);
                                             }}
                                         >
@@ -374,6 +385,7 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
                                                             String(Number(likes))
                                                         );
                                                     if (proof) form.append("proof", proof);
+                                                    if (eventCampaign) form.append("phone", phone);
                                                     return api.post(
                                                         `/lotteries/${data.id}/entries`,
                                                         form,
@@ -409,6 +421,27 @@ export default function LotteryPage({ eventKey, eventTitle, embedded = false, on
                                                                 {t("lottery.event.like_count_hint")}
                                                             </small>
                                                         )}
+                                                    </label>
+                                                )}
+                                                {eventCampaign && (
+                                                    <label>
+                                                        {t("lottery.phone")}
+                                                        <input
+                                                            type="tel"
+                                                            autoComplete="tel-national"
+                                                            inputMode="tel"
+                                                            pattern="1[3-9][0-9]{9}"
+                                                            maxLength={11}
+                                                            required
+                                                            value={phone}
+                                                            placeholder={t(
+                                                                "lottery.phone_placeholder"
+                                                            )}
+                                                            onChange={(e) =>
+                                                                setPhone(e.target.value)
+                                                            }
+                                                        />
+                                                        <small>{t("lottery.phone_hint")}</small>
                                                     </label>
                                                 )}
                                                 {!embedded && (

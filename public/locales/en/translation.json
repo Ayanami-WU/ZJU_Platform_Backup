@@ -7320,6 +7320,7 @@
             "not_claimed": "The winner has not submitted a claim.",
             "unavailable": "Unable to complete this now. Refresh and try again.",
             "invalid_event": "Select a valid event.",
+            "invalid_phone": "Enter a valid 11-digit Chinese mobile number.",
             "invalid_likes": "Enter a valid whole number of likes.",
             "invalid_promotion_url": "Enter a valid HTTP or HTTPS post URL.",
             "promotion_url_required": "Save the official post URL before publishing.",
@@ -7346,6 +7347,10 @@
         "min_likes": "Minimum likes",
         "min_likes_hint": "0 means no minimum. Each approved account receives one chance.",
         "event_review_required": "Event campaigns always require a screenshot and administrator approval.",
+        "phone": "Mobile number",
+        "phone_placeholder": "Enter an 11-digit Chinese mobile number",
+        "phone_hint": "Only used for lottery and prize notifications. Not shown publicly.",
+        "phone_missing": "Not provided (existing entry)",
         "like_count": "Likes shown in screenshot",
         "review_checklist": "Verify the correct official post was shared and the reported likes match the screenshot and meet the minimum. Explain any rejection so the participant can resubmit.",
         "event": {

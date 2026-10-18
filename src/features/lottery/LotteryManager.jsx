@@ -47,6 +47,11 @@ function EntryRow({ entry, campaign, busy, onReview, onFulfill }) {
                 </p>
             )}
             <p>{entry.note}</p>
+            {campaign.event_key && (
+                <p>
+                    {t("lottery.phone")}：{entry.phone || t("lottery.phone_missing")}
+                </p>
+            )}
             {entry.review_note && (
                 <p>
                     {t("lottery.review_note")}：{entry.review_note}

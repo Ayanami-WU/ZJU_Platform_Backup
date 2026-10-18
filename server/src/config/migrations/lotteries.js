@@ -16,7 +16,7 @@ async function migrateLotteries(db) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             lottery_id TEXT NOT NULL REFERENCES lotteries(id), user_id INTEGER NOT NULL REFERENCES users(id),
             ticket TEXT NOT NULL UNIQUE, status TEXT NOT NULL CHECK(status IN ('pending','approved','rejected')),
-            note TEXT NOT NULL DEFAULT '', proof BLOB, like_count INTEGER, review_note TEXT NOT NULL DEFAULT '',
+            note TEXT NOT NULL DEFAULT '', proof BLOB, like_count INTEGER, phone TEXT NOT NULL DEFAULT '', review_note TEXT NOT NULL DEFAULT '',
             submitted_at INTEGER NOT NULL, reviewed_at INTEGER, reviewed_by INTEGER REFERENCES users(id),
             eligible INTEGER NOT NULL DEFAULT 0, UNIQUE(lottery_id,user_id)
         );
@@ -39,7 +39,7 @@ async function migrateLotteries(db) {
             promotion_url: "TEXT NOT NULL DEFAULT ''",
             min_likes: "INTEGER NOT NULL DEFAULT 0",
         },
-        lottery_entries: { like_count: "INTEGER" },
+        lottery_entries: { like_count: "INTEGER", phone: "TEXT NOT NULL DEFAULT ''" },
     })) {
         const existing = new Set(
             (await db.all(`PRAGMA table_info(${table})`)).map((column) => column.name)

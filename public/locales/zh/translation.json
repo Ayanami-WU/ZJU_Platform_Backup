@@ -7418,6 +7418,7 @@
             "not_claimed": "用户尚未提交领奖信息。",
             "unavailable": "暂时无法完成，请刷新后重试。",
             "invalid_event": "请选择有效赛事。",
+            "invalid_phone": "请填写有效的 11 位手机号。",
             "invalid_likes": "请填写有效的整数点赞数。",
             "invalid_promotion_url": "请填写有效的 HTTP 或 HTTPS 推文链接。",
             "promotion_url_required": "发布前请先保存官方推文链接。",
@@ -7444,6 +7445,10 @@
         "min_likes": "最低点赞数",
         "min_likes_hint": "0 表示不设门槛。审核通过后，每个账号一次抽奖机会。",
         "event_review_required": "赛事转发抽奖必须提交截图并经管理员审核，无法关闭。",
+        "phone": "手机号",
+        "phone_placeholder": "请输入 11 位手机号",
+        "phone_hint": "仅用于抽奖联系及领奖通知，不会公开。",
+        "phone_missing": "未填写（历史记录）",
         "like_count": "截图中的点赞数",
         "review_checklist": "核对是否转发本期官方推文、截图中的点赞数是否一致并达到门槛；信息不符时填写原因，退回补交。",
         "event": {

@@ -279,6 +279,7 @@ test("existing databases gain event fields without reassigning campaigns or entr
         assert.equal(old.event_key, null);
         assert.equal(old.promotion_url, "");
         assert.equal(old.min_likes, 0);
+        assert.equal((await legacy.get("SELECT phone FROM lottery_entries WHERE id=1")).phone, "");
         assert.equal(
             (await legacy.get("SELECT * FROM lottery_entries WHERE id=1")).like_count,
             null
@@ -329,9 +330,16 @@ test("event campaigns validate configuration, isolate event queries and mandate 
         service.enter(event.id, 2, { proof: Buffer.from("screenshot"), like_count: 9 }),
         { code: "insufficient_likes" }
     );
+    for (const phone of [undefined, "", "123", "12800000000", "1380000000a", 13800000001, null]) {
+        await assert.rejects(
+            service.enter(event.id, 2, { proof: Buffer.from("screenshot"), like_count: 12, phone }),
+            { code: "invalid_phone" }
+        );
+    }
     const entry = await service.enter(event.id, 2, {
         proof: Buffer.from("screenshot"),
         like_count: "12",
+        phone: "13800000001",
     });
     assert.equal((await service.detail(event.id, 2)).entry.status, "pending");
     assert.equal((await service.entries(event.id)).items[0].like_count, 12);
@@ -339,11 +347,15 @@ test("event campaigns validate configuration, isolate event queries and mandate 
     const resubmitted = await service.enter(event.id, 2, {
         proof: Buffer.from("clear screenshot"),
         like_count: 15,
+        phone: "13900000002",
     });
     assert.equal(resubmitted.id, entry.id);
     const updated = (await service.detail(event.id, 2)).entry;
     assert.equal(updated.status, "pending");
     assert.equal(updated.like_count, 15);
+    assert.equal(updated.phone, "13900000002");
+    assert.equal((await service.entries(event.id)).items[0].phone, "13900000002");
+    assert(!JSON.stringify(await service.detail(event.id, 3)).includes("13900000002"));
     assert.equal(updated.review_note, "");
     assert.equal(updated.reviewed_at, null);
     assert.equal(
@@ -362,6 +374,7 @@ test("published event edits keep required promotion and draw with the latest pri
         const entry = await service.enter(event.id, user, {
             proof: Buffer.from("proof"),
             like_count,
+            phone: "13800000001",
         });
         await service.review(event.id, entry.id, 1, "approved");
     }
@@ -407,6 +420,7 @@ test("event approval and draw enforce screenshots and threshold, with one chance
         const entry = await service.enter(event.id, user, {
             proof: Buffer.from("proof"),
             like_count: count,
+            phone: "13800000001",
         });
         if ([2, 3, 6, 7].includes(user)) await service.review(event.id, entry.id, 1, "approved");
         if (user === 5) await service.review(event.id, entry.id, 1, "rejected", "Wrong post");
@@ -543,6 +557,7 @@ test("HTTP permissions, screenshot decoding, proof ownership, and public data mi
         const eventForm = new FormData();
         eventForm.append("note", "event private note");
         eventForm.append("like_count", "18");
+        eventForm.append("phone", "13800000003");
         eventForm.append(
             "proof",
             new Blob(
@@ -562,6 +577,8 @@ test("HTTP permissions, screenshot decoding, proof ownership, and public data mi
         const eventEntry = await submitted.json();
         const eventDetail = await (await req(`/${event.id}?event=${eventKey}`, 3)).json();
         assert.equal(eventDetail.entry.like_count, 18);
+        assert.equal(eventDetail.entry.phone, "13800000003");
+        assert(!JSON.stringify(await (await req(`/${event.id}`)).json()).includes("13800000003"));
         assert.equal(eventDetail.entry.status, "pending");
         assert.equal(eventDetail.entry.id, eventEntry.id);
         assert.match(eventDetail.entry.ticket, /^[0-9A-F]{16}$/);
@@ -580,6 +597,7 @@ test("HTTP permissions, screenshot decoding, proof ownership, and public data mi
         assert.equal(roster.items[0].id, eventEntry.id);
         assert.equal(roster.items[0].status, "pending");
         assert.equal(roster.items[0].like_count, 18);
+        assert.equal(roster.items[0].phone, "13800000003");
         assert.equal(roster.items[0].note, "event private note");
         const saved = await db.get(
             "SELECT ticket, status, proof IS NOT NULL AS has_proof FROM lottery_entries WHERE id=?",
