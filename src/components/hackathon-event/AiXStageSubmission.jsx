@@ -106,6 +106,11 @@ export default function AiXStageSubmission({
             setError(label("projectNameRequired"));
             return;
         }
+        const modelscopeInput = materials.modelscopeUrl?.trim() || "";
+        const modelscopeUrl =
+            modelscopeInput && !/^[a-z][a-z0-9+.-]*:/i.test(modelscopeInput)
+                ? `https://${modelscopeInput}`
+                : modelscopeInput;
         const invalid =
             action !== "withdraw" &&
             fields.find(
@@ -115,7 +120,13 @@ export default function AiXStageSubmission({
                         required.includes(field) &&
                         !materials[field]?.trim()) ||
                         (materials[field]?.trim() &&
-                            !/^https:\/\//i.test(safeWebUrl(materials[field].trim()) || "")))
+                            !(field === "modelscopeUrl" ? /^https?:\/\//i : /^https:\/\//i).test(
+                                safeWebUrl(
+                                    field === "modelscopeUrl"
+                                        ? modelscopeUrl
+                                        : materials[field].trim()
+                                ) || ""
+                            )))
             );
         if (invalid) {
             setInvalidField(invalid);
@@ -148,7 +159,11 @@ export default function AiXStageSubmission({
                     stage,
                     action,
                     expectedVersion: version,
-                    materials: { ...materials, projectName: materials.projectName?.trim() || "" },
+                    materials: {
+                        ...materials,
+                        modelscopeUrl,
+                        projectName: materials.projectName?.trim() || "",
+                    },
                 },
                 { noRetry: true }
             );

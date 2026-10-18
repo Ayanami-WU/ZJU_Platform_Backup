@@ -7026,7 +7026,7 @@
             "campusPending": "本赛道支持自由命题，提交你的技术作品。推荐赛题公布后会在这里展示。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",
-            "accessibleLinks": "GitHub 与魔搭链接须使用 HTTPS，并确保评委可直接访问。",
+            "accessibleLinks": "GitHub 请填写 HTTPS 仓库链接；魔搭可填写作品页或部署地址，请确保评委可直接访问。",
             "fields": {
                 "projectName": "项目名称",
                 "productHighlights": "作品说明书",
@@ -7065,7 +7065,7 @@
             "withdrawConfirm": "确认撤回正式提交？材料会保留为草稿，撤回后不参与评审。请在截止前重新正式提交。",
             "withdrawSuccess": "已撤回正式提交，材料已保留。请在截止前修改并重新提交。",
             "failed": "保存失败，输入已保留，请重试。",
-            "invalidUrl": "请检查「{{field}}」，填写可访问的 HTTPS 链接。",
+            "invalidUrl": "请检查「{{field}}」，填写有效的网页地址；GitHub 须使用 HTTPS。",
             "material": "提交材料",
             "conflict": "其他窗口已有更新，当前输入已保留。请选择保留当前输入，或载入已保存内容。",
             "conflictLoadFailed": "其他窗口已有更新，最新记录暂未读取成功。输入已保留，请重试保存。",

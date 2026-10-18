@@ -45,11 +45,10 @@ test("AI+X materials require actual GitHub and ModelScope deployment HTTPS links
         );
     }
     for (const modelscopeUrl of [
-        "https://modelscope.cn/models/a/b",
-        "https://modelscope.cn.evil.test/studios/a/b",
-        "https://evil.test",
-        "http://a.ms.show",
-        "https://a.ms.show:123/a",
+        "javascript:alert(1)",
+        "file:///tmp/demo",
+        "https://user:pass@example.com/demo",
+        "not a url",
     ]) {
         assert.throws(
             () => normalizeMaterials({ ...materials, modelscopeUrl }),
@@ -60,6 +59,11 @@ test("AI+X materials require actual GitHub and ModelScope deployment HTTPS links
         "https://modelscope.cn/studios/a/b/summary",
         "https://modelscope.ai/studios/a/b",
         "https://a-b.ms.show/demo",
+        "https://modelscope.cn/models/a/b",
+        "http://a.ms.show",
+        "https://a.ms.show:123/a",
+        "modelscope.cn/studios/a/b",
+        "https://example.com/my-app",
     ]) {
         assert.ok(normalizeMaterials({ ...materials, modelscopeUrl }).modelscopeUrl);
     }
