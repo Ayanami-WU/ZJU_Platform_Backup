@@ -5116,7 +5116,7 @@
         "motto": "Break boundaries · Co-create · Emerge",
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
-        "location": "Oct 18: Duan Yongping Teaching Building 2-112 · Oct 25: Sandun Entrepreneurship Space",
+        "location": "Oct 18: Morning forum — Duan Yongping Teaching Building 2-112; afternoon development — North 2-227 · Oct 25: Sandun Entrepreneurship Space",
         "team": "Tmall OPC Incubation Track and Huawei Industry Implementation Track: teams of 1–5",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
@@ -5274,7 +5274,7 @@
                 "venue": "Venue",
                 "guidance": "Online submission, 18–20 Oct",
                 "campusLocation": "ZJU Zijingang Campus",
-                "room": "Duan Yongping Teaching Building 2–112",
+                "room": "North 2-227",
                 "brief": "Format",
                 "industryBrief": "Build an Agent or Skill for an industry challenge announced on site.",
                 "campusBrief": "Choose your own topic or enter an existing mature project.",
@@ -5522,7 +5522,7 @@
             "application": "Apps",
             "bothTracks": "You can enter both tracks",
             "venues": [
-                "Oct 18 · Duan Yongping Teaching Building 2-112",
+                "Oct 18 · Morning forum: Duan Yongping Teaching Building 2-112; afternoon development: North 2-227",
                 "Oct 25 · Sandun Entrepreneurship Space"
             ],
             "pauseMotion": "Pause glow animation",
@@ -6165,7 +6165,7 @@
                     "date": "10.18",
                     "title": "Preliminary round · Technical forum",
                     "place": "Zhejiang University, Zijingang Campus",
-                    "address": "Duan Yongping Teaching Building 2–112"
+                    "address": "Morning forum: Duan Yongping Teaching Building 2-112; afternoon development: North 2-227"
                 },
                 {
                     "date": "10.25",
@@ -6251,7 +6251,7 @@
                             "time": "13:00–17:00",
                             "title": "On-site development · Attendance required",
                             "note": "On-site challenge and development · Attendance required",
-                            "place": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2–112",
+                            "place": "ZJU Zijingang Campus · North 2-227",
                             "label": "Qualifier",
                             "attendance": "Required"
                         },
@@ -7009,7 +7009,7 @@
             "locationLabel": "Location",
             "locations": {
                 "campus": "Online",
-                "industry": "ZJU Zijingang Campus · Duan Yongping Teaching Building 2‑112 · Attendance required",
+                "industry": "ZJU Zijingang Campus · North 2-227 · Attendance required",
                 "semifinal": "Online",
                 "final": "Sandun Startup Space · Baogang Lifestyle Plaza, Building C, 6F"
             },
