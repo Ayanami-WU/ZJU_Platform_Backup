@@ -43,6 +43,13 @@ import {
 } from "./AdminUI";
 import HackathonTemplateEditor from "./HackathonTemplateEditor";
 import HackathonSubmissionManager from "./HackathonSubmissionManager";
+import RegistrationSubmissionData from "./RegistrationSubmissionData";
+import {
+    attachRegistrationSubmissions,
+    registrationSubmissionState,
+    registrationSubmissionAnswers,
+    registrationSubmissionField,
+} from "../../utils/hackathonRegistrationSubmissions";
 
 const gradeLabels = {
     freshman: "大一",
@@ -139,6 +146,7 @@ const registrationAnswers = (registration) => {
             ? registration.form_data
             : {}),
         ...trackAnswers,
+        ...registrationSubmissionAnswers(registration),
     };
     delete answers.trackRegistrations;
     return answers;
@@ -165,6 +173,8 @@ const fallbackFieldsById = new Map(
     ].map((field) => [field.id, field])
 );
 const registrationField = (fieldsByEvent, eventKey, fieldId) => {
+    const submissionField = registrationSubmissionField(fieldId);
+    if (submissionField) return submissionField;
     const match = /^(industry|campus)__(.+)$/.exec(fieldId);
     if (match) {
         const field =
@@ -242,6 +252,12 @@ const HackathonManager = () => {
     const { t } = useTranslation();
     const { isDayMode, headingTextClass, mutedTextClass } = useAdminTheme();
     const [registrations, setRegistrations] = useState([]);
+    const [submissionRoster, setSubmissionRoster] = useState(null);
+    const [submissionFilter, setSubmissionFilter] = useState("all");
+    const registrationsWithSubmissions = useMemo(
+        () => attachRegistrationSubmissions(registrations, submissionRoster),
+        [registrations, submissionRoster]
+    );
     const [works, setWorks] = useState([]);
     const [mediaLinks, setMediaLinks] = useState([]);
     const [confirmState, setConfirmState] = useState(null);
@@ -276,6 +292,7 @@ const HackathonManager = () => {
     );
     useEffect(() => {
         setEventFilter(selectedEventKey);
+        setSubmissionFilter("all");
         if (selectedEventKey !== AIX_EVENT_KEY) {
             setActiveWorkspace((current) => (current === "submissions" ? "overview" : current));
         }
@@ -337,6 +354,13 @@ const HackathonManager = () => {
                 fetchMediaLinks(),
                 api.get("/admin/hackathon/schedule"),
                 api.get("/admin/competitions"),
+                api
+                    .get("/admin/hackathon/submissions", { params: { event: AIX_EVENT_KEY } })
+                    .then((response) => setSubmissionRoster(response.data))
+                    .catch(() => {
+                        setSubmissionRoster(null);
+                        toast.error(t("admin.hackathon_submissions.load_failed"));
+                    }),
             ]);
             setScheduleConfig(scheduleResponse.data);
             setCompetitions(competitionResponse.data);
@@ -354,7 +378,7 @@ const HackathonManager = () => {
 
     const filteredRegistrations = useMemo(() => {
         const query = searchTerm.trim().toLowerCase();
-        return registrations.filter((registration) => {
+        return registrationsWithSubmissions.filter((registration) => {
             const matchesSearch =
                 !query ||
                 [
@@ -365,6 +389,9 @@ const HackathonManager = () => {
                     registration.major,
                     registration.grade,
                     registration.experience,
+                    ...registration.submissionRecords.map(
+                        (record) => record.submitted?.projectName || record.draft?.projectName
+                    ),
                     safeParseTools(registration.ai_tools).join(" "),
                     ...Object.values(registration.form_data || {}),
                 ]
@@ -373,9 +400,19 @@ const HackathonManager = () => {
 
             const matchesGrade = gradeFilter ? registration.grade === gradeFilter : true;
             const matchesEvent = eventFilter ? registration.event_key === eventFilter : true;
-            return matchesSearch && matchesGrade && matchesEvent;
+            const matchesSubmission =
+                submissionFilter === "all" ||
+                registrationSubmissionState(registration) === submissionFilter;
+            return matchesSearch && matchesGrade && matchesEvent && matchesSubmission;
         });
-    }, [eventFilter, eventTitleByKey, gradeFilter, registrations, searchTerm]);
+    }, [
+        eventFilter,
+        eventTitleByKey,
+        gradeFilter,
+        registrationsWithSubmissions,
+        searchTerm,
+        submissionFilter,
+    ]);
 
     const filteredWorks = useMemo(() => {
         const query = workSearchTerm.trim().toLowerCase();
@@ -488,6 +525,8 @@ const HackathonManager = () => {
             .filter(
                 ([fieldId, value]) =>
                     !legacyRegistrationFieldIds.has(fieldId) &&
+                    fieldId !== "workStatus" &&
+                    !fieldId.startsWith("work__") &&
                     value !== "" &&
                     value !== null &&
                     value !== undefined
@@ -891,6 +930,12 @@ const HackathonManager = () => {
                     <div className={`mt-3 text-sm ${mutedTextClass}`}>
                         {renderAdditionalAnswers(registration)}
                     </div>
+                    <section className="mt-4 border-t border-current/10 pt-3">
+                        <h4 className="mb-2 text-sm font-semibold">
+                            {t("admin.hackathon_submissions.registration_column")}
+                        </h4>
+                        <RegistrationSubmissionData registration={registration} />
+                    </section>
                 </article>
             ))}
         </div>
@@ -1125,10 +1170,33 @@ const HackathonManager = () => {
                                 </div>
                             </ToolbarGroup>
                             <ToolbarGroup>
+                                {eventFilter === AIX_EVENT_KEY && (
+                                    <select
+                                        className="theme-admin-input min-h-[40px] rounded-xl px-3 py-2 text-sm"
+                                        aria-label={t(
+                                            "admin.hackathon_submissions.registration_filter"
+                                        )}
+                                        value={submissionFilter}
+                                        disabled={!submissionRoster}
+                                        onChange={(event) => {
+                                            setSubmissionFilter(event.target.value);
+                                            setCurrentPage(1);
+                                        }}
+                                    >
+                                        {["all", "submitted", "draft", "none"].map((value) => (
+                                            <option key={value} value={value}>
+                                                {t(
+                                                    `admin.hackathon_submissions.registration_${value}`
+                                                )}
+                                            </option>
+                                        ))}
+                                    </select>
+                                )}
                                 <select
                                     value={eventFilter}
                                     onChange={(event) => {
                                         setEventFilter(event.target.value);
+                                        setSubmissionFilter("all");
                                         setCurrentPage(1);
                                     }}
                                     className="theme-admin-input min-h-[40px] max-w-[220px] rounded-xl px-3 py-2 text-sm"
@@ -1188,6 +1256,11 @@ const HackathonManager = () => {
                                                     {filteredFieldLabel("experience")}
                                                 </th>
                                                 <th className="p-4">其他报名信息</th>
+                                                <th className="p-4">
+                                                    {t(
+                                                        "admin.hackathon_submissions.registration_column"
+                                                    )}
+                                                </th>
                                                 <th className="p-4">报名时间</th>
                                                 <th className="p-4 text-right">操作</th>
                                             </tr>
@@ -1265,6 +1338,11 @@ const HackathonManager = () => {
                                                         <div className={mutedTextClass}>
                                                             {renderAdditionalAnswers(registration)}
                                                         </div>
+                                                    </td>
+                                                    <td className="p-4 align-top">
+                                                        <RegistrationSubmissionData
+                                                            registration={registration}
+                                                        />
                                                     </td>
                                                     <td className="p-4">
                                                         <AdminTableCellText>

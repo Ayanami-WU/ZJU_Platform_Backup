@@ -4153,6 +4153,13 @@
             "preview_help": "Changes preview here. Save to apply across the site."
         },
         "hackathon_submissions": {
+            "registration_column": "Project submissions",
+            "registration_filter": "Filter by project submission status",
+            "registration_all": "All submission statuses",
+            "registration_submitted": "Formally submitted",
+            "registration_draft": "Draft only, not submitted",
+            "registration_none": "No submission on this site",
+
             "title": "Submissions & qualification",
             "description": "Review each registered account and track separately. Only formal submissions are used for judging; drafts do not count as submitted entries.",
             "track": "Track",

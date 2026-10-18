@@ -4272,6 +4272,13 @@
             "preview_help": "调整仅在此处预览，保存后应用到全站。"
         },
         "hackathon_submissions": {
+            "registration_column": "作品提交",
+            "registration_filter": "按作品提交情况筛选",
+            "registration_all": "全部提交状态",
+            "registration_submitted": "已正式提交",
+            "registration_draft": "仅草稿，未正式提交",
+            "registration_none": "暂无本站提交",
+
             "title": "提交与晋级",
             "description": "按报名账号及赛道分别查看材料。正式提交用于评审；草稿仅供查看，不代表已参赛提交。",
             "track": "赛道",
