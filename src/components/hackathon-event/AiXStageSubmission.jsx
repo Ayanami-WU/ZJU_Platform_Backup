@@ -97,6 +97,7 @@ export default function AiXStageSubmission({
 
     const persist = async (action) => {
         if (busy || conflict || disabled || (action === "submit" && !gate?.canSubmit)) return;
+        if (action === "withdraw" && !window.confirm(label("withdrawConfirm"))) return;
         setError("");
         setInvalidField("");
         setNotice("");
@@ -105,13 +106,17 @@ export default function AiXStageSubmission({
             setError(label("projectNameRequired"));
             return;
         }
-        const invalid = fields.find(
-            (field) =>
-                ["githubUrl", "modelscopeUrl"].includes(field) &&
-                ((action === "submit" && required.includes(field) && !materials[field]?.trim()) ||
-                    (materials[field]?.trim() &&
-                        !/^https:\/\//i.test(safeWebUrl(materials[field].trim()) || "")))
-        );
+        const invalid =
+            action !== "withdraw" &&
+            fields.find(
+                (field) =>
+                    ["githubUrl", "modelscopeUrl"].includes(field) &&
+                    ((action === "submit" &&
+                        required.includes(field) &&
+                        !materials[field]?.trim()) ||
+                        (materials[field]?.trim() &&
+                            !/^https:\/\//i.test(safeWebUrl(materials[field].trim()) || "")))
+            );
         if (invalid) {
             setInvalidField(invalid);
             setError(label("invalidUrl", { field: label(`fields.${invalid}`) }));
@@ -148,10 +153,20 @@ export default function AiXStageSubmission({
                 { noRetry: true }
             );
             setVersion(data.submission.version);
-            setMaterials({ ...emptyMaterials(), ...data.submission.draft });
-            onDraft(data.submission.draft);
+            if (action !== "withdraw") {
+                setMaterials({ ...emptyMaterials(), ...data.submission.draft });
+                onDraft(data.submission.draft);
+            }
             onRecord(data.submission);
-            setNotice(label(action === "submit" ? "submitSuccess" : "saveSuccess"));
+            setNotice(
+                label(
+                    action === "withdraw"
+                        ? "withdrawSuccess"
+                        : action === "submit"
+                          ? "submitSuccess"
+                          : "saveSuccess"
+                )
+            );
         } catch (e) {
             const response = e.response?.data;
             if (response?.code === "HACKATHON_SUBMISSION_CONFLICT") {
@@ -286,6 +301,20 @@ export default function AiXStageSubmission({
                     </span>
                 )}
             </header>
+            {user && (
+                <div className="aix-task-confirmation" role="status" aria-live="polite">
+                    <CheckCircle2 size={18} aria-hidden="true" />
+                    <div>
+                        <strong>{label(record?.submitted ? "submitted" : "notSubmitted")}</strong>
+                        <p>
+                            {record?.submitted
+                                ? label("submittedAt", { time: formatDate(record.submittedAt) })
+                                : label("draftNotReviewed")}
+                        </p>
+                        {pendingFormal && <p>{label("draftAfterSubmitHint")}</p>}
+                    </div>
+                </div>
+            )}
             {accessNotice}
             <form
                 noValidate
@@ -518,12 +547,22 @@ export default function AiXStageSubmission({
                                 )}
                             </button>
                         </div>
+                        {record?.submitted && (
+                            <button
+                                className="aix-secondary"
+                                type="button"
+                                disabled={disabled || Boolean(conflict)}
+                                onClick={() => persist("withdraw")}
+                            >
+                                {label(busy === "withdraw" ? "withdrawing" : "withdrawSubmission")}
+                            </button>
+                        )}
                         <p className="aix-task-help">{label("saveHint")}</p>
                     </>
                 )}
             </form>
             {record?.submitted && (
-                <details className="aix-task-receipt" open={gate?.state === "closed"}>
+                <details className="aix-task-receipt" open>
                     <summary>
                         <CheckCircle2 size={18} />
                         {label("formalReceipt")} · {formatDate(record.submittedAt)}

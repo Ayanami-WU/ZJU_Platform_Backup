@@ -84,7 +84,7 @@
                     {
                         "id": "initial",
                         "opensAt": "2026-10-18T13:00:00+08:00",
-                        "closesAt": "2026-10-18T17:00:00+08:00",
+                        "closesAt": "2026-10-18T17:30:00+08:00",
                         "requiredFields": ["projectName", "githubUrl", "modelscopeUrl", "bpFileId"]
                     },
                     {

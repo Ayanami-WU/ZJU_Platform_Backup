@@ -224,6 +224,27 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                 .version,
             1
         );
+        const withdrawn = await save({ track: "industry", action: "withdraw", expectedVersion: 1 });
+        assert.equal(withdrawn.submission.submitted, null);
+        assert.equal(withdrawn.submission.submittedAt, null);
+        assert.deepEqual(withdrawn.submission.draft, normalizeMaterials(industryInitialMaterials));
+        assert.equal(withdrawn.submission.version, 2);
+        assert.equal(
+            (await service.getMine(1, eventKey)).submissions.find((x) => x.track === "industry")
+                .submitted,
+            null
+        );
+        await rejects(
+            () => save({ track: "industry", action: "withdraw", expectedVersion: 1 }),
+            "HACKATHON_SUBMISSION_CONFLICT"
+        );
+        const resubmitted = await save({
+            track: "industry",
+            expectedVersion: 2,
+            materials: industryInitialMaterials,
+        });
+        assert.equal(resubmitted.submission.submitted.projectName, "Project");
+        assert.equal(resubmitted.submission.version, 3);
         await save(
             {
                 track: "industry",
@@ -232,10 +253,15 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             },
             2
         );
-        clock = Date.parse("2026-10-18T17:00:00+08:00");
+        clock = Date.parse("2026-10-18T17:30:00+08:00");
         await rejects(() => save({ expectedVersion: 4 }), "HACKATHON_SUBMISSION_BLOCKED", "closed");
         await rejects(
-            () => save({ track: "industry", expectedVersion: 1 }),
+            () => save({ track: "industry", expectedVersion: 3 }),
+            "HACKATHON_SUBMISSION_BLOCKED",
+            "closed"
+        );
+        await rejects(
+            () => save({ track: "industry", action: "withdraw", expectedVersion: 3 }),
             "HACKATHON_SUBMISSION_BLOCKED",
             "closed"
         );

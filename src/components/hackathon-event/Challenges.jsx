@@ -173,6 +173,31 @@ export default function Challenges({ template, now, registrationState = {} }) {
         boundaryRefresh.current = key;
         read().catch(() => setLoadError(true));
     }, [owner, track, stage, remoteGate, temporalState, read]);
+    useEffect(() => {
+        if (!owner) return undefined;
+        let active = true;
+        let reading = false;
+        const refresh = async () => {
+            if (!active || mutating || reading || document.visibilityState === "hidden") return;
+            reading = true;
+            try {
+                await read();
+            } catch {
+                /* Keep the last snapshot during transient outages. */
+            } finally {
+                reading = false;
+            }
+        };
+        const timer = globalThis.setInterval(refresh, 15000);
+        globalThis.addEventListener("focus", refresh);
+        document.addEventListener("visibilitychange", refresh);
+        return () => {
+            active = false;
+            globalThis.clearInterval(timer);
+            globalThis.removeEventListener("focus", refresh);
+            document.removeEventListener("visibilitychange", refresh);
+        };
+    }, [owner, read, mutating]);
     const loaded = Boolean(data);
     useEffect(() => {
         if (location.hash !== "#submission") return;

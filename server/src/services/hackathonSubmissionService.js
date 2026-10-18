@@ -292,7 +292,7 @@ function createHackathonSubmissionService({
             checkTrack(body.track);
             if (
                 !["initial", "semifinal"].includes(body.stage) ||
-                !["save", "submit"].includes(body.action) ||
+                !["save", "submit", "withdraw"].includes(body.action) ||
                 !Number.isSafeInteger(body.expectedVersion) ||
                 body.expectedVersion < 0
             )
@@ -308,6 +308,22 @@ function createHackathonSubmissionService({
                     fail(403, "HACKATHON_SUBMISSION_BLOCKED", "当前无法修改本轮材料", {
                         reason: info.blockedReason,
                     });
+                if (body.action === "withdraw") {
+                    const existing = await db.get(
+                        "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=?",
+                        [body.eventKey, userId, body.track, body.stage]
+                    );
+                    if (!existing || existing.version !== body.expectedVersion)
+                        fail(409, "HACKATHON_SUBMISSION_CONFLICT", "材料已更新，请刷新后重试");
+                    await db.run(
+                        "UPDATE hackathon_submissions SET submitted_json=NULL,submitted_at=NULL,version=version+1 WHERE id=? AND user_id=?",
+                        [existing.id, userId]
+                    );
+                    const saved = await db.get("SELECT * FROM hackathon_submissions WHERE id=?", [
+                        existing.id,
+                    ]);
+                    return { submission: submissionPayload(saved), serverNow };
+                }
                 const materials = normalizeMaterials(
                     body.materials,
                     body.action === "submit" ? info.requiredFields : []
