@@ -5185,7 +5185,7 @@
             "initial": {
                 "title": "First round",
                 "date": "10.18",
-                "description": "Tmall begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct. Huawei develops and submits onsite 18 Oct, 13:00–17:00.",
+                "description": "Tmall begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct. Huawei develops onsite 18 Oct, 13:00–17:00; submissions extended to 18:15.",
                 "materials": "Submit a working demo and project description to ModelScope, covering the problem, core features and completion."
             },
             "semifinal": {
@@ -5280,7 +5280,7 @@
                 "campusBrief": "Choose your own topic or enter an existing mature project.",
                 "semifinal": "Online semifinal",
                 "final": "Final · Sandun Metaspace",
-                "initialDeadline": "Due 17:00",
+                "initialDeadline": "Due 18:15",
                 "initialDevelopment": "Qualifier · On-site development",
                 "semifinalDeadline": "Due 24:00"
             },
@@ -5439,7 +5439,7 @@
                     "shortTitle": "Huawei Industry Implementation Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
                     "team": "Teams of 1–5",
-                    "deadline": "Onsite · October 18, 17:00",
+                    "deadline": "Onsite · October 18, 18:15",
                     "support": "Challenge support from Huawei China"
                 }
             },

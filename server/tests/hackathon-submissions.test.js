@@ -232,7 +232,7 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
             },
             2
         );
-        clock = Date.parse("2026-10-18T17:00:00+08:00");
+        clock = Date.parse("2026-10-18T18:15:00+08:00");
         await rejects(() => save({ expectedVersion: 4 }), "HACKATHON_SUBMISSION_BLOCKED", "closed");
         await rejects(
             () => save({ track: "industry", expectedVersion: 1 }),
