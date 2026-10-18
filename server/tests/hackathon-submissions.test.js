@@ -31,7 +31,7 @@ const materials = {
     demoFileId: null,
 };
 
-test("AI+X materials require actual GitHub and ModelScope deployment HTTPS links", () => {
+test("AI+X materials validate GitHub repositories and accept project links from any web platform", () => {
     for (const githubUrl of [
         "javascript:alert(1)",
         "https://github.com.evil.test/a/b",

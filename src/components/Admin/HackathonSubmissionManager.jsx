@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import api from "../../services/api";
 import { safeWebUrl } from "../../utils/hackathonAiX";
+import { submissionExportTable, submissionExportCsv } from "../../utils/hackathonSubmissionExport";
 import {
     AdminButton,
     AdminLoadingState,
@@ -29,6 +30,7 @@ export default function HackathonSubmissionManager({ eventKey }) {
     const [query, setQuery] = useState("");
     const [pendingRow, setPendingRow] = useState(null);
     const [saving, setSaving] = useState(false);
+    const [exporting, setExporting] = useState(false);
     const requestId = useRef(0);
 
     const refresh = useCallback(async () => {
@@ -148,6 +150,45 @@ export default function HackathonSubmissionManager({ eventKey }) {
         }
     };
 
+    const exportProjects = async () => {
+        if (exporting) return;
+        setExporting(true);
+        try {
+            const { data } = await api.get("/admin/hackathon/submissions", {
+                params: { event: eventKey },
+            });
+            const table = submissionExportTable(data, text, (value) =>
+                value
+                    ? new Intl.DateTimeFormat("sv-SE", {
+                          timeZone: "Asia/Shanghai",
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                          hour12: false,
+                      }).format(new Date(value))
+                    : ""
+            );
+            const url = URL.createObjectURL(
+                new Blob([submissionExportCsv(table)], { type: "text/csv;charset=utf-8;" })
+            );
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `hackathon_projects_${eventKey}_${new Date(data.serverNow).toISOString().replace(/[:.]/g, "-")}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            toast.success(text("export_success", { count: table.length - 1 }));
+        } catch {
+            toast.error(text("export_failed"));
+        } finally {
+            setExporting(false);
+        }
+    };
+
     const renderSnapshot = (snapshot, submitted) => (
         <section className="min-w-0 space-y-2 rounded-xl border border-[rgba(128,146,167,0.2)] p-4">
             <h4 className={`font-bold ${headingTextClass}`}>
@@ -237,10 +278,20 @@ export default function HackathonSubmissionManager({ eventKey }) {
             title={text("title")}
             description={text("description")}
             action={
-                <AdminButton tone="subtle" disabled={loading || saving} onClick={refresh}>
-                    <RefreshCw size={16} />
-                    {text("refresh")}
-                </AdminButton>
+                <div className="flex flex-wrap gap-2">
+                    <AdminButton
+                        tone="subtle"
+                        disabled={loading || exporting}
+                        onClick={exportProjects}
+                    >
+                        <Download size={16} />
+                        {text(exporting ? "exporting" : "export_projects")}
+                    </AdminButton>
+                    <AdminButton tone="subtle" disabled={loading || saving} onClick={refresh}>
+                        <RefreshCw size={16} />
+                        {text("refresh")}
+                    </AdminButton>
+                </div>
             }
         >
             <div className="mb-4 flex flex-wrap items-center gap-3">
