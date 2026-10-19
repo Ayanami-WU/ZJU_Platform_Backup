@@ -7334,9 +7334,10 @@
             "later": "稍后查看，继续浏览",
             "close": "关闭晋级通知",
             "teamLabel": "晋级队伍",
-            "individual": "个人参赛",
+            "individual": "已确认晋级成员",
             "deadlineLabel": "复赛提交截止",
-            "timezone": "北京时间"
+            "timezone": "北京时间",
+            "memberLabel": "参赛成员"
         }
     },
     "eventWorkspace": {

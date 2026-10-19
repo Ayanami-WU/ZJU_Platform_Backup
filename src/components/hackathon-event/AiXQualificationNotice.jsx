@@ -148,8 +148,12 @@ export default function AiXQualificationNotice({ eventKey, user }) {
                     </div>
                     <dl className="aix-qualification-details">
                         <div>
-                            <dt>{text("teamLabel")}</dt>
-                            <dd>{qualification.teamName || text("individual")}</dd>
+                            <dt>{text(qualification.teamName ? "teamLabel" : "memberLabel")}</dt>
+                            <dd>
+                                {qualification.teamName ||
+                                    user?.registrationProfile?.name ||
+                                    text("individual")}
+                            </dd>
                         </div>
                         {deadlineText && (
                             <div>

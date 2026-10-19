@@ -7229,9 +7229,10 @@
             "later": "View later, keep browsing",
             "close": "Close qualification notice",
             "teamLabel": "Qualified team",
-            "individual": "Individual entry",
+            "individual": "Confirmed semifinalist",
             "deadlineLabel": "Semifinal submission deadline",
-            "timezone": "Beijing time"
+            "timezone": "Beijing time",
+            "memberLabel": "Participant"
         }
     },
     "eventWorkspace": {
