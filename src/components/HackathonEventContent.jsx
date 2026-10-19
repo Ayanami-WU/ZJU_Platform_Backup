@@ -36,6 +36,7 @@ export default function HackathonEventContent({
         return (
             <HackathonRegistration
                 standalone
+                now={now}
                 initialTrack={getRegistrationTrack(location)}
                 template={{ ...template, event: { ...template.event, registrationOpen } }}
                 registrationState={registrationState}
@@ -65,6 +66,7 @@ export default function HackathonEventContent({
     if (view === "challenges") return <FirstEditionChallenge template={template} />;
     return (
         <HackathonRegistration
+            now={now}
             template={{ ...template, event: { ...template.event, registrationOpen } }}
             registrationRef={registrationRef}
             registrationState={registrationState}

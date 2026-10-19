@@ -3,7 +3,21 @@ const names = { initial: "初赛", semifinal: "复赛", final: "决赛" };
 const toLocal = (value) =>
     value ? new Date(new Date(value).getTime() + 8 * 3600000).toISOString().slice(0, 16) : "";
 const toZoned = (value) => (value ? `${value}:00+08:00` : "");
-export default function HackathonProgramEditor({ program, onChange, inputClass, fieldClass }) {
+export default function HackathonProgramEditor({
+    program,
+    onChange,
+    inputClass,
+    fieldClass,
+    trackRegistration = false,
+}) {
+    const updateTrack = (track, patch) =>
+        onChange({
+            ...program,
+            trackRegistration: {
+                ...program.trackRegistration,
+                [track]: { ...program.trackRegistration?.[track], ...patch },
+            },
+        });
     const update = (collection, index, field, value) =>
         onChange({
             ...program,
@@ -50,6 +64,50 @@ export default function HackathonProgramEditor({ program, onChange, inputClass, 
                     }
                 />
             </label>
+            {trackRegistration && (
+                <fieldset className={`${fieldClass} mb-5`}>
+                    <legend>分赛道报名</legend>
+                    <p className="text-sm mb-3">
+                        各赛道独立开放；未填写截止时间时沿用上方报名截止时间。
+                    </p>
+                    <div className="grid gap-4 md:grid-cols-2">
+                        {[
+                            ["campus", "天猫OPC孵化赛道"],
+                            ["industry", "华为产业落地赛道"],
+                        ].map(([track, name]) => (
+                            <div key={track}>
+                                <label className="flex items-center gap-2 mb-2">
+                                    <input
+                                        type="checkbox"
+                                        checked={
+                                            program.trackRegistration?.[track]?.enabled !== false
+                                        }
+                                        onChange={(e) =>
+                                            updateTrack(track, { enabled: e.target.checked })
+                                        }
+                                    />
+                                    允许{name}报名
+                                </label>
+                                <label className="block text-sm">
+                                    {name}报名截止时间
+                                    <input
+                                        type="datetime-local"
+                                        className={`${inputClass} mt-2`}
+                                        value={toLocal(
+                                            program.trackRegistration?.[track]?.closesAt
+                                        )}
+                                        onChange={(e) =>
+                                            updateTrack(track, {
+                                                closesAt: toZoned(e.target.value),
+                                            })
+                                        }
+                                    />
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </fieldset>
+            )}
             <label className="block text-sm mb-5">
                 华为产业落地赛道初赛命题发布时间（选填，默认采用阶段开始时间）
                 <input

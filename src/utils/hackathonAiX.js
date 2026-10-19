@@ -11,13 +11,23 @@ export const currentStage = (stages, now = Date.now()) =>
     stages.find((stage) => stageState(stage, now) === "live") ||
     stages.find((stage) => stageState(stage, now) === "upcoming") ||
     stages.at(-1);
-export const registrationOpen = (template, now = Date.now()) =>
-    template.navigation.registrationVisible &&
-    template.event.registrationOpen &&
-    (!template.event.program?.registrationOpensAt ||
-        now >= Date.parse(template.event.program.registrationOpensAt)) &&
-    (!template.event.program?.registrationClosesAt ||
-        now < Date.parse(template.event.program.registrationClosesAt));
+export const registrationOpen = (template, now = Date.now(), track) => {
+    const { event, navigation } = template;
+    const program = event.program || {};
+    if (
+        !navigation.registrationVisible ||
+        !event.registrationOpen ||
+        (event.endAt && now >= eventTimestamp(event.endAt)) ||
+        (program.registrationOpensAt && now < Date.parse(program.registrationOpensAt))
+    )
+        return false;
+    const tracks = program.trackRegistration;
+    if (!track && tracks && Object.keys(tracks).length)
+        return ["campus", "industry"].some((key) => registrationOpen(template, now, key));
+    const config = track ? tracks?.[track] : undefined;
+    const closesAt = config?.closesAt || program.registrationClosesAt;
+    return config?.enabled !== false && (!closesAt || now < Date.parse(closesAt));
+};
 export const safeWebUrl = (value) => {
     if (typeof value === "string") {
         const normalized = value.trim();

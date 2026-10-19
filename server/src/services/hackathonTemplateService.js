@@ -180,6 +180,28 @@ const normalizeProgram = (input = {}) => {
             ? { registrationOpensAt: text(input.registrationOpensAt, 40) }
             : {}),
         registrationClosesAt: text(input.registrationClosesAt, 40),
+        ...(input.trackRegistration && typeof input.trackRegistration === "object"
+            ? {
+                  trackRegistration: Object.fromEntries(
+                      ["campus", "industry"]
+                          .filter(
+                              (track) =>
+                                  input.trackRegistration[track] &&
+                                  typeof input.trackRegistration[track] === "object"
+                          )
+                          .map((track) => [
+                              track,
+                              {
+                                  enabled: booleanValue(
+                                      input.trackRegistration[track].enabled,
+                                      true
+                                  ),
+                                  closesAt: text(input.trackRegistration[track].closesAt, 40),
+                              },
+                          ])
+                  ),
+              }
+            : {}),
         ...(input.campusReview
             ? {
                   campusReview: Object.fromEntries(
@@ -387,6 +409,13 @@ const validateTemplate = (template) => {
     }
     if (template.event.program) {
         const program = template.event.program;
+        for (const [track, config] of Object.entries(program.trackRegistration || {})) {
+            if (config.closesAt && !Number.isFinite(Date.parse(config.closesAt)))
+                errors.push({
+                    field: `event.program.trackRegistration.${track}.closesAt`,
+                    message: "请输入有效的赛道报名截止时间",
+                });
+        }
         if (program.challengeReleaseAt && !Number.isFinite(Date.parse(program.challengeReleaseAt)))
             errors.push({
                 field: "event.program.challengeReleaseAt",

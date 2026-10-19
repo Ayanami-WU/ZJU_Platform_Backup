@@ -4278,7 +4278,6 @@
             "registration_submitted": "已正式提交",
             "registration_draft": "仅草稿，未正式提交",
             "registration_none": "暂无本站提交",
-
             "title": "提交与晋级",
             "description": "按报名账号及赛道分别查看材料。正式提交用于评审；草稿仅供查看，不代表已参赛提交。",
             "track": "赛道",
@@ -5426,7 +5425,8 @@
             "withdrawing": "撤销中…",
             "withdrawConfirm": "确认撤销当前赛道报名？另一赛道不受影响，报名开放期间可重新报名。",
             "withdrawn": "当前赛道报名已撤销",
-            "withdrawFailed": "撤销失败，请重试"
+            "withdrawFailed": "撤销失败，请重试",
+            "trackClosed": "当前赛道报名已关闭，表单仅供查看。"
         },
         "fields": {
             "name": "姓名",

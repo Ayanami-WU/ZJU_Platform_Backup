@@ -4159,7 +4159,6 @@
             "registration_submitted": "Formally submitted",
             "registration_draft": "Draft only, not submitted",
             "registration_none": "No submission on this site",
-
             "title": "Submissions & qualification",
             "description": "Review each registered account and track separately. Only formal submissions are used for judging; drafts do not count as submitted entries.",
             "track": "Track",
@@ -5317,7 +5316,8 @@
             "withdrawing": "Withdrawing…",
             "withdrawConfirm": "Withdraw from this track? Your other track is unaffected. You can register again while registration is open.",
             "withdrawn": "Registration withdrawn for this track",
-            "withdrawFailed": "Withdrawal failed. Please retry."
+            "withdrawFailed": "Withdrawal failed. Please retry.",
+            "trackClosed": "Registration for this track is closed. The form is available for viewing only."
         },
         "fields": {
             "name": "Name",

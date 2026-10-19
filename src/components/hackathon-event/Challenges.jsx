@@ -8,7 +8,7 @@ import {
     eventTimestamp,
     registrationOpen,
 } from "../../utils/hackathonAiX";
-import { getEventUrl } from "../../utils/hackathonRoute";
+import { getRegistrationUrl } from "../../utils/hackathonRoute";
 import api from "../../services/api";
 import AiXStageSubmission from "./AiXStageSubmission";
 import AiXRecommendedScenes from "./AiXRecommendedScenes";
@@ -97,7 +97,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
         (item) => item.published && item.track === track && item.stage === stage
     );
     const hasRecommendations = eventKey === AIX_EVENT_KEY && track === "campus";
-    const signupOpen = registrationOpen(template, now);
+    const signupOpen = registrationOpen(template, now, track);
     const formatDate = (value) => {
         const time = eventTimestamp(value);
         return Number.isFinite(time)
@@ -249,7 +249,7 @@ export default function Challenges({ template, now, registrationState = {} }) {
             <div className="aix-task-access" role="status">
                 <p>{label(`blocked.${reason}`)}</p>
                 {reason === "not_registered" && signupOpen && (
-                    <Link to={getEventUrl(eventKey, "intro", { hash: "#registration-form" })}>
+                    <Link to={getRegistrationUrl(eventKey, track)}>
                         {label("register")}
                         <ArrowUpRight size={16} />
                     </Link>

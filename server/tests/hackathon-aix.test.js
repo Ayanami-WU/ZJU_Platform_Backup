@@ -481,6 +481,68 @@ test("AI+X seed preserves the old event; registration is authenticated, isolated
             next
         );
         assert.equal(res.statusCode, 403);
+        // Reopen campus only after the common cutoff; reject industry and mixed writes atomically.
+        schedule.events[1].event.program.trackRegistration = {
+            campus: { enabled: true, closesAt: "2099-01-01T00:00:00+08:00" },
+            industry: { enabled: false, closesAt: "2099-01-01T00:00:00+08:00" },
+        };
+        await db.run("UPDATE settings SET value=? WHERE key='hackathon_schedule_config'", [
+            JSON.stringify(schedule),
+        ]);
+        const beforeReopen = JSON.parse(
+            (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=1"))
+                .form_data_json
+        );
+        for (const track of [["industry"], ["campus", "industry"]]) {
+            res = response();
+            await controller.registerHackathon(
+                { user: { id: 1 }, body: { eventKey, answers: { ...campusEdit, track } } },
+                res,
+                next
+            );
+            assert.equal(res.statusCode, 403);
+        }
+        res = response();
+        await controller.withdrawRegistration(
+            { user: { id: 1 }, body: { eventKey, track: "industry" } },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 403);
+        assert.deepEqual(
+            JSON.parse(
+                (await db.get("SELECT form_data_json FROM hackathon_registrations WHERE user_id=1"))
+                    .form_data_json
+            ),
+            beforeReopen
+        );
+        res = response();
+        await controller.registerHackathon(
+            {
+                user: { id: 1 },
+                body: { eventKey, answers: { ...campusEdit, team: "Campus reopened" } },
+            },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 201);
+        assert.equal(res.body.trackRegistrations.campus.answers.team, "Campus reopened");
+        assert.deepEqual(
+            res.body.trackRegistrations.industry,
+            beforeReopen.trackRegistrations.industry
+        );
+        res = response();
+        await controller.withdrawRegistration(
+            { user: { id: 1 }, body: { eventKey, track: "campus" } },
+            res,
+            next
+        );
+        assert.equal(res.statusCode, 200);
+        assert.deepEqual(await db.get("SELECT * FROM hackathon_submissions"), formalBefore);
+        assert.deepEqual(
+            await db.get("SELECT * FROM hackathon_submission_qualifications"),
+            qualificationBefore
+        );
     } finally {
         await pool.close();
         fs.rmSync(temp, { recursive: true, force: true });

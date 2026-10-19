@@ -44,6 +44,7 @@ import { useEcosystemPartners } from "../hooks/useEcosystemPartners";
 import { useSectionPager } from "../hooks/useSectionPager";
 import { useReducedMotion } from "../utils/animations";
 import { REGISTRATION_TRACKS } from "../utils/hackathonRoute";
+import { registrationOpen } from "../utils/hackathonAiX";
 import api from "../services/api";
 import SEO from "./SEO";
 import RegistrationProfileForm from "./RegistrationProfileForm";
@@ -200,6 +201,7 @@ const HackathonRegistration = ({
     // inside the paged intro flow; the form itself is untouched.
     standalone = false,
     initialTrack,
+    now = Date.now(),
 }) => {
     const { i18n, t } = useTranslation();
     const location = useLocation();
@@ -224,9 +226,18 @@ const HackathonRegistration = ({
     const resolvedTemplate = useMemo(() => normalizeHackathonTemplate(template), [template]);
     const isAiX = resolvedTemplate.event.key === "zhekesong-ai-x-2026";
     const [activeTrack, setActiveTrack] = useState(() =>
-        initialTrack && REGISTRATION_TRACKS.includes(initialTrack) ? initialTrack : "industry"
+        initialTrack && REGISTRATION_TRACKS.includes(initialTrack)
+            ? initialTrack
+            : (isAiX &&
+                  REGISTRATION_TRACKS.find((track) =>
+                      registrationOpen(resolvedTemplate, now, track)
+                  )) ||
+              "industry"
     );
     const trackDrafts = useRef({});
+    const selectedTrackOpen = isAiX
+        ? registrationOpen(resolvedTemplate, now, activeTrack)
+        : resolvedTemplate.event.registrationOpen;
     const [editingTracks, setEditingTracks] = useState({});
     const [isWithdrawing, setIsWithdrawing] = useState(false);
     const trackEntry =
@@ -256,15 +267,14 @@ const HackathonRegistration = ({
               }
             : null;
     }, [isAiX, eventRegistration, activeTrack, trackEntry]);
-    const gateRegistration =
-        requiresLogin && resolvedTemplate.event.registrationOpen && !registration;
+    const gateRegistration = requiresLogin && selectedTrackOpen && !registration;
     const showProfileGate = gateRegistration && (!user || !profileComplete || editingProfile);
     const useAccountBasics =
         requiresLogin &&
         profileComplete &&
         !registration &&
         !trackEntry?.answers &&
-        resolvedTemplate.event.registrationOpen;
+        selectedTrackOpen;
     const sourceFormFields = useMemo(
         () => getActiveHackathonFields(resolvedTemplate),
         [resolvedTemplate]
@@ -526,13 +536,14 @@ const HackathonRegistration = ({
             : formatHackathonSchedule(sourceEvent);
         return {
             ...localizedEvent,
+            registrationOpen: selectedTrackOpen,
             date,
             prizeUnit: /[0-9]/.test(sourceEvent.prizeValue) ? localizedEvent.prizeUnit : "",
             prize: /[0-9]/.test(sourceEvent.prizeValue)
                 ? `${localizedEvent.prizeValue} ${localizedEvent.prizeUnit}`.trim()
                 : localizedEvent.prizeValue,
         };
-    }, [isEnglish, resolvedTemplate.event, t]);
+    }, [isEnglish, resolvedTemplate.event, selectedTrackOpen, t]);
 
     const palette = isAiX
         ? {
@@ -2104,7 +2115,9 @@ const HackathonRegistration = ({
                                                     {t(
                                                         isFirstEdition
                                                             ? "firstEdition.registrationHistory"
-                                                            : "hackathon.form.registration_preview",
+                                                            : isAiX
+                                                              ? "aix.register.trackClosed"
+                                                              : "hackathon.form.registration_preview",
                                                         "当前赛事报名尚未开放，表单仅供预览。"
                                                     )}
                                                 </p>
@@ -2144,7 +2157,7 @@ const HackathonRegistration = ({
                                                                   : event.registrationOpen
                                                                     ? formConfig.submitLabel
                                                                     : t(
-                                                                          isFirstEdition
+                                                                          isFirstEdition || isAiX
                                                                               ? "aix.register.closed"
                                                                               : "hackathon.form.registration_closed",
                                                                           "报名已截止"

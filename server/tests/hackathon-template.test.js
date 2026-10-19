@@ -10,7 +10,29 @@ const {
     saveHackathonSchedule,
     saveHackathonTemplate,
     validateRegistrationAnswers,
+    normalizeHackathonTemplate,
+    validateTemplate,
 } = require("../src/services/hackathonTemplateService");
+
+test("track registration settings survive normalization and reject invalid deadlines", () => {
+    const event = structuredClone(require("../../shared/hackathonAiX.json"));
+    event.event.program.trackRegistration = {
+        campus: { enabled: true, closesAt: "2026-10-20T23:00:00+08:00" },
+        industry: { enabled: false, closesAt: "" },
+        unknown: { enabled: true },
+    };
+    const normalized = normalizeHackathonTemplate(event);
+    assert.deepEqual(normalized.event.program.trackRegistration, {
+        campus: event.event.program.trackRegistration.campus,
+        industry: event.event.program.trackRegistration.industry,
+    });
+    normalized.event.program.trackRegistration.campus.closesAt = "invalid";
+    assert.ok(
+        validateTemplate(normalized).some(
+            (error) => error.field === "event.program.trackRegistration.campus.closesAt"
+        )
+    );
+});
 
 const createDb = async () => {
     const db = await open({ filename: ":memory:", driver: sqlite3.Database });

@@ -801,6 +801,7 @@ const HackathonTemplateEditor = ({ onTemplateChange, initialEventKey, focusSecti
             <div id="hackathon-config-program" className="scroll-mt-24" />
             {draft.event.program && (
                 <HackathonProgramEditor
+                    trackRegistration={draft.event.key === "zhekesong-ai-x-2026"}
                     program={draft.event.program}
                     onChange={(value) => updateEvent("program", value)}
                     inputClass={inputClass}
