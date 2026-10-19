@@ -4223,6 +4223,25 @@
             "export_submitted": "Formally submitted",
             "export_draft": "Draft only",
             "projectName": "Project name"
+        },
+        "qualificationImport": {
+            "import": "Import reviewed Huawei semifinal members",
+            "checking": "Checking…",
+            "invalid": "Import a JSON roster for this event with a members array (up to 1 MB).",
+            "failed": "Could not verify or save the roster. Please retry.",
+            "preview": "Review {{count}} Huawei semifinal members",
+            "hint": "Check each account, name and team. Only listed members receive qualification; similar names are not expanded and other qualifications are not revoked.",
+            "name": "Name",
+            "team": "Registered team",
+            "account": "Account ID",
+            "status": "Action",
+            "existing": "Already qualified, unchanged",
+            "new": "Grant semifinal qualification",
+            "apply": "Confirm qualification for {{count}} members",
+            "recheck": "Check again",
+            "cancel": "Cancel",
+            "success": "Verified {{count}} members; granted {{granted}} new qualifications",
+            "summary": "{{existing}} already qualified; {{newCount}} to grant."
         }
     },
     "not_found": {
@@ -7199,6 +7218,20 @@
                     ]
                 }
             ]
+        },
+        "qualificationNotice": {
+            "badge": "Semifinalist",
+            "track": "Huawei Industry Implementation Track",
+            "title": "Congratulations!\nYou’re a semifinalist.",
+            "description": "Your team has qualified for the Huawei semifinal. View the round requirements and submit your next version.",
+            "deadline": "Submission deadline: {{time}} (Beijing time)",
+            "continue": "View semifinal requirements and submit",
+            "later": "View later, keep browsing",
+            "close": "Close qualification notice",
+            "teamLabel": "Qualified team",
+            "individual": "Individual entry",
+            "deadlineLabel": "Semifinal submission deadline",
+            "timezone": "Beijing time"
         }
     },
     "eventWorkspace": {

@@ -4,6 +4,7 @@ const path = require("path");
 const defaults = require("../../../shared/hackathonAiX.json");
 const { getHackathonTemplate } = require("./hackathonTemplateService");
 const { activeTrackRegistrations } = require("./hackathonTrackRegistrationService");
+const { reviewQualificationMembers } = require("./hackathonQualificationService");
 const {
     AIX_EVENT_KEY,
     repositorySubmission,
@@ -224,14 +225,17 @@ function createHackathonSubmissionService({
             : [];
         return Object.fromEntries(
             TRACKS.map((track) => {
-                const qualified = qualifications.some(
+                const qualification = qualifications.find(
                     (item) => item.track === track && item.qualified === 1
                 );
+                const qualified = Boolean(qualification);
                 return [
                     track,
                     {
                         registered: Boolean(registered[track]),
                         semifinalQualified: qualified,
+                        qualificationUpdatedAt: qualification?.updated_at || null,
+                        teamName: registered[track]?.answers?.team || "",
                         stages: Object.fromEntries(
                             STAGES.map((stage) => [
                                 stage,
@@ -473,6 +477,30 @@ function createHackathonSubmissionService({
                     track: body.track,
                     semifinalQualified: body.qualified,
                     qualificationUpdatedAt: stamp,
+                };
+            });
+        },
+        batchQualify: (adminId, body) => {
+            checkEvent(body.eventKey);
+            if (typeof body.apply !== "boolean")
+                fail(400, "HACKATHON_QUALIFICATION_REVIEW", "请先预览晋级名单");
+            return useDb(body.apply, async (db) => {
+                const review = await reviewQualificationMembers(db, body.eventKey, body.members);
+                if (!body.apply) return { ...review, applied: false };
+                if (body.expectedFingerprint !== review.fingerprint)
+                    fail(409, "HACKATHON_QUALIFICATION_REVIEW", "报名或晋级信息已变化，请重新预览");
+                const stamp = new Date(now()).toISOString();
+                for (const row of review.rows) {
+                    if (row.qualified) continue;
+                    await db.run(
+                        `INSERT INTO hackathon_submission_qualifications (event_key,user_id,registration_id,track,qualified,updated_at,updated_by) VALUES (?,?,?,'industry',1,?,?) ON CONFLICT(event_key,user_id,track) DO UPDATE SET registration_id=excluded.registration_id,qualified=1,updated_at=excluded.updated_at,updated_by=excluded.updated_by`,
+                        [body.eventKey, row.userId, row.registrationId, stamp, adminId]
+                    );
+                }
+                return {
+                    ...review,
+                    applied: true,
+                    granted: review.rows.filter((row) => !row.qualified).length,
                 };
             });
         },

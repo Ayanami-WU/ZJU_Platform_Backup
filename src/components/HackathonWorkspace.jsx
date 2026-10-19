@@ -10,6 +10,7 @@ import SEO from "./SEO";
 import LotteryModal from "../features/lottery/LotteryModal";
 import HackathonEventPicker from "./HackathonEventPicker";
 import HackathonEventContent from "./HackathonEventContent";
+import AiXQualificationNotice from "./hackathon-event/AiXQualificationNotice";
 import { getEventViews, getEventView, getEventUrl } from "../utils/hackathonRoute";
 import "./HackathonShared.css";
 import "./HackathonWorkspace.css";
@@ -127,6 +128,7 @@ export default function HackathonWorkspace({ template, schedule }) {
             data-view={view}
         >
             <SEO title={`${event.title} | 浙客松`} description={event.description} />
+            <AiXQualificationNotice eventKey={event.key} user={user} />
             <a className="hx-skip" href="#hx-event-content">
                 {t("eventWorkspace.skip")}
             </a>

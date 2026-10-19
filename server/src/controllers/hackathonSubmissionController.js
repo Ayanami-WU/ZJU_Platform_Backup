@@ -61,4 +61,5 @@ module.exports = {
     save: handler((req) => service.save(req.user.id, req.body || {})),
     getRoster: handler((req) => service.getRoster(req.query.event)),
     setQualification: handler((req) => service.setQualification(req.user.id, req.body || {})),
+    batchQualify: handler((req) => service.batchQualify(req.user.id, req.body || {})),
 };

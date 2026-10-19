@@ -4342,6 +4342,25 @@
             "export_submitted": "已正式提交",
             "export_draft": "仅草稿",
             "projectName": "项目名称"
+        },
+        "qualificationImport": {
+            "import": "导入已核实的华为晋级成员",
+            "checking": "正在核对…",
+            "invalid": "请导入当前赛事的 JSON 名单（members 数组，最多 1 MB）。",
+            "failed": "名单核对或保存失败，请重试",
+            "preview": "待确认：{{count}} 位华为复赛成员",
+            "hint": "逐个核对账号、姓名和队名。仅授予名单中成员资格，不自动扩展相似队名或撤销其他人的资格。",
+            "name": "姓名",
+            "team": "报名队名",
+            "account": "账号编号",
+            "status": "本次操作",
+            "existing": "已晋级，保持原值",
+            "new": "新增复赛资格",
+            "apply": "确认授予这 {{count}} 位成员复赛资格",
+            "recheck": "重新核对",
+            "cancel": "取消",
+            "success": "已核实 {{count}} 位成员，新增 {{granted}} 位复赛资格",
+            "summary": "已有复赛资格 {{existing}} 位，待新增 {{newCount}} 位。"
         }
     },
     "not_found": {
@@ -7304,6 +7323,20 @@
                     ]
                 }
             ]
+        },
+        "qualificationNotice": {
+            "badge": "已晋级复赛",
+            "track": "华为产业落地赛道",
+            "title": "恭喜你\n进入复赛！",
+            "description": "你所在的队伍已晋级华为复赛。前往赛题页，查看本轮要求并提交作品。",
+            "deadline": "复赛提交截止：{{time}}（北京时间）",
+            "continue": "查看复赛要求与提交作品",
+            "later": "稍后查看，继续浏览",
+            "close": "关闭晋级通知",
+            "teamLabel": "晋级队伍",
+            "individual": "个人参赛",
+            "deadlineLabel": "复赛提交截止",
+            "timezone": "北京时间"
         }
     },
     "eventWorkspace": {

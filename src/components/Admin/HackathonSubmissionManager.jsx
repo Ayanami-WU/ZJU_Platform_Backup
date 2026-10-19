@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import api from "../../services/api";
 import { safeWebUrl } from "../../utils/hackathonAiX";
+import HackathonQualificationImport from "./HackathonQualificationImport";
 import { submissionExportTable, submissionExportCsv } from "../../utils/hackathonSubmissionExport";
 import {
     AdminButton,
@@ -294,6 +295,7 @@ export default function HackathonSubmissionManager({ eventKey }) {
                 </div>
             }
         >
+            <HackathonQualificationImport key={eventKey} eventKey={eventKey} onApplied={refresh} />
             <div className="mb-4 flex flex-wrap items-center gap-3">
                 <div className="flex flex-wrap gap-2" role="group" aria-label={text("track")}>
                     {["industry", "campus"].map((id) => (
