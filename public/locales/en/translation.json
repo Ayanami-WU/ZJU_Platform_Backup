@@ -4225,6 +4225,9 @@
             "projectName": "Project name"
         },
         "qualificationImport": {
+            "pasteOption": "Cannot select a file? Paste the JSON roster",
+            "pasteLabel": "Reviewed JSON roster",
+            "previewPaste": "Check pasted roster",
             "import": "Import reviewed Huawei semifinal members",
             "checking": "Checking…",
             "invalid": "Import a JSON roster for this event with a members array (up to 1 MB).",

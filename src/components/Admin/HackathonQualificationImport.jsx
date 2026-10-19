@@ -13,6 +13,7 @@ export default function HackathonQualificationImport({ eventKey, onApplied }) {
     const [preview, setPreview] = useState(null);
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState("");
+    const [rosterText, setRosterText] = useState("");
     const review = async (list) => {
         setError("");
         setPreview(null);
@@ -34,22 +35,39 @@ export default function HackathonQualificationImport({ eventKey, onApplied }) {
             setBusy(false);
         }
     };
-    const importFile = async (event) => {
-        const file = event.target.files?.[0];
-        event.target.value = "";
-        if (!file || busy) return;
+    const importRoster = async (content) => {
+        if (busy) return;
         setPreview(null);
         setMembers(null);
         setError("");
         try {
-            if (file.size > 1024 * 1024) throw new Error(text("invalid"));
-            const parsed = JSON.parse(await file.text());
+            if (new TextEncoder().encode(content).length > 1024 * 1024)
+                throw new Error(text("invalid"));
+            const parsed = JSON.parse(content);
             if ((parsed.eventKey && parsed.eventKey !== eventKey) || !Array.isArray(parsed.members))
                 throw new Error(text("invalid"));
             setMembers(parsed.members);
             await review(parsed.members);
         } catch {
             setError(text("invalid"));
+        }
+    };
+    const importFile = async (event) => {
+        const file = event.target.files?.[0];
+        event.target.value = "";
+        if (!file || busy) return;
+        if (file.size > 1024 * 1024) {
+            setError(text("invalid"));
+            setPreview(null);
+            setMembers(null);
+            return;
+        }
+        try {
+            await importRoster(await file.text());
+        } catch {
+            setError(text("invalid"));
+            setPreview(null);
+            setMembers(null);
         }
     };
     const apply = async () => {
@@ -69,6 +87,7 @@ export default function HackathonQualificationImport({ eventKey, onApplied }) {
             );
             setPreview(null);
             setMembers(null);
+            setRosterText("");
             toast.success(text("success", { count: data.rows.length, granted: data.granted }));
             onApplied();
         } catch (err) {
@@ -92,6 +111,32 @@ export default function HackathonQualificationImport({ eventKey, onApplied }) {
                 <Upload size={16} />
                 {text(busy ? "checking" : "import")}
             </AdminButton>
+            <details className="text-sm">
+                <summary className="cursor-pointer">{text("pasteOption")}</summary>
+                <div className="mt-3 space-y-3">
+                    <textarea
+                        aria-label={text("pasteLabel")}
+                        value={rosterText}
+                        onChange={(event) => {
+                            setRosterText(event.target.value);
+                            setPreview(null);
+                            setMembers(null);
+                            setError("");
+                        }}
+                        disabled={busy}
+                        maxLength={1024 * 1024}
+                        rows={6}
+                        className="w-full rounded-lg border border-slate-500/40 bg-transparent p-3 font-mono"
+                    />
+                    <AdminButton
+                        tone="subtle"
+                        disabled={busy || !rosterText.trim()}
+                        onClick={() => importRoster(rosterText)}
+                    >
+                        {text("previewPaste")}
+                    </AdminButton>
+                </div>
+            </details>
             {error && (
                 <p role="alert" className="text-red-500">
                     {error}

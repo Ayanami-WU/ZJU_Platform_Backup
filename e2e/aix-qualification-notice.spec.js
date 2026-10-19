@@ -161,65 +161,87 @@ test("English mobile notice fits and its action remains reachable", async ({ pag
     await expect(page).toHaveURL(/stage=semifinal/);
 });
 
-test("admin previews exact members before granting qualifications", async ({ page }) => {
-    const calls = [];
-    await page.addInitScript(() => {
-        sessionStorage.setItem("token", "qualification-admin-test");
-        localStorage.setItem("i18nextLng", "zh");
+for (const importMode of ["file", "paste"]) {
+    test(`admin previews exact members before granting qualifications via ${importMode}`, async ({
+        page,
+    }) => {
+        const calls = [];
+        await page.addInitScript(() => {
+            sessionStorage.setItem("token", "qualification-admin-test");
+            localStorage.setItem("i18nextLng", "zh");
+        });
+        await page.route("**/api/**", async (route) => {
+            const path = new URL(route.request().url()).pathname;
+            let json = [];
+            if (path.endsWith("/auth/me"))
+                json = {
+                    id: 1,
+                    username: "test_admin",
+                    role: "admin",
+                    registrationProfile: {
+                        name: "Admin",
+                        studentId: "TEST-A",
+                        major: "CS",
+                        grade: "junior",
+                    },
+                };
+            else if (path.endsWith("/admin/capabilities"))
+                json = {
+                    scope: "platform",
+                    permissions: ["*"],
+                    isPlatformAdmin: true,
+                    profileIds: [],
+                };
+            else if (path.endsWith("/settings")) json = { language: "zh" };
+            else if (path.endsWith("/admin/hackathon/schedule"))
+                json = { events: [template], activeEventKey: template.event.key };
+            else if (path.endsWith("/admin/hackathon/submissions/qualifications/batch")) {
+                const body = route.request().postDataJSON();
+                calls.push(body);
+                json = {
+                    rows: body.members.map((m, i) => ({ ...m, userId: i + 10, qualified: false })),
+                    fingerprint: "reviewed-fingerprint",
+                    applied: body.apply,
+                    granted: body.apply ? 2 : undefined,
+                };
+            } else if (path.endsWith("/admin/hackathon/submissions"))
+                json = { rows: [], files: [] };
+            await route.fulfill({ json });
+        });
+        await page.goto("/admin?tab=hackathon");
+        await page.getByRole("tab", { name: "提交与晋级", exact: true }).click();
+        const members = [
+            { name: "测试队长", studentId: "test-1", teamName: "测试队" },
+            { name: "测试队友", studentId: "test-2", teamName: "测试队" },
+        ];
+        if (importMode === "file") {
+            await page.getByLabel("导入已核实的华为晋级成员", { exact: true }).setInputFiles({
+                name: "reviewed-members.json",
+                mimeType: "application/json",
+                buffer: Buffer.from(JSON.stringify({ eventKey: template.event.key, members })),
+            });
+        } else {
+            await page.getByText("文件无法选择？粘贴 JSON 名单", { exact: true }).click();
+            await page.getByLabel("已核实的 JSON 名单", { exact: true }).fill("invalid json");
+            await page.getByRole("button", { name: "核对粘贴的名单", exact: true }).click();
+            await expect(page.getByRole("alert")).toBeVisible();
+            expect(calls).toHaveLength(0);
+            await page
+                .getByLabel("已核实的 JSON 名单", { exact: true })
+                .fill(JSON.stringify({ eventKey: template.event.key, members }));
+            await page.getByRole("button", { name: "核对粘贴的名单", exact: true }).click();
+        }
+        await expect(page.getByRole("heading", { name: "待确认：2 位华为复赛成员" })).toBeVisible();
+        expect(calls).toHaveLength(1);
+        expect(calls[0].apply).toBe(false);
+        await expect(page.getByRole("cell", { name: "测试队友", exact: true })).toBeVisible();
+        await page.getByRole("button", { name: "确认授予这 2 位成员复赛资格" }).click();
+        await expect(page.getByText("已核实 2 位成员，新增 2 位复赛资格")).toBeVisible();
+        expect(calls[1]).toEqual({
+            eventKey: template.event.key,
+            members,
+            apply: true,
+            expectedFingerprint: "reviewed-fingerprint",
+        });
     });
-    await page.route("**/api/**", async (route) => {
-        const path = new URL(route.request().url()).pathname;
-        let json = [];
-        if (path.endsWith("/auth/me"))
-            json = {
-                id: 1,
-                username: "test_admin",
-                role: "admin",
-                registrationProfile: {
-                    name: "Admin",
-                    studentId: "TEST-A",
-                    major: "CS",
-                    grade: "junior",
-                },
-            };
-        else if (path.endsWith("/admin/capabilities"))
-            json = { scope: "platform", permissions: ["*"], isPlatformAdmin: true, profileIds: [] };
-        else if (path.endsWith("/settings")) json = { language: "zh" };
-        else if (path.endsWith("/admin/hackathon/schedule"))
-            json = { events: [template], activeEventKey: template.event.key };
-        else if (path.endsWith("/admin/hackathon/submissions/qualifications/batch")) {
-            const body = route.request().postDataJSON();
-            calls.push(body);
-            json = {
-                rows: body.members.map((m, i) => ({ ...m, userId: i + 10, qualified: false })),
-                fingerprint: "reviewed-fingerprint",
-                applied: body.apply,
-                granted: body.apply ? 2 : undefined,
-            };
-        } else if (path.endsWith("/admin/hackathon/submissions")) json = { rows: [], files: [] };
-        await route.fulfill({ json });
-    });
-    await page.goto("/admin?tab=hackathon");
-    await page.getByRole("tab", { name: "提交与晋级", exact: true }).click();
-    const members = [
-        { name: "测试队长", studentId: "test-1", teamName: "测试队" },
-        { name: "测试队友", studentId: "test-2", teamName: "测试队" },
-    ];
-    await page.getByLabel("导入已核实的华为晋级成员", { exact: true }).setInputFiles({
-        name: "reviewed-members.json",
-        mimeType: "application/json",
-        buffer: Buffer.from(JSON.stringify({ eventKey: template.event.key, members })),
-    });
-    await expect(page.getByRole("heading", { name: "待确认：2 位华为复赛成员" })).toBeVisible();
-    expect(calls).toHaveLength(1);
-    expect(calls[0].apply).toBe(false);
-    await expect(page.getByRole("cell", { name: "测试队友", exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "确认授予这 2 位成员复赛资格" }).click();
-    await expect(page.getByText("已核实 2 位成员，新增 2 位复赛资格")).toBeVisible();
-    expect(calls[1]).toEqual({
-        eventKey: template.event.key,
-        members,
-        apply: true,
-        expectedFingerprint: "reviewed-fingerprint",
-    });
-});
+}

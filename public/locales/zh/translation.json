@@ -4344,6 +4344,9 @@
             "projectName": "项目名称"
         },
         "qualificationImport": {
+            "pasteOption": "文件无法选择？粘贴 JSON 名单",
+            "pasteLabel": "已核实的 JSON 名单",
+            "previewPaste": "核对粘贴的名单",
             "import": "导入已核实的华为晋级成员",
             "checking": "正在核对…",
             "invalid": "请导入当前赛事的 JSON 名单（members 数组，最多 1 MB）。",
