@@ -72,7 +72,7 @@ export default function HackathonProgramEditor({
                     </p>
                     <div className="grid gap-4 md:grid-cols-2">
                         {[
-                            ["campus", "天猫OPC孵化赛道"],
+                            ["campus", "天猫校园OPC孵化赛道"],
                             ["industry", "华为产业落地赛道"],
                         ].map(([track, name]) => (
                             <div key={track}>

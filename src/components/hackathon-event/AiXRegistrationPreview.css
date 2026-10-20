@@ -95,7 +95,7 @@
     border-color: var(--hx-accent, #b8ff46);
     color: #102000;
 }
-/* The final tab labels (华为产业落地赛道报名 / 天猫OPC孵化赛道报名) are longer than
+/* The final tab labels (华为产业落地赛道报名 / 天猫校园OPC孵化赛道报名) are longer than
    the ones this grid was sized for; stack the tabs on narrow phones so each stays
    on a single line instead of wrapping mid-word. */
 @media (max-width: 480px) {

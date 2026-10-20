@@ -4164,7 +4164,7 @@
             "track": "Track",
             "stage": "Round",
             "industry": "Huawei Industry Implementation Track",
-            "campus": "Tmall OPC Incubation Track",
+            "campus": "Tmall Campus OPC Incubation Track",
             "initial": "Initial round",
             "semifinal": "Semifinal",
             "refresh": "Refresh",
@@ -4255,7 +4255,7 @@
             "people": "People",
             "records": "Session registrations",
             "industry": "Huawei industry track",
-            "campus": "Tmall OPC track",
+            "campus": "Tmall Campus OPC track",
             "dual": "Both tracks",
             "withdrawn": "Fully withdrawn",
             "submittedPeople": "People with submissions",
@@ -5262,13 +5262,13 @@
         "description": "Start with your discipline. Work across fields to turn real problems into working AI applications.",
         "date": "2026.10.09–10.25",
         "location": "Oct 18: Morning forum — Duan Yongping Teaching Building 2-112; afternoon development — North 2-227 · Oct 25: Sandun Entrepreneurship Space",
-        "team": "Tmall OPC Incubation Track and Huawei Industry Implementation Track: teams of 1–5",
+        "team": "Tmall Campus OPC Incubation Track and Huawei Industry Implementation Track: teams of 1–5",
         "tracksKicker": "Two tracks",
         "tracksTitle": "Your discipline is a starting point.",
         "viewChallenges": "View challenges",
         "tracks": {
             "campus": {
-                "title": "Tmall OPC Incubation Track",
+                "title": "Tmall Campus OPC Incubation Track",
                 "description": "Open topics across disciplines; mature, deployable projects preferred. Online participation · 1–5 people",
                 "topics": "Open topics across disciplines and application scenarios"
             },
@@ -5298,7 +5298,7 @@
         "agenda": [
             {
                 "date": "10.13",
-                "title": "Tmall initial begins",
+                "title": "Tmall Campus initial begins",
                 "description": "Initial round begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct; review 21–22 Oct; finalists announced 22 Oct at 23:00; final 25 Oct."
             },
             {
@@ -5317,7 +5317,7 @@
         "stagesLabel": "Competition stages",
         "deadline": "Submission deadline",
         "challengePending": "Challenges to be announced",
-        "releaseTime": "Tmall OPC Incubation Track challenges are released on Oct 14; Huawei Industry Implementation Track releases its challenge at 13:00 on Oct 18.",
+        "releaseTime": "Tmall Campus OPC Incubation Track challenges are released on Oct 14; Huawei Industry Implementation Track releases its challenge at 13:00 on Oct 18.",
         "nextStageNotice": "Requirements and submission links will open after the official announcement.",
         "submissionPending": "Submission link coming soon",
         "submissionClosed": "Submissions closed for this stage",
@@ -5330,13 +5330,13 @@
             "initial": {
                 "title": "First round",
                 "date": "10.18",
-                "description": "Tmall begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct. Huawei develops onsite 18 Oct, 13:00–17:00; submissions extended to 18:15.",
+                "description": "Tmall Campus begins 13 Oct; submit online 18–20 Oct by 23:00 on 20 Oct. Huawei develops onsite 18 Oct, 13:00–17:00; submissions extended to 18:15.",
                 "materials": "Submit a working demo and project description to ModelScope, covering the problem, core features and completion."
             },
             "semifinal": {
                 "title": "Semifinal",
                 "date": "10.19–10.23",
-                "description": "Huawei semifinal: 19–23 Oct, closing at 24:00 on 23 Oct. Tmall review: 21–22 Oct; finalists at 23:00 on 22 Oct.",
+                "description": "Huawei semifinal: 19–23 Oct, closing at 24:00 on 23 Oct. Tmall Campus review: 21–22 Oct; finalists at 23:00 on 22 Oct.",
                 "materials": "Refine the project guide and demo, submit source code and a ModelScope project as required by the official challenge."
             },
             "final": {
@@ -5365,7 +5365,7 @@
             "registered": "Registered · View",
             "retry": "Retry status",
             "closed": "Registration closed",
-            "description": "Tmall OPC Incubation Track and Huawei Industry Implementation Track: teams of 1–5",
+            "description": "Tmall Campus OPC Incubation Track and Huawei Industry Implementation Track: teams of 1–5",
             "success": "Your registration has been saved. Refer to official notices for event arrangements.",
             "saved": "Registration successful",
             "loginHint": "Sign in to register and access your registration details at any time.",
@@ -5399,10 +5399,10 @@
             "loginPreview": "Please register or sign in before completing your registration.",
             "trackTabs": "Registration track",
             "trackTabs_industry": "Huawei Industry Implementation Track registration",
-            "trackTabs_campus": "Tmall OPC Incubation Track registration",
+            "trackTabs_campus": "Tmall Campus OPC Incubation Track registration",
             "sectionTitle": "Register",
             "cta_industry": "Register for the Huawei Industry Implementation Track",
-            "cta_campus": "Register for the Tmall OPC Incubation Track",
+            "cta_campus": "Register for the Tmall Campus OPC Incubation Track",
             "entryHint": "Each track is registered separately; the form and profile editing live on their own pages.",
             "entryRegistered": "Submitted tracks can be opened to review or edit the details.",
             "phone": "Mobile number",
@@ -5411,7 +5411,7 @@
             "trackSummary": {
                 "label": "Participation details",
                 "industryTitle": "Huawei Industry Implementation Track",
-                "campusTitle": "Tmall OPC Incubation Track",
+                "campusTitle": "Tmall Campus OPC Incubation Track",
                 "industryFormat": "Teams of 1–5 · In person required",
                 "campusFormat": "Teams of 1–5 · Online participation",
                 "development": "On-site development",
@@ -5468,7 +5468,7 @@
             "senior": "Year 4",
             "master": "Master’s",
             "phd": "PhD",
-            "campus": "Tmall OPC Incubation Track",
+            "campus": "Tmall Campus OPC Incubation Track",
             "industry": "Huawei Industry Implementation Track",
             "Codex": "Codex",
             "Claude": "Claude / Claude Code",
@@ -5571,7 +5571,7 @@
                     "type": "Your own challenge",
                     "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
                     "format": "Build online · Present on campus",
-                    "shortTitle": "Tmall OPC Incubation Track",
+                    "shortTitle": "Tmall Campus OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
                     "team": "1–5 members",
                     "deadline": "Initial submission closes 20 Oct, 23:00",
@@ -5594,7 +5594,7 @@
             "agenda": [
                 {
                     "date": "10.12",
-                    "title": "Tmall OPC Incubation Track registration opens",
+                    "title": "Tmall Campus OPC Incubation Track registration opens",
                     "description": "Existing, deployable projects welcome"
                 },
                 {
@@ -5677,10 +5677,10 @@
             "openingLabel": "Opening speakers",
             "judges": "",
             "rewardsTitle": "Awards & gifts",
-            "rewardsIntro": "Tmall OPC Incubation Track team awards and Huawei Industry Implementation Track cash and prizes; ModelScope onsite giveaways.",
+            "rewardsIntro": "Tmall Campus OPC Incubation Track team awards and Huawei Industry Implementation Track cash and prizes; ModelScope onsite giveaways.",
             "rewards": [
                 {
-                    "label": "Tmall OPC Incubation Track awards",
+                    "label": "Tmall Campus OPC Incubation Track awards",
                     "value": "¥6,500",
                     "note": "6 winning teams",
                     "items": [
@@ -5706,7 +5706,7 @@
                     "value": "¥1,614",
                     "note": "3 passes · 3 months each",
                     "items": [
-                        "Tmall OPC Incubation Track champion: 1 winner",
+                        "Tmall Campus OPC Incubation Track champion: 1 winner",
                         "Industry Advancement first prize: 2 winners"
                     ]
                 },
@@ -5779,7 +5779,7 @@
             "releaseAt": "Expected release: {{date}}. The official published brief is authoritative.",
             "awaitPublication": "The official brief has not been published. Please check back for an organizer update.",
             "participation": "Participation",
-            "individual": "Teams of 1–5; online participation is available for Tmall OPC Incubation Track.",
+            "individual": "Teams of 1–5; online participation is available for Tmall Campus OPC Incubation Track.",
             "team": "Teams of 1–5; onsite preliminary, online semifinal.",
             "schedule": "Schedule",
             "campusMaterials": "Technical project + BP + Demo",
@@ -6312,8 +6312,8 @@
             "teamSizeError": "Choose a team size of 1–5",
             "recapAdditionalTitle": "Xijing Cup · Interdisciplinary Quantitative Investment Challenge",
             "recapAdditionalText": "Organized by Xijing Technology with Tuozhe AI Ecosystem and campus clubs, July–October 2026. Natural-language hypotheses, backtesting and virtual portfolios.",
-            "campusTeamLabel": "Tmall OPC Incubation Track team name",
-            "campusTeamSizeLabel": "Tmall OPC Incubation Track team size"
+            "campusTeamLabel": "Tmall Campus OPC Incubation Track team name",
+            "campusTeamSizeLabel": "Tmall Campus OPC Incubation Track team size"
         },
         "pages": {
             "format": "Competition format",
@@ -6338,7 +6338,7 @@
             "tracks": [
                 {
                     "id": "campus",
-                    "title": "Tmall OPC Incubation Track",
+                    "title": "Tmall Campus OPC Incubation Track",
                     "mode": "Online participation · 1–5 people",
                     "description": "Open topics across disciplines; mature, deployable projects preferred.",
                     "stages": [
@@ -6445,7 +6445,7 @@
             ],
             "rewards": [
                 {
-                    "title": "Tmall OPC Incubation Track",
+                    "title": "Tmall Campus OPC Incubation Track",
                     "value": "¥6,500",
                     "note": "6 winning teams",
                     "rows": [
@@ -6530,7 +6530,7 @@
                         {
                             "label": "Champion",
                             "count": "1 winner",
-                            "lines": ["Tmall OPC Incubation Track"]
+                            "lines": ["Tmall Campus OPC Incubation Track"]
                         },
                         {
                             "label": "First prize",
@@ -7068,7 +7068,7 @@
             "published": "Challenge published",
             "pending": "Awaiting publication",
             "campus": {
-                "initial": "Submit through the official channel via the QR code; this site does not collect Tmall entries.",
+                "initial": "Submit through the official channel via the QR code; this site does not collect Tmall Campus entries.",
                 "semifinal": "There is no semifinal submission. Initial entries are reviewed to select finalists."
             },
             "industry": {
@@ -7162,7 +7162,7 @@
             },
             "trackLabels": {
                 "industry": "Huawei Industry Implementation Track",
-                "campus": "Tmall OPC Incubation Track"
+                "campus": "Tmall Campus OPC Incubation Track"
             },
             "locationLabel": "Location",
             "locations": {

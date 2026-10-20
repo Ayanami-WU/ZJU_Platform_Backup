@@ -76,6 +76,6 @@ export function registrationSubmissionField(fieldId) {
     };
     return {
         id: fieldId,
-        label: `${match[1] === "industry" ? "华为" : "天猫"} · ${match[2] === "initial" ? "初赛" : "复赛"} · ${labels[match[3]] || match[3]}`,
+        label: `${match[1] === "industry" ? "华为" : "天猫校园"} · ${match[2] === "initial" ? "初赛" : "复赛"} · ${labels[match[3]] || match[3]}`,
     };
 }

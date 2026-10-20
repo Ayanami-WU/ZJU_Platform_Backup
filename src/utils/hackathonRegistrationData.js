@@ -121,7 +121,7 @@ export const registrationField = (fieldsByEvent, eventKey, fieldId) => {
         return {
             ...field,
             id: fieldId,
-            label: `${match[1] === "industry" ? "华为产业落地赛道" : "天猫OPC孵化赛道"} · ${field.label}`,
+            label: `${match[1] === "industry" ? "华为产业落地赛道" : "天猫校园OPC孵化赛道"} · ${field.label}`,
         };
     }
     return (

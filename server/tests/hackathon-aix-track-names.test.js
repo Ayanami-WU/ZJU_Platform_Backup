@@ -15,7 +15,7 @@ test("track rename keeps IDs, registration snapshots, schedules and published br
         );
         const current = structuredClone(defaults);
         const track = current.form.fields.find((field) => field.id === "track");
-        track.options[0].label = "天猫·OPC孵化赛道";
+        track.options[0].label = "天猫校园·OPC孵化赛道";
         track.options[1].label = "华为·产业进阶赛道";
         current.event.program.challenges = [{ title: "华为正式赛题", published: true }];
         current.rules.push({ id: "custom", description: "Custom rule" });
@@ -36,7 +36,7 @@ test("track rename keeps IDs, registration snapshots, schedules and published br
         assert.deepEqual(
             after.events[1].form.fields.find((field) => field.id === "track").options,
             [
-                { value: "campus", label: "天猫OPC孵化赛道" },
+                { value: "campus", label: "天猫校园OPC孵化赛道" },
                 { value: "industry", label: "华为产业落地赛道" },
             ]
         );
