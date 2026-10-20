@@ -218,7 +218,7 @@ test("registration workspace supports scoped counts, deep search, teams, reading
         "ascending"
     );
     await workspace.getByLabel("勾选本页", { exact: true }).check();
-    await expect(workspace.getByRole("button", { name: "导出勾选 25 人" })).toBeVisible();
+    await expect(workspace.getByRole("button", { name: "导出勾选 25 条" })).toBeVisible();
     await workspace.locator(".roster-columns summary").click();
     await workspace.locator(".roster-columns").getByLabel("手机号", { exact: true }).uncheck();
     await expect(workspace.getByRole("columnheader", { name: /手机号/ })).toHaveCount(0);

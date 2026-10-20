@@ -4307,7 +4307,7 @@
             "wrap": "Wrap cells",
             "columns": "Columns",
             "restoreColumns": "Restore default columns",
-            "exportSelected": "Export {{count}} selected",
+            "exportSelected": "Export {{count}} selected records",
             "exportFiltered": "Export {{count}} filtered records",
             "resultCount": "{{count}} matching records",
             "selectedCount": "{{count}} selected",

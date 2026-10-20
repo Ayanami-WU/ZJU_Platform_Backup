@@ -4426,7 +4426,7 @@
             "wrap": "单元格自动换行",
             "columns": "显示列",
             "restoreColumns": "恢复默认列",
-            "exportSelected": "导出勾选 {{count}} 人",
+            "exportSelected": "导出勾选 {{count}} 条",
             "exportFiltered": "导出筛选结果 {{count}} 条",
             "resultCount": "筛选结果 {{count}} 条",
             "selectedCount": "已勾选 {{count}} 条",
