@@ -6857,17 +6857,16 @@
                                 "photo": false
                             },
                             {
-                                "id": "ying-qi",
-                                "name": "Ying Qi",
-                                "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
-                                "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
-                            },
-                            {
                                 "id": "cheng-shaoxiong",
                                 "name": "Cheng Shaoxiong",
                                 "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus",
                                 "photo": false
+                            },
+                            {
+                                "id": "xu-songbo",
+                                "name": "Xu Songbo",
+                                "photo": true,
+                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
                             },
                             {
                                 "id": "zhang-jie",
@@ -6889,18 +6888,6 @@
                                 "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
-                                "id": "dou-mingqing",
-                                "name": "Dou Mingqing",
-                                "role": "Post-investment Director, Puhua Capital",
-                                "photo": true
-                            },
-                            {
-                                "id": "liu-xiang",
-                                "name": "Liu Xiang",
-                                "role": "Investment Director, XbotPark Ningbo",
-                                "photo": false
-                            },
-                            {
                                 "id": "zhang-jialin",
                                 "name": "Zhang Jialin",
                                 "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
@@ -6913,6 +6900,42 @@
                                 "photo": true
                             },
                             {
+                                "id": "yan-xia",
+                                "name": "Yan Xia",
+                                "role": "General Manager of Shelf E-commerce, Pechoin",
+                                "photo": false
+                            },
+                            {
+                                "id": "he-lu",
+                                "name": "He Lu",
+                                "role": "MKT Director, Huawei Zhejiang Consumer Business",
+                                "photo": false
+                            },
+                            {
+                                "id": "yan-guangjun",
+                                "name": "Yan Guangjun",
+                                "role": "Retail Director, Huawei Zhejiang Consumer Business",
+                                "photo": false
+                            },
+                            {
+                                "id": "liu-xiang",
+                                "name": "Liu Xiang",
+                                "role": "Investment Director, XbotPark Ningbo",
+                                "photo": false
+                            },
+                            {
+                                "id": "dou-mingqing",
+                                "name": "Dou Mingqing",
+                                "role": "Post-investment Director, Puhua Capital",
+                                "photo": true
+                            },
+                            {
+                                "id": "shen-lei",
+                                "name": "Shen Lei",
+                                "role": "Head of Strategy, Tmall Campus",
+                                "photo": false
+                            },
+                            {
                                 "id": "han-bing",
                                 "name": "Han Bing",
                                 "role": "Head of Talent, MolarData",
@@ -6920,31 +6943,20 @@
                                 "photoUrl": "/images/hackathon/ai-x/guests/han-bing.jpg"
                             },
                             {
-                                "id": "xu-songbo",
-                                "name": "Xu Songbo",
-                                "photo": true,
-                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
-                            },
-                            {
                                 "id": "liu-xushuang",
                                 "name": "Liu Xushuang",
                                 "role": "OPC Project Lead, Tmall Campus",
                                 "photo": false
+                            },
+                            {
+                                "id": "ying-qi",
+                                "name": "Ying Qi",
+                                "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
                             }
                         ],
                         "topics": [
-                            {
-                                "title": "Remarks from Sandun Town Government",
-                                "speaker": "Zhu Kai",
-                                "guestIds": ["zhu-kai"],
-                                "time": "13:35–13:40"
-                            },
-                            {
-                                "title": "Remarks from ZJU School of Innovation and Entrepreneurship",
-                                "speaker": "Wang Han",
-                                "guestIds": ["wang-han"],
-                                "time": "13:40–13:45"
-                            },
                             {
                                 "title": "Founding vision: bringing ideas into practice",
                                 "speaker": "Ying Qi",
@@ -6994,76 +7006,18 @@
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo", "liu-xushuang"],
-                        "judgesLabel": "25 Oct morning · Final jury",
-                        "judges": [
-                            {
-                                "id": "wang-han",
-                                "name": "Wang Han",
-                                "role": "Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University",
-                                "photo": false
-                            },
-                            {
-                                "id": "cheng-shaoxiong",
-                                "name": "Cheng Shaoxiong",
-                                "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus",
-                                "photo": false
-                            },
-                            {
-                                "id": "xu-songbo",
-                                "name": "Xu Songbo",
-                                "photo": true,
-                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee (Huawei track jury)"
-                            },
-                            {
-                                "id": "he-lu",
-                                "name": "He Lu",
-                                "role": "MKT Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
-                                "photo": false
-                            },
-                            {
-                                "id": "yan-guangjun",
-                                "name": "Yan Guangjun",
-                                "role": "Retail Director, Huawei Zhejiang Consumer Business (Huawei track jury)",
-                                "photo": false
-                            },
-                            {
-                                "id": "zhang-jie",
-                                "name": "Zhang Jie",
-                                "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)",
-                                "photo": true
-                            },
-                            {
-                                "id": "wang-jin",
-                                "name": "Wang Jin",
-                                "role": "President, Manhattan Capital",
-                                "photo": true
-                            },
-                            {
-                                "id": "yan-xia",
-                                "name": "Yan Xia",
-                                "role": "General Manager of Shelf E-commerce, Pechoin",
-                                "photo": false
-                            },
-                            {
-                                "id": "shen-lei",
-                                "name": "Shen Lei",
-                                "role": "Head of Strategy, Tmall Campus",
-                                "photo": false
-                            },
-                            {
-                                "id": "zhang-jialin",
-                                "name": "Zhang Jialin",
-                                "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
-                                "photo": true
-                            },
-                            {
-                                "id": "wang-feifan",
-                                "name": "Wang Feifan",
-                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University",
-                                "photo": true
-                            }
-                        ]
+                        "invitedGuestIds": [
+                            "zhu-kai",
+                            "wang-han",
+                            "xu-songbo",
+                            "yan-xia",
+                            "he-lu",
+                            "yan-guangjun",
+                            "dou-mingqing",
+                            "shen-lei",
+                            "liu-xushuang"
+                        ],
+                        "topicsLabel": "Featured talks"
                     }
                 ],
                 "invitedLabel": "Special guests",

@@ -6962,17 +6962,16 @@
                                 "photo": false
                             },
                             {
-                                "id": "ying-qi",
-                                "name": "应奇",
-                                "role": "拓浙AI生态&奇膺科技创始人",
-                                "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
-                            },
-                            {
                                 "id": "cheng-shaoxiong",
                                 "name": "程少雄",
                                 "role": "阿里巴巴集团团委书记、天猫校园总经理",
                                 "photo": false
+                            },
+                            {
+                                "id": "xu-songbo",
+                                "name": "徐松波",
+                                "photo": true,
+                                "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任"
                             },
                             {
                                 "id": "zhang-jie",
@@ -6994,18 +6993,6 @@
                                 "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
                             },
                             {
-                                "id": "dou-mingqing",
-                                "name": "窦明清",
-                                "role": "普华资本投后总监",
-                                "photo": true
-                            },
-                            {
-                                "id": "liu-xiang",
-                                "name": "刘香",
-                                "role": "XbotPark机器人宁波基地投资总监",
-                                "photo": false
-                            },
-                            {
                                 "id": "zhang-jialin",
                                 "name": "张加林",
                                 "role": "时代强鹰·杭州创业发展促进会秘书长",
@@ -7018,6 +7005,42 @@
                                 "photo": true
                             },
                             {
+                                "id": "yan-xia",
+                                "name": "颜霞",
+                                "role": "百雀羚货架电商总经理",
+                                "photo": false
+                            },
+                            {
+                                "id": "he-lu",
+                                "name": "何璐",
+                                "role": "华为浙江终端业务部MKT总监",
+                                "photo": false
+                            },
+                            {
+                                "id": "yan-guangjun",
+                                "name": "晏光军",
+                                "role": "华为浙江终端业务部零售总监",
+                                "photo": false
+                            },
+                            {
+                                "id": "liu-xiang",
+                                "name": "刘香",
+                                "role": "XbotPark机器人宁波基地投资总监",
+                                "photo": false
+                            },
+                            {
+                                "id": "dou-mingqing",
+                                "name": "窦明清",
+                                "role": "普华资本投后总监",
+                                "photo": true
+                            },
+                            {
+                                "id": "shen-lei",
+                                "name": "沈蕾",
+                                "role": "天猫校园战略中心负责人",
+                                "photo": false
+                            },
+                            {
                                 "id": "han-bing",
                                 "name": "韩冰",
                                 "role": "整数智能（MolarData）Head of Talent",
@@ -7025,31 +7048,20 @@
                                 "photoUrl": "/images/hackathon/ai-x/guests/han-bing.jpg"
                             },
                             {
-                                "id": "xu-songbo",
-                                "name": "徐松波",
-                                "photo": true,
-                                "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任"
-                            },
-                            {
                                 "id": "liu-xushuang",
                                 "name": "刘绪爽",
                                 "role": "天猫校园OPC项目负责人",
                                 "photo": false
+                            },
+                            {
+                                "id": "ying-qi",
+                                "name": "应奇",
+                                "role": "拓浙AI生态&奇膺科技创始人",
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
                             }
                         ],
                         "topics": [
-                            {
-                                "title": "杭州市西湖区三墩镇人民政府领导致辞",
-                                "speaker": "诸凯",
-                                "guestIds": ["zhu-kai"],
-                                "time": "13:35–13:40"
-                            },
-                            {
-                                "title": "浙江大学创新创业学院领导致辞",
-                                "speaker": "王晗",
-                                "guestIds": ["wang-han"],
-                                "time": "13:40–13:45"
-                            },
                             {
                                 "title": "浙客松创始理念分享：浙客松:让创意走向落地",
                                 "speaker": "应奇",
@@ -7099,76 +7111,18 @@
                             }
                         ],
                         "signup": "报名创业论坛",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo", "liu-xushuang"],
-                        "judgesLabel": "10月25日上午 · 决赛评委",
-                        "judges": [
-                            {
-                                "id": "wang-han",
-                                "name": "王晗",
-                                "role": "浙江大学创新创业学院副院长",
-                                "photo": false
-                            },
-                            {
-                                "id": "cheng-shaoxiong",
-                                "name": "程少雄",
-                                "role": "阿里巴巴集团团委书记、天猫校园总经理",
-                                "photo": false
-                            },
-                            {
-                                "id": "xu-songbo",
-                                "name": "徐松波",
-                                "photo": true,
-                                "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任（华为产业落地赛道评委）"
-                            },
-                            {
-                                "id": "he-lu",
-                                "name": "何璐",
-                                "role": "华为浙江终端业务部MKT总监（华为产业落地赛道评委）",
-                                "photo": false
-                            },
-                            {
-                                "id": "yan-guangjun",
-                                "name": "晏光军",
-                                "role": "华为浙江终端业务部零售总监（华为产业落地赛道评委）",
-                                "photo": false
-                            },
-                            {
-                                "id": "zhang-jie",
-                                "name": "张洁",
-                                "role": "华旦天使投资创始人兼 CEO、每日互动（个推）联合创始人",
-                                "photo": true
-                            },
-                            {
-                                "id": "wang-jin",
-                                "name": "王进",
-                                "role": "曼哈顿资本总裁",
-                                "photo": true
-                            },
-                            {
-                                "id": "yan-xia",
-                                "name": "颜霞",
-                                "role": "百雀羚货架电商总经理",
-                                "photo": false
-                            },
-                            {
-                                "id": "shen-lei",
-                                "name": "沈蕾",
-                                "role": "天猫校园战略中心负责人",
-                                "photo": false
-                            },
-                            {
-                                "id": "zhang-jialin",
-                                "name": "张加林",
-                                "role": "时代强鹰·杭州创业发展促进会秘书长",
-                                "photo": true
-                            },
-                            {
-                                "id": "wang-feifan",
-                                "name": "王非凡",
-                                "role": "浙江大学学生创业发展中心副主任",
-                                "photo": true
-                            }
-                        ]
+                        "invitedGuestIds": [
+                            "zhu-kai",
+                            "wang-han",
+                            "xu-songbo",
+                            "yan-xia",
+                            "he-lu",
+                            "yan-guangjun",
+                            "dou-mingqing",
+                            "shen-lei",
+                            "liu-xushuang"
+                        ],
+                        "topicsLabel": "主题分享"
                     }
                 ],
                 "invitedLabel": "特邀嘉宾",

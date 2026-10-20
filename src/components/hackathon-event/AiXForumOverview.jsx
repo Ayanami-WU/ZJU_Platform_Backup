@@ -75,6 +75,11 @@ export default function AiXForumOverview() {
                                 </div>
                             </div>
                             <div className="aix-forum-agenda">
+                                {forum.topicsLabel && (
+                                    <h3 className="px-[26px] pb-2.5 pt-5 text-base font-semibold text-[var(--hx-muted)]">
+                                        {forum.topicsLabel}
+                                    </h3>
+                                )}
                                 {forum.topics.map((topic) => (
                                     <article
                                         className="aix-forum-topic-row"
