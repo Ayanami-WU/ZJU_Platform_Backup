@@ -400,11 +400,13 @@ const updateHackathonScheduleConfig = async (req, res, next) => {
 
 const getRegistrations = async (req, res, next) => {
     try {
+        const includeWithdrawn = req.query?.includeWithdrawn === "1";
         const db = await getDb();
         const rows = await db.all("SELECT * FROM hackathon_registrations ORDER BY created_at DESC");
         const registrations = rows
             .filter(
                 (row) =>
+                    includeWithdrawn ||
                     row.event_key !== AIX_EVENT_KEY ||
                     Object.keys(
                         activeTrackRegistrations(
@@ -436,7 +438,7 @@ const getRegistrations = async (req, res, next) => {
                         experience: row.experience,
                     };
                 }
-                if (row.event_key === AIX_EVENT_KEY) {
+                if (row.event_key === AIX_EVENT_KEY && !includeWithdrawn) {
                     const active = activeTrackRegistrations(formData, row.created_at);
                     const keys = Object.keys(active);
                     formData = {
@@ -448,6 +450,7 @@ const getRegistrations = async (req, res, next) => {
                 }
                 return { ...row, form_data: formData };
             });
+        res.setHeader?.("Cache-Control", "no-store");
         res.json(registrations);
     } catch (error) {
         next(error);

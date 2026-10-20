@@ -1,0 +1,537 @@
+.hackathon-roster {
+    --roster-bg: #141c27;
+    --roster-soft: #1b2634;
+    --roster-head: #233143;
+    --roster-text: #edf3fa;
+    --roster-muted: #afbdd0;
+    --roster-line: #344457;
+    --roster-accent: #8cdef2;
+    --roster-selected: #193b4b;
+    color: var(--roster-text);
+    font-size: 14px;
+    line-height: 1.5;
+    min-width: 0;
+}
+.hackathon-roster.roster-day {
+    --roster-bg: #ffffff;
+    --roster-soft: #f5f8fb;
+    --roster-head: #eaf0f6;
+    --roster-text: #17283c;
+    --roster-muted: #52677d;
+    --roster-line: #cbd6e2;
+    --roster-accent: #08627e;
+    --roster-selected: #e1f2f8;
+}
+.roster-heading,
+.roster-table-toolbar,
+.roster-table-actions,
+.roster-pagination,
+.roster-detail > header,
+.roster-detail > nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.roster-heading {
+    padding: 16px 0;
+}
+.roster-heading h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+.roster-heading p,
+.roster-note,
+.roster-detail header p {
+    font-size: 12px;
+    color: var(--roster-muted);
+}
+.roster-switch {
+    display: inline-flex;
+    gap: 2px;
+    background: var(--roster-soft);
+    padding: 3px;
+    border: 1px solid var(--roster-line);
+}
+.roster-switch button {
+    padding: 7px 13px;
+    min-height: 36px;
+    font-weight: 600;
+    color: var(--roster-muted);
+}
+.roster-switch button[aria-pressed="true"] {
+    background: var(--roster-selected);
+    color: var(--roster-accent);
+}
+.roster-stats {
+    display: flex;
+    flex-wrap: wrap;
+    border-block: 1px solid var(--roster-line);
+    padding: 12px 0;
+    gap: 12px 0;
+}
+.roster-stats > div {
+    flex: 1 0 120px;
+    padding: 0 20px;
+    border-inline-start: 1px solid var(--roster-line);
+}
+.roster-stats > div:first-child {
+    border: 0;
+    padding-left: 0;
+}
+.roster-stats dt {
+    color: var(--roster-muted);
+    font-size: 12px;
+}
+.roster-stats dd {
+    font-size: 26px;
+    line-height: 1.3;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.roster-note {
+    padding: 8px 0;
+}
+.roster-distributions {
+    border-bottom: 1px solid var(--roster-line);
+    padding-bottom: 12px;
+}
+.roster-distributions > summary {
+    cursor: pointer;
+    padding: 8px 0;
+    font-weight: 600;
+}
+.roster-distributions > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+}
+.roster-distributions h4 {
+    font-size: 12px;
+    color: var(--roster-muted);
+    margin-bottom: 5px;
+}
+.roster-distributions section > button {
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) minmax(40px, 1fr) 26px;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    min-height: 30px;
+    text-align: left;
+    padding: 2px 5px;
+}
+.roster-distributions section > button:hover,
+.roster-distributions button[aria-pressed="true"] {
+    background: var(--roster-selected);
+}
+.roster-distributions button > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.roster-distributions strong {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+}
+.roster-distributions meter {
+    width: 100%;
+    height: 6px;
+    background: var(--roster-head);
+    border: 0;
+}
+.roster-distributions meter::-webkit-meter-bar {
+    border: 0;
+    background: var(--roster-head);
+}
+.roster-distributions meter::-webkit-meter-optimum-value {
+    background: var(--roster-accent);
+}
+.roster-controls {
+    padding-block: 16px;
+}
+.roster-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--roster-bg);
+    border: 1px solid var(--roster-line);
+    padding: 0 12px;
+    max-width: 580px;
+}
+.roster-search input {
+    background: transparent;
+    min-width: 0;
+    width: 100%;
+    padding: 10px 0;
+    outline: 0;
+}
+.roster-search input::placeholder {
+    color: var(--roster-muted);
+}
+.roster-search:focus-within {
+    outline: 2px solid var(--roster-accent);
+    outline-offset: 2px;
+}
+.roster-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+    margin-top: 12px;
+}
+.roster-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--roster-muted);
+}
+.roster-filter select,
+.roster-pagination select {
+    color: var(--roster-text);
+    background: var(--roster-bg);
+    border: 1px solid var(--roster-line);
+    padding: 7px 9px;
+    min-height: 36px;
+    max-width: 220px;
+}
+.roster-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    font-size: 12px;
+}
+.hackathon-roster input[type="checkbox"] {
+    accent-color: var(--roster-accent);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.roster-text-button {
+    color: var(--roster-accent);
+    padding: 8px;
+    font-size: 12px;
+}
+.roster-table-toolbar {
+    border-top: 1px solid var(--roster-line);
+    padding-top: 12px;
+}
+.roster-table-actions {
+    justify-content: flex-end;
+    gap: 12px;
+}
+.roster-columns {
+    position: relative;
+}
+.roster-columns summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 12px;
+}
+.roster-columns > div {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 15;
+    background: var(--roster-bg);
+    border: 1px solid var(--roster-line);
+    width: min(340px, 80vw);
+    max-height: 360px;
+    overflow-y: auto;
+    padding: 12px;
+}
+.roster-columns label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 0;
+}
+.roster-columns button {
+    padding: 8px 0;
+    color: var(--roster-accent);
+}
+.roster-reading-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+.roster-reading-layout.has-detail {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 420px);
+}
+.roster-list {
+    min-width: 0;
+}
+.roster-table-scroll {
+    overflow: auto;
+    max-height: 65vh;
+    width: 100%;
+    border: 1px solid var(--roster-line);
+    overscroll-behavior-x: contain;
+    background: var(--roster-bg);
+    scrollbar-gutter: stable;
+}
+.roster-table-scroll table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    text-align: left;
+    font-size: 13px;
+}
+.roster-table-scroll th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--roster-head);
+    border-bottom: 1px solid var(--roster-line);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.roster-table-scroll th button {
+    text-align: left;
+    padding: 10px 12px;
+    min-height: 42px;
+    width: 100%;
+}
+.roster-table-scroll td {
+    background: var(--roster-bg);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--roster-line);
+    vertical-align: top;
+}
+.roster-table-scroll td > span {
+    display: block;
+    max-width: 240px;
+    min-width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.roster-table-scroll tr:hover td,
+.roster-table-scroll tr[data-selected="true"] td {
+    background: var(--roster-selected);
+}
+.roster-table-scroll .roster-select-cell {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    min-width: 40px;
+    width: 40px;
+    padding: 13px 10px;
+}
+.roster-table-scroll .roster-name-cell {
+    position: sticky;
+    left: 40px;
+    z-index: 2;
+    min-width: 132px;
+    border-right: 1px solid var(--roster-line);
+}
+.roster-table-scroll th.roster-select-cell,
+.roster-table-scroll th.roster-name-cell {
+    z-index: 4;
+}
+.roster-person {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    min-height: 36px;
+    color: var(--roster-accent);
+}
+.roster-person small {
+    display: block;
+    color: var(--roster-muted);
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 3px;
+}
+.roster-wrap td > span {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-width: 150px;
+}
+.roster-status {
+    font-size: 12px;
+    font-weight: 600;
+}
+.roster-pagination {
+    justify-content: flex-end;
+    padding-block: 12px;
+    font-size: 12px;
+}
+.roster-pagination > span {
+    margin-right: auto;
+    color: var(--roster-muted);
+}
+.roster-pagination label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.roster-detail {
+    background: var(--roster-bg);
+    border: 1px solid var(--roster-line);
+    padding: 18px;
+    position: sticky;
+    top: 12px;
+    max-height: 80vh;
+    overflow: auto;
+    scroll-margin-top: 90px;
+}
+.roster-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+}
+.roster-detail header button {
+    padding: 7px;
+}
+.roster-detail > nav {
+    flex-wrap: nowrap;
+    border-block: 1px solid var(--roster-line);
+    padding: 10px 0;
+    margin-top: 14px;
+}
+.roster-detail > nav > span {
+    white-space: nowrap;
+    font-size: 12px;
+}
+.roster-detail dl > div {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--roster-line);
+}
+.roster-detail dt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--roster-muted);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.roster-detail dt button {
+    color: var(--roster-accent);
+    padding: 3px;
+}
+.roster-detail dd {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+.roster-detail-submissions {
+    padding-top: 20px;
+}
+.roster-detail-submissions > div {
+    min-width: 0;
+    max-width: none;
+    font-size: 14px;
+}
+.roster-danger {
+    margin-top: 24px;
+}
+.roster-teams {
+    background: var(--roster-bg);
+    border: 1px solid var(--roster-line);
+    padding: 12px;
+}
+.roster-teams > details {
+    border-bottom: 1px solid var(--roster-line);
+    padding: 12px 0;
+}
+.roster-teams summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    cursor: pointer;
+}
+.roster-teams summary > strong {
+    margin-right: auto;
+}
+.roster-teams summary > span,
+.roster-teams p {
+    font-size: 12px;
+    color: var(--roster-muted);
+}
+.roster-teams li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 8px 0;
+}
+.roster-teams li button {
+    color: var(--roster-accent);
+    font-weight: 600;
+}
+.hackathon-roster .roster-warning {
+    color: #f3c26d;
+    font-size: 12px;
+    padding: 8px 0;
+}
+.roster-day .roster-warning {
+    color: #895600;
+}
+.roster-error {
+    padding: 16px 0;
+}
+.hackathon-roster :is(button, select, summary, input, [tabindex]):focus-visible {
+    outline: 2px solid var(--roster-accent);
+    outline-offset: 2px;
+}
+@media (max-width: 999px) {
+    .roster-reading-layout.has-detail {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .roster-detail {
+        grid-row: 1;
+        position: relative;
+        top: auto;
+        max-height: none;
+    }
+}
+@media (max-width: 600px) {
+    .roster-stats > div {
+        flex-basis: 33.33%;
+        padding: 0 10px;
+    }
+    .roster-stats dd {
+        font-size: 22px;
+    }
+    .roster-table-toolbar,
+    .roster-table-actions {
+        justify-content: flex-start;
+    }
+    .roster-filter {
+        flex: 1;
+        min-width: 100px;
+    }
+    .roster-filter select {
+        width: 100%;
+        max-width: 100%;
+    }
+    .roster-filter-row > span {
+        flex: 1;
+        min-width: 100px;
+    }
+    .roster-columns > div {
+        left: 0;
+        right: auto;
+    }
+    .roster-heading {
+        align-items: flex-start;
+    }
+    .roster-search input {
+        font-size: 16px;
+    }
+    .roster-table-scroll {
+        max-height: 60vh;
+    }
+    .roster-table-scroll .roster-name-cell {
+        min-width: 108px;
+    }
+}

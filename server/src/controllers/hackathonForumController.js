@@ -11,10 +11,20 @@ const toRegistration = (row) => ({
     major: row.major || "",
     grade: row.grade || "",
     question: row.question || "",
+    school: row.school || "",
+    projectExperience: row.project_experience || "",
+    researchExperience: row.research_experience || "",
+    aiCapabilities: row.ai_capabilities || "",
     createdAt: row.created_at,
 });
 const clean = (value, limit) =>
     typeof value === "string" && value.length <= limit && !/[\x00-\x1f\x7f]/.test(value)
+        ? value.trim()
+        : "";
+const cleanAnswer = (value) =>
+    typeof value === "string" &&
+    value.length <= 2000 &&
+    !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(value)
         ? value.trim()
         : "";
 const getMyForums = async (req, res, next) => {
@@ -42,21 +52,22 @@ const registerForums = async (req, res, next) => {
             major: rawMajor,
             grade: rawGrade,
             question: rawQuestion,
+            school: rawSchool,
+            projectExperience: rawProjectExperience,
+            researchExperience: rawResearchExperience,
+            aiCapabilities: rawAiCapabilities,
         } = req.body || {};
         const name = clean(rawName, 80),
             contact = clean(rawContact, 120),
             organization = clean(rawOrganization || "", 160);
-        const internal = attendeeType === "internal";
-        const studentId = internal ? clean(rawStudentId, 80) : "";
-        const major = internal ? clean(rawMajor, 160) : "";
-        const grade = internal ? clean(rawGrade, 80) : "";
-        const question =
-            internal &&
-            typeof rawQuestion === "string" &&
-            rawQuestion.length <= 2000 &&
-            !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(rawQuestion)
-                ? rawQuestion.trim()
-                : "";
+        const studentId = clean(rawStudentId, 80);
+        const major = clean(rawMajor, 160);
+        const grade = clean(rawGrade, 80);
+        const school = clean(rawSchool, 160);
+        const projectExperience = cleanAnswer(rawProjectExperience);
+        const researchExperience = cleanAnswer(rawResearchExperience);
+        const aiCapabilities = cleanAnswer(rawAiCapabilities);
+        const question = cleanAnswer(rawQuestion);
         if (
             !Array.isArray(sessions) ||
             !sessions.length ||
@@ -72,16 +83,20 @@ const registerForums = async (req, res, next) => {
             !contact ||
             !/^(?:\+?86[ -]?)?1[3-9]\d{9}$/.test(contact) ||
             !["internal", "external"].includes(attendeeType) ||
-            (internal && (!studentId || !major || !grade || !question)) ||
-            (!internal && !organization) ||
+            !studentId ||
+            !major ||
+            !grade ||
+            !school ||
+            !projectExperience ||
+            !researchExperience ||
+            !aiCapabilities ||
+            !question ||
             (rawOrganization && !organization)
         )
-            return res
-                .status(400)
-                .json({
-                    error: "请填写有效手机号及对应身份的必填信息",
-                    code: "FORUM_INVALID_DETAILS",
-                });
+            return res.status(400).json({
+                error: "请填写有效手机号及对应身份的必填信息",
+                code: "FORUM_INVALID_DETAILS",
+            });
         const now = Date.now();
         if (
             now < Date.parse(config.registrationOpensAt) ||
@@ -105,10 +120,14 @@ const registerForums = async (req, res, next) => {
             major,
             grade,
             question,
+            school,
+            projectExperience,
+            researchExperience,
+            aiCapabilities,
         ]);
         // One atomic statement: repeat submissions update the same account/session receipt.
         await db.run(
-            `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization,attendee_type,student_id,major,grade,question) VALUES ${sessions.map(() => "(?,?,?,?,?,?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,attendee_type=excluded.attendee_type,student_id=excluded.student_id,major=excluded.major,grade=excluded.grade,question=excluded.question,updated_at=CURRENT_TIMESTAMP`,
+            `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization,attendee_type,student_id,major,grade,question,school,project_experience,research_experience,ai_capabilities) VALUES ${sessions.map(() => "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,attendee_type=excluded.attendee_type,student_id=excluded.student_id,major=excluded.major,grade=excluded.grade,question=excluded.question,school=excluded.school,project_experience=excluded.project_experience,research_experience=excluded.research_experience,ai_capabilities=excluded.ai_capabilities,updated_at=CURRENT_TIMESTAMP`,
             values
         );
         return getMyForums(req, res, next);
@@ -142,7 +161,9 @@ const getForumRoster = async (req, res, next) => {
             [config.eventKey]
         );
         res.setHeader("Cache-Control", "no-store");
-        res.json({ registrations: rows.map(toRegistration) });
+        res.json({
+            registrations: rows.map((row) => ({ ...toRegistration(row), userId: row.user_id })),
+        });
     } catch (e) {
         next(e);
     }

@@ -23,6 +23,10 @@ const emptyDetails = (profile = {}) => ({
     major: profile.major || "",
     grade: profile.grade || "",
     question: "",
+    school: "",
+    projectExperience: "",
+    researchExperience: "",
+    aiCapabilities: "",
 });
 const entrepreneurship = config.sessions.find((s) => s.key === "entrepreneurship");
 export default function AiXForums({ now, registrationState }) {
@@ -144,9 +148,6 @@ export default function AiXForums({ now, registrationState }) {
                 {
                     sessions,
                     ...details,
-                    ...(details.attendeeType === "external"
-                        ? { studentId: "", major: "", grade: "", question: "" }
-                        : { organization: "" }),
                 },
                 { noRetry: true }
             );
@@ -277,6 +278,9 @@ export default function AiXForums({ now, registrationState }) {
                                 </>
                             ) : (
                                 <form onSubmit={submit}>
+                                    <p className="mb-4 text-sm leading-6">
+                                        {t("aix.forumPage.requiredHint")}
+                                    </p>
                                     <div
                                         className="aix-forum-attendee-tabs"
                                         role="tablist"
@@ -314,26 +318,33 @@ export default function AiXForums({ now, registrationState }) {
                                             disabled={!user || authLoading || loading || busy}
                                             className={`aix-forum-fields ${!user ? "aix-registration-preview-fields" : ""}`}
                                         >
-                                            {(details.attendeeType === "internal"
-                                                ? [
-                                                      "name",
-                                                      "studentId",
-                                                      "major",
-                                                      "grade",
-                                                      "contact",
-                                                      "question",
-                                                  ]
-                                                : ["name", "contact", "organization"]
-                                            ).map((key) => {
-                                                const Input =
-                                                    key === "question" ? "textarea" : "input";
+                                            {[
+                                                "school",
+                                                "major",
+                                                "grade",
+                                                "name",
+                                                "contact",
+                                                "studentId",
+                                                "projectExperience",
+                                                "researchExperience",
+                                                "aiCapabilities",
+                                                "question",
+                                            ].map((key) => {
+                                                const Input = [
+                                                    "question",
+                                                    "projectExperience",
+                                                    "researchExperience",
+                                                    "aiCapabilities",
+                                                ].includes(key)
+                                                    ? "textarea"
+                                                    : "input";
                                                 return (
                                                     <label
                                                         key={key}
                                                         data-field={key}
                                                         className={
-                                                            key === "question" ||
-                                                            key === "organization"
+                                                            Input === "textarea" ||
+                                                            key === "contact"
                                                                 ? "aix-forum-field-wide"
                                                                 : ""
                                                         }
@@ -343,14 +354,21 @@ export default function AiXForums({ now, registrationState }) {
                                                             <span aria-hidden="true">*</span>
                                                         </span>
                                                         <Input
+                                                            placeholder={t(
+                                                                `aix.forumPage.placeholders.${key}`,
+                                                                { defaultValue: "" }
+                                                            )}
                                                             name={key}
                                                             required
                                                             maxLength={
-                                                                key === "question"
+                                                                Input === "textarea"
                                                                     ? 2000
                                                                     : key === "contact"
                                                                       ? 30
-                                                                      : key === "organization"
+                                                                      : [
+                                                                              "school",
+                                                                              "major",
+                                                                          ].includes(key)
                                                                         ? 160
                                                                         : 80
                                                             }
@@ -360,7 +378,7 @@ export default function AiXForums({ now, registrationState }) {
                                                                     : undefined
                                                             }
                                                             rows={
-                                                                key === "question" ? 3 : undefined
+                                                                Input === "textarea" ? 3 : undefined
                                                             }
                                                             autoComplete={
                                                                 key === "name"

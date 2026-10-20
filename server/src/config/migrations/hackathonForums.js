@@ -12,6 +12,10 @@ async function migrateHackathonForums(db) {
         major TEXT NOT NULL DEFAULT '',
         grade TEXT NOT NULL DEFAULT '',
         question TEXT NOT NULL DEFAULT '',
+        school TEXT NOT NULL DEFAULT '',
+        project_experience TEXT NOT NULL DEFAULT '',
+        research_experience TEXT NOT NULL DEFAULT '',
+        ai_capabilities TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(event_key, user_id, forum_key)
@@ -22,7 +26,17 @@ async function migrateHackathonForums(db) {
             (column) => column.name
         )
     );
-    for (const column of ["attendee_type", "student_id", "major", "grade", "question"]) {
+    for (const column of [
+        "attendee_type",
+        "student_id",
+        "major",
+        "grade",
+        "question",
+        "school",
+        "project_experience",
+        "research_experience",
+        "ai_capabilities",
+    ]) {
         if (!columns.has(column)) {
             await db.exec(
                 `ALTER TABLE hackathon_forum_registrations ADD COLUMN ${column} TEXT NOT NULL DEFAULT ''`

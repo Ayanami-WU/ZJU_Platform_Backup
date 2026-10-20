@@ -73,12 +73,30 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             contact: "13800138000",
             organization: "Example School",
             attendeeType: "external",
+            school: "Example School",
+            studentId: "202600001",
+            major: "计算机",
+            grade: "硕士",
+            projectExperience: "项目经历\n第二行",
+            researchExperience: "暂无",
+            aiCapabilities: "判断力与执行力",
+            question: "如何验证真实需求？",
             userId: 2,
             eventKey: "other-edition",
         };
         const history = (await request("/mine", { id: 2 })).data.registrations[0];
         assert.equal(history.contact, "old@example.test");
-        for (const field of ["attendeeType", "studentId", "major", "grade", "question"])
+        for (const field of [
+            "attendeeType",
+            "studentId",
+            "major",
+            "grade",
+            "question",
+            "school",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ])
             assert.equal(history[field], "");
         await request("/cancel/technology", { id: 2, method: "DELETE" });
         assert.equal(
@@ -100,12 +118,51 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             { contact: "12345678901" },
             { attendeeType: "" },
             { attendeeType: "student" },
-            { organization: " " },
+            { school: " " },
             { name: " " },
         ]) {
             assert.equal(
                 (await request("/signup", { method: "POST", body: { ...payload, ...invalid } }))
                     .status,
+                400
+            );
+        }
+        for (const field of [
+            "school",
+            "studentId",
+            "major",
+            "grade",
+            "question",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ]) {
+            for (const invalid of [" ", null, 123, "bad\u0000value"]) {
+                assert.equal(
+                    (
+                        await request("/signup", {
+                            method: "POST",
+                            body: { ...payload, [field]: invalid },
+                        })
+                    ).status,
+                    400,
+                    `${field} is required for external attendees`
+                );
+            }
+        }
+        for (const field of [
+            "question",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ]) {
+            assert.equal(
+                (
+                    await request("/signup", {
+                        method: "POST",
+                        body: { ...payload, [field]: "x".repeat(2001) },
+                    })
+                ).status,
                 400
             );
         }
@@ -128,7 +185,16 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             grade: "2026级",
             question: "如何判断AI创业方向？\n如何验证需求？",
         };
-        for (const field of ["studentId", "major", "grade", "question"]) {
+        for (const field of [
+            "school",
+            "studentId",
+            "major",
+            "grade",
+            "question",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ]) {
             assert.equal(
                 (await request("/signup", { method: "POST", body: { ...internal, [field]: " " } }))
                     .status,
@@ -151,7 +217,17 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             internalSaved.data.registrations.map((r) => r.id),
             ids
         );
-        for (const field of ["attendeeType", "studentId", "major", "grade", "question"]) {
+        for (const field of [
+            "attendeeType",
+            "studentId",
+            "major",
+            "grade",
+            "question",
+            "school",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ]) {
             assert.equal(internalSaved.data.registrations[0][field], internal[field]);
             assert.equal(
                 (await request("/admin", { id: 3 })).data.registrations[0][field],
@@ -164,8 +240,17 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
         });
         assert.equal(externalSaved.status, 200);
         assert.equal(externalSaved.data.registrations[0].attendeeType, "external");
-        for (const field of ["studentId", "major", "grade", "question"])
-            assert.equal(externalSaved.data.registrations[0][field], "");
+        for (const field of [
+            "school",
+            "studentId",
+            "major",
+            "grade",
+            "question",
+            "projectExperience",
+            "researchExperience",
+            "aiCapabilities",
+        ])
+            assert.equal(externalSaved.data.registrations[0][field], payload[field]);
         const concurrent = await Promise.all([
             request("/signup", { method: "POST", body: payload }),
             request("/signup", { method: "POST", body: payload }),
@@ -175,6 +260,7 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
         assert.equal((await request("/mine", { id: 2 })).data.registrations.length, 0);
         assert.equal((await request("/admin")).status, 403);
         assert.equal((await request("/admin", { id: 3 })).data.registrations.length, 2);
+        assert.equal((await request("/admin", { id: 3 })).data.registrations[0].userId, 1);
         await request("/cancel/technology", { id: 2, method: "DELETE" });
         assert.equal((await request("/mine")).data.registrations.length, 2);
         assert.equal(

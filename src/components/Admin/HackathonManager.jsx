@@ -3,17 +3,12 @@ import {
     Award,
     Calendar,
     CheckCircle,
-    ChevronLeft,
-    ChevronRight,
-    Download,
     ExternalLink,
     Filter,
-    GraduationCap,
     RefreshCw,
     Search,
     Sparkles,
     Trash2,
-    User,
     Users,
     XCircle,
 } from "lucide-react";
@@ -22,7 +17,6 @@ import { useTranslation } from "react-i18next";
 
 import { AIX_EVENT_KEY, registrationOpen } from "../../utils/hackathonAiX";
 import { getEventUrl } from "../../utils/hackathonRoute";
-import { formatHackathonAnswer } from "../../data/hackathonTemplate";
 import api from "../../services/api";
 import {
     AdminButton,
@@ -43,30 +37,9 @@ import {
 } from "./AdminUI";
 import HackathonTemplateEditor from "./HackathonTemplateEditor";
 import HackathonSubmissionManager from "./HackathonSubmissionManager";
-import RegistrationSubmissionData from "./RegistrationSubmissionData";
-import {
-    attachRegistrationSubmissions,
-    registrationSubmissionState,
-    registrationSubmissionAnswers,
-    registrationSubmissionField,
-} from "../../utils/hackathonRegistrationSubmissions";
-
-const gradeLabels = {
-    freshman: "大一",
-    sophomore: "大二",
-    junior: "大三",
-    senior: "大四",
-    master: "硕士",
-    phd: "博士",
-};
-
-const aiToolLabels = {
-    claude: "Claude",
-    codex: "Codex",
-    cursor: "Cursor",
-    trae: "Trae",
-    other: "其他",
-};
+import HackathonRegistrationWorkspace from "./HackathonRegistrationWorkspace";
+import { activeRegistrationTracks } from "../../utils/hackathonRoster";
+import { attachRegistrationSubmissions } from "../../utils/hackathonRegistrationSubmissions";
 
 const workStatusLabels = {
     all: "全部状态",
@@ -75,177 +48,6 @@ const workStatusLabels = {
     rejected: "已驳回",
 };
 
-const itemsPerPage = 20;
-const legacyRegistrationFieldIds = new Set([
-    "name",
-    "studentId",
-    "major",
-    "grade",
-    "aiTools",
-    "experience",
-]);
-
-const safeParseTools = (value) => {
-    try {
-        const parsed = JSON.parse(value || "[]");
-        return Array.isArray(parsed) ? parsed : [];
-    } catch {
-        return [];
-    }
-};
-
-const escapeCsv = (value) => {
-    const text = String(value ?? "");
-    // CSV files are opened in spreadsheets; treat user-supplied formulas as text.
-    return (/^[\s]*[=+@-]/.test(text) ? `'${text}` : text).replace(/"/g, '""');
-};
-
-const fallbackRegistrationFields = [
-    { id: "name", label: "姓名" },
-    { id: "studentId", label: "学号" },
-    { id: "major", label: "专业" },
-    {
-        id: "grade",
-        label: "年级",
-        options: Object.entries(gradeLabels).map(([value, label]) => ({ value, label })),
-    },
-    {
-        id: "aiTools",
-        label: "AI 工具",
-        options: Object.entries(aiToolLabels).map(([value, label]) => ({ value, label })),
-    },
-    { id: "experience", label: "项目经验" },
-];
-
-const registrationAnswers = (registration) => {
-    const entries = registration.form_data?.trackRegistrations;
-    const trackAnswers = {};
-    if (entries) {
-        for (const track of ["industry", "campus"]) {
-            const entry = entries[track];
-            if (!entry?.answers) continue;
-            for (const [id, value] of Object.entries(entry.answers)) {
-                if (id !== "trackRegistrations") trackAnswers[`${track}__${id}`] = value;
-            }
-            trackAnswers[`${track}__submittedAt`] = entry.createdAt;
-        }
-    }
-    const answers = {
-        githubRepository: registration.github_repository_url || "",
-        modelscopeRepository: registration.modelscope_repository_url || "",
-        repositoriesUpdatedAt: registration.repositories_updated_at || "",
-        name: registration.name,
-        studentId: registration.student_id,
-        major: registration.major,
-        grade: registration.grade,
-        aiTools: safeParseTools(registration.ai_tools),
-        experience: registration.experience,
-        ...(registration.form_data &&
-        typeof registration.form_data === "object" &&
-        !Array.isArray(registration.form_data)
-            ? registration.form_data
-            : {}),
-        ...trackAnswers,
-        ...registrationSubmissionAnswers(registration),
-    };
-    delete answers.trackRegistrations;
-    return answers;
-};
-
-const registrationFieldsByEvent = (events) =>
-    new Map(
-        events.map((item) => [
-            item.event.key,
-            new Map(
-                [...fallbackRegistrationFields, ...(item.form?.fields || [])].map((field) => [
-                    field.id,
-                    field,
-                ])
-            ),
-        ])
-    );
-const fallbackFieldsById = new Map(
-    [
-        ...fallbackRegistrationFields,
-        { id: "githubRepository", label: "GitHub 仓库" },
-        { id: "modelscopeRepository", label: "魔搭社区仓库" },
-        { id: "repositoriesUpdatedAt", label: "仓库提交时间" },
-    ].map((field) => [field.id, field])
-);
-const registrationField = (fieldsByEvent, eventKey, fieldId) => {
-    const submissionField = registrationSubmissionField(fieldId);
-    if (submissionField) return submissionField;
-    const match = /^(industry|campus)__(.+)$/.exec(fieldId);
-    if (match) {
-        const field =
-            match[2] === "submittedAt"
-                ? { label: "提交时间" }
-                : registrationField(fieldsByEvent, eventKey, match[2]);
-        return {
-            ...field,
-            id: fieldId,
-            label: `${match[1] === "industry" ? "华为产业落地赛道" : "天猫OPC孵化赛道"} · ${field.label}`,
-        };
-    }
-    return (
-        fieldsByEvent.get(eventKey)?.get(fieldId) ||
-        fallbackFieldsById.get(fieldId) || { id: fieldId, label: fieldId }
-    );
-};
-
-const registrationExportTable = (registrations, events, eventFilter) => {
-    const fieldsByEvent = registrationFieldsByEvent(events);
-    const eventTitles = new Map(events.map((item) => [item.event.key, item.event.title]));
-    const scopedEvents = eventFilter
-        ? events.filter((item) => item.event.key === eventFilter)
-        : events;
-    const columns = new Map();
-    const addColumn = (field) => columns.set(JSON.stringify([field.id, field.label]), field);
-    const configured = scopedEvents
-        .flatMap((item) => item.form?.fields || [])
-        .filter((field) => field.enabled !== false);
-    (configured.length ? configured : fallbackRegistrationFields).forEach(addColumn);
-    // Preserve answers from retired/disabled fields and editions absent from current configuration.
-    registrations.forEach((registration) => {
-        Object.entries(registrationAnswers(registration)).forEach(([id, value]) => {
-            if (
-                value !== undefined &&
-                value !== null &&
-                value !== "" &&
-                (!Array.isArray(value) || value.length)
-            )
-                addColumn(registrationField(fieldsByEvent, registration.event_key, id));
-        });
-    });
-    const exportFields = [...columns.values()];
-    const labels = exportFields.map((field) => field.label);
-    const headers = [
-        "比赛日程",
-        ...exportFields.map((field) =>
-            labels.filter((label) => label === field.label).length > 1
-                ? `${field.label} (${field.id})`
-                : field.label
-        ),
-        "报名时间",
-    ];
-    const rows = registrations.map((registration) => {
-        const answers = registrationAnswers(registration);
-        return [
-            eventTitles.get(registration.event_key) || registration.event_key || "历史赛事",
-            ...exportFields.map((column) => {
-                const field = registrationField(fieldsByEvent, registration.event_key, column.id);
-                return field.label === column.label
-                    ? formatHackathonAnswer(answers[column.id], field)
-                    : "";
-            }),
-            formatDateTime(registration.created_at),
-        ];
-    });
-    return [headers, ...rows];
-};
-
-const formatDateTime = (value) => (value ? new Date(value).toLocaleString("zh-CN") : "未知时间");
-
 const formatNumber = (value) => new Intl.NumberFormat("zh-CN").format(Number(value || 0));
 
 const HackathonManager = () => {
@@ -253,7 +55,6 @@ const HackathonManager = () => {
     const { isDayMode, headingTextClass, mutedTextClass } = useAdminTheme();
     const [registrations, setRegistrations] = useState([]);
     const [submissionRoster, setSubmissionRoster] = useState(null);
-    const [submissionFilter, setSubmissionFilter] = useState("all");
     const registrationsWithSubmissions = useMemo(
         () => attachRegistrationSubmissions(registrations, submissionRoster),
         [registrations, submissionRoster]
@@ -263,13 +64,9 @@ const HackathonManager = () => {
     const [confirmState, setConfirmState] = useState(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
     const [workSearchTerm, setWorkSearchTerm] = useState("");
-    const [gradeFilter, setGradeFilter] = useState("");
-    const [eventFilter, setEventFilter] = useState("");
     const [workStatusFilter, setWorkStatusFilter] = useState("all");
     const [workCompetitionFilter, setWorkCompetitionFilter] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
     const [scheduleConfig, setScheduleConfig] = useState(null);
     const [activeWorkspace, setActiveWorkspace] = useState("overview");
     const [selectedEventKey, setSelectedEventKey] = useState("");
@@ -291,45 +88,22 @@ const HackathonManager = () => {
         (item) => item.slug === selectedEvent?.results.competitionSlug
     );
     useEffect(() => {
-        setEventFilter(selectedEventKey);
-        setSubmissionFilter("all");
         if (selectedEventKey !== AIX_EVENT_KEY) {
             setActiveWorkspace((current) => (current === "submissions" ? "overview" : current));
         }
         const id = selectedCompetition ? String(selectedCompetition.id) : "__none__";
         setWorkCompetitionFilter(id);
         setMediaCompetitionFilter(id);
-        setCurrentPage(1);
     }, [selectedEventKey, selectedCompetition?.id]);
     const configure = (section) => {
         setTemplateSection(section);
         setActiveWorkspace("template");
     };
 
-    const eventTitleByKey = useMemo(
-        () =>
-            new Map(
-                (scheduleConfig?.events || []).map((item) => [item.event.key, item.event.title])
-            ),
-        [scheduleConfig]
-    );
-
-    const fieldsByEvent = useMemo(
-        () => registrationFieldsByEvent(scheduleConfig?.events || []),
-        [scheduleConfig]
-    );
-    const fieldFor = (registration, fieldId) =>
-        registrationField(fieldsByEvent, registration.event_key, fieldId);
-    const answerFor = (registration, fieldId) =>
-        formatHackathonAnswer(
-            registrationAnswers(registration)[fieldId],
-            fieldFor(registration, fieldId)
-        );
-    const filteredFieldLabel = (fieldId) =>
-        registrationField(fieldsByEvent, eventFilter, fieldId).label;
-
     const fetchRegistrations = async () => {
-        const response = await api.get("/admin/hackathon/registrations");
+        const response = await api.get("/admin/hackathon/registrations", {
+            params: { includeWithdrawn: "1" },
+        });
         setRegistrations(Array.isArray(response.data) ? response.data : []);
     };
 
@@ -376,44 +150,6 @@ const HackathonManager = () => {
         refreshAll();
     }, []);
 
-    const filteredRegistrations = useMemo(() => {
-        const query = searchTerm.trim().toLowerCase();
-        return registrationsWithSubmissions.filter((registration) => {
-            const matchesSearch =
-                !query ||
-                [
-                    registration.name,
-                    registration.event_key,
-                    eventTitleByKey.get(registration.event_key),
-                    registration.student_id,
-                    registration.major,
-                    registration.grade,
-                    registration.experience,
-                    ...registration.submissionRecords.map(
-                        (record) => record.submitted?.projectName || record.draft?.projectName
-                    ),
-                    safeParseTools(registration.ai_tools).join(" "),
-                    ...Object.values(registration.form_data || {}),
-                ]
-                    .map((value) => String(value || "").toLowerCase())
-                    .some((value) => value.includes(query));
-
-            const matchesGrade = gradeFilter ? registration.grade === gradeFilter : true;
-            const matchesEvent = eventFilter ? registration.event_key === eventFilter : true;
-            const matchesSubmission =
-                submissionFilter === "all" ||
-                registrationSubmissionState(registration) === submissionFilter;
-            return matchesSearch && matchesGrade && matchesEvent && matchesSubmission;
-        });
-    }, [
-        eventFilter,
-        eventTitleByKey,
-        gradeFilter,
-        registrationsWithSubmissions,
-        searchTerm,
-        submissionFilter,
-    ]);
-
     const filteredWorks = useMemo(() => {
         const query = workSearchTerm.trim().toLowerCase();
         return works.filter((work) => {
@@ -445,35 +181,11 @@ const HackathonManager = () => {
         });
     }, [workCompetitionFilter, workSearchTerm, workStatusFilter, featuredFilter, works]);
 
-    const totalPages = Math.max(1, Math.ceil(filteredRegistrations.length / itemsPerPage));
-
-    useEffect(() => {
-        setCurrentPage((page) => Math.min(page, totalPages));
-    }, [totalPages]);
-
-    const paginatedRegistrations = filteredRegistrations.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
-    const registrationStats = useMemo(() => {
-        const byGrade = registrations.reduce((accumulator, registration) => {
-            const grade = registration.grade || "unknown";
-            accumulator[grade] = (accumulator[grade] || 0) + 1;
-            return accumulator;
-        }, {});
-
-        return {
-            total: registrations.filter((item) => item.event_key === eventFilter).length,
-            filtered: filteredRegistrations.length,
-            undergraduate:
-                (byGrade.freshman || 0) +
-                (byGrade.sophomore || 0) +
-                (byGrade.junior || 0) +
-                (byGrade.senior || 0),
-            graduate: (byGrade.master || 0) + (byGrade.phd || 0),
-        };
-    }, [filteredRegistrations.length, registrations, eventFilter]);
+    const registrationTotal = registrationsWithSubmissions.filter(
+        (row) =>
+            row.event_key === selectedEventKey &&
+            (row.event_key !== AIX_EVENT_KEY || activeRegistrationTracks(row).length > 0)
+    ).length;
 
     const workStats = useMemo(() => {
         const scopedWorks = works.filter(
@@ -496,78 +208,6 @@ const HackathonManager = () => {
             rejected: byStatus.rejected || 0,
         };
     }, [filteredWorks.length, works, workCompetitionFilter]);
-
-    const renderToolTags = (registration) => {
-        const value = registrationAnswers(registration).aiTools;
-        const tools = Array.isArray(value) ? value : [];
-        const field = fieldFor(registration, "aiTools");
-        if (tools.length === 0) {
-            return <span className={mutedTextClass}>未填写</span>;
-        }
-
-        return (
-            <div className="flex flex-wrap gap-1.5">
-                {tools.map((tool) => (
-                    <span
-                        key={tool}
-                        className="rounded-full bg-white/5 px-2.5 py-1 text-xs font-semibold"
-                    >
-                        {formatHackathonAnswer(tool, field)}
-                    </span>
-                ))}
-            </div>
-        );
-    };
-
-    const renderAdditionalAnswers = (registration) => {
-        const formData = registrationAnswers(registration);
-        const answers = Object.entries(formData)
-            .filter(
-                ([fieldId, value]) =>
-                    !legacyRegistrationFieldIds.has(fieldId) &&
-                    fieldId !== "workStatus" &&
-                    !fieldId.startsWith("work__") &&
-                    value !== "" &&
-                    value !== null &&
-                    value !== undefined
-            )
-            .map(([fieldId, value]) => ({
-                id: fieldId,
-                label: fieldFor(registration, fieldId).label,
-                value: formatHackathonAnswer(value, fieldFor(registration, fieldId)),
-            }))
-            .filter((item) => item.value);
-
-        if (answers.length === 0) return <span className={mutedTextClass}>暂无</span>;
-        return (
-            <div className="space-y-1.5">
-                {answers.map((answer) => (
-                    <p key={answer.id} className="max-w-[260px] break-words text-xs leading-5">
-                        <span className="font-semibold">{answer.label}：</span>
-                        {answer.value}
-                    </p>
-                ))}
-            </div>
-        );
-    };
-
-    const exportRegistrations = () => {
-        const table = registrationExportTable(
-            filteredRegistrations,
-            scheduleConfig?.events || [],
-            eventFilter
-        );
-        const csv =
-            "\uFEFF" +
-            table.map((row) => row.map((cell) => `"${escapeCsv(cell)}"`).join(",")).join("\n");
-        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `hackathon_registrations_${new Date().toISOString().slice(0, 10)}.csv`;
-        link.click();
-        URL.revokeObjectURL(link.href);
-        toast.success("报名数据已导出");
-    };
 
     const deleteConfirmed = async () => {
         if (!confirmState) return;
@@ -863,84 +503,6 @@ const HackathonManager = () => {
         </div>
     );
 
-    const renderRegistrationMobileCards = () => (
-        <div className="grid gap-3 md:hidden">
-            {paginatedRegistrations.map((registration) => (
-                <article
-                    key={registration.id}
-                    className={`rounded-2xl border p-4 ${
-                        isDayMode
-                            ? "border-slate-200/70 bg-white/[0.78]"
-                            : "border-white/10 bg-white/[0.03]"
-                    }`}
-                >
-                    <div className="flex items-start justify-between gap-3">
-                        <div className="flex min-w-0 items-center gap-3">
-                            <div
-                                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                                    isDayMode
-                                        ? "bg-cyan-100 text-cyan-700"
-                                        : "bg-cyan-500/15 text-cyan-200"
-                                }`}
-                            >
-                                <User size={16} />
-                            </div>
-                            <div className="min-w-0">
-                                <h3 className={`truncate font-semibold ${headingTextClass}`}>
-                                    {registration.name || "未命名"}
-                                </h3>
-                                <p className={`text-xs ${mutedTextClass}`}>
-                                    {registration.student_id || "未填学号"} ·{" "}
-                                    {answerFor(registration, "grade") || "未填年级"}
-                                </p>
-                                <p className="mt-1 truncate text-[11px] font-semibold text-cyan-500">
-                                    {eventTitleByKey.get(registration.event_key) ||
-                                        registration.event_key ||
-                                        "历史赛事"}
-                                </p>
-                            </div>
-                        </div>
-                        <AdminIconButton
-                            label="删除报名记录"
-                            tone="danger"
-                            onClick={() => setConfirmState({ id: registration.id })}
-                        >
-                            <Trash2 size={16} />
-                        </AdminIconButton>
-                    </div>
-                    <div className={`mt-4 grid gap-2 text-sm ${mutedTextClass}`}>
-                        <span className="inline-flex items-center gap-2">
-                            <GraduationCap size={14} />
-                            {registration.major || "未填写专业"}
-                        </span>
-                        <span className="inline-flex items-center gap-2">
-                            <Calendar size={14} />
-                            {formatDateTime(registration.created_at)}
-                        </span>
-                    </div>
-                    <div className="mt-3">{renderToolTags(registration)}</div>
-                    {answerFor(registration, "experience") ? (
-                        <p className={`mt-3 line-clamp-3 text-sm leading-6 ${mutedTextClass}`}>
-                            <span className="font-semibold">
-                                {fieldFor(registration, "experience").label}：
-                            </span>
-                            {answerFor(registration, "experience")}
-                        </p>
-                    ) : null}
-                    <div className={`mt-3 text-sm ${mutedTextClass}`}>
-                        {renderAdditionalAnswers(registration)}
-                    </div>
-                    <section className="mt-4 border-t border-current/10 pt-3">
-                        <h4 className="mb-2 text-sm font-semibold">
-                            {t("admin.hackathon_submissions.registration_column")}
-                        </h4>
-                        <RegistrationSubmissionData registration={registration} />
-                    </section>
-                </article>
-            ))}
-        </div>
-    );
-
     if (loading) {
         return <AdminLoadingState text="正在加载黑客松报名数据..." />;
     }
@@ -949,20 +511,12 @@ const HackathonManager = () => {
         <>
             <AdminPageShell
                 title="黑客松运营管理"
-                description={`统一维护赛事页面、赛制和报名表单；当前报名 ${formatNumber(registrationStats.total)} 条，待审作品 ${formatNumber(workStats.pending)} 条。`}
+                description={`统一维护赛事页面、赛制和报名表单；当前报名 ${formatNumber(registrationTotal)} 条，待审作品 ${formatNumber(workStats.pending)} 条。`}
                 actions={
                     <>
                         <AdminButton tone="subtle" onClick={refreshAll}>
                             <RefreshCw size={16} />
                             刷新
-                        </AdminButton>
-                        <AdminButton
-                            tone="primary"
-                            onClick={exportRegistrations}
-                            disabled={filteredRegistrations.length === 0}
-                        >
-                            <Download size={16} />
-                            导出报名
                         </AdminButton>
                     </>
                 }
@@ -1107,31 +661,33 @@ const HackathonManager = () => {
                         </div>
                     </AdminPanel>
                 )}
-                <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-                    <AdminMetricCard
-                        label="总报名"
-                        value={formatNumber(registrationStats.total)}
-                        icon={Users}
-                    />
-                    <AdminMetricCard
-                        label="比赛日程"
-                        value={formatNumber(scheduleConfig?.events?.length)}
-                        icon={Filter}
-                        tone="emerald"
-                    />
-                    <AdminMetricCard
-                        label="作品总数"
-                        value={formatNumber(workStats.total)}
-                        icon={Award}
-                        tone="indigo"
-                    />
-                    <AdminMetricCard
-                        label="待审作品"
-                        value={formatNumber(workStats.pending)}
-                        icon={RefreshCw}
-                        tone="amber"
-                    />
-                </div>
+                {activeWorkspace !== "registrations" && (
+                    <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+                        <AdminMetricCard
+                            label="总报名"
+                            value={formatNumber(registrationTotal)}
+                            icon={Users}
+                        />
+                        <AdminMetricCard
+                            label="比赛日程"
+                            value={formatNumber(scheduleConfig?.events?.length)}
+                            icon={Filter}
+                            tone="emerald"
+                        />
+                        <AdminMetricCard
+                            label="作品总数"
+                            value={formatNumber(workStats.total)}
+                            icon={Award}
+                            tone="indigo"
+                        />
+                        <AdminMetricCard
+                            label="待审作品"
+                            value={formatNumber(workStats.pending)}
+                            icon={RefreshCw}
+                            tone="amber"
+                        />
+                    </div>
+                )}
 
                 {activeWorkspace === "template" ? (
                     <HackathonTemplateEditor
@@ -1149,273 +705,13 @@ const HackathonManager = () => {
                 ) : null}
 
                 {activeWorkspace === "registrations" ? (
-                    <>
-                        <AdminToolbar>
-                            <ToolbarGroup className="w-full flex-1">
-                                <div className="relative w-full min-w-0 flex-1 md:max-w-lg">
-                                    <Search
-                                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-                                        size={16}
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="搜索姓名、学号、专业、项目经验"
-                                        value={searchTerm}
-                                        onChange={(event) => {
-                                            setSearchTerm(event.target.value);
-                                            setCurrentPage(1);
-                                        }}
-                                        className="theme-admin-input w-full rounded-xl py-2.5 pl-10 pr-4 text-sm"
-                                    />
-                                </div>
-                            </ToolbarGroup>
-                            <ToolbarGroup>
-                                {eventFilter === AIX_EVENT_KEY && (
-                                    <select
-                                        className="theme-admin-input min-h-[40px] rounded-xl px-3 py-2 text-sm"
-                                        aria-label={t(
-                                            "admin.hackathon_submissions.registration_filter"
-                                        )}
-                                        value={submissionFilter}
-                                        disabled={!submissionRoster}
-                                        onChange={(event) => {
-                                            setSubmissionFilter(event.target.value);
-                                            setCurrentPage(1);
-                                        }}
-                                    >
-                                        {["all", "submitted", "draft", "none"].map((value) => (
-                                            <option key={value} value={value}>
-                                                {t(
-                                                    `admin.hackathon_submissions.registration_${value}`
-                                                )}
-                                            </option>
-                                        ))}
-                                    </select>
-                                )}
-                                <select
-                                    value={eventFilter}
-                                    onChange={(event) => {
-                                        setEventFilter(event.target.value);
-                                        setSubmissionFilter("all");
-                                        setCurrentPage(1);
-                                    }}
-                                    className="theme-admin-input min-h-[40px] max-w-[220px] rounded-xl px-3 py-2 text-sm"
-                                    aria-label="按比赛日程筛选"
-                                >
-                                    <option value="">所有比赛日程</option>
-                                    {(scheduleConfig?.events || []).map((item) => (
-                                        <option key={item.event.key} value={item.event.key}>
-                                            {item.event.title}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    value={gradeFilter}
-                                    onChange={(event) => {
-                                        setGradeFilter(event.target.value);
-                                        setCurrentPage(1);
-                                    }}
-                                    className="theme-admin-input min-h-[40px] rounded-xl px-3 py-2 text-sm"
-                                    aria-label="按年级筛选"
-                                >
-                                    <option value="">所有年级</option>
-                                    {Object.entries(gradeLabels).map(([value, label]) => (
-                                        <option key={value} value={value}>
-                                            {label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </ToolbarGroup>
-                        </AdminToolbar>
-
-                        <AdminPanel
-                            title={`报名列表 (${formatNumber(filteredRegistrations.length)})`}
-                            description={`第 ${currentPage} / ${totalPages} 页，CSV 导出包含当前筛选的 ${formatNumber(filteredRegistrations.length)} 条。`}
-                        >
-                            {paginatedRegistrations.length === 0 ? (
-                                <AdminEmptyState
-                                    icon={Users}
-                                    title="暂无匹配的报名数据"
-                                    description="可以清空搜索词、切换年级筛选，或稍后刷新。"
-                                />
-                            ) : (
-                                <>
-                                    {renderRegistrationMobileCards()}
-                                    <AdminTableShell minWidth={1460}>
-                                        <thead>
-                                            <tr className="theme-admin-table-head border-b text-xs uppercase tracking-[0.2em]">
-                                                <th className="p-4">报名人</th>
-                                                <th className="p-4">比赛日程</th>
-                                                <th className="p-4">学号</th>
-                                                <th className="p-4">专业</th>
-                                                <th className="p-4">年级</th>
-                                                <th className="p-4">
-                                                    {filteredFieldLabel("aiTools")}
-                                                </th>
-                                                <th className="p-4">
-                                                    {filteredFieldLabel("experience")}
-                                                </th>
-                                                <th className="p-4">其他报名信息</th>
-                                                <th className="p-4">
-                                                    {t(
-                                                        "admin.hackathon_submissions.registration_column"
-                                                    )}
-                                                </th>
-                                                <th className="p-4">报名时间</th>
-                                                <th className="p-4 text-right">操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="theme-admin-table-body divide-y">
-                                            {paginatedRegistrations.map((registration) => (
-                                                <tr
-                                                    key={registration.id}
-                                                    className="theme-admin-row"
-                                                >
-                                                    <td className="p-4">
-                                                        <div className="flex items-center gap-3">
-                                                            <div
-                                                                className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                                                                    isDayMode
-                                                                        ? "bg-cyan-100 text-cyan-700"
-                                                                        : "bg-cyan-500/15 text-cyan-200"
-                                                                }`}
-                                                            >
-                                                                <User size={16} />
-                                                            </div>
-                                                            <AdminTableCellText strong>
-                                                                {registration.name || "未命名"}
-                                                            </AdminTableCellText>
-                                                        </div>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText className="max-w-[180px] break-words">
-                                                            {eventTitleByKey.get(
-                                                                registration.event_key
-                                                            ) ||
-                                                                registration.event_key ||
-                                                                "历史赛事"}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText>
-                                                            {registration.student_id || "-"}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText className="max-w-[180px] break-words">
-                                                            {registration.major || "-"}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText>
-                                                            {answerFor(registration, "grade") ||
-                                                                "-"}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        {renderToolTags(registration)}
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText className="line-clamp-2 max-w-[280px] break-words">
-                                                            {!eventFilter && (
-                                                                <span className="font-semibold">
-                                                                    {
-                                                                        fieldFor(
-                                                                            registration,
-                                                                            "experience"
-                                                                        ).label
-                                                                    }
-                                                                    ：
-                                                                </span>
-                                                            )}
-                                                            {answerFor(
-                                                                registration,
-                                                                "experience"
-                                                            ) || "暂无"}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <div className={mutedTextClass}>
-                                                            {renderAdditionalAnswers(registration)}
-                                                        </div>
-                                                    </td>
-                                                    <td className="p-4 align-top">
-                                                        <RegistrationSubmissionData
-                                                            registration={registration}
-                                                        />
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <AdminTableCellText>
-                                                            {formatDateTime(
-                                                                registration.created_at
-                                                            )}
-                                                        </AdminTableCellText>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <div className="flex justify-end">
-                                                            <AdminIconButton
-                                                                label="删除报名记录"
-                                                                tone="danger"
-                                                                onClick={() =>
-                                                                    setConfirmState({
-                                                                        id: registration.id,
-                                                                    })
-                                                                }
-                                                            >
-                                                                <Trash2 size={16} />
-                                                            </AdminIconButton>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </AdminTableShell>
-                                </>
-                            )}
-
-                            {filteredRegistrations.length > itemsPerPage ? (
-                                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                    <div className={`text-sm ${mutedTextClass}`}>
-                                        第 {(currentPage - 1) * itemsPerPage + 1} -{" "}
-                                        {Math.min(
-                                            currentPage * itemsPerPage,
-                                            filteredRegistrations.length
-                                        )}{" "}
-                                        条， 共 {formatNumber(filteredRegistrations.length)} 条
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <AdminButton
-                                            tone="subtle"
-                                            disabled={currentPage === 1}
-                                            onClick={() =>
-                                                setCurrentPage((page) => Math.max(1, page - 1))
-                                            }
-                                        >
-                                            <ChevronLeft size={16} />
-                                            上一页
-                                        </AdminButton>
-                                        <span
-                                            className={`text-sm font-semibold ${headingTextClass}`}
-                                        >
-                                            {currentPage} / {totalPages}
-                                        </span>
-                                        <AdminButton
-                                            tone="subtle"
-                                            disabled={currentPage === totalPages}
-                                            onClick={() =>
-                                                setCurrentPage((page) =>
-                                                    Math.min(totalPages, page + 1)
-                                                )
-                                            }
-                                        >
-                                            下一页
-                                            <ChevronRight size={16} />
-                                        </AdminButton>
-                                    </div>
-                                </div>
-                            ) : null}
-                        </AdminPanel>
-                    </>
+                    <HackathonRegistrationWorkspace
+                        key={selectedEventKey}
+                        registrations={registrationsWithSubmissions}
+                        events={scheduleConfig?.events || []}
+                        eventKey={selectedEventKey}
+                        onDelete={(id) => setConfirmState({ id })}
+                    />
                 ) : null}
 
                 {activeWorkspace === "works" ? (

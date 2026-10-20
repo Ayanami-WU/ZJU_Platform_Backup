@@ -187,6 +187,36 @@ test("real SQLite registration, private repository persistence, edits, deadline 
         assert.deepEqual((await read(1)).body.registration.answers, receipt.answers);
         const admin = await invoke(controller.getRegistrations, {});
         assert.equal(admin.body[0].github_repository_url, "https://github.com/owner/updated");
+        const storedRegistration = await db.get(
+            "SELECT * FROM hackathon_registrations WHERE user_id=1"
+        );
+        const originalAnswers = JSON.parse(storedRegistration.form_data_json);
+        const withdrawnAnswers = {
+            ...originalAnswers,
+            track: [],
+            trackRegistrations: {
+                industry: {
+                    answers: { ...originalAnswers, track: ["industry"] },
+                    active: false,
+                    cancelledAt: "2026-10-19T00:00:00Z",
+                },
+            },
+        };
+        await db.run("UPDATE hackathon_registrations SET form_data_json=? WHERE id=?", [
+            JSON.stringify(withdrawnAnswers),
+            storedRegistration.id,
+        ]);
+        assert.equal((await invoke(controller.getRegistrations, {})).body.length, 0);
+        const historical = await invoke(controller.getRegistrations, {
+            query: { includeWithdrawn: "1" },
+        });
+        assert.equal(historical.body.length, 1);
+        assert.equal(historical.body[0].form_data.trackRegistrations.industry.active, false);
+        assert.equal(historical.headers["Cache-Control"], "no-store");
+        await db.run("UPDATE hackathon_registrations SET form_data_json=? WHERE id=?", [
+            storedRegistration.form_data_json,
+            storedRegistration.id,
+        ]);
         template.event.startAt = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 16);
         template.event.endAt = new Date(Date.now() - 86400000).toISOString().slice(0, 16);
         await saveHackathonTemplate(db, template);
