@@ -1,5 +1,5 @@
 const defaults = require("../../../../shared/hackathonAiX.json");
-const MARKER = "hackathon_ai_x_forum_agenda_oct16_v1";
+const MARKER = "hackathon_ai_x_forum_agenda_oct21_v2";
 
 // Reconcile the published schedule without touching registrations, works,
 // challenges, other editions, or dates that operators changed separately.
@@ -16,7 +16,11 @@ async function migrateHackathonAiXForumAgenda(db) {
             );
             if (current) {
                 const before = JSON.stringify(current);
-                if (["2026-10-25T17:00", "2026-10-25T16:30"].includes(current.event.endAt)) {
+                if (
+                    ["2026-10-25T17:00", "2026-10-25T16:30", "2026-10-25T16:00"].includes(
+                        current.event.endAt
+                    )
+                ) {
                     current.event.endAt = defaults.event.endAt;
                 }
                 const program = current.event.program;

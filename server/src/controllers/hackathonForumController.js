@@ -83,10 +83,10 @@ const registerForums = async (req, res, next) => {
             !contact ||
             !/^(?:\+?86[ -]?)?1[3-9]\d{9}$/.test(contact) ||
             !["internal", "external"].includes(attendeeType) ||
-            !studentId ||
+            (attendeeType === "internal" && !studentId) ||
             !major ||
             !grade ||
-            !school ||
+            (attendeeType === "external" && !school) ||
             !projectExperience ||
             !researchExperience ||
             !aiCapabilities ||

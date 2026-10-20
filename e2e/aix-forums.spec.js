@@ -50,7 +50,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
             if (data.attendeeType === "internal") expect(data.question).toContain("真实需求");
             else {
                 expect(data.school).toBe("示例大学");
-                expect(data.studentId).toBe("32600001");
+                expect(data.studentId).toBe("");
                 expect(data.question).toContain("真实需求");
             }
             rows = data.sessions.map((forumKey, i) => ({ id: i + 1, forumKey, ...data }));
@@ -72,7 +72,7 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
     await expect(form.getByLabel(/学号/)).toHaveValue("32600001");
     await expect(form.getByLabel(/专业/)).toHaveValue("计算机");
     await expect(form.getByLabel(/年级/)).toHaveValue("大二");
-    await form.getByLabel(/学校/, { exact: false }).fill("示例大学");
+    await expect(form.getByLabel(/学校/)).toHaveCount(0);
     await form.getByLabel(/项目／创业经历/).fill("完成过AI项目");
     await form.getByLabel(/科研经历/).fill("暂无");
     await form.getByLabel(/你认为AI时代最重要的能力有哪些/).fill("判断力和执行力");
@@ -96,8 +96,9 @@ test("independent forum signup preserves inputs on failure, stores receipts, res
     await expect(page.locator(".aix-forum-signup form").getByLabel(/姓名/)).toHaveValue("论坛测试");
     await expect(form.getByLabel(/学号/)).toHaveValue("32600001");
     await form.getByRole("tab", { name: "校外", exact: true }).click();
-    await expect(form.getByLabel(/学号/)).toHaveValue("32600001");
-    await expect(form.locator("input:required")).toHaveCount(6);
+    await expect(form.getByLabel(/学号/)).toHaveCount(0);
+    await form.getByLabel(/学校/).fill("示例大学");
+    await expect(form.locator("input:required")).toHaveCount(5);
     await expect(form.locator("textarea:required")).toHaveCount(4);
     await form.locator("button[type=submit]").click();
     await expect(form.getByRole("status")).toContainText("已保存");

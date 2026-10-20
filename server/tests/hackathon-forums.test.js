@@ -74,7 +74,7 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             organization: "Example School",
             attendeeType: "external",
             school: "Example School",
-            studentId: "202600001",
+            studentId: "",
             major: "计算机",
             grade: "硕士",
             projectExperience: "项目经历\n第二行",
@@ -129,7 +129,6 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
         }
         for (const field of [
             "school",
-            "studentId",
             "major",
             "grade",
             "question",
@@ -180,13 +179,13 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             ...payload,
             attendeeType: "internal",
             organization: "",
+            school: "",
             studentId: "3260100010",
             major: "计算机科学与技术",
             grade: "2026级",
             question: "如何判断AI创业方向？\n如何验证需求？",
         };
         for (const field of [
-            "school",
             "studentId",
             "major",
             "grade",

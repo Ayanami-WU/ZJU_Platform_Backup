@@ -43,7 +43,7 @@ test("forum agenda migration updates old dates once while retaining user submiss
         const registrations = await db.all("SELECT * FROM hackathon_registrations");
         await migrate(db);
         const saved = await read(db);
-        assert.equal(saved.events[1].event.endAt, "2026-10-25T16:00");
+        assert.equal(saved.events[1].event.endAt, "2026-10-25T16:05");
         for (const stages of [
             saved.events[1].event.program.stages,
             ...Object.values(saved.events[1].event.program.trackStages),

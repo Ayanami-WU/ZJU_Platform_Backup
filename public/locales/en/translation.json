@@ -5288,7 +5288,7 @@
                 "description": "AI technology trends and industrial applications"
             },
             "entrepreneurship": {
-                "date": "October 25 · 09:00–16:00 · Around 150 attendees",
+                "date": "October 25 · 09:00–16:05 · Around 150 attendees",
                 "title": "Finals & Entrepreneurship Forum",
                 "description": "First principles of entrepreneurship in the AI era"
             }
@@ -5309,7 +5309,7 @@
             {
                 "date": "10.25",
                 "title": "Final & entrepreneurship forum",
-                "description": "09:00–11:30 · 13:30–16:00"
+                "description": "09:00–11:30 · 13:30–16:05"
             }
         ],
         "challengeKicker": "Academic creativity · Industry challenges",
@@ -5980,48 +5980,52 @@
                 "entrepreneurship": {
                     "title": "Entrepreneurship forum",
                     "theme": "First principles of entrepreneurship in the AI era",
-                    "time": "25 Oct · 13:30–16:00",
-                    "location": "Sandun Entrepreneurship Space, 6F, Building C, Baogang Life Plaza",
+                    "time": "25 Oct · 13:30–16:05",
+                    "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace Hall (Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou)",
                     "required": "Finalists must attend the final-day forum. Parallel pitches in the morning; entrepreneurship forum in the afternoon.",
                     "agenda": [
                         {
                             "time": "13:30–13:35",
-                            "title": "Opening · Yang Xing"
+                            "title": "Opening · Yang Xing, PhD student, School of Marxism, Zhejiang University"
                         },
                         {
                             "time": "13:35–13:40",
-                            "title": "Leadership remarks · Wang Han, Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University"
+                            "title": "Sandun government remarks · Zhu Kai, Mayor of Sandun Town, Xihu District, Hangzhou"
                         },
                         {
                             "time": "13:40–13:45",
-                            "title": "Competition update · Ying Qi, Founder, Tuozhe AI Ecosystem"
+                            "title": "Zhejiang University leadership remarks · Wang Han, Vice Dean, School of Innovation and Entrepreneurship"
                         },
                         {
-                            "time": "13:45–14:00",
+                            "time": "13:45–13:50",
+                            "title": "Founding vision: bringing ideas into practice · Ying Qi, Founder, Tuozhe AI Ecosystem & Qiying Technology"
+                        },
+                        {
+                            "time": "13:50–14:05",
                             "title": "Platform introduction: ZJU Zijin Entrepreneurship Metaspace — an AI-powered entrepreneurship education ecosystem · Wang Feifan"
                         },
                         {
-                            "time": "14:00–14:20",
+                            "time": "14:05–14:25",
                             "title": "Founder perspective: redefining outstanding talent in the AI era · Han Bing"
                         },
                         {
-                            "time": "14:20–14:35",
-                            "title": "Platform introduction: Elite Eagle · Zhang Jialin"
+                            "time": "14:25–14:40",
+                            "title": "Platform introduction · Zhang Jialin"
                         },
                         {
-                            "time": "14:35–14:55",
+                            "time": "14:40–15:00",
                             "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles? · Liu Jianbin"
                         },
                         {
-                            "time": "14:55–15:10",
+                            "time": "15:00–15:15",
                             "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1 · Liu Xiang"
                         },
                         {
-                            "time": "15:10–15:50",
-                            "title": "Roundtable and discussion: first successes and failures in the AI era · Hosted by Ying Qi; Cheng Shaoxiong, Wang Jin, Zhang Jie and Zhang Jialin"
+                            "time": "15:15–15:55",
+                            "title": "Roundtable: first successes and failures in the AI era · Hosted by Ying Qi; Cheng Shaoxiong, Wang Jin, Zhang Jie and Zhang Jialin"
                         },
                         {
-                            "time": "15:50–16:00",
+                            "time": "15:55–16:05",
                             "title": "Awards ceremony"
                         }
                     ],
@@ -6072,15 +6076,14 @@
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
             "chapters": ["Technology", "Entrepreneurship", "Registration"],
-            "dateTime": "October 25 · 13:30–16:00",
-            "venue": "Sandun Innovation Space",
-            "address": "6F, Building C, Baogang Life Plaza",
+            "dateTime": "October 25 · 13:30–16:05",
+            "venue": "1897 OPC Community & Sandun Metaspace",
+            "address": "Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
             "attendeeLabel": "Attendee type",
             "attendeeTypes": {
                 "internal": "On-campus",
                 "external": "Off-campus"
             },
-            "requiredHint": "All fields are required. Enter “None” if you have no project or research experience. Graduates may enter their former school and “N/A” for grade and student ID.",
             "placeholders": {
                 "school": "Current or former school",
                 "projectExperience": "Describe your projects, role and progress, or enter “None”",
@@ -6437,7 +6440,7 @@
                 },
                 {
                     "title": "Entrepreneurship forum",
-                    "time": "Oct 25 · 13:30–16:00"
+                    "time": "Oct 25 · 13:30–16:05"
                 }
             ],
             "rewards": [
@@ -6838,9 +6841,28 @@
                         "id": "entrepreneurship",
                         "title": "Entrepreneurship forum",
                         "theme": "First principles of entrepreneurship in the AI era",
-                        "date": "25 Oct · 13:30–16:00 · Host: Yang Xing",
-                        "location": "Sandun Entrepreneurship Space\nBaogang Life Plaza, Block C, Level 6",
+                        "date": "25 Oct · 13:30–16:05 · Host: Yang Xing",
+                        "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace\nLevel 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
                         "guests": [
+                            {
+                                "id": "zhu-kai",
+                                "name": "Zhu Kai",
+                                "role": "Mayor of Sandun Town, Xihu District, Hangzhou",
+                                "photo": false
+                            },
+                            {
+                                "id": "wang-han",
+                                "name": "Wang Han",
+                                "role": "Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University",
+                                "photo": false
+                            },
+                            {
+                                "id": "ying-qi",
+                                "name": "Ying Qi",
+                                "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
+                            },
                             {
                                 "id": "cheng-shaoxiong",
                                 "name": "Cheng Shaoxiong",
@@ -6875,7 +6897,7 @@
                             {
                                 "id": "liu-xiang",
                                 "name": "Liu Xiang",
-                                "role": "Investment Director, XbotPark Ningbo; core member of Prof. Li Zexiang’s team",
+                                "role": "Investment Director, XbotPark Ningbo",
                                 "photo": false
                             },
                             {
@@ -6887,7 +6909,7 @@
                             {
                                 "id": "wang-feifan",
                                 "name": "Wang Feifan",
-                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University; National Jury Pool Expert, China International College Students’ Innovation Competition",
+                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University",
                                 "photo": true
                             },
                             {
@@ -6902,41 +6924,65 @@
                                 "name": "Xu Songbo",
                                 "photo": true,
                                 "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
+                            },
+                            {
+                                "id": "liu-xushuang",
+                                "name": "Liu Xushuang",
+                                "role": "OPC Project Lead, Tmall Campus",
+                                "photo": false
                             }
                         ],
                         "topics": [
                             {
+                                "title": "Remarks from Sandun Town Government",
+                                "speaker": "Zhu Kai",
+                                "guestIds": ["zhu-kai"],
+                                "time": "13:35–13:40"
+                            },
+                            {
+                                "title": "Remarks from ZJU School of Innovation and Entrepreneurship",
+                                "speaker": "Wang Han",
+                                "guestIds": ["wang-han"],
+                                "time": "13:40–13:45"
+                            },
+                            {
+                                "title": "Founding vision: bringing ideas into practice",
+                                "speaker": "Ying Qi",
+                                "guestIds": ["ying-qi"],
+                                "time": "13:45–13:50"
+                            },
+                            {
                                 "title": "Platform introduction: ZJU Zijin Entrepreneurship Metaspace — an AI-powered entrepreneurship education ecosystem",
                                 "speaker": "Wang Feifan",
                                 "guestIds": ["wang-feifan"],
-                                "time": "13:45–14:00"
+                                "time": "13:50–14:05"
                             },
                             {
                                 "title": "Founder perspective: redefining outstanding talent in the AI era",
                                 "speaker": "Han Bing",
                                 "guestIds": ["han-bing"],
-                                "time": "14:00–14:20"
+                                "time": "14:05–14:25"
                             },
                             {
                                 "title": "Platform introduction: Elite Eagle",
                                 "speaker": "Zhang Jialin",
                                 "guestIds": ["zhang-jialin"],
-                                "time": "14:20–14:35"
+                                "time": "14:25–14:40"
                             },
                             {
                                 "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles?",
                                 "speaker": "Liu Jianbin",
                                 "guestIds": ["liu-jianbin"],
-                                "time": "14:35–14:55"
+                                "time": "14:40–15:00"
                             },
                             {
                                 "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1",
                                 "speaker": "Liu Xiang",
                                 "guestIds": ["liu-xiang"],
-                                "time": "14:55–15:10"
+                                "time": "15:00–15:15"
                             },
                             {
-                                "title": "Roundtable and discussion: first successes and failures in the AI era",
+                                "title": "Roundtable: first successes and failures in the AI era",
                                 "speaker": "Cheng Shaoxiong、Wang Jin、Zhang Jie、Zhang Jialin",
                                 "guestIds": [
                                     "cheng-shaoxiong",
@@ -6944,11 +6990,11 @@
                                     "zhang-jie",
                                     "zhang-jialin"
                                 ],
-                                "time": "15:10–15:50"
+                                "time": "15:15–15:55"
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
-                        "invitedGuestIds": ["dou-mingqing", "xu-songbo"],
+                        "invitedGuestIds": ["dou-mingqing", "xu-songbo", "liu-xushuang"],
                         "judgesLabel": "25 Oct morning · Final jury",
                         "judges": [
                             {
@@ -7014,7 +7060,7 @@
                             {
                                 "id": "wang-feifan",
                                 "name": "Wang Feifan",
-                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University; National Jury Pool Expert, China International College Students’ Innovation Competition",
+                                "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University",
                                 "photo": true
                             }
                         ]
@@ -7025,7 +7071,7 @@
                 "host": {
                     "id": "ying-qi",
                     "name": "Ying Qi",
-                    "role": "Founder of Qiying Technology & Tuozhe AI Ecosystem",
+                    "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
                     "photo": true,
                     "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
                 }

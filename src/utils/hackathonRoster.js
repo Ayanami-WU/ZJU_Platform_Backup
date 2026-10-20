@@ -40,7 +40,12 @@ export function activeRegistrationTracks(row) {
 }
 
 export function missingForumFields(row) {
-    return FORUM_REQUIRED_FIELDS.filter((key) => !String(row[key] || "").trim());
+    return FORUM_REQUIRED_FIELDS.filter(
+        (key) =>
+            !(row.attendeeType === "internal" && key === "school") &&
+            !(row.attendeeType === "external" && key === "studentId") &&
+            !String(row[key] || "").trim()
+    );
 }
 
 export function flatSearchText(value) {

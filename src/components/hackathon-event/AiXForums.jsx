@@ -148,6 +148,7 @@ export default function AiXForums({ now, registrationState }) {
                 {
                     sessions,
                     ...details,
+                    ...(details.attendeeType === "internal" ? { school: "" } : { studentId: "" }),
                 },
                 { noRetry: true }
             );
@@ -278,9 +279,6 @@ export default function AiXForums({ now, registrationState }) {
                                 </>
                             ) : (
                                 <form onSubmit={submit}>
-                                    <p className="mb-4 text-sm leading-6">
-                                        {t("aix.forumPage.requiredHint")}
-                                    </p>
                                     <div
                                         className="aix-forum-attendee-tabs"
                                         role="tablist"
@@ -329,84 +327,92 @@ export default function AiXForums({ now, registrationState }) {
                                                 "researchExperience",
                                                 "aiCapabilities",
                                                 "question",
-                                            ].map((key) => {
-                                                const Input = [
-                                                    "question",
-                                                    "projectExperience",
-                                                    "researchExperience",
-                                                    "aiCapabilities",
-                                                ].includes(key)
-                                                    ? "textarea"
-                                                    : "input";
-                                                return (
-                                                    <label
-                                                        key={key}
-                                                        data-field={key}
-                                                        className={
-                                                            Input === "textarea" ||
-                                                            key === "contact"
-                                                                ? "aix-forum-field-wide"
-                                                                : ""
-                                                        }
-                                                    >
-                                                        <span>
-                                                            {t(`aix.forumPage.fields.${key}`)}{" "}
-                                                            <span aria-hidden="true">*</span>
-                                                        </span>
-                                                        <Input
-                                                            placeholder={t(
-                                                                `aix.forumPage.placeholders.${key}`,
-                                                                { defaultValue: "" }
-                                                            )}
-                                                            name={key}
-                                                            required
-                                                            maxLength={
-                                                                Input === "textarea"
-                                                                    ? 2000
-                                                                    : key === "contact"
-                                                                      ? 30
-                                                                      : [
-                                                                              "school",
-                                                                              "major",
-                                                                          ].includes(key)
-                                                                        ? 160
-                                                                        : 80
-                                                            }
-                                                            type={
+                                            ]
+                                                .filter((key) =>
+                                                    details.attendeeType === "internal"
+                                                        ? key !== "school"
+                                                        : key !== "studentId"
+                                                )
+                                                .map((key) => {
+                                                    const Input = [
+                                                        "question",
+                                                        "projectExperience",
+                                                        "researchExperience",
+                                                        "aiCapabilities",
+                                                    ].includes(key)
+                                                        ? "textarea"
+                                                        : "input";
+                                                    return (
+                                                        <label
+                                                            key={key}
+                                                            data-field={key}
+                                                            className={
+                                                                Input === "textarea" ||
                                                                 key === "contact"
-                                                                    ? "tel"
-                                                                    : undefined
+                                                                    ? "aix-forum-field-wide"
+                                                                    : ""
                                                             }
-                                                            rows={
-                                                                Input === "textarea" ? 3 : undefined
-                                                            }
-                                                            autoComplete={
-                                                                key === "name"
-                                                                    ? "name"
-                                                                    : key === "contact"
-                                                                      ? "tel"
-                                                                      : key === "organization"
-                                                                        ? "organization"
-                                                                        : "off"
-                                                            }
-                                                            value={details[key]}
-                                                            disabled={
-                                                                !user ||
-                                                                authLoading ||
-                                                                loading ||
-                                                                busy
-                                                            }
-                                                            onChange={(e) => {
-                                                                setSaved(false);
-                                                                setDetails((v) => ({
-                                                                    ...v,
-                                                                    [key]: e.target.value,
-                                                                }));
-                                                            }}
-                                                        />
-                                                    </label>
-                                                );
-                                            })}
+                                                        >
+                                                            <span>
+                                                                {t(`aix.forumPage.fields.${key}`)}{" "}
+                                                                <span aria-hidden="true">*</span>
+                                                            </span>
+                                                            <Input
+                                                                placeholder={t(
+                                                                    `aix.forumPage.placeholders.${key}`,
+                                                                    { defaultValue: "" }
+                                                                )}
+                                                                name={key}
+                                                                required
+                                                                maxLength={
+                                                                    Input === "textarea"
+                                                                        ? 2000
+                                                                        : key === "contact"
+                                                                          ? 30
+                                                                          : [
+                                                                                  "school",
+                                                                                  "major",
+                                                                              ].includes(key)
+                                                                            ? 160
+                                                                            : 80
+                                                                }
+                                                                type={
+                                                                    key === "contact"
+                                                                        ? "tel"
+                                                                        : undefined
+                                                                }
+                                                                rows={
+                                                                    Input === "textarea"
+                                                                        ? 3
+                                                                        : undefined
+                                                                }
+                                                                autoComplete={
+                                                                    key === "name"
+                                                                        ? "name"
+                                                                        : key === "contact"
+                                                                          ? "tel"
+                                                                          : key === "organization"
+                                                                            ? "organization"
+                                                                            : "off"
+                                                                }
+                                                                value={details[key]}
+                                                                disabled={
+                                                                    !user ||
+                                                                    authLoading ||
+                                                                    loading ||
+                                                                    busy
+                                                                }
+                                                                onChange={(e) => {
+                                                                    setSaved(false);
+                                                                    setDetails((v) => ({
+                                                                        ...v,
+                                                                        [key]: e.target.value,
+                                                                    }));
+                                                                }}
+                                                            />
+                                                        </label>
+                                                    );
+                                                })}
                                         </fieldset>
                                         {!user && (
                                             <AiXRegistrationLock
