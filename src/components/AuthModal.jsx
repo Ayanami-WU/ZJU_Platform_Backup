@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, User, Lock, ArrowRight, Loader, AlertCircle, MessageCircle } from "lucide-react";
@@ -24,6 +24,64 @@ const AuthModal = ({ isOpen, onClose }) => {
     const usernameId = useId();
     const passwordId = useId();
     const errorId = useId();
+    const dialogRef = useRef(null);
+    const closeRef = useRef(onClose);
+
+    useEffect(() => {
+        closeRef.current = onClose;
+    }, [onClose]);
+
+    useEffect(() => {
+        if (!isOpen || !dialogRef.current) return undefined;
+        const dialog = dialogRef.current;
+        const opener = document.activeElement?.closest("button, a[href]") || document.activeElement;
+        const focusable = () =>
+            [
+                ...dialog.querySelectorAll("button, a[href], input, select, textarea, [tabindex]"),
+            ].filter(
+                (element) =>
+                    !element.disabled &&
+                    element.tabIndex >= 0 &&
+                    element.getClientRects().length > 0
+            );
+        const focusInitial = () =>
+            (dialog.querySelector("input:not([disabled])") || focusable()[0] || dialog).focus({
+                preventScroll: true,
+            });
+        const keepFocusInside = (event) => {
+            if (!dialog.contains(event.target)) focusInitial();
+        };
+        const handleKeyDown = (event) => {
+            if (event.isComposing) return;
+            if (event.key === "Escape") {
+                event.preventDefault();
+                event.stopPropagation();
+                closeRef.current();
+            } else if (event.key === "Tab") {
+                const elements = focusable();
+                const first = elements[0];
+                const last = elements[elements.length - 1];
+                if (!first) {
+                    event.preventDefault();
+                    dialog.focus();
+                } else if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        };
+        focusInitial();
+        dialog.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("focusin", keepFocusInside);
+        return () => {
+            dialog.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("focusin", keepFocusInside);
+            if (opener?.isConnected) opener.focus({ preventScroll: true });
+        };
+    }, [isOpen]);
 
     const { pathname } = useLocation();
     const isForumSignup = /^\/hackathon\/(?:2|zhekesong-ai-x-2026)\/forums\/?$/.test(pathname);
@@ -112,6 +170,8 @@ const AuthModal = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                     role="dialog"
+                    ref={dialogRef}
+                    tabIndex={-1}
                     aria-modal="true"
                     aria-labelledby={dialogTitleId}
                     aria-describedby={error ? errorId : undefined}
