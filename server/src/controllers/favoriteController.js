@@ -1,6 +1,7 @@
 const { getDb } = require("../config/db");
 const { createNotification } = require("./notificationController");
 const { enqueueProfileRefresh } = require("../services/userEventAiProfileService");
+const { canReviewResource, isPlatformAdmin } = require("../utils/userPermissions");
 
 // FIX: O2 — Extract shared tableMap to module level (was duplicated in toggleFavorite and getFavorites)
 const FAVORITE_TABLE_MAP = {
@@ -31,21 +32,47 @@ const resolveFavoriteTarget = async (db, itemType, itemId) => {
     if (!meta) return null;
 
     return db.get(
-        `SELECT id, ${meta.ownerColumn} AS owner_id, title FROM ${meta.table} WHERE id = ?`,
+        `SELECT id, ${meta.ownerColumn} AS owner_id, title, status${itemType === "project" ? "" : ", deleted_at"} FROM ${meta.table} WHERE id = ?`,
         [itemId]
+    );
+};
+
+const canReadFavoriteTarget = (target, itemType, user) => {
+    if (!target) return false;
+    const isOwner = String(target.owner_id) === String(user.id);
+    if (itemType === "project") {
+        return (
+            target.status === "published" ||
+            (target.status === "draft" && (isOwner || isPlatformAdmin(user)))
+        );
+    }
+    return (
+        (target.status === "approved" && !target.deleted_at) ||
+        isOwner ||
+        canReviewResource(user, FAVORITE_TABLE_MAP[itemType])
     );
 };
 
 const toggleFavorite = async (req, res, next) => {
     try {
-        const db = await getDb();
         const userId = req.user.id;
-        const { itemId, itemType } = req.body;
+        const { itemId: rawItemId, itemType } = req.body || {};
+        const itemId =
+            typeof rawItemId === "number" ||
+            (typeof rawItemId === "string" && /^\d+$/.test(rawItemId))
+                ? Number(rawItemId)
+                : NaN;
 
-        if (!itemId || !itemType) {
-            return res.status(400).json({ error: "Item ID and Type are required" });
+        if (
+            typeof itemType !== "string" ||
+            !Object.hasOwn(FAVORITE_TABLE_MAP, itemType) ||
+            !Number.isSafeInteger(itemId) ||
+            itemId <= 0
+        ) {
+            return res.status(400).json({ error: "Invalid item ID or type" });
         }
 
+        const db = await getDb();
         const tableName = FAVORITE_TABLE_MAP[itemType];
 
         // Check if exists
@@ -80,6 +107,11 @@ const toggleFavorite = async (req, res, next) => {
 
             res.json({ favorited: false, likes: newLikes });
         } else {
+            const target = await resolveFavoriteTarget(db, itemType, itemId);
+            if (!canReadFavoriteTarget(target, itemType, req.user)) {
+                return res.status(404).json({ error: "Item not found" });
+            }
+
             // Add
             await db.run("INSERT INTO favorites (user_id, item_id, item_type) VALUES (?, ?, ?)", [
                 userId,
@@ -97,7 +129,6 @@ const toggleFavorite = async (req, res, next) => {
                 newLikes = item && typeof item.likes === "number" ? item.likes : 0;
             }
 
-            const target = await resolveFavoriteTarget(db, itemType, itemId);
             if (target?.owner_id && String(target.owner_id) !== String(userId)) {
                 const actorName = await resolveActorName(db, userId);
                 const resourceLabel = FAVORITE_RESOURCE_META[itemType]?.label || "内容";
