@@ -55,8 +55,12 @@ api.interceptors.response.use(
             return Promise.reject(error);
         }
 
+        if (!config) {
+            return Promise.reject(error);
+        }
+
         // Retry only safe reads by default. Callers can opt in with retryWrites.
-        if (!config || !config.retry) {
+        if (!config.retry) {
             config.retry = 0;
         }
 
