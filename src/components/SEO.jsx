@@ -15,7 +15,7 @@ const toAbsoluteUrl = (siteUrl, value) => {
 const SEO = ({ title, description, image, url, type = "website", article = {} }) => {
     const { t, i18n } = useTranslation();
     const lang = i18n.language || "zh";
-    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://tuotuzj.com";
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://tuotuzju.com";
     const siteName = t("seo.site_name", SITE_NAME);
     const siteAltName = t("seo.site_alt_name", SITE_ALT_NAME);
     const defaultDescription = t("seo.default_desc", DEFAULT_DESCRIPTION);

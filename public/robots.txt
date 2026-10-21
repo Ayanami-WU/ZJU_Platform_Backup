@@ -1,5 +1,5 @@
 # robots.txt for 拓浙AI生态 (TUOZHE AI ECOSYSTEM)
-# https://tuotuzj.com
+# https://tuotuzju.com
 
 User-agent: *
 Allow: /
@@ -26,7 +26,7 @@ Disallow: /auth
 Disallow: /auth/
 
 # Sitemap 位置
-Sitemap: https://tuotuzj.com/sitemap.xml
+Sitemap: https://tuotuzju.com/sitemap.xml
 
 # 通用爬虫延迟 (1 秒)
 Crawl-delay: 1

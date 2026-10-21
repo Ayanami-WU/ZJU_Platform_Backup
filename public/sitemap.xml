@@ -6,68 +6,60 @@
   <!-- 
   注意：这是一个静态 sitemap。对于动态内容（画廊、音乐、视频、文章），
   建议在服务器端生成动态 sitemap 或使用 sitemap 生成工具。
+  lastmod 仅在能核实页面重要内容的实际更新时间时填写。
   -->
   
   <!-- 主要页面 -->
   <url>
-    <loc>https://tuotuzj.com/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/events</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/events</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/gallery</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://tuotuzj.com/media</loc>
-    <lastmod>2026-05-29</lastmod>
+    <loc>https://tuotuzju.com/media</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/music</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/music</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/videos</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/videos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/articles</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/articles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://tuotuzj.com/about</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://tuotuzju.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://tuotuzj.com/download</loc>
-    <lastmod>2026-06-17</lastmod>
+    <loc>https://tuotuzju.com/download</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
