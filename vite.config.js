@@ -122,18 +122,32 @@ export default defineConfig(({ mode }) => {
                             urlPattern: ({ request, url }) =>
                                 url.pathname.startsWith("/api/") &&
                                 (request.headers.has("Authorization") ||
-                                    /^\/api\/(?:admin(?:\/|$)|auth(?:\/|$)|stats$|audit-logs|fs\/|db\/)/.test(
+                                    url.searchParams.has("token") ||
+                                    /^\/api\/(?:admin(?:\/|$)|auth(?:\/|$)|native-poster-sessions(?:\/|$)|stats$|audit-logs|fs\/|db\/)/.test(
                                         url.pathname
                                     )),
                             handler: "NetworkOnly",
                         },
                         {
-                            urlPattern: /^\/api\/.*$/,
+                            urlPattern: ({ url }) =>
+                                url.origin === self.location.origin &&
+                                url.pathname.startsWith("/api/"),
                             handler: "NetworkFirst",
                             options: {
                                 cacheName: "api-cache",
                                 networkTimeoutSeconds: 10,
-                                cacheableResponse: { statuses: [0, 200] },
+                                plugins: [
+                                    {
+                                        cacheWillUpdate: async ({ response }) => {
+                                            const control =
+                                                response.headers.get("Cache-Control") || "";
+                                            return response.status === 200 &&
+                                                !/\b(?:no-store|no-cache|private)\b/i.test(control)
+                                                ? response
+                                                : null;
+                                        },
+                                    },
+                                ],
                             },
                         },
                         {
