@@ -76,6 +76,7 @@
         "wechat_bind_failed": "WeChat account binding failed. Please try again later.",
         "or": "or",
         "registration_failed": "Registration failed",
+        "registration_timeout": "Registration timed out. Please try again later, or try signing in if you already submitted.",
         "username_exists": "Username already exists",
         "username_too_short": "Username must be at least 3 characters.",
         "username_invalid": "Username can only contain letters, numbers, and underscores.",

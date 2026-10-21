@@ -160,7 +160,7 @@ export const AuthProvider = ({ children }) => {
                     registrationProfile: options.registrationProfile,
                     registrationContext: options.registrationContext,
                 },
-                { noRetry: true }
+                { timeout: 15000, noRetry: true }
             );
             if (requestId !== sessionRequest.current) return false;
             const { token, user } = res.data;
@@ -178,7 +178,11 @@ export const AuthProvider = ({ children }) => {
         } catch (err) {
             if (requestId !== sessionRequest.current) return false;
             errorMonitor.report(err, { action: "register", username });
-            showError(getAuthErrorMessage(err, "auth.registration_failed"));
+            showError(
+                ["ECONNABORTED", "ETIMEDOUT"].includes(err.code)
+                    ? t("auth.registration_timeout")
+                    : getAuthErrorMessage(err, "auth.registration_failed")
+            );
             return false;
         } finally {
             if (requestId === sessionRequest.current) setLoading(false);
