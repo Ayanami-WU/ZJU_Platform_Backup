@@ -15,7 +15,11 @@ WORKDIR /app/server
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ \
     && rm -rf /var/lib/apt/lists/*
 COPY server/package.json server/package-lock.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+# Upstream sqlite3 prebuilds can target a newer glibc than this base image.
+RUN npm ci --omit=dev \
+    && npm rebuild sqlite3 --build-from-source --nodedir=/usr/local \
+    && node -e "require('sqlite3')" \
+    && npm cache clean --force
 COPY server ./
 
 FROM node:22-bookworm-slim AS production
@@ -39,7 +43,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 make g+
     && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 COPY server/package.json server/package-lock.json ./server/
-RUN npm ci --include=dev --ignore-scripts && npm --prefix server ci
+RUN npm ci --include=dev --ignore-scripts && npm --prefix server ci \
+    && npm --prefix server rebuild sqlite3 --build-from-source --nodedir=/usr/local \
+    && node -e "require('./server/node_modules/sqlite3')"
 COPY . .
 ENV NODE_ENV=development PORT=5181 SERVER_HOST=0.0.0.0 BACKGROUND_TASKS_DISABLED=1
 EXPOSE 5180 5181
