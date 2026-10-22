@@ -89,6 +89,40 @@ test("AI+X materials require GitHub repositories and HTTPS ModelScope studio or 
     assert.equal(normalizeMaterials({ githubUrl: "", modelscopeUrl: "" }).githubUrl, "");
 });
 
+test("Huawei accepts project URLs on any platform without changing campus link validation", () => {
+    for (const modelscopeUrl of [
+        "https://example.com/my-app?demo=1#preview",
+        "http://demo.example.com:8080/app",
+        "https://192.0.2.1:8443/demo",
+        "https://modelscope.cn/models/a/b",
+        "demo.example.com:8080/app",
+        "example.com/app",
+    ]) {
+        const input = { ...materials, modelscopeUrl };
+        const result = normalizeMaterials(input, [], "industry");
+        assert.match(result.modelscopeUrl, /^https?:\/\//);
+        assert.throws(
+            () => normalizeMaterials(input, [], "campus"),
+            (e) => e.field === "modelscopeUrl"
+        );
+    }
+    for (const modelscopeUrl of ["javascript:alert(1)", "file:///tmp/demo", "not a url"]) {
+        assert.throws(
+            () => normalizeMaterials({ ...materials, modelscopeUrl }, [], "industry"),
+            (e) => e.field === "modelscopeUrl"
+        );
+    }
+    assert.throws(
+        () =>
+            normalizeMaterials(
+                { ...materials, githubUrl: "http://github.com/a/b" },
+                [],
+                "industry"
+            ),
+        (e) => e.field === "githubUrl"
+    );
+});
+
 test("AI+X isolated migration, stage windows, snapshots, ownership, qualification and concurrent updates", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "aix-submission-"));
     const filename = path.join(dir, "isolated.sqlite");
@@ -233,7 +267,11 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
                 }
             )
         ).file;
-        const industryInitialMaterials = { ...materials, bpFileId: industryInitialBp.id };
+        const industryInitialMaterials = {
+            ...materials,
+            modelscopeUrl: "http://demo.example.com:8080/my-app?review=1#demo",
+            bpFileId: industryInitialBp.id,
+        };
         assert.equal(
             (await save({ track: "industry", materials: industryInitialMaterials })).submission
                 .version,
@@ -242,7 +280,10 @@ test("AI+X isolated migration, stage windows, snapshots, ownership, qualificatio
         const withdrawn = await save({ track: "industry", action: "withdraw", expectedVersion: 1 });
         assert.equal(withdrawn.submission.submitted, null);
         assert.equal(withdrawn.submission.submittedAt, null);
-        assert.deepEqual(withdrawn.submission.draft, normalizeMaterials(industryInitialMaterials));
+        assert.deepEqual(
+            withdrawn.submission.draft,
+            normalizeMaterials(industryInitialMaterials, [], "industry")
+        );
         assert.equal(withdrawn.submission.version, 2);
         assert.equal(
             (await service.getMine(1, eventKey)).submissions.find((x) => x.track === "industry")

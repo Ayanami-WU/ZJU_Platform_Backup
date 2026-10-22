@@ -164,33 +164,58 @@ async function prepare(page, { date = "2026-10-18T14:00:00+08:00", failRead = fa
     return state;
 }
 
-test("Huawei submission shows ModelScope links on desktop and mobile and rejects HTTP", async ({
+test("Huawei project URL copy accepts self-hosted links on desktop and mobile without changing campus", async ({
     page,
 }) => {
-    await prepare(page);
+    const state = await prepare(page);
+    const writes = [];
+    await page.route("**/api/hackathon/submissions", async (route) => {
+        if (route.request().method() === "GET") return route.fallback();
+        const body = route.request().postDataJSON();
+        writes.push(body);
+        return route.fulfill({
+            json: {
+                submission: {
+                    ...state.data.submissions.find((record) => record.track === "industry"),
+                    version: body.expectedVersion + 1,
+                    draft: body.materials,
+                    draftUpdatedAt: "2026-10-18T14:00:00+08:00",
+                },
+                serverNow: state.data.serverNow,
+            },
+        });
+    });
     await page.goto("/hackathon/2/challenges?track=industry&stage=initial");
     await page.getByRole("button", { name: "稍后查看，继续浏览", exact: true }).click();
     const form = page.locator(".aix-task-submission");
-    const input = form.getByRole("textbox", { name: /魔搭部署链接/ });
+    const input = form.getByRole("textbox", { name: /魔搭社区部署链接或作品网址/ });
     for (const width of [1440, 390]) {
         await page.setViewportSize({ width, height: 1000 });
         await expect(input).toBeVisible();
-        await expect(input).toHaveAttribute(
-            "placeholder",
-            "https://modelscope.cn/studios/owner/project"
-        );
-        await expect(
-            page.getByText(/魔搭部署链接请填写 HTTPS 创空间地址或 ms.show 部署地址/)
-        ).toBeVisible();
+        await expect(input).toHaveAttribute("placeholder", "填写魔搭社区部署链接或作品网址");
+        await expect(page.getByText(/作品网址支持自建服务器及其他平台/)).toBeVisible();
         await page.screenshot({
             path: `output/playwright/modelscope-link-${width}.png`,
             fullPage: true,
         });
     }
-    await input.fill("http://example.ms.show");
-    await form.getByRole("button", { name: "保存草稿", exact: true }).click();
-    await expect(form.getByRole("alert")).toContainText("HTTPS 创空间或 ms.show 部署链接");
-    await expect(input).toHaveValue("http://example.ms.show");
+    for (const [index, url] of [
+        "http://demo.example.com:8080/app",
+        "demo.example.com:8080/app",
+    ].entries()) {
+        await input.fill(url);
+        await form.getByRole("button", { name: "保存草稿", exact: true }).click();
+        await expect(form.getByRole("alert")).toHaveCount(0);
+        await expect(
+            form.getByText("草稿已保存，尚未更新正式提交。", { exact: true })
+        ).toBeVisible();
+        expect(writes).toHaveLength(index + 1);
+        expect(writes[index].track).toBe("industry");
+        expect(writes[index].materials.modelscopeUrl).toBe(index === 0 ? url : `https://${url}`);
+    }
+    await page.locator("#task-track-campus").click();
+    await expect(page.locator(".aix-submission-channel.is-tmall img")).toBeVisible();
+    await expect(page.getByRole("textbox", { name: /魔搭社区部署链接或作品网址/ })).toHaveCount(0);
 });
 
 test("published brief and extra entry belong only to the selected track and round", async ({

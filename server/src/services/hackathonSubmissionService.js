@@ -91,7 +91,8 @@ const stageInfo = (template, track, stage, registered, qualified, now) => {
                       ]),
     };
 };
-const normalizeMaterials = (input, required = []) => {
+const normalizeMaterials = (input, required = [], track = "campus") => {
+    const allowAnyProjectUrl = track === "industry";
     if (!input || typeof input !== "object" || Array.isArray(input))
         fail(400, "HACKATHON_SUBMISSION_INVALID", "请填写提交材料", { field: "materials" });
     const data = {};
@@ -124,11 +125,19 @@ const normalizeMaterials = (input, required = []) => {
             fail(400, "HACKATHON_SUBMISSION_INVALID", "请补全必填材料", { field });
         if (!["projectName", "productHighlights"].includes(field) && data[field]) {
             try {
-                if (field === "modelscopeUrl" && !/^[a-z][a-z0-9+.-]*:/i.test(data[field]))
+                if (
+                    field === "modelscopeUrl" &&
+                    (!/^[a-z][a-z0-9+.-]*:/i.test(data[field]) ||
+                        (allowAnyProjectUrl && /^[^/?#:\s]+:\d+(?:[/?#]|$)/.test(data[field])))
+                )
                     data[field] = `https://${data[field]}`;
                 const url = new URL(data[field]);
                 if (
-                    url.protocol !== "https:" ||
+                    !(
+                        field === "modelscopeUrl" && allowAnyProjectUrl
+                            ? ["http:", "https:"]
+                            : ["https:"]
+                    ).includes(url.protocol) ||
                     !url.hostname ||
                     url.username ||
                     url.password ||
@@ -137,7 +146,7 @@ const normalizeMaterials = (input, required = []) => {
                     throw new Error();
                 if (field === "githubUrl") {
                     data[field] = normalizeRepositoryUrl(data[field], "github");
-                } else if (field === "modelscopeUrl") {
+                } else if (field === "modelscopeUrl" && !allowAnyProjectUrl) {
                     const host = url.hostname.toLowerCase();
                     if (url.port) throw new Error();
                     if (
@@ -161,7 +170,9 @@ const normalizeMaterials = (input, required = []) => {
                     field === "githubUrl"
                         ? "请填写有效的 GitHub HTTPS 仓库链接"
                         : field === "modelscopeUrl"
-                          ? "请填写 HTTPS 魔搭创空间或 ms.show 部署链接"
+                          ? allowAnyProjectUrl
+                              ? "请填写有效的作品网址"
+                              : "请填写 HTTPS 魔搭创空间或 ms.show 部署链接"
                           : "请填写有效的 HTTPS 材料链接",
                     { field }
                 );
@@ -332,7 +343,8 @@ function createHackathonSubmissionService({
                 }
                 const materials = normalizeMaterials(
                     body.materials,
-                    body.action === "submit" ? info.requiredFields : []
+                    body.action === "submit" ? info.requiredFields : [],
+                    body.track
                 );
                 for (const kind of ["bp", "demo"]) {
                     const field = `${kind}FileId`;

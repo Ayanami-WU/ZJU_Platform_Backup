@@ -222,7 +222,13 @@ export default function HackathonSubmissionManager({ eventKey }) {
                                         key={key}
                                         className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
                                     >
-                                        <dt className={mutedTextClass}>{text(key)}</dt>
+                                        <dt className={mutedTextClass}>
+                                            {key === "modelscopeUrl" && track === "industry"
+                                                ? t(
+                                                      "aix.challengeWorkspace.industry.projectUrlLabel"
+                                                  )
+                                                : text(key)}
+                                        </dt>
                                         <dd>
                                             {isFile ? (
                                                 file ? (

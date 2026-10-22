@@ -51,7 +51,13 @@ export default function AiXSubmissionChannel({ track, stage }) {
                 <ul>
                     {fields.map((field) => (
                         <li key={field}>
-                            <span>{label(`fields.${field}`)}</span>
+                            <span>
+                                {label(
+                                    field === "modelscopeUrl"
+                                        ? "industry.projectUrlLabel"
+                                        : `fields.${field}`
+                                )}
+                            </span>
                             <b>{channelLabel("requiredMark")}</b>
                         </li>
                     ))}

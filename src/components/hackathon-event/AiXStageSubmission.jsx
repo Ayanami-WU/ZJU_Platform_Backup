@@ -63,7 +63,19 @@ export default function AiXStageSubmission({
     formatDate,
 }) {
     const { t } = useTranslation();
-    const label = (key, options) => t(`aix.challengeWorkspace.${key}`, options);
+    const label = (key, options) => {
+        const industryKey = {
+            "fields.modelscopeUrl": "projectUrlLabel",
+            "summaryFields.modelscopeUrl": "projectUrlLabel",
+            "placeholders.modelscopeUrl": "projectUrlPlaceholder",
+            accessibleLinks: "accessibleLinks",
+            invalidUrl: "invalidUrl",
+        }[key];
+        return t(
+            `aix.challengeWorkspace.${track === "industry" && industryKey ? `industry.${industryKey}` : key}`,
+            options
+        );
+    };
     const [materials, setMaterials] = useState(
         () => cachedDraft || record?.draft || emptyMaterials()
     );
@@ -108,7 +120,9 @@ export default function AiXStageSubmission({
         }
         const modelscopeInput = materials.modelscopeUrl?.trim() || "";
         const modelscopeUrl =
-            modelscopeInput && !/^[a-z][a-z0-9+.-]*:/i.test(modelscopeInput)
+            modelscopeInput &&
+            (!/^[a-z][a-z0-9+.-]*:/i.test(modelscopeInput) ||
+                (track === "industry" && /^[^/?#:\s]+:\d+(?:[/?#]|$)/.test(modelscopeInput)))
                 ? `https://${modelscopeInput}`
                 : modelscopeInput;
         const invalid =
@@ -120,7 +134,11 @@ export default function AiXStageSubmission({
                         required.includes(field) &&
                         !materials[field]?.trim()) ||
                         (materials[field]?.trim() &&
-                            !/^https:\/\//i.test(
+                            !(
+                                field === "modelscopeUrl" && track === "industry"
+                                    ? /^https?:\/\//i
+                                    : /^https:\/\//i
+                            ).test(
                                 safeWebUrl(
                                     field === "modelscopeUrl"
                                         ? modelscopeUrl

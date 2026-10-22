@@ -5827,7 +5827,7 @@
             "tmallChannelQrAlt": "QR code for the Tmall Campus University OPC entrepreneurship competition form",
             "requiredMark": "required",
             "huaweiChannelTitle": "Huawei Industry Implementation submission channel",
-            "huaweiChannelDescription": "Huawei initial submissions require GitHub, a ModelScope deployment URL, and a product handbook. Add the recorded Demo video in the semifinal.",
+            "huaweiChannelDescription": "Huawei initial submissions require GitHub, a ModelScope Community deployment link or project URL, and a product handbook. Add the recorded Demo video in the semifinal.",
             "campusChannels": "Save your GitHub and ModelScope repository URLs below.",
             "industryChannels": "Submit through ModelScope; GitHub is a supplementary code repository.",
             "channelHint": "Save repository links here for the event team. If a challenge specifies another submission form, complete that form as well.",
@@ -5857,7 +5857,7 @@
                     }
                 ]
             },
-            "industryMaterials": "GitHub + ModelScope deployment URL + product handbook; add Demo video in semifinal"
+            "industryMaterials": "GitHub + ModelScope Community deployment link or project URL + product handbook; add Demo video in semifinal"
         },
         "official": {
             "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
@@ -7053,8 +7053,12 @@
                 "semifinal": "There is no semifinal submission. Initial entries are reviewed to select finalists."
             },
             "industry": {
-                "initial": "Submit GitHub, a ModelScope deployment URL, and a product handbook covering the feature walkthrough and excellent results.",
-                "semifinal": "Submit GitHub, a ModelScope deployment URL, the updated product handbook and a recorded Demo video."
+                "initial": "Submit GitHub, a ModelScope Community deployment link or project URL, and a product handbook covering the feature walkthrough and excellent results.",
+                "semifinal": "Submit GitHub, a ModelScope Community deployment link or project URL, the updated product handbook and a recorded Demo video.",
+                "projectUrlLabel": "ModelScope Community deployment link or project URL",
+                "projectUrlPlaceholder": "Enter a ModelScope Community deployment link or project URL",
+                "accessibleLinks": "Project URLs may use HTTP or HTTPS on your own server or any other platform. Make sure judges can access them directly.",
+                "invalidUrl": "Check “{{field}}” and enter an accessible web URL. GitHub requires an HTTPS repository URL."
             },
             "selfDefined": "Choose your own topic or a published recommended challenge.",
             "campusPending": "This track accepts self-defined projects. Submit your technical work; recommended challenges will appear here when published.",

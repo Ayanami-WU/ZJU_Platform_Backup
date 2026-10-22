@@ -68,7 +68,7 @@ export function registrationSubmissionField(fieldId) {
         projectName: "项目名称",
         productHighlights: "作品特色",
         githubUrl: "GitHub 仓库",
-        modelscopeUrl: "作品或部署链接",
+        modelscopeUrl: match[1] === "industry" ? "魔搭社区部署链接或作品网址" : "作品或部署链接",
         bpFileId: "作品说明书文件",
         demoFileId: "Demo 文件",
         submittedAt: "作品正式提交时间",
