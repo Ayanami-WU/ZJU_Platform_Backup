@@ -128,9 +128,7 @@ const normalizeMaterials = (input, required = []) => {
                     data[field] = `https://${data[field]}`;
                 const url = new URL(data[field]);
                 if (
-                    !(field === "modelscopeUrl" ? ["http:", "https:"] : ["https:"]).includes(
-                        url.protocol
-                    ) ||
+                    url.protocol !== "https:" ||
                     !url.hostname ||
                     url.username ||
                     url.password ||
@@ -140,7 +138,21 @@ const normalizeMaterials = (input, required = []) => {
                 if (field === "githubUrl") {
                     data[field] = normalizeRepositoryUrl(data[field], "github");
                 } else if (field === "modelscopeUrl") {
-                    data[field] = url.href;
+                    const host = url.hostname.toLowerCase();
+                    if (url.port) throw new Error();
+                    if (
+                        [
+                            "modelscope.cn",
+                            "www.modelscope.cn",
+                            "modelscope.ai",
+                            "www.modelscope.ai",
+                        ].includes(host)
+                    ) {
+                        if (!url.pathname.startsWith("/studios/")) throw new Error();
+                        data[field] = normalizeRepositoryUrl(data[field], "modelscope");
+                    } else if (host.endsWith(".ms.show") && host !== "ms.show") {
+                        data[field] = url.href;
+                    } else throw new Error();
                 } else data[field] = url.href;
             } catch {
                 fail(
@@ -149,7 +161,7 @@ const normalizeMaterials = (input, required = []) => {
                     field === "githubUrl"
                         ? "请填写有效的 GitHub HTTPS 仓库链接"
                         : field === "modelscopeUrl"
-                          ? "请填写有效的作品或部署网页链接"
+                          ? "请填写 HTTPS 魔搭创空间或 ms.show 部署链接"
                           : "请填写有效的 HTTPS 材料链接",
                     { field }
                 );

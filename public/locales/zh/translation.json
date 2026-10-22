@@ -4318,7 +4318,7 @@
             "cancel": "取消",
             "saving": "保存中…",
             "githubUrl": "GitHub 仓库",
-            "modelscopeUrl": "作品或部署链接",
+            "modelscopeUrl": "魔搭部署链接",
             "productHighlights": "作品说明书",
             "bpFileId": "作品说明书",
             "demoFileId": "Demo 文件",
@@ -5933,7 +5933,7 @@
             "tmallChannelQrAlt": "天猫校园大学生 OPC 创业大赛报名表二维码",
             "requiredMark": "必填",
             "huaweiChannelTitle": "华为产业落地赛道提交入口",
-            "huaweiChannelDescription": "华为初赛提交 GitHub、作品或部署链接和作品说明书（产品特色、功能讲解＋优秀运行结果）；复赛在此基础上补交 Demo 运行录制视频。",
+            "huaweiChannelDescription": "华为初赛提交 GitHub、魔搭部署链接和作品说明书（产品特色、功能讲解＋优秀运行结果）；复赛在此基础上补交 Demo 运行录制视频。",
             "campusChannels": "在下方保存 GitHub 与魔搭社区仓库地址。",
             "industryChannels": "通过魔搭社区提交，GitHub 作为补充代码入口。",
             "channelHint": "本页保存仓库地址供赛事组查看；赛题另有指定入口时，请同步完成该入口的提交。",
@@ -5963,7 +5963,7 @@
                     }
                 ]
             },
-            "industryMaterials": "GitHub + 作品或部署链接 + 作品说明书；复赛补交 Demo 视频"
+            "industryMaterials": "GitHub + 魔搭部署链接 + 作品说明书；复赛补交 Demo 视频"
         },
         "official": {
             "chapters": ["主页", "赛制", "奖励", "孵化支持", "报名"],
@@ -7158,19 +7158,19 @@
                 "semifinal": "本赛道不再设置复赛提交，初赛后直接评审并确定决赛项目。"
             },
             "industry": {
-                "initial": "初赛提交 GitHub 链接、作品或部署链接和作品说明书（产品特色、功能讲解＋优秀运行结果）。",
-                "semifinal": "复赛提交 GitHub、作品或部署链接、更新后的作品说明书和 Demo 运行录制视频。"
+                "initial": "初赛提交 GitHub 链接、魔搭部署链接和作品说明书（产品特色、功能讲解＋优秀运行结果）。",
+                "semifinal": "复赛提交 GitHub、魔搭部署链接、更新后的作品说明书和 Demo 运行录制视频。"
             },
             "selfDefined": "可自主命题，也可选择已公布的推荐赛题。",
             "campusPending": "本赛道支持自由命题，提交你的技术作品。推荐赛题公布后会在这里展示。",
             "industryPending": "本轮赛题尚未发布，请以正式发布的内容为准。",
             "requirements": "本轮提交材料",
-            "accessibleLinks": "GitHub 请填写 HTTPS 仓库链接；作品或部署链接支持任意平台的 HTTP/HTTPS 网页，省略协议时自动补为 HTTPS，请确保评委可直接访问。",
+            "accessibleLinks": "GitHub 请填写 HTTPS 仓库链接；魔搭部署链接请填写 HTTPS 创空间地址或 ms.show 部署地址，省略协议时自动补为 HTTPS，请确保评委可直接访问。",
             "fields": {
                 "projectName": "项目名称",
                 "productHighlights": "作品说明书",
                 "githubUrl": "GitHub 仓库链接",
-                "modelscopeUrl": "作品或部署链接",
+                "modelscopeUrl": "魔搭部署链接",
                 "bpFileId": "作品说明书",
                 "demoFileId": "Demo 演示文件"
             },
@@ -7178,7 +7178,7 @@
                 "projectName": "填写项目名称",
                 "productHighlights": "上传包含产品特色、功能讲解和优秀运行结果的作品说明书",
                 "githubUrl": "https://github.com/owner/repository",
-                "modelscopeUrl": "https://example.com/your-project"
+                "modelscopeUrl": "https://modelscope.cn/studios/owner/project"
             },
             "mySubmission": "提交作品",
             "ownership": "仅保存本人在当前赛道、当前轮次的提交。",
@@ -7204,7 +7204,7 @@
             "withdrawConfirm": "确认撤回正式提交？材料会保留为草稿，撤回后不参与评审。请在截止前重新正式提交。",
             "withdrawSuccess": "已撤回正式提交，材料已保留。请在截止前修改并重新提交。",
             "failed": "保存失败，输入已保留，请重试。",
-            "invalidUrl": "请检查“{{field}}”并填写有效网页链接；GitHub 须使用 HTTPS，作品或部署链接支持 HTTP/HTTPS。",
+            "invalidUrl": "请检查“{{field}}”；GitHub 须填写 HTTPS 仓库链接，魔搭须填写 HTTPS 创空间或 ms.show 部署链接。",
             "material": "提交材料",
             "conflict": "其他窗口已有更新，当前输入已保留。请选择保留当前输入，或载入已保存内容。",
             "conflictLoadFailed": "其他窗口已有更新，最新记录暂未读取成功。输入已保留，请重试保存。",
@@ -7248,7 +7248,7 @@
             "summaryFields": {
                 "productHighlights": "作品说明书",
                 "githubUrl": "GitHub 仓库链接",
-                "modelscopeUrl": "作品或部署链接",
+                "modelscopeUrl": "魔搭部署链接",
                 "bpFileId": "作品说明书",
                 "demoFileId": "Demo 视频",
                 "projectName": "项目名称"

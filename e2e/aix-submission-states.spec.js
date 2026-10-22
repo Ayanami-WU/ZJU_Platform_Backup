@@ -164,6 +164,35 @@ async function prepare(page, { date = "2026-10-18T14:00:00+08:00", failRead = fa
     return state;
 }
 
+test("Huawei submission shows ModelScope links on desktop and mobile and rejects HTTP", async ({
+    page,
+}) => {
+    await prepare(page);
+    await page.goto("/hackathon/2/challenges?track=industry&stage=initial");
+    await page.getByRole("button", { name: "稍后查看，继续浏览", exact: true }).click();
+    const form = page.locator(".aix-task-submission");
+    const input = form.getByRole("textbox", { name: /魔搭部署链接/ });
+    for (const width of [1440, 390]) {
+        await page.setViewportSize({ width, height: 1000 });
+        await expect(input).toBeVisible();
+        await expect(input).toHaveAttribute(
+            "placeholder",
+            "https://modelscope.cn/studios/owner/project"
+        );
+        await expect(
+            page.getByText(/魔搭部署链接请填写 HTTPS 创空间地址或 ms.show 部署地址/)
+        ).toBeVisible();
+        await page.screenshot({
+            path: `output/playwright/modelscope-link-${width}.png`,
+            fullPage: true,
+        });
+    }
+    await input.fill("http://example.ms.show");
+    await form.getByRole("button", { name: "保存草稿", exact: true }).click();
+    await expect(form.getByRole("alert")).toContainText("HTTPS 创空间或 ms.show 部署链接");
+    await expect(input).toHaveValue("http://example.ms.show");
+});
+
 test("published brief and extra entry belong only to the selected track and round", async ({
     page,
 }) => {

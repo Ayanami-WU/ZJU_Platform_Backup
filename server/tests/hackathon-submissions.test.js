@@ -31,7 +31,7 @@ const materials = {
     demoFileId: null,
 };
 
-test("AI+X materials validate GitHub repositories and accept project links from any web platform", () => {
+test("AI+X materials require GitHub repositories and HTTPS ModelScope studio or deployment links", () => {
     for (const githubUrl of [
         "javascript:alert(1)",
         "https://github.com.evil.test/a/b",
@@ -49,6 +49,15 @@ test("AI+X materials validate GitHub repositories and accept project links from 
         "file:///tmp/demo",
         "https://user:pass@example.com/demo",
         "not a url",
+        "https://example.com/my-app",
+        "https://modelscope.cn.evil.test/studios/a/b",
+        "https://a.ms.show.evil.test/demo",
+        "https://ms.show",
+        "https://modelscope.cn/models/a/b",
+        "https://modelscope.cn/studios/a",
+        "http://a.ms.show",
+        "https://a.ms.show:123/a",
+        "https://user:pass@a.ms.show/demo",
     ]) {
         assert.throws(
             () => normalizeMaterials({ ...materials, modelscopeUrl }),
@@ -59,14 +68,16 @@ test("AI+X materials validate GitHub repositories and accept project links from 
         "https://modelscope.cn/studios/a/b/summary",
         "https://modelscope.ai/studios/a/b",
         "https://a-b.ms.show/demo",
-        "https://modelscope.cn/models/a/b",
-        "http://a.ms.show",
-        "https://a.ms.show:123/a",
         "modelscope.cn/studios/a/b",
-        "https://example.com/my-app",
+        "a-b.ms.show/demo",
     ]) {
         assert.ok(normalizeMaterials({ ...materials, modelscopeUrl }).modelscopeUrl);
     }
+    assert.equal(
+        normalizeMaterials({ ...materials, modelscopeUrl: "modelscope.cn/studios/a/b/summary" })
+            .modelscopeUrl,
+        "https://modelscope.cn/studios/a/b"
+    );
     assert.throws(
         () => normalizeMaterials({ ...materials, demoFileId: "https://example.com/demo" }),
         (e) => e.field === "demoFileId"

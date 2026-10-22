@@ -120,7 +120,7 @@ export default function AiXStageSubmission({
                         required.includes(field) &&
                         !materials[field]?.trim()) ||
                         (materials[field]?.trim() &&
-                            !(field === "modelscopeUrl" ? /^https?:\/\//i : /^https:\/\//i).test(
+                            !/^https:\/\//i.test(
                                 safeWebUrl(
                                     field === "modelscopeUrl"
                                         ? modelscopeUrl
