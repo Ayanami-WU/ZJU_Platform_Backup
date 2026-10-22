@@ -5570,7 +5570,13 @@
                 "campus": {
                     "partner": "Tmall Campus",
                     "type": "Your own challenge",
-                    "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
+                    "topics": [
+                        "Law",
+                        "Ocean science",
+                        "Medicine",
+                        "Education",
+                        "Communications"
+                    ],
                     "format": "Build online · Present on campus",
                     "shortTitle": "Tmall Campus OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
@@ -5581,7 +5587,10 @@
                 "industry": {
                     "partner": "Huawei China",
                     "type": "Industry challenge",
-                    "topics": ["Copywriting", "Marketing"],
+                    "topics": [
+                        "Copywriting",
+                        "Marketing"
+                    ],
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei Industry Implementation Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
@@ -5632,12 +5641,12 @@
             "allPartners": "Schools, communities & student organizations",
             "partners": [
                 {
-                    "label": "Guidance",
-                    "names": "ZJU School of Innovation and Entrepreneurship"
+                    "label": "Guidance · October 25",
+                    "names": "Zhejiang University Innovation & Entrepreneurship College · Sandun Town People's Government, Xihu District, Hangzhou"
                 },
                 {
-                    "label": "Organizer",
-                    "names": "Tuozhe AI Ecosystem · Zhejiang University Qiushi Elite Eagle Club"
+                    "label": "Organizers · October 25",
+                    "names": "TUOZHE AI Ecosystem · Zhejiang University Student Qiushi Eagle Club · Elite Eagle · Hangzhou Entrepreneurship Development Promotion Association · 1897 OPC Community · Zhejiang University Technology Venture Program (ZTVP)"
                 },
                 {
                     "label": "Track sponsors",
@@ -5860,7 +5869,13 @@
             "industryMaterials": "GitHub + project or deployment URL + product handbook; add Demo video in semifinal"
         },
         "official": {
-            "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
+            "chapters": [
+                "Home",
+                "Format",
+                "Prizes",
+                "Incubation",
+                "Register"
+            ],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -5999,7 +6014,7 @@
                         },
                         {
                             "time": "13:45–13:50",
-                            "title": "Founding vision: bringing ideas into practice · Ying Qi, Founder, Tuozhe AI Ecosystem & Qiying Technology"
+                            "title": "TUOZHE AI Ecosystem: exploring an AI-native talent development model · Ying Qi"
                         },
                         {
                             "time": "13:50–14:05",
@@ -6023,7 +6038,7 @@
                         },
                         {
                             "time": "15:15–15:55",
-                            "title": "Roundtable: first successes and failures in the AI era · Hosted by Ying Qi; Cheng Shaoxiong, Wang Jin, Zhang Jie and Zhang Jialin"
+                            "title": "Roundtable: first successes and failures in the AI era · Hosted by Ying Qi; Wang Jin, Zhang Jie, Zhang Jialin and Han Bing"
                         },
                         {
                             "time": "15:55–16:05",
@@ -6076,7 +6091,11 @@
             },
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
-            "chapters": ["Technology", "Entrepreneurship", "Registration"],
+            "chapters": [
+                "Technology",
+                "Entrepreneurship",
+                "Registration"
+            ],
             "dateTime": "October 25 · 13:30–16:05",
             "venue": "1897 OPC Community & Sandun Metaspace",
             "address": "Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
@@ -6531,12 +6550,16 @@
                         {
                             "label": "Champion",
                             "count": "1 winner",
-                            "lines": ["Tmall Campus OPC Incubation Track"]
+                            "lines": [
+                                "Tmall Campus OPC Incubation Track"
+                            ]
                         },
                         {
                             "label": "First prize",
                             "count": "2 winners",
-                            "lines": ["Industry Advancement Track"]
+                            "lines": [
+                                "Industry Advancement Track"
+                            ]
                         }
                     ],
                     "footer": "Sponsored by Zhipu · Added on top of track prizes",
@@ -6552,7 +6575,9 @@
                     "rows": [
                         {
                             "label": "Models",
-                            "lines": ["Fable · Astra · and more"]
+                            "lines": [
+                                "Fable · Astra · and more"
+                            ]
                         }
                     ],
                     "footer": "Provided separately from cash and physical prizes"
@@ -6564,17 +6589,24 @@
                     "rows": [
                         {
                             "label": "10 each",
-                            "lines": ["Neck pillows · Mugs · Umbrellas"],
+                            "lines": [
+                                "Neck pillows · Mugs · Umbrellas"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "20 each",
-                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"],
+                            "lines": [
+                                "Tote bags · Plush earphone pouches",
+                                "Purple phone clips"
+                            ],
                             "count": ""
                         },
                         {
                             "label": "40",
-                            "lines": ["Stickers"],
+                            "lines": [
+                                "Stickers"
+                            ],
                             "count": ""
                         }
                     ],
@@ -6585,16 +6617,20 @@
             ],
             "organizers": [
                 {
-                    "label": "Guidance",
+                    "label": "Guidance · October 25",
                     "members": [
                         {
                             "id": "innovation",
                             "name": "Zhejiang University Innovation & Entrepreneurship College"
+                        },
+                        {
+                            "id": "sandun-government",
+                            "name": "Sandun Town People's Government, Xihu District, Hangzhou"
                         }
                     ]
                 },
                 {
-                    "label": "Organizers",
+                    "label": "Organizers · October 25",
                     "members": [
                         {
                             "id": "tuozhe",
@@ -6602,11 +6638,19 @@
                         },
                         {
                             "id": "qiushi-eagle",
-                            "name": "Zhejiang University Qiushi Eagle Club"
+                            "name": "Zhejiang University Student Qiushi Eagle Club"
                         },
                         {
                             "id": "elite-eagle",
-                            "name": "Elite Eagle"
+                            "name": "Elite Eagle · Hangzhou Entrepreneurship Development Promotion Association"
+                        },
+                        {
+                            "id": "1897-opc",
+                            "name": "1897 OPC Community"
+                        },
+                        {
+                            "id": "ztvp",
+                            "name": "Zhejiang University Technology Venture Program (ZTVP)"
                         }
                     ]
                 }
@@ -6783,7 +6827,10 @@
                     ]
                 }
             ],
-            "coverTitle": ["ZHEKESONG:", "AI+X Hackathon"],
+            "coverTitle": [
+                "ZHEKESONG:",
+                "AI+X Hackathon"
+            ],
             "forumOverview": {
                 "title": "Forums",
                 "topicsLabel": "Topics",
@@ -6820,19 +6867,25 @@
                             {
                                 "title": "Development trends of 仝 and enterprise responses",
                                 "speaker": "Ye Xinjiang",
-                                "guestIds": ["ye-xinjiang"],
+                                "guestIds": [
+                                    "ye-xinjiang"
+                                ],
                                 "time": "09:20–10:00"
                             },
                             {
                                 "title": "From hackathon to startup",
                                 "speaker": "Tan Weichuan",
-                                "guestIds": ["tan-weichuan"],
+                                "guestIds": [
+                                    "tan-weichuan"
+                                ],
                                 "time": "10:05–10:45"
                             },
                             {
                                 "title": "Keynote: developments in embodied intelligence technology",
                                 "speaker": "Sun Yifei",
-                                "guestIds": ["sun-yifei"],
+                                "guestIds": [
+                                    "sun-yifei"
+                                ],
                                 "time": "10:50–11:30"
                             }
                         ],
@@ -6846,174 +6899,155 @@
                         "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace\nLevel 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
                         "guests": [
                             {
-                                "id": "zhu-kai",
-                                "name": "Zhu Kai",
-                                "role": "Mayor of Sandun Town, Xihu District, Hangzhou",
-                                "photo": false
-                            },
-                            {
-                                "id": "wang-han",
-                                "name": "Wang Han",
-                                "role": "Vice Dean, School of Innovation and Entrepreneurship, Zhejiang University",
-                                "photo": false
-                            },
-                            {
-                                "id": "cheng-shaoxiong",
-                                "name": "Cheng Shaoxiong",
-                                "role": "Secretary of the Alibaba Group Youth League Committee; General Manager, Tmall Campus",
-                                "photo": false
+                                "id": "liu-xiangguan",
+                                "name": "Liu Xiangguan",
+                                "role": "Adviser, ZJU Committee for the Wellbeing of the Next Generation lecture group; doctoral supervisor in Operations Research and Cybernetics",
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
                             },
                             {
                                 "id": "xu-songbo",
                                 "name": "Xu Songbo",
                                 "photo": true,
-                                "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
+                                "role": "Chairman, Chuangfeifan AI; Vice President, Zhejiang Association of Technological Innovation Enterprises",
+                                "photoUrl": "/images/hackathon/ai-x/guests/xu-songbo-poster.png"
                             },
                             {
                                 "id": "zhang-jie",
                                 "name": "Zhang Jie",
                                 "role": "Founder and CEO, Huadan Angel Investment; Co-founder, Daily Interactive (Getui)",
-                                "photo": true
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/zhang-jie-poster.png"
                             },
                             {
                                 "id": "wang-jin",
                                 "name": "Wang Jin",
                                 "role": "President, Manhattan Capital",
-                                "photo": true
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/wang-jin-poster.png"
                             },
                             {
                                 "id": "liu-jianbin",
                                 "name": "Liu Jianbin",
                                 "role": "Founder, Oufang Angel",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-portrait.png"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-jianbin-poster.png"
                             },
                             {
                                 "id": "zhang-jialin",
                                 "name": "Zhang Jialin",
                                 "role": "Secretary-General, Elite Eagle · Hangzhou Entrepreneurship Development Association",
-                                "photo": true
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/zhang-jialin-poster.png"
                             },
                             {
                                 "id": "wang-feifan",
                                 "name": "Wang Feifan",
                                 "role": "Deputy Director, Student Entrepreneurship Development Center, Zhejiang University",
-                                "photo": true
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/wang-feifan-poster.png"
                             },
                             {
                                 "id": "yan-xia",
                                 "name": "Yan Xia",
                                 "role": "General Manager of Shelf E-commerce, Pechoin",
-                                "photo": false
-                            },
-                            {
-                                "id": "he-lu",
-                                "name": "He Lu",
-                                "role": "MKT Director, Huawei Zhejiang Consumer Business",
-                                "photo": false
-                            },
-                            {
-                                "id": "yan-guangjun",
-                                "name": "Yan Guangjun",
-                                "role": "Retail Director, Huawei Zhejiang Consumer Business",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/yan-xia-poster.png"
                             },
                             {
                                 "id": "liu-xiang",
                                 "name": "Liu Xiang",
                                 "role": "Investment Director, XbotPark Ningbo",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-xiang-poster.png"
                             },
                             {
                                 "id": "dou-mingqing",
                                 "name": "Dou Mingqing",
                                 "role": "Post-investment Director, Puhua Capital",
-                                "photo": true
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/dou-mingqing-poster.png"
                             },
                             {
                                 "id": "shen-lei",
                                 "name": "Shen Lei",
                                 "role": "Head of Strategy, Tmall Campus",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/shen-lei-poster.png"
                             },
                             {
                                 "id": "han-bing",
                                 "name": "Han Bing",
                                 "role": "Head of Talent, MolarData",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/han-bing.jpg"
+                                "photoUrl": "/images/hackathon/ai-x/guests/han-bing-poster.jpg"
                             },
                             {
                                 "id": "liu-xushuang",
                                 "name": "Liu Xushuang",
                                 "role": "OPC Project Lead, Tmall Campus",
-                                "photo": false
+                                "photo": true,
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-xushuang-poster.png"
                             },
                             {
                                 "id": "ying-qi",
                                 "name": "Ying Qi",
                                 "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi.jpg"
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi-poster.png"
                             }
                         ],
                         "topics": [
                             {
-                                "title": "Founding vision: bringing ideas into practice",
+                                "title": "TUOZHE AI Ecosystem: exploring an AI-native talent development model",
                                 "speaker": "Ying Qi",
-                                "guestIds": ["ying-qi"],
+                                "guestIds": [
+                                    "ying-qi"
+                                ],
                                 "time": "13:45–13:50"
-                            },
-                            {
-                                "title": "Platform introduction: ZJU Zijin Entrepreneurship Metaspace — an AI-powered entrepreneurship education ecosystem",
-                                "speaker": "Wang Feifan",
-                                "guestIds": ["wang-feifan"],
-                                "time": "13:50–14:05"
                             },
                             {
                                 "title": "Founder perspective: redefining outstanding talent in the AI era",
                                 "speaker": "Han Bing",
-                                "guestIds": ["han-bing"],
+                                "guestIds": [
+                                    "han-bing"
+                                ],
                                 "time": "14:05–14:25"
-                            },
-                            {
-                                "title": "Platform introduction: Elite Eagle",
-                                "speaker": "Zhang Jialin",
-                                "guestIds": ["zhang-jialin"],
-                                "time": "14:25–14:40"
                             },
                             {
                                 "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles?",
                                 "speaker": "Liu Jianbin",
-                                "guestIds": ["liu-jianbin"],
+                                "guestIds": [
+                                    "liu-jianbin"
+                                ],
                                 "time": "14:40–15:00"
                             },
                             {
                                 "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1",
                                 "speaker": "Liu Xiang",
-                                "guestIds": ["liu-xiang"],
+                                "guestIds": [
+                                    "liu-xiang"
+                                ],
                                 "time": "15:00–15:15"
                             },
                             {
                                 "title": "Roundtable: first successes and failures in the AI era",
-                                "speaker": "Cheng Shaoxiong、Wang Jin、Zhang Jie、Zhang Jialin",
+                                "speaker": "Wang Jin, Zhang Jie, Zhang Jialin, Han Bing",
                                 "guestIds": [
-                                    "cheng-shaoxiong",
                                     "wang-jin",
                                     "zhang-jie",
-                                    "zhang-jialin"
+                                    "zhang-jialin",
+                                    "han-bing"
                                 ],
                                 "time": "15:15–15:55"
                             }
                         ],
                         "signup": "Join entrepreneurship forum",
                         "invitedGuestIds": [
-                            "zhu-kai",
-                            "wang-han",
+                            "liu-xiangguan",
                             "xu-songbo",
+                            "wang-feifan",
                             "yan-xia",
-                            "he-lu",
-                            "yan-guangjun",
                             "dou-mingqing",
                             "shen-lei",
                             "liu-xushuang"
@@ -7230,7 +7264,11 @@
                     "Service"
                 ],
                 "evidenceTitle": "Validation",
-                "evidence": ["Working demo", "Pilot validation", "User feedback"],
+                "evidence": [
+                    "Working demo",
+                    "Pilot validation",
+                    "User feedback"
+                ],
                 "thinkingSteps": [
                     {
                         "title": "Context",
@@ -7255,8 +7293,14 @@
         },
         "trackScheduleOnline": "Online",
         "trackBadges": {
-            "campus": ["Online", "Teams of 1–5"],
-            "industry": ["In person", "Teams of 1–5"]
+            "campus": [
+                "Online",
+                "Teams of 1–5"
+            ],
+            "industry": [
+                "In person",
+                "Teams of 1–5"
+            ]
         },
         "trackPurpose": {
             "campus": "Open Topic",
@@ -7655,15 +7699,22 @@
         "partners": [
             {
                 "role": "Organizer",
-                "names": ["TUOZHE AI ECOSYSTEM"]
+                "names": [
+                    "TUOZHE AI ECOSYSTEM"
+                ]
             },
             {
                 "role": "Host",
-                "names": ["Getui"]
+                "names": [
+                    "Getui"
+                ]
             },
             {
                 "role": "Sponsors",
-                "names": ["ROCKINGZOO", "个知"]
+                "names": [
+                    "ROCKINGZOO",
+                    "个知"
+                ]
             },
             {
                 "role": "Co-organizers",
@@ -7748,7 +7799,11 @@
             "compress": "Condense",
             "feedback": "Refine"
         },
-        "beautyTasks": ["Analyze", "Recommend", "Build"],
+        "beautyTasks": [
+            "Analyze",
+            "Recommend",
+            "Build"
+        ],
         "trackDetails": "Explore the tracks",
         "industrySchedule": "Initial · Oct 18 / Semifinal · Oct 19–24 / Final · Oct 25"
     },
@@ -7769,8 +7824,14 @@
         "watchFilm": "Play event film",
         "upcoming": "The event has not started. Works and event coverage will appear here after the competition.",
         "pending": "Event outcomes are being compiled. Published content will appear here.",
-        "beautyTitleLines": ["Getui", "Beauty Hackathon"],
-        "aixTitleLines": ["AI+X", "Hackathon"],
+        "beautyTitleLines": [
+            "Getui",
+            "Beauty Hackathon"
+        ],
+        "aixTitleLines": [
+            "AI+X",
+            "Hackathon"
+        ],
         "allEntries": "All works ({{count}})"
     },
     "accountProfile": {

@@ -1,6 +1,6 @@
 .aix-organizers {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
     margin: 0 0 24px;
     padding: 4px 0 22px;
     border-bottom: 1px solid var(--hx-line);
@@ -22,8 +22,8 @@
 }
 .aix-organizers-group ul {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 18px 0;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -59,7 +59,7 @@
     object-position: center;
 }
 .aix-organizers [data-organizer="elite-eagle"] .aix-organizer-logo {
-    flex-basis: 164px;
+    flex-basis: 100px;
     max-width: 100%;
 }
 .aix-organizers [data-organizer="elite-eagle"] img {
@@ -102,6 +102,6 @@
         max-height: 48px;
     }
     .aix-organizers [data-organizer="elite-eagle"] .aix-organizer-logo {
-        flex-basis: 164px;
+        flex-basis: 100px;
     }
 }
