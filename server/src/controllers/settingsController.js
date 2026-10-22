@@ -85,7 +85,7 @@ const readSettings = async (db, keys) => {
 const getSettings = async (req, res, next) => {
     try {
         const db = await getDb();
-        res.set("Cache-Control", "no-store");
+        res.setHeader("Cache-Control", "no-store");
         res.json(await readSettings(db, PUBLIC_SETTING_KEYS));
     } catch (error) {
         next(error);
@@ -96,7 +96,7 @@ const getAdminSettings = async (req, res, next) => {
     try {
         const db = await getDb();
         const keys = isPlatformAdmin(req.user) ? EDITABLE_SETTING_KEYS : PAGE_CONTENT_KEYS;
-        res.set("Cache-Control", "private, no-store");
+        res.setHeader("Cache-Control", "private, no-store");
         res.json(await readSettings(db, keys));
     } catch (error) {
         next(error);

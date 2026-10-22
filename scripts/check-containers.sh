@@ -9,8 +9,14 @@ compose=(docker compose --project-name "$project")
 sentinel="server/.env.container-check"
 test ! -e "$sentinel"
 cleanup() {
+    status=$?
+    if [ "$status" -ne 0 ]; then
+        "${compose[@]}" ps --all
+        "${compose[@]}" logs --no-color --tail 100 app dev
+    fi
     "${compose[@]}" down --volumes --remove-orphans
     rm -f "$sentinel"
+    return "$status"
 }
 trap cleanup EXIT
 printf 'CONTAINER_IGNORE_SENTINEL=synthetic\n' > "$sentinel"
