@@ -126,12 +126,26 @@ const organizerProfileFromEvent = (event = {}) => ({
     status: event.organizer_profile_status,
 });
 
+const isValidEventCalendarDate = (value) => {
+    const match = String(value).match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T\s]|$)/);
+    if (!match) return true;
+    const [, year, month, day] = match.map(Number);
+    const check = new Date(Date.UTC(year, month - 1, day));
+    return (
+        check.getUTCFullYear() === year &&
+        check.getUTCMonth() === month - 1 &&
+        check.getUTCDate() === day
+    );
+};
+
 const getEventLifecycle = (date, endDate, t) => {
     if (!date) return t("events.status.unknown");
     try {
         const now = new Date();
         // For YYYY-MM-DD (no time), treat as local midnight by replacing - with /
         const startDate = new Date(date.includes("T") ? date : date.replace(/-/g, "/"));
+        if (Number.isNaN(startDate.getTime()) || !isValidEventCalendarDate(date))
+            return t("events.status.unknown");
 
         if (endDate) {
             // For YYYY-MM-DD (no time), treat as end of that day (23:59:59)
@@ -142,6 +156,8 @@ const getEventLifecycle = (date, endDate, t) => {
                 end = new Date(endDate.replace(/-/g, "/"));
                 end.setHours(23, 59, 59, 999);
             }
+            if (Number.isNaN(end.getTime()) || !isValidEventCalendarDate(endDate))
+                return t("events.status.unknown");
 
             if (now < startDate) return t("events.status.upcoming");
             if (now >= startDate && now <= end) return t("events.status.ongoing");
@@ -203,11 +219,13 @@ const isSameDay = (d1, d2) => {
 
 const formatDateTime = (dateStr) => {
     if (!dateStr) return "";
+    if (!isValidEventCalendarDate(dateStr)) return dateStr;
     // Extract date parts from string directly to avoid timezone issues
     // Supports: YYYY-MM-DD, YYYY-MM-DDTHH:MM, YYYY-MM-DDTHH:MM:SS
     const datePart = dateStr.substring(0, 10); // YYYY-MM-DD
     const parts = datePart.split("-");
     if (parts.length < 3) return dateStr;
+    const year = parts[0];
     const month = parseInt(parts[1], 10);
     const day = parseInt(parts[2], 10);
     if (isNaN(month) || isNaN(day)) return dateStr;
@@ -216,14 +234,15 @@ const formatDateTime = (dateStr) => {
     if (dateStr.length > 10 && dateStr[10] === "T") {
         const timePart = dateStr.substring(11, 16); // HH:MM
         if (timePart && timePart !== "00:00") {
-            return `${month}.${day} ${timePart}`;
+            return `${year}.${month}.${day} ${timePart}`;
         }
     }
-    return `${month}.${day}`;
+    return `${year}.${month}.${day}`;
 };
 
 const formatMobileEventSchedule = (dateStr, endDateStr, language = "zh") => {
     if (!dateStr) return "";
+    if (!isValidEventCalendarDate(dateStr)) return dateStr;
     const datePart = dateStr.substring(0, 10);
     const [year, monthText, dayText] = datePart.split("-");
     const month = parseInt(monthText, 10);
@@ -251,7 +270,7 @@ const formatMobileEventSchedule = (dateStr, endDateStr, language = "zh") => {
     const timeRange = startTime ? (endTime ? `${startTime}–${endTime}` : startTime) : "";
     const weekdayLabel = weekday ? (isEnglish ? ` · ${weekday}` : `（周${weekday}）`) : "";
 
-    return `${month}.${day}${weekdayLabel}${timeRange ? `  ${timeRange}` : ""}`;
+    return `${year}.${month}.${day}${weekdayLabel}${timeRange ? `  ${timeRange}` : ""}`;
 };
 
 const EVENT_FALLBACK_COVER_URLS = {
