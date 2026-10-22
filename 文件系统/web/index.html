@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI生态 · 资料库</title>
+<link rel="stylesheet" href="/app.css">
+<body>
+<main id="login" class="login-panel" hidden>
+  <span class="eyebrow">AI生态</span><h1>团队资料，放在一起。</h1>
+  <p>登录后查找、更新和分享文件。</p>
+  <form id="login-form">
+    <label>账号<input id="username" autocomplete="username" required value="yq"></label>
+    <label>密码<input id="password" type="password" autocomplete="current-password" required></label>
+    <button class="primary" id="login-button">登录资料库</button>
+    <p id="login-error" role="alert"></p>
+  </form>
+</main>
+<div id="workspace" hidden>
+  <aside>
+    <a class="brand" href="/">AI生态<span>团队资料库</span></a>
+    <nav aria-label="资料导航">
+      <button id="all-files" class="nav active">全部文件</button>
+      <button id="trash" class="nav">回收站</button>
+      <button id="shares" class="nav">分享记录</button>
+    </nav>
+    <div class="aside-bottom"><p>同一份资料，始终在这里更新。</p><button id="logout" class="text-button">退出登录</button></div>
+  </aside>
+  <main class="content">
+    <header><div><span class="eyebrow">AI生态 / 资料库</span><h1 id="page-title">全部文件</h1></div>
+      <label class="search"><span class="sr-only">搜索文件名</span><input id="search" type="search" placeholder="搜索文件名…"><kbd>⌘ K</kbd></label>
+    </header>
+    <section class="toolbar"><div id="breadcrumbs" aria-label="当前位置"></div><div class="actions">
+      <button id="refresh">刷新</button><button id="new-folder">新建文件夹</button><button id="upload-button" class="primary">上传文件</button>
+      <input id="upload-input" type="file" multiple hidden>
+    </div></section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <div id="table-wrap"><table><thead><tr><th>名称</th><th>修改时间</th><th>大小</th><th><span class="sr-only">操作</span></th></tr></thead><tbody id="rows"></tbody></table>
+      <div id="empty" hidden>这个文件夹还没有资料。可以上传文件，或新建文件夹。</div>
+    </div>
+    <footer><span id="count"></span><span>文件更新后，点击刷新查看。</span></footer>
+  </main>
+</div>
+<dialog id="dialog"><header><h2 id="dialog-title"></h2><button id="close-dialog" aria-label="关闭">×</button></header><div id="dialog-body"></div></dialog>
+<script src="/app.js" defer></script>
+</body></html>

@@ -110,6 +110,7 @@ ZJU_Platform/
 ├── scripts/                     仓库级检查、图标生成与发布辅助
 │   └── build/                   Vite 构建辅助
 ├── deploy/                      发布到服务器及独立采集服务的配置
+├── 文件系统/                    资料库独立服务、网页、Mac 同步与备份脚本
 ├── e2e/                         浏览器端到端测试
 ├── bin/                         用户可调用的 CLI 入口
 ├── android-twa/                 Android 工程
@@ -131,6 +132,10 @@ ZJU_Platform/
 | [logo-vertical-light.png](public/images/brand/logo-vertical-light.png)                 | 浅色底竖标，含名称与口号                             |
 
 三份素材沿用用户确认的版本。修改只在 `public/images/brand/` 维护；旧 `/newlogo.png`、`/logo.png`、`/tuozhe-ai-ecosystem-logo.svg` 地址由[构建辅助](scripts/build/brand-assets.mjs)兼容，构建时生成旧地址文件，开发与预览时映射到正式素材。浏览器图标、PWA 图标及 `.well-known/` 保留各自的固定地址。
+
+### 资料库网站
+
+[文件系统](文件系统/README.md)是资料库网站的独立服务组件，包含 Python 服务、网页、Mac 同步与备份脚本。源码在本仓库维护，业务资料、数据库、密钥及恢复副本保存在仓库外；部署和恢复位置见组件 README。
 
 ### 脚本与本地文件
 
