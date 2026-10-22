@@ -5679,13 +5679,7 @@
                 "campus": {
                     "partner": "天猫校园",
                     "type": "自主命题",
-                    "topics": [
-                        "法学",
-                        "海洋",
-                        "医学",
-                        "教育",
-                        "宣传"
-                    ],
+                    "topics": ["法学", "海洋", "医学", "教育", "宣传"],
                     "format": "线上开发 · 线下路演",
                     "shortTitle": "天猫校园OPC孵化赛道",
                     "shortDescription": "自选学科问题，提前开发。",
@@ -5696,10 +5690,7 @@
                 "industry": {
                     "partner": "华为中国区",
                     "type": "企业命题",
-                    "topics": [
-                        "文案",
-                        "营销"
-                    ],
+                    "topics": ["文案", "营销"],
                     "format": "方案设计 · 产品开发 · 阶段展示",
                     "shortTitle": "华为产业落地赛道",
                     "shortDescription": "企业真实业务问题，方案设计与产品开发。",
@@ -5824,10 +5815,7 @@
                     "label": "Coding Plan Pro 套餐季卡",
                     "value": "¥1,614",
                     "note": "共 3 份 · 每份有效期 3 个月",
-                    "items": [
-                        "天猫校园OPC孵化赛道冠军：1名",
-                        "华为产业落地赛道一等奖：2名"
-                    ]
+                    "items": ["天猫校园OPC孵化赛道冠军：1名", "华为产业落地赛道一等奖：2名"]
                 },
                 {
                     "label": "魔搭社区现场抽奖",
@@ -5978,13 +5966,7 @@
             "industryMaterials": "GitHub + 作品或部署链接 + 作品说明书；复赛补交 Demo 视频"
         },
         "official": {
-            "chapters": [
-                "主页",
-                "赛制",
-                "奖励",
-                "孵化支持",
-                "报名"
-            ],
+            "chapters": ["主页", "赛制", "奖励", "孵化支持", "报名"],
             "chapterNav": "介绍页章节",
             "totalPrize": "奖品与奖金总价值",
             "tracksTitle": "比赛赛道",
@@ -6199,11 +6181,7 @@
             },
             "heroLink": "论坛介绍与独立报名",
             "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
-            "chapters": [
-                "技术论坛",
-                "创业论坛",
-                "论坛报名"
-            ],
+            "chapters": ["技术论坛", "创业论坛", "论坛报名"],
             "dateTime": "10月25日 13:30–16:05",
             "venue": "1897OPC社区 & 三墩元空间",
             "address": "杭州市西湖区宝港生活广场 C 座 6 楼",
@@ -6658,16 +6636,12 @@
                         {
                             "label": "冠军",
                             "count": "1 名",
-                            "lines": [
-                                "天猫校园OPC孵化赛道"
-                            ]
+                            "lines": ["天猫校园OPC孵化赛道"]
                         },
                         {
                             "label": "一等奖",
                             "count": "2 名",
-                            "lines": [
-                                "华为产业落地赛道"
-                            ]
+                            "lines": ["华为产业落地赛道"]
                         }
                     ],
                     "footer": "智谱赞助 · 在原赛道奖励基础上加赠",
@@ -6683,9 +6657,7 @@
                     "rows": [
                         {
                             "label": "可用模型",
-                            "lines": [
-                                "Fable · Astra · 其他模型"
-                            ]
+                            "lines": ["Fable · Astra · 其他模型"]
                         }
                     ],
                     "footer": "单独提供，不计入现金及实物奖池"
@@ -6697,24 +6669,17 @@
                     "rows": [
                         {
                             "label": "各 10 份",
-                            "lines": [
-                                "颈枕 · 马克杯 · 雨伞"
-                            ],
+                            "lines": ["颈枕 · 马克杯 · 雨伞"],
                             "count": ""
                         },
                         {
                             "label": "各 20 份",
-                            "lines": [
-                                "帆布袋 · 毛绒耳机包",
-                                "紫色手机夹"
-                            ],
+                            "lines": ["帆布袋 · 毛绒耳机包", "紫色手机夹"],
                             "count": ""
                         },
                         {
                             "label": "40 份",
-                            "lines": [
-                                "贴纸"
-                            ],
+                            "lines": ["贴纸"],
                             "count": ""
                         }
                     ],
@@ -6935,10 +6900,7 @@
                     ]
                 }
             ],
-            "coverTitle": [
-                "浙客松：",
-                "AI+X破界黑客松"
-            ],
+            "coverTitle": ["浙客松：", "AI+X破界黑客松"],
             "forumOverview": {
                 "title": "论坛",
                 "topicsLabel": "分享主题",
@@ -6975,25 +6937,19 @@
                             {
                                 "title": "仝的发展趋势及企业应对",
                                 "speaker": "叶新江",
-                                "guestIds": [
-                                    "ye-xinjiang"
-                                ],
+                                "guestIds": ["ye-xinjiang"],
                                 "time": "09:20–10:00"
                             },
                             {
                                 "title": "从黑客松到创业公司",
                                 "speaker": "谭炜川",
-                                "guestIds": [
-                                    "tan-weichuan"
-                                ],
+                                "guestIds": ["tan-weichuan"],
                                 "time": "10:05–10:45"
                             },
                             {
                                 "title": "主题分享：具身智能技术发展",
                                 "speaker": "孙逸飞",
-                                "guestIds": [
-                                    "sun-yifei"
-                                ],
+                                "guestIds": ["sun-yifei"],
                                 "time": "10:50–11:30"
                             }
                         ],
@@ -7109,44 +7065,31 @@
                             {
                                 "title": "拓浙AI生态：AI Native 人才培养模式的探索",
                                 "speaker": "应奇",
-                                "guestIds": [
-                                    "ying-qi"
-                                ],
+                                "guestIds": ["ying-qi"],
                                 "time": "13:45–13:50"
                             },
                             {
                                 "title": "创业者代表分享：AI时代，重新定义优秀人才",
                                 "speaker": "韩冰",
-                                "guestIds": [
-                                    "han-bing"
-                                ],
+                                "guestIds": ["han-bing"],
                                 "time": "14:05–14:25"
                             },
                             {
                                 "title": "主题分享一：AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？",
                                 "speaker": "刘建斌",
-                                "guestIds": [
-                                    "liu-jianbin"
-                                ],
+                                "guestIds": ["liu-jianbin"],
                                 "time": "14:40–15:00"
                             },
                             {
                                 "title": "主题分享二：从未知到可能，智能硬件创业0-1",
                                 "speaker": "刘香",
-                                "guestIds": [
-                                    "liu-xiang"
-                                ],
+                                "guestIds": ["liu-xiang"],
                                 "time": "15:00–15:15"
                             },
                             {
                                 "title": "圆桌论坛：AI时代的第一次成功与失败",
                                 "speaker": "王进、张洁、张加林、韩冰",
-                                "guestIds": [
-                                    "wang-jin",
-                                    "zhang-jie",
-                                    "zhang-jialin",
-                                    "han-bing"
-                                ],
+                                "guestIds": ["wang-jin", "zhang-jie", "zhang-jialin", "han-bing"],
                                 "time": "15:15–15:55"
                             }
                         ],
@@ -7370,20 +7313,9 @@
                 "goal": "围绕真实需求，做出可验证、可落地的产品或服务。",
                 "scope": "推荐场景供参考，也可自选有实际价值与转化潜力的方向。",
                 "formatsTitle": "作品形式不限",
-                "formats": [
-                    "AI 应用",
-                    "Agent",
-                    "软件原型",
-                    "硬件原型",
-                    "工具",
-                    "服务"
-                ],
+                "formats": ["AI 应用", "Agent", "软件原型", "硬件原型", "工具", "服务"],
                 "evidenceTitle": "效果验证",
-                "evidence": [
-                    "运行演示",
-                    "试点验证",
-                    "用户反馈"
-                ],
+                "evidence": ["运行演示", "试点验证", "用户反馈"],
                 "thinkingSteps": [
                     {
                         "title": "场景",
@@ -7408,14 +7340,8 @@
         },
         "trackScheduleOnline": "线上",
         "trackBadges": {
-            "campus": [
-                "线上",
-                "1—5人组队"
-            ],
-            "industry": [
-                "线下",
-                "1—5人组队"
-            ]
+            "campus": ["线上", "1—5人组队"],
+            "industry": ["线下", "1—5人组队"]
         },
         "trackPurpose": {
             "campus": "自由命题",
@@ -7814,22 +7740,15 @@
         "partners": [
             {
                 "role": "主办",
-                "names": [
-                    "拓浙 AI 生态"
-                ]
+                "names": ["拓浙 AI 生态"]
             },
             {
                 "role": "承办",
-                "names": [
-                    "每日互动"
-                ]
+                "names": ["每日互动"]
             },
             {
                 "role": "赞助",
-                "names": [
-                    "摇滚动物园",
-                    "个知"
-                ]
+                "names": ["摇滚动物园", "个知"]
             },
             {
                 "role": "联合主办",
@@ -7914,11 +7833,7 @@
             "compress": "内容压缩",
             "feedback": "对话优化"
         },
-        "beautyTasks": [
-            "识别肌肤",
-            "匹配产品",
-            "完成应用"
-        ],
+        "beautyTasks": ["识别肌肤", "匹配产品", "完成应用"],
         "trackDetails": "查看赛道安排",
         "industrySchedule": "初赛 10.18 · 复赛 10.19—10.24 · 决赛 10.25"
     },
@@ -7939,14 +7854,8 @@
         "watchFilm": "播放赛事影像",
         "upcoming": "赛事尚未开始，作品与现场记录将在赛后呈现。",
         "pending": "本场成果正在整理，已发布内容将在这里呈现。",
-        "beautyTitleLines": [
-            "每日互动",
-            "美妆联谊赛"
-        ],
-        "aixTitleLines": [
-            "AI+X",
-            "破界黑客松"
-        ],
+        "beautyTitleLines": ["每日互动", "美妆联谊赛"],
+        "aixTitleLines": ["AI+X", "破界黑客松"],
         "allEntries": "全部作品（{{count}}）"
     },
     "accountProfile": {

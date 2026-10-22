@@ -5570,13 +5570,7 @@
                 "campus": {
                     "partner": "Tmall Campus",
                     "type": "Your own challenge",
-                    "topics": [
-                        "Law",
-                        "Ocean science",
-                        "Medicine",
-                        "Education",
-                        "Communications"
-                    ],
+                    "topics": ["Law", "Ocean science", "Medicine", "Education", "Communications"],
                     "format": "Build online · Present on campus",
                     "shortTitle": "Tmall Campus OPC Incubation Track",
                     "shortDescription": "Your discipline. Your problem. Build ahead.",
@@ -5587,10 +5581,7 @@
                 "industry": {
                     "partner": "Huawei China",
                     "type": "Industry challenge",
-                    "topics": [
-                        "Copywriting",
-                        "Marketing"
-                    ],
+                    "topics": ["Copywriting", "Marketing"],
                     "format": "Solution design · Product development · Presentations",
                     "shortTitle": "Huawei Industry Implementation Track",
                     "shortDescription": "Design and build solutions to real enterprise problems.",
@@ -5869,13 +5860,7 @@
             "industryMaterials": "GitHub + project or deployment URL + product handbook; add Demo video in semifinal"
         },
         "official": {
-            "chapters": [
-                "Home",
-                "Format",
-                "Prizes",
-                "Incubation",
-                "Register"
-            ],
+            "chapters": ["Home", "Format", "Prizes", "Incubation", "Register"],
             "chapterNav": "Introduction chapters",
             "totalPrize": "Total cash & prizes",
             "tracksTitle": "Competition tracks",
@@ -6091,11 +6076,7 @@
             },
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
-            "chapters": [
-                "Technology",
-                "Entrepreneurship",
-                "Registration"
-            ],
+            "chapters": ["Technology", "Entrepreneurship", "Registration"],
             "dateTime": "October 25 · 13:30–16:05",
             "venue": "1897 OPC Community & Sandun Metaspace",
             "address": "Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
@@ -6550,16 +6531,12 @@
                         {
                             "label": "Champion",
                             "count": "1 winner",
-                            "lines": [
-                                "Tmall Campus OPC Incubation Track"
-                            ]
+                            "lines": ["Tmall Campus OPC Incubation Track"]
                         },
                         {
                             "label": "First prize",
                             "count": "2 winners",
-                            "lines": [
-                                "Industry Advancement Track"
-                            ]
+                            "lines": ["Industry Advancement Track"]
                         }
                     ],
                     "footer": "Sponsored by Zhipu · Added on top of track prizes",
@@ -6575,9 +6552,7 @@
                     "rows": [
                         {
                             "label": "Models",
-                            "lines": [
-                                "Fable · Astra · and more"
-                            ]
+                            "lines": ["Fable · Astra · and more"]
                         }
                     ],
                     "footer": "Provided separately from cash and physical prizes"
@@ -6589,24 +6564,17 @@
                     "rows": [
                         {
                             "label": "10 each",
-                            "lines": [
-                                "Neck pillows · Mugs · Umbrellas"
-                            ],
+                            "lines": ["Neck pillows · Mugs · Umbrellas"],
                             "count": ""
                         },
                         {
                             "label": "20 each",
-                            "lines": [
-                                "Tote bags · Plush earphone pouches",
-                                "Purple phone clips"
-                            ],
+                            "lines": ["Tote bags · Plush earphone pouches", "Purple phone clips"],
                             "count": ""
                         },
                         {
                             "label": "40",
-                            "lines": [
-                                "Stickers"
-                            ],
+                            "lines": ["Stickers"],
                             "count": ""
                         }
                     ],
@@ -6827,10 +6795,7 @@
                     ]
                 }
             ],
-            "coverTitle": [
-                "ZHEKESONG:",
-                "AI+X Hackathon"
-            ],
+            "coverTitle": ["ZHEKESONG:", "AI+X Hackathon"],
             "forumOverview": {
                 "title": "Forums",
                 "topicsLabel": "Topics",
@@ -6867,25 +6832,19 @@
                             {
                                 "title": "Development trends of 仝 and enterprise responses",
                                 "speaker": "Ye Xinjiang",
-                                "guestIds": [
-                                    "ye-xinjiang"
-                                ],
+                                "guestIds": ["ye-xinjiang"],
                                 "time": "09:20–10:00"
                             },
                             {
                                 "title": "From hackathon to startup",
                                 "speaker": "Tan Weichuan",
-                                "guestIds": [
-                                    "tan-weichuan"
-                                ],
+                                "guestIds": ["tan-weichuan"],
                                 "time": "10:05–10:45"
                             },
                             {
                                 "title": "Keynote: developments in embodied intelligence technology",
                                 "speaker": "Sun Yifei",
-                                "guestIds": [
-                                    "sun-yifei"
-                                ],
+                                "guestIds": ["sun-yifei"],
                                 "time": "10:50–11:30"
                             }
                         ],
@@ -7001,44 +6960,31 @@
                             {
                                 "title": "TUOZHE AI Ecosystem: exploring an AI-native talent development model",
                                 "speaker": "Ying Qi",
-                                "guestIds": [
-                                    "ying-qi"
-                                ],
+                                "guestIds": ["ying-qi"],
                                 "time": "13:45–13:50"
                             },
                             {
                                 "title": "Founder perspective: redefining outstanding talent in the AI era",
                                 "speaker": "Han Bing",
-                                "guestIds": [
-                                    "han-bing"
-                                ],
+                                "guestIds": ["han-bing"],
                                 "time": "14:05–14:25"
                             },
                             {
                                 "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles?",
                                 "speaker": "Liu Jianbin",
-                                "guestIds": [
-                                    "liu-jianbin"
-                                ],
+                                "guestIds": ["liu-jianbin"],
                                 "time": "14:40–15:00"
                             },
                             {
                                 "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1",
                                 "speaker": "Liu Xiang",
-                                "guestIds": [
-                                    "liu-xiang"
-                                ],
+                                "guestIds": ["liu-xiang"],
                                 "time": "15:00–15:15"
                             },
                             {
                                 "title": "Roundtable: first successes and failures in the AI era",
                                 "speaker": "Wang Jin, Zhang Jie, Zhang Jialin, Han Bing",
-                                "guestIds": [
-                                    "wang-jin",
-                                    "zhang-jie",
-                                    "zhang-jialin",
-                                    "han-bing"
-                                ],
+                                "guestIds": ["wang-jin", "zhang-jie", "zhang-jialin", "han-bing"],
                                 "time": "15:15–15:55"
                             }
                         ],
@@ -7264,11 +7210,7 @@
                     "Service"
                 ],
                 "evidenceTitle": "Validation",
-                "evidence": [
-                    "Working demo",
-                    "Pilot validation",
-                    "User feedback"
-                ],
+                "evidence": ["Working demo", "Pilot validation", "User feedback"],
                 "thinkingSteps": [
                     {
                         "title": "Context",
@@ -7293,14 +7235,8 @@
         },
         "trackScheduleOnline": "Online",
         "trackBadges": {
-            "campus": [
-                "Online",
-                "Teams of 1–5"
-            ],
-            "industry": [
-                "In person",
-                "Teams of 1–5"
-            ]
+            "campus": ["Online", "Teams of 1–5"],
+            "industry": ["In person", "Teams of 1–5"]
         },
         "trackPurpose": {
             "campus": "Open Topic",
@@ -7699,22 +7635,15 @@
         "partners": [
             {
                 "role": "Organizer",
-                "names": [
-                    "TUOZHE AI ECOSYSTEM"
-                ]
+                "names": ["TUOZHE AI ECOSYSTEM"]
             },
             {
                 "role": "Host",
-                "names": [
-                    "Getui"
-                ]
+                "names": ["Getui"]
             },
             {
                 "role": "Sponsors",
-                "names": [
-                    "ROCKINGZOO",
-                    "个知"
-                ]
+                "names": ["ROCKINGZOO", "个知"]
             },
             {
                 "role": "Co-organizers",
@@ -7799,11 +7728,7 @@
             "compress": "Condense",
             "feedback": "Refine"
         },
-        "beautyTasks": [
-            "Analyze",
-            "Recommend",
-            "Build"
-        ],
+        "beautyTasks": ["Analyze", "Recommend", "Build"],
         "trackDetails": "Explore the tracks",
         "industrySchedule": "Initial · Oct 18 / Semifinal · Oct 19–24 / Final · Oct 25"
     },
@@ -7824,14 +7749,8 @@
         "watchFilm": "Play event film",
         "upcoming": "The event has not started. Works and event coverage will appear here after the competition.",
         "pending": "Event outcomes are being compiled. Published content will appear here.",
-        "beautyTitleLines": [
-            "Getui",
-            "Beauty Hackathon"
-        ],
-        "aixTitleLines": [
-            "AI+X",
-            "Hackathon"
-        ],
+        "beautyTitleLines": ["Getui", "Beauty Hackathon"],
+        "aixTitleLines": ["AI+X", "Hackathon"],
         "allEntries": "All works ({{count}})"
     },
     "accountProfile": {
