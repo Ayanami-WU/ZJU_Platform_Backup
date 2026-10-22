@@ -1,4 +1,27 @@
 const ACCOUNT_TYPES = new Set(["personal", "organization"]);
+const PAGE_CONTENT_KEYS = new Set([
+    "footer_acknowledgements",
+    "site_title",
+    "favicon_url",
+    "hero_title",
+    "hero_subtitle",
+    "hero_bg_url",
+    "about_title",
+    "about_subtitle",
+    "profile_image_url",
+    "about_intro",
+    "about_detail",
+    "about_exp_years",
+    "about_exhibitions",
+    "about_projects",
+    "contact_email",
+    "contact_phone",
+    "contact_address",
+    "social_github",
+    "social_twitter",
+    "social_instagram",
+    "social_linkedin",
+]);
 const REVIEW_PERMISSIONS = new Set(["normal", "trusted", "admin"]);
 const ADMIN_SCOPES = new Set(["none", "platform", "organization", "operations"]);
 // Operators share the admin workspace, with module grants and no private-system authority.
@@ -77,6 +100,7 @@ const defaultReviewStatusForUser = (
     return canBypassReview(user) ? "approved" : "pending";
 };
 module.exports = {
+    PAGE_CONTENT_KEYS,
     ACCOUNT_TYPES,
     REVIEW_PERMISSIONS,
     ADMIN_SCOPES,

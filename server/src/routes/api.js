@@ -945,6 +945,12 @@ router.post(
 
 // Settings Routes
 router.get("/settings", settingsController.getSettings);
+router.get(
+    "/admin/settings",
+    authenticateToken,
+    requireAdminPermission("admin.pages.manage"),
+    settingsController.getAdminSettings
+);
 router.post(
     "/settings",
     authenticateToken,

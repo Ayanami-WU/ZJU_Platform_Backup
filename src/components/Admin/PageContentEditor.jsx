@@ -14,7 +14,7 @@ const PageContentEditor = () => {
     const fetchSettings = async () => {
         setLoading(true);
         try {
-            const response = await api.get("/settings");
+            const response = await api.get("/admin/settings");
             const nextSettings = response.data || {};
             setSettings(nextSettings);
             setInitialSettings(nextSettings);

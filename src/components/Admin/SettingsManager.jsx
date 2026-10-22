@@ -326,7 +326,7 @@ const SettingsManager = ({ capabilities } = {}) => {
         setLoading(true);
         setLoadError(false);
         try {
-            const response = await api.get("/settings");
+            const response = await api.get("/admin/settings");
             const nextSettings = { ...THEME_APPEARANCE_DEFAULTS, ...(response.data || {}) };
             setSettings(nextSettings);
             setInitialSettings(nextSettings);

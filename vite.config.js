@@ -123,7 +123,7 @@ export default defineConfig(({ mode }) => {
                                 url.pathname.startsWith("/api/") &&
                                 (request.headers.has("Authorization") ||
                                     url.searchParams.has("token") ||
-                                    /^\/api\/(?:admin(?:\/|$)|auth(?:\/|$)|native-poster-sessions(?:\/|$)|stats$|audit-logs|fs\/|db\/)/.test(
+                                    /^\/api\/(?:settings(?:\/|$)|admin(?:\/|$)|auth(?:\/|$)|native-poster-sessions(?:\/|$)|stats$|audit-logs|fs\/|db\/)/.test(
                                         url.pathname
                                     )),
                             handler: "NetworkOnly",

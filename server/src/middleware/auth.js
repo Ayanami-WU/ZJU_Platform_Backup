@@ -5,6 +5,7 @@ const {
     isAdmin: isAdminUser,
     isPlatformAdmin,
     hasAdminPermission,
+    PAGE_CONTENT_KEYS,
 } = require("../utils/userPermissions");
 
 const readIdentity = async (token) => {
@@ -79,29 +80,6 @@ const requireAnyAdminPermission =
         keys.some((key) => hasAdminPermission(req.user, key))
             ? next()
             : res.status(403).json({ error: "Admin permission required" });
-const PAGE_CONTENT_KEYS = new Set([
-    "footer_acknowledgements",
-    "site_title",
-    "favicon_url",
-    "hero_title",
-    "hero_subtitle",
-    "hero_bg_url",
-    "about_title",
-    "about_subtitle",
-    "profile_image_url",
-    "about_intro",
-    "about_detail",
-    "about_exp_years",
-    "about_exhibitions",
-    "about_projects",
-    "contact_email",
-    "contact_phone",
-    "contact_address",
-    "social_github",
-    "social_twitter",
-    "social_instagram",
-    "social_linkedin",
-]);
 const canUpdateSetting = (req, res, next) =>
     isPlatformAdmin(req.user) ||
     (hasAdminPermission(req.user, "admin.pages.manage") && PAGE_CONTENT_KEYS.has(req.body?.key))
