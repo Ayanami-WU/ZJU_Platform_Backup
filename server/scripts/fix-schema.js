@@ -64,7 +64,7 @@ const EXPECTED_COLUMNS = {
     photos: ["id", "title", "rejection_reason"],
     music: ["id", "title", "rejection_reason"],
     videos: ["id", "title", "rejection_reason"],
-    events: ["id", "title", "rejection_reason", "category"],
+    events: ["id", "title", "rejection_reason", "category", "registration_deadline"],
     news: ["id", "title"],
 };
 

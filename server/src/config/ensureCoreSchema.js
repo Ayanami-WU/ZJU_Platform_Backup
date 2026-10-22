@@ -104,6 +104,7 @@ async function ensureCoreSchema(db) {
       title TEXT,
       date TEXT,
       end_date TEXT,
+      registration_deadline TEXT,
       location TEXT,
       tags TEXT,
       status TEXT DEFAULT 'approved',
@@ -340,6 +341,7 @@ async function ensureCoreSchema(db) {
     );
   `);
 
+    await require("./migrations/eventRegistrationDeadline").migrateEventRegistrationDeadline(db);
     await require("./migrations/profileHome").migrateProfileHome(db);
     await require("./migrations/registrationProfiles").migrateRegistrationProfiles(db);
     await require("./migrations/lotteries").migrateLotteries(db);

@@ -15,7 +15,7 @@ const REQUIRED_COLUMNS = {
         "related_group_ids",
         "views_count",
     ],
-    events: ["category"],
+    events: ["category", "registration_deadline"],
     community_posts: [
         "content_blocks",
         "related_article_ids",

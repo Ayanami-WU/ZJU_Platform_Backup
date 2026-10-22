@@ -175,6 +175,55 @@ const getEventLifecycle = (date, endDate, t) => {
     }
 };
 
+const getEventRegistrationNotice = (deadline, t) => {
+    const value = String(deadline || "").trim();
+    if (!value || !isValidEventCalendarDate(value)) return null;
+
+    const dateOnly = /^\d{4}-\d{1,2}-\d{1,2}$/.test(value);
+    const localDateTime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(value);
+    const normalized = dateOnly
+        ? `${value}T23:59:59+08:00`
+        : localDateTime
+          ? `${value}${value.length === 16 ? ":00" : ""}+08:00`
+          : value;
+    const timestamp = Date.parse(normalized);
+    if (!Number.isFinite(timestamp)) return null;
+
+    const closed = Date.now() >= timestamp;
+    return {
+        closed,
+        label: closed
+            ? t("events.registration_deadline_closed")
+            : t("events.registration_deadline_upcoming", {
+                  date: formatDateTime(value),
+              }),
+    };
+};
+
+const EventRegistrationNotice = memo(({ deadline, isDayMode, t }) => {
+    const notice = getEventRegistrationNotice(deadline, t);
+    if (!notice) return null;
+
+    return (
+        <div
+            data-testid="event-registration-status"
+            className={`mt-2 flex min-w-0 items-center gap-1.5 text-xs font-semibold leading-5 ${
+                notice.closed
+                    ? isDayMode
+                        ? "text-slate-500"
+                        : "text-slate-400"
+                    : isDayMode
+                      ? "text-emerald-700"
+                      : "text-emerald-300"
+            }`}
+        >
+            <Clock size={13} className="shrink-0" aria-hidden="true" />
+            <span className="truncate">{notice.label}</span>
+        </div>
+    );
+});
+EventRegistrationNotice.displayName = "EventRegistrationNotice";
+
 const getStatusColor = (status, t, isDayMode = false) => {
     if (isDayMode) {
         switch (status) {
@@ -517,6 +566,12 @@ const EventCard = memo(({ event, index, onClick, reduceMotion, isDayMode }) => {
                     </div>
                 </div>
 
+                <EventRegistrationNotice
+                    deadline={event.registration_deadline}
+                    isDayMode={isDayMode}
+                    t={t}
+                />
+
                 {(event.score || event.volunteer_time) && (
                     <div
                         className={`mt-3 flex min-w-0 items-center gap-3 text-xs font-semibold ${isDayMode ? "text-amber-700" : "text-amber-200"}`}
@@ -655,6 +710,12 @@ const MobileReferenceEventCard = memo(({ event, index, onClick, reduceMotion, is
                         </span>
                     </div>
                 </div>
+
+                <EventRegistrationNotice
+                    deadline={event.registration_deadline}
+                    isDayMode={isDayMode}
+                    t={t}
+                />
 
                 {event.target_audience &&
                     !["浙江大学在校学生", "全校", "全体学生", "全校学生"].includes(
@@ -815,6 +876,12 @@ const EventListRow = memo(({ event, index, onClick, reduceMotion, isDayMode }) =
                         </span>
                     )}
                 </div>
+
+                <EventRegistrationNotice
+                    deadline={event.registration_deadline}
+                    isDayMode={isDayMode}
+                    t={t}
+                />
 
                 {event.description && (
                     <p
@@ -1012,6 +1079,12 @@ const CollegeNoticeRow = memo(({ event, index, onClick, reduceMotion, isDayMode 
                             </span>
                         )}
                     </div>
+
+                    <EventRegistrationNotice
+                        deadline={event.registration_deadline}
+                        isDayMode={isDayMode}
+                        t={t}
+                    />
 
                     {event.description && (
                         <p

@@ -59,6 +59,7 @@ test("event creation returns the saved record and rejects duplicate sources with
         link: "https://example.org/events/upload-regression",
         category: "volunteer",
         tags: "volunteer",
+        registration_deadline: "2026-10-23T18:00",
     };
 
     const response = await submit(payload);
@@ -67,6 +68,7 @@ test("event creation returns the saved record and rejects duplicate sources with
     const row = await db.get("SELECT * FROM events WHERE id = ?", [saved.id]);
     assert.ok(row);
     assert.equal(row.title, payload.title);
+    assert.equal(row.registration_deadline, payload.registration_deadline);
     assert.equal(saved.status, "approved");
     assert.equal(row.publisher_profile_id, 101);
     assert.equal(row.organizer_profile_id, 202);
@@ -74,6 +76,15 @@ test("event creation returns the saved record and rejects duplicate sources with
     assert.equal(scan.mock.callCount(), 1);
     assert.equal(scan.mock.calls[0].arguments[1].eventId, saved.id);
     assert.equal(fanout.mock.callCount(), 1);
+
+    const invalidDeadlineResponse = await submit({
+        ...payload,
+        link: "https://example.org/events/invalid-deadline",
+        registration_deadline: "2026-02-30T18:00",
+    });
+    assert.equal(invalidDeadlineResponse.status, 400);
+    assert.equal((await invalidDeadlineResponse.json()).error, "INVALID_REGISTRATION_DEADLINE");
+    assert.equal((await db.get("SELECT COUNT(*) AS count FROM events")).count, 1);
     assert.equal(fanout.mock.calls[0].arguments[0].resourceId, saved.id);
     await new Promise((resolve) => setImmediate(resolve));
     // Wait for the queued SQLite read used by background indexing.

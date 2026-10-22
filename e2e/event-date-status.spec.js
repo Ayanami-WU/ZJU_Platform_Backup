@@ -13,6 +13,19 @@ const events = [
     { id: 1805, title: "Impossible calendar date", date: "2026-02-30" },
     { id: 1806, title: "Current day event", date: "2026-10-22" },
     { id: 1807, title: "Past event", date: "2026-10-20" },
+    {
+        id: 1808,
+        title: "Future registration deadline",
+        date: "2026-10-23T10:00",
+        registration_deadline: "2026-10-23T18:00",
+    },
+    {
+        id: 1809,
+        title: "Expired registration deadline",
+        date: "2026-10-23T10:00",
+        registration_deadline: "2026-10-21T18:00",
+    },
+    { id: 1810, title: "Unspecified registration deadline", date: "2026-10-23T10:00" },
 ].map((event) => ({
     ...event,
     category: "lecture",
@@ -76,6 +89,15 @@ for (const mobile of [false, true]) {
             await expect(card("Next year event")).toContainText("即将开始");
             await expect(card("Current day event")).toContainText("进行中");
             await expect(card("Past event")).toContainText("已结束");
+            await expect(
+                card("Future registration deadline").getByTestId("event-registration-status")
+            ).toContainText("报名截止：2026.10.23 18:00");
+            await expect(
+                card("Expired registration deadline").getByTestId("event-registration-status")
+            ).toHaveText("报名已截止");
+            await expect(
+                card("Unspecified registration deadline").getByTestId("event-registration-status")
+            ).toHaveCount(0);
             expect(
                 await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
             ).toBe(true);
@@ -92,6 +114,16 @@ test("English mobile cards retain years and unknown status", async ({ page }) =>
     await expect(cards.filter({ hasText: "Next year event" })).toContainText("2027.1.2");
     await expect(cards.filter({ hasText: "Unspecified start" })).toContainText("Unknown");
     await expect(cards.filter({ hasText: "Current day event" })).toContainText("Ongoing");
+    await expect(
+        cards
+            .filter({ hasText: "Future registration deadline" })
+            .getByTestId("event-registration-status")
+    ).toContainText("Registration closes 2026.10.23 18:00");
+    await expect(
+        cards
+            .filter({ hasText: "Expired registration deadline" })
+            .getByTestId("event-registration-status")
+    ).toHaveText("Registration closed");
 });
 
 test("event detail shows both years across the year boundary", async ({ page }) => {
@@ -113,4 +145,6 @@ test("desktop list keeps years and unknown lifecycle", async ({ page }) => {
     await expect(row("Year boundary event")).toContainText("2027.1.1");
     await expect(row("Unspecified start")).toContainText("未知");
     await expect(row("Past event")).toContainText("已结束");
+    await expect(row("Future registration deadline")).toContainText("报名截止：2026.10.23 18:00");
+    await expect(row("Expired registration deadline")).toContainText("报名已截止");
 });

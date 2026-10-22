@@ -20,6 +20,7 @@ const { normalizeEventWorkflowStatus } = require("../utils/resourceWorkflowStatu
 const { triggerEventGovernance } = require("../services/eventGovernanceTriggerService");
 const { ensureEventProfile } = require("../services/eventAiProfileService");
 const { cleanWeChatUrl } = require("../utils/wechatUrl");
+const { normalizeDeadline } = require("../utils/wechatEventSummary");
 
 const refreshEventAiIndex = (db, eventId) => {
     setImmediate(async () => {
@@ -204,6 +205,14 @@ const inferCollegeNoticeFlag = (body = {}) => {
 const normalizeEventPayload = (body = {}) => {
     body.tags = normalizeEventTags(body.tags);
     body.is_college_notice = inferCollegeNoticeFlag(body);
+    const rawDeadline = String(body.registration_deadline || "").trim();
+    body.registration_deadline = rawDeadline ? normalizeDeadline(rawDeadline) : null;
+    if (rawDeadline && !body.registration_deadline) {
+        const error = new Error("请输入有效的报名截止时间");
+        error.status = 400;
+        error.code = "INVALID_REGISTRATION_DEADLINE";
+        throw error;
+    }
 
     if (body.is_college_notice && !body.tags.split(",").includes("学院通知")) {
         body.tags = normalizeEventTags([body.tags, "学院通知"].filter(Boolean).join(","));
@@ -1399,6 +1408,7 @@ const fields = {
         "title",
         "date",
         "end_date",
+        "registration_deadline",
         "location",
         "tags",
         "image",

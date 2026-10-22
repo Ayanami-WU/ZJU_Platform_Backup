@@ -69,6 +69,7 @@ test("WeChat MP manual imports apply the shared AI analysis to articles and even
         date: "2026-07-21T14:00",
         end_date: "2026-07-21T16:00",
         location: "紫金港校区国际会议中心",
+        registration_deadline: "2026-07-20T18:00",
         tags: ["人工智能", "讲座"],
         category: "lecture",
         target_audience: "本科生,研究生",
@@ -88,6 +89,7 @@ test("WeChat MP manual imports apply the shared AI analysis to articles and even
     assert.equal(eventPayload.title, parsed.title);
     assert.equal(eventPayload.date, parsed.date);
     assert.equal(eventPayload.end_date, parsed.end_date);
+    assert.equal(eventPayload.registration_deadline, parsed.registration_deadline);
     assert.equal(eventPayload.location, parsed.location);
     assert.equal(eventPayload.category, parsed.category);
     assert.match(eventPayload.tags, /微信公众号/);

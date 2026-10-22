@@ -435,6 +435,9 @@ const UploadModal = ({
     // Event specific
     const [eventDate, setEventDate] = useState(initialData?.date || "");
     const [eventEndDate, setEventEndDate] = useState(initialData?.end_date || "");
+    const [eventRegistrationDeadline, setEventRegistrationDeadline] = useState(
+        initialData?.registration_deadline || ""
+    );
     const [eventLocation, setEventLocation] = useState(initialData?.location || "");
     const [eventLink, setEventLink] = useState(initialData?.link || "");
 
@@ -686,6 +689,8 @@ const UploadModal = ({
                 // date and end_date are now YYYY-MM-DDTHH:MM format from AI parsing
                 if (data.date) setEventDate(data.date);
                 if (data.end_date) setEventEndDate(data.end_date);
+                if (data.registration_deadline !== undefined)
+                    setEventRegistrationDeadline(data.registration_deadline || "");
                 if (data.location) setEventLocation(data.location);
                 if (data.content) setContent(data.content); // Store full content for parsing/editing
                 if (data.description) setDescription(data.description); // Summary for description
@@ -754,6 +759,7 @@ const UploadModal = ({
         setContent("");
         setEventDate("");
         setEventEndDate("");
+        setEventRegistrationDeadline("");
         setEventLocation("");
         setEventOrganizer("");
         setEventTarget("");
@@ -929,6 +935,7 @@ const UploadModal = ({
                 setArtist(initialData.artist || "");
                 setEventDate(initialData.date || "");
                 setEventEndDate(initialData.end_date || "");
+                setEventRegistrationDeadline(initialData.registration_deadline || "");
                 setEventLocation(initialData.location || "");
                 setEventLink(initialData.link || "");
                 setEventScore(initialData.score || "");
@@ -995,6 +1002,7 @@ const UploadModal = ({
                 setArtist("");
                 setEventDate("");
                 setEventEndDate("");
+                setEventRegistrationDeadline("");
                 setEventLocation("");
                 setEventLink("");
                 setEventScore("");
@@ -1836,6 +1844,7 @@ const UploadModal = ({
                         ? eventDate
                         : new Date().toLocaleDateString(),
                 end_date: type === "event" ? eventEndDate : null,
+                registration_deadline: type === "event" ? eventRegistrationDeadline || null : null,
                 time: null,
                 location: type === "event" ? eventLocation : null,
                 link: type === "event" ? eventLink : null,
@@ -2869,6 +2878,31 @@ const UploadModal = ({
                                                                 }
                                                                 onChange={(e) =>
                                                                     setEventEndDate(e.target.value)
+                                                                }
+                                                                className={inputClasses}
+                                                            />
+                                                        </div>
+                                                        <div className="col-span-1">
+                                                            <label className={labelClasses}>
+                                                                {t(
+                                                                    "event_fields.registration_deadline"
+                                                                )}
+                                                            </label>
+                                                            <input
+                                                                type="datetime-local"
+                                                                step="1800"
+                                                                value={
+                                                                    eventRegistrationDeadline
+                                                                        ? eventRegistrationDeadline.substring(
+                                                                              0,
+                                                                              16
+                                                                          )
+                                                                        : ""
+                                                                }
+                                                                onChange={(e) =>
+                                                                    setEventRegistrationDeadline(
+                                                                        e.target.value
+                                                                    )
                                                                 }
                                                                 className={inputClasses}
                                                             />

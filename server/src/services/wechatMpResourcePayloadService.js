@@ -1,5 +1,6 @@
 const { cleanWeChatUrl } = require("../utils/wechatUrl");
 const { normalizeEventCategory, normalizeEventDateTime } = require("./eventIntelligenceService");
+const { normalizeDeadline } = require("../utils/wechatEventSummary");
 
 const DEFAULT_ARTICLE_TAGS = "微信公众号,浙大资讯";
 const DEFAULT_EVENT_TAGS = "微信公众号";
@@ -259,6 +260,7 @@ const buildEventPayload = ({
         title: (toText(parsed?.title) || record.title).slice(0, 500),
         date,
         end_date: normalizeEventDateTime(parsed?.end_date, parsed?.time, 1) || date || null,
+        registration_deadline: normalizeDeadline(parsed?.registration_deadline),
         location: toText(parsed?.location),
         tags: uniqueTexts([DEFAULT_EVENT_TAGS, ...parsedTags]).join(","),
         image: toText(parsed?.coverImage) || record.cover || record.images[0] || "",
