@@ -5896,7 +5896,7 @@
         },
         "forumPage": {
             "title": "AI+X Finals & Entrepreneurship Forum",
-            "intro": "Special remarks by National Science and Technology Progress Award First Prize recipient Professor Liu Xiangguan in the morning; investment and industry leaders from six institutions in the afternoon. Register for either or both sessions.",
+            "intro": "Special remarks by National Science and Technology Progress Award First Prize recipient Professor Liu Xiangguan in the morning; investment and industry leaders from six institutions in the afternoon. Register for either or both sessions; comprehensive quality credits are available for each attended session.",
             "back": "Back to competition",
             "enter": "Forums & independent registration",
             "attendanceTitle": "Required attendance for contestants",
@@ -5908,7 +5908,7 @@
             "register": "Register for this forum",
             "closed": "Registration closed or not yet open",
             "signupTitle": "October 25 · Event registration",
-            "signupHint": "Choose the morning, afternoon, or both sessions.",
+            "signupHint": "Morning and afternoon registrations are separate, with comprehensive quality credits available for each attended session.",
             "chooseSession": "Choose sessions (select one or both)",
             "fields": {
                 "name": "Name",
@@ -6104,7 +6104,7 @@
                 "aiCapabilities": "Share your view and, if you wish, your reasoning",
                 "question": "What would you most like the speakers to address?"
             },
-            "sessionHint": "Register for either session, or select both.",
+            "sessionHint": "Register for either or both sessions. Each attended session is eligible for comprehensive quality credits.",
             "noSession": "Select at least one session that is open for registration.",
             "registrationTheme": "AI+X final pitches & entrepreneurship forum"
         },
