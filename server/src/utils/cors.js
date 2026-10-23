@@ -1,14 +1,13 @@
 const DEFAULT_DEV_ORIGINS = [
     "http://localhost:5180",
-    "http://localhost:3000",
-    "http://localhost:3001",
+    "http://127.0.0.1:5180",
     "capacitor://localhost",
 ];
 
 const DEFAULT_PRODUCTION_FALLBACK_ORIGINS = [
     "https://tuotuzju.com",
+    "https://www.tuotuzju.com",
     "capacitor://localhost",
-    "http://118.31.78.72",
 ];
 
 const normalizeOrigin = (value) => {

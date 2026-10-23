@@ -14,7 +14,7 @@ const main = () => {
     const productionEnv = {
         NODE_ENV: "production",
         FRONTEND_URL: "https://tuotuzju.com",
-        CORS_ALLOWED_ORIGINS: "https://tuotuzju.com,http://118.31.78.72",
+        CORS_ALLOWED_ORIGINS: "https://tuotuzju.com,https://www.tuotuzju.com,capacitor://localhost",
     };
 
     const productionOrigins = getAllowedOrigins(productionEnv);
@@ -23,20 +23,20 @@ const main = () => {
         "Production origin list should include the canonical domain."
     );
     assert(
-        productionOrigins.includes("http://118.31.78.72"),
-        "Production origin list should include the public IP while it is supported."
+        productionOrigins.includes("https://www.tuotuzju.com"),
+        "Production origin list should include the www domain."
     );
     assert(
         isOriginAllowed("https://tuotuzju.com", productionOrigins),
         "Canonical domain should pass CORS validation."
     );
     assert(
-        isOriginAllowed("http://118.31.78.72", productionOrigins),
-        "Configured public IP should pass CORS validation."
+        !isOriginAllowed("http://118.31.78.72", productionOrigins),
+        "The retired public IP must not pass the current default CORS configuration."
     );
     assert(
-        !isOriginAllowed("capacitor://localhost", productionOrigins),
-        "Explicit production CORS config should remain authoritative."
+        isOriginAllowed("capacitor://localhost", productionOrigins),
+        "The configured iOS client should pass CORS validation."
     );
     assert(
         !isOriginAllowed("https://evil.example.com", productionOrigins),
@@ -46,7 +46,7 @@ const main = () => {
         hasExplicitProductionOrigins(productionEnv),
         "Configured production env should be recognized as explicit."
     );
-    console.log("✓ Production CORS allowlist accepts configured domain and public IP only.");
+    console.log("✓ Production CORS allowlist accepts the configured web and native clients.");
 
     const productionFallbackOrigins = getAllowedOrigins({
         NODE_ENV: "production",
@@ -64,8 +64,8 @@ const main = () => {
         "Development allowlist should keep the Vite dev origin."
     );
     assert(
-        isOriginAllowed("http://localhost:3001", developmentOrigins),
-        "Development allowlist should keep the API dev origin."
+        isOriginAllowed("http://127.0.0.1:5180", developmentOrigins),
+        "Development allowlist should accept the numeric loopback Vite origin."
     );
     assert(
         isOriginAllowed("capacitor://localhost", developmentOrigins),

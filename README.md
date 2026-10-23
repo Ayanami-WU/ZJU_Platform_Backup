@@ -41,11 +41,12 @@ cp -n server/.env.example server/.env
 npm run dev
 ```
 
-先编辑 `server/.env`，至少设置安全的 `SECRET_KEY`。完整变量及说明以 [server/.env.example](server/.env.example) 为准，不提交真实配置。
+先编辑 `server/.env`，至少设置安全的 `SECRET_KEY`；样例不提供可用密钥或默认管理员密码，默认采用开发模式并关闭后台任务。完整变量及说明以 [server/.env.example](server/.env.example) 为准，不提交真实配置。
 
 - 前端固定 [localhost:5180](http://localhost:5180)，端口占用时明确失败，不自动换号。
 - 后端健康端点为 [localhost:5181/api/health](http://localhost:5181/api/health)。
 - `npm run dev` 把 `/api`、`/uploads` 代理到本地 `127.0.0.1:5181`，以开发模式关闭采集、开奖等后台任务。
+- `npm run dev:server` 同样固定开发模式和 5181 端口；已有生产 `.env` 的端口不会覆盖开发入口。完整开发入口在任一子进程退出时停止另一进程，避免端口占用失败后遗留服务。
 - 分开启动可使用 `npm run dev:server`、`npm run dev:client`。手动启动前端时检查 `VITE_API_PROXY_TARGET`，避免意外连接生产。
 - `SERVER_HOST` 控制后端监听，`BACKGROUND_TASKS_DISABLED=1` 明确关闭后台任务；真实 AI、采集、推送等外部能力按专项任务配置，不用页面联调消耗线上服务。
 
@@ -64,6 +65,10 @@ npm run dev
 | 微信采集           | `npm run check:wechat-ai` 及相关服务测试                                           |
 | 搜索索引维护       | `npm run search:index:refresh`（会更新索引，不是只读检查）                         |
 | 格式与差异         | `npm run format:check`、`git diff --check`                                         |
+
+`make help` 列出的入口与 npm、Compose 保持一致。`make test` 执行后端测试，浏览器测试使用 `make test-e2e`；没有单独的前端单元测试入口。容器目标使用 Compose v2 和 `server/.env`，停止容器保留数据卷。
+
+`playwright.local.config.js` 继承标准本地配置，不连接生产 API。已安装的 Chromium 可通过 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 指定；测试结果保存到仓库的 `test-results/local`。
 
 文档任务检查内容、链接、格式和差异；UI 需查看真实页面；Mock、构建不能替代真实 provider、平台账号、真机或生产流程证据。
 
@@ -142,7 +147,7 @@ ZJU_Platform/
 
 优先通过根目录和 `server/package.json` 的 npm 命令运行脚本。`scripts/` 是仓库级工具，`server/scripts/` 是后端工具；同一目录中的脚本统一使用小写连字符命名，名称表达动作和对象，例如 `seed-community-demo.js`、`verify-event-assistant.js`、`wechat-parser.mjs`。
 
-- 后端数据初始化：`npm --prefix server run seed` 调用 `server/scripts/seed-platform.js`；它会写入数据库，不作为启动前的例行检查。
+- 后端演示数据重置：`npm --prefix server run seed` 调用 `server/scripts/seed-platform.js`；它会清空并重建目标库的演示内容，仅对明确选择的演示数据库使用。执行前必须提供至少 12 字符的 `SEED_ADMIN_PASSWORD` 和 `SEED_USER_PASSWORD`；缺失时在打开数据库前退出，不创建公开默认密码的账号。
 - 人工修复：`server/scripts/fix-comment-schema.js` 会迁移数据库；`server/scripts/reinstall-dependencies.sh` 会重装后端依赖并重启 PM2。它们与只读检查脚本用途不同。
 - 自动生成的 `node_modules/`、`dist/`、`dev-dist/`、测试报告、`output/`、`tmp/` 和浏览器缓存不作为源码入口，也不提交 Git。
 - 数据库及 WAL/SHM、`server/uploads/`、`server/data/`、日志、备份与真实环境配置是本地或服务器运行数据。不能随目录整理移动正在使用的数据库；数据库位置以服务配置和 `DATABASE_FILE` 为准。

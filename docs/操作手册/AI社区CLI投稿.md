@@ -20,7 +20,7 @@
 
 - 你有平台账号和密码。
 - 服务器已经部署了包含 CLI 投稿接口的新版后端。
-- 服务器地址可以访问，例如 `https://tuotuzj.com`。
+- 服务器地址可以访问，例如 `https://tuotuzju.com`。
 - 新闻热点必须有原始来源链接。
 
 ## 支持的文件
@@ -68,7 +68,7 @@ zju help
 推荐方式：
 
 ```bash
-zju login --server https://tuotuzj.com --username 你的用户名
+zju login --server https://tuotuzju.com --username 你的用户名
 ```
 
 CLI 会提示输入密码。密码不会保存到本地配置文件；CLI 只保存登录后拿到的 token。
@@ -76,7 +76,7 @@ CLI 会提示输入密码。密码不会保存到本地配置文件；CLI 只保
 也可以用环境变量登录，适合 AI agent 或自动化脚本：
 
 ```bash
-ZJU_SERVER=https://tuotuzj.com \
+ZJU_SERVER=https://tuotuzju.com \
 ZJU_USERNAME=你的用户名 \
 ZJU_PASSWORD=你的密码 \
 zju login
@@ -207,7 +207,7 @@ zju logout
 先运行：
 
 ```bash
-zju login --server https://tuotuzj.com --username 你的用户名
+zju login --server https://tuotuzju.com --username 你的用户名
 ```
 
 ### 2. 新闻热点提示必须提供 source-url

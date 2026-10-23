@@ -1,5 +1,12 @@
 require("dotenv").config();
 
+// Validate before loading the database or clearing any existing tables.
+for (const key of ["SEED_ADMIN_PASSWORD", "SEED_USER_PASSWORD"]) {
+    if (!process.env[key] || process.env[key].length < 12) {
+        throw new Error(`${key} must be set to a password of at least 12 characters.`);
+    }
+}
+
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const { getDb, pool } = require("../src/config/db");
@@ -32,7 +39,7 @@ const settingsSeed = {
 const usersSeed = [
     {
         username: process.env.SEED_ADMIN_USERNAME || "seed_admin",
-        password: process.env.SEED_ADMIN_PASSWORD || "Admin123456",
+        password: process.env.SEED_ADMIN_PASSWORD,
         role: "admin",
         nickname: "种子管理员",
         organization_cr: "拓浙AI生态",
@@ -40,7 +47,7 @@ const usersSeed = [
     },
     {
         username: process.env.SEED_USER_USERNAME || "demo_user",
-        password: process.env.SEED_USER_PASSWORD || "Demo123456",
+        password: process.env.SEED_USER_PASSWORD,
         role: "user",
         nickname: "演示用户",
         organization_cr: "浙江大学",
@@ -1120,9 +1127,7 @@ async function seed() {
 
     await pool.close();
 
-    console.log(
-        "✅ Seed completed — default accounts created (see env vars or source for credentials)"
-    );
+    console.log("✅ Seed completed — demo accounts use the supplied SEED_*_PASSWORD values");
 }
 
 seed().catch(async (error) => {

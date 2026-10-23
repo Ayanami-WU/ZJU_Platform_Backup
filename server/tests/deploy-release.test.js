@@ -42,6 +42,17 @@ for (const { failHealth, browser, fault = "none" } of [
             write(path.join(payload, "release-manifest.txt"), `commit=${sha}\n`);
             write(path.join(payload, "server/index.js"), "// new server");
             write(path.join(payload, "server/package.json"), '{"name":"server"}');
+            for (const file of ["scripts/configure-production-env.js", "src/utils/cors.js"]) {
+                write(
+                    path.join(payload, "server", file),
+                    fs.readFileSync(path.resolve(__dirname, "..", file), "utf8")
+                );
+            }
+            fs.cpSync(
+                path.dirname(require.resolve("dotenv/package.json")),
+                path.join(payload, "server/node_modules/dotenv"),
+                { recursive: true }
+            );
             write(path.join(payload, "dist/index.html"), "new frontend");
             write(path.join(payload, "shared/hackathonTemplateDefaults.json"), "{}");
             for (const match of fs

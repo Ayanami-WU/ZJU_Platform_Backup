@@ -77,7 +77,7 @@ echo "Release payload validated"
 
 (
   cd "$payload/server"
-  npm ci --omit=dev --legacy-peer-deps
+  npm ci --omit=dev
   verify_browser() {
     node -e 'const { chromium } = require("playwright"); chromium.launch({ headless: true }).then(async (browser) => { await browser.close(); console.log("Playwright Chromium launch verified"); }).catch((error) => { console.error(error); process.exit(1); });'
   }
@@ -173,27 +173,13 @@ if [ -z "${ZJU_QWEN_BASE_URL:-}" ]; then
   echo "ERROR: private Qwen endpoint secret is missing"
   exit 1
 fi
-APP_ROOT="$app_root" ZJU_QWEN_BASE_URL="$ZJU_QWEN_BASE_URL" node - <<'NODE'
-const fs = require("node:fs");
-const path = require("node:path");
-const envPath = path.join(process.env.APP_ROOT, "server", ".env");
-const tempPath = `${envPath}.qwen-policy.tmp`;
-const key = "ZJU_QWEN_BASE_URL";
-const value = process.env.ZJU_QWEN_BASE_URL || "";
-if (!value || !/^https?:\/\//.test(value)) {
-  throw new Error("Private Qwen endpoint secret is invalid.");
-}
-const current = fs.existsSync(envPath) ? fs.readFileSync(envPath, "utf8") : "";
-const lines = current
-  .split(/\r?\n/)
-  .filter((line) => !line.startsWith(`${key}=`));
-while (lines.length > 0 && lines.at(-1) === "") lines.pop();
-lines.push(`${key}=${value}`, "");
-const mode = fs.existsSync(envPath) ? fs.statSync(envPath).mode & 0o777 : 0o600;
-fs.writeFileSync(tempPath, lines.join("\n"), { mode });
-fs.renameSync(tempPath, envPath);
-NODE
-echo "Private Qwen endpoint anchor configured"
+CORS_ALLOWED_ORIGINS="$(APP_ROOT="$app_root" ZJU_QWEN_BASE_URL="$ZJU_QWEN_BASE_URL" \
+  node "$app_root/server/scripts/configure-production-env.js")"
+# Clear inherited legacy PM2 aliases; their configured clients are now in the allowlist.
+CORS_ORIGIN=""
+FRONTEND_URL=""
+export CORS_ALLOWED_ORIGINS CORS_ORIGIN FRONTEND_URL
+echo "Private model anchor and production client origins configured"
 
 install -m 0644 "$stage/payload/release-manifest.txt" "$app_root/.deployed-release"
 grep -Fxq "commit=$release_id" "$app_root/.deployed-release"

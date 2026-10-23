@@ -1,107 +1,47 @@
-# Lumos Photography Makefile
-# Quick commands for development and deployment
+# 拓浙 AI 生态：thin wrappers around maintained npm and Compose entry points.
+.DEFAULT_GOAL := help
+COMPOSE := docker compose --env-file server/.env
 
-.PHONY: help install dev build test lint clean docker-build docker-run deploy
+.PHONY: help install dev dev-backend dev-frontend build build-docker test test-backend test-e2e lint lint-fix format format-check docker-build docker-run docker-dev docker-stop docker-clean db-migrate db-seed db-backup audit logs shell
 
-# Default target
 help:
-	@echo "Lumos Photography - Available Commands:"
-	@echo ""
-	@echo "Development:"
-	@echo "  make install       Install all dependencies"
-	@echo "  make dev           Start development server"
-	@echo "  make dev-backend   Start backend development server only"
-	@echo "  make dev-frontend  Start frontend development server only"
-	@echo ""
-	@echo "Building:"
-	@echo "  make build         Build production application"
-	@echo "  make build-docker  Build Docker image"
-	@echo ""
-	@echo "Testing:"
-	@echo "  make test          Run all tests"
-	@echo "  make test-frontend Run frontend tests"
-	@echo "  make test-backend  Run backend tests"
-	@echo "  make test-e2e      Run end-to-end tests"
-	@echo ""
-	@echo "Code Quality:"
-	@echo "  make lint          Run ESLint"
-	@echo "  make lint-fix      Fix ESLint errors"
-	@echo "  make format        Format code with Prettier"
-	@echo "  make format-check  Check code formatting"
-	@echo ""
-	@echo "Docker:"
-	@echo "  make docker-build  Build Docker image"
-	@echo "  make docker-run    Run Docker container"
-	@echo "  make docker-dev    Run development Docker environment"
-	@echo "  make docker-stop   Stop Docker containers"
-	@echo "  make docker-clean  Clean Docker containers and images"
-	@echo ""
-	@echo "Database:"
-	@echo "  make db-migrate    Run database migrations"
-	@echo "  make db-seed       Seed database with sample data"
-	@echo "  make db-backup     Backup database"
-	@echo "  make db-restore    Restore database from backup"
-	@echo ""
-	@echo "Deployment:"
-	@echo "  make deploy-staging    Deploy to staging"
-	@echo "  make deploy-production Deploy to production"
-	@echo ""
-	@echo "Maintenance:"
-	@echo "  make clean         Clean build files and dependencies"
-	@echo "  make update        Update all dependencies"
-	@echo "  make audit         Run security audit"
+	@echo "Development: install, dev, dev-backend, dev-frontend"
+	@echo "Checks: build, test (backend), test-e2e, lint, lint-fix, format, format-check, audit"
+	@echo "Containers: docker-build, docker-run, docker-dev, docker-stop, logs, shell"
+	@echo "Database (writes data): db-migrate, db-seed (demo reset), db-backup"
+	@echo "Production release: push reviewed commits to master; GitHub Actions deploys them."
+	@echo "Run container targets separately; production and development both use port 5181."
 
-# ============================================
-# Development
-# ============================================
 install:
-	npm install
-	cd server && npm install
+	npm ci
 
 dev:
 	npm run dev
 
 dev-backend:
-	cd server && npm run dev
+	npm run dev:server
 
 dev-frontend:
-	npm run dev:frontend
+	npm run dev:client
 
-# ============================================
-# Building
-# ============================================
 build:
 	npm run build
 
-build-docker:
-	docker build -t lumos:latest .
+build-docker: docker-build
 
-# ============================================
-# Testing
-# ============================================
-test:
-	npm run test
-	cd server && npm test
-
-test-frontend:
-	npm run test:unit
+test: test-backend
 
 test-backend:
-	cd server && npm test
+	node --test --test-concurrency=1 server/tests/*.test.js
 
 test-e2e:
 	npm run test:e2e
 
-# ============================================
-# Code Quality
-# ============================================
 lint:
 	npm run lint
-	cd server && npm run lint
 
 lint-fix:
-	npm run lint:fix
-	cd server && npm run lint:fix
+	npm run lint -- --fix
 
 format:
 	npm run format
@@ -109,87 +49,36 @@ format:
 format-check:
 	npm run format:check
 
-# ============================================
-# Docker
-# ============================================
 docker-build:
-	docker-compose build
+	$(COMPOSE) build app
 
 docker-run:
-	docker-compose up -d app
+	$(COMPOSE) up --build -d app
 
 docker-dev:
-	docker-compose up dev
+	$(COMPOSE) --profile development up --build dev
 
 docker-stop:
-	docker-compose down
+	$(COMPOSE) --profile development --profile with-backup down --remove-orphans
 
-docker-clean:
-	docker-compose down -v --rmi all --remove-orphans
-	docker system prune -f
+# Retain the old alias without deleting persistent volumes or unrelated images.
+docker-clean: docker-stop
 
-# ============================================
-# Database
-# ============================================
 db-migrate:
-	cd server && npm run migrate
+	npm --prefix server run migrate
 
 db-seed:
-	cd server && npm run seed
+	npm --prefix server run seed
 
 db-backup:
-	cd server && npm run backup
-
-db-restore:
-	@echo "Usage: make db-restore FILE=backup-file.sql"
-	cd server && npm run restore -- $(FILE)
-
-# ============================================
-# Deployment
-# ============================================
-deploy-staging:
-	@echo "Deploying to staging..."
-	# Add your staging deployment commands
-	# ssh user@staging-server "cd /app && git pull && make docker-build && make docker-run"
-
-deploy-production:
-	@echo "Deploying to production..."
-	# Add your production deployment commands
-	# ssh user@production-server "cd /app && git pull && make docker-build && make docker-run"
-
-# ============================================
-# Maintenance
-# ============================================
-clean:
-	rm -rf node_modules
-	rm -rf server/node_modules
-	rm -rf dist
-	rm -rf server/dist
-	rm -rf coverage
-	rm -rf server/coverage
-	find . -type d -name ".cache" -exec rm -rf {} + 2>/dev/null || true
-	find . -type d -name "build" -exec rm -rf {} + 2>/dev/null || true
-
-update:
-	npm update
-	cd server && npm update
+	npm --prefix server run backup
 
 audit:
-	npm audit
-	cd server && npm audit
+	npm run audit:dependencies
+	npm audit --prefix server --omit=dev --audit-level=high
 
-# ============================================
-# Utilities
-# ============================================
 logs:
-	docker-compose logs -f app
+	$(COMPOSE) logs --tail 100 -f app
 
 shell:
-	docker-compose exec app sh
-
-backup-images:
-	@echo "Backing up images..."
-	tar -czf backups/images-$(shell date +%Y%m%d-%H%M%S).tar.gz uploads/
-
-optimize-images:
-	cd server && npm run optimize-images
+	$(COMPOSE) exec app sh

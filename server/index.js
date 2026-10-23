@@ -155,7 +155,10 @@ const corsOptionsDelegate = (req, callback) => {
         `[CORS] Blocked origin: ${origin || "<missing>"} host=${req.headers.host || "<missing>"} referer=${req.headers.referer || "<missing>"} x-forwarded-proto=${req.headers["x-forwarded-proto"] || "<missing>"}`
     );
 
-    callback(new Error("CORS policy violation: Origin not allowed"));
+    const error = new Error("CORS policy violation: Origin not allowed");
+    error.statusCode = 403;
+    error.code = "CORS_ORIGIN_DENIED";
+    callback(error);
 };
 
 app.use(cors(corsOptionsDelegate));
