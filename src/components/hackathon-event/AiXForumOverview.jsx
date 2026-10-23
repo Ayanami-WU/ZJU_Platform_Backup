@@ -1,4 +1,4 @@
-import { CalendarDays, MapPin } from "lucide-react";
+import { Award, CalendarDays, MapPin, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./AiXForumOverview.css";
 
@@ -36,7 +36,7 @@ function ForumGuest({ guest, label }) {
     );
 }
 
-export default function AiXForumOverview() {
+export default function AiXForumOverview({ onRegisterSession }) {
     const { t } = useTranslation();
     const copy = t("aix.pages.forumOverview", { returnObjects: true });
     return (
@@ -74,6 +74,44 @@ export default function AiXForumOverview() {
                                     </div>
                                 </div>
                             </div>
+                            {forum.highlight && (
+                                <div
+                                    className="aix-forum-highlight"
+                                    data-morning={forum.id === "finals" || undefined}
+                                >
+                                    {forum.highlight.photoUrl ? (
+                                        <img
+                                            className="aix-forum-highlight-portrait"
+                                            src={forum.highlight.photoUrl}
+                                            alt={forum.highlight.name}
+                                            width="200"
+                                            height="240"
+                                        />
+                                    ) : (
+                                        <Award
+                                            className="aix-forum-highlight-award"
+                                            size={56}
+                                            aria-hidden="true"
+                                        />
+                                    )}
+                                    <div className="aix-forum-highlight-copy">
+                                        <p>{forum.highlight.eyebrow}</p>
+                                        <h3>{forum.highlight.title}</h3>
+                                        <strong>{forum.highlight.name}</strong>
+                                        <p>{forum.highlight.description}</p>
+                                    </div>
+                                    {onRegisterSession && (
+                                        <button
+                                            className="aix-primary"
+                                            type="button"
+                                            onClick={() => onRegisterSession(forum.id)}
+                                        >
+                                            {forum.signup}
+                                            <ArrowUpRight size={19} aria-hidden="true" />
+                                        </button>
+                                    )}
+                                </div>
+                            )}
                             <div className="aix-forum-agenda">
                                 {forum.topicsLabel && (
                                     <h3 className="px-[26px] pb-2.5 pt-5 text-base font-semibold text-[var(--hx-muted)]">

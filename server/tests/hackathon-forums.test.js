@@ -279,6 +279,71 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             ).status,
             200
         );
+        // October 25 morning is a new session, not a relabelled October 18 receipt.
+        Date.now = () => Date.parse("2026-10-23T12:00:00+08:00");
+        await db.run(
+            "INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact) VALUES(?,?,?,?,?)",
+            ["zhekesong-ai-x-2026", "technology", 1, "Historical Guest", "old@example.test"]
+        );
+        const both = {
+            ...payload,
+            sessions: ["finals", "entrepreneurship"],
+            replaceUpcoming: true,
+        };
+        const dual = await request("/signup", { method: "POST", body: both });
+        assert.equal(dual.status, 200);
+        assert.deepEqual(dual.data.registrations.map((row) => row.forumKey).sort(), [
+            "entrepreneurship",
+            "finals",
+            "technology",
+        ]);
+        const dualIds = dual.data.registrations.map((row) => row.id);
+        assert.deepEqual(
+            (await request("/signup", { method: "POST", body: both })).data.registrations.map(
+                (row) => row.id
+            ),
+            dualIds
+        );
+        const afternoonOnly = await request("/signup", {
+            method: "POST",
+            body: { ...both, sessions: ["entrepreneurship"] },
+        });
+        assert.equal(afternoonOnly.status, 200);
+        assert(!afternoonOnly.data.registrations.some((row) => row.forumKey === "finals"));
+        assert.equal(
+            afternoonOnly.data.registrations.find((row) => row.forumKey === "technology").contact,
+            "old@example.test"
+        );
+        assert.equal(
+            (await request("/signup", { method: "POST", body: { ...both, sessions: [] } })).status,
+            400
+        );
+        assert.equal(
+            (
+                await request("/signup", {
+                    method: "POST",
+                    body: { ...both, sessions: ["technology"] },
+                })
+            ).status,
+            400
+        );
+        const morningOnly = await request("/signup", {
+            method: "POST",
+            body: { ...both, sessions: ["finals"] },
+        });
+        assert.equal(morningOnly.status, 200);
+        assert(!morningOnly.data.registrations.some((row) => row.forumKey === "entrepreneurship"));
+        const parallel = await Promise.all([
+            request("/signup", { method: "POST", body: both }),
+            request("/signup", { method: "POST", body: both }),
+        ]);
+        assert(parallel.every((response) => response.status === 200));
+        assert.equal(
+            (await request("/admin", { id: 3 })).data.registrations.filter(
+                (row) => row.forumKey === "finals"
+            ).length,
+            1
+        );
         Date.now = () => Date.parse("2026-10-25T09:00:00+08:00");
         assert.equal(
             (
@@ -288,6 +353,16 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
                 })
             ).status,
             200
+        );
+        assert.equal((await request("/signup", { method: "POST", body: both })).status, 403);
+        const afterMorning = await request("/signup", {
+            method: "POST",
+            body: { ...both, sessions: ["entrepreneurship"] },
+        });
+        assert.equal(afterMorning.status, 200);
+        assert(
+            afterMorning.data.registrations.some((row) => row.forumKey === "finals"),
+            "Started morning receipt is preserved"
         );
         Date.now = () => Date.parse("2026-10-25T13:30:00+08:00");
         assert.equal(

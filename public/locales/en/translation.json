@@ -4346,7 +4346,8 @@
             "copyFailed": "Could not copy. Select and copy the text manually.",
             "submissionMaterials": "Submission materials (formal snapshots and drafts kept separately)",
             "delete": "Delete this registration",
-            "peopleView": "People"
+            "peopleView": "People",
+            "finals": "Morning finals"
         }
     },
     "not_found": {
@@ -5894,8 +5895,8 @@
             "prizeValue": "¥27,500"
         },
         "forumPage": {
-            "title": "AI Interdisciplinary Innovation Forums",
-            "intro": "AI technology and industrial applications, and first principles of entrepreneurship. Open to the public; forum and competition registrations are separate.",
+            "title": "AI+X Finals & Entrepreneurship Forum",
+            "intro": "Special remarks by National Science and Technology Progress Award First Prize recipient Professor Liu Xiangguan in the morning; investment and industry leaders from six institutions in the afternoon. Register for either or both sessions.",
             "back": "Back to competition",
             "enter": "Forums & independent registration",
             "attendanceTitle": "Required attendance for contestants",
@@ -5906,9 +5907,9 @@
             "cancel": "Cancel this session",
             "register": "Register for this forum",
             "closed": "Registration closed or not yet open",
-            "signupTitle": "Register for entrepreneurship forum",
-            "signupHint": "Enter your contact details to register for the entrepreneurship forum.",
-            "chooseSession": "Choose forum sessions",
+            "signupTitle": "October 25 · Event registration",
+            "signupHint": "Choose the morning, afternoon, or both sessions.",
+            "chooseSession": "Choose sessions (select one or both)",
             "fields": {
                 "name": "Name",
                 "contact": "Mobile number",
@@ -5982,7 +5983,7 @@
                     ]
                 },
                 "entrepreneurship": {
-                    "title": "Entrepreneurship forum",
+                    "title": "Afternoon · Entrepreneurship forum",
                     "theme": "First principles of entrepreneurship in the AI era",
                     "time": "25 Oct · 13:30–16:05",
                     "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace Hall (Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou)",
@@ -6074,13 +6075,21 @@
                             "name": "Xu Songbo",
                             "role": "Chairman, Chuang Feifan AI; Vice President, Zhejiang Science and Technology Innovation Enterprise Association; Chair, AI Innovation Committee"
                         }
-                    ]
+                    ],
+                    "highlight": "Invited investment and industry leaders from six institutions"
+                },
+                "finals": {
+                    "title": "Morning · Hackathon finals",
+                    "theme": "AI+X interdisciplinary hackathon",
+                    "time": "25 Oct · 09:00–11:30",
+                    "highlight": "Special guest: National Science and Technology Progress Award First Prize recipient Prof. Liu Xiangguan",
+                    "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace\nLevel 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou"
                 }
             },
             "heroLink": "Forums & registration",
             "accountHint": "Forums are open to the public. Create an account, then complete the forum form without a student ID. Competition participation still requires contestant details.",
-            "chapters": ["Technology", "Entrepreneurship", "Registration"],
-            "dateTime": "October 25 · 13:30–16:05",
+            "chapters": ["Morning finals", "Afternoon forum", "Registration"],
+            "dateTime": "25 Oct · Morning 09:00 / Afternoon 13:30",
             "venue": "1897 OPC Community & Sandun Metaspace",
             "address": "Level 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
             "attendeeLabel": "Attendee type",
@@ -6094,7 +6103,10 @@
                 "researchExperience": "Describe your research, contribution and results, or enter “None”",
                 "aiCapabilities": "Share your view and, if you wish, your reasoning",
                 "question": "What would you most like the speakers to address?"
-            }
+            },
+            "sessionHint": "Register for either session, or select both.",
+            "noSession": "Select at least one session that is open for registration.",
+            "registrationTheme": "AI+X final pitches & entrepreneurship forum"
         },
         "october12": {
             "partnerGroups": [
@@ -6804,58 +6816,60 @@
                 "topicsLabel": "Topics",
                 "sessions": [
                     {
-                        "id": "technology",
-                        "title": "Technical forum",
-                        "theme": "AI technology trends & industry applications",
-                        "date": "18 Oct · 09:00–11:30 · Host: Ying Qi",
-                        "location": "ZJU Zijingang Campus\nDuan Yongping Teaching Building 2–112",
+                        "id": "finals",
+                        "title": "Morning · Hackathon finals",
+                        "theme": "AI+X interdisciplinary hackathon",
+                        "date": "25 Oct · 09:00–11:30",
+                        "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace\nLevel 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
                         "guests": [
                             {
-                                "id": "ye-xinjiang",
-                                "name": "Ye Xinjiang",
-                                "role": "CTO, Daily Interactive Co., Ltd.",
+                                "id": "liu-xiangguan",
+                                "name": "Liu Xiangguan",
+                                "role": "First Prize recipient, National Science and Technology Progress Award; doctoral supervisor in Operations Research and Cybernetics, Zhejiang University",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/ye-xinjiang.jpg"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
                             },
                             {
-                                "id": "tan-weichuan",
-                                "name": "Tan Weichuan",
-                                "role": "University Relations Lead, MiraclePlus",
+                                "id": "ying-qi",
+                                "name": "Ying Qi",
+                                "role": "Founder, Tuozhe AI Ecosystem & Qiying Technology",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/tan-weichuan.jpg"
-                            },
-                            {
-                                "id": "sun-yifei",
-                                "name": "Sun Yifei",
-                                "role": "Hundred Talents Program Researcher, Zhejiang University",
-                                "photo": true
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi-poster.png"
                             }
                         ],
+                        "topicsLabel": "Finals agenda",
                         "topics": [
                             {
-                                "title": "Development trends of 仝 and enterprise responses",
-                                "speaker": "Ye Xinjiang",
-                                "guestIds": ["ye-xinjiang"],
-                                "time": "09:20–10:00"
+                                "title": "Special guest opening remarks",
+                                "speaker": "Liu Xiangguan",
+                                "guestIds": ["liu-xiangguan"],
+                                "time": "09:05–09:10"
                             },
                             {
-                                "title": "From hackathon to startup",
-                                "speaker": "Tan Weichuan",
-                                "guestIds": ["tan-weichuan"],
-                                "time": "10:05–10:45"
+                                "title": "Zhekesong: bringing ideas into the real world",
+                                "speaker": "Ying Qi",
+                                "guestIds": ["ying-qi"],
+                                "time": "09:10–09:15"
                             },
                             {
-                                "title": "Keynote: developments in embodied intelligence technology",
-                                "speaker": "Sun Yifei",
-                                "guestIds": ["sun-yifei"],
-                                "time": "10:50–11:30"
+                                "title": "11 project pitches and final judging",
+                                "speaker": "Final pitches",
+                                "guestIds": [],
+                                "time": "09:25–11:30"
                             }
                         ],
-                        "signup": "Join technical forum"
+                        "signup": "Register for morning",
+                        "highlight": {
+                            "eyebrow": "Special guest remarks",
+                            "title": "National Science and Technology Progress Award · First Prize",
+                            "name": "Professor Liu Xiangguan",
+                            "description": "Zhejiang University doctoral supervisor in Operations Research and Cybernetics",
+                            "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
+                        }
                     },
                     {
                         "id": "entrepreneurship",
-                        "title": "Entrepreneurship forum",
+                        "title": "Afternoon · Entrepreneurship forum",
                         "theme": "First principles of entrepreneurship in the AI era",
                         "date": "25 Oct · 13:30–16:05 · Host: Yang Xing",
                         "location": "1897 OPC Community & ZJU National Innovation and Entrepreneurship Demonstration Base · Sandun Metaspace\nLevel 6, Block C, Baogang Life Plaza, Xihu District, Hangzhou",
@@ -6863,7 +6877,7 @@
                             {
                                 "id": "liu-xiangguan",
                                 "name": "Liu Xiangguan",
-                                "role": "Adviser, ZJU Committee for the Wellbeing of the Next Generation lecture group; doctoral supervisor in Operations Research and Cybernetics",
+                                "role": "First Prize recipient, National Science and Technology Progress Award; doctoral supervisor in Operations Research and Cybernetics, Zhejiang University",
                                 "photo": true,
                                 "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
                             },
@@ -6967,19 +6981,31 @@
                                 "time": "13:45–13:50"
                             },
                             {
-                                "title": "Founder perspective: redefining outstanding talent in the AI era",
+                                "title": "ZJU Zijin Entrepreneurship Metaspace",
+                                "speaker": "Wang Feifan",
+                                "guestIds": ["wang-feifan"],
+                                "time": "13:50–14:05"
+                            },
+                            {
+                                "title": "Redefining outstanding talent in the AI era",
                                 "speaker": "Han Bing",
                                 "guestIds": ["han-bing"],
                                 "time": "14:05–14:25"
                             },
                             {
-                                "title": "Keynote 1: calm reflection amid the AI frenzy: what capabilities should young people develop to navigate cycles?",
+                                "title": "Elite Eagle platform introduction",
+                                "speaker": "Zhang Jialin",
+                                "guestIds": ["zhang-jialin"],
+                                "time": "14:25–14:40"
+                            },
+                            {
+                                "title": "Calm reflection amid the AI frenzy: what capabilities help young people navigate cycles?",
                                 "speaker": "Liu Jianbin",
                                 "guestIds": ["liu-jianbin"],
                                 "time": "14:40–15:00"
                             },
                             {
-                                "title": "Keynote 2: from the unknown to possibility: building a smart hardware startup from 0 to 1",
+                                "title": "From the unknown to possibility: smart hardware entrepreneurship from 0 to 1",
                                 "speaker": "Liu Xiang",
                                 "guestIds": ["liu-xiang"],
                                 "time": "15:00–15:15"
@@ -6993,15 +7019,19 @@
                         ],
                         "signup": "Join entrepreneurship forum",
                         "invitedGuestIds": [
-                            "liu-xiangguan",
                             "xu-songbo",
-                            "wang-feifan",
                             "yan-xia",
                             "dou-mingqing",
                             "shen-lei",
                             "liu-xushuang"
                         ],
-                        "topicsLabel": "Featured talks"
+                        "topicsLabel": "Featured talks",
+                        "highlight": {
+                            "eyebrow": "Invited investment and industry leaders",
+                            "title": "Six investment institutions",
+                            "name": "Growth and entrepreneurship in the AI era",
+                            "description": "Manhattan Capital · Huadan Angel · Oufang Angel · Puhua Capital · XbotPark · MiraclePlus"
+                        }
                     }
                 ],
                 "invitedLabel": "Special guests",

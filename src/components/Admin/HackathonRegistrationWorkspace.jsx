@@ -169,8 +169,7 @@ export default function HackathonRegistrationWorkspace({
                 .join(" / ");
         if (id === "workStatus") return tr(`status_${submissionFor(row)}`);
         if (forum) {
-            if (id === "sessionLabel")
-                return tr(row.forumKey === "technology" ? "technology" : "entrepreneurship");
+            if (id === "sessionLabel") return tr(row.forumKey);
             if (id === "completeLabel")
                 return tr(missingForumFields(row).length ? "incomplete" : "complete");
             if (id === "attendeeType")
@@ -599,7 +598,7 @@ export default function HackathonRegistrationWorkspace({
                                         tr("session"),
                                         session,
                                         setSession,
-                                        ["technology", "entrepreneurship"].map((key) => [
+                                        ["finals", "entrepreneurship", "technology"].map((key) => [
                                             key,
                                             tr(key),
                                         ])

@@ -1,3 +1,5 @@
+const { open } = require("sqlite");
+const sqlite3 = require("sqlite3");
 const { getDb } = require("../config/db");
 const config = require("../../../shared/hackathonForums.json");
 const toRegistration = (row) => ({
@@ -44,6 +46,7 @@ const registerForums = async (req, res, next) => {
     try {
         const {
             sessions,
+            replaceUpcoming,
             name: rawName,
             contact: rawContact,
             organization: rawOrganization,
@@ -73,7 +76,12 @@ const registerForums = async (req, res, next) => {
             !sessions.length ||
             sessions.length > 2 ||
             new Set(sessions).size !== sessions.length ||
-            sessions.some((key) => !config.sessions.some((s) => s.key === key))
+            sessions.some((key) => !config.sessions.some((s) => s.key === key)) ||
+            (replaceUpcoming !== undefined && typeof replaceUpcoming !== "boolean") ||
+            (replaceUpcoming === true &&
+                sessions.some(
+                    (key) => !config.sessions.some((s) => s.key === key && s.registrationSelectable)
+                ))
         )
             return res
                 .status(400)
@@ -125,11 +133,47 @@ const registerForums = async (req, res, next) => {
             researchExperience,
             aiCapabilities,
         ]);
-        // One atomic statement: repeat submissions update the same account/session receipt.
-        await db.run(
-            `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization,attendee_type,student_id,major,grade,question,school,project_experience,research_experience,ai_capabilities) VALUES ${sessions.map(() => "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,attendee_type=excluded.attendee_type,student_id=excluded.student_id,major=excluded.major,grade=excluded.grade,question=excluded.question,school=excluded.school,project_experience=excluded.project_experience,research_experience=excluded.research_experience,ai_capabilities=excluded.ai_capabilities,updated_at=CURRENT_TIMESTAMP`,
-            values
-        );
+        // Dedicated connection: one account's session changes cannot enroll unrelated requests
+        // in its transaction. Historical and already-started sessions remain untouched.
+        let writer = db;
+        if (replaceUpcoming) {
+            const database = (await db.all("PRAGMA database_list")).find(
+                (row) => row.name === "main"
+            );
+            writer = await open({ filename: database.file, driver: sqlite3.Database });
+        }
+        try {
+            if (replaceUpcoming)
+                await writer.exec(
+                    "PRAGMA foreign_keys=ON; PRAGMA busy_timeout=10000; BEGIN IMMEDIATE"
+                );
+            await writer.run(
+                `INSERT INTO hackathon_forum_registrations(event_key,forum_key,user_id,name,contact,organization,attendee_type,student_id,major,grade,question,school,project_experience,research_experience,ai_capabilities) VALUES ${sessions.map(() => "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)").join(",")} ON CONFLICT(event_key,user_id,forum_key) DO UPDATE SET name=excluded.name,contact=excluded.contact,organization=excluded.organization,attendee_type=excluded.attendee_type,student_id=excluded.student_id,major=excluded.major,grade=excluded.grade,question=excluded.question,school=excluded.school,project_experience=excluded.project_experience,research_experience=excluded.research_experience,ai_capabilities=excluded.ai_capabilities,updated_at=CURRENT_TIMESTAMP`,
+                values
+            );
+
+            if (replaceUpcoming) {
+                const removed = config.sessions
+                    .filter(
+                        (session) =>
+                            session.registrationSelectable &&
+                            now < Date.parse(session.startsAt) &&
+                            !sessions.includes(session.key)
+                    )
+                    .map((session) => session.key);
+                if (removed.length)
+                    await writer.run(
+                        `DELETE FROM hackathon_forum_registrations WHERE event_key=? AND user_id=? AND forum_key IN (${removed.map(() => "?").join(",")})`,
+                        [config.eventKey, req.user.id, ...removed]
+                    );
+                await writer.exec("COMMIT");
+            }
+        } catch (error) {
+            if (replaceUpcoming) await writer.exec("ROLLBACK").catch(() => {});
+            throw error;
+        } finally {
+            if (replaceUpcoming) await writer.close();
+        }
         return getMyForums(req, res, next);
     } catch (e) {
         next(e);

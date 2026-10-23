@@ -268,3 +268,156 @@
         gap: 20px;
     }
 }
+
+/* October 25: shared registration entry, independently selectable morning and afternoon. */
+.aix-forum-session-picker {
+    border: 0;
+    margin: 0 0 28px;
+    padding: 0;
+    min-width: 0;
+}
+.aix-forum-session-picker legend {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--hx-text);
+}
+.aix-forum-session-picker > p {
+    color: var(--hx-muted);
+    line-height: 1.6;
+    margin: 8px 0 16px;
+}
+.aix-forum-session-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.aix-forum-session-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 14px;
+    border: 1px solid var(--hx-line);
+    background: var(--hx-surface);
+    border-radius: 8px;
+    cursor: pointer;
+}
+.aix-forum-session-options label[data-selected="true"] {
+    border-color: var(--hx-accent-text);
+    background: color-mix(in srgb, var(--hx-accent) 9%, var(--hx-surface));
+}
+.aix-forum-session-options input {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    margin-top: 3px;
+    accent-color: var(--hx-accent-text);
+}
+.aix-forum-session-options label > span {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
+.aix-forum-session-options strong {
+    font-size: 17px;
+    line-height: 1.5;
+}
+.aix-forum-session-options time {
+    color: var(--hx-accent-text);
+    font-size: 16px;
+    line-height: 1.5;
+}
+.aix-forum-session-options span > span {
+    font-size: 14px;
+    color: var(--hx-muted);
+    line-height: 1.6;
+}
+.aix-forum-highlight {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    border-block: 1px solid var(--hx-line);
+    background: linear-gradient(
+        105deg,
+        color-mix(in srgb, var(--hx-accent) 8%, transparent),
+        transparent
+    );
+}
+.aix-forum-highlight-portrait {
+    width: 150px;
+    height: 190px;
+    object-fit: contain;
+    object-position: center bottom;
+    flex: none;
+}
+.aix-forum-highlight-award {
+    flex: none;
+    color: var(--hx-accent-text);
+}
+.aix-forum-highlight-copy {
+    flex: 1;
+    min-width: 0;
+}
+.aix-forum-highlight-copy h3 {
+    color: var(--hx-accent-text);
+    font-size: clamp(25px, 2.8vw, 40px);
+    line-height: 1.35;
+    font-weight: 750;
+    margin: 8px 0 12px;
+}
+.aix-forum-highlight-copy strong {
+    display: block;
+    color: var(--hx-text);
+    font-size: 23px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.aix-forum-highlight-copy p {
+    color: var(--hx-muted);
+    line-height: 1.7;
+    font-size: 16px;
+}
+.aix-forum-highlight .aix-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex: none;
+}
+.aix-forum-topic-row:has(.aix-forum-speakers:empty) {
+    grid-template-columns: 1fr;
+}
+.aix-forum-speakers:empty {
+    display: none;
+}
+@media (max-width: 767px) {
+    .aix-forum-session-options {
+        grid-template-columns: 1fr;
+    }
+    .aix-forum-highlight {
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 22px 0;
+    }
+    .aix-forum-highlight-portrait {
+        width: 96px;
+        height: 136px;
+    }
+    .aix-forum-highlight-award {
+        width: 40px;
+        height: 40px;
+    }
+    .aix-forum-highlight-copy {
+        flex-basis: calc(100% - 120px);
+    }
+    .aix-forum-highlight-copy h3 {
+        font-size: 25px;
+    }
+    .aix-forum-highlight-copy strong {
+        font-size: 20px;
+    }
+    .aix-forum-highlight .aix-primary {
+        width: 100%;
+    }
+}

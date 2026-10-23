@@ -4465,7 +4465,8 @@
             "copyFailed": "复制失败，请手动选择文字复制。",
             "submissionMaterials": "作品材料（正式提交与草稿分别保留）",
             "delete": "删除这条报名记录",
-            "peopleView": "人员名单"
+            "peopleView": "人员名单",
+            "finals": "上午决赛"
         }
     },
     "not_found": {
@@ -6000,8 +6001,8 @@
             "prizeValue": "¥27,500"
         },
         "forumPage": {
-            "title": "AI跨学科创新论坛",
-            "intro": "技术趋势与产业应用，AI时代创业的第一性原理。面向校内外公众开放，论坛报名与赛事报名分别办理。",
+            "title": "AI+X决赛与创业论坛",
+            "intro": "上午特邀国家科技进步一等奖获得者刘祥官教授，下午特邀六大资本机构投资与产业嘉宾。两场可分别报名，也可同时参加。",
             "back": "返回赛事",
             "enter": "查看论坛与独立报名",
             "attendanceTitle": "参赛选手到场要求",
@@ -6012,9 +6013,9 @@
             "cancel": "取消本场报名",
             "register": "报名本场论坛",
             "closed": "报名已截止或尚未开放",
-            "signupTitle": "创业论坛报名",
-            "signupHint": "填写联系信息，报名创业论坛。",
-            "chooseSession": "请选择论坛场次",
+            "signupTitle": "10月25日 · 参会报名",
+            "signupHint": "上午场、下午场可分别报名，也可同时参加。",
+            "chooseSession": "选择参加场次（可多选）",
             "fields": {
                 "name": "姓名",
                 "contact": "手机号",
@@ -6087,7 +6088,7 @@
                     ]
                 },
                 "entrepreneurship": {
-                    "title": "创业论坛",
+                    "title": "下午场 · 创业论坛",
                     "theme": "AI时代创业的第一性原理",
                     "time": "10月25日 13:30–16:05",
                     "location": "1897OPC社区&浙大国家级双创示范基地·三墩元空间活动厅（杭州市西湖区宝港生活广场C座6楼）",
@@ -6179,13 +6180,21 @@
                             "name": "徐松波",
                             "role": "创非凡人工智能董事长、浙江省科技创新企业协会副会长、AI 科创专委会主任"
                         }
-                    ]
+                    ],
+                    "highlight": "特邀六大资本机构投资与产业嘉宾"
+                },
+                "finals": {
+                    "title": "上午场 · 黑客松总决赛",
+                    "theme": "AI+X破界黑客松",
+                    "time": "10月25日 09:00–11:30",
+                    "highlight": "特邀国家科技进步一等奖获得者刘祥官教授",
+                    "location": "1897OPC社区 & 浙大国家级双创示范基地·三墩元空间\n杭州市西湖区宝港生活广场 C 座 6 楼"
                 }
             },
             "heroLink": "论坛介绍与独立报名",
             "accountHint": "论坛面向校内外公众。创建账号后填写论坛报名信息，无需提供学生学号；参加赛事时再补齐参赛资料。",
-            "chapters": ["技术论坛", "创业论坛", "论坛报名"],
-            "dateTime": "10月25日 13:30–16:05",
+            "chapters": ["上午决赛", "下午论坛", "参会报名"],
+            "dateTime": "10月25日 · 上午09:00 / 下午13:30",
             "venue": "1897OPC社区 & 三墩元空间",
             "address": "杭州市西湖区宝港生活广场 C 座 6 楼",
             "attendeeLabel": "参会身份",
@@ -6199,7 +6208,10 @@
                 "researchExperience": "简述研究方向、参与工作与成果；没有请填“暂无”",
                 "aiCapabilities": "写下你的判断，也可以简单说明理由",
                 "question": "围绕创业或投资，写下最希望嘉宾回应的问题"
-            }
+            },
+            "sessionHint": "上午场与下午场可分别报名，也可同时勾选。",
+            "noSession": "请至少勾选一个尚未截止的场次。",
+            "registrationTheme": "AI+X决赛路演与创业论坛"
         },
         "october12": {
             "partnerGroups": [
@@ -6909,58 +6921,60 @@
                 "topicsLabel": "分享主题",
                 "sessions": [
                     {
-                        "id": "technology",
-                        "title": "技术论坛",
-                        "theme": "AI技术趋势与产业应用",
-                        "date": "10月18日 09:00–11:30 · 主持人：应奇",
-                        "location": "浙江大学紫金港校区\n段永平教学楼 2-112",
+                        "id": "finals",
+                        "title": "上午场 · 黑客松总决赛",
+                        "theme": "AI+X破界黑客松",
+                        "date": "10月25日 · 09:00—11:30",
+                        "location": "1897OPC社区 & 浙大国家级双创示范基地·三墩元空间\n杭州市西湖区宝港生活广场 C 座 6 楼",
                         "guests": [
                             {
-                                "id": "ye-xinjiang",
-                                "name": "叶新江",
-                                "role": "每日互动股份有限公司 CTO",
+                                "id": "liu-xiangguan",
+                                "name": "刘祥官",
+                                "role": "国家科技进步一等奖获得者；浙江大学运筹学与控制论博导",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/ye-xinjiang.jpg"
+                                "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
                             },
                             {
-                                "id": "tan-weichuan",
-                                "name": "谭炜川",
-                                "role": "奇绩创坛高校负责人",
+                                "id": "ying-qi",
+                                "name": "应奇",
+                                "role": "拓浙AI生态&奇膺科技创始人",
                                 "photo": true,
-                                "photoUrl": "/images/hackathon/ai-x/guests/tan-weichuan.jpg"
-                            },
-                            {
-                                "id": "sun-yifei",
-                                "name": "孙逸飞",
-                                "role": "浙江大学百人计划研究员",
-                                "photo": true
+                                "photoUrl": "/images/hackathon/ai-x/guests/ying-qi-poster.png"
                             }
                         ],
+                        "topicsLabel": "决赛议程",
                         "topics": [
                             {
-                                "title": "仝的发展趋势及企业应对",
-                                "speaker": "叶新江",
-                                "guestIds": ["ye-xinjiang"],
-                                "time": "09:20–10:00"
+                                "title": "特邀嘉宾致辞",
+                                "speaker": "刘祥官",
+                                "guestIds": ["liu-xiangguan"],
+                                "time": "09:05–09:10"
                             },
                             {
-                                "title": "从黑客松到创业公司",
-                                "speaker": "谭炜川",
-                                "guestIds": ["tan-weichuan"],
-                                "time": "10:05–10:45"
+                                "title": "浙客松：让创意走向落地",
+                                "speaker": "应奇",
+                                "guestIds": ["ying-qi"],
+                                "time": "09:10–09:15"
                             },
                             {
-                                "title": "主题分享：具身智能技术发展",
-                                "speaker": "孙逸飞",
-                                "guestIds": ["sun-yifei"],
-                                "time": "10:50–11:30"
+                                "title": "11个项目路演与决赛评审",
+                                "speaker": "决赛路演",
+                                "guestIds": [],
+                                "time": "09:25–11:30"
                             }
                         ],
-                        "signup": "报名技术论坛"
+                        "signup": "报名上午场",
+                        "highlight": {
+                            "eyebrow": "特邀致辞",
+                            "title": "国家科技进步一等奖获得者",
+                            "name": "刘祥官教授",
+                            "description": "浙江大学运筹学与控制论博导、浙江省特级专家",
+                            "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
+                        }
                     },
                     {
                         "id": "entrepreneurship",
-                        "title": "创业论坛",
+                        "title": "下午场 · 创业论坛",
                         "theme": "AI时代创业的第一性原理",
                         "date": "10月25日 13:30–16:05 · 主持人：杨幸",
                         "location": "1897OPC社区 & 浙大国家级双创示范基地·三墩元空间\n杭州市西湖区宝港生活广场 C 座 6 楼",
@@ -6968,7 +6982,7 @@
                             {
                                 "id": "liu-xiangguan",
                                 "name": "刘祥官",
-                                "role": "浙江大学关工委宣讲团顾问、运筹学与控制论博导",
+                                "role": "国家科技进步一等奖获得者；浙江大学运筹学与控制论博导",
                                 "photo": true,
                                 "photoUrl": "/images/hackathon/ai-x/guests/liu-xiangguan-poster.png"
                             },
@@ -7072,19 +7086,31 @@
                                 "time": "13:45–13:50"
                             },
                             {
-                                "title": "创业者代表分享：AI时代，重新定义优秀人才",
+                                "title": "浙大紫金创业元空间介绍",
+                                "speaker": "王非凡",
+                                "guestIds": ["wang-feifan"],
+                                "time": "13:50–14:05"
+                            },
+                            {
+                                "title": "AI时代，重新定义优秀人才",
                                 "speaker": "韩冰",
                                 "guestIds": ["han-bing"],
                                 "time": "14:05–14:25"
                             },
                             {
-                                "title": "主题分享一：AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？",
+                                "title": "时代强鹰平台介绍",
+                                "speaker": "张加林",
+                                "guestIds": ["zhang-jialin"],
+                                "time": "14:25–14:40"
+                            },
+                            {
+                                "title": "AI狂欢下的冷静思考：青年应该培养哪些穿越周期的能力？",
                                 "speaker": "刘建斌",
                                 "guestIds": ["liu-jianbin"],
                                 "time": "14:40–15:00"
                             },
                             {
-                                "title": "主题分享二：从未知到可能，智能硬件创业0-1",
+                                "title": "从未知到可能，智能硬件创业0-1",
                                 "speaker": "刘香",
                                 "guestIds": ["liu-xiang"],
                                 "time": "15:00–15:15"
@@ -7098,15 +7124,19 @@
                         ],
                         "signup": "报名创业论坛",
                         "invitedGuestIds": [
-                            "liu-xiangguan",
                             "xu-songbo",
-                            "wang-feifan",
                             "yan-xia",
                             "dou-mingqing",
                             "shen-lei",
                             "liu-xushuang"
                         ],
-                        "topicsLabel": "主题分享"
+                        "topicsLabel": "主题分享",
+                        "highlight": {
+                            "eyebrow": "特邀投资与产业嘉宾",
+                            "title": "六大资本机构",
+                            "name": "共话AI时代的成长与创业",
+                            "description": "曼哈顿资本 · 华旦天使 · 藕舫天使 · 普华资本 · XbotPark · 奇绩创坛"
+                        }
                     }
                 ],
                 "invitedLabel": "特邀嘉宾",

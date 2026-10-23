@@ -13,7 +13,7 @@ import AiXForumOverview from "./AiXForumOverview";
 import AiXRegistrationLock from "./AiXRegistrationLock";
 import "./AiXForums.css";
 import "./AiXRegistrationPreview.css";
-const FORUM_IDS = ["forum-technology", "forum-entrepreneurship", "forum-registration"];
+const FORUM_IDS = ["forum-finals", "forum-entrepreneurship", "forum-registration"];
 const emptyDetails = (profile = {}) => ({
     name: profile.name || "",
     contact: "",
@@ -28,7 +28,7 @@ const emptyDetails = (profile = {}) => ({
     researchExperience: "",
     aiCapabilities: "",
 });
-const entrepreneurship = config.sessions.find((s) => s.key === "entrepreneurship");
+const registrationSessions = config.sessions.filter((session) => session.registrationSelectable);
 export default function AiXForums({ now, registrationState }) {
     const { t } = useTranslation();
     const { hash } = useLocation();
@@ -43,6 +43,13 @@ export default function AiXForums({ now, registrationState }) {
     };
     const { user, loading: authLoading, onLogin } = registrationState;
     const [registrations, setRegistrations] = useState([]);
+    const [selectedSessions, setSelectedSessions] = useState([]);
+    const syncSessions = (rows) =>
+        setSelectedSessions(
+            registrationSessions
+                .filter((session) => rows.some((row) => row.forumKey === session.key))
+                .map((session) => session.key)
+        );
     const [details, setDetails] = useState(emptyDetails);
     const [loading, setLoading] = useState(false),
         [busy, setBusy] = useState(false),
@@ -85,6 +92,7 @@ export default function AiXForums({ now, registrationState }) {
     useEffect(() => {
         let active = true;
         setRegistrations([]);
+        setSelectedSessions([]);
         setSaved(false);
         setBusy(false);
         setError("");
@@ -99,6 +107,7 @@ export default function AiXForums({ now, registrationState }) {
             .then(({ data }) => {
                 if (!active) return;
                 setRegistrations(data.registrations);
+                syncSessions(data.registrations);
                 if (data.registrations.length) {
                     const r =
                         data.registrations.find((r) => r.forumKey === "entrepreneurship") ||
@@ -133,11 +142,13 @@ export default function AiXForums({ now, registrationState }) {
     const submit = async (event) => {
         event.preventDefault();
         if (!user || authLoading || loading || busy) return;
-        if (!open(entrepreneurship)) {
-            setError("closed");
+        const sessions = selectedSessions.filter((key) =>
+            registrationSessions.some((session) => session.key === key && open(session))
+        );
+        if (!sessions.length) {
+            setError("noSession");
             return;
         }
-        const sessions = ["entrepreneurship"];
         const userId = user.id;
         setBusy(true);
         setError("");
@@ -147,6 +158,7 @@ export default function AiXForums({ now, registrationState }) {
                 "/hackathon/forums/register",
                 {
                     sessions,
+                    replaceUpcoming: true,
                     ...details,
                     ...(details.attendeeType === "internal" ? { school: "" } : { studentId: "" }),
                 },
@@ -154,6 +166,7 @@ export default function AiXForums({ now, registrationState }) {
             );
             if (owner.current !== userId) return;
             setRegistrations(data.registrations);
+            syncSessions(data.registrations);
             setSaved(true);
         } catch (e) {
             if (owner.current === userId)
@@ -179,6 +192,7 @@ export default function AiXForums({ now, registrationState }) {
             });
             if (owner.current !== userId) return;
             setRegistrations(data.registrations);
+            syncSessions(data.registrations);
         } catch {
             if (owner.current === userId) setError("saveFailed");
         } finally {
@@ -193,7 +207,13 @@ export default function AiXForums({ now, registrationState }) {
                 ids={FORUM_IDS}
                 labels={t("aix.forumPage.chapters", { returnObjects: true })}
             />
-            <AiXForumOverview />
+            <AiXForumOverview
+                onRegisterSession={(key) => {
+                    setSelectedSessions((values) => [...new Set([...values, key])]);
+                    setSaved(false);
+                    goTo("forum-registration");
+                }}
+            />
             <section className="aix-page" ref={formRef} id="forum-registration">
                 <div className="aix-page-body">
                     <header className="aix-page-heading">
@@ -203,14 +223,14 @@ export default function AiXForums({ now, registrationState }) {
                     <div className="aix-forum-registration-layout">
                         <aside className="aix-forum-registration-summary">
                             <p className="aix-eyebrow">AI + X · 2026</p>
-                            <h3>{t("aix.pages.forumOverview.sessions.1.theme")}</h3>
+                            <h3>{t("aix.forumPage.registrationTheme")}</h3>
                             <div className="aix-forum-event-info">
                                 <div>
                                     <span className="aix-forum-info-icon">
                                         <CalendarDays size={24} aria-hidden="true" />
                                     </span>
                                     <div>
-                                        <time dateTime={entrepreneurship.startsAt}>
+                                        <time dateTime="2026-10-25">
                                             {t("aix.forumPage.dateTime")}
                                         </time>
                                     </div>
@@ -279,6 +299,65 @@ export default function AiXForums({ now, registrationState }) {
                                 </>
                             ) : (
                                 <form onSubmit={submit}>
+                                    <fieldset
+                                        className="aix-forum-session-picker"
+                                        disabled={busy || loading || authLoading}
+                                    >
+                                        <legend>{t("aix.forumPage.chooseSession")}</legend>
+                                        <p>{t("aix.forumPage.sessionHint")}</p>
+                                        <div className="aix-forum-session-options">
+                                            {registrationSessions.map((session) => (
+                                                <label
+                                                    key={session.key}
+                                                    data-selected={selectedSessions.includes(
+                                                        session.key
+                                                    )}
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        name="sessions"
+                                                        value={session.key}
+                                                        checked={selectedSessions.includes(
+                                                            session.key
+                                                        )}
+                                                        disabled={!open(session)}
+                                                        onChange={(event) => {
+                                                            setSaved(false);
+                                                            setError("");
+                                                            setSelectedSessions((values) =>
+                                                                event.target.checked
+                                                                    ? [...values, session.key]
+                                                                    : values.filter(
+                                                                          (key) =>
+                                                                              key !== session.key
+                                                                      )
+                                                            );
+                                                        }}
+                                                    />
+                                                    <span>
+                                                        <strong>
+                                                            {t(
+                                                                `aix.forumPage.sessions.${session.key}.title`
+                                                            )}
+                                                        </strong>
+                                                        <time dateTime={session.startsAt}>
+                                                            {t(
+                                                                `aix.forumPage.sessions.${session.key}.time`
+                                                            )}
+                                                        </time>
+                                                        <span>
+                                                            {t(
+                                                                `aix.forumPage.sessions.${session.key}.highlight`
+                                                            )}
+                                                        </span>
+                                                        {!open(session) && (
+                                                            <span>{t("aix.forumPage.closed")}</span>
+                                                        )}
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </fieldset>
                                     <div
                                         className="aix-forum-attendee-tabs"
                                         role="tablist"
@@ -435,7 +514,7 @@ export default function AiXForums({ now, registrationState }) {
                                             authLoading ||
                                             loading ||
                                             busy ||
-                                            !open(entrepreneurship)
+                                            !registrationSessions.some(open)
                                         }
                                     >
                                         {t(busy ? "aix.forumPage.saving" : "aix.forumPage.submit")}

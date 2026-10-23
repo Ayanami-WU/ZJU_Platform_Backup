@@ -8,9 +8,16 @@
             "endsAt": "2026-10-18T11:30:00+08:00"
         },
         {
+            "key": "finals",
+            "startsAt": "2026-10-25T09:00:00+08:00",
+            "endsAt": "2026-10-25T11:30:00+08:00",
+            "registrationSelectable": true
+        },
+        {
             "key": "entrepreneurship",
             "startsAt": "2026-10-25T13:30:00+08:00",
-            "endsAt": "2026-10-25T16:05:00+08:00"
+            "endsAt": "2026-10-25T16:05:00+08:00",
+            "registrationSelectable": true
         }
     ]
 }
