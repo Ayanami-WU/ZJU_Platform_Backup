@@ -401,8 +401,8 @@ export default function AiXForums({ now, registrationState }) {
                                                 "major",
                                                 "grade",
                                                 "name",
-                                                "contact",
                                                 "studentId",
+                                                "contact",
                                                 "projectExperience",
                                                 "researchExperience",
                                                 "aiCapabilities",
@@ -528,6 +528,30 @@ export default function AiXForums({ now, registrationState }) {
                                     </button>
                                 </form>
                             )}
+                            <section
+                                className="aix-forum-group"
+                                aria-labelledby="forum-group-title"
+                            >
+                                <div>
+                                    <h3 id="forum-group-title">{t("aix.forumPage.groupTitle")}</h3>
+                                    <p>{t("aix.forumPage.groupHint")}</p>
+                                </div>
+                                <a
+                                    href="/images/hackathon/ai-x/official/entrepreneurship-forum-group-qr.jpg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={t("aix.forumPage.groupOpen")}
+                                >
+                                    <img
+                                        src="/images/hackathon/ai-x/official/entrepreneurship-forum-group-qr.jpg"
+                                        alt={t("aix.forumPage.groupAlt")}
+                                        width="1279"
+                                        height="1788"
+                                        loading="lazy"
+                                    />
+                                    <span>{t("aix.forumPage.groupOpen")}</span>
+                                </a>
+                            </section>
                         </div>
                     </div>
                 </div>

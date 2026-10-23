@@ -5895,6 +5895,10 @@
             "prizeValue": "¥27,500"
         },
         "forumPage": {
+            "groupTitle": "Join the forum WeChat group",
+            "groupHint": "Scan to join the AI+X Entrepreneurship Forum group for event updates. On mobile, open the original image and long-press to recognize it, or save it and scan it in WeChat.",
+            "groupAlt": "WeChat group QR code for the AI+X Entrepreneurship Forum",
+            "groupOpen": "Open original QR image",
             "title": "AI+X Finals & Entrepreneurship Forum",
             "intro": "Special remarks by National Science and Technology Progress Award First Prize recipient Professor Liu Xiangguan in the morning; investment and industry leaders from six institutions in the afternoon. Register for either or both sessions; comprehensive quality credits are available for each attended session.",
             "back": "Back to competition",

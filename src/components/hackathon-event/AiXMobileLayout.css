@@ -954,14 +954,15 @@
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
         #forum-registration[data-aix-fit="flow"]
         .aix-forum-signup {
-        padding: 16px;
+        padding: 14px 12px;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
         #forum-registration[data-aix-fit="flow"]
         .aix-forum-fields {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        gap: 10px;
+        margin-bottom: 16px;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
@@ -992,7 +993,7 @@
         min-width: 0;
         width: 100%;
         min-height: 44px;
-        padding: 10px 12px;
+        padding: 9px 10px;
         font-size: 16px;
         line-height: 1.5;
     }
@@ -1001,13 +1002,161 @@
         #forum-registration[data-aix-fit="flow"]
         .aix-forum-fields
         textarea {
-        min-height: 96px;
+        min-height: 72px;
+        height: 72px;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
         #forum-registration[data-aix-fit="flow"]
         .aix-forum-attendee-tabs {
         margin-bottom: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-page-heading {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-page-heading
+        h2 {
+        font-size: 24px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-registration-layout {
+        gap: 16px;
+        margin-top: 0;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-registration-summary
+        h3 {
+        font-size: 21px;
+        margin: 6px 0 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-event-info {
+        gap: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-event-info
+        > div {
+        gap: 10px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-info-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-event-info
+        :is(time, strong) {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-event-info
+        p {
+        font-size: 13px;
+        line-height: 1.55;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-picker {
+        margin-bottom: 16px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-picker
+        legend {
+        font-size: 17px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-picker
+        > p {
+        font-size: 13px;
+        margin: 6px 0 10px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options {
+        gap: 8px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options
+        label {
+        gap: 10px;
+        padding: 12px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options
+        label
+        > span {
+        gap: 4px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options
+        strong {
+        font-size: 15px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options
+        time {
+        font-size: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-session-options
+        span
+        > span {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-attendee-tabs
+        button {
+        min-height: 44px;
+        font-size: 14px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        #forum-registration[data-aix-fit="flow"]
+        .aix-forum-signup
+        button[type="submit"] {
+        margin-top: 12px;
     }
 }
 
