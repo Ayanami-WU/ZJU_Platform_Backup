@@ -843,9 +843,36 @@
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
         .aix-forum-screen[data-aix-fit="flow"]
         .aix-guest-portrait {
-        width: 52px;
-        height: 62px;
-        flex-basis: 52px;
+        width: 64px;
+        height: 80px;
+        flex-basis: 64px;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-guest-portrait[data-photo="original"] {
+        aspect-ratio: auto;
+        border-radius: 0;
+        mask-image: none;
+        align-items: center;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-guest-portrait[data-photo="original"]::before {
+        display: none;
+    }
+    :root
+        .hx-workspace[data-event="zhekesong-ai-x-2026"]
+        .aix-forum-screen[data-aix-fit="flow"]
+        .aix-guest-portrait[data-photo="original"]
+        img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        object-fit: contain;
+        object-position: center;
+        transform: none;
     }
     :root
         .hx-workspace[data-event="zhekesong-ai-x-2026"]
