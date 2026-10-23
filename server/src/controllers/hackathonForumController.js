@@ -28,7 +28,7 @@ const cleanAnswer = (value) =>
     value.length <= 2000 &&
     !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(value)
         ? value.trim()
-        : "";
+        : null;
 const getMyForums = async (req, res, next) => {
     try {
         const db = await getDb();
@@ -67,8 +67,8 @@ const registerForums = async (req, res, next) => {
         const major = clean(rawMajor, 160);
         const grade = clean(rawGrade, 80);
         const school = clean(rawSchool, 160);
-        const projectExperience = cleanAnswer(rawProjectExperience);
-        const researchExperience = cleanAnswer(rawResearchExperience);
+        const projectExperience = cleanAnswer(rawProjectExperience ?? "");
+        const researchExperience = cleanAnswer(rawResearchExperience ?? "");
         const aiCapabilities = cleanAnswer(rawAiCapabilities);
         const question = cleanAnswer(rawQuestion);
         if (
@@ -95,8 +95,8 @@ const registerForums = async (req, res, next) => {
             !major ||
             !grade ||
             (attendeeType === "external" && !school) ||
-            !projectExperience ||
-            !researchExperience ||
+            projectExperience === null ||
+            researchExperience === null ||
             !aiCapabilities ||
             !question ||
             (rawOrganization && !organization)

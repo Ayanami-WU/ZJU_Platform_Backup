@@ -1,7 +1,7 @@
 import { registrationSubmissionState } from "./hackathonRegistrationSubmissions.js";
 
 export const TRACK_KEYS = ["industry", "campus"];
-export const FORUM_REQUIRED_FIELDS = [
+export const FORUM_FIELDS = [
     "school",
     "major",
     "grade",
@@ -13,6 +13,9 @@ export const FORUM_REQUIRED_FIELDS = [
     "aiCapabilities",
     "question",
 ];
+export const FORUM_REQUIRED_FIELDS = FORUM_FIELDS.filter(
+    (key) => !["projectExperience", "researchExperience"].includes(key)
+);
 
 export function registrationTrackEntries(row) {
     const data = row.form_data || {};

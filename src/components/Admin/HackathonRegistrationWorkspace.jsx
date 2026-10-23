@@ -31,7 +31,7 @@ import {
     reportedTeamGroups,
     rosterDate,
     rosterTimestamp,
-    FORUM_REQUIRED_FIELDS,
+    FORUM_FIELDS,
 } from "../../utils/hackathonRoster";
 import { registrationSubmissionState } from "../../utils/hackathonRegistrationSubmissions";
 import { AdminButton, AdminEmptyState, useAdminTheme } from "./AdminUI";
@@ -194,7 +194,7 @@ export default function HackathonRegistrationWorkspace({
         const add = (id, label) => result.set(id, { id, label });
         add("name", tr("name"));
         if (forum) {
-            for (const id of FORUM_REQUIRED_FIELDS.filter((key) => key !== "name"))
+            for (const id of FORUM_FIELDS.filter((key) => key !== "name"))
                 add(id, t(`aix.forumPage.fields.${id}`));
             for (const [id, key] of [
                 ["attendeeType", "identity"],

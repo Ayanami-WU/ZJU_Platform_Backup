@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CalendarDays, MapPin, CheckCircle2 } from "lucide-react";
 import api from "../../services/api";
+import { FORUM_REQUIRED_FIELDS } from "../../utils/hackathonRoster.js";
 import config from "../../../shared/hackathonForums.json";
 import { useReducedMotion } from "framer-motion";
 import { useAiXPager } from "../../hooks/useAiXPager";
@@ -413,6 +414,8 @@ export default function AiXForums({ now, registrationState }) {
                                                         : key !== "studentId"
                                                 )
                                                 .map((key) => {
+                                                    const required =
+                                                        FORUM_REQUIRED_FIELDS.includes(key);
                                                     const Input = [
                                                         "question",
                                                         "projectExperience",
@@ -434,7 +437,11 @@ export default function AiXForums({ now, registrationState }) {
                                                         >
                                                             <span>
                                                                 {t(`aix.forumPage.fields.${key}`)}{" "}
-                                                                <span aria-hidden="true">*</span>
+                                                                {required && (
+                                                                    <span aria-hidden="true">
+                                                                        *
+                                                                    </span>
+                                                                )}
                                                             </span>
                                                             <Input
                                                                 placeholder={t(
@@ -442,7 +449,7 @@ export default function AiXForums({ now, registrationState }) {
                                                                     { defaultValue: "" }
                                                                 )}
                                                                 name={key}
-                                                                required
+                                                                required={required}
                                                                 maxLength={
                                                                     Input === "textarea"
                                                                         ? 2000

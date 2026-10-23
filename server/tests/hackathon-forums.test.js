@@ -127,15 +127,7 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
                 400
             );
         }
-        for (const field of [
-            "school",
-            "major",
-            "grade",
-            "question",
-            "projectExperience",
-            "researchExperience",
-            "aiCapabilities",
-        ]) {
+        for (const field of ["school", "major", "grade", "question", "aiCapabilities"]) {
             for (const invalid of [" ", null, 123, "bad\u0000value"]) {
                 assert.equal(
                     (
@@ -185,15 +177,7 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             grade: "2026级",
             question: "如何判断AI创业方向？\n如何验证需求？",
         };
-        for (const field of [
-            "studentId",
-            "major",
-            "grade",
-            "question",
-            "projectExperience",
-            "researchExperience",
-            "aiCapabilities",
-        ]) {
+        for (const field of ["studentId", "major", "grade", "question", "aiCapabilities"]) {
             assert.equal(
                 (await request("/signup", { method: "POST", body: { ...internal, [field]: " " } }))
                     .status,
@@ -210,6 +194,30 @@ test("forum signup is independent, private, idempotent, date-bounded and adminis
             ).status,
             400
         );
+        for (const details of [payload, internal]) {
+            for (const blank of ["", " ", null, undefined]) {
+                const result = await request("/signup", {
+                    method: "POST",
+                    body: { ...details, projectExperience: blank, researchExperience: blank },
+                });
+                assert.equal(result.status, 200);
+                assert.equal(result.data.registrations[0].projectExperience, "");
+                assert.equal(result.data.registrations[0].researchExperience, "");
+            }
+        }
+        for (const field of ["projectExperience", "researchExperience"]) {
+            for (const invalid of [123, "bad\u0000value"]) {
+                assert.equal(
+                    (
+                        await request("/signup", {
+                            method: "POST",
+                            body: { ...payload, [field]: invalid },
+                        })
+                    ).status,
+                    400
+                );
+            }
+        }
         const internalSaved = await request("/signup", { method: "POST", body: internal });
         assert.equal(internalSaved.status, 200);
         assert.deepEqual(
