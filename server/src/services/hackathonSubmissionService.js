@@ -198,8 +198,9 @@ const submissionPayload = (row) =>
               track: row.track,
               stage: row.stage,
               version: row.version,
-              draft: JSON.parse(row.draft_json),
-              draftUpdatedAt: row.draft_updated_at,
+              draft: row.draft_json && row.draft_json !== "{}" ? JSON.parse(row.draft_json) : null,
+              draftUpdatedAt:
+                  row.draft_json && row.draft_json !== "{}" ? row.draft_updated_at : null,
               submitted: row.submitted_json ? JSON.parse(row.submitted_json) : null,
               submittedAt: row.submitted_at || null,
           }
@@ -290,7 +291,7 @@ function createHackathonSubmissionService({
                     tracks: await eligibility(db, row, template, serverNow),
                     submissions: (
                         await db.all(
-                            "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? ORDER BY track,stage",
+                            "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND record_key='primary' ORDER BY track,stage",
                             [eventKey, userId]
                         )
                     ).map(submissionPayload),
@@ -327,7 +328,7 @@ function createHackathonSubmissionService({
                     });
                 if (body.action === "withdraw") {
                     const existing = await db.get(
-                        "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=?",
+                        "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=? AND record_key='primary'",
                         [body.eventKey, userId, body.track, body.stage]
                     );
                     if (!existing || existing.version !== body.expectedVersion)
@@ -366,7 +367,7 @@ function createHackathonSubmissionService({
                         });
                 }
                 const existing = await db.get(
-                    "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=?",
+                    "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=? AND record_key='primary'",
                     [body.eventKey, userId, body.track, body.stage]
                 );
                 if ((existing?.version || 0) !== body.expectedVersion)
@@ -407,7 +408,7 @@ function createHackathonSubmissionService({
                     );
                 }
                 const saved = await db.get(
-                    "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=?",
+                    "SELECT * FROM hackathon_submissions WHERE event_key=? AND user_id=? AND track=? AND stage=? AND record_key='primary'",
                     [body.eventKey, userId, body.track, body.stage]
                 );
                 return { submission: submissionPayload(saved), serverNow };
@@ -532,7 +533,7 @@ function createHackathonSubmissionService({
             checkEvent(eventKey);
             return useDb(false, async (db) => {
                 const registrations = await db.all(
-                    "SELECT * FROM hackathon_registrations WHERE event_key=? AND user_id IS NOT NULL ORDER BY id",
+                    "SELECT * FROM hackathon_registrations WHERE event_key=? ORDER BY id",
                     [eventKey]
                 );
                 const submissions = await db.all(
@@ -551,13 +552,19 @@ function createHackathonSubmissionService({
                             eventKey,
                         ])
                     ).map(filePayload),
-                    rows: registrations.flatMap((row) =>
-                        Object.entries(entriesFor(row)).map(([track, entry]) => {
-                            const answers = entry.answers;
+                    rows: registrations.flatMap((row) => {
+                        const entries = entriesFor(row);
+                        const own = submissions.filter((item) => item.registration_id === row.id);
+                        const tracks = new Set([
+                            ...Object.keys(entries),
+                            ...own.map((item) => item.track),
+                        ]);
+                        return [...tracks].flatMap((track) => {
+                            const answers = entries[track]?.answers || {};
                             const qualification = qualifications.find(
-                                (item) => item.user_id === row.user_id && item.track === track
+                                (item) => item.registration_id === row.id && item.track === track
                             );
-                            return {
+                            const base = {
                                 registrationId: row.id,
                                 userId: row.user_id,
                                 track,
@@ -565,25 +572,47 @@ function createHackathonSubmissionService({
                                 studentId: answers.studentId || row.student_id || "",
                                 contact: answers.contact || "",
                                 teamName: answers.team || "",
-                                teamSize: Number(answers.teamSize) || 1,
+                                teamSize: Number(answers.teamSize) || null,
+                                canManageQualification: Boolean(row.user_id && entries[track]),
                                 semifinalQualified: qualification?.qualified === 1,
                                 qualificationUpdatedAt: qualification?.updated_at || null,
-                                submissions: Object.fromEntries(
-                                    ["initial", "semifinal"].map((stage) => [
-                                        stage,
-                                        submissionPayload(
-                                            submissions.find(
-                                                (item) =>
-                                                    item.user_id === row.user_id &&
-                                                    item.track === track &&
-                                                    item.stage === stage
-                                            )
-                                        ),
-                                    ])
-                                ),
                             };
-                        })
-                    ),
+                            const records = own.filter((item) => item.track === track);
+                            const primary = records.filter((item) => item.record_key === "primary");
+                            const additional = records.filter(
+                                (item) => item.record_key !== "primary"
+                            );
+                            const result = [];
+                            if (primary.length || !additional.length)
+                                result.push({
+                                    ...base,
+                                    rowKey: `${row.id}:${track}:primary`,
+                                    submissions: Object.fromEntries(
+                                        ["initial", "semifinal"].map((stage) => [
+                                            stage,
+                                            submissionPayload(
+                                                primary.find((item) => item.stage === stage)
+                                            ),
+                                        ])
+                                    ),
+                                });
+                            for (const record of additional) {
+                                const payload = submissionPayload(record);
+                                const snapshot = payload.submitted || payload.draft;
+                                result.push({
+                                    ...base,
+                                    rowKey: `${row.id}:${track}:${record.id}`,
+                                    availableStages: [record.stage],
+                                    name: snapshot.captainName || base.name,
+                                    contact: snapshot.contact || base.contact,
+                                    teamName: snapshot.teamName || base.teamName,
+                                    teamSize: snapshot.teamSize ?? base.teamSize,
+                                    submissions: { [record.stage]: payload },
+                                });
+                            }
+                            return result;
+                        });
+                    }),
                 };
             });
         },

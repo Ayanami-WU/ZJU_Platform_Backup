@@ -7,17 +7,19 @@ async function migrateHackathonSubmissions(db) {
             CREATE TABLE IF NOT EXISTS hackathon_submissions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 event_key TEXT NOT NULL,
-                user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
                 registration_id INTEGER NOT NULL REFERENCES hackathon_registrations(id) ON DELETE CASCADE,
                 track TEXT NOT NULL CHECK(track IN ('campus','industry')),
                 stage TEXT NOT NULL CHECK(stage IN ('initial','semifinal')),
+                record_key TEXT NOT NULL DEFAULT 'primary',
+                provenance_json TEXT NOT NULL DEFAULT '{}',
                 version INTEGER NOT NULL DEFAULT 1 CHECK(version >= 1),
                 draft_json TEXT NOT NULL DEFAULT '{}',
                 draft_updated_at TEXT NOT NULL,
                 submitted_json TEXT,
                 submitted_at TEXT,
                 CHECK ((submitted_json IS NULL AND submitted_at IS NULL) OR (submitted_json IS NOT NULL AND submitted_at IS NOT NULL)),
-                UNIQUE(event_key,user_id,track,stage)
+                UNIQUE(event_key,user_id,track,stage,record_key)
             );
             CREATE INDEX IF NOT EXISTS idx_hackathon_submissions_roster ON hackathon_submissions(event_key,track,stage);
             CREATE TABLE IF NOT EXISTS hackathon_submission_files (
@@ -78,5 +80,6 @@ async function migrateHackathonSubmissions(db) {
         await db.exec("ROLLBACK");
         throw error;
     }
+    await require("./hackathonFlexibleRecords").migrateHackathonFlexibleRecords(db);
 }
 module.exports = { migrateHackathonSubmissions };

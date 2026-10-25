@@ -77,3 +77,36 @@ test("failed or malformed submission reads remain unknown rather than falsely ma
     }
     assert.doesNotThrow(() => registrationSubmissionAnswers(registration(2, 5)));
 });
+
+test("multiple works in one round and unlinked registrations retain every snapshot", () => {
+    const source = {
+        rows: [
+            { registrationId: 2, userId: null, submissions: { initial: { ...record, id: 21 } } },
+            {
+                registrationId: 2,
+                userId: null,
+                submissions: {
+                    initial: {
+                        ...record,
+                        id: 22,
+                        submitted: {
+                            projectName: "另一作品",
+                            attachmentReferences: [{ name: "待补.pdf" }],
+                        },
+                    },
+                },
+            },
+            { registrationId: 3, userId: null, submissions: { initial: { ...record, id: 23 } } },
+        ],
+    };
+    const [row] = attachRegistrationSubmissions([registration(2, null)], source);
+    assert.equal(row.submissionRecords.length, 2);
+    const answers = registrationSubmissionAnswers(row);
+    assert.equal(answers.work__industry__initial__projectName, "正式版本");
+    assert.equal(answers.work__industry__initial__record22__projectName, "另一作品");
+    assert.equal(answers.work__industry__initial__record22__attachmentReferences, "待补.pdf");
+    assert.match(
+        registrationSubmissionField("work__industry__initial__record22__projectName").label,
+        /记录 22 · 项目名称/
+    );
+});

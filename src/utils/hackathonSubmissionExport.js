@@ -12,10 +12,19 @@ export const submissionExportTable = (roster, label, formatDate) => {
         "modelscopeUrl",
         "bpFileId",
         "demoFileId",
+        "wechat",
+        "visitNotes",
+        "links",
+        "attachmentReferences",
+        "reviewNote",
     ];
     const snapshotValues = (snapshot) =>
         keys.flatMap((key) => {
             const value = snapshot?.[key] ?? "";
+            if (key === "links")
+                return [(snapshot?.links || []).map((link) => link.url).join("\n")];
+            if (key === "attachmentReferences")
+                return [(snapshot?.attachmentReferences || []).map((file) => file.name).join("\n")];
             if (!key.endsWith("FileId")) return [value];
             const file = files.get(String(value));
             return [
@@ -31,6 +40,7 @@ export const submissionExportTable = (roster, label, formatDate) => {
                 : []),
         ]);
     const headers = [
+        label("export_submission_id"),
         label("export_registration_id"),
         label("export_user_id"),
         label("track"),
@@ -52,6 +62,7 @@ export const submissionExportTable = (roster, label, formatDate) => {
         Object.entries(row.submissions || {})
             .filter(([, submission]) => submission)
             .map(([stage, submission]) => [
+                submission.id,
                 row.registrationId,
                 row.userId,
                 label(row.track),
@@ -62,7 +73,9 @@ export const submissionExportTable = (roster, label, formatDate) => {
                 row.teamName,
                 row.teamSize,
                 label(submission.submitted ? "export_submitted" : "export_draft"),
-                formatDate(submission.submittedAt),
+                /^\d{4}-\d{2}-\d{2}$/.test(submission.submittedAt || "")
+                    ? submission.submittedAt
+                    : formatDate(submission.submittedAt),
                 formatDate(submission.draftUpdatedAt),
                 submission.version,
                 label(row.semifinalQualified ? "qualified" : "not_qualified"),

@@ -15,6 +15,8 @@ import {
     useAdminTheme,
 } from "./AdminUI";
 
+import SubmissionAdditionalMaterials from "./SubmissionAdditionalMaterials";
+
 const materialKeys = ["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"];
 
 export default function HackathonSubmissionManager({ eventKey }) {
@@ -69,6 +71,7 @@ export default function HackathonSubmissionManager({ eventKey }) {
             rows.filter(
                 (row) =>
                     row.track === track &&
+                    (!row.availableStages || row.availableStages.includes(stage)) &&
                     [
                         row.name,
                         row.studentId,
@@ -86,16 +89,18 @@ export default function HackathonSubmissionManager({ eventKey }) {
     );
 
     const formatDate = (value) =>
-        value
-            ? new Intl.DateTimeFormat(i18n.language.startsWith("en") ? "en-GB" : "zh-CN", {
-                  timeZone: "Asia/Shanghai",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-              }).format(new Date(value))
-            : "—";
+        value && /^\d{4}-\d{2}-\d{2}$/.test(value)
+            ? value
+            : value
+              ? new Intl.DateTimeFormat(i18n.language.startsWith("en") ? "en-GB" : "zh-CN", {
+                    timeZone: "Asia/Shanghai",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                }).format(new Date(value))
+              : "—";
 
     const updateQualification = async () => {
         if (!pendingRow || saving) return;
@@ -159,18 +164,20 @@ export default function HackathonSubmissionManager({ eventKey }) {
                 params: { event: eventKey },
             });
             const table = submissionExportTable(data, text, (value) =>
-                value
-                    ? new Intl.DateTimeFormat("sv-SE", {
-                          timeZone: "Asia/Shanghai",
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          second: "2-digit",
-                          hour12: false,
-                      }).format(new Date(value))
-                    : ""
+                value && /^\d{4}-\d{2}-\d{2}$/.test(value)
+                    ? value
+                    : value
+                      ? new Intl.DateTimeFormat("sv-SE", {
+                            timeZone: "Asia/Shanghai",
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                            hour12: false,
+                        }).format(new Date(value))
+                      : ""
             );
             const url = URL.createObjectURL(
                 new Blob([submissionExportCsv(table)], { type: "text/csv;charset=utf-8;" })
@@ -198,8 +205,14 @@ export default function HackathonSubmissionManager({ eventKey }) {
             {snapshot ? (
                 <>
                     <p className="break-words font-semibold">
-                        {snapshot.projectName || text("untitled")}
+                        {snapshot.projectName || snapshot.teamName || text("untitled")}
                     </p>
+                    {snapshot.productHighlights && (
+                        <p className="whitespace-pre-wrap break-words text-sm">
+                            {snapshot.productHighlights}
+                        </p>
+                    )}
+                    <SubmissionAdditionalMaterials snapshot={snapshot} />
                     <dl className="space-y-2 text-sm">
                         {materialKeys
                             .filter(
@@ -355,7 +368,7 @@ export default function HackathonSubmissionManager({ eventKey }) {
                             const submission = row.submissions?.[stage];
                             return (
                                 <article
-                                    key={`${row.userId}-${row.track}`}
+                                    key={row.rowKey || `${row.registrationId}-${row.track}`}
                                     className="theme-admin-panel rounded-xl p-4 sm:p-5"
                                 >
                                     <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
@@ -394,7 +407,14 @@ export default function HackathonSubmissionManager({ eventKey }) {
                                             </strong>
                                             <AdminButton
                                                 tone={row.semifinalQualified ? "subtle" : "primary"}
-                                                disabled={saving}
+                                                disabled={
+                                                    saving || row.canManageQualification === false
+                                                }
+                                                title={
+                                                    row.canManageQualification === false
+                                                        ? text("qualificationUnavailable")
+                                                        : undefined
+                                                }
                                                 onClick={() => setPendingRow(row)}
                                             >
                                                 {text(

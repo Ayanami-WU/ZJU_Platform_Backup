@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 import api from "../../services/api";
 import { AIX_EVENT_KEY, safeWebUrl } from "../../utils/hackathonAiX";
 
+import SubmissionAdditionalMaterials from "./SubmissionAdditionalMaterials";
+
 export default function RegistrationSubmissionData({ registration }) {
     const { t } = useTranslation();
     const text = (key) => t(`admin.hackathon_submissions.${key}`);
@@ -12,7 +14,11 @@ export default function RegistrationSubmissionData({ registration }) {
     if (!registration.submissionDataLoaded) return <span>{text("load_failed")}</span>;
     if (!registration.submissionRecords.length) return <span>{text("registration_none")}</span>;
     const date = (value) =>
-        value ? new Date(value).toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" }) : "—";
+        value && /^\d{4}-\d{2}-\d{2}$/.test(value)
+            ? value
+            : value
+              ? new Date(value).toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })
+              : "—";
     const download = async (file) => {
         if (downloading !== null) return;
         setDownloading(file.id);
@@ -40,7 +46,9 @@ export default function RegistrationSubmissionData({ registration }) {
             <dl className="space-y-2 break-words">
                 <div>
                     <dt>{text("projectName")}</dt>
-                    <dd className="font-semibold">{value.projectName || text("untitled")}</dd>
+                    <dd className="font-semibold">
+                        {value.projectName || value.teamName || text("untitled")}
+                    </dd>
                 </div>
                 {value.productHighlights && (
                     <div>
@@ -48,6 +56,9 @@ export default function RegistrationSubmissionData({ registration }) {
                         <dd>{value.productHighlights}</dd>
                     </div>
                 )}
+                <div>
+                    <SubmissionAdditionalMaterials snapshot={value} />
+                </div>
                 {["githubUrl", "modelscopeUrl", "bpFileId", "demoFileId"].map((key) => {
                     if (!value[key]) return null;
                     const url = key.endsWith("FileId") ? null : safeWebUrl(value[key]);
@@ -99,6 +110,7 @@ export default function RegistrationSubmissionData({ registration }) {
                         <span className="block font-normal">
                             {record.submitted?.projectName ||
                                 record.draft?.projectName ||
+                                record.submitted?.teamName ||
                                 text("untitled")}
                         </span>
                     </summary>
