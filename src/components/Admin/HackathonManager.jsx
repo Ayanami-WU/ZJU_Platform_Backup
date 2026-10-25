@@ -381,7 +381,17 @@ const HackathonManager = () => {
                                 {[
                                     work.author,
                                     work.honor_title,
-                                    work.rank ? `Rank ${work.rank}` : "",
+                                    work.rank
+                                        ? t("admin.hackathon_manager.results.finalRank", {
+                                              rank: work.rank,
+                                          })
+                                        : "",
+                                    work.final_score != null
+                                        ? t("admin.hackathon_manager.results.finalScore", {
+                                              score: work.final_score,
+                                          })
+                                        : "",
+                                    work.entry_code || "",
                                 ]
                                     .filter(Boolean)
                                     .join(" · ") || "未填写作者"}

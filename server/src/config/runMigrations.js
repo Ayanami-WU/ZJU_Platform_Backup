@@ -2953,6 +2953,7 @@ async function runMigrations(db) {
     );
     await require("./migrations/hackathonGetuiBeauty").migrateHackathonGetuiBeauty(db);
     await require("./migrations/competitionWorkSelection").migrateCompetitionWorkSelection(db);
+    await require("./migrations/hackathonFinalResults").migrateHackathonFinalResults(db);
 }
 
 module.exports = {

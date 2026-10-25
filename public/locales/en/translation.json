@@ -2470,7 +2470,9 @@
                 "award_placeholder": "e.g. First Prize / Best Innovation",
                 "save": "Save Result",
                 "saved": "Rank and award updated",
-                "save_failed": "Failed to save judging result"
+                "save_failed": "Failed to save judging result",
+                "finalRank": "Final rank {{rank}}",
+                "finalScore": "Score {{score}}"
             },
             "media": {
                 "title": "Photos and videos ({{count}})",
@@ -4235,7 +4237,6 @@
             "attachmentReferences": "Pending attachments",
             "export_submission_id": "Submission ID"
         },
-
         "qualificationImport": {
             "pasteOption": "Cannot select a file? Paste the JSON roster",
             "pasteLabel": "Reviewed JSON roster",
@@ -5691,7 +5692,7 @@
             "openingLabel": "Opening speakers",
             "judges": "",
             "rewardsTitle": "Awards & gifts",
-            "rewardsIntro": "Tmall Campus OPC Incubation Track team awards and Huawei Industry Implementation Track cash and prizes; ModelScope onsite giveaways.",
+            "rewardsIntro": "Tmall Campus team prizes, Huawei track prizes, Zhipu Coding Plan Pro and Lite quarterly passes, and on-site ModelScope gifts.",
             "rewards": [
                 {
                     "label": "Tmall Campus OPC Incubation Track awards",
@@ -5716,12 +5717,12 @@
                     "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+128GB (¥2,779), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
                 },
                 {
-                    "label": "Coding Plan Pro · Quarterly Plan",
-                    "value": "¥1,614",
-                    "note": "3 passes · 3 months each",
+                    "label": "Zhipu Coding Plan quarterly passes",
+                    "value": "8 passes",
+                    "note": "3 Pro + 5 Lite passes · 3 months each",
                     "items": [
-                        "Tmall Campus OPC Incubation Track champion: 1 winner",
-                        "Industry Advancement first prize: 2 winners"
+                        "Pro: ¥1,614 each · 1 Tmall champion and 2 Huawei first-prize winners",
+                        "Lite: ¥354 each · 5 second-prize passes"
                     ]
                 },
                 {
@@ -5901,7 +5902,7 @@
             "resultsAfter": "Results awaiting publication",
             "resultsHint": "This edition’s awards and projects will appear after official publication.",
             "challengeSoon": "Coming soon",
-            "prizeValue": "¥27,500"
+            "prizeValue": "¥30,000"
         },
         "forumPage": {
             "groupTitle": "Join the forum WeChat group",
@@ -6552,24 +6553,27 @@
                     "totalLabel": "Prizes & cash value"
                 },
                 {
-                    "title": "Coding Plan Pro · Quarterly Plan",
-                    "value": "¥1,614",
-                    "note": "3 passes · 3 months each",
+                    "title": "Zhipu Coding Plan quarterly passes",
+                    "value": "8 passes",
+                    "note": "3 Pro + 5 Lite passes · 3 months each",
                     "rows": [
                         {
-                            "label": "Champion",
-                            "count": "1 winner",
-                            "lines": ["Tmall Campus OPC Incubation Track"]
+                            "label": "Pro pass",
+                            "count": "3 passes",
+                            "lines": [
+                                "¥1,614 per pass",
+                                "1 Tmall champion · 2 Huawei first-prize winners"
+                            ]
                         },
                         {
-                            "label": "First prize",
-                            "count": "2 winners",
-                            "lines": ["Industry Advancement Track"]
+                            "label": "Lite pass",
+                            "count": "5 passes",
+                            "lines": ["¥354 per pass", "Additional second-prize benefit"]
                         }
                     ],
                     "footer": "Sponsored by Zhipu · Added on top of track prizes",
                     "kind": "coding",
-                    "totalLabel": "Value per pass"
+                    "totalLabel": "Special prizes"
                 },
                 {
                     "title": "MiraclePlus · Token credits",

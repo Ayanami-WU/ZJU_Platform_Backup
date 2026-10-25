@@ -557,7 +557,9 @@ function createHackathonSubmissionService({
                         const own = submissions.filter((item) => item.registration_id === row.id);
                         const tracks = new Set([
                             ...Object.keys(entries),
-                            ...own.map((item) => item.track),
+                            ...own
+                                .filter((item) => item.record_key !== "primary")
+                                .map((item) => item.track),
                         ]);
                         return [...tracks].flatMap((track) => {
                             const answers = entries[track]?.answers || {};
@@ -578,7 +580,9 @@ function createHackathonSubmissionService({
                                 qualificationUpdatedAt: qualification?.updated_at || null,
                             };
                             const records = own.filter((item) => item.track === track);
-                            const primary = records.filter((item) => item.record_key === "primary");
+                            const primary = entries[track]
+                                ? records.filter((item) => item.record_key === "primary")
+                                : [];
                             const additional = records.filter(
                                 (item) => item.record_key !== "primary"
                             );

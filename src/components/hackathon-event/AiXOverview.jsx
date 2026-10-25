@@ -31,7 +31,7 @@ export default function AiXOverview({ state }) {
                             <strong>{copy.coverTitle[1]}</strong>
                         </h1>
                         <div className="aix-cover-prize">
-                            <strong>¥27,500</strong>
+                            <strong>{t("aix.official.prizeValue")}</strong>
                             <span>{t("aix.official.totalPrize")}</span>
                         </div>
                     </div>
@@ -176,7 +176,7 @@ export default function AiXOverview({ state }) {
                         <h2 id="aix-reward-title">{copy.rewardsTitle}</h2>
                         <p className="aix-rewards-pool">
                             <small>{t("aix.official.totalPrize")}</small>
-                            <strong>¥27,500</strong>
+                            <strong>{t("aix.official.prizeValue")}</strong>
                         </p>
                     </header>
                     <AiXRewards rewards={copy.rewards} />
