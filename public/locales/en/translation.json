@@ -5707,14 +5707,14 @@
                 },
                 {
                     "label": "Huawei Industry Implementation Track prizes & cash value",
-                    "value": "¥14,980",
+                    "value": "¥15,900",
                     "note": "10 awards",
                     "items": [
                         "First ×2 · Camera / tablet + ¥1,000 each",
                         "Second ×3 · FreeBuds Neo + ¥600 each",
                         "Third ×5 · FreeBuds 7i + ¥250 each"
                     ],
-                    "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+128GB (¥2,779), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
+                    "detail": "First prize: Osmo Pocket 4 (¥2,999) or MatePad Air Z 8GB+256GB (¥3,699), plus ¥1,000. Second: FreeBuds Neo (¥669) plus ¥600 each. Third: FreeBuds 7i (¥429) plus ¥250 each."
                 },
                 {
                     "label": "Zhipu Coding Plan quarterly passes",
@@ -6504,7 +6504,7 @@
                 },
                 {
                     "title": "Huawei Industry Implementation Track",
-                    "value": "¥14,980",
+                    "value": "¥15,900",
                     "note": "Teams of 1–5 · 10 winners",
                     "rows": [
                         {
@@ -6518,8 +6518,8 @@
                                     "cash": "Cash ¥1,000"
                                 },
                                 {
-                                    "name": "MatePad Air Z tablet",
-                                    "value": "Value ¥2,779",
+                                    "name": "MatePad Air Z 8GB+256GB tablet",
+                                    "value": "Value ¥3,699",
                                     "cash": "Cash ¥1,000"
                                 }
                             ]

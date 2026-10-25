@@ -5816,14 +5816,14 @@
                 },
                 {
                     "label": "华为产业落地赛道奖品与奖金总价值",
-                    "value": "¥14,980",
+                    "value": "¥15,900",
                     "note": "10 个获奖名额",
                     "items": [
                         "一等奖 2 名 · 相机 / 平板 + 每名 ¥1,000",
                         "二等奖 3 名 · FreeBuds Neo + 每名 ¥600",
                         "三等奖 5 名 · FreeBuds 7i + 每名 ¥250"
                     ],
-                    "detail": "一等奖：Osmo Pocket 4（价值 ¥2,999）或 MatePad Air Z 8G+128G 悦享款（价值 ¥2,779），加现金 ¥1,000；二等奖 FreeBuds Neo（¥669）加 ¥600／人；三等奖 FreeBuds 7i（¥429）加 ¥250／人。"
+                    "detail": "一等奖：Osmo Pocket 4（价值 ¥2,999）或 MatePad Air Z 8G+256G 悦享款（价值 ¥3,699），加现金 ¥1,000；二等奖 FreeBuds Neo（¥669）加 ¥600／人；三等奖 FreeBuds 7i（¥429）加 ¥250／人。"
                 },
                 {
                     "label": "智谱 Coding Plan 季卡",
@@ -6612,7 +6612,7 @@
                 },
                 {
                     "title": "华为产业落地赛道",
-                    "value": "¥14,980",
+                    "value": "¥15,900",
                     "note": "1–5 人组队 · 10 个获奖名额",
                     "rows": [
                         {
@@ -6626,8 +6626,8 @@
                                     "cash": "现金 ¥1,000"
                                 },
                                 {
-                                    "name": "MatePad Air Z 平板",
-                                    "value": "价值 ¥2,779",
+                                    "name": "MatePad Air Z 8GB+256GB 平板",
+                                    "value": "价值 ¥3,699",
                                     "cash": "现金 ¥1,000"
                                 }
                             ]
