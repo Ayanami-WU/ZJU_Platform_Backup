@@ -36,6 +36,7 @@ import {
 import { registrationSubmissionState } from "../../utils/hackathonRegistrationSubmissions";
 import { AdminButton, AdminEmptyState, useAdminTheme } from "./AdminUI";
 import RegistrationSubmissionData from "./RegistrationSubmissionData";
+import HackathonProjectInventory from "./HackathonProjectInventory";
 import "./HackathonRegistrationWorkspace.css";
 
 const gradeLabels = {
@@ -1178,6 +1179,19 @@ export default function HackathonRegistrationWorkspace({
                                         <h4>{tr("submissionMaterials")}</h4>
                                         <RegistrationSubmissionData registration={detail} />
                                     </section>
+                                )}
+                                {!forum && (
+                                    <details
+                                        className="roster-track-detail"
+                                        key={`personal-${detail.id}`}
+                                    >
+                                        <summary>{t("admin.hackathon_inventory.personal")}</summary>
+                                        <HackathonProjectInventory
+                                            eventKey={detail.event_key}
+                                            kind="personal"
+                                            registrationId={detail.id}
+                                        />
+                                    </details>
                                 )}
                                 {!forum && (
                                     <div className="roster-danger">

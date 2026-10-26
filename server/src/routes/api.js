@@ -1275,6 +1275,12 @@ router.post(
 );
 
 // Hackathon Registration Routes
+router.get(
+    "/admin/hackathon/project-inventory",
+    authenticateToken,
+    isAdmin,
+    require("../controllers/hackathonProjectInventoryController").getInventory
+);
 router.get("/hackathon/schedule", hackathonController.getHackathonScheduleConfig);
 router.get("/hackathon/template", hackathonController.getHackathonTemplateConfig);
 router.post("/hackathon/assistant", optionalAuth, hackathonController.handleHackathonAssistant);

@@ -38,6 +38,7 @@ import {
 import HackathonTemplateEditor from "./HackathonTemplateEditor";
 import HackathonSubmissionManager from "./HackathonSubmissionManager";
 import HackathonRegistrationWorkspace from "./HackathonRegistrationWorkspace";
+import HackathonProjectInventory from "./HackathonProjectInventory";
 import { activeRegistrationTracks } from "../../utils/hackathonRoster";
 import { attachRegistrationSubmissions } from "../../utils/hackathonRegistrationSubmissions";
 
@@ -540,6 +541,8 @@ const HackathonManager = () => {
                             ["overview", t("admin.hackathon_manager.flow.title")],
                             ["template", t("admin.hackathon_manager.tabs.template")],
                             ["registrations", t("admin.hackathon_manager.tabs.registrations")],
+                            ["contestProjects", t("admin.hackathon_inventory.contest")],
+                            ["personalProjects", t("admin.hackathon_inventory.personal")],
                             ...(selectedEventKey === AIX_EVENT_KEY
                                 ? [["submissions", t("admin.hackathon_submissions.title")]]
                                 : []),
@@ -671,7 +674,9 @@ const HackathonManager = () => {
                         </div>
                     </AdminPanel>
                 )}
-                {activeWorkspace !== "registrations" && (
+                {!["registrations", "contestProjects", "personalProjects"].includes(
+                    activeWorkspace
+                ) && (
                     <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
                         <AdminMetricCard
                             label="总报名"
@@ -723,6 +728,14 @@ const HackathonManager = () => {
                         onDelete={(id) => setConfirmState({ id })}
                     />
                 ) : null}
+
+                {["contestProjects", "personalProjects"].includes(activeWorkspace) && (
+                    <HackathonProjectInventory
+                        key={`${selectedEventKey}-${activeWorkspace}`}
+                        eventKey={selectedEventKey}
+                        kind={activeWorkspace === "contestProjects" ? "contest" : "personal"}
+                    />
+                )}
 
                 {activeWorkspace === "works" ? (
                     <AdminPanel

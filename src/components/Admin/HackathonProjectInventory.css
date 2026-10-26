@@ -1,0 +1,109 @@
+.project-inventory {
+    padding: 1rem;
+}
+.inventory-distribution {
+    border-block: 1px solid var(--roster-line);
+    padding: 1rem 0;
+}
+.inventory-distribution > summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+.inventory-distribution > p {
+    color: var(--roster-muted);
+    margin-block: 0.75rem;
+}
+.inventory-distribution > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+.inventory-distribution h4 {
+    margin-bottom: 0.75rem;
+}
+.inventory-distribution ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.inventory-distribution li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 3rem 4rem;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--roster-line);
+}
+.inventory-distribution li strong,
+.inventory-distribution li > span:last-child {
+    text-align: right;
+}
+.inventory-controls {
+    margin-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+.inventory-controls .roster-search {
+    flex: 1 1 14rem;
+}
+.inventory-controls .roster-search input {
+    width: 100%;
+    min-width: 0;
+}
+.inventory-controls .roster-search > span {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+.inventory-list {
+    display: grid;
+    gap: 0.75rem;
+}
+.inventory-list > article {
+    padding: 1rem;
+    border: 1px solid var(--roster-line);
+    border-radius: 0.5rem;
+    overflow-wrap: anywhere;
+}
+.inventory-item-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.inventory-item-heading > span,
+.inventory-list p {
+    color: var(--roster-muted);
+}
+.inventory-list p {
+    margin-block: 0.4rem;
+}
+.inventory-list details > summary {
+    cursor: pointer;
+    color: var(--roster-accent);
+}
+.inventory-list details section {
+    margin-top: 0.75rem;
+}
+.inventory-evidence pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    padding: 0.75rem;
+    background: var(--roster-soft);
+}
+@media (max-width: 640px) {
+    .inventory-distribution > div {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+    .inventory-item-heading {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .inventory-controls input,
+    .inventory-controls select {
+        font-size: 16px;
+    }
+}

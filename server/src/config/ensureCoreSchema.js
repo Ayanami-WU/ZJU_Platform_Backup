@@ -351,6 +351,7 @@ async function ensureCoreSchema(db) {
     await require("./migrations/registrationProfiles").migrateRegistrationProfiles(db);
     await require("./migrations/lotteries").migrateLotteries(db);
     await require("./migrations/hackathonForums").migrateHackathonForums(db);
+    await require("./migrations/hackathonProjectInventory").migrateHackathonProjectInventory(db);
     console.log("✅ Core schema ready");
 }
 
