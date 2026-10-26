@@ -361,6 +361,11 @@ router.get(
 );
 
 // Notification Routes
+router.get(
+    "/notifications/account-banner",
+    authenticateToken,
+    notificationController.getAccountBanner
+);
 router.get("/notifications", authenticateToken, notificationController.getNotifications);
 router.put("/notifications/:id/read", authenticateToken, notificationController.markAsRead);
 router.delete("/notifications/:id", authenticateToken, notificationController.deleteNotification);

@@ -39,6 +39,7 @@ import MobileNavbar from "./components/MobileNavbar";
 import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import HomeDirectory from "./features/navigation/HomeDirectory";
+import AccountPrizeBanner from "./components/AccountPrizeBanner";
 
 const RegistrationProfileReminder = lazy(() => import("./components/RegistrationProfileReminder"));
 
@@ -707,6 +708,7 @@ const App = () => {
                                 }}
                             />
                             <AppContent />
+                            <AccountPrizeBanner />
                             <Suspense fallback={null}>
                                 <RegistrationProfileReminder />
                             </Suspense>

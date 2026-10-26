@@ -8088,5 +8088,12 @@
         "empty_card": "请先添加文字、图片或链接。",
         "previous": "上一页",
         "next": "下一页"
+    },
+    "accountPrizeNotice": {
+        "title": "转发抽奖领奖提醒",
+        "copy": "复制联系方式",
+        "copied": "已复制联系方式",
+        "copyFailed": "复制失败，请长按上方文字复制联系方式",
+        "close": "暂时收起领奖提示"
     }
 }

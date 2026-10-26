@@ -151,6 +151,32 @@ const getNotifications = async (req, res, next) => {
     }
 };
 
+const getAccountBanner = async (req, res, next) => {
+    try {
+        res.set("Cache-Control", "no-store");
+        const db = await getDb();
+        const row = await db.get(
+            "SELECT id, content, message, title, data FROM notifications WHERE user_id = ? AND type = 'prize_claim_banner' ORDER BY id DESC LIMIT 1",
+            [req.user.id]
+        );
+        const data = safeParseNotificationData(row?.data);
+        const message = row && normalizeNotificationRow(row).content;
+        res.json({
+            banner:
+                message && data.active !== false
+                    ? {
+                          id: row.id,
+                          message: String(message).slice(0, 500),
+                          contact:
+                              typeof data.contact === "string" ? data.contact.slice(0, 80) : "",
+                      }
+                    : null,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const markAsRead = async (req, res, next) => {
     try {
         const db = await getDb();
@@ -191,6 +217,7 @@ const deleteNotification = async (req, res, next) => {
 };
 
 module.exports = {
+    getAccountBanner,
     createNotification,
     fanOutNewContent,
     getNotifications,

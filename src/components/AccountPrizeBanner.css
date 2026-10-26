@@ -1,0 +1,103 @@
+.account-prize-banner {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 78px);
+    inset-inline: 16px;
+    z-index: 45;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 920px;
+    margin-inline: auto;
+    padding: 20px 22px;
+    border: 1px solid #a3e63580;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px #00000028;
+    color: #ecfccb;
+    background: #142313;
+}
+.account-prize-banner.is-day {
+    color: #243511;
+    background: #f2f8e8;
+    border-color: #a3bc7e;
+}
+.account-prize-icon {
+    flex-shrink: 0;
+    color: #a3e635;
+}
+.account-prize-banner.is-day .account-prize-icon {
+    color: #4d7c0f;
+}
+.account-prize-copy {
+    flex: 1;
+    min-width: 0;
+}
+.account-prize-copy strong {
+    display: block;
+    font-size: 13px;
+    opacity: 0.75;
+}
+.account-prize-copy p {
+    margin: 5px 0 0;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+.account-prize-copy span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+}
+.account-prize-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    min-height: 42px;
+    padding: 9px 13px;
+    border: 1px solid currentColor;
+    border-radius: 9px;
+    font-size: 13px;
+}
+.account-prize-close {
+    display: grid;
+    place-items: center;
+    align-self: flex-start;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 8px;
+}
+.account-prize-close:hover {
+    background: #84cc1620;
+}
+.account-prize-banner button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+@media (max-width: 640px) {
+    .account-prize-banner {
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr) 32px;
+        gap: 10px;
+        inset-inline: 12px;
+        padding: 16px 12px;
+    }
+    .account-prize-copy p {
+        font-size: 17px;
+    }
+    .account-prize-icon {
+        align-self: start;
+        margin-top: 4px;
+    }
+    .account-prize-close {
+        grid-column: 3;
+        grid-row: 1;
+        min-width: 32px;
+        min-height: 32px;
+    }
+    .account-prize-action {
+        grid-column: 2;
+        justify-self: start;
+    }
+}

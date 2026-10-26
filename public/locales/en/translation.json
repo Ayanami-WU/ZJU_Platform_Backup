@@ -7983,5 +7983,12 @@
         "empty_card": "Add text, an image or a link first.",
         "previous": "Previous",
         "next": "Next"
+    },
+    "accountPrizeNotice": {
+        "title": "Prize collection reminder",
+        "copy": "Copy contact",
+        "copied": "Contact copied",
+        "copyFailed": "Copy failed. Select the contact above to copy it.",
+        "close": "Hide this reminder for now"
     }
 }

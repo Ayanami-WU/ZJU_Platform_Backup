@@ -43,16 +43,27 @@ export default function RegistrationProfileReminder() {
             )
                 return;
             // Allow an in-progress login or another dialog to finish first.
-            if (document.querySelector('[role="dialog"], [aria-modal="true"]')) return;
+            if (
+                document.querySelector(
+                    '[role="dialog"], [aria-modal="true"], [data-account-prize-banner]'
+                )
+            )
+                return;
             markProfileReminderSeen(user.id);
             setOpenFor(user.id);
         };
         const timer = window.setTimeout(remind, 600);
+        const deferForPrize = () => {
+            markProfileReminderSeen(user.id);
+            setOpenFor(null);
+        };
+        window.addEventListener("account-prize-banner-visible", deferForPrize);
         window.addEventListener("focus", remind);
         window.addEventListener("online", remind);
         document.addEventListener("visibilitychange", remind);
         return () => {
             window.clearTimeout(timer);
+            window.removeEventListener("account-prize-banner-visible", deferForPrize);
             window.removeEventListener("focus", remind);
             window.removeEventListener("online", remind);
             document.removeEventListener("visibilitychange", remind);
