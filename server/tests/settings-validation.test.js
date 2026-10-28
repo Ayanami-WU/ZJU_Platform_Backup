@@ -12,7 +12,7 @@ const validateSettingsPayload = async (body) => {
 
 test("footer names allow ordered text or an empty list and reject oversized or non-text values", async () => {
     const key = "footer_acknowledgements";
-    for (const value of ["", "应奇\n周子涵", Array(50).fill("A".repeat(60)).join("\n")]) {
+    for (const value of ["", "应奇\n邬铭轩", Array(50).fill("A".repeat(60)).join("\n")]) {
         assert.deepEqual(await validateSettingsPayload({ key, value }), []);
     }
     for (const value of [
